@@ -617,8 +617,8 @@ function CreateWASDActions()
                     --print("Первый раз сделал рывок")
                 end
 
-                local dist = 200
-                local delay = 0.2
+                local dist = 400
+                local delay = 0.5
                 if data.ReleaseQ and not data.QJump2Pointer then
                     -- print("сплеш в рывке, пробуем прыгнуть прыжок")
                     dist = 400
@@ -724,11 +724,11 @@ function CreateWASDActions()
                     if not data.isSpined then
                         -- нельзя сделать во вращении
                         if data.IsMoving then
-                            print("в движении")
-                            SetUnitTimeScale(data.UnitHero, 3)
+                            --print("в движении")
+                            SetUnitTimeScale(data.UnitHero, 1)
                         else
-                            print("стоя на месте")
-                            SetUnitTimeScale(data.UnitHero, 3)
+                            --print("стоя на месте")
+                            SetUnitTimeScale(data.UnitHero, 1)
                         end
                         SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationSpace)-- Всегда бег
                         --SetUnitAnimationByIndex(data.UnitHero, 27) -- 27 для кувырка -- IndexAnimationWalk -- для бега

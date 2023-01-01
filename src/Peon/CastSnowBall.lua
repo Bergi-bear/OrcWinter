@@ -6,7 +6,7 @@
 function CastSnowBall(data,directionAngle)
     local effModel="snowball"--"Abilities\\Weapons\\LichMissile\\LichMissile"
     local hero=data.UnitHero
-    if data.AttackIsReady then
+    if data.AttackIsReady and not data.SpaceForce then
         BlzSetUnitFacingEx(hero,directionAngle)
         SetUnitAnimationByIndex(hero,3)
         data.AttackIsReady=false
