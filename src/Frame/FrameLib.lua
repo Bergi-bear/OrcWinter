@@ -28,9 +28,13 @@ function HideEverythingAll()
 end
 
 function HideEverything()
+    --print("скрытие панели?")
     --BlzFrameSetVisible(BlzGetFrameByName("ConsoleUIBackdrop", 0), false)
     BlzFrameSetAbsPoint(BlzGetFrameByName("ConsoleUIBackdrop", 0), FRAMEPOINT_TOPRIGHT, 0, -0, 8)
-    BlzFrameSetSize(BlzGetFrameByName("CommandButton_" .. 0, 0), 0, 0)-- M в позиции 0,0
+    --BlzFrameSetSize(BlzGetFrameByName("CommandButton_" .. 0, 0), 0, 0)-- M в позиции 0,0
+    BlzFrameClearAllPoints(BlzGetFrameByName("CommandButton_" .. 0, 0))
+
+    BlzFrameSetAbsPoint(BlzGetFrameByName("CommandButton_" .. 0, 0),FRAMEPOINT_CENTER,0,-0.1)
     for i = 1, 11 do
         BlzFrameSetVisible(BlzGetFrameByName("CommandButton_"..i, 0), false) --отключить
     end

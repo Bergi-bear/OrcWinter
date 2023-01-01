@@ -93,7 +93,9 @@ function InitHEROTable()
             ItemSlotName={}, -- таблица имён для предметов
             ItemSlotTooltip={}, -- фрейм тултипа описания
             ItemSlotText={}, -- описание предмета
-            --
+            --- От снежной карты
+            AttackIsReady=true -- флаг готовности атаки
+
 
         }
         --InitInputHandler(HERO[i])

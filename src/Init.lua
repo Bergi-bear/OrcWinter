@@ -21,7 +21,7 @@ do
             InitHEROTable()
             InitMenu()
             InitMouseMoveTrigger()
-            --InitMouseClickEvent()
+            InitMouseClickEvent()
             CreateWASDActions()
 
             --InitGameSlimes()
@@ -34,6 +34,11 @@ do
             --ShapeInit()
             --SetDayNightModels("Environment\\DNC\\DNCAshenvale\\DNCAshenvaleTerrain\\DNCAshenvaleTerrain.mdl", "Environment\\DNC\\DNCAshenvale\\DNCAshenvaleUnit\\DNCAshenvaleUnit.mdl")
             --SetDayNightModels("", "")
+
+            ClearMapMusicBJ()
+            PlayMusicBJ("Endless Snowbanks")
+            SetMusicVolumeBJ(100)
+
             print(">>>")
         end)
     end

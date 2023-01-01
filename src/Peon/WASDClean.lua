@@ -4,17 +4,16 @@ TIMER_PERIOD64 = 1 / 64
 HERO = {}
 HeroID = FourCC("opeo")
 
-
 function InitAnimations(hero, data)
-
+    PlayUnitAnimationFromChat()
 
     if GetUnitTypeId(data.UnitHero) == FourCC("opeo") then
-        print("инициализацию анимация пеона")
+        --print("инициализацию анимация пеона")
         data.AnimDurationWalk = 0.767 --длительность анимации движения, полный круг
         data.IndexAnimationWalk = 1-- индекс анимации движения
         data.ResetDuration = 3.333 -- время сброса для анимации stand, длительность анимации stand
         data.IndexAnimationQ = 5 -- анимация сплеш удара
-        data.IndexAnimationSpace = 1 -- анимация для рывка, если анимации нет, ставь индекс аналогичный бегу
+        data.IndexAnimationSpace = 22 -- анимация для рывка, если анимации нет, ставь индекс аналогичный бегу
         data.IndexAnimationAttackInDash = 3 --анимация удара в рывке
         data.IndexAnimationThrow = 3 -- индекс анимациии броска чего либо
         data.IndexAnimationAttack1 = 4 --индекс анимации атаки в серии
@@ -185,9 +184,9 @@ function InitWASD(hero)
                 SetCameraQuickPosition(GetUnitX(hero), GetUnitY(hero))
                 SetCameraTargetControllerNoZForPlayer(GetOwningPlayer(hero), hero, 10, 10, true) -- не дергается
                 --print(GetCameraField(CAMERA_FIELD_ZOFFSET))
-                local z=GetUnitZ(hero)
+                local z = GetUnitZ(hero)
 
-                SetCameraField(CAMERA_FIELD_ZOFFSET, z-800, 0.1)
+                SetCameraField(CAMERA_FIELD_ZOFFSET, z - 1000, 0.1)
 
 
             else
@@ -305,6 +304,9 @@ function InitWASD(hero)
                     data.DirectionMove = angle
 
                     speed = GetUnitMoveSpeed(hero) / 38
+                    if data.UnitInAttack then
+                        speed = speed * 0.1
+                    end
                     --print(speed)
                     if data.isAttacking or (data.ReleaseQ and data.CDSpellQ > 0) or data.ReleaseRMB then
                         speed = 0.5
@@ -324,8 +326,11 @@ function InitWASD(hero)
                     if not data.isAttacking then
                         if data.CurrentWeaponType == "pickaxe" or not data.PressSpin then
                             --
-                            --print("место для поворота в движении"..angle)
-                            SetUnitFacing(hero, angle)
+
+                            if  not data.UnitInAttack then
+                                SetUnitFacing(hero, angle)
+                                --print("место для поворота в движении"..angle)
+                            end
                         else
 
                         end
@@ -669,22 +674,21 @@ function CreateWASDActions()
                     --CreateAndForceBullet(data.UnitHero, data.DirectionMove, 5, "Abilities\\Weapons\\SentinelMissile\\SentinelMissile.mdl", x, y, 5, 350, 350)
                 end
 
-
                 if true then
-                    local nx,ny=MoveXY(GetUnitX(data.UnitHero),GetUnitY(data.UnitHero),dist,data.DirectionMove)
-                    local PerepadZ = GetTerrainZ(MoveXY(GetUnitX(data.UnitHero),GetUnitY(data.UnitHero), 120, data.DirectionMove)) - GetTerrainZ(GetUnitX(data.UnitHero),GetUnitY(data.UnitHero))
+                    local nx, ny = MoveXY(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), dist, data.DirectionMove)
+                    local PerepadZ = GetTerrainZ(MoveXY(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), 120, data.DirectionMove)) - GetTerrainZ(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero))
                     --print(PerepadZ)
-                    if not IsTerrainPathable(nx,ny,PATHING_TYPE_WALKABILITY) and PerepadZ<-1 then
-                       -- print("проверка проходимости конечной точки")
+                    if not IsTerrainPathable(nx, ny, PATHING_TYPE_WALKABILITY) and PerepadZ < -1 then
+                        -- print("проверка проходимости конечной точки")
                         --DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt", nx, ny))
-                        if not Chk2Way(GetUnitX(data.UnitHero),GetUnitY(data.UnitHero),nx,ny) then
-                            Blink2Point(data, nx,ny)
+                        if not Chk2Way(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), nx, ny) then
+                            Blink2Point(data, nx, ny)
                         else
-                           -- print("прыжок вниз?")
-                            UnitAddForceSimple(data.UnitHero, data.DirectionMove, 25, dist, "ignore") --САМ рывок при нажатии пробела
+                            -- print("прыжок вниз?")
+                            UnitAddForceSimple(data.UnitHero, data.DirectionMove, 10, dist, "ignore") --САМ рывок при нажатии пробела
                         end
                     else
-                        UnitAddForceSimple(data.UnitHero, data.DirectionMove, 25, dist, "ignore") --САМ рывок при нажатии пробела
+                        UnitAddForceSimple(data.UnitHero, data.DirectionMove, 10, dist, "ignore") --САМ рывок при нажатии пробела
                     end
                 end
                 if data.ArrowDamageAfterCharge then
@@ -720,11 +724,11 @@ function CreateWASDActions()
                     if not data.isSpined then
                         -- нельзя сделать во вращении
                         if data.IsMoving then
-                            --print("в движении")
-                            SetUnitTimeScale(data.UnitHero, 4)
+                            print("в движении")
+                            SetUnitTimeScale(data.UnitHero, 3)
                         else
-                            --print("стоя на месте")
-                            SetUnitTimeScale(data.UnitHero, 4)
+                            print("стоя на месте")
+                            SetUnitTimeScale(data.UnitHero, 3)
                         end
                         SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationSpace)-- Всегда бег
                         --SetUnitAnimationByIndex(data.UnitHero, 27) -- 27 для кувырка -- IndexAnimationWalk -- для бега
@@ -894,8 +898,24 @@ function LockAnimAnimation(data)
 end
 
 function StopUnitMoving(data)
-    data.ReleaseW=false
-    data.ReleaseA=false
-    data.ReleaseS=false
-    data.ReleaseD=false
+    data.ReleaseW = false
+    data.ReleaseA = false
+    data.ReleaseS = false
+    data.ReleaseD = false
+end
+
+function PlayUnitAnimationFromChat()
+    local this = CreateTrigger()
+    TriggerRegisterPlayerChatEvent(this, Player(0), "", true)
+    TriggerRegisterPlayerChatEvent(this, Player(1), "", true)
+    TriggerAddAction(this, function()
+        local s = S2I(GetEventPlayerChatString())
+        local data = HERO[GetPlayerId(GetTriggerPlayer())]
+        if GetEventPlayerChatString() == "w" then
+            --CreateForUnitWayToPoint(mainHero,CQX,CQY)
+            return
+        end
+        SetUnitAnimationByIndex(data.UnitHero, s)
+        print(GetUnitName(data.UnitHero) .. " " .. s)
+    end)
 end
