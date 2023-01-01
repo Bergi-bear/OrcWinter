@@ -1,0 +1,12 @@
+[Misc]
+AgiMoveBonus=1.0
+BuildingKillsGiveExp=1
+ChanceToMiss=0.5
+DecayTime=18.0
+DissipateTime=20.0
+MaxHeroLevel=50
+MaxUnitSpeed=522.0
+MinUnitSpeed=1.0
+ReactionDelay=0.0
+StrHitPointBonus=5.0
+

@@ -1,0 +1,2649 @@
+﻿STRING 1
+{
+Кража года
+}
+
+STRING 2
+{
+1
+}
+
+STRING 3
+{
+Nondescript
+}
+
+STRING 4
+{
+Hanabibushi
+}
+
+STRING 5
+{
+Player 1
+}
+
+STRING 6
+{
+Force 1
+}
+
+STRING 7
+// Units: E604 (LLlypuK), Name (Name)
+{
+LLlypuK
+}
+
+STRING 9
+// Doodads: D000 (+[Tree] Winter Pine), Name (Name)
+{
++[Tree] Winter Pine
+}
+
+STRING 12
+// Doodads: D002 (+[Lights] Candle Green), Name (Name)
+{
++[Lights] Candle Green
+}
+
+STRING 13
+// Doodads: D003 (+[Lights] Candle Red), Name (Name)
+{
++[Lights] Candle Red
+}
+
+STRING 14
+// Doodads: D004 (+[Spec] Flying Ice Chunk), Name (Name)
+{
++[Spec] Flying Ice Chunk
+}
+
+STRING 15
+// Doodads: D005 (+[Stone] Snow 1), Name (Name)
+{
++[Stone] Snow 1
+}
+
+STRING 16
+// Doodads: D006 (+[Stone] Snow 2), Name (Name)
+{
++[Stone] Snow 2
+}
+
+STRING 17
+// Doodads: D007 (+[Stone] Snow 3), Name (Name)
+{
++[Stone] Snow 3
+}
+
+STRING 18
+// Doodads: D008 (+[Stone] Snow 4), Name (Name)
+{
++[Stone] Snow 4
+}
+
+STRING 19
+// Doodads: D009 (+[Stone] Snow 5), Name (Name)
+{
++[Stone] Snow 5
+}
+
+STRING 20
+// Doodads: D00A (+[Stone] Snow 6), Name (Name)
+{
++[Stone] Snow 6
+}
+
+STRING 21
+// Doodads: D00B (+[Stone] Snow 7), Name (Name)
+{
++[Stone] Snow 7
+}
+
+STRING 22
+// Doodads: D00C (+[Stone] Snow 8), Name (Name)
+{
++[Stone] Snow 8
+}
+
+STRING 23
+// Doodads: D00D (+[Stone] Snow 9), Name (Name)
+{
++[Stone] Snow 9
+}
+
+STRING 24
+// Doodads: D00E (+[Stone] Snow 10), Name (Name)
+{
++[Stone] Snow 10
+}
+
+STRING 25
+// Doodads: D00F (+[Stone] Snow Big A), Name (Name)
+{
++[Stone] Snow Big A
+}
+
+STRING 26
+// Doodads: D00G (+[Stone] Snow Big 1), Name (Name)
+{
++[Stone] Snow Big 1
+}
+
+STRING 27
+// Doodads: D00H (+[Stone] Snow Big 2), Name (Name)
+{
++[Stone] Snow Big 2
+}
+
+STRING 28
+// Doodads: D00I (+[Stone] Snow Big 3), Name (Name)
+{
++[Stone] Snow Big 3
+}
+
+STRING 29
+// Doodads: D00J (+[Stone] Snow Big 4), Name (Name)
+{
++[Stone] Snow Big 4
+}
+
+STRING 31
+// Doodads: D00L (+[Lights] BE Lamppost), Name (Name)
+{
++[Lights] BE Lamppost
+}
+
+STRING 32
+// Doodads: D00M (+[Lights] Post Lantern Light Source), Name (Name)
+{
++[Lights] Post Lantern Light Source
+}
+
+STRING 34
+// Doodads: D00O (+[Stone] Snow Wall 1), Name (Name)
+{
++[Stone] Snow Wall 1
+}
+
+STRING 35
+// Doodads: D00P (+[Stone] Snow Wall 1b), Name (Name)
+{
++[Stone] Snow Wall 1b
+}
+
+STRING 36
+// Doodads: D00Q (+[Stone] Snow Wall 1c), Name (Name)
+{
++[Stone] Snow Wall 1c
+}
+
+STRING 38
+// Doodads: D00S (+[Stone] Snow Wall 1e), Name (Name)
+{
++[Stone] Snow Wall 1e
+}
+
+STRING 39
+// Doodads: D00T (+[Stone] Snow Wall 1f), Name (Name)
+{
++[Stone] Snow Wall 1f
+}
+
+STRING 40
+// Doodads: D00U (+[Stone] Snow Stalagmite 1), Name (Name)
+{
++[Stone] Snow Stalagmite 1
+}
+
+STRING 44
+// Doodads: D00Y (+[Stone] Snow Stalagmite 5), Name (Name)
+{
++[Stone] Snow Stalagmite 5
+}
+
+STRING 45
+// Doodads: D01D (+[Misc] Snowman), Name (Name)
+{
++[Misc] Snowman
+}
+
+STRING 46
+// Doodads: D010 (+[Stone] Ice Stalagmite 1), Name (Name)
+{
++[Stone] Ice Stalagmite 1
+}
+
+STRING 47
+// Doodads: D011 (+[Stone] Ice Stalagmite 2), Name (Name)
+{
++[Stone] Ice Stalagmite 2
+}
+
+STRING 50
+// Doodads: D014 (+[Stone] Ice Stalagmite 5), Name (Name)
+{
++[Stone] Ice Stalagmite 5
+}
+
+STRING 54
+// Doodads: D018 (+[Stone] Ice Big 3), Name (Name)
+{
++[Stone] Ice Big 3
+}
+
+STRING 55
+// Doodads: D019 (+[Stone] Ice Big 4), Name (Name)
+{
++[Stone] Ice Big 4
+}
+
+STRING 56
+// Doodads: D01A (+[Stone] Ice Wall Small e), Name (Name)
+{
++[Stone] Ice Wall Small e
+}
+
+STRING 57
+// Doodads: D01B (+[Stone] Ice Wall e), Name (Name)
+{
++[Stone] Ice Wall e
+}
+
+STRING 58
+// Doodads: D01C (+[XGMers] Chronicles - Green Crystal), Name (Name)
+{
++[XGMers] Chronicles - Green Crystal
+}
+
+STRING 60
+// Doodads: D00Z (+[Misc] Bottle Dark Green), Name (Name)
+{
++[Misc] Bottle Dark Green
+}
+
+STRING 61
+// Doodads: D01E (+[Misc] Glass), Name (Name)
+{
++[Misc] Glass
+}
+
+STRING 62
+// Doodads: D01F (+[Misc] Glass 2), Name (Name)
+{
++[Misc] Glass 2
+}
+
+STRING 63
+// Doodads: D01G (+[Misc] Bottle Red), Name (Name)
+{
++[Misc] Bottle Red
+}
+
+STRING 64
+// Doodads: D01H (+[Misc] Bottle Blue), Name (Name)
+{
++[Misc] Bottle Blue
+}
+
+STRING 65
+// Doodads: D01I (+[Log] Bench), Name (Name)
+{
++[Log] Bench
+}
+
+STRING 66
+// Doodads: D01J (+[Log] Barrel ---), Name (Name)
+{
++[Log] Barrel ---
+}
+
+STRING 67
+// Doodads: D01K (+[Log] Barrel ||), Name (Name)
+{
++[Log] Barrel ||
+}
+
+STRING 68
+// Doodads: D01L (+[Misc] Bottle Dark Green Lying), Name (Name)
+{
++[Misc] Bottle Dark Green Lying
+}
+
+STRING 69
+// Doodads: D01M (+[Misc] Bottle Red Lying), Name (Name)
+{
++[Misc] Bottle Red Lying
+}
+
+STRING 70
+// Doodads: D01N (+[Misc] Bottle Blue Lying), Name (Name)
+{
++[Misc] Bottle Blue Lying
+}
+
+STRING 72
+// Doodads: D01P (+[Misc] New Year Tree Small), Name (Name)
+{
++[Misc] New Year Tree Small
+}
+
+STRING 76
+// Doodads: D001 (+[Lights] Candle Blue), Name (Name)
+{
++[Lights] Candle Blue
+}
+
+STRING 116
+// Doodads: D01T (+[Stone] New_SnowBigStone1), Name (Name)
+{
++[Stone] New_SnowBigStone1
+}
+
+STRING 117
+// Doodads: D01U (+[Stone] New_SnowBigStone2), Name (Name)
+{
++[Stone] New_SnowBigStone2
+}
+
+STRING 118
+// Doodads: D01V (+[Stone] New_SnowBigStone3), Name (Name)
+{
++[Stone] New_SnowBigStone3
+}
+
+STRING 119
+// Doodads: D01W (+[Stone] New_SnowBigStone4), Name (Name)
+{
++[Stone] New_SnowBigStone4
+}
+
+STRING 120
+// Doodads: D01X (+[Stone] New_SnowBigStone5), Name (Name)
+{
++[Stone] New_SnowBigStone5
+}
+
+STRING 122
+// Doodads: D01Z (+[Stone] New_SnowBigStone7), Name (Name)
+{
++[Stone] New_SnowBigStone7
+}
+
+STRING 123
+// Doodads: D020 (+[Stone] New_SnowBigStone8), Name (Name)
+{
++[Stone] New_SnowBigStone8
+}
+
+STRING 124
+// Doodads: D021 (+[Stone] New_SnowBigStone9), Name (Name)
+{
++[Stone] New_SnowBigStone9
+}
+
+STRING 125
+// Doodads: D022 (+[Stone] New_SnowBigStone9b), Name (Name)
+{
++[Stone] New_SnowBigStone9b
+}
+
+STRING 126
+// Doodads: D023 (+[Stone] SnowArka1), Name (Name)
+{
++[Stone] SnowArka1
+}
+
+STRING 128
+// Doodads: D025 (+[Stone] Snow_new_small_stone3), Name (Name)
+{
++[Stone] Snow_new_small_stone3
+}
+
+STRING 129
+// Doodads: D026 (+[Stone] Snow_new_small_stone1), Name (Name)
+{
++[Stone] Snow_new_small_stone1
+}
+
+STRING 130
+// Doodads: D027 (+[Stone] Snow_new_small_stone2), Name (Name)
+{
++[Stone] Snow_new_small_stone2
+}
+
+STRING 132
+// Doodads: D029 (+[Stone] Snow_new_small_stone1C), Name (Name)
+{
++[Stone] Snow_new_small_stone1C
+}
+
+STRING 133
+// Doodads: D02A (+[Stone] Snow_new_small_stone3C), Name (Name)
+{
++[Stone] Snow_new_small_stone3C
+}
+
+STRING 134
+// Doodads: D02B (+[Stone] Ice_new_small_stone1B), Name (Name)
+{
++[Stone] Ice_new_small_stone1B
+}
+
+STRING 135
+// Doodads: D02C (+[Stone] Ice_new_small_stone2B), Name (Name)
+{
++[Stone] Ice_new_small_stone2B
+}
+
+STRING 136
+// Doodads: D02D (+[Stone] Ice_new_small_stone3B), Name (Name)
+{
++[Stone] Ice_new_small_stone3B
+}
+
+STRING 139
+// Doodads: D02G (+[Stone] Ice_new_small_stone3), Name (Name)
+{
++[Stone] Ice_new_small_stone3
+}
+
+STRING 140
+// Doodads: D02H (+[Stone] Ice_new_small_stone1), Name (Name)
+{
++[Stone] Ice_new_small_stone1
+}
+
+STRING 144
+// Doodads: D02L (+[Water] Ice Field), Name (Name)
+{
++[Water] Ice Field
+}
+
+STRING 145
+// Doodads: D02M (+[Water] Dark Water), Name (Name)
+{
++[Water] Dark Water
+}
+
+STRING 146
+// Doodads: D02N (+[Water] Waterfall), Name (Name)
+{
++[Water] Waterfall
+}
+
+STRING 147
+// Doodads: D02O (+[Spec] Fog), Name (Name)
+{
++[Spec] Fog
+}
+
+STRING 149
+// Doodads: D02Q (+[Stone] stone_wall_snow2), Name (Name)
+{
++[Stone] stone_wall_snow2
+}
+
+STRING 150
+// Doodads: D02R (+[Stone] stone_wall_snow3), Name (Name)
+{
++[Stone] stone_wall_snow3
+}
+
+STRING 151
+// Doodads: D02S (+[Stone] stone_wall_snow4), Name (Name)
+{
++[Stone] stone_wall_snow4
+}
+
+STRING 152
+// Doodads: D02T (+[Stone] stone_wall_snow1), Name (Name)
+{
++[Stone] stone_wall_snow1
+}
+
+STRING 153
+// Doodads: D02U (+[Stone] stone_wall_snow5), Name (Name)
+{
++[Stone] stone_wall_snow5
+}
+
+STRING 154
+// Doodads: D02V (+[XGMers] BTW - Portal), Name (Name)
+{
++[XGMers] BTW - Portal
+}
+
+STRING 155
+// Doodads: D02W (+[Lights] Candle White Big), Name (Name)
+{
++[Lights] Candle White Big
+}
+
+STRING 157
+// Doodads: D02Y (+[Spec] Portal Fog), Name (Name)
+{
++[Spec] Portal Fog
+}
+
+STRING 158
+// Doodads: D02Z (+[Spec] Portal 2), Name (Name)
+{
++[Spec] Portal 2
+}
+
+STRING 159
+// Doodads: D030 (+[Tree] Dead 0), Name (Name)
+{
++[Tree] Dead 0
+}
+
+STRING 160
+// Doodads: D031 (+[Tree] Dead 1), Name (Name)
+{
++[Tree] Dead 1
+}
+
+STRING 161
+// Doodads: D032 (+[Tree] Dead 2), Name (Name)
+{
++[Tree] Dead 2
+}
+
+STRING 162
+// Doodads: D033 (+[Misc] Bones), Name (Name)
+{
++[Misc] Bones
+}
+
+STRING 170
+// Doodads: D03B (+[fence]_1), Name (Name)
+{
++[fence]_1
+}
+
+STRING 171
+// Doodads: D03C (+[fence]_2), Name (Name)
+{
++[fence]_2
+}
+
+STRING 172
+// Doodads: D03D (+[fence]_3), Name (Name)
+{
++[fence]_3
+}
+
+STRING 173
+// Doodads: D03E (+[fence]_4), Name (Name)
+{
++[fence]_4
+}
+
+STRING 174
+// Doodads: D03F (+[fence]_5), Name (Name)
+{
++[fence]_5
+}
+
+STRING 175
+// Doodads: D03G (+[fence]_6), Name (Name)
+{
++[fence]_6
+}
+
+STRING 176
+// Doodads: D03H (+[fence]_7), Name (Name)
+{
++[fence]_7
+}
+
+STRING 177
+// Doodads: D03I (+[wall]_big_4), Name (Name)
+{
++[wall]_big_4
+}
+
+STRING 178
+// Doodads: D03J (+[wall]_big_1), Name (Name)
+{
++[wall]_big_1
+}
+
+STRING 179
+// Doodads: D03K (+[wall]_big_2), Name (Name)
+{
++[wall]_big_2
+}
+
+STRING 180
+// Doodads: D03L (+[wall]_big_3), Name (Name)
+{
++[wall]_big_3
+}
+
+STRING 181
+// Doodads: D03M (+[Lights] BE Lamppost V2), Name (Name)
+{
++[Lights] BE Lamppost V2
+}
+
+STRING 182
+// Doodads: D03N (+[wall]_big_1_b3), Name (Name)
+{
++[wall]_big_1_b3
+}
+
+STRING 183
+// Doodads: D03O (+[wall]_big_1_b), Name (Name)
+{
++[wall]_big_1_b
+}
+
+STRING 184
+// Doodads: D03P (+[wall]_big_1_b2), Name (Name)
+{
++[wall]_big_1_b2
+}
+
+STRING 185
+// Doodads: D03Q (+[wall]_big_1_b4), Name (Name)
+{
++[wall]_big_1_b4
+}
+
+STRING 186
+// Doodads: D03R (+[wall]_big_1_b_small), Name (Name)
+{
++[wall]_big_1_b_small
+}
+
+STRING 187
+// Doodads: D03S (+[wall]_big_1_b_small2), Name (Name)
+{
++[wall]_big_1_b_small2
+}
+
+STRING 188
+// Doodads: D03T (+[wall]_big_2_b_small), Name (Name)
+{
++[wall]_big_2_b_small
+}
+
+STRING 189
+// Doodads: D03U (+[wall]_big_3_b_small), Name (Name)
+{
++[wall]_big_3_b_small
+}
+
+STRING 190
+// Doodads: D03V (+[wall]_big_4_b_small), Name (Name)
+{
++[wall]_big_4_b_small
+}
+
+STRING 192
+// Doodads: D03X (+[brus]_2), Name (Name)
+{
++[brus]_2
+}
+
+STRING 194
+// Doodads: D03Z (+[brus]_3), Name (Name)
+{
++[brus]_3
+}
+
+STRING 195
+// Doodads: D040 (+[brus]_1), Name (Name)
+{
++[brus]_1
+}
+
+STRING 196
+// Doodads: D041 (+[brus]_1b), Name (Name)
+{
++[brus]_1b
+}
+
+STRING 198
+// Doodads: D043 (+[brus]_2b), Name (Name)
+{
++[brus]_2b
+}
+
+STRING 199
+// Doodads: D044 (+[floor]_3), Name (Name)
+{
++[floor]_3
+}
+
+STRING 200
+// Doodads: D045 (+[floor]_1), Name (Name)
+{
++[floor]_1
+}
+
+STRING 201
+// Doodads: D046 (+[floor]_4), Name (Name)
+{
++[floor]_4
+}
+
+STRING 202
+// Doodads: D047 (+[floor]_2), Name (Name)
+{
++[floor]_2
+}
+
+STRING 203
+// Doodads: D048 (равшан), Name (Name)
+{
+равшан
+}
+
+STRING 205
+// Doodads: D04A (+[Log] Cart), Name (Name)
+{
++[Log] Cart
+}
+
+STRING 206
+// Doodads: D04B (+[Tree] XGM Pine), Name (Name)
+{
++[Tree] XGM Pine
+}
+
+STRING 207
+// Doodads: D04C (+[roof]_2), Name (Name)
+{
++[roof]_2
+}
+
+STRING 208
+// Doodads: D04D (+[roof]_1), Name (Name)
+{
++[roof]_1
+}
+
+STRING 209
+// Doodads: D04E (+[roof]_3), Name (Name)
+{
++[roof]_3
+}
+
+STRING 210
+// Doodads: D04F (+[roof]_4), Name (Name)
+{
++[roof]_4
+}
+
+STRING 211
+// Doodads: D04G (+[roof]_wall), Name (Name)
+{
++[roof]_wall
+}
+
+STRING 212
+// Doodads: D054 (+[wall]_big_1_b4x2), Name (Name)
+{
++[wall]_big_1_b4x2
+}
+
+STRING 213
+// Doodads: D04I (+[wall]_big_2_b_small_b), Name (Name)
+{
++[wall]_big_2_b_small_b
+}
+
+STRING 218
+// Doodads: D04L (+[okno] 2), Name (Name)
+{
++[okno] 2
+}
+
+STRING 219
+// Doodads: D036 (+[Misc] Arthas), Name (Name)
+{
++[Misc] Arthas
+}
+
+STRING 220
+// Doodads: D037 (+[Misc] Plate 2), Name (Name)
+{
++[Misc] Plate 2
+}
+
+STRING 221
+// Doodads: D038 (+[Misc] Plate 6), Name (Name)
+{
++[Misc] Plate 6
+}
+
+STRING 223
+// Doodads: D03A (+[Misc] Water Pot Glass), Name (Name)
+{
++[Misc] Water Pot Glass
+}
+
+STRING 224
+// Doodads: D04M (+[Misc] Apple), Name (Name)
+{
++[Misc] Apple
+}
+
+STRING 225
+// Doodads: D04N (+[Misc] Cheese), Name (Name)
+{
++[Misc] Cheese
+}
+
+STRING 227
+// Doodads: D04P (+[Misc] Meat 2), Name (Name)
+{
++[Misc] Meat 2
+}
+
+STRING 228
+// Doodads: D04Q (+[Misc] White Wolf Head), Name (Name)
+{
++[Misc] White Wolf Head
+}
+
+STRING 229
+// Doodads: YOts (+[Misc] Sign Tavern), Name (Name)
+{
++[Misc] Sign Tavern
+}
+
+STRING 230
+// Doodads: D04R (+[roof]_1), Name (Name)
+{
++[roof]_1
+}
+
+STRING 231
+// Doodads: D04S (+[roof]_2), Name (Name)
+{
++[roof]_2
+}
+
+STRING 232
+// Doodads: D04T (+[roof]_3), Name (Name)
+{
++[roof]_3
+}
+
+STRING 233
+// Doodads: D04U (+[roof]_4), Name (Name)
+{
++[roof]_4
+}
+
+STRING 234
+// Doodads: D04V (+[roof]_wall), Name (Name)
+{
++[roof]_wall
+}
+
+STRING 235
+// Doodads: D04W (+[brus]_1), Name (Name)
+{
++[brus]_1
+}
+
+STRING 236
+// Doodads: D04X (+[brus]_1b), Name (Name)
+{
++[brus]_1b
+}
+
+STRING 237
+// Doodads: D04Y (+[brus]_2), Name (Name)
+{
++[brus]_2
+}
+
+STRING 238
+// Doodads: D04Z (+[wall]_big_2_b_small_b), Name (Name)
+{
++[wall]_big_2_b_small_b
+}
+
+STRING 239
+// Doodads: D050 (+[wall]_big_4_b_small), Name (Name)
+{
++[wall]_big_4_b_small
+}
+
+STRING 240
+// Doodads: D051 (+[okno] 2), Name (Name)
+{
++[okno] 2
+}
+
+STRING 241
+// Doodads: D052 (+[wall]_big_1_b_small2), Name (Name)
+{
++[wall]_big_1_b_small2
+}
+
+STRING 242
+// Doodads: D053 (+[floor]_1), Name (Name)
+{
++[floor]_1
+}
+
+STRING 244
+// Doodads: D055 (+[Stone] Ice Wall mini), Name (Name)
+{
++[Stone] Ice Wall mini
+}
+
+STRING 246
+// Doodads: D057 (+[Spec] Portal Fog2), Name (Name)
+{
++[Spec] Portal Fog2
+}
+
+STRING 257
+// Doodads: D05I (+[Tree] oldTree6), Name (Name)
+{
++[Tree] oldTree6
+}
+
+STRING 258
+// Doodads: D05J (+[Tree] oldTree5), Name (Name)
+{
++[Tree] oldTree5
+}
+
+STRING 260
+// Doodads: D05L (+[Tree] oldTree3), Name (Name)
+{
++[Tree] oldTree3
+}
+
+STRING 261
+// Doodads: D05M (+[Tree] oldTree2), Name (Name)
+{
++[Tree] oldTree2
+}
+
+STRING 263
+// Doodads: D05O (+[Tree] oldTree9), Name (Name)
+{
++[Tree] oldTree9
+}
+
+STRING 264
+// Doodads: D05P (+[Tree] oldTree11), Name (Name)
+{
++[Tree] oldTree11
+}
+
+STRING 265
+// Doodads: D05Q (+[Tree] oldTree10), Name (Name)
+{
++[Tree] oldTree10
+}
+
+STRING 266
+// Doodads: D05R (+[Tree] oldTree), Name (Name)
+{
++[Tree] oldTree
+}
+
+STRING 280
+// Doodads: D058 (+[XGMers] oGre_), Name (Name)
+{
++[XGMers] oGre_
+}
+
+STRING 281
+// Doodads: D05E (+[roof] sosulka1), Name (Name)
+{
++[roof] sosulka1
+}
+
+STRING 283
+// Doodads: D05T (+[Misc] Mug 0), Name (Name)
+{
++[Misc] Mug 0
+}
+
+STRING 284
+// Doodads: D05U (+[Misc] Mug 1), Name (Name)
+{
++[Misc] Mug 1
+}
+
+STRING 286
+// Doodads: D05W (+[Misc] Mug 3), Name (Name)
+{
++[Misc] Mug 3
+}
+
+STRING 287
+// Doodads: D05X (+[Misc] Curtain White), Name (Name)
+{
++[Misc] Curtain White
+}
+
+STRING 288
+// Doodads: D05Y (+[Misc] Mug Beer 0), Name (Name)
+{
++[Misc] Mug Beer 0
+}
+
+STRING 289
+// Doodads: D05Z (+[Misc] Mug Beer 1), Name (Name)
+{
++[Misc] Mug Beer 1
+}
+
+STRING 290
+// Doodads: D060 (+[Misc] Santa 1), Name (Name)
+{
++[Misc] Santa 1
+}
+
+STRING 291
+// Doodads: D061 (+[Misc] Santa 2), Name (Name)
+{
++[Misc] Santa 2
+}
+
+STRING 292
+// Doodads: D063 (+[Misc] Santa 3), Name (Name)
+{
++[Misc] Santa 3
+}
+
+STRING 294
+// Doodads: D062 (+[Misc] Santa 4), Name (Name)
+{
++[Misc] Santa 4
+}
+
+STRING 295
+// Doodads: D064 (+[Misc] Santa 5), Name (Name)
+{
++[Misc] Santa 5
+}
+
+STRING 296
+// Doodads: D01Q (+[Misc] Present 3), Name (Name)
+{
++[Misc] Present 3
+}
+
+STRING 297
+// Doodads: D01R (+[Misc] Present 2), Name (Name)
+{
++[Misc] Present 2
+}
+
+STRING 298
+// Doodads: D01S (+[Misc] Present 1), Name (Name)
+{
++[Misc] Present 1
+}
+
+STRING 299
+// Doodads: D00K (+[Misc] Lights 1), Name (Name)
+{
++[Misc] Lights 1
+}
+
+STRING 300
+// Doodads: D00N (+[Misc] Lights 2), Name (Name)
+{
++[Misc] Lights 2
+}
+
+STRING 301
+// Doodads: D00R (+[Misc] Lights 3), Name (Name)
+{
++[Misc] Lights 3
+}
+
+STRING 302
+// Units: H600 (16GB), Propernames (Proper Names)
+{
+16GB
+}
+
+STRING 303
+// Units: H600 (16GB), Name (Name)
+{
+16GB
+}
+
+STRING 304
+// Units: U600 (alexkill), Propernames (Proper Names)
+{
+alexkill
+}
+
+STRING 305
+// Units: U600 (alexkill), Name (Name)
+{
+alexkill
+}
+
+STRING 306
+// Units: H601 (AnimE), Name (Name)
+{
+AnimE
+}
+
+STRING 307
+// Units: H601 (AnimE), Propernames (Proper Names)
+{
+AnimE
+}
+
+STRING 308
+// Units: n600 (aprotos), Name (Name)
+{
+aprotos
+}
+
+STRING 309
+// Units: O600 (Арастиор), Propernames (Proper Names)
+{
+Арастиор
+}
+
+STRING 310
+// Units: O600 (Арастиор), Name (Name)
+{
+Арастиор
+}
+
+STRING 311
+// Units: O600 (Арастиор), Ubertip (Tooltip - Extended)
+{
+Этот герой лучше всего проявляет себя в боях один на один. Способен выучить заклинания 'Уклонение', ''Исцеление'' и ''Смертельный Удар'', а также освоить способность ''Подчинение''. |n|n|cffffcc00Может атаковать наземные цели.|r
+}
+
+STRING 312
+// Units: O600 (Арастиор), Revivetip (Tooltip - Revive)
+{
+Воскресить Паладина (|cffffcc00B|r)
+}
+
+STRING 313
+// Units: O600 (Арастиор), Awakentip (Tooltip - Awaken)
+{
+Воскресить Паладина (|cffffcc00B|r)
+}
+
+STRING 314
+// Units: z600 (Артём), Name (Name)
+{
+Артём
+}
+
+STRING 315
+// Units: z600 (Артём), Tip (Tooltip - Basic)
+{
+Сержант 71-го Кадианского(|cffffcc00M|r)
+}
+
+STRING 316
+// Units: z600 (Артём), Ubertip (Tooltip - Extended)
+{
+Сержант 1-го взвода роты "Зажигателей" 71-го Кадианского полка. Вооружен цепной пилой и лазерным пистолетом. Обладает огромным даром убеждения. Способен уговорить грязных еретиков и ксеносов принять веру в Императора. |n|n|cffffcc00 Может атаковать наземные и воздушные цели.|r
+}
+
+STRING 317
+// Units: h602 (Bee), Name (Name)
+{
+Bee
+}
+
+STRING 318
+// Units: H603 (Bermoff), Name (Name)
+{
+Bermoff
+}
+
+STRING 319
+// Units: H603 (Bermoff), Propernames (Proper Names)
+{
+Bermoff
+}
+
+STRING 320
+// Units: H603 (Bermoff), Description (Description)
+{
+Модель юнита by levigeorge1617
+}
+
+STRING 321
+// Units: H603 (Bermoff), Tip (Tooltip - Basic)
+{
+Модель юнита by levigeorge1617
+}
+
+STRING 322
+// Units: u601 (bladget), Name (Name)
+{
+bladget
+}
+
+STRING 323
+// Units: u601 (bladget), Ubertip (Tooltip - Extended)
+{
+Застрял в сугробе головой вниз возле катка(озера).
+}
+
+STRING 324
+// Units: h604 (CursedSoul), Name (Name)
+{
+CursedSoul
+}
+
+STRING 325
+// Units: H605 (CeraRalaz), Name (Name)
+{
+CeraRalaz
+}
+
+STRING 326
+// Units: H605 (CeraRalaz), Propernames (Proper Names)
+{
+CeraRalaz
+}
+
+STRING 327
+// Units: H606 (MiRGE), Name (Name)
+{
+MiRGE
+}
+
+STRING 328
+// Units: H606 (MiRGE), Propernames (Proper Names)
+{
+MiRGE
+}
+
+STRING 329
+// Units: H607 (Rush), Name (Name)
+{
+Rush
+}
+
+STRING 330
+// Units: H607 (Rush), Propernames (Proper Names)
+{
+Rush
+}
+
+STRING 331
+// Units: H608 (Scorpion), Name (Name)
+{
+Scorpion
+}
+
+STRING 332
+// Units: H608 (Scorpion), Propernames (Proper Names)
+{
+Скорпион
+}
+
+STRING 333
+// Units: N601 (Demolition), Propernames (Proper Names)
+{
+Demolition
+}
+
+STRING 334
+// Units: N601 (Demolition), Name (Name)
+{
+Demolition
+}
+
+STRING 335
+// Units: N601 (Demolition), Hotkey (Hotkey)
+{
+D
+}
+
+STRING 336
+// Units: N601 (Demolition), Ubertip (Tooltip - Extended)
+{
+Поддерживает свечение Новогодней Елки!!!
+}
+
+STRING 337
+// Units: H609 (Diazon), Propernames (Proper Names)
+{
+Diazon
+}
+
+STRING 338
+// Units: H609 (Diazon), Name (Name)
+{
+Diazon
+}
+
+STRING 339
+// Units: U602 (DIMENSIO), Name (Name)
+{
+DIMENSIO
+}
+
+STRING 340
+// Units: U602 (DIMENSIO), Propernames (Proper Names)
+{
+DIMENSIO
+}
+
+STRING 341
+// Units: U602 (DIMENSIO), Tip (Tooltip - Basic)
+{
+Архидемон
+}
+
+STRING 342
+// Units: U602 (DIMENSIO), Revivetip (Tooltip - Revive)
+{
+Архидемон
+}
+
+STRING 343
+// Units: U602 (DIMENSIO), Awakentip (Tooltip - Awaken)
+{
+Архидемон
+}
+
+STRING 344
+// Units: U602 (DIMENSIO), Ubertip (Tooltip - Extended)
+{
+Герой армии Тьмы. Может освоить заклинания ''Тварь из Недр'', ''Громовая Поступь'', ''Молот Бурь'' и ''Огненный голем''. |n|n|cffffcc00Может атаковать наземные цели.|r
+}
+
+STRING 346
+// Units: o601 (dk), Name (Name)
+{
+dk
+}
+
+STRING 347
+// Units: n602 (DMBL), Name (Name)
+{
+DMBL
+}
+
+STRING 348
+// Units: H60A (DoMuHaToP), Name (Name)
+{
+DoMuHaToP
+}
+
+STRING 349
+// Units: H60A (DoMuHaToP), Propernames (Proper Names)
+{
+DoMuHaToP
+}
+
+STRING 350
+// Units: N603 (Dragon Spirit), Name (Name)
+{
+Dragon Spirit
+}
+
+STRING 351
+// Units: N603 (Dragon Spirit), Tip (Tooltip - Basic)
+{
+Химик (|cffffcc00X|r)
+}
+
+STRING 352
+// Units: N603 (Dragon Spirit), Propernames (Proper Names)
+{
+Dragon Spirit
+}
+
+STRING 353
+// Units: N604 (XimikS), Name (Name)
+{
+XimikS
+}
+
+STRING 354
+// Units: N604 (XimikS), Tip (Tooltip - Basic)
+{
+Химик (|cffffcc00X|r)
+}
+
+STRING 355
+// Units: N604 (XimikS), Propernames (Proper Names)
+{
+XimikS
+}
+
+STRING 356
+// Units: H60B (Edirt De Yarou), Name (Name)
+{
+Edirt De Yarou
+}
+
+STRING 357
+// Units: H60B (Edirt De Yarou), Propernames (Proper Names)
+{
+Edirt De Yarou
+}
+
+STRING 358
+// Units: O602 (Elisar), Propernames (Proper Names)
+{
+Elisar
+}
+
+STRING 359
+// Units: O602 (Elisar), Name (Name)
+{
+Elisar
+}
+
+STRING 360
+// Units: h60C (Enein), Name (Name)
+{
+Enein
+}
+
+STRING 361
+// Units: H60D (FEARSTARTER), Name (Name)
+{
+FEARSTARTER
+}
+
+STRING 362
+// Units: H60D (FEARSTARTER), Tip (Tooltip - Basic)
+{
+|c00AA0055FEARSTARTER|r
+}
+
+STRING 363
+// Units: H60D (FEARSTARTER), Propernames (Proper Names)
+{
+FEARSTARTER
+}
+
+STRING 364
+// Units: H60E (FireMagik), Name (Name)
+{
+FireMagik
+}
+
+STRING 365
+// Units: U603 (FREEZE_ball), Name (Name)
+{
+FREEZE_ball
+}
+
+STRING 366
+// Units: U603 (FREEZE_ball), Propernames (Proper Names)
+{
+FREEZE_ball
+}
+
+STRING 367
+// Units: H123 (Hellfim), Name (Name)
+{
+Hellfim
+}
+
+STRING 368
+// Units: n605 (Искатель), Name (Name)
+{
+Искатель
+}
+
+STRING 369
+// Units: H60G (MF), Name (Name)
+{
+MF
+}
+
+STRING 370
+// Units: n606 (JamesBlack), Name (Name)
+{
+JamesBlack
+}
+
+STRING 371
+// Units: n606 (JamesBlack), Tip (Tooltip - Basic)
+{
+Беленький медвежонок
+}
+
+STRING 372
+// Units: n606 (JamesBlack), Ubertip (Tooltip - Extended)
+{
+Маленький беленький медвежонок. Родственник Умки. Живет в Ноябрске.
+}
+
+STRING 373
+// Units: N607 (Kainer), Name (Name)
+{
+Kainer
+}
+
+STRING 374
+// Units: N607 (Kainer), Propernames (Proper Names)
+{
+Kainer
+}
+
+STRING 375
+// Units: N607 (Kainer), Revivetip (Tooltip - Revive)
+{
+Воскресить грозу КиП (|cffffcc00W|r)
+}
+
+STRING 376
+// Units: N607 (Kainer), Awakentip (Tooltip - Awaken)
+{
+Воскресить грозу КиП (|cffffcc00W|r)
+}
+
+STRING 377
+// Units: N607 (Kainer), Ubertip (Tooltip - Extended)
+{
+Могущественный демон был призван из преисподней по личному приказу Повелителя демонов Зеренара, чтобы стать телом для создателя кампании "Повелитель демонов" Kainer'а, жуткого человека и грозу "Карт и Проектов"
+}
+
+STRING 378
+// Units: N607 (Kainer), Tip (Tooltip - Basic)
+{
+Kainer (|cffffcc00K|r)
+}
+
+STRING 379
+// Units: N607 (Kainer), Hotkey (Hotkey)
+{
+K
+}
+
+STRING 380
+// Units: n608 (Картошка), Name (Name)
+{
+Картошка
+}
+
+STRING 381
+// Units: H60H (Kel9290), Name (Name)
+{
+Kel9290
+}
+
+STRING 382
+// Units: H60H (Kel9290), Propernames (Proper Names)
+{
+Kel9290
+}
+
+STRING 383
+// Units: n609 (kodoo), Name (Name)
+{
+kodoo
+}
+
+STRING 384
+// Units: U604 (KorN Faeron), Name (Name)
+{
+KorN Faeron
+}
+
+STRING 385
+// Units: U604 (KorN Faeron), Propernames (Proper Names)
+{
+KorN Faeron
+}
+
+STRING 386
+// Units: E600 (Krag Hag), Propernames (Proper Names)
+{
+Krag Hag
+}
+
+STRING 387
+// Units: E600 (Krag Hag), Name (Name)
+{
+Krag Hag
+}
+
+STRING 388
+// Units: h60I (Лелуш), Name (Name)
+{
+Лелуш
+}
+
+STRING 389
+// Units: H60J (LittleDark Lynx), Name (Name)
+{
+LittleDark Lynx
+}
+
+STRING 390
+// Units: H60J (LittleDark Lynx), Propernames (Proper Names)
+{
+LittleDark Lynx
+}
+
+STRING 391
+// Units: H60J (LittleDark Lynx), Tip (Tooltip - Basic)
+{
+Некромант (|cffffcc00B|r)
+}
+
+STRING 392
+// Units: H60J (LittleDark Lynx), Revivetip (Tooltip - Revive)
+{
+Оживить некроманта (|cffffcc00B|r)
+}
+
+STRING 393
+// Units: H60J (LittleDark Lynx), Ubertip (Tooltip - Extended)
+{
+Адепт Некрополиса. |n|n|cffffcc00Может атаковать наземные и воздушные цели.|r
+}
+
+STRING 394
+// Units: H60J (LittleDark Lynx), Awakentip (Tooltip - Awaken)
+{
+Оживить некроманта (|cffffcc00B|r)
+}
+
+STRING 395
+// Units: H60K (Lord Vampire), Hotkey (Hotkey)
+{
+Q
+}
+
+STRING 396
+// Units: H60K (Lord Vampire), Propernames (Proper Names)
+{
+Lord Vampire
+}
+
+STRING 397
+// Units: H60K (Lord Vampire), Name (Name)
+{
+Lord Vampire
+}
+
+STRING 398
+// Units: H60K (Lord Vampire), Tip (Tooltip - Basic)
+{
+Яррррр! (|cffffcc00L|r)
+}
+
+STRING 399
+// Units: H60K (Lord Vampire), Revivetip (Tooltip - Revive)
+{
+Воскресить Яррррра! (|cffffcc00L|r)
+}
+
+STRING 400
+// Units: H60K (Lord Vampire), Ubertip (Tooltip - Extended)
+{
+Яррррр! Яррррр! Яррррр! Яррррр!
+}
+
+STRING 401
+// Units: H60K (Lord Vampire), Awakentip (Tooltip - Awaken)
+{
+Воскресить Яррррра! (|cffffcc00L|r)
+}
+
+STRING 402
+// Units: H60L (Manhant), Name (Name)
+{
+Manhant
+}
+
+STRING 403
+// Units: H60L (Manhant), Propernames (Proper Names)
+{
+Manhant
+}
+
+STRING 404
+// Units: n60A (Медведь), Name (Name)
+{
+Медведь
+}
+
+STRING 405
+// Units: n60A (Медведь), Tip (Tooltip - Basic)
+{
+Медведь
+}
+
+STRING 406
+// Units: H60M (Механик), Propernames (Proper Names)
+{
+MEXAHuK
+}
+
+STRING 407
+// Units: H60M (Механик), Name (Name)
+{
+Механик
+}
+
+STRING 408
+// Units: H60M (Механик), Tip (Tooltip - Basic)
+{
+Механик (|cffffcc00M|r)
+}
+
+STRING 409
+// Units: H60M (Механик), Revivetip (Tooltip - Revive)
+{
+Воскресить Механика (|cffffcc00M|r)
+}
+
+STRING 410
+// Units: H60M (Механик), Ubertip (Tooltip - Extended)
+{
+Герой-маг, непревзойденный в магии. Приводит противника в смятение и страх. 
+}
+
+STRING 411
+// Units: H60M (Механик), Awakentip (Tooltip - Awaken)
+{
+Воскресить Механика (|cffffcc00M|r)
+}
+
+STRING 412
+// Units: O603 (MisterX), Propernames (Proper Names)
+{
+MisterX
+}
+
+STRING 413
+// Units: O603 (MisterX), Name (Name)
+{
+MisterX
+}
+
+STRING 414
+// Units: n60B (mitryz), Name (Name)
+{
+mitryz
+}
+
+STRING 415
+// Units: n60B (mitryz), Hotkey (Hotkey)
+{
+M
+}
+
+STRING 416
+// Units: n60B (mitryz), Tip (Tooltip - Basic)
+{
+|cffffcc00m|ritryz
+}
+
+STRING 417
+// Units: n60B (mitryz), Ubertip (Tooltip - Extended)
+{
+Real Programmer
+}
+
+STRING 418
+// Units: h60N (NanO), Name (Name)
+{
+NanO
+}
+
+STRING 419
+// Units: h60O (NCrashed), Name (Name)
+{
+NCrashed
+}
+
+STRING 420
+// Units: h60O (NCrashed), Tip (Tooltip - Basic)
+{
+NCrashed (|cffffcc00B|r)
+}
+
+STRING 421
+// Units: h60O (NCrashed), Ubertip (Tooltip - Extended)
+{
+Воин людей, с детства обученный защищать своего хозяина. Если потребуется, он готов отдать за него жизнь.|n|n|cffffcc00Может атаковать наземные цели.|r
+}
+
+STRING 422
+// Units: H60P (Nero hero), Name (Name)
+{
+Nero hero
+}
+
+STRING 423
+// Units: H60P (Nero hero), Tip (Tooltip - Basic)
+{
+Nero hero (|cffffcc00B|r)
+}
+
+STRING 424
+// Units: H60P (Nero hero), Propernames (Proper Names)
+{
+Nero hero
+}
+
+STRING 425
+// Units: H60Q (Nikikin), Name (Name)
+{
+Nikikin
+}
+
+STRING 426
+// Units: H60Q (Nikikin), Tip (Tooltip - Basic)
+{
+Nikikin
+}
+
+STRING 427
+// Units: H60Q (Nikikin), Propernames (Proper Names)
+{
+Nikikin
+}
+
+STRING 428
+// Units: E601 (Nyuu), Name (Name)
+{
+Nyuu
+}
+
+STRING 429
+// Units: E601 (Nyuu), Propernames (Proper Names)
+{
+Nyuu
+}
+
+STRING 430
+// Units: U605 (Омега), Name (Name)
+{
+Омега
+}
+
+STRING 431
+// Units: U605 (Омега), Propernames (Proper Names)
+{
+Омега
+}
+
+STRING 432
+// Units: O604 (Пиначет), Propernames (Proper Names)
+{
+Пиначет
+}
+
+STRING 433
+// Units: O604 (Пиначет), Name (Name)
+{
+Пиначет
+}
+
+STRING 434
+// Units: O604 (Пиначет), Tip (Tooltip - Basic)
+{
+Ловец Снов (|cffffcc00D|r)
+}
+
+STRING 435
+// Units: O604 (Пиначет), Revivetip (Tooltip - Revive)
+{
+Воскресить Ловца Снов (|cffffcc00D|r)
+}
+
+STRING 436
+// Units: O604 (Пиначет), Awakentip (Tooltip - Awaken)
+{
+Воскресить Ловца Снов (|cffffcc00D|r)
+}
+
+STRING 437
+// Units: O604 (Пиначет), Ubertip (Tooltip - Extended)
+{
+Этот герой способен не только усыплять детей в Новогоднюю ночь, но и колдовать зимние заклятья...|n|n|cffffcc00Может атаковать наземные цели.|r
+}
+
+STRING 438
+// Units: O604 (Пиначет), Hotkey (Hotkey)
+{
+D
+}
+
+STRING 439
+// Units: n60C (Prototype_T), Name (Name)
+{
+Prototype_T
+}
+
+STRING 440
+// Units: z601 (Ranger21), Name (Name)
+{
+Ranger21
+}
+
+STRING 441
+// Units: h60R (reALien), Name (Name)
+{
+reALien
+}
+
+STRING 442
+// Units: n60D (RedFog), Name (Name)
+{
+RedFog
+}
+
+STRING 443
+// Units: O605 (Rewenger), Name (Name)
+{
+Rewenger
+}
+
+STRING 444
+// Units: O605 (Rewenger), Propernames (Proper Names)
+{
+Rewenger
+}
+
+STRING 445
+// Units: O605 (Rewenger), Tip (Tooltip - Basic)
+{
+Фиолетовый человек (|cffffcc00B|r)
+}
+
+STRING 446
+// Units: O605 (Rewenger), Revivetip (Tooltip - Revive)
+{
+Воскресить Фиолетового человека (|cffffcc00B|r)
+}
+
+STRING 447
+// Units: O605 (Rewenger), Awakentip (Tooltip - Awaken)
+{
+Воскресить Фиолетового человека (|cffffcc00B|r)
+}
+
+STRING 448
+// Units: O605 (Rewenger), Ubertip (Tooltip - Extended)
+{
+Не больше, чем тень Фиолетового Человека в этом измерении, посему лишена большей части могущества. Обладает повышенными физическими характеристиками и распространяет фиолетовое излучение, ускоряющее процессы жизнедеятельности окружающих. |n|n|cffffcc00Может атаковать наземные и воздушные цели.|r
+}
+
+STRING 449
+// Units: N60E (ROLAN), Propernames (Proper Names)
+{
+ROLAN
+}
+
+STRING 450
+// Units: N60E (ROLAN), Name (Name)
+{
+ROLAN
+}
+
+STRING 451
+// Units: n60F (Sarcazi), Name (Name)
+{
+Sarcazi
+}
+
+STRING 452
+// Units: n60F (Sarcazi), Tip (Tooltip - Basic)
+{
+The Sarcazi
+}
+
+STRING 453
+// Units: n60F (Sarcazi), Ubertip (Tooltip - Extended)
+{
+XGM X-MAS!
+}
+
+STRING 454
+// Units: n60G (ScorpioT1000), Name (Name)
+{
+ScorpioT1000
+}
+
+STRING 455
+// Units: h60S (Сказочник), Name (Name)
+{
+Сказочник
+}
+
+STRING 456
+// Units: O606 (SkEлEтOH), Propernames (Proper Names)
+{
+SkEлEтOH
+}
+
+STRING 457
+// Units: O606 (SkEлEтOH), Name (Name)
+{
+SkEлEтOH
+}
+
+STRING 458
+// Units: H60T (sleep), Name (Name)
+{
+sleep
+}
+
+STRING 459
+// Units: H60T (sleep), Propernames (Proper Names)
+{
+sleep
+}
+
+STRING 460
+// Units: H60U (Sodjiro Seta), Name (Name)
+{
+Sodjiro Seta
+}
+
+STRING 461
+// Units: H60U (Sodjiro Seta), Propernames (Proper Names)
+{
+Джек Скеллингтон
+}
+
+STRING 462
+// Units: H60U (Sodjiro Seta), Tip (Tooltip - Basic)
+{
+Джек Скеллингтон
+}
+
+STRING 463
+// Units: E602 (stepanick), Propernames (Proper Names)
+{
+stepanick
+}
+
+STRING 464
+// Units: E602 (stepanick), Ubertip (Tooltip - Extended)
+{
+Ну что тут скажешь... Это я, Stepanick aka Leprekon aka Степан... Хех... Вот такой вот я мускулистый ночной эльф в татушках... В душе. Аффтор конверта собственно тоже я, моделя сборная, использовалась в одной из моих карт "В стол" (Рабочий).
+}
+
+STRING 465
+// Units: E602 (stepanick), Name (Name)
+{
+stepanick
+}
+
+STRING 466
+// Units: n60H (Sunn), Name (Name)
+{
+Sunn
+}
+
+STRING 467
+// Units: H60V (Tiodor), Name (Name)
+{
+Tiodor
+}
+
+STRING 468
+// Units: o607 (trakt), Name (Name)
+{
+trakt
+}
+
+STRING 469
+// Units: H60W (Вурдалак), Name (Name)
+{
+Вурдалак
+}
+
+STRING 470
+// Units: H60W (Вурдалак), Propernames (Proper Names)
+{
+Мясникадзе Вурдалакович
+}
+
+STRING 471
+// Units: H60W (Вурдалак), Tip (Tooltip - Basic)
+{
+Санта-мясник (|cffffcc00L|r)
+}
+
+STRING 472
+// Units: H60W (Вурдалак), Revivetip (Tooltip - Revive)
+{
+Воскресить Санта-мясник (|cffffcc00L|r)
+}
+
+STRING 473
+// Units: H60W (Вурдалак), Awakentip (Tooltip - Awaken)
+{
+Воскресить Санта-мясник (|cffffcc00L|r)
+}
+
+STRING 474
+// Units: H60W (Вурдалак), Ubertip (Tooltip - Extended)
+{
+Мясникадзе Вурдалакович готов служить. Равняйсь  на ХГМ!
+}
+
+STRING 475
+// Units: H60X (WaterMan), Propernames (Proper Names)
+{
+WaterMan
+}
+
+STRING 476
+// Units: H60X (WaterMan), Name (Name)
+{
+WaterMan
+}
+
+STRING 477
+// Units: h60Y (WebSter), Name (Name)
+{
+WebSter
+}
+
+STRING 478
+// Units: h60Y (WebSter), Ubertip (Tooltip - Extended)
+{
+Мастер на все руки. Может добывать золото и рубить лес, а также строить новые здания, делать модели, текстуры и анимы, а также ремонтировать поврежденные. При необходимости способен сражатся как настоящий гвардеец Адептус Механикус. В настоящий момент имеет должность хранителя новогодней ёлки XGM. |n|n|cffffcc00Может атаковать любые цели.|r
+}
+
+STRING 479
+// Units: h60Y (WebSter), Tip (Tooltip - Basic)
+{
+WebSter (|cffffcc00P|r)
+}
+
+STRING 480
+// Units: n60I (ZiDi), Name (Name)
+{
+ZiDi
+}
+
+STRING 481
+// Units: n60J (House M.D.), Name (Name)
+{
+House M.D.
+}
+
+STRING 482
+// Units: e603 (ShadoW DaemoN), Name (Name)
+{
+ShadoW DaemoN
+}
+
+STRING 483
+// Units: H60Z (HTC), Name (Name)
+{
+HTC
+}
+
+STRING 484
+// Units: H60Z (HTC), Propernames (Proper Names)
+{
+НТС
+}
+
+STRING 485
+// Units: n60K (Инквизитор), Name (Name)
+{
+Инквизитор
+}
+
+STRING 486
+// Units: n60L (Sakh_badboy), Name (Name)
+{
+Sakh_badboy
+}
+
+STRING 487
+// Units: n60M (GadenbIsh), Name (Name)
+{
+GadenbIsh
+}
+
+STRING 488
+// Units: E604 (LLlypuK), Propernames (Proper Names)
+{
+LLlypuK
+}
+
+STRING 489
+// Abilities: A600 (16gb a), Name (Name)
+{
+16gb a
+}
+
+STRING 490
+// Abilities: A601 (aprotos a), Name (Name)
+{
+aprotos a
+}
+
+STRING 491
+// Abilities: A602 (aprotos b), Name (Name)
+{
+aprotos b
+}
+
+STRING 492
+// Abilities: A602 (aprotos b), Ubertip (Tooltip - Normal - Extended)
+{
+Спецэффект - оружие
+}
+
+STRING 493
+// Abilities: A602 (aprotos b), Tip (Tooltip - Normal)
+{
+Спецэффект №2
+}
+
+STRING 494
+// Abilities: A603 (aprotos c), Name (Name)
+{
+aprotos c
+}
+
+STRING 495
+// Abilities: A603 (aprotos c), Tip (Tooltip - Normal)
+{
+Спецэффект №3
+}
+
+STRING 496
+// Abilities: A603 (aprotos c), Ubertip (Tooltip - Normal - Extended)
+{
+Спецэффект - голова волка
+}
+
+STRING 497
+// Abilities: A604 (SANTA HAT), Name (Name)
+{
+SANTA HAT
+}
+
+STRING 498
+// Abilities: A605 (bermoff b), Name (Name)
+{
+bermoff b
+}
+
+STRING 499
+// Abilities: A606 (bermoff c), Name (Name)
+{
+bermoff c
+}
+
+STRING 500
+// Abilities: A607 (bermoff d), Name (Name)
+{
+bermoff d
+}
+
+STRING 501
+// Abilities: A608 (CursedSoul a), Name (Name)
+{
+CursedSoul a
+}
+
+STRING 502
+// Abilities: A609 (ximiks a), Name (Name)
+{
+ximiks a
+}
+
+STRING 503
+// Abilities: A60A (Elisar a), Name (Name)
+{
+Elisar a
+}
+
+STRING 504
+// Abilities: A60B (firemagik a), Name (Name)
+{
+firemagik a
+}
+
+STRING 505
+// Abilities: A60B (firemagik a), Tip (Tooltip - Normal)
+{
+!Пандовая аура
+}
+
+STRING 506
+// Abilities: A60C (firemagik b), Name (Name)
+{
+firemagik b
+}
+
+STRING 507
+// Abilities: A60C (firemagik b), Tip (Tooltip - Normal)
+{
+!Пандовая аура
+}
+
+STRING 508
+// Abilities: A60D (firemagik c), Name (Name)
+{
+firemagik c
+}
+
+STRING 509
+// Abilities: A60E (firemagik d), Name (Name)
+{
+firemagik d
+}
+
+STRING 510
+// Abilities: A60F (mf a), Name (Name)
+{
+mf a
+}
+
+STRING 511
+// Abilities: A60G (kodoo a), Name (Name)
+{
+kodoo a
+}
+
+STRING 512
+// Abilities: A60H (kodoo b), Name (Name)
+{
+kodoo b
+}
+
+STRING 513
+// Abilities: A60I (nano a), Name (Name)
+{
+nano a
+}
+
+STRING 514
+// Abilities: S600 (rewenger a), Name (Name)
+{
+rewenger a
+}
+
+STRING 515
+// Abilities: S600 (rewenger a), Tip (Tooltip - Normal)
+{
+|c008000A0Виолетвинг
+}
+
+STRING 516
+// Abilities: S600 (rewenger a), Ubertip (Tooltip - Normal - Extended)
+{
+|c008000A0Этот юнит использует меч Виолетвинг как своё оружие.
+}
+
+STRING 517
+// Abilities: A60J (rewenger b), Name (Name)
+{
+rewenger b
+}
+
+STRING 518
+// Abilities: A60K (sarcazi a), Name (Name)
+{
+sarcazi a
+}
+
+STRING 519
+// Abilities: A60K (sarcazi a), Tip (Tooltip - Normal)
+{
+Торнадо!
+}
+
+STRING 520
+// Abilities: A60K (sarcazi a), Ubertip (Tooltip - Normal - Extended)
+{
+Так нбольшой эффект.
+}
+
+STRING 521
+// Abilities: A60L (sodjiroseta a), Name (Name)
+{
+sodjiroseta a
+}
+
+STRING 522
+// Abilities: A60M (Sunn a), Name (Name)
+{
+Sunn a
+}
+
+STRING 523
+// Abilities: A60N (trakt a), Name (Name)
+{
+trakt a
+}
+
+STRING 524
+// Abilities: A60N (trakt a), Ubertip (Tooltip - Normal - Extended)
+{
+Спецэффект - оружие
+}
+
+STRING 525
+// Abilities: A60N (trakt a), Tip (Tooltip - Normal)
+{
+Спецэффект №1
+}
+
+STRING 526
+// Abilities: A60O (trakt b), Name (Name)
+{
+trakt b
+}
+
+STRING 527
+// Abilities: A60O (trakt b), Tip (Tooltip - Normal)
+{
+Спецэффект №2
+}
+
+STRING 528
+// Abilities: A60O (trakt b), Ubertip (Tooltip - Normal - Extended)
+{
+Спецэффект - руки
+}
+
+STRING 529
+// Abilities: A60P (zidi b), Name (Name)
+{
+zidi b
+}
+
+STRING 530
+// Abilities: A60Q (zidi a), Name (Name)
+{
+zidi a
+}
+
+STRING 531
+// Abilities: A60R (swdn a), Name (Name)
+{
+swdn a
+}
+
+STRING 532
+// Units: n000 (oGre_), Name (Name)
+{
+oGre_
+}
+
+STRING 533
+// Units: u601 (bladget), EditorSuffix (Name - Editor Suffix)
+{
+[dummy]
+}
+
+STRING 534
+// Doodads: D00V (+[Misc] smallLights 1), Name (Name)
+{
++[Misc] smallLights 1
+}
+
+STRING 535
+// Doodads: D00W (+[Misc] smallLights 2), Name (Name)
+{
++[Misc] smallLights 2
+}
+
+STRING 536
+// Doodads: D00X (+[Misc] smallLights 3), Name (Name)
+{
++[Misc] smallLights 3
+}
+
+STRING 537
+// Doodads: D012 (+[Misc] smallLights 4), Name (Name)
+{
++[Misc] smallLights 4
+}
+
+STRING 538
+// Doodads: D013 (+[Misc] smallLights 5), Name (Name)
+{
++[Misc] smallLights 5
+}
+
+STRING 539
+// Doodads: D015 (+[Misc] box), Name (Name)
+{
++[Misc] box
+}
+
+STRING 540
+// Units: u000 (Искорка), Name (Name)
+{
+Искорка
+}
+
+STRING 541
+// Units: u000 (Искорка), EditorSuffix (Name - Editor Suffix)
+{
+Синяя
+}
+
+STRING 542
+// Units: u001 (Искорка), Name (Name)
+{
+Искорка
+}
+
+STRING 543
+// Units: u001 (Искорка), EditorSuffix (Name - Editor Suffix)
+{
+Оранжевая
+}
+
+STRING 544
+// Units: u002 (Искорка), Name (Name)
+{
+Искорка
+}
+
+STRING 545
+// Units: u002 (Искорка), EditorSuffix (Name - Editor Suffix)
+{
+Красная
+}
+
+STRING 546
+// Units: u003 (Искорка), Name (Name)
+{
+Искорка
+}
+
+STRING 547
+// Units: u003 (Искорка), EditorSuffix (Name - Editor Suffix)
+{
+Белая
+}
+
+STRING 548
+// Units: u004 (Искорка), Name (Name)
+{
+Искорка
+}
+
+STRING 549
+// Units: u004 (Искорка), EditorSuffix (Name - Editor Suffix)
+{
+Желтая
+}
+
+STRING 550
+// Units: u005 (Искорка), Name (Name)
+{
+Искорка
+}
+
+STRING 551
+// Units: u005 (Искорка), EditorSuffix (Name - Editor Suffix)
+{
+Зеленая
+}
+
+STRING 552
+// Units: n000 (oGre_), EditorSuffix (Name - Editor Suffix)
+{
+[dummy]
+}
+
+STRING 553
+// Doodads: D016 (+[XGMers] bladget), Name (Name)
+{
++[XGMers] bladget
+}
+
+STRING 554
+// Doodads: D017 (+[XGMers] Lord Vampire 2), Name (Name)
+{
++[XGMers] Lord Vampire 2
+}
+
+STRING 558
+// Abilities: A001 (snowball), Name (Name)
+{
+snowball
+}
+
+STRING 559
+{
+2023
+}
+
+STRING 560
+{
+До нового года оставалось полчаса
+}
+
+STRING 561
+{
+Но кто-то украл все подарки и украшения с ёлки
+}
+
+STRING 562
+// Units: n001 (Light or Dark), Name (Name)
+{
+Light or Dark
+}
+
