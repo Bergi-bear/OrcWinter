@@ -124,6 +124,12 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
             if flag == "RunSkeleton" then
                 UnitDamageArea(hero, 1, GetUnitX(hero), GetUnitY(hero), 120)
             end
+            if flag == "RunEtti" then
+                --print("етти наносит урон в рывке за каждый тик движения?")
+                UnitDamageArea(hero, 20, GetUnitX(hero), GetUnitY(hero), 120)
+                --DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic",x,y))
+                PlayerSeeNoiseInRangeTimed(0.5, x, y)
+            end
             if flag == "ignore" then
                 local data = HERO[GetPlayerId(GetOwningPlayer(hero))]
                 --print("попытка нанести урон в рывке")
@@ -157,6 +163,13 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
                     DestroyEffect(effDash)
                 end
                 if flag == "RunSkeleton" then
+                    BlzPauseUnitEx(hero, false)
+                    SetUnitTimeScale(hero, 1)
+                    if UnitAlive(hero) then
+                        ResetUnitAnimation(hero)
+                    end
+                end
+                if flag == "RunEtti" then
                     BlzPauseUnitEx(hero, false)
                     SetUnitTimeScale(hero, 1)
                     if UnitAlive(hero) then
@@ -246,7 +259,7 @@ function UnitHasBow(hero)
 end
 
 function PlayerSeeNoiseInRangeTimed(duration, x, y)
-    DestroyEffect(AddSpecialEffect("Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl", x, y))
+    --DestroyEffect(AddSpecialEffect("Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl", x, y))
     for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
         if PlayerIsPlaying[i] then
             local data = HERO[i]

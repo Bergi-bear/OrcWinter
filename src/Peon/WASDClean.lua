@@ -2,18 +2,18 @@ FREE_CAMERA = false
 TIMER_PERIOD = 1 / 32
 TIMER_PERIOD64 = 1 / 64
 HERO = {}
-HeroID = FourCC("opeo")
+HeroID = FourCC("O000")
 
 function InitAnimations(hero, data)
     PlayUnitAnimationFromChat()
 
-    if GetUnitTypeId(data.UnitHero) == FourCC("opeo") then
+    if GetUnitTypeId(data.UnitHero) == FourCC("O000") then
         --print("инициализацию анимация пеона")
         data.AnimDurationWalk = 0.767 --длительность анимации движения, полный круг
         data.IndexAnimationWalk = 1-- индекс анимации движения
         data.ResetDuration = 3.333 -- время сброса для анимации stand, длительность анимации stand
         data.IndexAnimationQ = 5 -- анимация сплеш удара
-        data.IndexAnimationSpace = 22 -- анимация для рывка, если анимации нет, ставь индекс аналогичный бегу
+        data.IndexAnimationSpace = 22 -- анимация для рывка, если анимации нет, ставьте индекс аналогичный бегу
         data.IndexAnimationAttackInDash = 3 --анимация удара в рывке
         data.IndexAnimationThrow = 3 -- индекс анимациии броска чего либо
         data.IndexAnimationAttack1 = 4 --индекс анимации атаки в серии

@@ -1302,3 +1302,39 @@ STRING 567
 Сосулька блокиратор
 }
 
+STRING 568
+// Destructibles: B002 (Сосулька падающая), Name (Name)
+{
+Сосулька падающая
+}
+
+STRING 569
+// Abilities: A000 (Уворот 100%), Name (Name)
+{
+Уворот 100%
+}
+
+STRING 570
+// Units: O000 (Батрак), Description (Description)
+{
+Настоящий герой
+}
+
+STRING 571
+// Units: O000 (Батрак), Propernames (Proper Names)
+{
+Пеонетти
+}
+
+STRING 572
+// Units: e001 (Снеговик взрыв), Name (Name)
+{
+Снеговик взрыв
+}
+
+STRING 573
+// Units: e002 (Портал для вращения), Name (Name)
+{
+Портал для вращения
+}
+

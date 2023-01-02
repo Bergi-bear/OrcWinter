@@ -35,6 +35,7 @@ gg_rct_alt_7 = nil
 gg_rct_alt_8 = nil
 gg_rct_ZiDi_spawn2 = nil
 gg_rct________________037 = nil
+gg_rct_Region_038 = nil
 gg_cam_c5 = nil
 gg_cam_c6 = nil
 gg_cam_c7 = nil
@@ -52,36 +53,41 @@ gg_cam_c12 = nil
 gg_cam_c15 = nil
 gg_cam_c11a = nil
 gg_trg_InitGUI = nil
-gg_rct_Region_038 = nil
+gg_trg_EnterInRect = nil
 function InitGlobals()
 end
 
 function CreateNeutralHostile()
-    local p = Player(PLAYER_NEUTRAL_AGGRESSIVE)
-    local u
-    local unitID
-    local t
-    local life
-    u = BlzCreateUnitWithSkin(p, FourCC("nwna"), -2721.1, -5406.3, 218.821, FourCC("nwna"))
+local p = Player(PLAYER_NEUTRAL_AGGRESSIVE)
+local u
+local unitID
+local t
+local life
+
+u = BlzCreateUnitWithSkin(p, FourCC("n000"), -2863.2, -5340.3, 326.601, FourCC("n000"))
+u = BlzCreateUnitWithSkin(p, FourCC("nbdo"), -7507.9, 4307.3, 260.248, FourCC("nbdo"))
 end
 
 function CreateNeutralPassive()
-    local p = Player(PLAYER_NEUTRAL_PASSIVE)
-    local u
-    local unitID
-    local t
-    local life
-    u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -1377.3, 7311.8, 119.744, FourCC("nsno"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -1556.1, 6346.7, 20.347, FourCC("nsno"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -4992.9, 4916.3, 230.423, FourCC("nsno"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -5043.9, 6247.3, 163.306, FourCC("nsno"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -5760.5, 6601.1, 203.528, FourCC("nsno"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -7232.7, 3468.5, 318.646, FourCC("nsno"))
-    u = BlzCreateUnitWithSkin(p, FourCC("H60K"), -6460.3, 7391.5, 128.310, FourCC("H60K"))
-    SetUnitColor(u, ConvertPlayerColor(12))
-    u = BlzCreateUnitWithSkin(p, FourCC("H60W"), -78.9, 421.8, 43.683, FourCC("H60W"))
-    u = BlzCreateUnitWithSkin(p, FourCC("H60Z"), -793.0, -515.8, 14.149, FourCC("H60Z"))
-    u = BlzCreateUnitWithSkin(p, FourCC("H60H"), -525.6, 218.5, 304.095, FourCC("H60H"))
+local p = Player(PLAYER_NEUTRAL_PASSIVE)
+local u
+local unitID
+local t
+local life
+
+u = BlzCreateUnitWithSkin(p, FourCC("e002"), 5726.2, -5277.6, -47.342, FourCC("e002"))
+u = BlzCreateUnitWithSkin(p, FourCC("e002"), 6357.5, -5150.5, 247.597, FourCC("e002"))
+u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -1377.3, 7311.8, 119.744, FourCC("nsno"))
+u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -1556.1, 6346.7, 20.347, FourCC("nsno"))
+u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -4992.9, 4916.3, 230.423, FourCC("nsno"))
+u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -5043.9, 6247.3, 163.306, FourCC("nsno"))
+u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -5760.5, 6601.1, 203.528, FourCC("nsno"))
+u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -7232.7, 3468.5, 318.646, FourCC("nsno"))
+u = BlzCreateUnitWithSkin(p, FourCC("H60K"), -6460.3, 7391.5, 128.310, FourCC("H60K"))
+SetUnitColor(u, ConvertPlayerColor(12))
+u = BlzCreateUnitWithSkin(p, FourCC("H60W"), -78.9, 421.8, 43.683, FourCC("H60W"))
+u = BlzCreateUnitWithSkin(p, FourCC("H60Z"), -793.0, -515.8, 14.149, FourCC("H60Z"))
+u = BlzCreateUnitWithSkin(p, FourCC("H60H"), -525.6, 218.5, 304.095, FourCC("H60H"))
 end
 
 function CreatePlayerBuildings()
@@ -91,263 +97,264 @@ function CreatePlayerUnits()
 end
 
 function CreateAllUnits()
-    CreatePlayerBuildings()
-    CreateNeutralHostile()
-    CreateNeutralPassive()
-    CreatePlayerUnits()
+CreatePlayerBuildings()
+CreateNeutralHostile()
+CreateNeutralPassive()
+CreatePlayerUnits()
 end
 
 function CreateRegions()
-    local we
-    gg_rct_Medved = Rect(-5952.0, 8064.0, -5824.0, 8192.0)
-    gg_rct_Undergroung_Chronicles = Rect(-7616.0, 4160.0, -7488.0, 4288.0)
-    gg_rct_Between_The_Worlds = Rect(1760.0, 6336.0, 1888.0, 6464.0)
-    gg_rct_aroundPine_0 = Rect(-832.0, -320.0, -704.0, 224.0)
-    gg_rct_aroundPine_1 = Rect(-800.0, -800.0, -576.0, -544.0)
-    gg_rct_aroundPine_2 = Rect(-64.0, -1024.0, 352.0, -896.0)
-    gg_rct_aroundPine_3 = Rect(256.0, -512.0, 480.0, -352.0)
-    gg_rct_aroundPine_4 = Rect(128.0, 32.0, 288.0, 192.0)
-    gg_rct_aroundPine_5 = Rect(-320.0, 32.0, -160.0, 192.0)
-    gg_rct_FWbomber_0 = Rect(-736.0, -288.0, -608.0, -160.0)
-    gg_rct_FWbomber_1 = Rect(352.0, -1792.0, 480.0, -1664.0)
-    gg_rct_FWbomber_2 = Rect(-992.0, -2464.0, -864.0, -2336.0)
-    gg_rct_FWbomber_3 = Rect(-256.0, -1856.0, -128.0, -1728.0)
-    gg_rct_FWbomber_4 = Rect(896.0, -2304.0, 1024.0, -2176.0)
-    gg_rct_FWbomber_5 = Rect(-352.0, -928.0, -256.0, -832.0)
-    gg_rct_ZiDi_spawn = Rect(1088.0, -3296.0, 1248.0, -3136.0)
-    gg_rct_aroundJB_0 = Rect(-6048.0, 4032.0, -5952.0, 4128.0)
-    gg_rct_aroundJB_1 = Rect(-6560.0, 3808.0, -6464.0, 3904.0)
-    gg_rct_aroundJB_2 = Rect(-6528.0, 3328.0, -6432.0, 3424.0)
-    gg_rct_aroundJB_3 = Rect(-6144.0, 3136.0, -6048.0, 3232.0)
-    gg_rct_aroundJB_4 = Rect(-5792.0, 3392.0, -5696.0, 3488.0)
-    gg_rct_main_0 = Rect(-1216.0, -192.0, -960.0, 64.0)
-    gg_rct_main_1 = Rect(-1024.0, -2752.0, -864.0, -2592.0)
-    gg_rct_main_2 = Rect(-2368.0, -4032.0, -2208.0, -3872.0)
-    gg_rct_main_4 = Rect(96.0, -4064.0, 256.0, -3904.0)
-    gg_rct_main_5 = Rect(288.0, -2752.0, 448.0, -2592.0)
-    gg_rct_alt_0 = Rect(-6720.0, 6016.0, -6496.0, 6240.0)
-    gg_rct_alt_1 = Rect(-5984.0, 8064.0, -5824.0, 8224.0)
-    gg_rct_alt_2 = Rect(-4992.0, 5664.0, -4832.0, 5824.0)
-    gg_rct_alt_3 = Rect(-5120.0, 4960.0, -4960.0, 5120.0)
-    gg_rct_alt_4 = Rect(-3584.0, 3424.0, -3424.0, 3584.0)
-    gg_rct_alt_5 = Rect(-2112.0, 2432.0, -1952.0, 2592.0)
-    gg_rct_alt_6 = Rect(-1280.0, 2336.0, -1120.0, 2496.0)
-    gg_rct_alt_7 = Rect(-928.0, 1728.0, -768.0, 1888.0)
-    gg_rct_alt_8 = Rect(-896.0, -128.0, -768.0, 0.0)
-    gg_rct_ZiDi_spawn2 = Rect(-320.0, 1248.0, -224.0, 1376.0)
-    gg_rct________________037 = Rect(128.0, -384.0, 160.0, -352.0)
-    gg_rct_Region_038 = Rect(-4224.0, -6208.0, -1568.0, -4608.0)
+local we
+
+gg_rct_Medved = Rect(-5952.0, 8064.0, -5824.0, 8192.0)
+gg_rct_Undergroung_Chronicles = Rect(-7616.0, 4160.0, -7488.0, 4288.0)
+gg_rct_Between_The_Worlds = Rect(1760.0, 6336.0, 1888.0, 6464.0)
+gg_rct_aroundPine_0 = Rect(-832.0, -320.0, -704.0, 224.0)
+gg_rct_aroundPine_1 = Rect(-800.0, -800.0, -576.0, -544.0)
+gg_rct_aroundPine_2 = Rect(-64.0, -1024.0, 352.0, -896.0)
+gg_rct_aroundPine_3 = Rect(256.0, -512.0, 480.0, -352.0)
+gg_rct_aroundPine_4 = Rect(128.0, 32.0, 288.0, 192.0)
+gg_rct_aroundPine_5 = Rect(-320.0, 32.0, -160.0, 192.0)
+gg_rct_FWbomber_0 = Rect(-736.0, -288.0, -608.0, -160.0)
+gg_rct_FWbomber_1 = Rect(352.0, -1792.0, 480.0, -1664.0)
+gg_rct_FWbomber_2 = Rect(-992.0, -2464.0, -864.0, -2336.0)
+gg_rct_FWbomber_3 = Rect(-256.0, -1856.0, -128.0, -1728.0)
+gg_rct_FWbomber_4 = Rect(896.0, -2304.0, 1024.0, -2176.0)
+gg_rct_FWbomber_5 = Rect(-352.0, -928.0, -256.0, -832.0)
+gg_rct_ZiDi_spawn = Rect(1088.0, -3296.0, 1248.0, -3136.0)
+gg_rct_aroundJB_0 = Rect(-6048.0, 4032.0, -5952.0, 4128.0)
+gg_rct_aroundJB_1 = Rect(-6560.0, 3808.0, -6464.0, 3904.0)
+gg_rct_aroundJB_2 = Rect(-6528.0, 3328.0, -6432.0, 3424.0)
+gg_rct_aroundJB_3 = Rect(-6144.0, 3136.0, -6048.0, 3232.0)
+gg_rct_aroundJB_4 = Rect(-5792.0, 3392.0, -5696.0, 3488.0)
+gg_rct_main_0 = Rect(-1216.0, -192.0, -960.0, 64.0)
+gg_rct_main_1 = Rect(-1024.0, -2752.0, -864.0, -2592.0)
+gg_rct_main_2 = Rect(-2368.0, -4032.0, -2208.0, -3872.0)
+gg_rct_main_4 = Rect(96.0, -4064.0, 256.0, -3904.0)
+gg_rct_main_5 = Rect(288.0, -2752.0, 448.0, -2592.0)
+gg_rct_alt_0 = Rect(-6720.0, 6016.0, -6496.0, 6240.0)
+gg_rct_alt_1 = Rect(-5984.0, 8064.0, -5824.0, 8224.0)
+gg_rct_alt_2 = Rect(-4992.0, 5664.0, -4832.0, 5824.0)
+gg_rct_alt_3 = Rect(-5120.0, 4960.0, -4960.0, 5120.0)
+gg_rct_alt_4 = Rect(-3584.0, 3424.0, -3424.0, 3584.0)
+gg_rct_alt_5 = Rect(-2112.0, 2432.0, -1952.0, 2592.0)
+gg_rct_alt_6 = Rect(-1280.0, 2336.0, -1120.0, 2496.0)
+gg_rct_alt_7 = Rect(-928.0, 1728.0, -768.0, 1888.0)
+gg_rct_alt_8 = Rect(-896.0, -128.0, -768.0, 0.0)
+gg_rct_ZiDi_spawn2 = Rect(-320.0, 1248.0, -224.0, 1376.0)
+gg_rct________________037 = Rect(128.0, -384.0, 160.0, -352.0)
+gg_rct_Region_038 = Rect(-4224.0, -6208.0, -1568.0, -4608.0)
 end
 
 function CreateCameras()
-    gg_cam_c5 = CreateCameraSetup()
-    CameraSetupSetField(gg_cam_c5, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c5, CAMERA_FIELD_ROTATION, 104.7, 0.0)
-    CameraSetupSetField(gg_cam_c5, CAMERA_FIELD_ANGLE_OF_ATTACK, 338.0, 0.0)
-    CameraSetupSetField(gg_cam_c5, CAMERA_FIELD_TARGET_DISTANCE, 2415.8, 0.0)
-    CameraSetupSetField(gg_cam_c5, CAMERA_FIELD_ROLL, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c5, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-    CameraSetupSetField(gg_cam_c5, CAMERA_FIELD_FARZ, 8857.8, 0.0)
-    CameraSetupSetField(gg_cam_c5, CAMERA_FIELD_NEARZ, 100.0, 0.0)
-    CameraSetupSetField(gg_cam_c5, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c5, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c5, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-    CameraSetupSetDestPosition(gg_cam_c5, 128.4, -1586.2, 0.0)
-    gg_cam_c6 = CreateCameraSetup()
-    CameraSetupSetField(gg_cam_c6, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c6, CAMERA_FIELD_ROTATION, 274.1, 0.0)
-    CameraSetupSetField(gg_cam_c6, CAMERA_FIELD_ANGLE_OF_ATTACK, 346.9, 0.0)
-    CameraSetupSetField(gg_cam_c6, CAMERA_FIELD_TARGET_DISTANCE, 2923.1, 0.0)
-    CameraSetupSetField(gg_cam_c6, CAMERA_FIELD_ROLL, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c6, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-    CameraSetupSetField(gg_cam_c6, CAMERA_FIELD_FARZ, 10000.0, 0.0)
-    CameraSetupSetField(gg_cam_c6, CAMERA_FIELD_NEARZ, 100.0, 0.0)
-    CameraSetupSetField(gg_cam_c6, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c6, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c6, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-    CameraSetupSetDestPosition(gg_cam_c6, -913.0, 1096.4, 0.0)
-    gg_cam_c7 = CreateCameraSetup()
-    CameraSetupSetField(gg_cam_c7, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c7, CAMERA_FIELD_ROTATION, 165.1, 0.0)
-    CameraSetupSetField(gg_cam_c7, CAMERA_FIELD_ANGLE_OF_ATTACK, 327.0, 0.0)
-    CameraSetupSetField(gg_cam_c7, CAMERA_FIELD_TARGET_DISTANCE, 2657.3, 0.0)
-    CameraSetupSetField(gg_cam_c7, CAMERA_FIELD_ROLL, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c7, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-    CameraSetupSetField(gg_cam_c7, CAMERA_FIELD_FARZ, 10000.0, 0.0)
-    CameraSetupSetField(gg_cam_c7, CAMERA_FIELD_NEARZ, 100.0, 0.0)
-    CameraSetupSetField(gg_cam_c7, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c7, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c7, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-    CameraSetupSetDestPosition(gg_cam_c7, -3845.2, 3469.9, 0.0)
-    gg_cam_c9 = CreateCameraSetup()
-    CameraSetupSetField(gg_cam_c9, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c9, CAMERA_FIELD_ROTATION, 133.9, 0.0)
-    CameraSetupSetField(gg_cam_c9, CAMERA_FIELD_ANGLE_OF_ATTACK, 332.5, 0.0)
-    CameraSetupSetField(gg_cam_c9, CAMERA_FIELD_TARGET_DISTANCE, 2196.1, 0.0)
-    CameraSetupSetField(gg_cam_c9, CAMERA_FIELD_ROLL, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c9, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-    CameraSetupSetField(gg_cam_c9, CAMERA_FIELD_FARZ, 10000.0, 0.0)
-    CameraSetupSetField(gg_cam_c9, CAMERA_FIELD_NEARZ, 100.0, 0.0)
-    CameraSetupSetField(gg_cam_c9, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c9, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c9, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-    CameraSetupSetDestPosition(gg_cam_c9, -5942.1, 4064.7, 0.0)
-    gg_cam_c10 = CreateCameraSetup()
-    CameraSetupSetField(gg_cam_c10, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c10, CAMERA_FIELD_ROTATION, 57.0, 0.0)
-    CameraSetupSetField(gg_cam_c10, CAMERA_FIELD_ANGLE_OF_ATTACK, 305.9, 0.0)
-    CameraSetupSetField(gg_cam_c10, CAMERA_FIELD_TARGET_DISTANCE, 1500.0, 0.0)
-    CameraSetupSetField(gg_cam_c10, CAMERA_FIELD_ROLL, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c10, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-    CameraSetupSetField(gg_cam_c10, CAMERA_FIELD_FARZ, 10000.0, 0.0)
-    CameraSetupSetField(gg_cam_c10, CAMERA_FIELD_NEARZ, 100.0, 0.0)
-    CameraSetupSetField(gg_cam_c10, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c10, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c10, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-    CameraSetupSetDestPosition(gg_cam_c10, -7486.6, 4532.2, 0.0)
-    gg_cam_c11 = CreateCameraSetup()
-    CameraSetupSetField(gg_cam_c11, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c11, CAMERA_FIELD_ROTATION, 216.0, 0.0)
-    CameraSetupSetField(gg_cam_c11, CAMERA_FIELD_ANGLE_OF_ATTACK, 329.7, 0.0)
-    CameraSetupSetField(gg_cam_c11, CAMERA_FIELD_TARGET_DISTANCE, 2415.8, 0.0)
-    CameraSetupSetField(gg_cam_c11, CAMERA_FIELD_ROLL, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c11, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-    CameraSetupSetField(gg_cam_c11, CAMERA_FIELD_FARZ, 10000.0, 0.0)
-    CameraSetupSetField(gg_cam_c11, CAMERA_FIELD_NEARZ, 100.0, 0.0)
-    CameraSetupSetField(gg_cam_c11, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c11, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c11, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-    CameraSetupSetDestPosition(gg_cam_c11, -7021.3, 5647.5, 0.0)
-    gg_cam_c13 = CreateCameraSetup()
-    CameraSetupSetField(gg_cam_c13, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c13, CAMERA_FIELD_ROTATION, 213.8, 0.0)
-    CameraSetupSetField(gg_cam_c13, CAMERA_FIELD_ANGLE_OF_ATTACK, 313.0, 0.0)
-    CameraSetupSetField(gg_cam_c13, CAMERA_FIELD_TARGET_DISTANCE, 2196.1, 0.0)
-    CameraSetupSetField(gg_cam_c13, CAMERA_FIELD_ROLL, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c13, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-    CameraSetupSetField(gg_cam_c13, CAMERA_FIELD_FARZ, 10000.0, 0.0)
-    CameraSetupSetField(gg_cam_c13, CAMERA_FIELD_NEARZ, 100.0, 0.0)
-    CameraSetupSetField(gg_cam_c13, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c13, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c13, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-    CameraSetupSetDestPosition(gg_cam_c13, 1674.2, 7089.2, 0.0)
-    gg_cam_c14 = CreateCameraSetup()
-    CameraSetupSetField(gg_cam_c14, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c14, CAMERA_FIELD_ROTATION, 210.8, 0.0)
-    CameraSetupSetField(gg_cam_c14, CAMERA_FIELD_ANGLE_OF_ATTACK, 325.8, 0.0)
-    CameraSetupSetField(gg_cam_c14, CAMERA_FIELD_TARGET_DISTANCE, 1996.5, 0.0)
-    CameraSetupSetField(gg_cam_c14, CAMERA_FIELD_ROLL, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c14, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-    CameraSetupSetField(gg_cam_c14, CAMERA_FIELD_FARZ, 10000.0, 0.0)
-    CameraSetupSetField(gg_cam_c14, CAMERA_FIELD_NEARZ, 100.0, 0.0)
-    CameraSetupSetField(gg_cam_c14, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c14, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c14, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-    CameraSetupSetDestPosition(gg_cam_c14, -3898.2, 4392.8, 0.0)
-    gg_cam_c8 = CreateCameraSetup()
-    CameraSetupSetField(gg_cam_c8, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c8, CAMERA_FIELD_ROTATION, 59.7, 0.0)
-    CameraSetupSetField(gg_cam_c8, CAMERA_FIELD_ANGLE_OF_ATTACK, 336.4, 0.0)
-    CameraSetupSetField(gg_cam_c8, CAMERA_FIELD_TARGET_DISTANCE, 2142.1, 0.0)
-    CameraSetupSetField(gg_cam_c8, CAMERA_FIELD_ROLL, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c8, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-    CameraSetupSetField(gg_cam_c8, CAMERA_FIELD_FARZ, 10000.0, 0.0)
-    CameraSetupSetField(gg_cam_c8, CAMERA_FIELD_NEARZ, 100.0, 0.0)
-    CameraSetupSetField(gg_cam_c8, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c8, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c8, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-    CameraSetupSetDestPosition(gg_cam_c8, -6853.1, 2494.8, 0.0)
-    gg_cam_c1 = CreateCameraSetup()
-    CameraSetupSetField(gg_cam_c1, CAMERA_FIELD_ZOFFSET, 150.0, 0.0)
-    CameraSetupSetField(gg_cam_c1, CAMERA_FIELD_ROTATION, 97.1, 0.0)
-    CameraSetupSetField(gg_cam_c1, CAMERA_FIELD_ANGLE_OF_ATTACK, 343.6, 0.0)
-    CameraSetupSetField(gg_cam_c1, CAMERA_FIELD_TARGET_DISTANCE, 2919.9, 0.0)
-    CameraSetupSetField(gg_cam_c1, CAMERA_FIELD_ROLL, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c1, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-    CameraSetupSetField(gg_cam_c1, CAMERA_FIELD_FARZ, 8857.8, 0.0)
-    CameraSetupSetField(gg_cam_c1, CAMERA_FIELD_NEARZ, 100.0, 0.0)
-    CameraSetupSetField(gg_cam_c1, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c1, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c1, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-    CameraSetupSetDestPosition(gg_cam_c1, -107.3, -277.9, 0.0)
-    gg_cam_c3 = CreateCameraSetup()
-    CameraSetupSetField(gg_cam_c3, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c3, CAMERA_FIELD_ROTATION, 148.2, 0.0)
-    CameraSetupSetField(gg_cam_c3, CAMERA_FIELD_ANGLE_OF_ATTACK, 309.5, 0.0)
-    CameraSetupSetField(gg_cam_c3, CAMERA_FIELD_TARGET_DISTANCE, 975.0, 0.0)
-    CameraSetupSetField(gg_cam_c3, CAMERA_FIELD_ROLL, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c3, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-    CameraSetupSetField(gg_cam_c3, CAMERA_FIELD_FARZ, 8857.8, 0.0)
-    CameraSetupSetField(gg_cam_c3, CAMERA_FIELD_NEARZ, 100.0, 0.0)
-    CameraSetupSetField(gg_cam_c3, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c3, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c3, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-    CameraSetupSetDestPosition(gg_cam_c3, -1962.9, -1905.8, 0.0)
-    gg_cam_c2 = CreateCameraSetup()
-    CameraSetupSetField(gg_cam_c2, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c2, CAMERA_FIELD_ROTATION, 226.1, 0.0)
-    CameraSetupSetField(gg_cam_c2, CAMERA_FIELD_ANGLE_OF_ATTACK, 336.6, 0.0)
-    CameraSetupSetField(gg_cam_c2, CAMERA_FIELD_TARGET_DISTANCE, 2196.1, 0.0)
-    CameraSetupSetField(gg_cam_c2, CAMERA_FIELD_ROLL, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c2, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-    CameraSetupSetField(gg_cam_c2, CAMERA_FIELD_FARZ, 8857.8, 0.0)
-    CameraSetupSetField(gg_cam_c2, CAMERA_FIELD_NEARZ, 100.0, 0.0)
-    CameraSetupSetField(gg_cam_c2, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c2, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c2, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-    CameraSetupSetDestPosition(gg_cam_c2, -1396.9, -1810.4, 0.0)
-    gg_cam_c4 = CreateCameraSetup()
-    CameraSetupSetField(gg_cam_c4, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c4, CAMERA_FIELD_ROTATION, 115.8, 0.0)
-    CameraSetupSetField(gg_cam_c4, CAMERA_FIELD_ANGLE_OF_ATTACK, 299.8, 0.0)
-    CameraSetupSetField(gg_cam_c4, CAMERA_FIELD_TARGET_DISTANCE, 1000.0, 0.0)
-    CameraSetupSetField(gg_cam_c4, CAMERA_FIELD_ROLL, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c4, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-    CameraSetupSetField(gg_cam_c4, CAMERA_FIELD_FARZ, 8857.8, 0.0)
-    CameraSetupSetField(gg_cam_c4, CAMERA_FIELD_NEARZ, 100.0, 0.0)
-    CameraSetupSetField(gg_cam_c4, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c4, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c4, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-    CameraSetupSetDestPosition(gg_cam_c4, -2062.8, -1658.2, 0.0)
-    gg_cam_c12 = CreateCameraSetup()
-    CameraSetupSetField(gg_cam_c12, CAMERA_FIELD_ZOFFSET, 500.0, 0.0)
-    CameraSetupSetField(gg_cam_c12, CAMERA_FIELD_ROTATION, 83.2, 0.0)
-    CameraSetupSetField(gg_cam_c12, CAMERA_FIELD_ANGLE_OF_ATTACK, 313.7, 0.0)
-    CameraSetupSetField(gg_cam_c12, CAMERA_FIELD_TARGET_DISTANCE, 2657.3, 0.0)
-    CameraSetupSetField(gg_cam_c12, CAMERA_FIELD_ROLL, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c12, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-    CameraSetupSetField(gg_cam_c12, CAMERA_FIELD_FARZ, 10000.0, 0.0)
-    CameraSetupSetField(gg_cam_c12, CAMERA_FIELD_NEARZ, 100.0, 0.0)
-    CameraSetupSetField(gg_cam_c12, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c12, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c12, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-    CameraSetupSetDestPosition(gg_cam_c12, 1501.3, 6038.1, 0.0)
-    gg_cam_c15 = CreateCameraSetup()
-    CameraSetupSetField(gg_cam_c15, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c15, CAMERA_FIELD_ROTATION, 152.7, 0.0)
-    CameraSetupSetField(gg_cam_c15, CAMERA_FIELD_ANGLE_OF_ATTACK, 326.6, 0.0)
-    CameraSetupSetField(gg_cam_c15, CAMERA_FIELD_TARGET_DISTANCE, 2196.1, 0.0)
-    CameraSetupSetField(gg_cam_c15, CAMERA_FIELD_ROLL, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c15, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-    CameraSetupSetField(gg_cam_c15, CAMERA_FIELD_FARZ, 10000.0, 0.0)
-    CameraSetupSetField(gg_cam_c15, CAMERA_FIELD_NEARZ, 100.0, 0.0)
-    CameraSetupSetField(gg_cam_c15, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c15, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c15, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-    CameraSetupSetDestPosition(gg_cam_c15, -2306.7, 3870.8, 0.0)
-    gg_cam_c11a = CreateCameraSetup()
-    CameraSetupSetField(gg_cam_c11a, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c11a, CAMERA_FIELD_ROTATION, 165.1, 0.0)
-    CameraSetupSetField(gg_cam_c11a, CAMERA_FIELD_ANGLE_OF_ATTACK, 317.4, 0.0)
-    CameraSetupSetField(gg_cam_c11a, CAMERA_FIELD_TARGET_DISTANCE, 1730.5, 0.0)
-    CameraSetupSetField(gg_cam_c11a, CAMERA_FIELD_ROLL, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c11a, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-    CameraSetupSetField(gg_cam_c11a, CAMERA_FIELD_FARZ, 10000.0, 0.0)
-    CameraSetupSetField(gg_cam_c11a, CAMERA_FIELD_NEARZ, 100.0, 0.0)
-    CameraSetupSetField(gg_cam_c11a, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c11a, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_c11a, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-    CameraSetupSetDestPosition(gg_cam_c11a, -6307.7, 7789.2, 0.0)
+gg_cam_c5 = CreateCameraSetup()
+CameraSetupSetField(gg_cam_c5, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c5, CAMERA_FIELD_ROTATION, 104.7, 0.0)
+CameraSetupSetField(gg_cam_c5, CAMERA_FIELD_ANGLE_OF_ATTACK, 338.0, 0.0)
+CameraSetupSetField(gg_cam_c5, CAMERA_FIELD_TARGET_DISTANCE, 2415.8, 0.0)
+CameraSetupSetField(gg_cam_c5, CAMERA_FIELD_ROLL, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c5, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+CameraSetupSetField(gg_cam_c5, CAMERA_FIELD_FARZ, 8857.8, 0.0)
+CameraSetupSetField(gg_cam_c5, CAMERA_FIELD_NEARZ, 100.0, 0.0)
+CameraSetupSetField(gg_cam_c5, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c5, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c5, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_c5, 128.4, -1586.2, 0.0)
+gg_cam_c6 = CreateCameraSetup()
+CameraSetupSetField(gg_cam_c6, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c6, CAMERA_FIELD_ROTATION, 274.1, 0.0)
+CameraSetupSetField(gg_cam_c6, CAMERA_FIELD_ANGLE_OF_ATTACK, 346.9, 0.0)
+CameraSetupSetField(gg_cam_c6, CAMERA_FIELD_TARGET_DISTANCE, 2923.1, 0.0)
+CameraSetupSetField(gg_cam_c6, CAMERA_FIELD_ROLL, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c6, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+CameraSetupSetField(gg_cam_c6, CAMERA_FIELD_FARZ, 10000.0, 0.0)
+CameraSetupSetField(gg_cam_c6, CAMERA_FIELD_NEARZ, 100.0, 0.0)
+CameraSetupSetField(gg_cam_c6, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c6, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c6, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_c6, -913.0, 1096.4, 0.0)
+gg_cam_c7 = CreateCameraSetup()
+CameraSetupSetField(gg_cam_c7, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c7, CAMERA_FIELD_ROTATION, 165.1, 0.0)
+CameraSetupSetField(gg_cam_c7, CAMERA_FIELD_ANGLE_OF_ATTACK, 327.0, 0.0)
+CameraSetupSetField(gg_cam_c7, CAMERA_FIELD_TARGET_DISTANCE, 2657.3, 0.0)
+CameraSetupSetField(gg_cam_c7, CAMERA_FIELD_ROLL, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c7, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+CameraSetupSetField(gg_cam_c7, CAMERA_FIELD_FARZ, 10000.0, 0.0)
+CameraSetupSetField(gg_cam_c7, CAMERA_FIELD_NEARZ, 100.0, 0.0)
+CameraSetupSetField(gg_cam_c7, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c7, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c7, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_c7, -3845.2, 3469.9, 0.0)
+gg_cam_c9 = CreateCameraSetup()
+CameraSetupSetField(gg_cam_c9, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c9, CAMERA_FIELD_ROTATION, 133.9, 0.0)
+CameraSetupSetField(gg_cam_c9, CAMERA_FIELD_ANGLE_OF_ATTACK, 332.5, 0.0)
+CameraSetupSetField(gg_cam_c9, CAMERA_FIELD_TARGET_DISTANCE, 2196.1, 0.0)
+CameraSetupSetField(gg_cam_c9, CAMERA_FIELD_ROLL, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c9, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+CameraSetupSetField(gg_cam_c9, CAMERA_FIELD_FARZ, 10000.0, 0.0)
+CameraSetupSetField(gg_cam_c9, CAMERA_FIELD_NEARZ, 100.0, 0.0)
+CameraSetupSetField(gg_cam_c9, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c9, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c9, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_c9, -5942.1, 4064.7, 0.0)
+gg_cam_c10 = CreateCameraSetup()
+CameraSetupSetField(gg_cam_c10, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c10, CAMERA_FIELD_ROTATION, 57.0, 0.0)
+CameraSetupSetField(gg_cam_c10, CAMERA_FIELD_ANGLE_OF_ATTACK, 305.9, 0.0)
+CameraSetupSetField(gg_cam_c10, CAMERA_FIELD_TARGET_DISTANCE, 1500.0, 0.0)
+CameraSetupSetField(gg_cam_c10, CAMERA_FIELD_ROLL, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c10, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+CameraSetupSetField(gg_cam_c10, CAMERA_FIELD_FARZ, 10000.0, 0.0)
+CameraSetupSetField(gg_cam_c10, CAMERA_FIELD_NEARZ, 100.0, 0.0)
+CameraSetupSetField(gg_cam_c10, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c10, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c10, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_c10, -7486.6, 4532.2, 0.0)
+gg_cam_c11 = CreateCameraSetup()
+CameraSetupSetField(gg_cam_c11, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c11, CAMERA_FIELD_ROTATION, 216.0, 0.0)
+CameraSetupSetField(gg_cam_c11, CAMERA_FIELD_ANGLE_OF_ATTACK, 329.7, 0.0)
+CameraSetupSetField(gg_cam_c11, CAMERA_FIELD_TARGET_DISTANCE, 2415.8, 0.0)
+CameraSetupSetField(gg_cam_c11, CAMERA_FIELD_ROLL, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c11, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+CameraSetupSetField(gg_cam_c11, CAMERA_FIELD_FARZ, 10000.0, 0.0)
+CameraSetupSetField(gg_cam_c11, CAMERA_FIELD_NEARZ, 100.0, 0.0)
+CameraSetupSetField(gg_cam_c11, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c11, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c11, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_c11, -7021.3, 5647.5, 0.0)
+gg_cam_c13 = CreateCameraSetup()
+CameraSetupSetField(gg_cam_c13, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c13, CAMERA_FIELD_ROTATION, 213.8, 0.0)
+CameraSetupSetField(gg_cam_c13, CAMERA_FIELD_ANGLE_OF_ATTACK, 313.0, 0.0)
+CameraSetupSetField(gg_cam_c13, CAMERA_FIELD_TARGET_DISTANCE, 2196.1, 0.0)
+CameraSetupSetField(gg_cam_c13, CAMERA_FIELD_ROLL, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c13, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+CameraSetupSetField(gg_cam_c13, CAMERA_FIELD_FARZ, 10000.0, 0.0)
+CameraSetupSetField(gg_cam_c13, CAMERA_FIELD_NEARZ, 100.0, 0.0)
+CameraSetupSetField(gg_cam_c13, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c13, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c13, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_c13, 1674.2, 7089.2, 0.0)
+gg_cam_c14 = CreateCameraSetup()
+CameraSetupSetField(gg_cam_c14, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c14, CAMERA_FIELD_ROTATION, 210.8, 0.0)
+CameraSetupSetField(gg_cam_c14, CAMERA_FIELD_ANGLE_OF_ATTACK, 325.8, 0.0)
+CameraSetupSetField(gg_cam_c14, CAMERA_FIELD_TARGET_DISTANCE, 1996.5, 0.0)
+CameraSetupSetField(gg_cam_c14, CAMERA_FIELD_ROLL, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c14, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+CameraSetupSetField(gg_cam_c14, CAMERA_FIELD_FARZ, 10000.0, 0.0)
+CameraSetupSetField(gg_cam_c14, CAMERA_FIELD_NEARZ, 100.0, 0.0)
+CameraSetupSetField(gg_cam_c14, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c14, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c14, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_c14, -3898.2, 4392.8, 0.0)
+gg_cam_c8 = CreateCameraSetup()
+CameraSetupSetField(gg_cam_c8, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c8, CAMERA_FIELD_ROTATION, 59.7, 0.0)
+CameraSetupSetField(gg_cam_c8, CAMERA_FIELD_ANGLE_OF_ATTACK, 336.4, 0.0)
+CameraSetupSetField(gg_cam_c8, CAMERA_FIELD_TARGET_DISTANCE, 2142.1, 0.0)
+CameraSetupSetField(gg_cam_c8, CAMERA_FIELD_ROLL, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c8, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+CameraSetupSetField(gg_cam_c8, CAMERA_FIELD_FARZ, 10000.0, 0.0)
+CameraSetupSetField(gg_cam_c8, CAMERA_FIELD_NEARZ, 100.0, 0.0)
+CameraSetupSetField(gg_cam_c8, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c8, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c8, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_c8, -6853.1, 2494.8, 0.0)
+gg_cam_c1 = CreateCameraSetup()
+CameraSetupSetField(gg_cam_c1, CAMERA_FIELD_ZOFFSET, 150.0, 0.0)
+CameraSetupSetField(gg_cam_c1, CAMERA_FIELD_ROTATION, 97.1, 0.0)
+CameraSetupSetField(gg_cam_c1, CAMERA_FIELD_ANGLE_OF_ATTACK, 343.6, 0.0)
+CameraSetupSetField(gg_cam_c1, CAMERA_FIELD_TARGET_DISTANCE, 2919.9, 0.0)
+CameraSetupSetField(gg_cam_c1, CAMERA_FIELD_ROLL, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c1, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+CameraSetupSetField(gg_cam_c1, CAMERA_FIELD_FARZ, 8857.8, 0.0)
+CameraSetupSetField(gg_cam_c1, CAMERA_FIELD_NEARZ, 100.0, 0.0)
+CameraSetupSetField(gg_cam_c1, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c1, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c1, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_c1, -107.3, -277.9, 0.0)
+gg_cam_c3 = CreateCameraSetup()
+CameraSetupSetField(gg_cam_c3, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c3, CAMERA_FIELD_ROTATION, 148.2, 0.0)
+CameraSetupSetField(gg_cam_c3, CAMERA_FIELD_ANGLE_OF_ATTACK, 309.5, 0.0)
+CameraSetupSetField(gg_cam_c3, CAMERA_FIELD_TARGET_DISTANCE, 975.0, 0.0)
+CameraSetupSetField(gg_cam_c3, CAMERA_FIELD_ROLL, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c3, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+CameraSetupSetField(gg_cam_c3, CAMERA_FIELD_FARZ, 8857.8, 0.0)
+CameraSetupSetField(gg_cam_c3, CAMERA_FIELD_NEARZ, 100.0, 0.0)
+CameraSetupSetField(gg_cam_c3, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c3, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c3, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_c3, -1962.9, -1905.8, 0.0)
+gg_cam_c2 = CreateCameraSetup()
+CameraSetupSetField(gg_cam_c2, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c2, CAMERA_FIELD_ROTATION, 226.1, 0.0)
+CameraSetupSetField(gg_cam_c2, CAMERA_FIELD_ANGLE_OF_ATTACK, 336.6, 0.0)
+CameraSetupSetField(gg_cam_c2, CAMERA_FIELD_TARGET_DISTANCE, 2196.1, 0.0)
+CameraSetupSetField(gg_cam_c2, CAMERA_FIELD_ROLL, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c2, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+CameraSetupSetField(gg_cam_c2, CAMERA_FIELD_FARZ, 8857.8, 0.0)
+CameraSetupSetField(gg_cam_c2, CAMERA_FIELD_NEARZ, 100.0, 0.0)
+CameraSetupSetField(gg_cam_c2, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c2, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c2, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_c2, -1396.9, -1810.4, 0.0)
+gg_cam_c4 = CreateCameraSetup()
+CameraSetupSetField(gg_cam_c4, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c4, CAMERA_FIELD_ROTATION, 115.8, 0.0)
+CameraSetupSetField(gg_cam_c4, CAMERA_FIELD_ANGLE_OF_ATTACK, 299.8, 0.0)
+CameraSetupSetField(gg_cam_c4, CAMERA_FIELD_TARGET_DISTANCE, 1000.0, 0.0)
+CameraSetupSetField(gg_cam_c4, CAMERA_FIELD_ROLL, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c4, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+CameraSetupSetField(gg_cam_c4, CAMERA_FIELD_FARZ, 8857.8, 0.0)
+CameraSetupSetField(gg_cam_c4, CAMERA_FIELD_NEARZ, 100.0, 0.0)
+CameraSetupSetField(gg_cam_c4, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c4, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c4, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_c4, -2062.8, -1658.2, 0.0)
+gg_cam_c12 = CreateCameraSetup()
+CameraSetupSetField(gg_cam_c12, CAMERA_FIELD_ZOFFSET, 500.0, 0.0)
+CameraSetupSetField(gg_cam_c12, CAMERA_FIELD_ROTATION, 83.2, 0.0)
+CameraSetupSetField(gg_cam_c12, CAMERA_FIELD_ANGLE_OF_ATTACK, 313.7, 0.0)
+CameraSetupSetField(gg_cam_c12, CAMERA_FIELD_TARGET_DISTANCE, 2657.3, 0.0)
+CameraSetupSetField(gg_cam_c12, CAMERA_FIELD_ROLL, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c12, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+CameraSetupSetField(gg_cam_c12, CAMERA_FIELD_FARZ, 10000.0, 0.0)
+CameraSetupSetField(gg_cam_c12, CAMERA_FIELD_NEARZ, 100.0, 0.0)
+CameraSetupSetField(gg_cam_c12, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c12, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c12, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_c12, 1501.3, 6038.1, 0.0)
+gg_cam_c15 = CreateCameraSetup()
+CameraSetupSetField(gg_cam_c15, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c15, CAMERA_FIELD_ROTATION, 152.7, 0.0)
+CameraSetupSetField(gg_cam_c15, CAMERA_FIELD_ANGLE_OF_ATTACK, 326.6, 0.0)
+CameraSetupSetField(gg_cam_c15, CAMERA_FIELD_TARGET_DISTANCE, 2196.1, 0.0)
+CameraSetupSetField(gg_cam_c15, CAMERA_FIELD_ROLL, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c15, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+CameraSetupSetField(gg_cam_c15, CAMERA_FIELD_FARZ, 10000.0, 0.0)
+CameraSetupSetField(gg_cam_c15, CAMERA_FIELD_NEARZ, 100.0, 0.0)
+CameraSetupSetField(gg_cam_c15, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c15, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c15, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_c15, -2306.7, 3870.8, 0.0)
+gg_cam_c11a = CreateCameraSetup()
+CameraSetupSetField(gg_cam_c11a, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c11a, CAMERA_FIELD_ROTATION, 165.1, 0.0)
+CameraSetupSetField(gg_cam_c11a, CAMERA_FIELD_ANGLE_OF_ATTACK, 317.4, 0.0)
+CameraSetupSetField(gg_cam_c11a, CAMERA_FIELD_TARGET_DISTANCE, 1730.5, 0.0)
+CameraSetupSetField(gg_cam_c11a, CAMERA_FIELD_ROLL, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c11a, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+CameraSetupSetField(gg_cam_c11a, CAMERA_FIELD_FARZ, 10000.0, 0.0)
+CameraSetupSetField(gg_cam_c11a, CAMERA_FIELD_NEARZ, 100.0, 0.0)
+CameraSetupSetField(gg_cam_c11a, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c11a, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+CameraSetupSetField(gg_cam_c11a, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_c11a, -6307.7, 7789.2, 0.0)
 end
 
 --CUSTOM_CODE
@@ -477,6 +484,12 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
             if flag == "RunSkeleton" then
                 UnitDamageArea(hero, 1, GetUnitX(hero), GetUnitY(hero), 120)
             end
+            if flag == "RunEtti" then
+                --print("етти наносит урон в рывке за каждый тик движения?")
+                UnitDamageArea(hero, 20, GetUnitX(hero), GetUnitY(hero), 120)
+                --DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic",x,y))
+                PlayerSeeNoiseInRangeTimed(0.5, x, y)
+            end
             if flag == "ignore" then
                 local data = HERO[GetPlayerId(GetOwningPlayer(hero))]
                 --print("попытка нанести урон в рывке")
@@ -510,6 +523,13 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
                     DestroyEffect(effDash)
                 end
                 if flag == "RunSkeleton" then
+                    BlzPauseUnitEx(hero, false)
+                    SetUnitTimeScale(hero, 1)
+                    if UnitAlive(hero) then
+                        ResetUnitAnimation(hero)
+                    end
+                end
+                if flag == "RunEtti" then
                     BlzPauseUnitEx(hero, false)
                     SetUnitTimeScale(hero, 1)
                     if UnitAlive(hero) then
@@ -599,7 +619,7 @@ function UnitHasBow(hero)
 end
 
 function PlayerSeeNoiseInRangeTimed(duration, x, y)
-    DestroyEffect(AddSpecialEffect("Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl", x, y))
+    --DestroyEffect(AddSpecialEffect("Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl", x, y))
     for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
         if PlayerIsPlaying[i] then
             local data = HERO[i]
@@ -1267,6 +1287,76 @@ function PointContentDestructable (x, y, range, iskill, damage, hero)
     return content, contentedDest
 end
 
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by Bergi.
+--- DateTime: 15.02.2021 18:51
+---
+function HealUnit(hero, amount, flag, eff)
+    --1 или nil Сколько вылчено
+    --2 Сверхлечение
+    if not amount then
+        amount = 99999
+    end
+    if not eff then
+        eff = "Abilities\\Spells\\Human\\Heal\\HealTarget"
+    end
+
+    if IsUnitType(hero, UNIT_TYPE_HERO) then
+        if HERO[GetPlayerId(GetOwningPlayer(hero))] then
+            local data = HERO[GetPlayerId(GetOwningPlayer(hero))]
+            amount = amount * data.HealRate
+        end
+    end
+
+    local p = GetOwningPlayer(hero)
+    local MaxHP = BlzGetUnitMaxHP(hero)
+    local CurrentHP = GetUnitState(hero, UNIT_STATE_LIFE)
+    local LoosingHP = MaxHP - CurrentHP
+    local OverHeal = amount - LoosingHP
+    local TotalHeal = amount
+    if LoosingHP <= amount then
+        TotalHeal = LoosingHP
+    end
+    DestroyEffect(AddSpecialEffectTarget(eff, hero, "overhead"))
+    SetUnitState(hero, UNIT_STATE_LIFE, CurrentHP + TotalHeal)
+
+    if IsUnitType(hero, UNIT_TYPE_HERO) then
+        if HERO[GetPlayerId(GetOwningPlayer(hero))] then
+            local data = HERO[GetPlayerId(GetOwningPlayer(hero))]
+            data.ShowHealSec = 0.3
+            if not data.ShowHealAmount then
+                data.ShowHealAmount = 0
+            end
+            data.ShowHealAmount = data.ShowHealAmount + TotalHeal
+            if data.ShowHeal then
+                data.ShowHeal = false
+                TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
+                    data.ShowHealSec = data.ShowHealSec - TIMER_PERIOD
+                    if data.ShowHealSec <= 0 then
+                        data.ShowHeal = true
+                        DestroyTimer(GetExpiredTimer())
+                        if TotalHeal > 1 then
+                            FlyTextTagHealXY(GetUnitX(hero), GetUnitY(hero), "+" .. R2I(data.ShowHealAmount), p)
+                            data.StatHealGained=data.StatHealGained+data.ShowHealAmount
+                        end
+                        data.ShowHealAmount = 0
+                    end
+                end)
+            end
+        end
+    end
+    if not flag or flag == 1 then
+        return TotalHeal
+    end
+    if flag == 2 then
+        return OverHeal
+    end
+end
+
+function UnitAddMana(target,amount)
+    SetUnitState(target,UNIT_STATE_MANA,GetUnitState(target,UNIT_STATE_MANA)+amount)
+end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
 --- Created by Bergi.
@@ -2456,6 +2546,262 @@ function UnitDamageArea(u, damage, x, y, range, flag)
     return isdamage, hero, k, all
 end
 
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by Bergi.
+--- DateTime: 02.05.2020 2:43
+---
+--stoneEffModel = "Abilities\\Weapons\\RockBoltMissile\\RockBoltMissile"
+--Special = "Abilities\\Weapons\\ProcMissile\\ProcMissile"
+do
+	local InitGlobalsOrigin = InitGlobals
+	function InitGlobals()
+		InitGlobalsOrigin()
+		TimerStart(CreateTimer(), .01, false, function()
+			DestroyTimer(GetExpiredTimer())
+
+			InitTrig_EnterInRectB()
+		end)
+	end
+end
+
+function InitTrig_EnterInRectB() --вызывается в кастом триггерс
+	--print("Инициализация босса")
+	local gg_trg_EnterInRect = CreateTrigger()
+	TriggerRegisterEnterRectSimple(gg_trg_EnterInRect, gg_rct_Region_038)
+	TriggerAddAction(gg_trg_EnterInRect, function()
+		StartYettyAI(GetRectCenterX(gg_rct_Region_038), GetRectCenterY(gg_rct_Region_038))
+		DisableTrigger(gg_trg_EnterInRect)
+	end)
+end
+
+function StartYettyAI(xs, ys)
+	local boss = FindUnitOfType(FourCC('n000'))
+
+	local BossFight=true
+	UnitAddAbility(boss, FourCC('Abun'))
+	SetUnitPosition(boss, xs, ys)
+	SetUnitOwner(boss, Player(10), true)
+	local range = 1000
+	local x, y = GetUnitXY(boss)
+
+
+
+	local FW = CreateFogModifierRectBJ(false, Player(0), FOG_OF_WAR_VISIBLE, GlobalRect)
+	FogModifierStart(FW)
+
+
+	local phase = 1 --стартовая фаза
+	local sec = 0
+	local PhaseOn = true
+	local OnAttack=true
+	TimerStart(CreateTimer(), 1, true, function() --каждую секунду
+		local bx,by=GetUnitXY(boss)
+
+		if not UnitAlive(boss) then-- Место где босс
+			StartSound(bj_questCompletedSound)
+			DestroyTimer(GetExpiredTimer())
+			phase = 0
+			print("Даём нарграду, победа")
+
+		else --Проверяем есть ли живые герои, когда тиник жив
+			if BossFight then
+				local k=0
+				for i = 0, 3 do
+					local hero = HERO[i].UnitHero
+					if IsUnitInRange(hero, boss, 2000) then
+						k=k+1
+					end
+
+					--print("Отталкивание для особо умных")
+					--if OnAttack then
+						if IsUnitInRange(hero, boss, 250) then
+							--SetUnitTimeScale(boss,-1)
+							OnAttack=false
+							local angle=AngleBetweenUnits(boss,hero)
+							SetUnitFacing(boss,angle)
+							--SetUnitAnimation(boss,"Attack")
+							if phase~=1 then
+								EttiDashAttackPrepare(boss,hero)
+							end
+
+						end
+
+					--end
+				end
+				if k==0 then
+					BossFight=false
+					phase=0
+					--print("Перезапуск босс файта и возврат в центр")
+					HealUnit(boss)
+					SetUnitPositionSmooth(boss,xs, ys)
+				end
+			end
+		end
+		local xb, yb = GetUnitXY(boss)
+		if BossFight then -- если идёт бой
+			sec = sec + 1
+			if sec >= 10 then
+				sec = 0
+				phase = phase + 1
+				PhaseOn = true
+				--print("phase " .. phase)
+				if phase >= 4 then
+					phase = 0
+				end
+			end
+			--фазы
+			if phase == 1 and PhaseOn then
+				PhaseOn = false
+				--print("Пытаемся разбежаться на игрока")
+				local hero=HERO[0].UnitHero
+				EttiDashAttackPrepare(boss,hero)
+
+
+				TimerStart(CreateTimer(), 2, true, function()--по героям
+					EttiDashAttackPrepare(boss,hero)
+
+					if phase ~= 1 then
+						DestroyTimer(GetExpiredTimer())
+					end
+				end)
+
+			end
+			if phase == 2 and PhaseOn then
+				PhaseOn = false
+				--print("Падающие сосульки")
+				local effmodel = "Icicle"
+				TimerStart(CreateTimer(), .5, true, function() -- случайные
+
+					SetUnitAnimationByIndex(boss,3)
+					local rx,ry=GetRandomInt(-500,500),GetRandomInt(-500,500)
+					MarkAndFall(bx+rx,by+ry,effmodel,boss)
+					SetUnitFacing(boss,AngleBetweenXY(GetUnitX(boss),GetUnitY(boss),bx+rx,by+ry)/bj_DEGTORAD)
+					if phase ~= 2 then
+						DestroyTimer(GetExpiredTimer())
+						ResetUnitAnimation(boss)
+					end
+				end)
+				local k=GetUnitLifePercent(boss)/100
+				k=1-k
+				--print(k)
+				TimerStart(CreateTimer(), 1.2-k, true, function()--по героям
+					for i = 0, 3 do
+						local hero = HERO[i].UnitHero
+						if IsUnitInRange(hero, boss, 1000) then
+							MarkAndFall(GetUnitX(hero),GetUnitY(hero),effmodel,boss)
+						end
+					end
+
+
+					if phase ~= 2 then
+						DestroyTimer(GetExpiredTimer())
+					end
+				end)
+			end
+			if phase == 3 and PhaseOn and sec==5 then -- оживление големов
+				PhaseOn = false
+				--print("Фаза призыва")
+				local hero=HERO[0].UnitHero
+				for i=1, GetRandomInt(10,20) do
+					local xx,yy=GetLocationX(GetRandomLocInRect(gg_rct_Region_038)),GetLocationY(GetRandomLocInRect(gg_rct_Region_038))
+					if not IsUnitInRangeXY(hero,xx,yy,500) then
+						local snowmanBlast=CreateUnit(GetOwningPlayer(boss), FourCC("e001"), xx, yy, 0)
+
+						TimerStart(CreateTimer(), 0.5, true, function()
+							IssueTargetOrder(snowmanBlast,"move",hero)
+							if IsUnitInRange(snowmanBlast,hero,200) then
+								DestroyEffect(AddSpecialEffect("Winter Blast SD",GetUnitXY(snowmanBlast)))
+								UnitDamageArea(snowmanBlast,100,GetUnitX(snowmanBlast),GetUnitY(snowmanBlast),250)
+								KillUnit(snowmanBlast)
+								ShowUnit(snowmanBlast,false)
+							end
+							if not UnitAlive(snowmanBlast) then
+								DestroyTimer(GetExpiredTimer())
+								DestroyEffect(AddSpecialEffect("Winter Blast SD",GetUnitXY(snowmanBlast)))
+								UnitDamageArea(snowmanBlast,100,GetUnitX(snowmanBlast),GetUnitY(snowmanBlast),150)
+								KillUnit(snowmanBlast)
+								ShowUnit(snowmanBlast,false)
+							end
+						end)
+					end
+				end
+
+				if phase ~= 3 then
+					DestroyTimer(GetExpiredTimer())
+				end
+			end
+
+		else-- перезапуск боссфайта
+			local k=0
+			for i = 0, 3 do
+				local hero = HERO[i].UnitHero
+				if IsUnitInRange(hero, boss, 300) then
+					k=k+1
+				end
+			end
+			if k>=1 then
+				--print("Лечим босса, бой был прерва")
+				HealUnit(boss,99999)
+				BossFight=true
+			end
+		end--конец
+	end)
+end
+
+function MarkAndFall(x,y,effModel,hero)
+	local mark=AddSpecialEffect("Snipe Target",x,y)
+	BlzSetSpecialEffectScale(mark,5)
+	TimerStart(CreateTimer(), 2, false, function()
+
+		local FallenEff=AddSpecialEffect(effModel,x,y)
+		BlzSetSpecialEffectZ(FallenEff,1000)
+		BlzSetSpecialEffectYaw(FallenEff, math.rad(GetRandomReal(0,360)))
+		BlzSetSpecialEffectScale(FallenEff,5)
+		TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
+			local z=BlzGetLocalSpecialEffectZ(FallenEff)
+			BlzSetSpecialEffectZ(FallenEff,z-50)
+			if z+GetRandomInt(200,400)<=GetTerrainZ(x,y) then
+				DestroyEffect(mark)
+				BlzSetSpecialEffectPosition(mark,5000,5000,0)
+				DestroyTimer(GetExpiredTimer())
+
+				local nd=CreateDestructableZ(FourCC('B002'), x, y, 0,0 , 5,1)
+				--SetDestructableInvulnerable(nd,true)
+				DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic",x,y))
+				PlayerSeeNoiseInRangeTimed(0.5, x, y)
+				UnitDamageArea(hero,100,x,y,150) --при падении камня
+				local k=GetUnitLifePercent(hero)/100
+				k=1-k
+				TimerStart(CreateTimer(), 5+(k*5), false, function()
+					DestroyEffect(FallenEff)
+					BlzSetSpecialEffectPosition(FallenEff,999,999,999)
+					KillDestructable(nd)
+				end)
+			end
+		end)
+	end)
+end
+
+function EttiDashAttackPrepare(boss,hero)
+	if UnitAlive(boss) then
+		local eff=AddSpecialEffect("BossArrow",GetUnitXY(boss))
+		local angle=AngleBetweenUnits(boss,hero)
+		local k=GetUnitLifePercent(boss)/100
+		k=1-k
+		BlzSetSpecialEffectYaw(eff, math.rad(angle))
+		TimerStart(CreateTimer(), 1.5, false, function()
+			DestroyEffect(eff)
+		end)
+		TimerStart(CreateTimer(), 1.2-k, false, function()
+			UnitAddForceSimple(boss,angle,20+20*k,1000,"RunEtti")
+			BlzPauseUnitEx(boss,true)
+			SetUnitAnimationByIndex(boss,7)
+			SetUnitTimeScale(boss,3)
+			BlzSetUnitFacingEx(boss,angle)
+		end)
+	end
+end
 function CreateSimpleFrameGlue(posX, PosY, texture,parent)
     --, call,callENTER,callLEAVE
     local NextPoint = 0.039
@@ -2672,7 +3018,7 @@ end
 function CastSnowBall(data,directionAngle)
     local effModel="snowball"--"Abilities\\Weapons\\LichMissile\\LichMissile"
     local hero=data.UnitHero
-    if data.AttackIsReady and not data.SpaceForce then
+    if data.AttackIsReady and not data.SpaceForce and UnitAlive(hero) then
         BlzSetUnitFacingEx(hero,directionAngle)
         SetUnitAnimationByIndex(hero,3)
         data.AttackIsReady=false
@@ -2906,18 +3252,18 @@ FREE_CAMERA = false
 TIMER_PERIOD = 1 / 32
 TIMER_PERIOD64 = 1 / 64
 HERO = {}
-HeroID = FourCC("opeo")
+HeroID = FourCC("O000")
 
 function InitAnimations(hero, data)
     PlayUnitAnimationFromChat()
 
-    if GetUnitTypeId(data.UnitHero) == FourCC("opeo") then
+    if GetUnitTypeId(data.UnitHero) == FourCC("O000") then
         --print("инициализацию анимация пеона")
         data.AnimDurationWalk = 0.767 --длительность анимации движения, полный круг
         data.IndexAnimationWalk = 1-- индекс анимации движения
         data.ResetDuration = 3.333 -- время сброса для анимации stand, длительность анимации stand
         data.IndexAnimationQ = 5 -- анимация сплеш удара
-        data.IndexAnimationSpace = 22 -- анимация для рывка, если анимации нет, ставь индекс аналогичный бегу
+        data.IndexAnimationSpace = 22 -- анимация для рывка, если анимации нет, ставьте индекс аналогичный бегу
         data.IndexAnimationAttackInDash = 3 --анимация удара в рывке
         data.IndexAnimationThrow = 3 -- индекс анимациии броска чего либо
         data.IndexAnimationAttack1 = 4 --индекс анимации атаки в серии
@@ -3825,63 +4171,74 @@ function PlayUnitAnimationFromChat()
 end
 --CUSTOM_CODE
 function Trig_InitGUI_Actions()
-    UseTimeOfDayBJ(false)
+UseTimeOfDayBJ(false)
 end
 
 function InitTrig_InitGUI()
-    gg_trg_InitGUI = CreateTrigger()
-    TriggerAddAction(gg_trg_InitGUI, Trig_InitGUI_Actions)
+gg_trg_InitGUI = CreateTrigger()
+TriggerAddAction(gg_trg_InitGUI, Trig_InitGUI_Actions)
+end
+
+function Trig_EnterInRect_Actions()
+end
+
+function InitTrig_EnterInRect()
+gg_trg_EnterInRect = CreateTrigger()
+TriggerRegisterEnterRectSimple(gg_trg_EnterInRect, gg_rct_Region_038)
+TriggerAddAction(gg_trg_EnterInRect, Trig_EnterInRect_Actions)
 end
 
 function InitCustomTriggers()
-    InitTrig_InitGUI()
+InitTrig_InitGUI()
+InitTrig_EnterInRect()
 end
 
 function RunInitializationTriggers()
-    ConditionalTriggerExecute(gg_trg_InitGUI)
+ConditionalTriggerExecute(gg_trg_InitGUI)
 end
 
 function InitCustomPlayerSlots()
-    SetPlayerStartLocation(Player(0), 0)
-    SetPlayerColor(Player(0), ConvertPlayerColor(0))
-    SetPlayerRacePreference(Player(0), RACE_PREF_HUMAN)
-    SetPlayerRaceSelectable(Player(0), true)
-    SetPlayerController(Player(0), MAP_CONTROL_USER)
+SetPlayerStartLocation(Player(0), 0)
+SetPlayerColor(Player(0), ConvertPlayerColor(0))
+SetPlayerRacePreference(Player(0), RACE_PREF_HUMAN)
+SetPlayerRaceSelectable(Player(0), true)
+SetPlayerController(Player(0), MAP_CONTROL_USER)
 end
 
 function InitCustomTeams()
-    SetPlayerTeam(Player(0), 0)
+SetPlayerTeam(Player(0), 0)
 end
 
 function main()
-    local we
-    SetCameraBounds(-10240.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), -10240.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 10240.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 10240.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -10240.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 10240.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 10240.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), -10240.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
-    SetDayNightModels("Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl", "Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl")
-    SetTerrainFogEx(0, 0.0, 5000.0, 0.500, 0.086, 0.043, 0.275)
-    we = AddWeatherEffect(Rect(-10240.0, -10240.0, 10240.0, 10240.0), FourCC("SNls"))
-    EnableWeatherEffect(we, true)
-    NewSoundEnvironment("Default")
-    SetAmbientDaySound("LordaeronWinterDay")
-    SetAmbientNightSound("LordaeronWinterNight")
-    SetMapMusic("Music", true, 0)
-    CreateRegions()
-    CreateCameras()
-    CreateAllUnits()
-    InitBlizzard()
-    InitGlobals()
-    InitCustomTriggers()
-    RunInitializationTriggers()
+local we
+
+SetCameraBounds(-10240.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), -10240.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 10240.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 10240.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -10240.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 10240.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 10240.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), -10240.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
+SetDayNightModels("Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl", "Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl")
+SetTerrainFogEx(0, 0.0, 5000.0, 0.500, 0.086, 0.043, 0.275)
+we = AddWeatherEffect(Rect(-10240.0, -10240.0, 10240.0, 10240.0), FourCC("SNls"))
+EnableWeatherEffect(we, true)
+NewSoundEnvironment("Default")
+SetAmbientDaySound("LordaeronWinterDay")
+SetAmbientNightSound("LordaeronWinterNight")
+SetMapMusic("Music", true, 0)
+CreateRegions()
+CreateCameras()
+CreateAllUnits()
+InitBlizzard()
+InitGlobals()
+InitCustomTriggers()
+RunInitializationTriggers()
 end
 
 function config()
-    SetMapName("TRIGSTR_001")
-    SetMapDescription("TRIGSTR_003")
-    SetPlayers(1)
-    SetTeams(1)
-    SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-    DefineStartLocation(0, -2432.0, -3904.0)
-    InitCustomPlayerSlots()
-    SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
-    InitGenericPlayerSlots()
+SetMapName("TRIGSTR_001")
+SetMapDescription("TRIGSTR_003")
+SetPlayers(1)
+SetTeams(1)
+SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
+DefineStartLocation(0, -5312.0, 3904.0)
+InitCustomPlayerSlots()
+SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
+InitGenericPlayerSlots()
 end
 
