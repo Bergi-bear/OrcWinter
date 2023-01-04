@@ -70,8 +70,8 @@ function InitWASD(hero)
     InitAnimations(hero, data)
     BlockMouse(data)
     SelectUnitForPlayerSingle(data.UnitHero, GetOwningPlayer(hero))
-    EnableDragSelect(false, false)
-    BlzEnableSelections(false, false)
+    --EnableDragSelect(false, false)
+    --BlzEnableSelections(false, false)
 
     local angle = 0
     local speed = 5

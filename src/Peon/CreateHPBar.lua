@@ -3,6 +3,7 @@
 --- Created by Bergi.
 --- DateTime: 21.12.2021 15:10
 ---
+GNext=0.039
 function CreateHPBar(data)
     local BoxBarParent = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), '', 0)
     BlzFrameSetVisible(BoxBarParent, GetLocalPlayer() == Player(data.pid))

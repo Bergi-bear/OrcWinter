@@ -19,10 +19,10 @@ do
 
             perebor = CreateGroup()
             InitHEROTable()
-            InitMenu()
+            --InitMenu()
             InitMouseMoveTrigger()
             InitMouseClickEvent()
-            CreateWASDActions()
+            --CreateWASDActions()
 
             --InitGameSlimes()
             --InitMurlocAI()

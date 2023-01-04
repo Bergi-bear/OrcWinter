@@ -23,7 +23,7 @@ function HideEverythingAll()
     for i = 0, 11 do
         BlzFrameSetVisible(BlzGetFrameByName("CommandButton_" .. i, 0), false)
     end
-    BlzHideOriginFrames(true)--скрыть всё
+    BlzHideOriginFrames(false)--скрыть всё
     BlzFrameSetScale(BlzFrameGetChild(BlzGetFrameByName("ConsoleUI", 0), 5), 0.001)
 end
 
@@ -128,4 +128,15 @@ function DrawSelectionPortrait(state)
    -- BlzFrameSetParent(Portrait, BlzGetFrameByName("ConsoleUIBackdrop", 0))
     BlzFrameSetAbsPoint(Portrait, FRAMEPOINT_CENTER, -0.0, 0.59)
     BlzFrameSetVisible(Portrait, state)
+end
+
+function DrawSelectionPortrait1(state)
+
+    local Portrait =BlzGetOriginFrame(ORIGIN_FRAME_PORTRAIT, 0)-- BlzGetFrameByName("Portrait",0)
+    --print("что-то не так с портретом")
+    BlzFrameClearAllPoints(Portrait)
+    BlzFrameSetSize(Portrait, 0.001, 0.001)
+    --BlzFrameSetParent(Portrait, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    BlzFrameSetAbsPoint(Portrait, FRAMEPOINT_LEFT, 0, 0)
+    BlzFrameSetVisible(Portrait, true)
 end
