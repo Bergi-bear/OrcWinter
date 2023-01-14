@@ -289,8 +289,12 @@ function MiniChargeOnArea(data)
         end
         if UnitAlive(e) and e ~= data.UnitHero then
             local angle = AngleBetweenUnits(data.UnitHero, e)
-            UnitAddForceSimple(e, angle, 5, 80)
-            has = true
+            --print("чуть чуть толкаем при хождении")
+            if not IsUnitAlly(data.UnitHero,GetOwningPlayer(e)) then
+                UnitAddForceSimple(e, angle, 5, 80)
+                has = true
+
+            end
         end
         GroupRemoveUnit(perebor, e)
     end

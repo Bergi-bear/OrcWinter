@@ -1,4 +1,4 @@
-FREE_CAMERA = false
+FREE_CAMERA = true
 TIMER_PERIOD = 1 / 32
 TIMER_PERIOD64 = 1 / 64
 HERO = {}

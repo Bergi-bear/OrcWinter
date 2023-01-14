@@ -175,9 +175,9 @@ function StartYettyAI(xs, ys)
                     local xx, yy = GetLocationX(GetRandomLocInRect(gg_rct_Region_038)), GetLocationY(GetRandomLocInRect(gg_rct_Region_038))
                     if not IsUnitInRangeXY(hero, xx, yy, 500) then
                         local snowmanBlast = CreateUnit(GetOwningPlayer(boss), FourCC("e001"), xx, yy, 0)
-
+                        IssueTargetOrder(snowmanBlast, "attack", hero)
                         TimerStart(CreateTimer(), 0.5, true, function()
-                            IssueTargetOrder(snowmanBlast, "move", hero)
+
                             if IsUnitInRange(snowmanBlast, hero, 200) then
                                 DestroyEffect(AddSpecialEffect("Winter Blast SD", GetUnitXY(snowmanBlast)))
                                 UnitDamageArea(snowmanBlast, 100, GetUnitX(snowmanBlast), GetUnitY(snowmanBlast), 250)

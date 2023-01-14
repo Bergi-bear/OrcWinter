@@ -45,6 +45,17 @@ gg_cam_MindPeon = nil
 gg_cam_TrallSteal = nil
 gg_cam_Vine = nil
 gg_cam_ResetCam = nil
+gg_snd_Intro1 = nil
+gg_snd_Intro2 = nil
+gg_snd_Intro3 = nil
+gg_snd_Intro4 = nil
+gg_snd_Intro5 = nil
+gg_snd_Intro6 = nil
+gg_snd_Intro7 = nil
+gg_snd_Intro8 = nil
+gg_snd_Intro9 = nil
+gg_snd_Intro10 = nil
+gg_snd_Intro11 = nil
 gg_trg_InitGUI = nil
 gg_trg_StartIntro = nil
 gg_trg_SkipIntro = nil
@@ -55,6 +66,64 @@ gg_unit_opeo_0015 = nil
 gg_unit_opeo_0024 = nil
 function InitGlobals()
 udg_PressESC = false
+end
+
+function InitSounds()
+gg_snd_Intro1 = CreateSound("Speech/Trall/Intro1.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_Intro1, 6624)
+SetSoundChannel(gg_snd_Intro1, 0)
+SetSoundVolume(gg_snd_Intro1, 127)
+SetSoundPitch(gg_snd_Intro1, 1.0)
+gg_snd_Intro2 = CreateSound("Speech/Trall/Intro2.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_Intro2, 3576)
+SetSoundChannel(gg_snd_Intro2, 0)
+SetSoundVolume(gg_snd_Intro2, 127)
+SetSoundPitch(gg_snd_Intro2, 1.0)
+gg_snd_Intro3 = CreateSound("Speech/Trall/Intro3.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_Intro3, 3648)
+SetSoundChannel(gg_snd_Intro3, 0)
+SetSoundVolume(gg_snd_Intro3, 127)
+SetSoundPitch(gg_snd_Intro3, 1.0)
+gg_snd_Intro4 = CreateSound("Speech/Trall/Intro4.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_Intro4, 2016)
+SetSoundChannel(gg_snd_Intro4, 0)
+SetSoundVolume(gg_snd_Intro4, 127)
+SetSoundPitch(gg_snd_Intro4, 1.0)
+gg_snd_Intro5 = CreateSound("Speech/Trall/Intro5.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_Intro5, 1176)
+SetSoundChannel(gg_snd_Intro5, 0)
+SetSoundVolume(gg_snd_Intro5, 127)
+SetSoundPitch(gg_snd_Intro5, 1.0)
+gg_snd_Intro6 = CreateSound("Speech/Trall/Intro6.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_Intro6, 960)
+SetSoundChannel(gg_snd_Intro6, 0)
+SetSoundVolume(gg_snd_Intro6, 127)
+SetSoundPitch(gg_snd_Intro6, 1.0)
+gg_snd_Intro7 = CreateSound("Speech/Trall/Intro7.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_Intro7, 936)
+SetSoundChannel(gg_snd_Intro7, 0)
+SetSoundVolume(gg_snd_Intro7, 127)
+SetSoundPitch(gg_snd_Intro7, 1.0)
+gg_snd_Intro8 = CreateSound("Speech/Trall/Intro8.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_Intro8, 1104)
+SetSoundChannel(gg_snd_Intro8, 0)
+SetSoundVolume(gg_snd_Intro8, 127)
+SetSoundPitch(gg_snd_Intro8, 1.0)
+gg_snd_Intro9 = CreateSound("Speech/Trall/Intro9.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_Intro9, 768)
+SetSoundChannel(gg_snd_Intro9, 0)
+SetSoundVolume(gg_snd_Intro9, 127)
+SetSoundPitch(gg_snd_Intro9, 1.0)
+gg_snd_Intro10 = CreateSound("Speech/Trall/Intro10.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_Intro10, 7152)
+SetSoundChannel(gg_snd_Intro10, 0)
+SetSoundVolume(gg_snd_Intro10, 127)
+SetSoundPitch(gg_snd_Intro10, 1.0)
+gg_snd_Intro11 = CreateSound("Speech/Trall/Intro11.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_Intro11, 5976)
+SetSoundChannel(gg_snd_Intro11, 0)
+SetSoundVolume(gg_snd_Intro11, 127)
+SetSoundPitch(gg_snd_Intro11, 1.0)
 end
 
 function CreateUnitsForPlayer0()
@@ -199,7 +268,7 @@ gg_cam_OnPineRound = CreateCameraSetup()
 CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
 CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_ROTATION, 98.2, 0.0)
 CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_ANGLE_OF_ATTACK, 317.9, 0.0)
-CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_TARGET_DISTANCE, 2253.9, 0.0)
+CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_TARGET_DISTANCE, 2727.3, 0.0)
 CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_ROLL, 0.0, 0.0)
 CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
 CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_FARZ, 6050.0, 0.0)
@@ -220,12 +289,12 @@ CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_NEARZ, 16.0, 0.0)
 CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
 CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
 CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-CameraSetupSetDestPosition(gg_cam_OnPeons, 134.6, -396.5, 0.0)
+CameraSetupSetDestPosition(gg_cam_OnPeons, -63.7, -669.2, 0.0)
 gg_cam_MindPeon = CreateCameraSetup()
 CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_ROTATION, 223.4, 0.0)
-CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_ANGLE_OF_ATTACK, 10.1, 0.0)
-CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_TARGET_DISTANCE, 37.4, 0.0)
+CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_ROTATION, 222.5, 0.0)
+CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_ANGLE_OF_ATTACK, 7.9, 0.0)
+CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_TARGET_DISTANCE, 2.1, 0.0)
 CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_ROLL, 0.0, 0.0)
 CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
 CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_FARZ, 5000.0, 0.0)
@@ -238,7 +307,7 @@ gg_cam_TrallSteal = CreateCameraSetup()
 CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
 CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_ROTATION, 63.3, 0.0)
 CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_ANGLE_OF_ATTACK, 325.7, 0.0)
-CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_TARGET_DISTANCE, 304.6, 0.0)
+CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_TARGET_DISTANCE, 368.5, 0.0)
 CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_ROLL, 0.0, 0.0)
 CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
 CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_FARZ, 5000.0, 0.0)
@@ -249,8 +318,8 @@ CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
 CameraSetupSetDestPosition(gg_cam_TrallSteal, 70.4, -585.1, 0.0)
 gg_cam_Vine = CreateCameraSetup()
 CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_ROTATION, 62.0, 0.0)
-CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_ANGLE_OF_ATTACK, 315.1, 0.0)
+CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_ROTATION, 59.5, 0.0)
+CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_ANGLE_OF_ATTACK, 311.0, 0.0)
 CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_TARGET_DISTANCE, 1051.5, 0.0)
 CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_ROLL, 0.0, 0.0)
 CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
@@ -259,7 +328,7 @@ CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_NEARZ, 16.0, 0.0)
 CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
 CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
 CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-CameraSetupSetDestPosition(gg_cam_Vine, 624.1, -297.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_Vine, 489.1, -482.8, 0.0)
 gg_cam_ResetCam = CreateCameraSetup()
 CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
 CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_ROTATION, 90.0, 0.0)
@@ -567,8 +636,12 @@ function MiniChargeOnArea(data)
         end
         if UnitAlive(e) and e ~= data.UnitHero then
             local angle = AngleBetweenUnits(data.UnitHero, e)
-            UnitAddForceSimple(e, angle, 5, 80)
-            has = true
+            --print("чуть чуть толкаем при хождении")
+            if not IsUnitAlly(data.UnitHero,GetOwningPlayer(e)) then
+                UnitAddForceSimple(e, angle, 5, 80)
+                has = true
+
+            end
         end
         GroupRemoveUnit(perebor, e)
     end
@@ -2655,10 +2728,10 @@ function StartYettyAI(xs, ys)
                 if k == 0 then
                     BossFight = false
                     phase = 0
-                    print("Нет ни 1 игрока рядов, босс файт прерван")
-                    print(BlzFrameIsVisible(into))
+                    --print("Нет ни 1 игрока рядов, босс файт прерван")
+                    --print(BlzFrameIsVisible(into))
                     BlzFrameSetVisible(into, false)
-                    print(BlzFrameIsVisible(into))
+                    --print(BlzFrameIsVisible(into))
                     HealUnit(boss)
                     SetUnitPositionSmooth(boss, xs, ys)
                 end
@@ -2736,9 +2809,9 @@ function StartYettyAI(xs, ys)
                     local xx, yy = GetLocationX(GetRandomLocInRect(gg_rct_Region_038)), GetLocationY(GetRandomLocInRect(gg_rct_Region_038))
                     if not IsUnitInRangeXY(hero, xx, yy, 500) then
                         local snowmanBlast = CreateUnit(GetOwningPlayer(boss), FourCC("e001"), xx, yy, 0)
-
+                        IssueTargetOrder(snowmanBlast, "attack", hero)
                         TimerStart(CreateTimer(), 0.5, true, function()
-                            IssueTargetOrder(snowmanBlast, "move", hero)
+
                             if IsUnitInRange(snowmanBlast, hero, 200) then
                                 DestroyEffect(AddSpecialEffect("Winter Blast SD", GetUnitXY(snowmanBlast)))
                                 UnitDamageArea(snowmanBlast, 100, GetUnitX(snowmanBlast), GetUnitY(snowmanBlast), 250)
@@ -2771,7 +2844,7 @@ function StartYettyAI(xs, ys)
                 end
             end
             if k >= 1 then
-                print("Лечим босса, и бой возобновляется")
+                --print("Лечим босса, и бой возобновляется")
                 BlzFrameSetVisible(into, true)
                 HealUnit(boss, 99999)
                 BossFight = true
@@ -2833,6 +2906,66 @@ function EttiDashAttackPrepare(boss, hero)
         end)
     end
 end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 14.01.2023 12:06
+---
+function CreateCardFrame()
+    --print("создаём карточки")
+    --BlzFrameSetAbsPoint(BlzGetFrameByName("ConsoleUIBackdrop", 0), FRAMEPOINT_TOPRIGHT, 0, 0) --на всякий
+    CardBox = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), '', 0) -- глобалка всех карточек
+    local cardNamesTable = {
+        "CardGirland",
+        "CardOlivie",
+        "CardPresent",
+        "CardStar",
+        "CardVine",
+    }
+    local cardText = {
+        "Гирлянда",
+        "Оливье",
+        "Подарки",
+        "Звезда",
+        "Вино",
+    }
+    --for i = 1, #cardNamesTable do
+    local i=1
+    TimerStart(CreateTimer(), 1, true, function()
+        local card = BlzCreateFrameByType("BACKDROP", "Face", CardBox, "", 0)
+        BlzFrameSetTexture(card, cardNamesTable[i], 0, true)
+        BlzFrameSetSize(card, 0.26, 0.26)
+        BlzFrameSetAbsPoint(card, FRAMEPOINT_CENTER, 0.13 + ((i - 1) * 0.12), 0.4)
+
+        local textName = BlzCreateFrameByType("TEXT", "ButtonChargesText", card, "", 0)
+        BlzFrameSetText(textName, cardText[i])
+        BlzFrameSetPoint(textName, FRAMEPOINT_BOTTOM, card, FRAMEPOINT_BOTTOM, 0., 0.025)
+        if true then
+            local alpha = 0
+            BlzFrameSetAlpha(card, alpha)
+           -- print(alpha)
+            TimerStart(CreateTimer(), 0.01, true, function()
+                alpha = alpha + 1
+                BlzFrameSetAlpha(card, alpha)
+                if alpha >= 255 then
+                    if i>=5 then
+                        --print("создание карточек завершено")
+                    end
+                    DestroyTimer(GetExpiredTimer())
+                end
+            end)
+        end
+
+        --BlzFrameSetParent(card, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+        i=i+1
+        if i==6 then
+            DestroyTimer(GetExpiredTimer())
+        end
+    end)
+
+end
+
+
 function CreateSimpleFrameGlue(posX, PosY, texture,parent)
     --, call,callENTER,callLEAVE
     local NextPoint = 0.039
@@ -3263,6 +3396,7 @@ end
 ---
 function CreatePeonForPlayer(data)
     --print("1")
+
     if IsPlayerSlotState(Player(data.pid),PLAYER_SLOT_STATE_PLAYING) and GetPlayerController(Player(data.pid)) == MAP_CONTROL_USER then
         PlayerIsPlaying[data.pid] = true
         --print("создание пеона")
@@ -3291,7 +3425,7 @@ end
 
 
 
-FREE_CAMERA = false
+FREE_CAMERA = true
 TIMER_PERIOD = 1 / 32
 TIMER_PERIOD64 = 1 / 64
 HERO = {}
@@ -4299,77 +4433,70 @@ end
 return true
 end
 
-function Trig_StartIntro_Func024C()
+function Trig_StartIntro_Func025C()
 if (not (udg_PressESC == true)) then
 return false
 end
 return true
 end
 
-function Trig_StartIntro_Func026C()
+function Trig_StartIntro_Func027C()
 if (not (udg_PressESC == true)) then
 return false
 end
 return true
 end
 
-function Trig_StartIntro_Func028C()
+function Trig_StartIntro_Func029C()
 if (not (udg_PressESC == true)) then
 return false
 end
 return true
 end
 
-function Trig_StartIntro_Func030C()
+function Trig_StartIntro_Func031C()
 if (not (udg_PressESC == true)) then
 return false
 end
 return true
 end
 
-function Trig_StartIntro_Func032C()
+function Trig_StartIntro_Func033C()
 if (not (udg_PressESC == true)) then
 return false
 end
 return true
 end
 
-function Trig_StartIntro_Func034C()
+function Trig_StartIntro_Func035C()
 if (not (udg_PressESC == true)) then
 return false
 end
 return true
 end
 
-function Trig_StartIntro_Func036C()
+function Trig_StartIntro_Func037C()
 if (not (udg_PressESC == true)) then
 return false
 end
 return true
 end
 
-function Trig_StartIntro_Func038C()
+function Trig_StartIntro_Func039C()
 if (not (udg_PressESC == true)) then
 return false
 end
 return true
 end
 
-function Trig_StartIntro_Func040C()
+function Trig_StartIntro_Func041C()
 if (not (udg_PressESC == true)) then
 return false
 end
 return true
 end
 
-function Trig_StartIntro_Func042C()
-if (not (udg_PressESC == true)) then
-return false
-end
-return true
-end
-
-function Trig_StartIntro_Func044C()
+function Trig_StartIntro_Func043C()
 if (not (udg_PressESC == true)) then
 return false
 end
@@ -4397,6 +4524,13 @@ end
 return true
 end
 
+function Trig_StartIntro_Func052C()
+if (not (udg_PressESC == true)) then
+return false
+end
+return true
+end
+
 function Trig_StartIntro_Actions()
 EnableTrigger(gg_trg_SkipIntro)
 if (Trig_StartIntro_Func002C()) then
@@ -4413,7 +4547,7 @@ if (Trig_StartIntro_Func006C()) then
 return 
 else
 end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_627", nil, "TRIGSTR_628", bj_TIMETYPE_ADD, 5.00, true)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_627", gg_snd_Intro1, "TRIGSTR_628", bj_TIMETYPE_ADD, 0.00, true)
 if (Trig_StartIntro_Func008C()) then
 return 
 else
@@ -4428,7 +4562,7 @@ if (Trig_StartIntro_Func012C()) then
 return 
 else
 end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_629", nil, "TRIGSTR_630", bj_TIMETYPE_ADD, 5.00, true)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_629", gg_snd_Intro2, "TRIGSTR_630", bj_TIMETYPE_ADD, 0.00, true)
 if (Trig_StartIntro_Func014C()) then
 return 
 else
@@ -4438,12 +4572,12 @@ if (Trig_StartIntro_Func016C()) then
 return 
 else
 end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_631", nil, "TRIGSTR_632", bj_TIMETYPE_ADD, 5.00, true)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_631", gg_snd_Intro3, "TRIGSTR_632", bj_TIMETYPE_ADD, 0.00, true)
 if (Trig_StartIntro_Func018C()) then
 return 
 else
 end
-CameraSetupApplyForPlayer(true, gg_cam_MindPeon, Player(0), 1.00)
+CameraSetupApplyForPlayer(true, gg_cam_MindPeon, Player(0), 0.00)
 if (Trig_StartIntro_Func020C()) then
 return 
 else
@@ -4454,72 +4588,74 @@ return
 else
 end
 CameraSetupApplyForPlayer(true, gg_cam_TrallSteal, Player(0), 0.00)
-if (Trig_StartIntro_Func024C()) then
+    CreateCardFrame()
+if (Trig_StartIntro_Func025C()) then
 return 
 else
 end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_635", nil, "TRIGSTR_636", bj_TIMETYPE_ADD, 0.00, true)
-if (Trig_StartIntro_Func026C()) then
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_635", gg_snd_Intro4, "TRIGSTR_636", bj_TIMETYPE_ADD, 0.00, true)
+if (Trig_StartIntro_Func027C()) then
 return 
 else
 end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_637", nil, "TRIGSTR_638", bj_TIMETYPE_ADD, 0.00, true)
-if (Trig_StartIntro_Func028C()) then
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_637", gg_snd_Intro5, "TRIGSTR_638", bj_TIMETYPE_ADD, 0.00, true)
+if (Trig_StartIntro_Func029C()) then
 return 
 else
 end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_639", nil, "TRIGSTR_640", bj_TIMETYPE_ADD, 0.00, true)
-if (Trig_StartIntro_Func030C()) then
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_639", gg_snd_Intro6, "TRIGSTR_640", bj_TIMETYPE_ADD, 0.00, true)
+if (Trig_StartIntro_Func031C()) then
 return 
 else
 end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_641", nil, "TRIGSTR_642", bj_TIMETYPE_ADD, 0.00, true)
-if (Trig_StartIntro_Func032C()) then
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_641", gg_snd_Intro7, "TRIGSTR_642", bj_TIMETYPE_ADD, 0.00, true)
+if (Trig_StartIntro_Func033C()) then
 return 
 else
 end
 SetUnitAnimation(gg_unit_opeo_0013, "Death")
-if (Trig_StartIntro_Func034C()) then
+if (Trig_StartIntro_Func035C()) then
 return 
 else
 end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_643", nil, "TRIGSTR_644", bj_TIMETYPE_ADD, 1.00, true)
-if (Trig_StartIntro_Func036C()) then
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_643", gg_snd_Intro8, "TRIGSTR_644", bj_TIMETYPE_ADD, 0.00, true)
+if (Trig_StartIntro_Func037C()) then
 return 
 else
 end
 SetUnitAnimation(gg_unit_opeo_0014, "Death")
-if (Trig_StartIntro_Func038C()) then
+if (Trig_StartIntro_Func039C()) then
 return 
 else
 end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_645", nil, "TRIGSTR_646", bj_TIMETYPE_ADD, 5.00, true)
-if (Trig_StartIntro_Func040C()) then
-return 
-else
-end
-SetUnitAnimation(gg_unit_opeo_0015, "Death")
-if (Trig_StartIntro_Func042C()) then
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_645", gg_snd_Intro9, "TRIGSTR_646", bj_TIMETYPE_ADD, 0.00, true)
+if (Trig_StartIntro_Func041C()) then
 return 
 else
 end
 CameraSetupApplyForPlayer(true, gg_cam_Vine, Player(0), 0.00)
-if (Trig_StartIntro_Func044C()) then
+if (Trig_StartIntro_Func043C()) then
 return 
 else
 end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_647", nil, "TRIGSTR_648", bj_TIMETYPE_ADD, 7.00, true)
+SetUnitAnimation(gg_unit_opeo_0015, "Death")
+    BlzFrameSetVisible(CardBox,false)
 if (Trig_StartIntro_Func046C()) then
 return 
 else
 end
-CameraSetupApplyForPlayer(true, gg_cam_TrallSteal, Player(0), 0.00)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_647", gg_snd_Intro10, "TRIGSTR_648", bj_TIMETYPE_ADD, 0.00, true)
 if (Trig_StartIntro_Func048C()) then
 return 
 else
 end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_649", nil, "TRIGSTR_650", bj_TIMETYPE_ADD, 8.00, true)
+CameraSetupApplyForPlayer(true, gg_cam_TrallSteal, Player(0), 0.00)
 if (Trig_StartIntro_Func050C()) then
+return 
+else
+end
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_649", gg_snd_Intro11, "TRIGSTR_650", bj_TIMETYPE_ADD, 0.00, true)
+if (Trig_StartIntro_Func052C()) then
 return 
 else
 end
@@ -4533,6 +4669,7 @@ TriggerAddAction(gg_trg_StartIntro, Trig_StartIntro_Actions)
 end
 
 function Trig_SkipIntro_Actions()
+    BlzFrameSetVisible(CardBox,false)
 udg_PressESC = true
 DisableTrigger(GetTriggeringTrigger())
 CameraSetupApplyForPlayer(true, gg_cam_ResetCam, Player(0), 1.00)
@@ -4540,6 +4677,7 @@ CinematicModeBJ(false, GetPlayersAll())
     CreateWASDActions()
 EnablePreSelect(false, false)
     InitMenu()
+    FREE_CAMERA=false
 end
 
 function InitTrig_SkipIntro()
@@ -4583,6 +4721,7 @@ NewSoundEnvironment("Default")
 SetAmbientDaySound("LordaeronWinterDay")
 SetAmbientNightSound("LordaeronWinterNight")
 SetMapMusic("Music", true, 0)
+InitSounds()
 CreateRegions()
 CreateCameras()
 CreateAllUnits()
@@ -4598,7 +4737,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, -2752.0, -4416.0)
+DefineStartLocation(0, -256.0, -704.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()
