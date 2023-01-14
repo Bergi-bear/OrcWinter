@@ -1,40 +1,4 @@
 udg_PressESC = false
-gg_rct_Medved = nil
-gg_rct_Undergroung_Chronicles = nil
-gg_rct_Between_The_Worlds = nil
-gg_rct_aroundPine_0 = nil
-gg_rct_aroundPine_1 = nil
-gg_rct_aroundPine_2 = nil
-gg_rct_aroundPine_3 = nil
-gg_rct_aroundPine_4 = nil
-gg_rct_aroundPine_5 = nil
-gg_rct_FWbomber_0 = nil
-gg_rct_FWbomber_1 = nil
-gg_rct_FWbomber_2 = nil
-gg_rct_FWbomber_3 = nil
-gg_rct_FWbomber_4 = nil
-gg_rct_FWbomber_5 = nil
-gg_rct_ZiDi_spawn = nil
-gg_rct_aroundJB_0 = nil
-gg_rct_aroundJB_1 = nil
-gg_rct_aroundJB_2 = nil
-gg_rct_aroundJB_3 = nil
-gg_rct_aroundJB_4 = nil
-gg_rct_main_0 = nil
-gg_rct_main_1 = nil
-gg_rct_main_2 = nil
-gg_rct_main_4 = nil
-gg_rct_main_5 = nil
-gg_rct_alt_0 = nil
-gg_rct_alt_1 = nil
-gg_rct_alt_2 = nil
-gg_rct_alt_3 = nil
-gg_rct_alt_4 = nil
-gg_rct_alt_5 = nil
-gg_rct_alt_6 = nil
-gg_rct_alt_7 = nil
-gg_rct_alt_8 = nil
-gg_rct_ZiDi_spawn2 = nil
 gg_rct________________037 = nil
 gg_rct_Region_038 = nil
 gg_rct_Region_024 = nil
@@ -64,6 +28,9 @@ gg_unit_opeo_0013 = nil
 gg_unit_opeo_0014 = nil
 gg_unit_opeo_0015 = nil
 gg_unit_opeo_0024 = nil
+gg_rct_TrapZone = nil
+gg_rct_EnterTrap = nil
+gg_trg_BoundEnter = nil
 function InitGlobals()
 udg_PressESC = false
 end
@@ -162,6 +129,114 @@ u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -558.6, -818.0, 49.483, FourCC("ope
 u = BlzCreateUnitWithSkin(p, FourCC("o001"), -1180.6, 1453.0, 262.555, FourCC("o001"))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -471.8, -961.9, 49.483, FourCC("opeo"))
 u = BlzCreateUnitWithSkin(p, FourCC("o001"), -536.6, -1082.7, 42.330, FourCC("o001"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -11617.0, -8041.4, 102.463, FourCC("opeo"))
+end
+
+function CreateUnitsForPlayer1()
+local p = Player(1)
+local u
+local unitID
+local t
+local life
+
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6471.0, -8160.1, 270.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h001"), -6499.8, 3496.2, 6.520, FourCC("h001"))
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6743.8, 3053.4, 279.210, FourCC("h000"))
+u = BlzCreateUnitWithSkin(p, FourCC("h001"), -6488.9, 3340.5, 6.520, FourCC("h001"))
+u = BlzCreateUnitWithSkin(p, FourCC("h001"), -6476.4, 3260.0, 6.520, FourCC("h001"))
+u = BlzCreateUnitWithSkin(p, FourCC("h001"), -6467.8, 3178.3, 6.520, FourCC("h001"))
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7034.1, 3054.5, 279.210, FourCC("h000"))
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6879.6, 3055.0, 279.210, FourCC("h000"))
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6979.4, 2632.2, 81.606, FourCC("h000"))
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6852.9, 2639.5, 97.059, FourCC("h000"))
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6723.9, 2663.2, 113.017, FourCC("h000"))
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6133.7, -8167.7, 270.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6037.7, -8688.0, 358.730, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6335.6, -8428.5, 90.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h001"), -6898.8, -8955.7, 8.704, FourCC("h001"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7188.2, -7265.4, 270.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h001"), -6410.7, -9091.2, 179.062, FourCC("h001"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h001"), -6902.9, -9203.4, 185.029, FourCC("h001"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h001"), -6898.1, -9295.2, 177.960, FourCC("h001"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7019.7, -7258.1, 270.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6881.3, -7708.2, 180.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7489.0, -6788.4, 225.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7942.8, -7368.2, 45.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7358.1, -6907.0, 225.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7808.0, -7493.3, 45.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8679.7, -7075.3, 225.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8558.9, -7160.7, 225.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -9008.4, -7783.9, 45.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8868.6, -7893.1, 45.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8759.8, -8506.6, 270.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8884.6, -8500.9, 270.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8644.4, -8506.6, 270.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8512.3, -8404.2, 270.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8195.2, -8342.2, 270.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7809.9, -9212.7, 181.432, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h001"), -9462.5, -9688.0, 2.700, FourCC("h001"))
+u = BlzCreateUnitWithSkin(p, FourCC("h001"), -9194.5, -8113.9, 180.000, FourCC("h001"))
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10558.1, -7979.8, 270.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10238.5, -7978.0, 270.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12806.5, -2941.5, 270.000, FourCC("h000"))
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12677.3, -2936.8, 270.000, FourCC("h000"))
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12542.8, -2937.9, 270.000, FourCC("h000"))
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12407.4, -2946.3, 270.000, FourCC("h000"))
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10496.7, -6851.4, 88.698, FourCC("h000"))
 end
 
 function CreateNeutralHostile()
@@ -185,7 +260,6 @@ local life
 u = BlzCreateUnitWithSkin(p, FourCC("e002"), 5726.2, -5277.6, 312.658, FourCC("e002"))
 u = BlzCreateUnitWithSkin(p, FourCC("e002"), 6357.5, -5150.5, 247.597, FourCC("e002"))
 u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -1377.3, 7311.8, 119.744, FourCC("nsno"))
-u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -1556.1, 6346.7, 20.347, FourCC("nsno"))
 u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -4992.9, 4916.3, 230.423, FourCC("nsno"))
 u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -5043.9, 6247.3, 163.306, FourCC("nsno"))
 u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -5760.5, 6601.1, 203.528, FourCC("nsno"))
@@ -197,6 +271,7 @@ end
 
 function CreatePlayerUnits()
 CreateUnitsForPlayer0()
+CreateUnitsForPlayer1()
 end
 
 function CreateAllUnits()
@@ -209,45 +284,11 @@ end
 function CreateRegions()
 local we
 
-gg_rct_Medved = Rect(-5952.0, 8064.0, -5824.0, 8192.0)
-gg_rct_Undergroung_Chronicles = Rect(-7616.0, 4160.0, -7488.0, 4288.0)
-gg_rct_Between_The_Worlds = Rect(1760.0, 6336.0, 1888.0, 6464.0)
-gg_rct_aroundPine_0 = Rect(-832.0, -320.0, -704.0, 224.0)
-gg_rct_aroundPine_1 = Rect(-800.0, -800.0, -576.0, -544.0)
-gg_rct_aroundPine_2 = Rect(-64.0, -1024.0, 352.0, -896.0)
-gg_rct_aroundPine_3 = Rect(256.0, -512.0, 480.0, -352.0)
-gg_rct_aroundPine_4 = Rect(128.0, 32.0, 288.0, 192.0)
-gg_rct_aroundPine_5 = Rect(-320.0, 32.0, -160.0, 192.0)
-gg_rct_FWbomber_0 = Rect(-736.0, -288.0, -608.0, -160.0)
-gg_rct_FWbomber_1 = Rect(352.0, -1792.0, 480.0, -1664.0)
-gg_rct_FWbomber_2 = Rect(-992.0, -2464.0, -864.0, -2336.0)
-gg_rct_FWbomber_3 = Rect(-256.0, -1856.0, -128.0, -1728.0)
-gg_rct_FWbomber_4 = Rect(896.0, -2304.0, 1024.0, -2176.0)
-gg_rct_FWbomber_5 = Rect(-352.0, -928.0, -256.0, -832.0)
-gg_rct_ZiDi_spawn = Rect(1088.0, -3296.0, 1248.0, -3136.0)
-gg_rct_aroundJB_0 = Rect(-6048.0, 4032.0, -5952.0, 4128.0)
-gg_rct_aroundJB_1 = Rect(-6560.0, 3808.0, -6464.0, 3904.0)
-gg_rct_aroundJB_2 = Rect(-6528.0, 3328.0, -6432.0, 3424.0)
-gg_rct_aroundJB_3 = Rect(-6144.0, 3136.0, -6048.0, 3232.0)
-gg_rct_aroundJB_4 = Rect(-5792.0, 3392.0, -5696.0, 3488.0)
-gg_rct_main_0 = Rect(-1216.0, -192.0, -960.0, 64.0)
-gg_rct_main_1 = Rect(-1024.0, -2752.0, -864.0, -2592.0)
-gg_rct_main_2 = Rect(-2368.0, -4032.0, -2208.0, -3872.0)
-gg_rct_main_4 = Rect(96.0, -4064.0, 256.0, -3904.0)
-gg_rct_main_5 = Rect(288.0, -2752.0, 448.0, -2592.0)
-gg_rct_alt_0 = Rect(-6720.0, 6016.0, -6496.0, 6240.0)
-gg_rct_alt_1 = Rect(-5984.0, 8064.0, -5824.0, 8224.0)
-gg_rct_alt_2 = Rect(-4992.0, 5664.0, -4832.0, 5824.0)
-gg_rct_alt_3 = Rect(-5120.0, 4960.0, -4960.0, 5120.0)
-gg_rct_alt_4 = Rect(-3584.0, 3424.0, -3424.0, 3584.0)
-gg_rct_alt_5 = Rect(-2112.0, 2432.0, -1952.0, 2592.0)
-gg_rct_alt_6 = Rect(-1280.0, 2336.0, -1120.0, 2496.0)
-gg_rct_alt_7 = Rect(-928.0, 1728.0, -768.0, 1888.0)
-gg_rct_alt_8 = Rect(-896.0, -128.0, -768.0, 0.0)
-gg_rct_ZiDi_spawn2 = Rect(-320.0, 1248.0, -224.0, 1376.0)
 gg_rct________________037 = Rect(128.0, -384.0, 160.0, -352.0)
 gg_rct_Region_038 = Rect(-4224.0, -6208.0, -1568.0, -4608.0)
 gg_rct_Region_024 = Rect(-192.0, -352.0, -96.0, -256.0)
+gg_rct_TrapZone = Rect(-12832.0, -9088.0, -5600.0, 4864.0)
+gg_rct_EnterTrap = Rect(-5856.0, -9440.0, -5472.0, -8928.0)
 end
 
 function CreateCameras()
@@ -2572,6 +2613,122 @@ end
 
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by Bergi.
+--- DateTime: 13.04.2022 16:56
+---
+function ActivateBulletTrap(unit,effect)
+    SetUnitAnimation(unit,"attack")
+    TimerStart(CreateTimer(), 0.3, false, function()
+        local angle = GetUnitFacing(unit)
+        local new = CreateAndForceBullet(unit, angle, 20, effect, nil, nil, 2, 1200,150)
+        BlzSetSpecialEffectYaw(new, math.rad(angle))
+    end)
+end
+
+function IsUnitInLine(unit,dist,angle,xs,ys)
+    local step=40
+    local range=80
+    local endi=dist//step
+    local inLine=false
+    local x,y=xs,ys
+    for i=1,endi do
+        x,y=MoveXY(x,y,step,angle)
+        if IsUnitInRangeXY(unit,x,y,range) then
+            --print("на линии видимости")
+            --DestroyEffect(AddSpecialEffect("Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl", x,y))
+            inLine=true
+            return inLine
+        end
+    end
+    return inLine
+end
+
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by Bergi.
+--- DateTime: 13.04.2022 15:32
+---
+do
+    local InitGlobalsOrigin = InitGlobals
+    function InitGlobals()
+        InitGlobalsOrigin()
+        TimerStart(CreateTimer(), .01, false, function()
+            InitTrapByID(FourCC("h000"))
+            InitTrapByID(FourCC("h001"))
+            --InitAllButton()
+        end)
+    end
+end
+
+
+function TrapShotByID(id, u)
+    if id == FourCC("h000") then
+        ActivateBulletTrap(u, "Abilities\\Weapons\\LichMissile\\LichMissile.mdl")
+    elseif id == FourCC("h001") then
+        ActivateBulletTrap(u, "Abilities\\Weapons\\ChimaeraAcidMissile\\ChimaeraAcidMissile.mdl")
+    end
+end
+
+function InitTrapByID(id)
+    local _, k, rg = FindUnitOfType(id)
+    local radiusActivate=500
+    local distanceSee=1200
+    --print(k)
+    for i = 1, #rg do
+        local u = rg[i]
+        UnitAddAbility(u, FourCC("Aloc"))
+        local enterTrig = CreateTrigger()
+
+        local hp = R2I(GetUnitLifePercent(u)) --тип ловушки определяется её процентом HP только НЕЧЕТНЫЕ
+        --print(hp.."%".." от "..R2S(BlzGetUnitMaxHP(u)))
+        if hp == 100 then -- ловушка работающая в радиусе
+
+            TriggerRegisterUnitInRange(enterTrig, u, radiusActivate, nil)
+            TriggerAddAction(enterTrig, function()
+                local entering = GetTriggerUnit()
+
+                if GetUnitTypeId(entering) == FourCC("opeo") then
+                    --print(GetUnitName(entering))
+                    if IsUnitInLine(entering, distanceSee, GetUnitFacing(u), GetUnitXY(u)) and IsUnitEnemy(u, GetOwningPlayer(entering)) then
+                        TrapShotByID(id, u)
+                    end
+                end
+                TimerStart(CreateTimer(), 0.5, true, function()
+                    if not IsUnitInRange(entering, u, radiusActivate+500) then
+                        --print("вышел из радиуса")
+                        DestroyTimer(GetExpiredTimer())
+                        --DestroyTrigger(enterTrig)
+                    else
+                        if IsUnitInLine(entering, distanceSee, GetUnitFacing(u), GetUnitXY(u)) and IsUnitEnemy(u, GetOwningPlayer(entering)) then
+                            TrapShotByID(id, u)
+                        end
+                    end
+                end)
+            end)
+        elseif hp == 1 then
+            print("первая вариация ловушки")
+            TimerStart(CreateTimer(), 2, true, function()
+                TrapShotByID(id, u)
+            end)
+        elseif hp == 3 then
+            print("вторая вариация")
+            TimerStart(CreateTimer(), 4, true, function()
+                local count = 3
+                TimerStart(CreateTimer(), 0.5, true, function()
+                    count = count - 1
+                    TrapShotByID(id, u)
+                    if count <= 0 then
+                        DestroyTimer(GetExpiredTimer())
+                    end
+                end)
+            end)
+        end
+
+    end
+end
+
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
 --- Created by User.
 --- DateTime: 03.01.2023 22:16
 ---
@@ -4418,6 +4575,16 @@ function PlayUnitAnimationFromChat()
     end)
 end
 --CUSTOM_CODE
+function Trig_BoundEnter_Actions()
+SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_TrapZone)
+end
+
+function InitTrig_BoundEnter()
+gg_trg_BoundEnter = CreateTrigger()
+TriggerRegisterEnterRectSimple(gg_trg_BoundEnter, gg_rct_EnterTrap)
+TriggerAddAction(gg_trg_BoundEnter, Trig_BoundEnter_Actions)
+end
+
 function Trig_InitGUI_Actions()
 UseTimeOfDayBJ(false)
 end
@@ -4759,6 +4926,7 @@ TriggerAddAction(gg_trg_SkipIntro, Trig_SkipIntro_Actions)
 end
 
 function InitCustomTriggers()
+InitTrig_BoundEnter()
 InitTrig_InitGUI()
 InitTrig_StartIntro()
 InitTrig_SkipIntro()
@@ -4783,10 +4951,10 @@ end
 function main()
 local we
 
-SetCameraBounds(-10240.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), -10240.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 10240.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 10240.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -10240.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 10240.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 10240.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), -10240.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
+SetCameraBounds(-14336.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), -10240.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 10240.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 10240.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -14336.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 10240.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 10240.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), -10240.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
 SetDayNightModels("Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl", "Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl")
 SetTerrainFogEx(0, 0.0, 5000.0, 0.500, 0.086, 0.043, 0.275)
-we = AddWeatherEffect(Rect(-10240.0, -10240.0, 10240.0, 10240.0), FourCC("SNls"))
+we = AddWeatherEffect(Rect(-14336.0, -10240.0, 10240.0, 10240.0), FourCC("SNls"))
 EnableWeatherEffect(we, true)
 NewSoundEnvironment("Default")
 SetAmbientDaySound("LordaeronWinterDay")
@@ -4808,7 +4976,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, -2816.0, -4352.0)
+DefineStartLocation(0, -5312.0, -9216.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()
