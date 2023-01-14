@@ -37,7 +37,9 @@ function StartYettyAI(xs, ys)
     SetUnitOwner(boss, Player(10), true)
     local range = 1000
     local x, y = GetUnitXY(boss)
-
+    ClearMapMusicBJ()
+    PlayMusicBJ("The Icefalcon's Crest")
+    SetMusicVolumeBJ(100)
     local FW = CreateFogModifierRectBJ(false, Player(0), FOG_OF_WAR_VISIBLE, GlobalRect)
     FogModifierStart(FW)
 
@@ -55,6 +57,9 @@ function StartYettyAI(xs, ys)
             DestroyTimer(GetExpiredTimer())
             phase = 0
             print("Даём нарграду, победа")
+            ClearMapMusicBJ()
+            PlayMusicBJ("Endless Snowbanks")
+            SetMusicVolumeBJ(100)
             BlzFrameSetVisible(into, false)
 
         else
@@ -79,6 +84,7 @@ function StartYettyAI(xs, ys)
                             SetUnitFacing(boss, angle)
                             --SetUnitAnimation(boss,"Attack")
                             if phase ~= 1 then
+                                PlaySound("Speech\\Yetti\\tineproidesh")
                                 EttiDashAttackPrepare(boss, hero)
                             end
 
@@ -100,6 +106,9 @@ function StartYettyAI(xs, ys)
                     --print(BlzFrameIsVisible(into))
                     HealUnit(boss)
                     SetUnitPositionSmooth(boss, xs, ys)
+                    ClearMapMusicBJ()
+                    PlayMusicBJ("Endless Snowbanks")
+                    SetMusicVolumeBJ(100)
                 end
             end
         end
@@ -120,9 +129,22 @@ function StartYettyAI(xs, ys)
             if phase == 1 and PhaseOn then
                 PhaseOn = false
                 --print("Пытаемся разбежаться на игрока")
-                local hero = HERO[0].UnitHero
-                EttiDashAttackPrepare(boss, hero)
 
+                local hero = HERO[0].UnitHero
+                 --Speech\\Yetti\\rastopchy
+                EttiDashAttackPrepare(boss, hero)
+                --normal_sound("Speech\\Yetti\\rastopchy", GetUnitXY(HERO[0].UnitHero))
+
+
+
+                local r=GetRandomInt(1,3)
+                if r==1 then
+                    PlaySound("Speech\\Yetti\\rastopchy")
+                elseif r==2 then
+                    PlaySound("Speech\\Yetti\\dogony")
+                elseif r==3 then
+                    PlaySound("Speech\\Yetti\\zatopchybolshiminogami")
+                end
                 TimerStart(CreateTimer(), 2, true, function()
                     --по героям
                     EttiDashAttackPrepare(boss, hero)
@@ -137,6 +159,7 @@ function StartYettyAI(xs, ys)
                 PhaseOn = false
                 --print("Падающие сосульки")
                 local effmodel = "Icicle"
+                PlaySound("Speech\\Yetti\\polychisosulkojvglaz")
                 TimerStart(CreateTimer(), .5, true, function()
                     -- случайные
 
@@ -170,6 +193,15 @@ function StartYettyAI(xs, ys)
                 -- оживление големов
                 PhaseOn = false
                 --print("Фаза призыва")
+                local r=GetRandomInt(1,3)
+                if r==1 then
+                    PlaySound("Speech\\Yetti\\zanimmoiminioni")
+                elseif r==2 then
+                    PlaySound("Speech\\Yetti\\nesmeilomatetypartiy")
+                elseif r==3 then
+                    PlaySound("Speech\\Yetti\\vsynochihlepil")
+                end
+
                 local hero = HERO[0].UnitHero
                 for i = 1, GetRandomInt(10, 20) do
                     local xx, yy = GetLocationX(GetRandomLocInRect(gg_rct_Region_038)), GetLocationY(GetRandomLocInRect(gg_rct_Region_038))
@@ -211,6 +243,9 @@ function StartYettyAI(xs, ys)
             end
             if k >= 1 then
                 --print("Лечим босса, и бой возобновляется")
+                ClearMapMusicBJ()
+                PlayMusicBJ("The Icefalcon's Crest")
+                SetMusicVolumeBJ(100)
                 BlzFrameSetVisible(into, true)
                 HealUnit(boss, 99999)
                 BossFight = true
@@ -264,6 +299,8 @@ function EttiDashAttackPrepare(boss, hero)
             DestroyEffect(eff)
         end)
         TimerStart(CreateTimer(), 1.2 - k, false, function()
+
+            --print("звук")
             UnitAddForceSimple(boss, angle, 20 + 20 * k, 1000, "RunEtti")
             BlzPauseUnitEx(boss, true)
             SetUnitAnimationByIndex(boss, 7)

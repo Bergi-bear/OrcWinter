@@ -82,7 +82,7 @@ function CreateAndStartClock()
     BlzFrameSetPoint(new_FrameChargesText, FRAMEPOINT_CENTER, charges, FRAMEPOINT_CENTER, 0., 0.)
     local sec = 0
     local min = 0
-    local h = 0
+    local h = 23
     TimerStart(CreateTimer(), 1, true, function()
         sec = sec + 1
         if sec == 60 then

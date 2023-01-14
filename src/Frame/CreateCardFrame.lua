@@ -16,7 +16,7 @@ function CreateCardFrame()
     }
     local cardText = {
         "Гирлянда",
-        "Оливье",
+        "Салаты",
         "Подарки",
         "Звезда",
         "Вино",
