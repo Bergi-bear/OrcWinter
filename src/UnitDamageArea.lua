@@ -131,7 +131,7 @@ function UnitDamageArea(u, damage, x, y, range, flag)
             end
             if (flag == "all" or IsUnitTrap(u)) and not UnitAlive(e) then
                 local ex, ey = GetUnitXY(e)
-                FlyTextTagShieldXY(ex, ey, L("Смерть от ловушки", "Death by trap"), GetOwningPlayer(e), "SeeAll")
+                FlyTextTagShieldXY(ex, ey, "Смерть от ловушки",  GetOwningPlayer(e), "SeeAll")
                 for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
                     if PlayerIsPlaying[i] then
                         local data = HERO[i]

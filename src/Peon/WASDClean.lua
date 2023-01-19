@@ -164,7 +164,9 @@ function InitWASD(hero)
 
                 TimerStart(CreateTimer(), 3, false, function()
                     DestroyTimer(GetExpiredTimer())
+                    x,y=GetUnitXY(hero)
                     ReviveHero(hero, x, y, true)
+                    HeroCandyHeal(data,3)
                     SetUnitInvulnerable(hero, true)
                     TimerStart(CreateTimer(), 2, false, function()
                         SetUnitInvulnerable(hero, false)
@@ -183,12 +185,13 @@ function InitWASD(hero)
             if not FREE_CAMERA then
                 SetCameraQuickPosition(GetUnitX(hero), GetUnitY(hero))
                 SetCameraTargetControllerNoZForPlayer(GetOwningPlayer(hero), hero, 10, 10, true) -- не дергается
-                --print(GetCameraField(CAMERA_FIELD_ZOFFSET))
+                --print(GetCameraField(CAMERA_FIELD_ANGLE_OF_ATTACK))
+                --print(GetCameraField(CAMERA_FIELD_TARGET_DISTANCE))
                 local z = GetUnitZ(hero)
 
-                SetCameraField(CAMERA_FIELD_ZOFFSET, z - 1000, 0.1)
-
-
+                --SetCameraField(CAMERA_FIELD_ZOFFSET, 100, 0.1) --z - 1000
+                SetCameraField(CAMERA_FIELD_TARGET_DISTANCE,2000,0.1)
+                SetCameraField(CAMERA_FIELD_ANGLE_OF_ATTACK,304,0.1)
             else
                 --print("камера освобождена")
             end
@@ -915,7 +918,41 @@ function PlayUnitAnimationFromChat()
             --CreateForUnitWayToPoint(mainHero,CQX,CQY)
             return
         end
+        if GetEventPlayerChatString() == "h" then
+            --print("лечение")
+            HeroCandyHeal(data,1)
+        end
         SetUnitAnimationByIndex(data.UnitHero, s)
         print(GetUnitName(data.UnitHero) .. " " .. s)
+    end)
+end
+
+CamZ = {}
+Step = 100 -- шаг подъёма камеры
+function InitCamControl()
+    local EventUp = CreateTrigger()
+    for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
+        CreateFogModifierRectBJ(true, Player(i), FOG_OF_WAR_VISIBLE, GetEntireMapRect())
+
+        BlzTriggerRegisterPlayerKeyEvent(EventUp, Player(i), OSKEY_HOME, 0, true)
+        CamZ[i] = GetCameraField(CAMERA_FIELD_ZOFFSET)
+    end
+    local EventDown = CreateTrigger()
+    for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
+        BlzTriggerRegisterPlayerKeyEvent(EventDown, Player(i), OSKEY_END, 0, true)
+    end
+    TriggerAddAction(EventUp, function()
+        CamZ[GetPlayerId(GetTriggerPlayer())] = GetCameraField(CAMERA_FIELD_ZOFFSET) + Step
+    end)
+    TriggerAddAction(EventDown, function()
+        CamZ[GetPlayerId(GetTriggerPlayer())] = GetCameraField(CAMERA_FIELD_ZOFFSET) - Step
+    end)
+
+    TimerStart(CreateTimer(), 0.02, true, function()
+        for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
+            if GetLocalPlayer() == Player(i) then
+                SetCameraField(CAMERA_FIELD_ZOFFSET, CamZ[i], 0.1)
+            end
+        end
     end)
 end

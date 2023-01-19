@@ -29,3 +29,7 @@ function IsUnitInLine(unit,dist,angle,xs,ys)
     end
     return inLine
 end
+
+function IsUnitTrap (unit)
+    return GetUnitAbilityLevel(unit,FourCC("A001"))>0
+end

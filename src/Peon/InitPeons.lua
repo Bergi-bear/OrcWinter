@@ -6,18 +6,21 @@
 function CreatePeonForPlayer(data)
     --print("1")
 
-    if IsPlayerSlotState(Player(data.pid),PLAYER_SLOT_STATE_PLAYING) and GetPlayerController(Player(data.pid)) == MAP_CONTROL_USER then
+    if IsPlayerSlotState(Player(data.pid), PLAYER_SLOT_STATE_PLAYING) and GetPlayerController(Player(data.pid)) == MAP_CONTROL_USER then
         PlayerIsPlaying[data.pid] = true
         --print("создание пеона")
 
         --CreateDownInterface(data)
-        local x,y=GetPlayerStartLocationX(Player(data.pid)),GetPlayerStartLocationY(Player(data.pid))
-        data.UnitHero=CreateUnit(Player(data.pid),HeroID,x,y,0)
-        SelectUnitForPlayerSingle(data.UnitHero,Player(data.pid))
-        UnitAddAbility(data.UnitHero,FourCC("Abun"))
-        UnitRemoveType(data.UnitHero,UNIT_TYPE_PEON)
-        SuspendHeroXP(data.UnitHero,true)
+        local x, y = GetPlayerStartLocationX(Player(data.pid)), GetPlayerStartLocationY(Player(data.pid))
+        data.UnitHero = CreateUnit(Player(data.pid), HeroID, x, y, 0)
+        SelectUnitForPlayerSingle(data.UnitHero, Player(data.pid))
+        UnitAddAbility(data.UnitHero, FourCC("Abun"))
+        UnitRemoveType(data.UnitHero, UNIT_TYPE_PEON)
+        SuspendHeroXP(data.UnitHero, true)
         InitWASD(data.UnitHero)
+        --CreatePeonHPBAR(data)
+        AddPeonMAXHP(data, 2)
+        AddPeonMAXHP(data, 3)
         --InitInventory(data)
 
         --CreateHPBar(data)
@@ -32,4 +35,61 @@ function CreatePeonForPlayer(data)
     end
 end
 
+function AddPeonMAXHP(data, k)
+    if not data.HPMAX then
+        --print("первичное добавление ХП")
+        data.HPMAX = 5
+        data.HPTableFH = {}
+        data.HPCount = 0
+    end
+    for i = 1, k do
+        CreatePeonHPBAR(data)
+    end
+end
+
+function CreatePeonHPBAR(data)
+    local step = 0.02
+    local hpBarBox = BlzCreateFrameByType("BACKDROP", "Face", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
+    BlzFrameSetParent(hpBarBox, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    local HPfh = BlzCreateFrameByType("BACKDROP", "Face", hpBarBox, "", 0)
+    BlzFrameSetTexture(HPfh, "HPCANDY", 0, true)
+    BlzFrameSetSize(HPfh, 0.02, 0.02)
+    BlzFrameSetAbsPoint(HPfh, FRAMEPOINT_CENTER, -0.07 + step * data.HPCount, 0.586)
+    data.HPCount = data.HPCount + 1
+    data.HPTableFH[data.HPCount] = HPfh
+end
+
+function HeroGetDamage(data, damageSource)
+    local hero = data.UnitHero
+    HealUnit(hero)
+    SetUnitInvulnerable(hero, true)
+    TimerStart(CreateTimer(), 1, false, function()
+        SetUnitInvulnerable(hero, false)
+    end)
+    if not data.CurrentHP then
+        data.CurrentHP = data.HPCount
+    end
+    BlzFrameSetTexture(data.HPTableFH[data.CurrentHP], "HPCANDYEMPTY", 0, true)
+    data.CurrentHP = data.CurrentHP - 1
+    --print("получил урон, текущее HP=" .. data.CurrentHP)
+    if data.CurrentHP <= 0 then
+        KillUnit(hero)
+    end
+end
+
+function HeroCandyHeal(data, k)
+    if not k then
+        k = data.HPCount
+    end
+    --print("восстанеавливаем карамельки"..)
+    for i = data.CurrentHP+1, k+data.CurrentHP do
+        BlzFrameSetTexture(data.HPTableFH[i], "HPCANDY", 0, true)
+        if data.CurrentHP<data.HPCount then
+            data.CurrentHP=data.CurrentHP+1
+        else
+           -- print("получено сверхлечение")
+        end
+       -- print(i)
+    end
+end
 

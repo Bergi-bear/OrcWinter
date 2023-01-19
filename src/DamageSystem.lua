@@ -103,7 +103,7 @@ function OnPostDamage()
         end
     else
         --print("наш герой получил урон")
-
+        HeroGetDamage(GetUnitData(target),caster)
     end
     if GetUnitTypeId(target) ~= HeroID and GetUnitTypeId(caster) == HeroID then
         --Функция должна быть в самом низу
@@ -128,7 +128,7 @@ function OnPostDamage()
 
 end
 
-function IsUnitTrap(unit)
+function IsUnitTrapOld(unit)
     return GetUnitAbilityLevel(unit, FourCC("A005")) > 0
 end
 

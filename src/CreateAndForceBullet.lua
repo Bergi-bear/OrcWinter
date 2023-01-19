@@ -14,6 +14,10 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
     end
     local zhero = GetUnitZ(hero) + 60
 
+    if IsUnitTrap(hero) then --отдельные настройки для ловушек
+        CollisionRange=60
+        zhero = GetUnitZ(hero) + 95
+    end
 
     local bullet = AddSpecialEffect(effectmodel, xs, ys)
     BlzSetSpecialEffectYaw(bullet, math.rad(angle))

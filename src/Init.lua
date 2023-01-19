@@ -19,6 +19,8 @@ do
 
             perebor = CreateGroup()
             InitHEROTable()
+            InitCamControl()
+
             --InitMenu()
             InitMouseMoveTrigger()
             InitMouseClickEvent()

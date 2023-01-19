@@ -61,12 +61,12 @@ function InitTrapByID(id)
                 end)
             end)
         elseif hp == 1 then
-            print("первая вариация ловушки")
+            --print("первая вариация ловушки")
             TimerStart(CreateTimer(), 2, true, function()
                 TrapShotByID(id, u)
             end)
         elseif hp == 3 then
-            print("вторая вариация")
+            --print("вторая вариация")
             TimerStart(CreateTimer(), 4, true, function()
                 local count = 3
                 TimerStart(CreateTimer(), 0.5, true, function()
