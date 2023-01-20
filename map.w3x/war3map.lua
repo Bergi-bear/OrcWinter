@@ -3738,7 +3738,7 @@ end
 
 function AddPeonMAXHP(data, k)
     if not data.HPMAX then
-        print("первичное добавление ХП")
+        --print("первичное добавление ХП")
         data.HPMAX = 5
         data.HPTableFH = {}
         data.HPCount = 0
@@ -3772,7 +3772,7 @@ function HeroGetDamage(data, damageSource)
     end
     BlzFrameSetTexture(data.HPTableFH[data.CurrentHP], "HPCANDYEMPTY", 0, true)
     data.CurrentHP = data.CurrentHP - 1
-    print("получил урон, текущее HP=" .. data.CurrentHP)
+    --print("получил урон, текущее HP=" .. data.CurrentHP)
     if data.CurrentHP <= 0 then
         KillUnit(hero)
     end
@@ -3788,9 +3788,9 @@ function HeroCandyHeal(data, k)
         if data.CurrentHP<data.HPCount then
             data.CurrentHP=data.CurrentHP+1
         else
-            print("получено сверхлечение")
+           -- print("получено сверхлечение")
         end
-        print(i)
+       -- print(i)
     end
 end
 
@@ -4716,7 +4716,7 @@ function PlayUnitAnimationFromChat()
             return
         end
         if GetEventPlayerChatString() == "h" then
-            print("лечение")
+            --print("лечение")
             HeroCandyHeal(data,1)
         end
         SetUnitAnimationByIndex(data.UnitHero, s)
