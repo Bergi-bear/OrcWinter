@@ -119,17 +119,18 @@ function StartDragonAI(xs, ys)
             sec = sec + 1
             if sec >= 5 then
                 sec = 0
-                phase = GetRandomInt(1, 3)
+                phase = GetRandomInt(1, 4) -- переключатель, рандомизатор фаз
                 PhaseOn = true
                 --print("phase " .. phase)
             end
             --фазы
+            local hero = HERO[0].UnitHero
             if phase == 1 and PhaseOn then
                 PhaseOn = false
-                print("фаза", phase)
+                --print("фаза", phase)
                 --print("Пытаемся разбежаться на игрока")
 
-                local hero = HERO[0].UnitHero
+                --local hero = HERO[0].UnitHero
                 local angle = AngleBetweenUnits(boss, hero)
                 IceImpale(boss, angle, false)
                 TimerStart(CreateTimer(), 2, true, function()
@@ -144,13 +145,14 @@ function StartDragonAI(xs, ys)
             end
             if phase == 3 and PhaseOn then
                 PhaseOn = false
-                print("фаза", phase)
+                --print("фаза", phase)
                 DragonDashAttackPrepare(boss, HERO[0].UnitHero)
 
             end
             if phase == 4 and PhaseOn then
                 PhaseOn = false
-                print("фаза", phase)
+                --print("фаза", phase)
+                DragonTripleShot(boss,hero)
 
             end
             if phase == 5 and PhaseOn then
@@ -160,7 +162,7 @@ function StartDragonAI(xs, ys)
             end
             if phase == 2 and PhaseOn then
                 PhaseOn = false
-                print("фаза", phase)
+                --print("фаза", phase)
                 --print("Падающие сосульки")
                 IceCrest(boss)
             end
@@ -175,7 +177,7 @@ function StartDragonAI(xs, ys)
                 end
             end
             if k >= 1 then
-                print("Лечим босса, и бой возобновляется")
+                --print("Лечим босса, и бой возобновляется")
                 ClearMapMusicBJ()
                 PlayMusicBJ("The Icefalcon's Crest")
                 SetMusicVolumeBJ(100)
@@ -187,8 +189,7 @@ function StartDragonAI(xs, ys)
     end)
 end
 
-
-function DragonDashAttackPrepare(boss,hero)
+function DragonDashAttackPrepare(boss, hero)
     if UnitAlive(boss) then
         local eff = AddSpecialEffect("BossArrow", GetUnitXY(boss))
         local angle = AngleBetweenUnits(boss, hero)
@@ -214,14 +215,14 @@ function DragonDashAttackPrepare(boss,hero)
 end
 
 function FallAfterRunDragon(boss)
-    local x,y=GetUnitXY(boss)
-    MarkAndFall(x,y, "Icicle", boss)
-    local max=8
+    local x, y = GetUnitXY(boss)
+    MarkAndFall(x, y, "Icicle", boss)
+    local max = 7
     TimerStart(CreateTimer(), 0.1, true, function()
-        max=max-1
-        x,y=MoveXY(x,y,160,GetUnitFacing(boss))
-        MarkAndFall(x,y, "Icicle", boss)
-        if max<=0 then
+        max = max - 1
+        x, y = MoveXY(x, y, 160, GetUnitFacing(boss))
+        MarkAndFall(x, y, "Icicle", boss)
+        if max <= 0 then
             DestroyTimer(GetExpiredTimer())
         end
     end)
@@ -269,22 +270,28 @@ function IceImpale(boss, angle, notMove)
     local hero = HERO[0].UnitHero
     local k = 0
     local step = 50
-    local max = 24
+    local max = 23
     local range = 80
+    local rangeAuto=100 --радиус поворота шипа на героя
     if notMove then
         step = 180
         max = 6
         range = 250
     end
+
     TimerStart(CreateTimer(), 0.7, false, function()
         BlzPauseUnitEx(boss, false)
 
         TimerStart(CreateTimer(), 0.05, true, function()
             k = k + 1
+            if IsUnitInRangeXY(hero, x, y, rangeAuto) and not notMove then
+                angle = AngleBetweenXY(x, y, GetUnitXY(hero)) / bj_DEGTORAD
+            end
             x, y = MoveXY(x, y, step, angle)
             UnitDamageArea(boss, 10, x, y, range)
             CreateSpikeFromDeep(x, y, notMove)
             if k > max then
+                CreateDestructableZ(FourCC("B006"), x, y, 900, GetRandomInt(0, 360), 2.5, 1)
                 DestroyTimer(GetExpiredTimer())
                 if not notMove then
                     IssuePointOrder(boss, "move", GetUnitXY(hero))
@@ -293,18 +300,47 @@ function IceImpale(boss, angle, notMove)
         end)
 
     end)
+end
 
+function DragonTripleShot(boss,hero)
+    local angle=AngleBetweenUnits(boss,hero)
+    SetUnitFacing(boss,angle)
+    local max=3
+    BlzPauseUnitEx(boss,true)
+    TimerStart(CreateTimer(), 0.5, true, function()
+        max=max-1
+        SetUnitTimeScale(boss,4)
+        SetUnitAnimation(boss,"attack")
+        CreateAndForceBullet(boss,GetUnitFacing(boss)-30,20,"Abilities\\Weapons\\LichMissile\\LichMissile")
+        CreateAndForceBullet(boss,GetUnitFacing(boss),20,"Abilities\\Weapons\\LichMissile\\LichMissile")
+        CreateAndForceBullet(boss,GetUnitFacing(boss)+30,20,"Abilities\\Weapons\\LichMissile\\LichMissile")
+
+        if max <= 0 then
+            SetUnitTimeScale(boss,1)
+            DestroyTimer(GetExpiredTimer())
+            angle=AngleBetweenUnits(boss,hero)
+            SetUnitFacing(boss,angle)
+
+            TimerStart(CreateTimer(), 1, false, function()
+                CreateAndForceBullet(boss,GetUnitFacing(boss)-30,20,"Abilities\\Weapons\\LichMissile\\LichMissile")
+                CreateAndForceBullet(boss,GetUnitFacing(boss),20,"Abilities\\Weapons\\LichMissile\\LichMissile")
+                CreateAndForceBullet(boss,GetUnitFacing(boss)+30,20,"Abilities\\Weapons\\LichMissile\\LichMissile")
+                BlzPauseUnitEx(boss,false)
+                --IceImpale(boss, AngleBetweenUnits(boss,hero), true)
+            end)
+        end
+    end)
 end
 
 function CreateSpikeFromDeep(x, y, notMove)
     --print(GetTerrainZ(x, y))
-    local size = 1
+    local size = GetRandomReal(0.8,1.1)
     local id = FourCC('B001')
     if notMove then
-        size = 3
+        size = GetRandomReal(2.5,3.1)
         id = FourCC("B006")
     end
-    if not IsTerrainPathable(x,y,PATHING_TYPE_WALKABILITY) then
+    if not IsTerrainPathable(x, y, PATHING_TYPE_WALKABILITY) then
         local nd = CreateDestructableZ(id, x, y, 900, GetRandomInt(0, 360), size, 1)
     end
 end

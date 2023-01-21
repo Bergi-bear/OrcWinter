@@ -2299,16 +2299,19 @@ end
 function normal_sound (s, x, y, volume)
     local snd = CreateSound(s, false, true, true, 10, 10, "CombatSoundsEAX")
     if not volume then
-        volume = 127
+        volume = 250
     end
-    print(s)
+    if not x then
+        x,y=GetUnitXY(HERO[0].UnitHero)
+    end
+    --print(s)
     SetSoundChannel(snd, 40)
     SetSoundVolume(snd, volume)
     SetSoundPitch(snd, 1)
     SetSoundDistances(snd, 600, 10000)
-    SetSoundDistanceCutoff(snd, 800)
+    SetSoundDistanceCutoff(snd, 1200)
     SetSoundConeAngles(snd, 0.0, 0.0, 127)
-    SetSoundConeOrientation(snd, 0.0, 0.0, 0.0)
+    SetSoundConeOrientation(snd, 0.0, 0.0, 1000)
     SetSoundPosition(snd, x, y, 50)
     StartSound(snd)
     return snd
@@ -3046,17 +3049,18 @@ function StartDragonAI(xs, ys)
             sec = sec + 1
             if sec >= 5 then
                 sec = 0
-                phase = GetRandomInt(1, 3)
+                phase = GetRandomInt(1, 4) -- переключатель, рандомизатор фаз
                 PhaseOn = true
                 --print("phase " .. phase)
             end
             --фазы
+            local hero = HERO[0].UnitHero
             if phase == 1 and PhaseOn then
                 PhaseOn = false
                 print("фаза", phase)
                 --print("Пытаемся разбежаться на игрока")
 
-                local hero = HERO[0].UnitHero
+                --local hero = HERO[0].UnitHero
                 local angle = AngleBetweenUnits(boss, hero)
                 IceImpale(boss, angle, false)
                 TimerStart(CreateTimer(), 2, true, function()
@@ -3078,6 +3082,7 @@ function StartDragonAI(xs, ys)
             if phase == 4 and PhaseOn then
                 PhaseOn = false
                 print("фаза", phase)
+                DragonTripleShot(boss,hero)
 
             end
             if phase == 5 and PhaseOn then
@@ -3114,8 +3119,7 @@ function StartDragonAI(xs, ys)
     end)
 end
 
-
-function DragonDashAttackPrepare(boss,hero)
+function DragonDashAttackPrepare(boss, hero)
     if UnitAlive(boss) then
         local eff = AddSpecialEffect("BossArrow", GetUnitXY(boss))
         local angle = AngleBetweenUnits(boss, hero)
@@ -3141,14 +3145,14 @@ function DragonDashAttackPrepare(boss,hero)
 end
 
 function FallAfterRunDragon(boss)
-    local x,y=GetUnitXY(boss)
-    MarkAndFall(x,y, "Icicle", boss)
-    local max=8
+    local x, y = GetUnitXY(boss)
+    MarkAndFall(x, y, "Icicle", boss)
+    local max = 7
     TimerStart(CreateTimer(), 0.1, true, function()
-        max=max-1
-        x,y=MoveXY(x,y,160,GetUnitFacing(boss))
-        MarkAndFall(x,y, "Icicle", boss)
-        if max<=0 then
+        max = max - 1
+        x, y = MoveXY(x, y, 160, GetUnitFacing(boss))
+        MarkAndFall(x, y, "Icicle", boss)
+        if max <= 0 then
             DestroyTimer(GetExpiredTimer())
         end
     end)
@@ -3196,22 +3200,28 @@ function IceImpale(boss, angle, notMove)
     local hero = HERO[0].UnitHero
     local k = 0
     local step = 50
-    local max = 24
+    local max = 23
     local range = 80
+    local rangeAuto=100 --радиус поворота шипа на героя
     if notMove then
         step = 180
         max = 6
         range = 250
     end
+
     TimerStart(CreateTimer(), 0.7, false, function()
         BlzPauseUnitEx(boss, false)
 
         TimerStart(CreateTimer(), 0.05, true, function()
             k = k + 1
+            if IsUnitInRangeXY(hero, x, y, rangeAuto) and not notMove then
+                angle = AngleBetweenXY(x, y, GetUnitXY(hero)) / bj_DEGTORAD
+            end
             x, y = MoveXY(x, y, step, angle)
             UnitDamageArea(boss, 10, x, y, range)
             CreateSpikeFromDeep(x, y, notMove)
             if k > max then
+                CreateDestructableZ(FourCC("B006"), x, y, 900, GetRandomInt(0, 360), 2.5, 1)
                 DestroyTimer(GetExpiredTimer())
                 if not notMove then
                     IssuePointOrder(boss, "move", GetUnitXY(hero))
@@ -3220,18 +3230,47 @@ function IceImpale(boss, angle, notMove)
         end)
 
     end)
+end
 
+function DragonTripleShot(boss,hero)
+    local angle=AngleBetweenUnits(boss,hero)
+    SetUnitFacing(boss,angle)
+    local max=3
+    BlzPauseUnitEx(boss,true)
+    TimerStart(CreateTimer(), 0.5, true, function()
+        max=max-1
+        SetUnitTimeScale(boss,4)
+        SetUnitAnimation(boss,"attack")
+        CreateAndForceBullet(boss,GetUnitFacing(boss)-30,20,"Abilities\\Weapons\\LichMissile\\LichMissile")
+        CreateAndForceBullet(boss,GetUnitFacing(boss),20,"Abilities\\Weapons\\LichMissile\\LichMissile")
+        CreateAndForceBullet(boss,GetUnitFacing(boss)+30,20,"Abilities\\Weapons\\LichMissile\\LichMissile")
+
+        if max <= 0 then
+            SetUnitTimeScale(boss,1)
+            DestroyTimer(GetExpiredTimer())
+            angle=AngleBetweenUnits(boss,hero)
+            SetUnitFacing(boss,angle)
+
+            TimerStart(CreateTimer(), 1, false, function()
+                CreateAndForceBullet(boss,GetUnitFacing(boss)-30,20,"Abilities\\Weapons\\LichMissile\\LichMissile")
+                CreateAndForceBullet(boss,GetUnitFacing(boss),20,"Abilities\\Weapons\\LichMissile\\LichMissile")
+                CreateAndForceBullet(boss,GetUnitFacing(boss)+30,20,"Abilities\\Weapons\\LichMissile\\LichMissile")
+                BlzPauseUnitEx(boss,false)
+                --IceImpale(boss, AngleBetweenUnits(boss,hero), true)
+            end)
+        end
+    end)
 end
 
 function CreateSpikeFromDeep(x, y, notMove)
     --print(GetTerrainZ(x, y))
-    local size = 1
+    local size = GetRandomReal(0.8,1.1)
     local id = FourCC('B001')
     if notMove then
-        size = 3
+        size = GetRandomReal(2.5,3.1)
         id = FourCC("B006")
     end
-    if not IsTerrainPathable(x,y,PATHING_TYPE_WALKABILITY) then
+    if not IsTerrainPathable(x, y, PATHING_TYPE_WALKABILITY) then
         local nd = CreateDestructableZ(id, x, y, 900, GetRandomInt(0, 360), size, 1)
     end
 end
@@ -3562,6 +3601,242 @@ function EttiDashAttackPrepare(boss, hero)
     end
 end
 
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by Bergi.
+--- DateTime: 04.08.2021 16:36
+---
+ActiveDialog = false
+do
+    local InitGlobalsOrigin = InitGlobals
+    function InitGlobals()
+        InitGlobalsOrigin()
+        TimerStart(CreateTimer(), 1, false, function()
+            CreteDialogBox()
+
+            --CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\normal_left", "Ну и долго мы ещё тут будем сидеть, пора исследовать этот остров", 0)
+            --CreateAndMoveSpeechImage("end", 5, "right", "PeonEmotion\\thing_right", "Да пришло время размять булки, пойдём ребята, осмотримся", 5)
+        end)
+    end
+end
+
+yDialog = 0.55
+function CreateAndMoveSpeechImage(state, duration, position, texture, text, delay, name, sound)
+    --print("изображение пеона")
+    if not name then
+        name = "<Неизвестно>"
+    end
+    sound = udg_sound
+    TimerStart(CreateTimer(), delay, false, function()
+        --BlzFrameSetText(TexBoxText, text)
+
+        --print(sound, "звук из глобалки")
+        if name~="Демонесса" then
+            normal_sound(sound, GetUnitXY(GetRandomPeon()))
+        else
+            PlaySound(sound)
+        end
+        SetTexSlow(text, TexBoxText, TIMER_PERIOD / 2)
+        BlzFrameSetAlpha(TexBox, 254)
+        local xPoz = 0
+        local yPoz = yDialog
+        local x = 0
+        local xs = 0
+        local pos = FRAMEPOINT_LEFT
+        if state == "start" then
+            xPoz = 0.1
+            ShowAllAbilitiesFrame(false)
+            SetMusicVolumeBJ(40)
+        end
+        if position == "right" then
+            xPoz = 0.7 + TIMER_PERIOD64
+            x = 1.2
+            pos = FRAMEPOINT_RIGHT
+        elseif position == "left" then
+            xPoz = 0.1 - TIMER_PERIOD64
+            x = -0.4
+            pos = FRAMEPOINT_LEFT
+        else
+            print("Передан недопустимый параметр направления")
+        end
+        xs = x
+        local image = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), '', 0)
+        BlzFrameSetAlpha(image, 0)
+        local alpha = 0
+        BlzFrameSetTexture(image, texture, 0, true)
+        BlzFrameSetSize(image, 0.2, 0.2)
+        BlzFrameSetParent(image, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+        BlzFrameSetAbsPoint(image, FRAMEPOINT_CENTER, xPoz, 1)
+        local y = 1
+
+        local nameSpeaker = BlzCreateFrameByType("TEXT", "ButtonChargesText", image, "", 0)
+        BlzFrameSetSize(nameSpeaker, 0.2, 0.2)
+        BlzFrameSetText(nameSpeaker, name)
+        local tempRight = 0
+        if position == "right" then
+            tempRight = 0.1
+        end
+        BlzFrameSetPoint(nameSpeaker, pos, image, pos, 0.01 + tempRight, -0.17)
+        BlzFrameSetScale(nameSpeaker, 1.5)
+
+        TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
+            alpha = alpha + 8
+            if alpha >= 255 then
+                alpha = 255
+            end
+            --BlzFrameSetAlpha(image, alpha)
+            --print(alpha)
+            --y = y - 0.03
+
+            if position == "left" then
+                x = x + TIMER_PERIOD64
+                --print(y)
+                BlzFrameSetAbsPoint(image, FRAMEPOINT_CENTER, x, yPoz)
+                if x >= xPoz then
+                    -- print(x)
+                    DestroyTimer(GetExpiredTimer())
+
+                    if state == "start" then
+                        BlzFrameSetVisible(TexBox, true)
+                    end
+                end
+            else
+                x = x - TIMER_PERIOD64
+                BlzFrameSetAbsPoint(image, FRAMEPOINT_CENTER, x, yPoz)
+                if x <= xPoz then
+                    DestroyTimer(GetExpiredTimer())
+
+                    if state == "start" then
+                        BlzFrameSetVisible(TexBox, true)
+
+                    end
+                end
+            end
+        end)
+        --уничтожение
+
+        TimerStart(CreateTimer(), duration, false, function()
+            y = 0.5
+            alpha = 255
+
+            TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
+                y = y + 0.03
+                alpha = alpha - 15
+                if alpha <= 0 then
+                    alpha = 0
+                end
+                BlzFrameSetAlpha(image, alpha)
+
+                --print(y)
+                --[[BlzFrameSetAbsPoint(image, FRAMEPOINT_CENTER, xPoz, y)
+                if y > 1 then
+                    DestroyTimer(GetExpiredTimer())
+                    BlzFrameSetVisible(image, false)
+                    if state == "end" then
+                        BlzFrameSetVisible(TexBox, false)
+                    end
+                end]]
+                if state == "end" then
+                    BlzFrameSetAlpha(TexBox, alpha)
+                    ShowAllAbilitiesFrame(true)
+                    SetMusicVolumeBJ(100)
+                end
+                if position == "left" then
+                    x = x - TIMER_PERIOD64
+                    --print(y)
+                    BlzFrameSetAbsPoint(image, FRAMEPOINT_CENTER, x, yPoz)
+                    if x <= xs then
+                        -- print(x)
+                        DestroyTimer(GetExpiredTimer())
+                        if state == "end" then
+                            BlzFrameSetVisible(TexBox, false)
+
+                            --BlzFrameSetAlpha(TexBox, 0)
+                        end
+                    end
+                else
+                    x = x + TIMER_PERIOD64
+                    BlzFrameSetAbsPoint(image, FRAMEPOINT_CENTER, x, yPoz)
+                    if x >= xs then
+                        DestroyTimer(GetExpiredTimer())
+
+                        if state == "end" then
+                            BlzFrameSetVisible(TexBox, false)
+                            --BlzFrameSetAlpha(TexBox, 0)
+                        end
+                    end
+                end
+
+
+            end)
+        end)
+    end)
+end
+
+function CreteDialogBox()
+    --print("создан бокс ",toolTipTex)
+    local tooltip = BlzCreateFrameByType("FRAME", "TestDialog", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "StandardFrameTemplate", 0)
+    BlzFrameSetParent(tooltip, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    --local backdrop = BlzCreateFrame("QuestButtonDisabledBackdropTemplate", tooltip, 0, 0)
+    local backdrop=BlzCreateFrameByType("BACKDROP", "Face", tooltip, "", 0)
+    BlzFrameSetTexture(backdrop, "SpeechBox", 0, true)
+    --BlzFrameSetSize(backdrop, 0.76, 0.02)
+    --BlzFrameSetAbsPoint(backdrop, FRAMEPOINT_LEFT, 0.018, 0.03)
+
+
+    local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", tooltip, "", 0)
+    BlzFrameSetAbsPoint(tooltip, FRAMEPOINT_LEFT, -0.08, 0.51)
+    BlzFrameSetSize(tooltip, 0.25, 0.125)
+    BlzFrameSetSize(backdrop, 0.25, 0.125)
+    BlzFrameSetSize(text, 0.28, 0.06)
+    BlzFrameSetPoint(backdrop, FRAMEPOINT_CENTER, tooltip, FRAMEPOINT_CENTER, 0.0, 0.0)
+    --BlzFrameSetAlpha(backdrop, 0)
+    BlzFrameSetText(text, "Проверочный текст для фрейма теперь текста больше, а где авто перенос?,Проверочный текст для фрейма теперь текста больше, а где авто перенос?,Проверочный текст для фрейма теперь текста больше, а где авто перенос?,Проверочный текст для фрейма теперь текста больше, а где авто перенос?")
+    BlzFrameSetPoint(text, FRAMEPOINT_LEFT, tooltip, FRAMEPOINT_LEFT, 0.02, -0.003)
+    BlzFrameSetScale(text, 0.8)
+    BlzFrameSetVisible(tooltip, false)
+
+    TexBox = tooltip
+    TexBoxText = text
+end
+
+function SetTexSlow(originalText, TextFrame, speed)
+    local t = {}
+    for i = 1, #originalText do
+        t[i] = originalText:sub(i, i)
+    end
+    local k = 1
+    local new = ""
+    TimerStart(CreateTimer(), speed, true, function()
+        new = new .. t[k]
+        BlzFrameSetText(TextFrame, new)
+        k = k + 1
+        if k > #originalText then
+            DestroyTimer(GetExpiredTimer())
+        end
+    end)
+
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 21.01.2023 23:57
+---
+function PlayMonoSpeech(sound,text)
+    if not BlzFrameIsVisible(TexBox) then
+        local s=normal_sound(sound)
+
+        --SetCinematicScene(HeroID, 1, "peon", "text", 2, 2)
+
+        BlzFrameSetVisible(TexBox, true)
+        BlzFrameSetText(TexBoxText,text)
+        TransmissionFromUnitWithNameBJ( GetPlayersAll(), HERO[0].UnitHero, "", nil, "", bj_TIMETYPE_SET, GetSoundDuration(s)/700, false )
+        --print(GetSoundDuration(s))
+        TimerStart(CreateTimer(), GetSoundDuration(s)/700, false, function()
+            BlzFrameSetVisible(TexBox, false)
+        end)
+    end
+end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
 --- Created by User.
@@ -4341,6 +4616,7 @@ function InitWASD(hero)
                     DestroyTimer(GetExpiredTimer())
                     x,y=GetUnitXY(hero)
                     ReviveHero(hero, x, y, true)
+                    PlayMonoSpeech("Speech\\Peon\\etobilobolno","Это было больно")
                     HeroCandyHeal(data,3)
                     SetUnitInvulnerable(hero, true)
                     TimerStart(CreateTimer(), 2, false, function()
@@ -5097,6 +5373,7 @@ function PlayUnitAnimationFromChat()
         local s = S2I(GetEventPlayerChatString())
         local data = HERO[GetPlayerId(GetTriggerPlayer())]
         if GetEventPlayerChatString() == "w" then
+            PlayMonoSpeech("Speech\\Peon\\OpyatOnRaskomandovalsa","Опять раскомандовался")
             --CreateForUnitWayToPoint(mainHero,CQX,CQY)
             return
         end
@@ -5493,6 +5770,7 @@ CinematicModeBJ(false, GetPlayersAll())
 EnablePreSelect(false, false)
     InitMenu()
     FREE_CAMERA=false
+    PlayMonoSpeech("Speech\\Peon\\OpyatOnRaskomandovalsa","Опять он раскомандовался")
 end
 
 function InitTrig_SkipIntro()

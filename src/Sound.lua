@@ -6,16 +6,19 @@
 function normal_sound (s, x, y, volume)
     local snd = CreateSound(s, false, true, true, 10, 10, "CombatSoundsEAX")
     if not volume then
-        volume = 127
+        volume = 250
     end
-    print(s)
+    if not x then
+        x,y=GetUnitXY(HERO[0].UnitHero)
+    end
+    --print(s)
     SetSoundChannel(snd, 40)
     SetSoundVolume(snd, volume)
     SetSoundPitch(snd, 1)
     SetSoundDistances(snd, 600, 10000)
-    SetSoundDistanceCutoff(snd, 800)
+    SetSoundDistanceCutoff(snd, 1200)
     SetSoundConeAngles(snd, 0.0, 0.0, 127)
-    SetSoundConeOrientation(snd, 0.0, 0.0, 0.0)
+    SetSoundConeOrientation(snd, 0.0, 0.0, 1000)
     SetSoundPosition(snd, x, y, 50)
     StartSound(snd)
     return snd

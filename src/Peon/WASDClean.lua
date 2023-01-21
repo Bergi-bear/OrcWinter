@@ -167,6 +167,7 @@ function InitWASD(hero)
                     DestroyTimer(GetExpiredTimer())
                     x,y=GetUnitXY(hero)
                     ReviveHero(hero, x, y, true)
+                    PlayMonoSpeech("Speech\\Peon\\etobilobolno","Это было больно")
                     HeroCandyHeal(data,3)
                     SetUnitInvulnerable(hero, true)
                     TimerStart(CreateTimer(), 2, false, function()
@@ -923,6 +924,7 @@ function PlayUnitAnimationFromChat()
         local s = S2I(GetEventPlayerChatString())
         local data = HERO[GetPlayerId(GetTriggerPlayer())]
         if GetEventPlayerChatString() == "w" then
+            PlayMonoSpeech("Speech\\Peon\\OpyatOnRaskomandovalsa","Опять раскомандовался")
             --CreateForUnitWayToPoint(mainHero,CQX,CQY)
             return
         end
