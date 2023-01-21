@@ -31,7 +31,7 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
         end
 
         if true then
-            -- print("повышение отзывчивости")
+            --print("повышение отзывчивости")
             local vector = Vector:new(GetUnitX(hero), GetUnitY(hero), GetUnitZ(hero))
             local newVector = vector
             newVector = VectorSum(newVector, vector:yawPitchOffset(speed, angle * (math.pi / 180), 0.0))
@@ -189,6 +189,7 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
                                 -- data.CurrentWeaponType ~= "bow" then
                                 --SetUnitAnimationByIndex(data.UnitHero, IndexAnimationWalk)
                             else
+                                --print("резкая анимация движения в случае хотьбы после переката")
                                 SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationWalk)
                             end
                         end

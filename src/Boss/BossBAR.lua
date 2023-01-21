@@ -3,59 +3,7 @@
 --- Created by User.
 --- DateTime: 03.01.2023 22:16
 ---
-function CreateBOSSHPBar(boss)
-    --[[local BoxBarParent = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), '', 0)
-    --BlzFrameSetVisible(BoxBarParent, GetLocalPlayer() == Player(data.pid))
-    local x, y = 0.08, 0.01
-    local hero = boss
-
-
-    --BlzFrameSetAlpha(into, 128)
-
-    local chargesBox = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BoxBarParent, '', 0)
-    BlzFrameSetTexture(chargesBox, "HPBOX", 0, true) --HPElement
-    BlzFrameSetSize(chargesBox, GNext, GNext)
-    BlzFrameSetAbsPoint(chargesBox, FRAMEPOINT_LEFT, x + 0.004, y)
-    BlzFrameSetAlpha(chargesBox, 128)
-
-    local into = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BoxBarParent, '', 0)
-    BlzFrameSetTexture(into, "into", 0, true)
-    BlzFrameSetSize(into, GNext * 5, GNext)
-    BlzFrameSetAbsPoint(into, FRAMEPOINT_LEFT, x, y)
-    BlzFrameSetAlpha(into, 128)
-    BlzFrameSetFocus(into,true)
-
-    local textCurrent = BlzCreateFrameByType("TEXT", "ButtonChargesText", BoxBarParent, "", 0)
-    BlzFrameSetPoint(textCurrent, FRAMEPOINT_LEFT, into, FRAMEPOINT_LEFT, 0.002, 0)
-    local textMax = BlzCreateFrameByType("TEXT", "ButtonChargesText", BoxBarParent, "", 0)
-    BlzFrameSetPoint(textMax, FRAMEPOINT_RIGHT, into, FRAMEPOINT_RIGHT, -0.002, 0)
-
-
-    --
-    BlzFrameSetParent(chargesBox, BlzGetFrameByName("ConsoleUIBackdrop", 0))
-    BlzFrameSetParent(textCurrent, BlzGetFrameByName("ConsoleUIBackdrop", 0))
-    BlzFrameSetParent(textMax, BlzGetFrameByName("ConsoleUIBackdrop", 0))
-    BlzFrameSetParent(into, BlzGetFrameByName("ConsoleUIBackdrop", 0))
-
-    TimerStart(CreateTimer(), 0.05, true, function()
-        local hp = 0
-        hp = GetUnitLifePercent(hero)
-        if not UnitAlive(hero) then
-            hp = 0
-            --print("Юнит мерт, сводим бар до нуля",hp)
-            BlzFrameSetSize(into, 0, 0)
-            --BlzFrameSetVisible(into, false)
-            BlzFrameSetText(textCurrent, hp)
-            BlzFrameSetText(textMax, R2I(BlzGetUnitMaxHP(hero)))
-        else
-            --BlzFrameSetVisible(into, GetLocalPlayer() == GetOwningPlayer(hero))
-            BlzFrameSetText(textCurrent, R2I(GetUnitState(hero, UNIT_STATE_LIFE)))
-            BlzFrameSetText(textMax, R2I(BlzGetUnitMaxHP(hero)))
-            BlzFrameSetSize(chargesBox, 4.82 * hp * GNext / 100, GNext * 0.5)
-            BlzFrameSetAlpha(chargesBox, 128)
-        end
-    end)
-    ]]
+function CreateBOSSHPBar(boss,name)
     local into=BlzCreateFrameByType("BACKDROP", "Face", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
     BlzFrameSetTexture(into, "Replaceabletextures\\Teamcolor\\Teamcolor00.blp", 0, true)
     BlzFrameSetSize(into, 0.76, 0.02)
@@ -68,7 +16,7 @@ function CreateBOSSHPBar(boss)
     BlzFrameSetSize(charges, 0.8, 0.066)
     BlzFrameSetAbsPoint(charges, FRAMEPOINT_LEFT, 0, 0.03)
     --BlzFrameSetPoint(charges, FRAMEPOINT_BOTTOM, wood, FRAMEPOINT_BOTTOM, 0,0)
-    BlzFrameSetText(new_FrameChargesText, "Ужасный злобный йети")
+    BlzFrameSetText(new_FrameChargesText, name)
     BlzFrameSetPoint(new_FrameChargesText, FRAMEPOINT_CENTER, charges, FRAMEPOINT_CENTER, 0., 0.)
     BlzFrameSetVisible(into, true)
 

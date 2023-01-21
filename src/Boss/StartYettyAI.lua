@@ -31,7 +31,7 @@ end
 function StartYettyAI(xs, ys)
     local boss = FindUnitOfType(FourCC('n000'))
     local BossFight = true
-    local into = CreateBOSSHPBar(boss)
+    local into = CreateBOSSHPBar(boss,"Сытый Етти")
     UnitAddAbility(boss, FourCC('Abun'))
     SetUnitPosition(boss, xs, ys)
     SetUnitOwner(boss, Player(10), true)
@@ -180,7 +180,7 @@ function StartYettyAI(xs, ys)
                     for i = 0, 3 do
                         local hero = HERO[i].UnitHero
                         if IsUnitInRange(hero, boss, 1000) then
-                            MarkAndFall(GetUnitX(hero), GetUnitY(hero), effmodel, boss)
+                            MarkAndFall(GetUnitX(hero), GetUnitY(hero), "Icicle", boss)
                         end
                     end
 

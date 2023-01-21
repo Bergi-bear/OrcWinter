@@ -1530,8 +1530,20 @@ STRING 661
 }
 
 STRING 662
+// Units: h002 (Леденец), Name (Name)
+{
+Леденец
+}
+
+STRING 663
 // Doodads: D024 (Леденец), Name (Name)
 {
 Леденец
+}
+
+STRING 664
+// Destructibles: B006 (Сосулька блокиратор большая), Name (Name)
+{
+Сосулька блокиратор большая
 }
 

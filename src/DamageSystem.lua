@@ -103,7 +103,7 @@ function OnPostDamage()
         end
     else
         --print("наш герой получил урон")
-        HeroGetDamage(GetUnitData(target),caster)
+        HeroCandyGetDamage(GetUnitData(target),caster)
     end
     if GetUnitTypeId(target) ~= HeroID and GetUnitTypeId(caster) == HeroID then
         --Функция должна быть в самом низу

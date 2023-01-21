@@ -84,18 +84,19 @@ function InitWASD(hero)
                 SelectUnitForPlayerSingle(hero, GetOwningPlayer(hero))
             end
 
-            ForceUIKeyBJ(GetOwningPlayer(hero), "Q")
+            --ForceUIKeyBJ(GetOwningPlayer(hero), "Q")
             --ForceUIKeyBJ(GetOwningPlayer(hero), "W")
             --ForceUIKeyBJ(GetOwningPlayer(hero), "E")
-            ForceUIKeyBJ(GetOwningPlayer(hero), "R")
+           -- ForceUIKeyBJ(GetOwningPlayer(hero), "R")
             --ForceUIKeyBJ(GetOwningPlayer(hero), "A")
             --ForceUIKeyBJ(GetOwningPlayer(hero), "S")
             --ForceUIKeyBJ(GetOwningPlayer(hero), "D")
-            ForceUIKeyBJ(GetOwningPlayer(hero), "F")
-            ForceUIKeyBJ(GetOwningPlayer(hero), "Z")
-            ForceUIKeyBJ(GetOwningPlayer(hero), "X")
-            ForceUIKeyBJ(GetOwningPlayer(hero), "C")
-            ForceUIKeyBJ(GetOwningPlayer(hero), "V")
+
+            --ForceUIKeyBJ(GetOwningPlayer(hero), "F")
+            --ForceUIKeyBJ(GetOwningPlayer(hero), "Z")
+            --ForceUIKeyBJ(GetOwningPlayer(hero), "X")
+            --ForceUIKeyBJ(GetOwningPlayer(hero), "C")
+            --ForceUIKeyBJ(GetOwningPlayer(hero), "V")
 
             ForceUIKeyBJ(GetOwningPlayer(hero), "M")
 
@@ -439,7 +440,12 @@ function CreateWASDActions()
             --SelectUnitForPlayerSingle(data.UnitHero,GetTriggerPlayer())
             if not data.isAttacking and StunSystem[GetHandleId(data.UnitHero)].Time == 0 then
                 --print("pressW and short anim")
-                UnitAddForceSimple(data.UnitHero, 90, 5, 15)
+                if data.SpaceForce then
+                   -- print("сломалась анимация?")
+                else
+                    --print("не сломалась")
+                end
+                --UnitAddForceSimple(data.UnitHero, 90, 5, 15)
                 data.DirectionMove = 90
 
                 if data.ReleaseW and data.ReleaseD then
@@ -491,7 +497,7 @@ function CreateWASDActions()
             --SelectUnitForPlayerSingle(data.UnitHero,Player(0))
             if not data.isAttacking and StunSystem[GetHandleId(data.UnitHero)].Time == 0 then
                 data.animStand = 1.8 --до полной анимации 2 секунды
-                UnitAddForceSimple(data.UnitHero, 270, 5, 15)
+                --UnitAddForceSimple(data.UnitHero, 270, 5, 15)
                 data.DirectionMove = 270
 
                 if data.ReleaseS and data.ReleaseD then
@@ -540,7 +546,7 @@ function CreateWASDActions()
             --SelectUnitForPlayerSingle(data.UnitHero,Player(0))
             if not data.isAttacking and StunSystem[GetHandleId(data.UnitHero)].Time == 0 then
                 data.animStand = 1.8 --до полной анимации 2 секунды
-                UnitAddForceSimple(data.UnitHero, 0, 5, 15)
+                --UnitAddForceSimple(data.UnitHero, 0, 5, 15)
                 data.DirectionMove = 0
                 SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationWalk)
 
@@ -583,7 +589,7 @@ function CreateWASDActions()
                 -- нет проверки на стан
                 data.animStand = 1.8 --до полной анимации 2 секунды
                 data.DirectionMove = 180
-                UnitAddForceSimple(data.UnitHero, 180, 5, 15)
+                --UnitAddForceSimple(data.UnitHero, 180, 5, 15)
                 if not LockAnimAnimation(data) then
                     SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationWalk)
 
@@ -601,7 +607,7 @@ function CreateWASDActions()
         local data = HERO[pid]
         data.ReleaseA = false
     end)
-    -----------------------------------------------------------------OSKEY_SPACE
+    -----------------------------------------------------------------OSKEY_SPACE пробел прыжок перекат
     local TrigPressSPACE = CreateTrigger()
     for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
         BlzTriggerRegisterPlayerKeyEvent(TrigPressSPACE, Player(i), OSKEY_SPACE, 0, true)
@@ -685,12 +691,14 @@ function CreateWASDActions()
                         -- print("проверка проходимости конечной точки")
                         --DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt", nx, ny))
                         if not Chk2Way(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), nx, ny) then
+                            print("ошибка, такой функции нет")
                             Blink2Point(data, nx, ny)
                         else
-                            -- print("прыжок вниз?")
+                            --print("прыжок вниз?")
                             UnitAddForceSimple(data.UnitHero, data.DirectionMove, 10, dist, "ignore") --САМ рывок при нажатии пробела
                         end
                     else
+                        --print("перекат тут?")
                         UnitAddForceSimple(data.UnitHero, data.DirectionMove, 10, dist, "ignore") --САМ рывок при нажатии пробела
                     end
                 end

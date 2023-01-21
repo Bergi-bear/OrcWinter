@@ -4,6 +4,11 @@ gg_rct_Region_038 = nil
 gg_rct_Region_024 = nil
 gg_rct_TrapZone = nil
 gg_rct_EnterTrap = nil
+gg_rct_ExitTrap = nil
+gg_rct_ExitTrapZone = nil
+gg_rct_Region_004 = nil
+gg_rct_BossDrakon = nil
+gg_rct_InitStartDragon = nil
 gg_cam_OnPeonsandTrall = nil
 gg_cam_OnPineRound = nil
 gg_cam_OnPeons = nil
@@ -23,6 +28,7 @@ gg_snd_Intro9 = nil
 gg_snd_Intro10 = nil
 gg_snd_Intro11 = nil
 gg_trg_BoundEnter = nil
+gg_trg_Exit = nil
 gg_trg_InitGUI = nil
 gg_trg_StartIntro = nil
 gg_trg_SkipIntro = nil
@@ -32,430 +38,433 @@ gg_unit_opeo_0014 = nil
 gg_unit_opeo_0015 = nil
 gg_unit_opeo_0024 = nil
 function InitGlobals()
-    udg_PressESC = false
+udg_PressESC = false
 end
 
 function InitSounds()
-    gg_snd_Intro1 = CreateSound("Speech/Trall/Intro1.mp3", false, false, false, 0, 0, "DefaultEAXON")
-    SetSoundDuration(gg_snd_Intro1, 6624)
-    SetSoundChannel(gg_snd_Intro1, 0)
-    SetSoundVolume(gg_snd_Intro1, 127)
-    SetSoundPitch(gg_snd_Intro1, 1.0)
-    gg_snd_Intro2 = CreateSound("Speech/Trall/Intro2.mp3", false, false, false, 0, 0, "DefaultEAXON")
-    SetSoundDuration(gg_snd_Intro2, 3576)
-    SetSoundChannel(gg_snd_Intro2, 0)
-    SetSoundVolume(gg_snd_Intro2, 127)
-    SetSoundPitch(gg_snd_Intro2, 1.0)
-    gg_snd_Intro3 = CreateSound("Speech/Trall/Intro3.mp3", false, false, false, 0, 0, "DefaultEAXON")
-    SetSoundDuration(gg_snd_Intro3, 3648)
-    SetSoundChannel(gg_snd_Intro3, 0)
-    SetSoundVolume(gg_snd_Intro3, 127)
-    SetSoundPitch(gg_snd_Intro3, 1.0)
-    gg_snd_Intro4 = CreateSound("Speech/Trall/Intro4.mp3", false, false, false, 0, 0, "DefaultEAXON")
-    SetSoundDuration(gg_snd_Intro4, 2016)
-    SetSoundChannel(gg_snd_Intro4, 0)
-    SetSoundVolume(gg_snd_Intro4, 127)
-    SetSoundPitch(gg_snd_Intro4, 1.0)
-    gg_snd_Intro5 = CreateSound("Speech/Trall/Intro5.mp3", false, false, false, 0, 0, "DefaultEAXON")
-    SetSoundDuration(gg_snd_Intro5, 1176)
-    SetSoundChannel(gg_snd_Intro5, 0)
-    SetSoundVolume(gg_snd_Intro5, 127)
-    SetSoundPitch(gg_snd_Intro5, 1.0)
-    gg_snd_Intro6 = CreateSound("Speech/Trall/Intro6.mp3", false, false, false, 0, 0, "DefaultEAXON")
-    SetSoundDuration(gg_snd_Intro6, 960)
-    SetSoundChannel(gg_snd_Intro6, 0)
-    SetSoundVolume(gg_snd_Intro6, 127)
-    SetSoundPitch(gg_snd_Intro6, 1.0)
-    gg_snd_Intro7 = CreateSound("Speech/Trall/Intro7.mp3", false, false, false, 0, 0, "DefaultEAXON")
-    SetSoundDuration(gg_snd_Intro7, 936)
-    SetSoundChannel(gg_snd_Intro7, 0)
-    SetSoundVolume(gg_snd_Intro7, 127)
-    SetSoundPitch(gg_snd_Intro7, 1.0)
-    gg_snd_Intro8 = CreateSound("Speech/Trall/Intro8.mp3", false, false, false, 0, 0, "DefaultEAXON")
-    SetSoundDuration(gg_snd_Intro8, 1104)
-    SetSoundChannel(gg_snd_Intro8, 0)
-    SetSoundVolume(gg_snd_Intro8, 127)
-    SetSoundPitch(gg_snd_Intro8, 1.0)
-    gg_snd_Intro9 = CreateSound("Speech/Trall/Intro9.mp3", false, false, false, 0, 0, "DefaultEAXON")
-    SetSoundDuration(gg_snd_Intro9, 768)
-    SetSoundChannel(gg_snd_Intro9, 0)
-    SetSoundVolume(gg_snd_Intro9, 127)
-    SetSoundPitch(gg_snd_Intro9, 1.0)
-    gg_snd_Intro10 = CreateSound("Speech/Trall/Intro10.mp3", false, false, false, 0, 0, "DefaultEAXON")
-    SetSoundDuration(gg_snd_Intro10, 7152)
-    SetSoundChannel(gg_snd_Intro10, 0)
-    SetSoundVolume(gg_snd_Intro10, 127)
-    SetSoundPitch(gg_snd_Intro10, 1.0)
-    gg_snd_Intro11 = CreateSound("Speech/Trall/Intro11.mp3", false, false, false, 0, 0, "DefaultEAXON")
-    SetSoundDuration(gg_snd_Intro11, 5976)
-    SetSoundChannel(gg_snd_Intro11, 0)
-    SetSoundVolume(gg_snd_Intro11, 127)
-    SetSoundPitch(gg_snd_Intro11, 1.0)
+gg_snd_Intro1 = CreateSound("Speech/Trall/Intro1.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_Intro1, 6624)
+SetSoundChannel(gg_snd_Intro1, 0)
+SetSoundVolume(gg_snd_Intro1, 127)
+SetSoundPitch(gg_snd_Intro1, 1.0)
+gg_snd_Intro2 = CreateSound("Speech/Trall/Intro2.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_Intro2, 3576)
+SetSoundChannel(gg_snd_Intro2, 0)
+SetSoundVolume(gg_snd_Intro2, 127)
+SetSoundPitch(gg_snd_Intro2, 1.0)
+gg_snd_Intro3 = CreateSound("Speech/Trall/Intro3.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_Intro3, 3648)
+SetSoundChannel(gg_snd_Intro3, 0)
+SetSoundVolume(gg_snd_Intro3, 127)
+SetSoundPitch(gg_snd_Intro3, 1.0)
+gg_snd_Intro4 = CreateSound("Speech/Trall/Intro4.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_Intro4, 2016)
+SetSoundChannel(gg_snd_Intro4, 0)
+SetSoundVolume(gg_snd_Intro4, 127)
+SetSoundPitch(gg_snd_Intro4, 1.0)
+gg_snd_Intro5 = CreateSound("Speech/Trall/Intro5.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_Intro5, 1176)
+SetSoundChannel(gg_snd_Intro5, 0)
+SetSoundVolume(gg_snd_Intro5, 127)
+SetSoundPitch(gg_snd_Intro5, 1.0)
+gg_snd_Intro6 = CreateSound("Speech/Trall/Intro6.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_Intro6, 960)
+SetSoundChannel(gg_snd_Intro6, 0)
+SetSoundVolume(gg_snd_Intro6, 127)
+SetSoundPitch(gg_snd_Intro6, 1.0)
+gg_snd_Intro7 = CreateSound("Speech/Trall/Intro7.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_Intro7, 936)
+SetSoundChannel(gg_snd_Intro7, 0)
+SetSoundVolume(gg_snd_Intro7, 127)
+SetSoundPitch(gg_snd_Intro7, 1.0)
+gg_snd_Intro8 = CreateSound("Speech/Trall/Intro8.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_Intro8, 1104)
+SetSoundChannel(gg_snd_Intro8, 0)
+SetSoundVolume(gg_snd_Intro8, 127)
+SetSoundPitch(gg_snd_Intro8, 1.0)
+gg_snd_Intro9 = CreateSound("Speech/Trall/Intro9.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_Intro9, 768)
+SetSoundChannel(gg_snd_Intro9, 0)
+SetSoundVolume(gg_snd_Intro9, 127)
+SetSoundPitch(gg_snd_Intro9, 1.0)
+gg_snd_Intro10 = CreateSound("Speech/Trall/Intro10.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_Intro10, 7152)
+SetSoundChannel(gg_snd_Intro10, 0)
+SetSoundVolume(gg_snd_Intro10, 127)
+SetSoundPitch(gg_snd_Intro10, 1.0)
+gg_snd_Intro11 = CreateSound("Speech/Trall/Intro11.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_Intro11, 5976)
+SetSoundChannel(gg_snd_Intro11, 0)
+SetSoundVolume(gg_snd_Intro11, 127)
+SetSoundPitch(gg_snd_Intro11, 1.0)
 end
 
 function CreateUnitsForPlayer0()
-    local p = Player(0)
-    local u
-    local unitID
-    local t
-    local life
-    gg_unit_Oths_0011 = BlzCreateUnitWithSkin(p, FourCC("Oths"), 63.2, -581.0, 211.076, FourCC("Oths"))
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -818.7, -584.8, 290.597, FourCC("opeo"))
-    gg_unit_opeo_0013 = BlzCreateUnitWithSkin(p, FourCC("opeo"), 473.2, -340.7, 313.224, FourCC("opeo"))
-    gg_unit_opeo_0014 = BlzCreateUnitWithSkin(p, FourCC("opeo"), 414.9, -479.3, 14.290, FourCC("opeo"))
-    gg_unit_opeo_0015 = BlzCreateUnitWithSkin(p, FourCC("opeo"), 534.7, -640.6, 73.650, FourCC("opeo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -624.7, -255.0, 349.324, FourCC("opeo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -390.0, -556.4, 49.483, FourCC("opeo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -480.1, 90.0, 303.316, FourCC("opeo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 262.9, 168.1, 227.255, FourCC("opeo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 342.8, 108.6, 217.383, FourCC("opeo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 424.9, 7.4, 204.764, FourCC("opeo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -93.3, 439.8, 264.538, FourCC("opeo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -9.7, 428.2, 255.377, FourCC("opeo"))
-    gg_unit_opeo_0024 = BlzCreateUnitWithSkin(p, FourCC("opeo"), -265.3, -699.5, 34.985, FourCC("opeo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -208.2, -839.7, 52.017, FourCC("opeo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -8.9, -847.4, 69.163, FourCC("opeo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 491.9, -2341.9, 337.803, FourCC("opeo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 689.2, -2273.3, 257.772, FourCC("opeo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 999.6, -2221.1, 233.399, FourCC("opeo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 32.3, -2538.1, 28.538, FourCC("opeo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1652.2, -1430.7, 121.800, FourCC("opeo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1468.0, 931.0, 54.255, FourCC("opeo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1213.6, 905.1, 102.463, FourCC("opeo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1106.8, 1270.4, 234.443, FourCC("opeo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1053.0, 1072.8, 172.683, FourCC("opeo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -558.6, -818.0, 49.483, FourCC("opeo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("o001"), -1180.6, 1453.0, 262.555, FourCC("o001"))
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -471.8, -961.9, 49.483, FourCC("opeo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("o001"), -536.6, -1082.7, 42.330, FourCC("o001"))
-    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -11617.0, -8041.4, 102.463, FourCC("opeo"))
+local p = Player(0)
+local u
+local unitID
+local t
+local life
+
+gg_unit_Oths_0011 = BlzCreateUnitWithSkin(p, FourCC("Oths"), 63.2, -581.0, 211.076, FourCC("Oths"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -818.7, -584.8, 290.597, FourCC("opeo"))
+gg_unit_opeo_0013 = BlzCreateUnitWithSkin(p, FourCC("opeo"), 473.2, -340.7, 313.224, FourCC("opeo"))
+gg_unit_opeo_0014 = BlzCreateUnitWithSkin(p, FourCC("opeo"), 414.9, -479.3, 14.290, FourCC("opeo"))
+gg_unit_opeo_0015 = BlzCreateUnitWithSkin(p, FourCC("opeo"), 534.7, -640.6, 73.650, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -624.7, -255.0, 349.324, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -390.0, -556.4, 49.483, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -480.1, 90.0, 303.316, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 262.9, 168.1, 227.255, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 342.8, 108.6, 217.383, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 424.9, 7.4, 204.764, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -93.3, 439.8, 264.538, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -9.7, 428.2, 255.377, FourCC("opeo"))
+gg_unit_opeo_0024 = BlzCreateUnitWithSkin(p, FourCC("opeo"), -265.3, -699.5, 34.985, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -208.2, -839.7, 52.017, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -8.9, -847.4, 69.163, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 491.9, -2341.9, 337.803, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 689.2, -2273.3, 257.772, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 999.6, -2221.1, 233.399, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 32.3, -2538.1, 28.538, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1652.2, -1430.7, 121.800, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1468.0, 931.0, 54.255, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1213.6, 905.1, 102.463, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1106.8, 1270.4, 234.443, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1053.0, 1072.8, 172.683, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -558.6, -818.0, 49.483, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("o001"), -1180.6, 1453.0, 262.555, FourCC("o001"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -471.8, -961.9, 49.483, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("o001"), -536.6, -1082.7, 42.330, FourCC("o001"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -11617.0, -8041.4, 102.463, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("h002"), -5160.5, -9289.1, 5.812, FourCC("h002"))
+u = BlzCreateUnitWithSkin(p, FourCC("h002"), -6622.8, -8553.6, 5.812, FourCC("h002"))
+u = BlzCreateUnitWithSkin(p, FourCC("h002"), -5681.4, -8453.4, 5.812, FourCC("h002"))
 end
 
 function CreateUnitsForPlayer1()
-    local p = Player(1)
-    local u
-    local unitID
-    local t
-    local life
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6471.0, -8160.1, 270.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -6499.8, 3496.2, 6.520, FourCC("h001"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6743.8, 3053.4, 279.210, FourCC("h000"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -6488.9, 3340.5, 6.520, FourCC("h001"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -6476.4, 3260.0, 6.520, FourCC("h001"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -6467.8, 3178.3, 6.520, FourCC("h001"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7034.1, 3054.5, 279.210, FourCC("h000"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6879.6, 3055.0, 279.210, FourCC("h000"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6979.4, 2632.2, 81.606, FourCC("h000"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6852.9, 2639.5, 97.059, FourCC("h000"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6723.9, 2663.2, 113.017, FourCC("h000"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6133.7, -8167.7, 270.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6037.7, -8688.0, 358.730, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6335.6, -8428.5, 90.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -6898.8, -8955.7, 8.704, FourCC("h001"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7188.2, -7265.4, 270.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -6410.7, -9091.2, 179.062, FourCC("h001"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -6902.9, -9203.4, 185.029, FourCC("h001"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -6898.1, -9295.2, 177.960, FourCC("h001"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7019.7, -7258.1, 270.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6881.3, -7708.2, 180.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7489.0, -6788.4, 225.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7942.8, -7368.2, 45.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7358.1, -6907.0, 225.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7808.0, -7493.3, 45.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8679.7, -7075.3, 225.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8558.9, -7160.7, 225.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -9008.4, -7783.9, 45.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8868.6, -7893.1, 45.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8759.8, -8506.6, 270.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8884.6, -8500.9, 270.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8644.4, -8506.6, 270.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8512.3, -8404.2, 270.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8195.2, -8342.2, 270.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7809.9, -9212.7, 181.432, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -9462.5, -9688.0, 2.700, FourCC("h001"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -9194.5, -8113.9, 180.000, FourCC("h001"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10558.1, -7979.8, 270.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10238.5, -7978.0, 270.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12806.5, -2941.5, 270.000, FourCC("h000"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12677.3, -2936.8, 270.000, FourCC("h000"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12542.8, -2937.9, 270.000, FourCC("h000"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12407.4, -2946.3, 270.000, FourCC("h000"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10205.5, -6390.6, 88.698, FourCC("h000"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -11564.6, -409.6, 0.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -11565.1, -509.3, 0.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -11566.1, -603.3, 0.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12105.4, -401.1, 180.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12105.9, -500.8, 180.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12107.0, -594.8, 180.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -11658.2, 162.7, 90.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -11567.4, 160.5, 90.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12107.5, 173.9, 90.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12016.6, 171.7, 90.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -11562.2, 54.7, 0.000, FourCC("h001"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -11559.4, -30.5, 0.000, FourCC("h001"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -11566.7, -100.1, 0.000, FourCC("h001"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -12118.8, 69.2, 180.000, FourCC("h001"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -12116.0, -16.0, 180.000, FourCC("h001"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -12123.3, -85.6, 180.000, FourCC("h001"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -10750.7, 1033.0, 225.000, FourCC("h001"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -10676.3, 964.2, 225.000, FourCC("h001"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -13120.1, 930.5, 315.000, FourCC("h001"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -13035.9, 999.6, 315.000, FourCC("h001"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12296.2, -8812.2, 270.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12159.5, -8829.7, 270.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12355.7, -9603.6, 90.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12214.1, -9469.8, 90.000, FourCC("h000"))
-    life = GetUnitState(u, UNIT_STATE_LIFE)
-    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -12998.0, -8052.5, 325.134, FourCC("h001"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -13035.6, -8214.4, 336.570, FourCC("h001"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -12448.1, -8360.0, 153.450, FourCC("h001"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -12501.4, -8480.1, 142.947, FourCC("h001"))
+local p = Player(1)
+local u
+local unitID
+local t
+local life
+
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6471.0, -8160.1, 270.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6133.7, -8167.7, 270.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6037.7, -8688.0, 358.730, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6335.6, -8428.5, 90.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h001"), -6898.8, -8955.7, 269.197, FourCC("h001"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7188.2, -7265.4, 270.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h001"), -6410.7, -9091.2, 179.062, FourCC("h001"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h001"), -6902.9, -9203.4, 185.029, FourCC("h001"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h001"), -6898.1, -9295.2, 177.960, FourCC("h001"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7019.7, -7258.1, 270.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6881.3, -7708.2, 180.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7489.0, -6788.4, 225.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7942.8, -7368.2, 45.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7358.1, -6907.0, 225.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7808.0, -7493.3, 45.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8679.7, -7075.3, 225.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8558.9, -7160.7, 225.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -9008.4, -7783.9, 45.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8868.6, -7893.1, 45.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8759.8, -8506.6, 270.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8884.6, -8500.9, 270.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8644.4, -8506.6, 270.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8512.3, -8404.2, 270.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8195.2, -8342.2, 270.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7809.9, -9212.7, 181.432, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h001"), -9462.5, -9688.0, 2.700, FourCC("h001"))
+u = BlzCreateUnitWithSkin(p, FourCC("h001"), -9194.5, -8113.9, 180.000, FourCC("h001"))
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10558.1, -7979.8, 270.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10238.5, -7978.0, 270.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12806.5, -2941.5, 270.000, FourCC("h000"))
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12677.3, -2936.8, 270.000, FourCC("h000"))
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12542.8, -2937.9, 270.000, FourCC("h000"))
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12407.4, -2946.3, 270.000, FourCC("h000"))
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10205.5, -6390.6, 88.698, FourCC("h000"))
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -11564.6, -409.6, 0.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -11565.1, -509.3, 0.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -11566.1, -603.3, 0.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12105.4, -401.1, 180.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12105.9, -500.8, 180.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12107.0, -594.8, 180.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -11658.2, 162.7, 90.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -11567.4, 160.5, 90.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12107.5, 173.9, 90.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12016.6, 171.7, 90.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h001"), -11562.2, 54.7, 0.000, FourCC("h001"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h001"), -11559.4, -30.5, 0.000, FourCC("h001"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h001"), -11566.7, -100.1, 0.000, FourCC("h001"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h001"), -12118.8, 69.2, 180.000, FourCC("h001"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h001"), -12116.0, -16.0, 180.000, FourCC("h001"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h001"), -12123.3, -85.6, 180.000, FourCC("h001"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h001"), -10750.7, 1033.0, 225.000, FourCC("h001"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h001"), -10676.3, 964.2, 225.000, FourCC("h001"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h001"), -13120.1, 930.5, 315.000, FourCC("h001"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h001"), -13035.9, 999.6, 315.000, FourCC("h001"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12296.2, -8812.2, 270.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12159.5, -8829.7, 270.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12355.7, -9603.6, 90.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12214.1, -9469.8, 90.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h001"), -12998.0, -8052.5, 325.134, FourCC("h001"))
+u = BlzCreateUnitWithSkin(p, FourCC("h001"), -13035.6, -8214.4, 336.570, FourCC("h001"))
+u = BlzCreateUnitWithSkin(p, FourCC("h001"), -12448.1, -8360.0, 153.450, FourCC("h001"))
+u = BlzCreateUnitWithSkin(p, FourCC("h001"), -12501.4, -8480.1, 142.947, FourCC("h001"))
 end
 
 function CreateNeutralHostile()
-    local p = Player(PLAYER_NEUTRAL_AGGRESSIVE)
-    local u
-    local unitID
-    local t
-    local life
-    u = BlzCreateUnitWithSkin(p, FourCC("n000"), -2863.2, -5340.3, 326.601, FourCC("n000"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nbdo"), -7507.9, 4307.3, 260.248, FourCC("nbdo"))
+local p = Player(PLAYER_NEUTRAL_AGGRESSIVE)
+local u
+local unitID
+local t
+local life
+
+u = BlzCreateUnitWithSkin(p, FourCC("n000"), -2863.2, -5340.3, 326.601, FourCC("n000"))
 end
 
 function CreateNeutralPassive()
-    local p = Player(PLAYER_NEUTRAL_PASSIVE)
-    local u
-    local unitID
-    local t
-    local life
-    u = BlzCreateUnitWithSkin(p, FourCC("e002"), 5726.2, -5277.6, 312.658, FourCC("e002"))
-    u = BlzCreateUnitWithSkin(p, FourCC("e002"), 6357.5, -5150.5, 247.597, FourCC("e002"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -1377.3, 7311.8, 119.744, FourCC("nsno"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -4992.9, 4916.3, 230.423, FourCC("nsno"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -5043.9, 6247.3, 163.306, FourCC("nsno"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -5760.5, 6601.1, 203.528, FourCC("nsno"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -7232.7, 3468.5, 318.646, FourCC("nsno"))
-    u = BlzCreateUnitWithSkin(p, FourCC("e002"), -11839.7, 128.6, 269.502, FourCC("e002"))
-    u = BlzCreateUnitWithSkin(p, FourCC("e002"), -11805.1, 1642.4, 272.161, FourCC("e002"))
+local p = Player(PLAYER_NEUTRAL_PASSIVE)
+local u
+local unitID
+local t
+local life
+
+u = BlzCreateUnitWithSkin(p, FourCC("e002"), 5726.2, -5277.6, 312.658, FourCC("e002"))
+u = BlzCreateUnitWithSkin(p, FourCC("e002"), 6357.5, -5150.5, 247.597, FourCC("e002"))
+u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -1377.3, 7311.8, 119.744, FourCC("nsno"))
+u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -4992.9, 4916.3, 230.423, FourCC("nsno"))
+u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -5043.9, 6247.3, 163.306, FourCC("nsno"))
+u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -5760.5, 6601.1, 203.528, FourCC("nsno"))
+u = BlzCreateUnitWithSkin(p, FourCC("n001"), -7567.0, 4006.9, 301.970, FourCC("n001"))
+u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -7232.7, 3468.5, 318.646, FourCC("nsno"))
+u = BlzCreateUnitWithSkin(p, FourCC("e002"), -11839.7, 128.6, 269.502, FourCC("e002"))
+u = BlzCreateUnitWithSkin(p, FourCC("e002"), -11805.1, 1642.4, 272.161, FourCC("e002"))
 end
 
 function CreatePlayerBuildings()
 end
 
 function CreatePlayerUnits()
-    CreateUnitsForPlayer0()
-    CreateUnitsForPlayer1()
+CreateUnitsForPlayer0()
+CreateUnitsForPlayer1()
 end
 
 function CreateAllUnits()
-    CreatePlayerBuildings()
-    CreateNeutralHostile()
-    CreateNeutralPassive()
-    CreatePlayerUnits()
+CreatePlayerBuildings()
+CreateNeutralHostile()
+CreateNeutralPassive()
+CreatePlayerUnits()
 end
 
 function CreateRegions()
-    local we
-    gg_rct________________037 = Rect(128.0, -384.0, 160.0, -352.0)
-    gg_rct_Region_038 = Rect(-4224.0, -6208.0, -1568.0, -4608.0)
-    gg_rct_Region_024 = Rect(-192.0, -352.0, -96.0, -256.0)
-    gg_rct_TrapZone = Rect(-12832.0, -9088.0, -5600.0, 4864.0)
-    gg_rct_EnterTrap = Rect(-5856.0, -9440.0, -5472.0, -8928.0)
+local we
+
+gg_rct________________037 = Rect(128.0, -384.0, 160.0, -352.0)
+gg_rct_Region_038 = Rect(-4224.0, -6208.0, -1568.0, -4608.0)
+gg_rct_Region_024 = Rect(-192.0, -352.0, -96.0, -256.0)
+gg_rct_TrapZone = Rect(-12832.0, -9088.0, -5600.0, 4864.0)
+gg_rct_EnterTrap = Rect(-5856.0, -9440.0, -5472.0, -8928.0)
+gg_rct_ExitTrap = Rect(-5472.0, -9440.0, -5376.0, -8992.0)
+gg_rct_ExitTrapZone = Rect(-7616.0, 4224.0, -7424.0, 4480.0)
+gg_rct_Region_004 = Rect(-7648.0, 4480.0, -7424.0, 4640.0)
+gg_rct_BossDrakon = Rect(-8672.0, 1088.0, -5376.0, 4000.0)
+gg_rct_InitStartDragon = Rect(-7840.0, 3552.0, -7168.0, 3840.0)
 end
 
 function CreateCameras()
-    gg_cam_OnPeonsandTrall = CreateCameraSetup()
-    CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_ROTATION, 93.0, 0.0)
-    CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_ANGLE_OF_ATTACK, 313.3, 0.0)
-    CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_TARGET_DISTANCE, 790.0, 0.0)
-    CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_ROLL, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-    CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_FARZ, 5000.0, 0.0)
-    CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_NEARZ, 16.0, 0.0)
-    CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-    CameraSetupSetDestPosition(gg_cam_OnPeonsandTrall, -103.0, -645.6, 0.0)
-    gg_cam_OnPineRound = CreateCameraSetup()
-    CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_ROTATION, 98.2, 0.0)
-    CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_ANGLE_OF_ATTACK, 317.9, 0.0)
-    CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_TARGET_DISTANCE, 2727.3, 0.0)
-    CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_ROLL, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-    CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_FARZ, 6050.0, 0.0)
-    CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_NEARZ, 16.0, 0.0)
-    CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-    CameraSetupSetDestPosition(gg_cam_OnPineRound, -105.5, 16.8, 0.0)
-    gg_cam_OnPeons = CreateCameraSetup()
-    CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_ROTATION, 214.9, 0.0)
-    CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_ANGLE_OF_ATTACK, 331.8, 0.0)
-    CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_TARGET_DISTANCE, 445.9, 0.0)
-    CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_ROLL, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-    CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_FARZ, 5000.0, 0.0)
-    CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_NEARZ, 16.0, 0.0)
-    CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-    CameraSetupSetDestPosition(gg_cam_OnPeons, -63.7, -669.2, 0.0)
-    gg_cam_MindPeon = CreateCameraSetup()
-    CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_ROTATION, 222.5, 0.0)
-    CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_ANGLE_OF_ATTACK, 7.9, 0.0)
-    CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_TARGET_DISTANCE, 2.1, 0.0)
-    CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_ROLL, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-    CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_FARZ, 5000.0, 0.0)
-    CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_NEARZ, 16.0, 0.0)
-    CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-    CameraSetupSetDestPosition(gg_cam_MindPeon, -5.4, -627.7, 0.0)
-    gg_cam_TrallSteal = CreateCameraSetup()
-    CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_ROTATION, 63.3, 0.0)
-    CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_ANGLE_OF_ATTACK, 325.7, 0.0)
-    CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_TARGET_DISTANCE, 368.5, 0.0)
-    CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_ROLL, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-    CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_FARZ, 5000.0, 0.0)
-    CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_NEARZ, 16.0, 0.0)
-    CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-    CameraSetupSetDestPosition(gg_cam_TrallSteal, 70.4, -585.1, 0.0)
-    gg_cam_Vine = CreateCameraSetup()
-    CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_ROTATION, 59.5, 0.0)
-    CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_ANGLE_OF_ATTACK, 311.0, 0.0)
-    CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_TARGET_DISTANCE, 1051.5, 0.0)
-    CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_ROLL, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-    CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_FARZ, 5000.0, 0.0)
-    CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_NEARZ, 16.0, 0.0)
-    CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-    CameraSetupSetDestPosition(gg_cam_Vine, 489.1, -482.8, 0.0)
-    gg_cam_ResetCam = CreateCameraSetup()
-    CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_ROTATION, 90.0, 0.0)
-    CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_ANGLE_OF_ATTACK, 304.0, 0.0)
-    CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_TARGET_DISTANCE, 1862.8, 0.0)
-    CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_ROLL, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-    CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_FARZ, 5000.0, 0.0)
-    CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_NEARZ, 16.0, 0.0)
-    CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-    CameraSetupSetDestPosition(gg_cam_ResetCam, -276.9, -696.2, 0.0)
+gg_cam_OnPeonsandTrall = CreateCameraSetup()
+CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_ROTATION, 93.0, 0.0)
+CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_ANGLE_OF_ATTACK, 313.3, 0.0)
+CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_TARGET_DISTANCE, 790.0, 0.0)
+CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_ROLL, 0.0, 0.0)
+CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_FARZ, 5000.0, 0.0)
+CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_OnPeonsandTrall, -103.0, -645.6, 0.0)
+gg_cam_OnPineRound = CreateCameraSetup()
+CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_ROTATION, 98.2, 0.0)
+CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_ANGLE_OF_ATTACK, 317.9, 0.0)
+CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_TARGET_DISTANCE, 2727.3, 0.0)
+CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_ROLL, 0.0, 0.0)
+CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_FARZ, 6050.0, 0.0)
+CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_OnPineRound, -105.5, 16.8, 0.0)
+gg_cam_OnPeons = CreateCameraSetup()
+CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_ROTATION, 214.9, 0.0)
+CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_ANGLE_OF_ATTACK, 331.8, 0.0)
+CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_TARGET_DISTANCE, 445.9, 0.0)
+CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_ROLL, 0.0, 0.0)
+CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_FARZ, 5000.0, 0.0)
+CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_OnPeons, -63.7, -669.2, 0.0)
+gg_cam_MindPeon = CreateCameraSetup()
+CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_ROTATION, 222.5, 0.0)
+CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_ANGLE_OF_ATTACK, 7.9, 0.0)
+CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_TARGET_DISTANCE, 2.1, 0.0)
+CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_ROLL, 0.0, 0.0)
+CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_FARZ, 5000.0, 0.0)
+CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_MindPeon, -5.4, -627.7, 0.0)
+gg_cam_TrallSteal = CreateCameraSetup()
+CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_ROTATION, 63.3, 0.0)
+CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_ANGLE_OF_ATTACK, 325.7, 0.0)
+CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_TARGET_DISTANCE, 368.5, 0.0)
+CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_ROLL, 0.0, 0.0)
+CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_FARZ, 5000.0, 0.0)
+CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_TrallSteal, 70.4, -585.1, 0.0)
+gg_cam_Vine = CreateCameraSetup()
+CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_ROTATION, 59.5, 0.0)
+CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_ANGLE_OF_ATTACK, 311.0, 0.0)
+CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_TARGET_DISTANCE, 1051.5, 0.0)
+CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_ROLL, 0.0, 0.0)
+CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_FARZ, 5000.0, 0.0)
+CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_Vine, 489.1, -482.8, 0.0)
+gg_cam_ResetCam = CreateCameraSetup()
+CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_ROTATION, 90.0, 0.0)
+CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_ANGLE_OF_ATTACK, 304.0, 0.0)
+CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_TARGET_DISTANCE, 1862.8, 0.0)
+CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_ROLL, 0.0, 0.0)
+CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_FARZ, 5000.0, 0.0)
+CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_ResetCam, -276.9, -696.2, 0.0)
 end
 
 --CUSTOM_CODE
@@ -492,7 +501,7 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
         end
 
         if true then
-            -- print("повышение отзывчивости")
+            --print("повышение отзывчивости")
             local vector = Vector:new(GetUnitX(hero), GetUnitY(hero), GetUnitZ(hero))
             local newVector = vector
             newVector = VectorSum(newVector, vector:yawPitchOffset(speed, angle * (math.pi / 180), 0.0))
@@ -650,6 +659,7 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
                                 -- data.CurrentWeaponType ~= "bow" then
                                 --SetUnitAnimationByIndex(data.UnitHero, IndexAnimationWalk)
                             else
+                                --print("резкая анимация движения в случае хотьбы после переката")
                                 SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationWalk)
                             end
                         end
@@ -1192,7 +1202,7 @@ function OnPostDamage()
         end
     else
         --print("наш герой получил урон")
-        HeroGetDamage(GetUnitData(target),caster)
+        HeroCandyGetDamage(GetUnitData(target),caster)
     end
     if GetUnitTypeId(target) ~= HeroID and GetUnitTypeId(caster) == HeroID then
         --Функция должна быть в самом низу
@@ -1492,6 +1502,7 @@ do
             --InitMenu()
             InitMouseMoveTrigger()
             InitMouseClickEvent()
+            InitItems() --иницуциализация юнитов предметов
             --CreateWASDActions()
 
             --InitGameSlimes()
@@ -1512,6 +1523,68 @@ do
             print(">>>")
         end)
     end
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 21.01.2023 11:44
+---
+function InitItems()
+    local allUnitsItem = {}
+    local idItems = {
+        FourCC("h002"), -- леденец
+    }
+    for i = 1, #idItems do
+        local unit = nil
+        local e = nil
+        local k = 0
+        --print("ищем")
+
+        GroupEnumUnitsInRect(perebor, bj_mapInitialPlayableArea, nil)
+        while true do
+            e = FirstOfGroup(perebor)
+
+            if e == nil then
+                break
+            end
+            if UnitAlive(e) and GetUnitTypeId(e) == idItems[i] then
+                --print("найдено")
+                table.insert(allUnitsItem, e)
+
+
+            end
+            GroupRemoveUnit(perebor, e)
+        end
+    end
+    ------
+
+
+    for i=1,#allUnitsItem do
+        RegistryNewItem(allUnitsItem[i])
+    end
+end
+function RegistryNewItem(unit)
+    local enterTrig = CreateTrigger()
+    TriggerRegisterUnitInRange(enterTrig, unit, 80, nil)
+    TriggerAddAction(enterTrig, function()
+        local entering = GetTriggerUnit()
+
+        if GetUnitTypeId(entering)==HeroID and not IsUnitHidden(unit) then
+            --print("вошел в зону предмета ",GetHandleId(unit))
+            if GetUnitTypeId(unit)==FourCC("h002") then -- леденец
+                --print("скушай леденец")
+                HeroCandyHeal(GetUnitData(entering),1)
+            end
+            --KillUnit(unit)
+            ShowUnit(unit,false)
+            --print("убит ",GetHandleId(unit))
+            local x,y=GetUnitXY(unit)
+            TimerStart(CreateTimer(), 30, false, function()
+                ShowUnit(unit,true)
+                --CreateUnit(GetOwningPlayer(unit),GetUnitTypeId(unit),x,y,0)
+            end)
+        end
+    end)
 end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
@@ -2814,59 +2887,7 @@ end
 --- Created by User.
 --- DateTime: 03.01.2023 22:16
 ---
-function CreateBOSSHPBar(boss)
-    --[[local BoxBarParent = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), '', 0)
-    --BlzFrameSetVisible(BoxBarParent, GetLocalPlayer() == Player(data.pid))
-    local x, y = 0.08, 0.01
-    local hero = boss
-
-
-    --BlzFrameSetAlpha(into, 128)
-
-    local chargesBox = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BoxBarParent, '', 0)
-    BlzFrameSetTexture(chargesBox, "HPBOX", 0, true) --HPElement
-    BlzFrameSetSize(chargesBox, GNext, GNext)
-    BlzFrameSetAbsPoint(chargesBox, FRAMEPOINT_LEFT, x + 0.004, y)
-    BlzFrameSetAlpha(chargesBox, 128)
-
-    local into = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BoxBarParent, '', 0)
-    BlzFrameSetTexture(into, "into", 0, true)
-    BlzFrameSetSize(into, GNext * 5, GNext)
-    BlzFrameSetAbsPoint(into, FRAMEPOINT_LEFT, x, y)
-    BlzFrameSetAlpha(into, 128)
-    BlzFrameSetFocus(into,true)
-
-    local textCurrent = BlzCreateFrameByType("TEXT", "ButtonChargesText", BoxBarParent, "", 0)
-    BlzFrameSetPoint(textCurrent, FRAMEPOINT_LEFT, into, FRAMEPOINT_LEFT, 0.002, 0)
-    local textMax = BlzCreateFrameByType("TEXT", "ButtonChargesText", BoxBarParent, "", 0)
-    BlzFrameSetPoint(textMax, FRAMEPOINT_RIGHT, into, FRAMEPOINT_RIGHT, -0.002, 0)
-
-
-    --
-    BlzFrameSetParent(chargesBox, BlzGetFrameByName("ConsoleUIBackdrop", 0))
-    BlzFrameSetParent(textCurrent, BlzGetFrameByName("ConsoleUIBackdrop", 0))
-    BlzFrameSetParent(textMax, BlzGetFrameByName("ConsoleUIBackdrop", 0))
-    BlzFrameSetParent(into, BlzGetFrameByName("ConsoleUIBackdrop", 0))
-
-    TimerStart(CreateTimer(), 0.05, true, function()
-        local hp = 0
-        hp = GetUnitLifePercent(hero)
-        if not UnitAlive(hero) then
-            hp = 0
-            --print("Юнит мерт, сводим бар до нуля",hp)
-            BlzFrameSetSize(into, 0, 0)
-            --BlzFrameSetVisible(into, false)
-            BlzFrameSetText(textCurrent, hp)
-            BlzFrameSetText(textMax, R2I(BlzGetUnitMaxHP(hero)))
-        else
-            --BlzFrameSetVisible(into, GetLocalPlayer() == GetOwningPlayer(hero))
-            BlzFrameSetText(textCurrent, R2I(GetUnitState(hero, UNIT_STATE_LIFE)))
-            BlzFrameSetText(textMax, R2I(BlzGetUnitMaxHP(hero)))
-            BlzFrameSetSize(chargesBox, 4.82 * hp * GNext / 100, GNext * 0.5)
-            BlzFrameSetAlpha(chargesBox, 128)
-        end
-    end)
-    ]]
+function CreateBOSSHPBar(boss,name)
     local into=BlzCreateFrameByType("BACKDROP", "Face", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
     BlzFrameSetTexture(into, "Replaceabletextures\\Teamcolor\\Teamcolor00.blp", 0, true)
     BlzFrameSetSize(into, 0.76, 0.02)
@@ -2879,7 +2900,7 @@ function CreateBOSSHPBar(boss)
     BlzFrameSetSize(charges, 0.8, 0.066)
     BlzFrameSetAbsPoint(charges, FRAMEPOINT_LEFT, 0, 0.03)
     --BlzFrameSetPoint(charges, FRAMEPOINT_BOTTOM, wood, FRAMEPOINT_BOTTOM, 0,0)
-    BlzFrameSetText(new_FrameChargesText, "Ужасный злобный йети")
+    BlzFrameSetText(new_FrameChargesText, name)
     BlzFrameSetPoint(new_FrameChargesText, FRAMEPOINT_CENTER, charges, FRAMEPOINT_CENTER, 0., 0.)
     BlzFrameSetVisible(into, true)
 
@@ -2918,6 +2939,331 @@ do
         TimerStart(CreateTimer(), .01, false, function()
             DestroyTimer(GetExpiredTimer())
 
+            InitTrig_EnterInRectBDragon()
+        end)
+    end
+end
+
+function InitTrig_EnterInRectBDragon()
+
+    print("Инициализация босса дракона")
+    local gg_trg_EnterInRect = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_EnterInRect, gg_rct_InitStartDragon)
+    TriggerAddAction(gg_trg_EnterInRect, function()
+        StartDragonAI(GetRectCenterX(gg_rct_InitStartDragon), GetRectCenterY(gg_rct_InitStartDragon))
+        DisableTrigger(gg_trg_EnterInRect)
+    end)
+end
+
+function StartDragonAI(xs, ys)
+    local boss = FindUnitOfType(FourCC('n001'))
+    local BossFight = true
+    local into = CreateBOSSHPBar(boss, "Драконит похититель подарков")
+    AuraDestroyableON(boss)
+    UnitAddAbility(boss, FourCC('Abun'))
+    SetUnitPosition(boss, xs, ys)
+    SetUnitOwner(boss, Player(10), true)
+    local range = 1000
+    local x, y = GetUnitXY(boss)
+    ClearMapMusicBJ()
+    PlayMusicBJ("The Icefalcon's Crest")
+    SetMusicVolumeBJ(100)
+    local FW = CreateFogModifierRectBJ(false, Player(0), FOG_OF_WAR_VISIBLE, GlobalRect)
+    FogModifierStart(FW)
+
+    local phase = 3 --стартовая фаза
+    local sec = 0
+    local PhaseOn = true
+    local OnAttack = true
+    TimerStart(CreateTimer(), 1, true, function()
+        --каждую секунду
+        local bx, by = GetUnitXY(boss)
+
+        if not UnitAlive(boss) then
+            -- Место где босс
+            StartSound(bj_questCompletedSound)
+            DestroyTimer(GetExpiredTimer())
+            phase = 0
+            print("Даём нарграду, победа")
+            ClearMapMusicBJ()
+            PlayMusicBJ("Endless Snowbanks")
+            SetMusicVolumeBJ(100)
+            BlzFrameSetVisible(into, false)
+
+        else
+            --Проверяем есть ли живые герои, когда тиник жив
+            if BossFight then
+                local k = 0
+                for i = 0, 3 do
+                    local hero = HERO[i].UnitHero
+                    if IsUnitInRange(hero, boss, 2000) then
+                        k = k + 1
+                    end
+
+                    --print("Отталкивание для особо умных")
+                    if OnAttack then
+                        if IsUnitInRange(hero, boss, 250) then
+                            --SetUnitTimeScale(boss,-1)
+                            OnAttack = false
+                            TimerStart(CreateTimer(), 5, false, function()
+                                OnAttack = true
+                            end)
+                            local angle = AngleBetweenUnits(boss, hero)
+                            SetUnitFacing(boss, angle)
+                            --SetUnitAnimation(boss,"Attack")
+                            if phase ~= 1 then
+                                --PlaySound("Speech\\Yetti\\tineproidesh")
+                                --EttiDashAttackPrepare(boss, hero)
+                            end
+
+                        end
+
+                    end
+                end
+                if k > 0 and not BossFight then
+                    print("Возобновление прерванного боя") -- этого принта нет
+                    BlzFrameSetVisible(into, true)
+                end
+
+                if k == 0 then
+                    BossFight = false
+                    phase = 0
+                    --print("Нет ни 1 игрока рядов, босс файт прерван")
+                    --print(BlzFrameIsVisible(into))
+                    BlzFrameSetVisible(into, false)
+                    --print(BlzFrameIsVisible(into))
+                    HealUnit(boss)
+                    SetUnitPositionSmooth(boss, xs, ys)
+                    ClearMapMusicBJ()
+                    PlayMusicBJ("Endless Snowbanks")
+                    SetMusicVolumeBJ(100)
+                end
+            end
+        end
+        local xb, yb = GetUnitXY(boss)
+        if BossFight then
+            -- если идёт бой
+            sec = sec + 1
+            if sec >= 5 then
+                sec = 0
+                phase = GetRandomInt(1, 3)
+                PhaseOn = true
+                --print("phase " .. phase)
+            end
+            --фазы
+            if phase == 1 and PhaseOn then
+                PhaseOn = false
+                print("фаза", phase)
+                --print("Пытаемся разбежаться на игрока")
+
+                local hero = HERO[0].UnitHero
+                local angle = AngleBetweenUnits(boss, hero)
+                IceImpale(boss, angle, false)
+                TimerStart(CreateTimer(), 2, true, function()
+                    --по героям
+                    --EttiDashAttackPrepare(boss, hero)
+
+                    if phase ~= 1 then
+                        DestroyTimer(GetExpiredTimer())
+                    end
+                end)
+
+            end
+            if phase == 3 and PhaseOn then
+                PhaseOn = false
+                print("фаза", phase)
+                DragonDashAttackPrepare(boss, HERO[0].UnitHero)
+
+            end
+            if phase == 4 and PhaseOn then
+                PhaseOn = false
+                print("фаза", phase)
+
+            end
+            if phase == 5 and PhaseOn then
+                PhaseOn = false
+                print("фаза", phase)
+
+            end
+            if phase == 2 and PhaseOn then
+                PhaseOn = false
+                print("фаза", phase)
+                --print("Падающие сосульки")
+                IceCrest(boss)
+            end
+
+        else
+            -- перезапуск боссфайта
+            local k = 0
+            for i = 0, 3 do
+                local hero = HERO[i].UnitHero
+                if IsUnitInRange(hero, boss, 1500) then
+                    k = k + 1
+                end
+            end
+            if k >= 1 then
+                print("Лечим босса, и бой возобновляется")
+                ClearMapMusicBJ()
+                PlayMusicBJ("The Icefalcon's Crest")
+                SetMusicVolumeBJ(100)
+                BlzFrameSetVisible(into, true)
+                HealUnit(boss, 99999)
+                BossFight = true
+            end
+        end--конец
+    end)
+end
+
+
+function DragonDashAttackPrepare(boss,hero)
+    if UnitAlive(boss) then
+        local eff = AddSpecialEffect("BossArrow", GetUnitXY(boss))
+        local angle = AngleBetweenUnits(boss, hero)
+        local k = GetUnitLifePercent(boss) / 100
+        k = 1 - k
+        BlzSetSpecialEffectYaw(eff, math.rad(angle))
+        TimerStart(CreateTimer(), 1.5, false, function()
+            DestroyEffect(eff)
+        end)
+        TimerStart(CreateTimer(), 1.2 - k, false, function()
+
+            --print("звук")
+            UnitAddForceSimple(boss, angle, 20 + 20 * k, 1000, "RunEtti")
+            FallAfterRunDragon(boss)
+            BlzPauseUnitEx(boss, true)
+            --local r=GetRandomInt(0,8)
+            --print(r)
+            SetUnitAnimationByIndex(boss, 2)
+            SetUnitTimeScale(boss, 3)
+            BlzSetUnitFacingEx(boss, angle)
+        end)
+    end
+end
+
+function FallAfterRunDragon(boss)
+    local x,y=GetUnitXY(boss)
+    MarkAndFall(x,y, "Icicle", boss)
+    local max=8
+    TimerStart(CreateTimer(), 0.1, true, function()
+        max=max-1
+        x,y=MoveXY(x,y,160,GetUnitFacing(boss))
+        MarkAndFall(x,y, "Icicle", boss)
+        if max<=0 then
+            DestroyTimer(GetExpiredTimer())
+        end
+    end)
+end
+
+function IceCrest(boss)
+    BlzPauseUnitEx(boss, true)
+    SetUnitTimeScale(boss, 0.3)
+    SetUnitAnimation(boss, "Spell Slam")
+    for i = 1, 4 do
+        local eff = AddSpecialEffect("BossArrow", GetUnitXY(boss))
+        local angle = GetUnitFacing(boss)
+        if i == 2 then
+            angle = angle - 180
+        elseif i == 3 then
+            angle = angle - 90
+        elseif i == 4 then
+            angle = angle + 90
+        end
+        BlzSetSpecialEffectYaw(eff, math.rad(angle))
+        TimerStart(CreateTimer(), 2, false, function()
+            DestroyEffect(eff)
+            IceImpale(boss, angle, true)
+            IceImpale(boss, angle - 180, true)
+            IceImpale(boss, angle + 90, true)
+            IceImpale(boss, angle - 90, true)
+        end)
+        TimerStart(CreateTimer(), 3, false, function()
+            IssuePointOrder(boss, "move", GetUnitXY(HERO[0].UnitHero))
+        end)
+    end
+
+    TimerStart(CreateTimer(), 2, false, function()
+        BlzPauseUnitEx(boss, false)
+        SetUnitTimeScale(boss, 1)
+    end)
+end
+
+function IceImpale(boss, angle, notMove)
+    local x, y = GetUnitXY(boss)
+    BlzPauseUnitEx(boss, true)
+    local r = GetRandomInt(1, 2)
+    SetUnitAnimation(boss, "Spell Slam")
+    SetUnitFacing(boss, angle)
+    local hero = HERO[0].UnitHero
+    local k = 0
+    local step = 50
+    local max = 24
+    local range = 80
+    if notMove then
+        step = 180
+        max = 6
+        range = 250
+    end
+    TimerStart(CreateTimer(), 0.7, false, function()
+        BlzPauseUnitEx(boss, false)
+
+        TimerStart(CreateTimer(), 0.05, true, function()
+            k = k + 1
+            x, y = MoveXY(x, y, step, angle)
+            UnitDamageArea(boss, 10, x, y, range)
+            CreateSpikeFromDeep(x, y, notMove)
+            if k > max then
+                DestroyTimer(GetExpiredTimer())
+                if not notMove then
+                    IssuePointOrder(boss, "move", GetUnitXY(hero))
+                end
+            end
+        end)
+
+    end)
+
+end
+
+function CreateSpikeFromDeep(x, y, notMove)
+    --print(GetTerrainZ(x, y))
+    local size = 1
+    local id = FourCC('B001')
+    if notMove then
+        size = 3
+        id = FourCC("B006")
+    end
+    if not IsTerrainPathable(x,y,PATHING_TYPE_WALKABILITY) then
+        local nd = CreateDestructableZ(id, x, y, 900, GetRandomInt(0, 360), size, 1)
+    end
+end
+
+function AuraDestroyableON(boss)
+    -- ломаем сосульки в радиусе
+    TimerStart(CreateTimer(), 1, true, function()
+        local x, y = GetUnitXY(boss)
+        local range = 300
+        SetRect(GlobalRect, x - range, y - range, x + range, y + range)
+        EnumDestructablesInRect(GlobalRect, nil, function()
+            local d = GetEnumDestructable()
+            if GetDestructableTypeId(d) == FourCC("B001") or GetDestructableTypeId(d) == FourCC("B006") then
+                KillDestructable(d)
+            end
+        end)
+    end)
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by Bergi.
+--- DateTime: 02.05.2020 2:43
+---
+--stoneEffModel = "Abilities\\Weapons\\RockBoltMissile\\RockBoltMissile"
+--Special = "Abilities\\Weapons\\ProcMissile\\ProcMissile"
+do
+    local InitGlobalsOrigin = InitGlobals
+    function InitGlobals()
+        InitGlobalsOrigin()
+        TimerStart(CreateTimer(), .01, false, function()
+            DestroyTimer(GetExpiredTimer())
+
             InitTrig_EnterInRectB()
         end)
     end
@@ -2937,7 +3283,7 @@ end
 function StartYettyAI(xs, ys)
     local boss = FindUnitOfType(FourCC('n000'))
     local BossFight = true
-    local into = CreateBOSSHPBar(boss)
+    local into = CreateBOSSHPBar(boss,"Сытый Етти")
     UnitAddAbility(boss, FourCC('Abun'))
     SetUnitPosition(boss, xs, ys)
     SetUnitOwner(boss, Player(10), true)
@@ -3086,7 +3432,7 @@ function StartYettyAI(xs, ys)
                     for i = 0, 3 do
                         local hero = HERO[i].UnitHero
                         if IsUnitInRange(hero, boss, 1000) then
-                            MarkAndFall(GetUnitX(hero), GetUnitY(hero), effmodel, boss)
+                            MarkAndFall(GetUnitX(hero), GetUnitY(hero), "Icicle", boss)
                         end
                     end
 
@@ -3714,6 +4060,7 @@ function CreatePeonForPlayer(data)
         --CreateDownInterface(data)
         local x, y = GetPlayerStartLocationX(Player(data.pid)), GetPlayerStartLocationY(Player(data.pid))
         data.UnitHero = CreateUnit(Player(data.pid), HeroID, x, y, 0)
+        UnitAddForceSimple(data.UnitHero, 90, 5, 15)
         SelectUnitForPlayerSingle(data.UnitHero, Player(data.pid))
         UnitAddAbility(data.UnitHero, FourCC("Abun"))
         UnitRemoveType(data.UnitHero, UNIT_TYPE_PEON)
@@ -3742,9 +4089,11 @@ function AddPeonMAXHP(data, k)
         data.HPMAX = 5
         data.HPTableFH = {}
         data.HPCount = 0
+        data.CurrentHP=0
     end
     for i = 1, k do
         CreatePeonHPBAR(data)
+
     end
 end
 
@@ -3758,11 +4107,15 @@ function CreatePeonHPBAR(data)
     BlzFrameSetAbsPoint(HPfh, FRAMEPOINT_CENTER, -0.07 + step * data.HPCount, 0.586)
     data.HPCount = data.HPCount + 1
     data.HPTableFH[data.HPCount] = HPfh
+    data.CurrentHP=data.CurrentHP+1
 end
 
-function HeroGetDamage(data, damageSource)
+function HeroCandyGetDamage(data, damageSource)
     local hero = data.UnitHero
     HealUnit(hero)
+    BlinkUnit(hero,1)
+    local angle=AngleBetweenUnits(damageSource,hero)
+    UnitAddForceSimple(hero,angle,25,80)
     SetUnitInvulnerable(hero, true)
     TimerStart(CreateTimer(), 1, false, function()
         SetUnitInvulnerable(hero, false)
@@ -3794,6 +4147,30 @@ function HeroCandyHeal(data, k)
     end
 end
 
+function BlinkUnit(hero,timed)
+    local period=0.05
+    local flag=false
+    SetUnitScale(hero,0,0,0)
+    TimerStart(CreateTimer(), period, true, function()
+        timed=timed-period
+        if UnitAlive(hero) then
+            if flag then
+                flag=false
+                SetUnitScale(hero,0,0,0)
+            else
+                flag=true
+                SetUnitScale(hero,1,1,1)
+            end
+        else
+            DestroyTimer(GetExpiredTimer())
+            SetUnitScale(hero,1,1,1)
+        end
+        if timed<=0 then
+            DestroyTimer(GetExpiredTimer())
+            SetUnitScale(hero,1,1,1)
+        end
+    end)
+end
 
 FREE_CAMERA = true
 TIMER_PERIOD = 1 / 32
@@ -3881,18 +4258,19 @@ function InitWASD(hero)
                 SelectUnitForPlayerSingle(hero, GetOwningPlayer(hero))
             end
 
-            ForceUIKeyBJ(GetOwningPlayer(hero), "Q")
+            --ForceUIKeyBJ(GetOwningPlayer(hero), "Q")
             --ForceUIKeyBJ(GetOwningPlayer(hero), "W")
             --ForceUIKeyBJ(GetOwningPlayer(hero), "E")
-            ForceUIKeyBJ(GetOwningPlayer(hero), "R")
+           -- ForceUIKeyBJ(GetOwningPlayer(hero), "R")
             --ForceUIKeyBJ(GetOwningPlayer(hero), "A")
             --ForceUIKeyBJ(GetOwningPlayer(hero), "S")
             --ForceUIKeyBJ(GetOwningPlayer(hero), "D")
-            ForceUIKeyBJ(GetOwningPlayer(hero), "F")
-            ForceUIKeyBJ(GetOwningPlayer(hero), "Z")
-            ForceUIKeyBJ(GetOwningPlayer(hero), "X")
-            ForceUIKeyBJ(GetOwningPlayer(hero), "C")
-            ForceUIKeyBJ(GetOwningPlayer(hero), "V")
+
+            --ForceUIKeyBJ(GetOwningPlayer(hero), "F")
+            --ForceUIKeyBJ(GetOwningPlayer(hero), "Z")
+            --ForceUIKeyBJ(GetOwningPlayer(hero), "X")
+            --ForceUIKeyBJ(GetOwningPlayer(hero), "C")
+            --ForceUIKeyBJ(GetOwningPlayer(hero), "V")
 
             ForceUIKeyBJ(GetOwningPlayer(hero), "M")
 
@@ -4236,7 +4614,12 @@ function CreateWASDActions()
             --SelectUnitForPlayerSingle(data.UnitHero,GetTriggerPlayer())
             if not data.isAttacking and StunSystem[GetHandleId(data.UnitHero)].Time == 0 then
                 --print("pressW and short anim")
-                UnitAddForceSimple(data.UnitHero, 90, 5, 15)
+                if data.SpaceForce then
+                   -- print("сломалась анимация?")
+                else
+                    --print("не сломалась")
+                end
+                --UnitAddForceSimple(data.UnitHero, 90, 5, 15)
                 data.DirectionMove = 90
 
                 if data.ReleaseW and data.ReleaseD then
@@ -4288,7 +4671,7 @@ function CreateWASDActions()
             --SelectUnitForPlayerSingle(data.UnitHero,Player(0))
             if not data.isAttacking and StunSystem[GetHandleId(data.UnitHero)].Time == 0 then
                 data.animStand = 1.8 --до полной анимации 2 секунды
-                UnitAddForceSimple(data.UnitHero, 270, 5, 15)
+                --UnitAddForceSimple(data.UnitHero, 270, 5, 15)
                 data.DirectionMove = 270
 
                 if data.ReleaseS and data.ReleaseD then
@@ -4337,7 +4720,7 @@ function CreateWASDActions()
             --SelectUnitForPlayerSingle(data.UnitHero,Player(0))
             if not data.isAttacking and StunSystem[GetHandleId(data.UnitHero)].Time == 0 then
                 data.animStand = 1.8 --до полной анимации 2 секунды
-                UnitAddForceSimple(data.UnitHero, 0, 5, 15)
+                --UnitAddForceSimple(data.UnitHero, 0, 5, 15)
                 data.DirectionMove = 0
                 SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationWalk)
 
@@ -4380,7 +4763,7 @@ function CreateWASDActions()
                 -- нет проверки на стан
                 data.animStand = 1.8 --до полной анимации 2 секунды
                 data.DirectionMove = 180
-                UnitAddForceSimple(data.UnitHero, 180, 5, 15)
+                --UnitAddForceSimple(data.UnitHero, 180, 5, 15)
                 if not LockAnimAnimation(data) then
                     SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationWalk)
 
@@ -4398,7 +4781,7 @@ function CreateWASDActions()
         local data = HERO[pid]
         data.ReleaseA = false
     end)
-    -----------------------------------------------------------------OSKEY_SPACE
+    -----------------------------------------------------------------OSKEY_SPACE пробел прыжок перекат
     local TrigPressSPACE = CreateTrigger()
     for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
         BlzTriggerRegisterPlayerKeyEvent(TrigPressSPACE, Player(i), OSKEY_SPACE, 0, true)
@@ -4482,12 +4865,14 @@ function CreateWASDActions()
                         -- print("проверка проходимости конечной точки")
                         --DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt", nx, ny))
                         if not Chk2Way(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), nx, ny) then
+                            print("ошибка, такой функции нет")
                             Blink2Point(data, nx, ny)
                         else
-                            -- print("прыжок вниз?")
+                            --print("прыжок вниз?")
                             UnitAddForceSimple(data.UnitHero, data.DirectionMove, 10, dist, "ignore") --САМ рывок при нажатии пробела
                         end
                     else
+                        --print("перекат тут?")
                         UnitAddForceSimple(data.UnitHero, data.DirectionMove, 10, dist, "ignore") --САМ рывок при нажатии пробела
                     end
                 end
@@ -4756,408 +5141,422 @@ end
 
 --CUSTOM_CODE
 function Trig_BoundEnter_Actions()
-    SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_TrapZone)
+SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_EnterTrap))
+SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_TrapZone)
 end
 
 function InitTrig_BoundEnter()
-    gg_trg_BoundEnter = CreateTrigger()
-    TriggerRegisterEnterRectSimple(gg_trg_BoundEnter, gg_rct_EnterTrap)
-    TriggerAddAction(gg_trg_BoundEnter, Trig_BoundEnter_Actions)
+gg_trg_BoundEnter = CreateTrigger()
+TriggerRegisterEnterRectSimple(gg_trg_BoundEnter, gg_rct_Region_004)
+TriggerAddAction(gg_trg_BoundEnter, Trig_BoundEnter_Actions)
+end
+
+function Trig_Exit_Actions()
+SetCameraBoundsToRectForPlayerBJ(Player(0), GetPlayableMapRect())
+SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_ExitTrapZone))
+end
+
+function InitTrig_Exit()
+gg_trg_Exit = CreateTrigger()
+TriggerRegisterEnterRectSimple(gg_trg_Exit, gg_rct_ExitTrap)
+TriggerAddAction(gg_trg_Exit, Trig_Exit_Actions)
 end
 
 function Trig_InitGUI_Actions()
-    UseTimeOfDayBJ(false)
+UseTimeOfDayBJ(false)
 end
 
 function InitTrig_InitGUI()
-    gg_trg_InitGUI = CreateTrigger()
-    TriggerAddAction(gg_trg_InitGUI, Trig_InitGUI_Actions)
+gg_trg_InitGUI = CreateTrigger()
+TriggerAddAction(gg_trg_InitGUI, Trig_InitGUI_Actions)
 end
 
 function Trig_StartIntro_Func002C()
-    if (not (udg_PressESC == true)) then
-        return false
-    end
-    return true
+if (not (udg_PressESC == true)) then
+return false
+end
+return true
 end
 
 function Trig_StartIntro_Func004C()
-    if (not (udg_PressESC == true)) then
-        return false
-    end
-    return true
+if (not (udg_PressESC == true)) then
+return false
+end
+return true
 end
 
 function Trig_StartIntro_Func006C()
-    if (not (udg_PressESC == true)) then
-        return false
-    end
-    return true
+if (not (udg_PressESC == true)) then
+return false
+end
+return true
 end
 
 function Trig_StartIntro_Func008C()
-    if (not (udg_PressESC == true)) then
-        return false
-    end
-    return true
+if (not (udg_PressESC == true)) then
+return false
+end
+return true
 end
 
 function Trig_StartIntro_Func010C()
-    if (not (udg_PressESC == true)) then
-        return false
-    end
-    return true
+if (not (udg_PressESC == true)) then
+return false
+end
+return true
 end
 
 function Trig_StartIntro_Func012C()
-    if (not (udg_PressESC == true)) then
-        return false
-    end
-    return true
+if (not (udg_PressESC == true)) then
+return false
+end
+return true
 end
 
 function Trig_StartIntro_Func014C()
-    if (not (udg_PressESC == true)) then
-        return false
-    end
-    return true
+if (not (udg_PressESC == true)) then
+return false
+end
+return true
 end
 
 function Trig_StartIntro_Func016C()
-    if (not (udg_PressESC == true)) then
-        return false
-    end
-    return true
+if (not (udg_PressESC == true)) then
+return false
+end
+return true
 end
 
 function Trig_StartIntro_Func018C()
-    if (not (udg_PressESC == true)) then
-        return false
-    end
-    return true
+if (not (udg_PressESC == true)) then
+return false
+end
+return true
 end
 
 function Trig_StartIntro_Func020C()
-    if (not (udg_PressESC == true)) then
-        return false
-    end
-    return true
+if (not (udg_PressESC == true)) then
+return false
+end
+return true
 end
 
 function Trig_StartIntro_Func022C()
-    if (not (udg_PressESC == true)) then
-        return false
-    end
-    return true
+if (not (udg_PressESC == true)) then
+return false
+end
+return true
 end
 
 function Trig_StartIntro_Func025C()
-    if (not (udg_PressESC == true)) then
-        return false
-    end
-    return true
+if (not (udg_PressESC == true)) then
+return false
+end
+return true
 end
 
 function Trig_StartIntro_Func027C()
-    if (not (udg_PressESC == true)) then
-        return false
-    end
-    return true
+if (not (udg_PressESC == true)) then
+return false
+end
+return true
 end
 
 function Trig_StartIntro_Func029C()
-    if (not (udg_PressESC == true)) then
-        return false
-    end
-    return true
+if (not (udg_PressESC == true)) then
+return false
+end
+return true
 end
 
 function Trig_StartIntro_Func031C()
-    if (not (udg_PressESC == true)) then
-        return false
-    end
-    return true
+if (not (udg_PressESC == true)) then
+return false
+end
+return true
 end
 
 function Trig_StartIntro_Func033C()
-    if (not (udg_PressESC == true)) then
-        return false
-    end
-    return true
+if (not (udg_PressESC == true)) then
+return false
+end
+return true
 end
 
 function Trig_StartIntro_Func036C()
-    if (not (udg_PressESC == true)) then
-        return false
-    end
-    return true
+if (not (udg_PressESC == true)) then
+return false
+end
+return true
 end
 
 function Trig_StartIntro_Func038C()
-    if (not (udg_PressESC == true)) then
-        return false
-    end
-    return true
+if (not (udg_PressESC == true)) then
+return false
+end
+return true
 end
 
 function Trig_StartIntro_Func040C()
-    if (not (udg_PressESC == true)) then
-        return false
-    end
-    return true
+if (not (udg_PressESC == true)) then
+return false
+end
+return true
 end
 
 function Trig_StartIntro_Func042C()
-    if (not (udg_PressESC == true)) then
-        return false
-    end
-    return true
+if (not (udg_PressESC == true)) then
+return false
+end
+return true
 end
 
 function Trig_StartIntro_Func044C()
-    if (not (udg_PressESC == true)) then
-        return false
-    end
-    return true
+if (not (udg_PressESC == true)) then
+return false
+end
+return true
 end
 
 function Trig_StartIntro_Func047C()
-    if (not (udg_PressESC == true)) then
-        return false
-    end
-    return true
+if (not (udg_PressESC == true)) then
+return false
+end
+return true
 end
 
 function Trig_StartIntro_Func049C()
-    if (not (udg_PressESC == true)) then
-        return false
-    end
-    return true
+if (not (udg_PressESC == true)) then
+return false
+end
+return true
 end
 
 function Trig_StartIntro_Func051C()
-    if (not (udg_PressESC == true)) then
-        return false
-    end
-    return true
+if (not (udg_PressESC == true)) then
+return false
+end
+return true
 end
 
 function Trig_StartIntro_Func053C()
-    if (not (udg_PressESC == true)) then
-        return false
-    end
-    return true
+if (not (udg_PressESC == true)) then
+return false
+end
+return true
 end
 
 function Trig_StartIntro_Actions()
-    EnableTrigger(gg_trg_SkipIntro)
-    if (Trig_StartIntro_Func002C()) then
-        return 
-    else
-    end
-    CinematicModeBJ(true, GetPlayersAll())
-    if (Trig_StartIntro_Func004C()) then
-        return 
-    else
-    end
-    CameraSetupApplyForPlayer(true, gg_cam_OnPeonsandTrall, Player(0), 0)
-    if (Trig_StartIntro_Func006C()) then
-        return 
-    else
-    end
-    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_627", gg_snd_Intro1, "TRIGSTR_628", bj_TIMETYPE_ADD, 0.00, true)
-    if (Trig_StartIntro_Func008C()) then
-        return 
-    else
-    end
-    CameraSetupApplyForPlayer(true, gg_cam_OnPineRound, Player(0), 0.00)
-    if (Trig_StartIntro_Func010C()) then
-        return 
-    else
-    end
-    RotateCameraAroundLocBJ(360.00, GetRectCenter(gg_rct_Region_024), Player(0), 5.00)
-    if (Trig_StartIntro_Func012C()) then
-        return 
-    else
-    end
-    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_629", gg_snd_Intro2, "TRIGSTR_630", bj_TIMETYPE_ADD, 0.00, true)
-    if (Trig_StartIntro_Func014C()) then
-        return 
-    else
-    end
-    CameraSetupApplyForPlayer(true, gg_cam_OnPeons, Player(0), 0.00)
-    if (Trig_StartIntro_Func016C()) then
-        return 
-    else
-    end
-    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_631", gg_snd_Intro3, "TRIGSTR_632", bj_TIMETYPE_ADD, 0.00, true)
-    if (Trig_StartIntro_Func018C()) then
-        return 
-    else
-    end
-    CameraSetupApplyForPlayer(true, gg_cam_MindPeon, Player(0), 0.00)
-    if (Trig_StartIntro_Func020C()) then
-        return 
-    else
-    end
-    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_opeo_0024, "TRIGSTR_633", nil, "TRIGSTR_634", bj_TIMETYPE_ADD, 3.00, true)
-    if (Trig_StartIntro_Func022C()) then
-        return 
-    else
-    end
-    CameraSetupApplyForPlayer(true, gg_cam_TrallSteal, Player(0), 0.00)
-        CreateCardFrame()
-    if (Trig_StartIntro_Func025C()) then
-        return 
-    else
-    end
-    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_635", gg_snd_Intro4, "TRIGSTR_636", bj_TIMETYPE_ADD, 0.00, true)
-    if (Trig_StartIntro_Func027C()) then
-        return 
-    else
-    end
-    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_637", gg_snd_Intro5, "TRIGSTR_638", bj_TIMETYPE_ADD, 0.00, true)
-    if (Trig_StartIntro_Func029C()) then
-        return 
-    else
-    end
-    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_639", gg_snd_Intro6, "TRIGSTR_640", bj_TIMETYPE_ADD, 0.00, true)
-    if (Trig_StartIntro_Func031C()) then
-        return 
-    else
-    end
-    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_641", gg_snd_Intro7, "TRIGSTR_642", bj_TIMETYPE_ADD, 0.00, true)
-    if (Trig_StartIntro_Func033C()) then
-        return 
-    else
-    end
-    SetUnitAnimation(gg_unit_opeo_0013, "Death")
-    if (Trig_StartIntro_Func036C()) then
-        return 
-    else
-    end
-    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_643", gg_snd_Intro8, "TRIGSTR_644", bj_TIMETYPE_ADD, 0.00, true)
-    if (Trig_StartIntro_Func038C()) then
-        return 
-    else
-    end
-    SetUnitAnimation(gg_unit_opeo_0014, "Death")
-    if (Trig_StartIntro_Func040C()) then
-        return 
-    else
-    end
-    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_645", gg_snd_Intro9, "TRIGSTR_646", bj_TIMETYPE_ADD, 0.00, true)
-    if (Trig_StartIntro_Func042C()) then
-        return 
-    else
-    end
-    CameraSetupApplyForPlayer(true, gg_cam_Vine, Player(0), 0.00)
-    if (Trig_StartIntro_Func044C()) then
-        return 
-    else
-    end
-    SetUnitAnimation(gg_unit_opeo_0015, "Death")
-        BlzFrameSetVisible(CardBox,false)
-    if (Trig_StartIntro_Func047C()) then
-        return 
-    else
-    end
-    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_647", gg_snd_Intro10, "TRIGSTR_648", bj_TIMETYPE_ADD, 0.00, true)
-    if (Trig_StartIntro_Func049C()) then
-        return 
-    else
-    end
-    CameraSetupApplyForPlayer(true, gg_cam_TrallSteal, Player(0), 0.00)
-    if (Trig_StartIntro_Func051C()) then
-        return 
-    else
-    end
-    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_649", gg_snd_Intro11, "TRIGSTR_650", bj_TIMETYPE_ADD, 0.00, true)
-    if (Trig_StartIntro_Func053C()) then
-        return 
-    else
-    end
-    TriggerExecute(gg_trg_SkipIntro)
+EnableTrigger(gg_trg_SkipIntro)
+if (Trig_StartIntro_Func002C()) then
+return 
+else
+end
+CinematicModeBJ(true, GetPlayersAll())
+if (Trig_StartIntro_Func004C()) then
+return 
+else
+end
+CameraSetupApplyForPlayer(true, gg_cam_OnPeonsandTrall, Player(0), 0)
+if (Trig_StartIntro_Func006C()) then
+return 
+else
+end
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_627", gg_snd_Intro1, "TRIGSTR_628", bj_TIMETYPE_ADD, 0.00, true)
+if (Trig_StartIntro_Func008C()) then
+return 
+else
+end
+CameraSetupApplyForPlayer(true, gg_cam_OnPineRound, Player(0), 0.00)
+if (Trig_StartIntro_Func010C()) then
+return 
+else
+end
+RotateCameraAroundLocBJ(360.00, GetRectCenter(gg_rct_Region_024), Player(0), 5.00)
+if (Trig_StartIntro_Func012C()) then
+return 
+else
+end
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_629", gg_snd_Intro2, "TRIGSTR_630", bj_TIMETYPE_ADD, 0.00, true)
+if (Trig_StartIntro_Func014C()) then
+return 
+else
+end
+CameraSetupApplyForPlayer(true, gg_cam_OnPeons, Player(0), 0.00)
+if (Trig_StartIntro_Func016C()) then
+return 
+else
+end
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_631", gg_snd_Intro3, "TRIGSTR_632", bj_TIMETYPE_ADD, 0.00, true)
+if (Trig_StartIntro_Func018C()) then
+return 
+else
+end
+CameraSetupApplyForPlayer(true, gg_cam_MindPeon, Player(0), 0.00)
+if (Trig_StartIntro_Func020C()) then
+return 
+else
+end
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_opeo_0024, "TRIGSTR_633", nil, "TRIGSTR_634", bj_TIMETYPE_ADD, 3.00, true)
+if (Trig_StartIntro_Func022C()) then
+return 
+else
+end
+CameraSetupApplyForPlayer(true, gg_cam_TrallSteal, Player(0), 0.00)
+    CreateCardFrame()
+if (Trig_StartIntro_Func025C()) then
+return 
+else
+end
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_635", gg_snd_Intro4, "TRIGSTR_636", bj_TIMETYPE_ADD, 0.00, true)
+if (Trig_StartIntro_Func027C()) then
+return 
+else
+end
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_637", gg_snd_Intro5, "TRIGSTR_638", bj_TIMETYPE_ADD, 0.00, true)
+if (Trig_StartIntro_Func029C()) then
+return 
+else
+end
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_639", gg_snd_Intro6, "TRIGSTR_640", bj_TIMETYPE_ADD, 0.00, true)
+if (Trig_StartIntro_Func031C()) then
+return 
+else
+end
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_641", gg_snd_Intro7, "TRIGSTR_642", bj_TIMETYPE_ADD, 0.00, true)
+if (Trig_StartIntro_Func033C()) then
+return 
+else
+end
+SetUnitAnimation(gg_unit_opeo_0013, "Death")
+if (Trig_StartIntro_Func036C()) then
+return 
+else
+end
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_643", gg_snd_Intro8, "TRIGSTR_644", bj_TIMETYPE_ADD, 0.00, true)
+if (Trig_StartIntro_Func038C()) then
+return 
+else
+end
+SetUnitAnimation(gg_unit_opeo_0014, "Death")
+if (Trig_StartIntro_Func040C()) then
+return 
+else
+end
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_645", gg_snd_Intro9, "TRIGSTR_646", bj_TIMETYPE_ADD, 0.00, true)
+if (Trig_StartIntro_Func042C()) then
+return 
+else
+end
+CameraSetupApplyForPlayer(true, gg_cam_Vine, Player(0), 0.00)
+if (Trig_StartIntro_Func044C()) then
+return 
+else
+end
+SetUnitAnimation(gg_unit_opeo_0015, "Death")
+    BlzFrameSetVisible(CardBox,false)
+if (Trig_StartIntro_Func047C()) then
+return 
+else
+end
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_647", gg_snd_Intro10, "TRIGSTR_648", bj_TIMETYPE_ADD, 0.00, true)
+if (Trig_StartIntro_Func049C()) then
+return 
+else
+end
+CameraSetupApplyForPlayer(true, gg_cam_TrallSteal, Player(0), 0.00)
+if (Trig_StartIntro_Func051C()) then
+return 
+else
+end
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_649", gg_snd_Intro11, "TRIGSTR_650", bj_TIMETYPE_ADD, 0.00, true)
+if (Trig_StartIntro_Func053C()) then
+return 
+else
+end
+TriggerExecute(gg_trg_SkipIntro)
 end
 
 function InitTrig_StartIntro()
-    gg_trg_StartIntro = CreateTrigger()
-    TriggerRegisterTimerEventSingle(gg_trg_StartIntro, 0.00)
-    TriggerAddAction(gg_trg_StartIntro, Trig_StartIntro_Actions)
+gg_trg_StartIntro = CreateTrigger()
+TriggerRegisterTimerEventSingle(gg_trg_StartIntro, 0.00)
+TriggerAddAction(gg_trg_StartIntro, Trig_StartIntro_Actions)
 end
 
 function Trig_SkipIntro_Actions()
-        BlzFrameSetVisible(CardBox,false)
-    udg_PressESC = true
-    DisableTrigger(GetTriggeringTrigger())
-    CameraSetupApplyForPlayer(true, gg_cam_ResetCam, Player(0), 1.00)
-    CinematicModeBJ(false, GetPlayersAll())
-        CreateWASDActions()
-    EnablePreSelect(false, false)
-        InitMenu()
-        FREE_CAMERA=false
+    BlzFrameSetVisible(CardBox,false)
+udg_PressESC = true
+DisableTrigger(GetTriggeringTrigger())
+CameraSetupApplyForPlayer(true, gg_cam_ResetCam, Player(0), 1.00)
+CinematicModeBJ(false, GetPlayersAll())
+    CreateWASDActions()
+EnablePreSelect(false, false)
+    InitMenu()
+    FREE_CAMERA=false
 end
 
 function InitTrig_SkipIntro()
-    gg_trg_SkipIntro = CreateTrigger()
-    DisableTrigger(gg_trg_SkipIntro)
-    TriggerRegisterPlayerEventEndCinematic(gg_trg_SkipIntro, Player(0))
-    TriggerAddAction(gg_trg_SkipIntro, Trig_SkipIntro_Actions)
+gg_trg_SkipIntro = CreateTrigger()
+DisableTrigger(gg_trg_SkipIntro)
+TriggerRegisterPlayerEventEndCinematic(gg_trg_SkipIntro, Player(0))
+TriggerAddAction(gg_trg_SkipIntro, Trig_SkipIntro_Actions)
 end
 
 function InitCustomTriggers()
-    InitTrig_BoundEnter()
-    InitTrig_InitGUI()
-    InitTrig_StartIntro()
-    InitTrig_SkipIntro()
+InitTrig_BoundEnter()
+InitTrig_Exit()
+InitTrig_InitGUI()
+InitTrig_StartIntro()
+InitTrig_SkipIntro()
 end
 
 function RunInitializationTriggers()
-    ConditionalTriggerExecute(gg_trg_InitGUI)
+ConditionalTriggerExecute(gg_trg_InitGUI)
 end
 
 function InitCustomPlayerSlots()
-    SetPlayerStartLocation(Player(0), 0)
-    SetPlayerColor(Player(0), ConvertPlayerColor(0))
-    SetPlayerRacePreference(Player(0), RACE_PREF_HUMAN)
-    SetPlayerRaceSelectable(Player(0), true)
-    SetPlayerController(Player(0), MAP_CONTROL_USER)
+SetPlayerStartLocation(Player(0), 0)
+SetPlayerColor(Player(0), ConvertPlayerColor(0))
+SetPlayerRacePreference(Player(0), RACE_PREF_HUMAN)
+SetPlayerRaceSelectable(Player(0), true)
+SetPlayerController(Player(0), MAP_CONTROL_USER)
 end
 
 function InitCustomTeams()
-    SetPlayerTeam(Player(0), 0)
+SetPlayerTeam(Player(0), 0)
 end
 
 function main()
-    local we
-    SetCameraBounds(-14336.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), -10240.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 10240.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 10240.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -14336.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 10240.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 10240.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), -10240.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
-    SetDayNightModels("Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl", "Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl")
-    SetTerrainFogEx(0, 0.0, 5000.0, 0.500, 0.086, 0.043, 0.275)
-    we = AddWeatherEffect(Rect(-14336.0, -10240.0, 10240.0, 10240.0), FourCC("SNls"))
-    EnableWeatherEffect(we, true)
-    NewSoundEnvironment("Default")
-    SetAmbientDaySound("LordaeronWinterDay")
-    SetAmbientNightSound("LordaeronWinterNight")
-    SetMapMusic("Music", true, 0)
-    InitSounds()
-    CreateRegions()
-    CreateCameras()
-    CreateAllUnits()
-    InitBlizzard()
-    InitGlobals()
-    InitCustomTriggers()
-    RunInitializationTriggers()
+local we
+
+SetCameraBounds(-14336.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), -10240.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 10240.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 10240.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -14336.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 10240.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 10240.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), -10240.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
+SetDayNightModels("Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl", "Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl")
+SetTerrainFogEx(0, 0.0, 5000.0, 0.500, 0.086, 0.043, 0.275)
+we = AddWeatherEffect(Rect(-14336.0, -10240.0, 10240.0, 10240.0), FourCC("SNls"))
+EnableWeatherEffect(we, true)
+NewSoundEnvironment("Default")
+SetAmbientDaySound("LordaeronWinterDay")
+SetAmbientNightSound("LordaeronWinterNight")
+SetMapMusic("Music", true, 0)
+InitSounds()
+CreateRegions()
+CreateCameras()
+CreateAllUnits()
+InitBlizzard()
+InitGlobals()
+InitCustomTriggers()
+RunInitializationTriggers()
 end
 
 function config()
-    SetMapName("TRIGSTR_001")
-    SetMapDescription("TRIGSTR_003")
-    SetPlayers(1)
-    SetTeams(1)
-    SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-    DefineStartLocation(0, -5760.0, -9088.0)
-    InitCustomPlayerSlots()
-    SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
-    InitGenericPlayerSlots()
+SetMapName("TRIGSTR_001")
+SetMapDescription("TRIGSTR_003")
+SetPlayers(1)
+SetTeams(1)
+SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
+DefineStartLocation(0, -7104.0, 2944.0)
+InitCustomPlayerSlots()
+SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
+InitGenericPlayerSlots()
 end
 

@@ -13,6 +13,7 @@ function CreatePeonForPlayer(data)
         --CreateDownInterface(data)
         local x, y = GetPlayerStartLocationX(Player(data.pid)), GetPlayerStartLocationY(Player(data.pid))
         data.UnitHero = CreateUnit(Player(data.pid), HeroID, x, y, 0)
+        UnitAddForceSimple(data.UnitHero, 90, 5, 15)
         SelectUnitForPlayerSingle(data.UnitHero, Player(data.pid))
         UnitAddAbility(data.UnitHero, FourCC("Abun"))
         UnitRemoveType(data.UnitHero, UNIT_TYPE_PEON)
@@ -41,9 +42,11 @@ function AddPeonMAXHP(data, k)
         data.HPMAX = 5
         data.HPTableFH = {}
         data.HPCount = 0
+        data.CurrentHP=0
     end
     for i = 1, k do
         CreatePeonHPBAR(data)
+
     end
 end
 
@@ -57,11 +60,15 @@ function CreatePeonHPBAR(data)
     BlzFrameSetAbsPoint(HPfh, FRAMEPOINT_CENTER, -0.07 + step * data.HPCount, 0.586)
     data.HPCount = data.HPCount + 1
     data.HPTableFH[data.HPCount] = HPfh
+    data.CurrentHP=data.CurrentHP+1
 end
 
-function HeroGetDamage(data, damageSource)
+function HeroCandyGetDamage(data, damageSource)
     local hero = data.UnitHero
     HealUnit(hero)
+    BlinkUnit(hero,1)
+    local angle=AngleBetweenUnits(damageSource,hero)
+    UnitAddForceSimple(hero,angle,25,80)
     SetUnitInvulnerable(hero, true)
     TimerStart(CreateTimer(), 1, false, function()
         SetUnitInvulnerable(hero, false)
@@ -93,3 +100,27 @@ function HeroCandyHeal(data, k)
     end
 end
 
+function BlinkUnit(hero,timed)
+    local period=0.05
+    local flag=false
+    SetUnitScale(hero,0,0,0)
+    TimerStart(CreateTimer(), period, true, function()
+        timed=timed-period
+        if UnitAlive(hero) then
+            if flag then
+                flag=false
+                SetUnitScale(hero,0,0,0)
+            else
+                flag=true
+                SetUnitScale(hero,1,1,1)
+            end
+        else
+            DestroyTimer(GetExpiredTimer())
+            SetUnitScale(hero,1,1,1)
+        end
+        if timed<=0 then
+            DestroyTimer(GetExpiredTimer())
+            SetUnitScale(hero,1,1,1)
+        end
+    end)
+end

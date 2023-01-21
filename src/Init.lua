@@ -24,6 +24,7 @@ do
             --InitMenu()
             InitMouseMoveTrigger()
             InitMouseClickEvent()
+            InitItems() --иницуциализация юнитов предметов
             --CreateWASDActions()
 
             --InitGameSlimes()
