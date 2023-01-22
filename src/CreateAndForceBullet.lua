@@ -159,7 +159,9 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
         local PerepadZ = zGround - z
         if not reverse and delay <= 0 and (dist > maxDistance or CollisionEnemy or CollisisonDestr or IsUnitType(DamagingUnit, UNIT_TYPE_STRUCTURE) or PerepadZ > 20) then
             if CollisisonDestr then
-                --print("попал в стену")
+                if GetUnitTypeId(hero)==HeroID then
+                    --print("попал в стену")
+                end
                 if effectmodel == "Abilities\\Weapons\\GryphonRiderMissile\\GryphonRiderMissile.mdl" then
                     -- print("в стену молот")
                     if IsUnitType(hero, UNIT_TYPE_HERO) then
@@ -192,6 +194,11 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
             end
             if DamagingUnit and IsUnitType(heroCurrent, UNIT_TYPE_HERO) then
                 local data = GetUnitData(heroCurrent)
+                --print("Мы в ког-то попали")
+                if GetUnitTypeId(DamagingUnit)==FourCC("opeo") then
+                    SetUnitAnimation(DamagingUnit,"death")
+                    UnitAddAbility(DamagingUnit,FourCC("Aloc"))
+                end
                 if data.KnockRMB then
                     UnitAddForceSimple(DamagingUnit, angleCurrent, speed / 4, 300, nil, heroCurrent)
                 end

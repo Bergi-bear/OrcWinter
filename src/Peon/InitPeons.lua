@@ -20,6 +20,7 @@ function CreatePeonForPlayer(data)
         SuspendHeroXP(data.UnitHero, true)
         InitWASD(data.UnitHero)
         --CreatePeonHPBAR(data)
+        InitRegistryEvent(data.UnitHero)
         AddPeonMAXHP(data, 2)
         AddPeonMAXHP(data, 3)
         --InitInventory(data)
@@ -35,6 +36,19 @@ function CreatePeonForPlayer(data)
         --SetDNCForPlayer(data.UnitHero,"Environment\\DNC\\DNCAshenvale\\DNCAshenvaleTerrain\\DNCAshenvaleTerrain.mdl","Луга слаймов")
     end
 end
+function InitRegistryEvent(hero)
+    local enterTrig=CreateTrigger()
+    TriggerRegisterUnitInRange(enterTrig, hero, 120, nil)
+    TriggerAddAction(enterTrig, function()
+        local entering = GetTriggerUnit()
+        --print(GetUnitName(entering))
+        if GetUnitTypeId(entering)==FourCC("h003") then
+            KillUnit(entering)
+            UnlockCard("CardOlivie",2)
+        end
+    end)
+end
+
 
 function AddPeonMAXHP(data, k)
     if not data.HPMAX then
@@ -70,6 +84,7 @@ function HeroCandyGetDamage(data, damageSource)
     local angle=AngleBetweenUnits(damageSource,hero)
     UnitAddForceSimple(hero,angle,25,80)
     SetUnitInvulnerable(hero, true)
+    --SetUnitAnimationByIndex(hero,24)--анимация прыжка назад
     TimerStart(CreateTimer(), 1, false, function()
         SetUnitInvulnerable(hero, false)
     end)

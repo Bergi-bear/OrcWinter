@@ -19,12 +19,14 @@ end
 
 function InitTrig_EnterInRectBDragon()
 
-    print("Инициализация босса дракона")
+   -- print("Инициализация босса дракона")
     local gg_trg_EnterInRect = CreateTrigger()
     TriggerRegisterEnterRectSimple(gg_trg_EnterInRect, gg_rct_InitStartDragon)
     TriggerAddAction(gg_trg_EnterInRect, function()
-        StartDragonAI(GetRectCenterX(gg_rct_InitStartDragon), GetRectCenterY(gg_rct_InitStartDragon))
-        DisableTrigger(gg_trg_EnterInRect)
+        if IsUnitType(GetEnteringUnit(), UNIT_TYPE_HERO) then
+            StartDragonAI(GetRectCenterX(gg_rct_InitStartDragon), GetRectCenterY(gg_rct_InitStartDragon))
+            DisableTrigger(gg_trg_EnterInRect)
+        end
     end)
 end
 

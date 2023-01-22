@@ -10,6 +10,7 @@ function InitMenu()
     MenuFrame()
     CreateAndStartClock()
     DrawSelectionPortrait(true)
+    CreateMiniCard()
 end
 function ReturnFPS()
     local fps = BlzGetFrameByName("ResourceBarFrame", 0)

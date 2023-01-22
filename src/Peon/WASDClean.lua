@@ -87,7 +87,7 @@ function InitWASD(hero)
             --ForceUIKeyBJ(GetOwningPlayer(hero), "Q")
             --ForceUIKeyBJ(GetOwningPlayer(hero), "W")
             --ForceUIKeyBJ(GetOwningPlayer(hero), "E")
-           -- ForceUIKeyBJ(GetOwningPlayer(hero), "R")
+            -- ForceUIKeyBJ(GetOwningPlayer(hero), "R")
             --ForceUIKeyBJ(GetOwningPlayer(hero), "A")
             --ForceUIKeyBJ(GetOwningPlayer(hero), "S")
             --ForceUIKeyBJ(GetOwningPlayer(hero), "D")
@@ -165,10 +165,14 @@ function InitWASD(hero)
 
                 TimerStart(CreateTimer(), 3, false, function()
                     DestroyTimer(GetExpiredTimer())
-                    x,y=GetUnitXY(hero)
+                    x, y = GetUnitXY(hero)
                     ReviveHero(hero, x, y, true)
-                    PlayMonoSpeech("Speech\\Peon\\etobilobolno","Это было больно")
-                    HeroCandyHeal(data,3)
+                    if GetRandomInt(1, 2) == 1 then
+                        PlayMonoSpeech("Speech\\Peon\\etobilobolno", "Это было больно")
+                    else
+                        PlayMonoSpeech("Speech\\Peon\\yabessmertniy", "Я бессмертный!")
+                    end
+                    HeroCandyHeal(data, 3)
                     SetUnitInvulnerable(hero, true)
                     TimerStart(CreateTimer(), 2, false, function()
                         SetUnitInvulnerable(hero, false)
@@ -192,8 +196,8 @@ function InitWASD(hero)
                 local z = GetUnitZ(hero)
 
                 --SetCameraField(CAMERA_FIELD_ZOFFSET, 100, 0.1) --z - 1000
-                SetCameraField(CAMERA_FIELD_TARGET_DISTANCE,2000,0.1)
-                SetCameraField(CAMERA_FIELD_ANGLE_OF_ATTACK,304,0.1)
+                SetCameraField(CAMERA_FIELD_TARGET_DISTANCE, 2000, 0.1)
+                SetCameraField(CAMERA_FIELD_ANGLE_OF_ATTACK, 304, 0.1)
             else
                 --print("камера освобождена")
             end
@@ -332,7 +336,7 @@ function InitWASD(hero)
                         if data.CurrentWeaponType == "pickaxe" or not data.PressSpin then
                             --
 
-                            if  not data.UnitInAttack then
+                            if not data.UnitInAttack then
                                 SetUnitFacing(hero, angle)
                                 --print("место для поворота в движении"..angle)
                             end
@@ -442,7 +446,7 @@ function CreateWASDActions()
             if not data.isAttacking and StunSystem[GetHandleId(data.UnitHero)].Time == 0 then
                 --print("pressW and short anim")
                 if data.SpaceForce then
-                   -- print("сломалась анимация?")
+                    -- print("сломалась анимация?")
                 else
                     --print("не сломалась")
                 end
@@ -924,13 +928,13 @@ function PlayUnitAnimationFromChat()
         local s = S2I(GetEventPlayerChatString())
         local data = HERO[GetPlayerId(GetTriggerPlayer())]
         if GetEventPlayerChatString() == "w" then
-            PlayMonoSpeech("Speech\\Peon\\OpyatOnRaskomandovalsa","Опять раскомандовался")
+            PlayMonoSpeech("Speech\\Peon\\OpyatOnRaskomandovalsa", "Опять раскомандовался")
             --CreateForUnitWayToPoint(mainHero,CQX,CQY)
             return
         end
         if GetEventPlayerChatString() == "h" then
             --print("лечение")
-            HeroCandyHeal(data,1)
+            HeroCandyHeal(data, 1)
         end
         SetUnitAnimationByIndex(data.UnitHero, s)
         print(GetUnitName(data.UnitHero) .. " " .. s)

@@ -23,8 +23,10 @@ function InitTrig_EnterInRectB()
     local gg_trg_EnterInRect = CreateTrigger()
     TriggerRegisterEnterRectSimple(gg_trg_EnterInRect, gg_rct_Region_038)
     TriggerAddAction(gg_trg_EnterInRect, function()
-        StartYettyAI(GetRectCenterX(gg_rct_Region_038), GetRectCenterY(gg_rct_Region_038))
-        DisableTrigger(gg_trg_EnterInRect)
+        if IsUnitType(GetEnteringUnit(), UNIT_TYPE_HERO) then
+            StartYettyAI(GetRectCenterX(gg_rct_Region_038), GetRectCenterY(gg_rct_Region_038))
+            DisableTrigger(gg_trg_EnterInRect)
+        end
     end)
 end
 
@@ -56,7 +58,10 @@ function StartYettyAI(xs, ys)
             StartSound(bj_questCompletedSound)
             DestroyTimer(GetExpiredTimer())
             phase = 0
-            print("Даём нарграду, победа")
+            --print("Даём нарграду, победа")
+            PlayMonoSpeech("Speech\\Peon\\nyizachemyaegoybil", "Ну и зачем я его убил")
+
+            CreateUnit(Player(0),FourCC("h003"),GetUnitX(boss),GetUnitY(boss),0)
             ClearMapMusicBJ()
             PlayMusicBJ("Endless Snowbanks")
             SetMusicVolumeBJ(100)

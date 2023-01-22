@@ -208,7 +208,7 @@ function PointContentDestructable (x, y, range, iskill, damage, hero)
     SetRect(GlobalRect, x - range, y - range, x + range, y + range)
     EnumDestructablesInRect(GlobalRect, nil, function()
         local d = GetEnumDestructable()
-        if GetDestructableLife(d) > 0 then
+        if GetDestructableLife(d) > 0 and GetDestructableTypeId(d)~=FourCC("B005") then --игнор специальных блокираторов
             --and unitZ<=GetTerrainZ(x,y)+50
             content = true
             contentedDest = d
