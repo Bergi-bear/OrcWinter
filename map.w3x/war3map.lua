@@ -4461,6 +4461,17 @@ function CreatePeonHPBAR(data)
 end
 
 function HeroCandyGetDamage(data, damageSource)
+
+    local  bugs = BlzCreateFrameByType("SPRITE", "SpriteName", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
+
+    BlzFrameSetAbsPoint(bugs, FRAMEPOINT_CENTER, 0.189, 0.296)
+    BlzFrameSetSize(bugs, 0.01, 0.01)
+    BlzFrameSetModel(bugs, "bugs2", 0)
+    BlzFrameSetScale(bugs, 0.00058)
+    TimerStart(CreateTimer(), 3, false, function()
+        BlzDestroyFrame(bugs)
+    end)
+
     local hero = data.UnitHero
     HealUnit(hero)
     BlinkUnit(hero,1)
