@@ -42,9 +42,30 @@ function InitRegistryEvent(hero)
     TriggerAddAction(enterTrig, function()
         local entering = GetTriggerUnit()
         --print(GetUnitName(entering))
-        if GetUnitTypeId(entering)==FourCC("h003") then
+        if GetUnitTypeId(entering)==FourCC("h003") then -- салат оливье
             KillUnit(entering)
             UnlockCard("CardOlivie",2)
+        elseif true  then
+
+        end
+    end)
+    --больший радиус
+    local enterTrig500=CreateTrigger()
+    TriggerRegisterUnitInRange(enterTrig500, hero, 500, nil)
+    TriggerAddAction(enterTrig500, function()
+        local entering = GetTriggerUnit()
+        --print(GetUnitName(entering))
+        if GetUnitTypeId(entering)==FourCC("h004") then -- Чекпоинт
+            --print("чекпоинт ")
+            local data=GetUnitData(hero)
+            local x,y=GetUnitXY(entering)
+            if data.ResPointX==x then
+
+            else
+                print("Контрольная точка изменена")
+            end
+            data.ResPointX,data.ResPointY=x,y
+
         end
     end)
 end
@@ -78,7 +99,7 @@ function CreatePeonHPBAR(data)
 end
 
 function HeroCandyGetDamage(data, damageSource)
-
+    --[[
     local  bugs = BlzCreateFrameByType("SPRITE", "SpriteName", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
     BlzFrameSetAbsPoint(bugs, FRAMEPOINT_CENTER, 0.189, 0.296)
     BlzFrameSetSize(bugs, 0.01, 0.01)
@@ -86,7 +107,7 @@ function HeroCandyGetDamage(data, damageSource)
     BlzFrameSetScale(bugs, 0.00058)
     TimerStart(CreateTimer(), 3, false, function()
         BlzDestroyFrame(bugs)
-    end)
+    end)]]
 
     local hero = data.UnitHero
     HealUnit(hero)

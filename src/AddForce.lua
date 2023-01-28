@@ -37,9 +37,11 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
             newVector = VectorSum(newVector, vector:yawPitchOffset(speed, angle * (math.pi / 180), 0.0))
             SetUnitPositionSmooth(hero, newVector.x, newVector.y)
         end
+        local countTick=0
 
         TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
             currentdistance = currentdistance + speed
+            countTick=countTick+1
             local x, y = GetUnitXY(hero)
             local vector = Vector:new(x, y, GetUnitZ(hero))
             local newVector = vector
@@ -130,6 +132,11 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
                 --DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic",x,y))
                 PlayerSeeNoiseInRangeTimed(0.5, x, y)
             end
+            if flag == "AttackAndRunWolf"  and countTick>=10 then --каждый тик движения
+                --print("эффекты ударов лап")
+                countTick=0
+                WolfSlashAttack(hero)
+            end
             if flag == "ignore" then
                 local data = HERO[GetPlayerId(GetOwningPlayer(hero))]
                 --print("попытка нанести урон в рывке")
@@ -172,6 +179,14 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
                 if flag == "RunEtti" then
                     BlzPauseUnitEx(hero, false)
                     SetUnitTimeScale(hero, 1)
+                    if UnitAlive(hero) then
+                        ResetUnitAnimation(hero)
+                    end
+                end
+                if flag == "AttackAndRunWolf" then
+                    BlzPauseUnitEx(hero, false)
+                    SetUnitTimeScale(hero, 1)
+                    WolfRoundMove(hero)
                     if UnitAlive(hero) then
                         ResetUnitAnimation(hero)
                     end
@@ -319,4 +334,17 @@ function Chk2Way(x, y, x1, x2)
         end
     end
     return wayClean
+end
+
+function MoveEffectTimedWSpeed(eff,speed,angle,timed)
+    TimerStart(CreateTimer(),TIMER_PERIOD64 , true, function()
+        timed=timed-TIMER_PERIOD64
+        local x,y,z=BlzGetLocalSpecialEffectX(eff),BlzGetLocalSpecialEffectY(eff),BlzGetLocalSpecialEffectZ(eff)
+        x,y=MoveXY(x,y,speed,angle)
+        BlzSetSpecialEffectPosition(eff,x,y,z)
+        BlzSetSpecialEffectYaw(eff, math.rad(angle))
+        if timed<=0 then
+            DestroyTimer(GetExpiredTimer())
+        end
+    end)
 end

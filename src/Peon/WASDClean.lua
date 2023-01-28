@@ -165,7 +165,10 @@ function InitWASD(hero)
 
                 TimerStart(CreateTimer(), 3, false, function()
                     DestroyTimer(GetExpiredTimer())
-                    x, y = GetUnitXY(hero)
+                    if not data.ResPointX then
+                        data.ResPointX,data.ResPointY=GetPlayerStartLocationX(Player(data.pid)), GetPlayerStartLocationY(Player(data.pid))
+                    end
+                    x, y = data.ResPointX,data.ResPointY
                     ReviveHero(hero, x, y, true)
                     if GetRandomInt(1, 2) == 1 then
                         PlayMonoSpeech("Speech\\Peon\\etobilobolno", "Это было больно")
@@ -697,7 +700,7 @@ function CreateWASDActions()
                         --DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt", nx, ny))
                         if not Chk2Way(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), nx, ny) then
                             print("ошибка, такой функции нет")
-                            Blink2Point(data, nx, ny)
+                            Blink2Point(data.UnitHero, nx, ny)
                         else
                             --print("прыжок вниз?")
                             UnitAddForceSimple(data.UnitHero, data.DirectionMove, 10, dist, "ignore") --САМ рывок при нажатии пробела
