@@ -41,7 +41,7 @@ function StartWolfAI(xs, ys)
     --local FW = CreateFogModifierRectBJ(false, Player(0), FOG_OF_WAR_VISIBLE, GlobalRect)
     --FogModifierStart(FW)
 
-    local phase = 5 --стартовая фаза
+    local phase = 6 --стартовая фаза
     local sec = 0
     local PhaseOn = true
     local OnAttack = true
@@ -116,7 +116,7 @@ function StartWolfAI(xs, ys)
             sec = sec + 1
             if sec >= 5 then
                 sec = 0
-                phase = GetRandomInt(1, 5) -- переключатель, рандомизатор фаз
+                phase = GetRandomInt(1, 6) -- переключатель, рандомизатор фаз
                 PhaseOn = true
                 --print("phase " .. phase)
             end
@@ -134,6 +134,11 @@ function StartWolfAI(xs, ys)
             if phase ~= 5 then
                 WolfDoingFastWalk = false
 
+            end
+            if phase == 2 and PhaseOn then
+                PhaseOn = false
+                print("фаза", phase)
+                WolfDashAttack(boss, hero)
             end
             if phase == 3 and PhaseOn then
                 PhaseOn = false
@@ -155,11 +160,29 @@ function StartWolfAI(xs, ys)
                 WolfWinterMove(boss, xs, ys)
 
             end
-            if phase == 2 and PhaseOn then
+            if phase == 6 and PhaseOn then
                 PhaseOn = false
                 print("фаза", phase)
-                WolfDashAttack(boss, hero)
+                WolfIceDash(boss, hero)
+                local eff = AddSpecialEffect("BossArrow", GetUnitXY(boss))
+                local angle = AngleBetweenUnits(boss, hero)
+                SetUnitFacing(boss, angle)
+                BlzSetSpecialEffectYaw(eff, math.rad(angle))
+
+                local k = 3
+                TimerStart(CreateTimer(), 1.2, true, function()
+                    DestroyEffect(eff)
+                    BlzSetSpecialEffectPosition(eff, 0, 0, 0)
+                    k = k - 1
+                    if k <= 0 then
+                        DestroyTimer(GetExpiredTimer())
+                    else
+                        WolfIceDash(boss, hero)
+                    end
+                end)
+
             end
+
 
         else
             -- перезапуск боссфайта
@@ -183,6 +206,40 @@ function StartWolfAI(xs, ys)
         end--конец
     end)
 end
+
+function WolfIceDash(boss, hero)
+    if UnitAlive(boss) then
+        --local eff = AddSpecialEffect("BossArrow", GetUnitXY(boss))
+        local angle = AngleBetweenUnits(boss, hero)
+        local k = GetUnitLifePercent(boss) / 100
+        k = 1 - k
+        SetUnitFacing(boss, angle)
+        --BlzSetSpecialEffectYaw(eff, math.rad(angle))
+        TimerStart(CreateTimer(), 1, false, function()
+            --  DestroyEffect(eff)
+        end)
+
+        TimerStart(CreateTimer(), 1, false, function()
+
+            --print("звук")
+            --WolfSlashAttack(boss)
+            local x, y = GetUnitXY(boss)
+            local chargeEff = AddSpecialEffect("IceCharge", x, y)
+            BlzSetSpecialEffectScale(chargeEff, 3)
+            SetUnitAnimationByIndex(boss, 2)
+            MoveEffectTimedWSpeed(chargeEff, 40, angle, 0.39)
+            UnitAddForceSimple(boss, angle, 40, 1000, "RunEtti")
+
+            BlzPauseUnitEx(boss, true)
+            -- local r=GetRandomInt(0,8)
+            --print(r,"волк")
+            --SetUnitAnimationByIndex(boss, r)
+            SetUnitTimeScale(boss, 3)
+            BlzSetUnitFacingEx(boss, angle)
+        end)
+    end
+end
+
 WolfDoingFastWalk = false
 
 function WolfWinterMove(boss, xs, ys)
@@ -199,10 +256,11 @@ function WolfWinterMove(boss, xs, ys)
         TimerStart(CreateTimer(), 1 / 64, true, function()
             local nx, ny = MoveXY(xs, ys, dist, speed * i)
             i = i + 1
-            dist=dist-1
+            dist = dist - 1
             local angle = AngleBetweenXY(nx, ny, MoveXY(xs, ys, dist, speed * (i + 1))) / bj_DEGTORAD
             SetUnitPosition(boss, nx, ny)
             BlzSetUnitFacingEx(boss, angle)
+            UnitDamageArea(boss, 50, nx, ny, 120)
             if GetRandomInt(1, 10) == 1 then
                 local new = CreateUnit(GetOwningPlayer(boss), FourCC("ntor"), GetUnitX(boss), GetUnitY(boss), 0)
                 UnitApplyTimedLife(new, FourCC('BTLF'), 5)
@@ -265,7 +323,9 @@ function UnitAddJumpForce(hero, angle, speed, distance, MaxHeight, HasMarker)
             SetUnitZ(hero, 0)
             --print("приземлился")
             if HasMarker then
-                WolfHowlFreeze(hero, 7)
+                if GetRandomInt(1,3)==1 then
+                    WolfHowlFreeze(hero, GetRandomInt(4,8))
+                end
                 WolfRoundMove(hero)
             end
             if UnitAlive(hero) then
@@ -273,9 +333,9 @@ function UnitAddJumpForce(hero, angle, speed, distance, MaxHeight, HasMarker)
             end
 
             if true then
-                if not UnitDamageArea(hero, 150, newX, newY, 250) then
-                    DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", newX, newY))
-                end
+                UnitDamageArea(hero, 150, newX, newY, 250)
+                DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", newX, newY))
+
             end
         end
     end)
@@ -291,12 +351,13 @@ function WolfHowlFreeze(boss, k)
 
     SetUnitAnimation(boss, "Spell Slam")
     local x, y = GetUnitXY(boss)
-    normal_sound("howl", x, y)
+
     --DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt", x, y))
     --
     local dist = 50
     if not k then
         k = 15
+        normal_sound("howl", x, y)
     end
     local n = 0
     TimerStart(CreateTimer(), 0.3, true, function()
@@ -305,7 +366,7 @@ function WolfHowlFreeze(boss, k)
             local nx, ny = MoveXY(x, y, dist, angle * i)
             --print("i",angle*i)
             local eff = AddSpecialEffect("Ice Shard", nx, ny)
-
+            BlzSetSpecialEffectYaw(eff, math.rad(angle))
             TimerStart(CreateTimer(), 0.3, false, function()
                 UnitDamageArea(boss, 50, nx, ny, 80)
             end)

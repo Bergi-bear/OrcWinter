@@ -108,6 +108,7 @@ function HeroCandyGetDamage(data, damageSource)
     TimerStart(CreateTimer(), 3, false, function()
         BlzDestroyFrame(bugs)
     end)]]
+    CinematicFadeBJ(bj_CINEFADETYPE_FADEIN, 3, "Vignette\\VignetteDamage", 255, 255, 255, 0)
 
     local hero = data.UnitHero
     HealUnit(hero)

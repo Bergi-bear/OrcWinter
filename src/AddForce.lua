@@ -344,6 +344,7 @@ function MoveEffectTimedWSpeed(eff,speed,angle,timed)
         BlzSetSpecialEffectPosition(eff,x,y,z)
         BlzSetSpecialEffectYaw(eff, math.rad(angle))
         if timed<=0 then
+            DestroyEffect(eff)
             DestroyTimer(GetExpiredTimer())
         end
     end)
