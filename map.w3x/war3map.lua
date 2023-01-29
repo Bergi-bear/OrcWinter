@@ -377,8 +377,10 @@ u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -558.6, -818.0, 49.483, FourCC("ope
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -471.8, -961.9, 49.483, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -11901.9, 2654.0, 102.460, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -13088.2, 3360.7, -4.878, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("e002"), -5412.0, -9227.2, -1.183, FourCC("e002"))
+u = BlzCreateUnitWithSkin(p, FourCC("e002"), -7561.3, 4576.4, -84.843, FourCC("e002"))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -11617.0, -8041.4, 102.460, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("e002"), -11839.7, 128.6, 269.502, FourCC("e002"))
@@ -5452,7 +5454,7 @@ function InitWASD(hero)
                         if data.CurrentWeaponType == "pickaxe" or not data.PressSpin then
                             --
 
-                            if not data.UnitInAttack then
+                            if not data.LMBIsPressed then -- UnitInAttack
                                 SetUnitFacing(hero, angle)
                                 --print("место для поворота в движении"..angle)
                             end

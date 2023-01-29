@@ -342,7 +342,7 @@ function InitWASD(hero)
                         if data.CurrentWeaponType == "pickaxe" or not data.PressSpin then
                             --
 
-                            if not data.UnitInAttack then
+                            if not data.LMBIsPressed then -- UnitInAttack
                                 SetUnitFacing(hero, angle)
                                 --print("место для поворота в движении"..angle)
                             end
