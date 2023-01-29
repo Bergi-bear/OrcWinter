@@ -23,6 +23,7 @@ function CreatePeonForPlayer(data)
         InitRegistryEvent(data.UnitHero)
         AddPeonMAXHP(data, 2)
         AddPeonMAXHP(data, 3)
+        IssuePointOrder(data.UnitHero,"smart",GetUnitXY(data.UnitHero))
         --InitInventory(data)
 
         --CreateHPBar(data)

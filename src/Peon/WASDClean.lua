@@ -97,8 +97,11 @@ function InitWASD(hero)
             --ForceUIKeyBJ(GetOwningPlayer(hero), "X")
             --ForceUIKeyBJ(GetOwningPlayer(hero), "C")
             --ForceUIKeyBJ(GetOwningPlayer(hero), "V")
-
-            ForceUIKeyBJ(GetOwningPlayer(hero), "M")
+            if not data.Desync then
+                ForceUIKeyBJ(GetOwningPlayer(hero), "M")
+            else
+                ForceUIKeyBJ(GetOwningPlayer(hero), "Q")
+            end
 
         end
     end)
