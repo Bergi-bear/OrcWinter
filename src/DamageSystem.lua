@@ -18,7 +18,7 @@ function OnPostDamage()
     local target = GetTriggerUnit() -- тот кто получил урон
     local caster = GetEventDamageSource() -- тот кто нанёс урон
 
-    --print(GetUnitName(target))
+    --print(GetUnitName(target),damage)
 
 
 
@@ -103,7 +103,12 @@ function OnPostDamage()
         end
     else
         --print("наш герой получил урон")
-        HeroCandyGetDamage(GetUnitData(target),caster)
+        if damage<2 then
+           -- print("урон",damage)
+            BlzSetEventDamage(0)
+        else
+            HeroCandyGetDamage(GetUnitData(target),caster)
+        end
     end
     if GetUnitTypeId(target) ~= HeroID and GetUnitTypeId(caster) == HeroID then
         --Функция должна быть в самом низу
