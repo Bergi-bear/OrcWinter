@@ -466,7 +466,7 @@ u = BlzCreateUnitWithSkin(p, FourCC("e002"), -11839.7, 128.6, 269.502, FourCC("e
 u = BlzCreateUnitWithSkin(p, FourCC("e002"), -11835.8, 1670.0, 270.000, FourCC("e002"))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -8082.3, -5380.2, 194.385, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -12755.9, -4965.9, -14.064, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -12755.9, -4965.9, 345.936, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 end
 
@@ -4434,6 +4434,7 @@ do
         InitGlobalsOrigin()
         TimerStart(CreateTimer(), .01, false, function()
             InitSnowMan(FourCC("h005"))
+            InitDeathEventCreep()
         end)
     end
 end
@@ -4448,15 +4449,29 @@ function InitSnowMan(id)
     end
 end
 
-function InitDeathEvent()
+function InitDeathEventCreep()
     local this = CreateTrigger()
     TriggerRegisterAnyUnitEventBJ(this, EVENT_PLAYER_UNIT_DEATH)
     TriggerAddAction(this, function()
         local u = GetTriggerUnit() --тот кто умер
-        local killer = GetKillingUnit()
-        local xu, yu = GetUnitXY(u)
+        if GetUnitTypeId(u)==FourCC("h005") then
+            local killer = GetKillingUnit()
+            local id=GetUnitTypeId(u)
+            local p=GetOwningPlayer(u)
+            local x,y=CreepsX[GetHandleId(u)],CreepsY[GetHandleId(u)]
+            local delay=15
+            TimerStart(CreateTimer(), delay, false, function()
+                local new=CreateUnit(p,id,x,y,GetRandomInt(0,360))
+                CreepsX[GetHandleId(new)],CreepsY[GetHandleId(new)]=GetUnitXY(new)
 
-    end )
+
+            end)
+            TimerStart(CreateTimer(), delay-5, false, function()
+                DestroyEffect(AddSpecialEffect("HealingWater", x,y))
+            end)
+        end
+
+    end)
 
 end
 ---
@@ -5665,7 +5680,7 @@ function InitWASD(hero)
             data.CameraStabUnit = nil
             if not FREE_CAMERA then
                 SetCameraQuickPosition(GetUnitX(hero), GetUnitY(hero))
-                SetCameraTargetControllerNoZForPlayer(GetOwningPlayer(hero), hero, 10, 10, true) -- не дергается
+                SetCameraTargetControllerNoZForPlayer(GetOwningPlayer(hero), hero, 10, 200, false) -- не дергается
                 --print(GetCameraField(CAMERA_FIELD_ANGLE_OF_ATTACK))
                 --print(GetCameraField(CAMERA_FIELD_TARGET_DISTANCE))
                 local z = GetUnitZ(hero)
@@ -6930,7 +6945,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, -320.0, -768.0)
+DefineStartLocation(0, -8960.0, -5952.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()

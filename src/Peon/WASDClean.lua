@@ -198,7 +198,7 @@ function InitWASD(hero)
             data.CameraStabUnit = nil
             if not FREE_CAMERA then
                 SetCameraQuickPosition(GetUnitX(hero), GetUnitY(hero))
-                SetCameraTargetControllerNoZForPlayer(GetOwningPlayer(hero), hero, 10, 10, true) -- не дергается
+                SetCameraTargetControllerNoZForPlayer(GetOwningPlayer(hero), hero, 10, 200, false) -- не дергается
                 --print(GetCameraField(CAMERA_FIELD_ANGLE_OF_ATTACK))
                 --print(GetCameraField(CAMERA_FIELD_TARGET_DISTANCE))
                 local z = GetUnitZ(hero)

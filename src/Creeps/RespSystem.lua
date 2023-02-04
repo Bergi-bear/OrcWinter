@@ -9,6 +9,7 @@ do
         InitGlobalsOrigin()
         TimerStart(CreateTimer(), .01, false, function()
             InitSnowMan(FourCC("h005"))
+            InitDeathEventCreep()
         end)
     end
 end
@@ -16,21 +17,35 @@ CreepsX={}
 CreepsY={}
 function InitSnowMan(id)
     local _, k, rg = FindUnitOfType(id)
-    print(k,"снеговиков")
+    --print(k,"снеговиков")
     for i = 1, #rg do
         local u = rg[i]
         CreepsX[GetHandleId(u)],CreepsY[GetHandleId(u)]=GetUnitXY(u)
     end
 end
 
-function InitDeathEvent()
+function InitDeathEventCreep()
     local this = CreateTrigger()
     TriggerRegisterAnyUnitEventBJ(this, EVENT_PLAYER_UNIT_DEATH)
     TriggerAddAction(this, function()
         local u = GetTriggerUnit() --тот кто умер
-        local killer = GetKillingUnit()
-        local xu, yu = GetUnitXY(u)
+        if GetUnitTypeId(u)==FourCC("h005") then
+            local killer = GetKillingUnit()
+            local id=GetUnitTypeId(u)
+            local p=GetOwningPlayer(u)
+            local x,y=CreepsX[GetHandleId(u)],CreepsY[GetHandleId(u)]
+            local delay=GetRandomInt(30,60)
+            TimerStart(CreateTimer(), delay, false, function()
+                local new=CreateUnit(p,id,x,y,GetRandomInt(0,360))
+                CreepsX[GetHandleId(new)],CreepsY[GetHandleId(new)]=GetUnitXY(new)
 
-    end )
+
+            end)
+            TimerStart(CreateTimer(), delay-5, false, function()
+                DestroyEffect(AddSpecialEffect("HealingWater", x,y))
+            end)
+        end
+
+    end)
 
 end
