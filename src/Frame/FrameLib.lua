@@ -11,6 +11,7 @@ function InitMenu()
     CreateAndStartClock()
     DrawSelectionPortrait(true)
     CreateMiniCard()
+    CreatePeonCounter()
 end
 function ReturnFPS()
     local fps = BlzGetFrameByName("ResourceBarFrame", 0)
@@ -77,19 +78,17 @@ function MenuFrame()
 end
 
 function CreateAndStartClock()
-
     local charges = BlzCreateFrameByType("BACKDROP", "Face", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
     local new_FrameChargesText = BlzCreateFrameByType("TEXT", "ButtonChargesText", charges, "", 0)
-
+    local sec = 0 --стартовые секунды
+    local min = 0 -- стартовые минуты
+    local h = 23 -- стартовые часы
     BlzFrameSetTexture(charges, "UI\\Widgets\\Console\\Human\\CommandButton\\human-button-lvls-overlay", 0, true)
     BlzFrameSetSize(charges, 0.08, 0.02)
     BlzFrameSetAbsPoint(charges, FRAMEPOINT_CENTER, 0.48, 0.6 - 0.01)
-    --BlzFrameSetPoint(charges, FRAMEPOINT_BOTTOM, wood, FRAMEPOINT_BOTTOM, 0,0)
     BlzFrameSetText(new_FrameChargesText, Zero(0) .. ":" .. Zero(0) .. ":" .. Zero(0))
     BlzFrameSetPoint(new_FrameChargesText, FRAMEPOINT_CENTER, charges, FRAMEPOINT_CENTER, 0., 0.)
-    local sec = 0
-    local min = 0
-    local h = 23
+
     TimerStart(CreateTimer(), 1, true, function()
         sec = sec + 1
         if sec == 60 then

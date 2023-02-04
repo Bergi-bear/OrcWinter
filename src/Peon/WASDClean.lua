@@ -173,11 +173,13 @@ function InitWASD(hero)
                     end
                     x, y = data.ResPointX,data.ResPointY
                     ReviveHero(hero, x, y, true)
-                    if GetRandomInt(1, 2) == 1 then
-                        PlayMonoSpeech("Speech\\Peon\\etobilobolno", "Это было больно")
-                    else
-                        PlayMonoSpeech("Speech\\Peon\\yabessmertniy", "Я бессмертный!")
-                    end
+                    TimerStart(CreateTimer(), 0.5, false, function()
+                        if GetRandomInt(1, 2) == 1 then
+                            PlayMonoSpeech("Speech\\Peon\\etobilobolno", "Это было больно")
+                        else
+                            PlayMonoSpeech("Speech\\Peon\\yabessmertniy", "Я бессмертный!")
+                        end
+                    end)
                     HeroCandyHeal(data, 3)
                     SetUnitInvulnerable(hero, true)
                     TimerStart(CreateTimer(), 2, false, function()
@@ -456,7 +458,7 @@ function CreateWASDActions()
                 else
                     --print("не сломалась")
                 end
-                --UnitAddForceSimple(data.UnitHero, 90, 5, 15)
+                UnitAddForceSimple(data.UnitHero, 90, 5, 15)
                 data.DirectionMove = 90
 
                 if data.ReleaseW and data.ReleaseD then
@@ -508,7 +510,7 @@ function CreateWASDActions()
             --SelectUnitForPlayerSingle(data.UnitHero,Player(0))
             if not data.isAttacking and StunSystem[GetHandleId(data.UnitHero)].Time == 0 then
                 data.animStand = 1.8 --до полной анимации 2 секунды
-                --UnitAddForceSimple(data.UnitHero, 270, 5, 15)
+                UnitAddForceSimple(data.UnitHero, 270, 5, 15)
                 data.DirectionMove = 270
 
                 if data.ReleaseS and data.ReleaseD then
@@ -557,7 +559,7 @@ function CreateWASDActions()
             --SelectUnitForPlayerSingle(data.UnitHero,Player(0))
             if not data.isAttacking and StunSystem[GetHandleId(data.UnitHero)].Time == 0 then
                 data.animStand = 1.8 --до полной анимации 2 секунды
-                --UnitAddForceSimple(data.UnitHero, 0, 5, 15)
+                UnitAddForceSimple(data.UnitHero, 0, 5, 15)
                 data.DirectionMove = 0
                 SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationWalk)
 
@@ -600,7 +602,7 @@ function CreateWASDActions()
                 -- нет проверки на стан
                 data.animStand = 1.8 --до полной анимации 2 секунды
                 data.DirectionMove = 180
-                --UnitAddForceSimple(data.UnitHero, 180, 5, 15)
+                UnitAddForceSimple(data.UnitHero, 180, 5, 15)
                 if not LockAnimAnimation(data) then
                     SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationWalk)
 

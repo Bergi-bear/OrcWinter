@@ -198,6 +198,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
                 if GetUnitTypeId(DamagingUnit)==FourCC("opeo") then
                     SetUnitAnimation(DamagingUnit,"death")
                     UnitAddAbility(DamagingUnit,FourCC("Aloc"))
+                    peonRescue=peonRescue+1
                 end
                 if data.KnockRMB then
                     UnitAddForceSimple(DamagingUnit, angleCurrent, speed / 4, 300, nil, heroCurrent)

@@ -15,28 +15,28 @@ do
     end
 end
 
-
-function TrapShotByID(id, u)
+function TrapShotByID(id, u, range)
     if id == FourCC("h000") then
-        ActivateBulletTrap(u, "Abilities\\Weapons\\LichMissile\\LichMissile.mdl")
+        ActivateBulletTrap(u, "Abilities\\Weapons\\LichMissile\\LichMissile.mdl", range)
     elseif id == FourCC("h001") then
-        ActivateBulletTrap(u, "Abilities\\Weapons\\ChimaeraAcidMissile\\ChimaeraAcidMissile.mdl")
+        ActivateBulletTrap(u, "Abilities\\Weapons\\ChimaeraAcidMissile\\ChimaeraAcidMissile.mdl", range)
     end
 end
 
 function InitTrapByID(id)
     local _, k, rg = FindUnitOfType(id)
-    local radiusActivate=500
-    local distanceSee=1200
+    local radiusActivate = 500
+    local distanceSee = 1200
     --print(k)
     for i = 1, #rg do
         local u = rg[i]
         UnitAddAbility(u, FourCC("Aloc"))
         local enterTrig = CreateTrigger()
 
-        local hp = R2I(GetUnitLifePercent(u)) --тип ловушки определяется её процентом HP только НЕЧЕТНЫЕ
-        --print(hp.."%%".." от "..R2S(BlzGetUnitMaxHP(u)))
-        if hp == 100 then -- ловушка работающая в радиусе
+        local hp = R2I(GetUnitLifePercent(u)) --тип ловушки определяется её процентом HP только НЕЧЕТНЫЕ, НЕТ лучше проверить дебагом
+        print(hp.."%%".." от "..R2S(BlzGetUnitMaxHP(u)))
+        if hp == 100 then
+            -- ловушка работающая в радиусе
 
             TriggerRegisterUnitInRange(enterTrig, u, radiusActivate, nil)
             TriggerAddAction(enterTrig, function()
@@ -49,7 +49,7 @@ function InitTrapByID(id)
                     end
                 end
                 TimerStart(CreateTimer(), 0.5, true, function()
-                    if not IsUnitInRange(entering, u, radiusActivate+500) then
+                    if not IsUnitInRange(entering, u, radiusActivate + 500) then
                         --print("вышел из радиуса")
                         DestroyTimer(GetExpiredTimer())
                         --DestroyTrigger(enterTrig)
@@ -75,6 +75,30 @@ function InitTrapByID(id)
                     if count <= 0 then
                         DestroyTimer(GetExpiredTimer())
                     end
+                end)
+            end)
+        elseif hp == 5 then
+            --5-11 с разно задержкой
+            -- стреляет очень далеко
+            TimerStart(CreateTimer(), 2, true, function()
+                TrapShotByID(id, u, 2400)
+            end)
+        elseif hp == 7 then
+            TimerStart(CreateTimer(), 0.5, false, function()
+                TimerStart(CreateTimer(), 2, true, function()
+                    TrapShotByID(id, u, 2400)
+                end)
+            end)
+        elseif hp == 9 then
+            TimerStart(CreateTimer(), 1, false, function()
+                TimerStart(CreateTimer(), 2, true, function()
+                    TrapShotByID(id, u, 2400)
+                end)
+            end)
+        elseif hp == 10 then
+            TimerStart(CreateTimer(), 1.5, false, function()
+                TimerStart(CreateTimer(), 2, true, function()
+                    TrapShotByID(id, u, 2400)
                 end)
             end)
         end

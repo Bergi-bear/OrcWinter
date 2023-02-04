@@ -114,8 +114,6 @@ local t
 local life
 
 gg_unit_Oths_0011 = BlzCreateUnitWithSkin(p, FourCC("Oths"), 63.2, -581.0, 211.076, FourCC("Oths"))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -480.1, 90.0, 303.316, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1652.2, -1430.7, 121.800, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("o001"), -1180.6, 1453.0, 262.550, FourCC("o001"))
@@ -126,8 +124,16 @@ u = BlzCreateUnitWithSkin(p, FourCC("h002"), -11168.0, -8085.8, 5.812, FourCC("h
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), -3856.2, -4870.3, 5.812, FourCC("h002"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), -5419.7, 3330.1, 5.812, FourCC("h002"))
 u = BlzCreateUnitWithSkin(p, FourCC("h004"), -11879.0, -1113.3, 159.380, FourCC("h004"))
+u = BlzCreateUnitWithSkin(p, FourCC("h002"), -12472.7, -2705.4, 5.812, FourCC("h002"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), -6622.8, -8553.6, 5.812, FourCC("h002"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), -5681.4, -8453.4, 5.812, FourCC("h002"))
+u = BlzCreateUnitWithSkin(p, FourCC("h002"), -10483.4, -6645.3, 5.812, FourCC("h002"))
+u = BlzCreateUnitWithSkin(p, FourCC("h004"), -11038.7, -8201.1, 159.380, FourCC("h004"))
+u = BlzCreateUnitWithSkin(p, FourCC("h002"), -13274.1, -1596.1, 5.810, FourCC("h002"))
+u = BlzCreateUnitWithSkin(p, FourCC("h002"), -12149.0, 4711.7, 5.810, FourCC("h002"))
+u = BlzCreateUnitWithSkin(p, FourCC("h004"), -5565.8, -8871.9, 159.380, FourCC("h004"))
+u = BlzCreateUnitWithSkin(p, FourCC("h002"), -9942.4, 872.0, 5.810, FourCC("h002"))
+u = BlzCreateUnitWithSkin(p, FourCC("h002"), -6551.2, -7066.3, 5.812, FourCC("h002"))
 end
 
 function CreateUnitsForPlayer1()
@@ -221,10 +227,20 @@ u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10238.5, -7978.0, 270.000, FourCC(
 life = GetUnitState(u, UNIT_STATE_LIFE)
 SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
 u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12806.5, -2941.5, 270.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.05 * life)
 u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12677.3, -2936.8, 270.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.07 * life)
 u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12542.8, -2937.9, 270.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.09 * life)
 u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12407.4, -2946.3, 270.000, FourCC("h000"))
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10205.5, -6390.6, 88.698, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.11 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10229.2, -6393.9, 88.700, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.07 * life)
 u = BlzCreateUnitWithSkin(p, FourCC("h000"), -11564.6, -409.6, 0.000, FourCC("h000"))
 life = GetUnitState(u, UNIT_STATE_LIFE)
 SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
@@ -301,6 +317,67 @@ u = BlzCreateUnitWithSkin(p, FourCC("h001"), -12998.0, -8052.5, 325.134, FourCC(
 u = BlzCreateUnitWithSkin(p, FourCC("h001"), -13035.6, -8214.4, 336.570, FourCC("h001"))
 u = BlzCreateUnitWithSkin(p, FourCC("h001"), -12448.1, -8360.0, 153.450, FourCC("h001"))
 u = BlzCreateUnitWithSkin(p, FourCC("h001"), -12501.4, -8480.1, 142.947, FourCC("h001"))
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12372.9, -6471.8, 0.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.05 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12377.1, -6339.6, 0.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.07 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -11790.7, -3586.8, 0.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -11767.9, -4341.4, 0.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10937.3, -2414.2, 229.221, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10111.5, -6397.4, 88.700, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.10 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10344.7, -5905.8, 88.700, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.07 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10432.8, -1987.4, 270.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.07 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10299.4, -2007.8, 270.000, FourCC("h000"))
+life = GetUnitState(u, UNIT_STATE_LIFE)
+SetUnitState(u, UNIT_STATE_LIFE, 0.10 * life)
+end
+
+function CreateUnitsForPlayer10()
+local p = Player(10)
+local u
+local unitID
+local t
+local life
+
+u = BlzCreateUnitWithSkin(p, FourCC("h005"), -8953.9, -3879.1, 240.498, FourCC("h005"))
+u = BlzCreateUnitWithSkin(p, FourCC("h005"), -8975.7, -4115.6, 237.037, FourCC("h005"))
+u = BlzCreateUnitWithSkin(p, FourCC("h005"), -8913.5, -4274.9, 310.461, FourCC("h005"))
+u = BlzCreateUnitWithSkin(p, FourCC("h005"), -8031.0, -3414.8, 65.074, FourCC("h005"))
+u = BlzCreateUnitWithSkin(p, FourCC("h005"), -8065.8, -3828.8, 43.002, FourCC("h005"))
+u = BlzCreateUnitWithSkin(p, FourCC("h005"), -8035.3, -4120.5, 240.894, FourCC("h005"))
+u = BlzCreateUnitWithSkin(p, FourCC("h005"), -9019.9, -3134.5, 311.505, FourCC("h005"))
+u = BlzCreateUnitWithSkin(p, FourCC("h005"), -8918.3, -2872.6, 232.401, FourCC("h005"))
+u = BlzCreateUnitWithSkin(p, FourCC("h005"), -8832.3, -3073.4, 311.549, FourCC("h005"))
+u = BlzCreateUnitWithSkin(p, FourCC("h005"), -9333.8, -1211.9, 242.926, FourCC("h005"))
+u = BlzCreateUnitWithSkin(p, FourCC("h005"), -10649.5, -844.4, 55.362, FourCC("h005"))
+u = BlzCreateUnitWithSkin(p, FourCC("h005"), -10455.2, -963.2, 33.235, FourCC("h005"))
+u = BlzCreateUnitWithSkin(p, FourCC("h005"), -10330.9, -1102.2, 229.885, FourCC("h005"))
+u = BlzCreateUnitWithSkin(p, FourCC("h005"), -10261.2, -326.6, 5.680, FourCC("h005"))
+u = BlzCreateUnitWithSkin(p, FourCC("h005"), -10117.6, -473.7, 291.652, FourCC("h005"))
+u = BlzCreateUnitWithSkin(p, FourCC("h005"), -9976.5, -621.8, 248.716, FourCC("h005"))
+u = BlzCreateUnitWithSkin(p, FourCC("h005"), -13416.5, -1531.8, 130.533, FourCC("h005"))
+u = BlzCreateUnitWithSkin(p, FourCC("h005"), -13380.5, -1147.7, 217.415, FourCC("h005"))
+u = BlzCreateUnitWithSkin(p, FourCC("h005"), -12971.2, -1291.5, 150.836, FourCC("h005"))
+u = BlzCreateUnitWithSkin(p, FourCC("h005"), -13022.2, -1680.6, 350.562, FourCC("h005"))
+u = BlzCreateUnitWithSkin(p, FourCC("h005"), -13180.0, -1417.9, 260.087, FourCC("h005"))
+u = BlzCreateUnitWithSkin(p, FourCC("h005"), -11812.2, -9329.4, 33.020, FourCC("h005"))
+u = BlzCreateUnitWithSkin(p, FourCC("h005"), -11593.3, -9501.6, 66.800, FourCC("h005"))
+u = BlzCreateUnitWithSkin(p, FourCC("h005"), -11277.3, -9421.3, 109.959, FourCC("h005"))
+u = BlzCreateUnitWithSkin(p, FourCC("h005"), -11015.5, -9258.0, 153.806, FourCC("h005"))
 end
 
 function CreateNeutralHostile()
@@ -311,6 +388,7 @@ local t
 local life
 
 u = BlzCreateUnitWithSkin(p, FourCC("n000"), -2863.2, -5340.3, 326.601, FourCC("n000"))
+u = BlzCreateUnitWithSkin(p, FourCC("n001"), -7570.0, 3830.9, 301.970, FourCC("n001"))
 u = BlzCreateUnitWithSkin(p, FourCC("n002"), -12134.0, 3783.0, 172.240, FourCC("n002"))
 end
 
@@ -327,7 +405,6 @@ u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -1377.3, 7311.8, 119.744, FourCC("n
 u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -4992.9, 4916.3, 230.423, FourCC("nsno"))
 u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -5043.9, 6247.3, 163.306, FourCC("nsno"))
 u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -5760.5, 6601.1, 203.528, FourCC("nsno"))
-u = BlzCreateUnitWithSkin(p, FourCC("n001"), -7570.0, 3830.9, 301.970, FourCC("n001"))
 u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -7232.7, 3468.5, 318.646, FourCC("nsno"))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -818.7, -584.8, 290.597, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
@@ -340,6 +417,8 @@ SetUnitColor(gg_unit_opeo_0015, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -624.7, -255.0, 349.324, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -390.0, -556.4, 49.483, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -480.1, 90.0, 303.320, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 262.9, 168.1, 227.255, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
@@ -384,7 +463,11 @@ u = BlzCreateUnitWithSkin(p, FourCC("e002"), -7561.3, 4576.4, 275.157, FourCC("e
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -11617.0, -8041.4, 102.460, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("e002"), -11839.7, 128.6, 269.502, FourCC("e002"))
-u = BlzCreateUnitWithSkin(p, FourCC("e002"), -11805.1, 1642.4, 272.161, FourCC("e002"))
+u = BlzCreateUnitWithSkin(p, FourCC("e002"), -11835.8, 1670.0, 270.000, FourCC("e002"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -8082.3, -5380.2, 194.385, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -12755.9, -4965.9, -14.064, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
 end
 
 function CreatePlayerBuildings()
@@ -393,6 +476,7 @@ end
 function CreatePlayerUnits()
 CreateUnitsForPlayer0()
 CreateUnitsForPlayer1()
+CreateUnitsForPlayer10()
 end
 
 function CreateAllUnits()
@@ -1067,6 +1151,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
                 if GetUnitTypeId(DamagingUnit)==FourCC("opeo") then
                     SetUnitAnimation(DamagingUnit,"death")
                     UnitAddAbility(DamagingUnit,FourCC("Aloc"))
+                    peonRescue=peonRescue+1
                 end
                 if data.KnockRMB then
                     UnitAddForceSimple(DamagingUnit, angleCurrent, speed / 4, 300, nil, heroCurrent)
@@ -2871,11 +2956,14 @@ end
 --- Created by Bergi.
 --- DateTime: 13.04.2022 16:56
 ---
-function ActivateBulletTrap(unit,effect)
+function ActivateBulletTrap(unit,effect,range)
+    if not range then
+        range=1200
+    end
     SetUnitAnimation(unit,"attack")
     TimerStart(CreateTimer(), 0.3, false, function()
         local angle = GetUnitFacing(unit)
-        local new = CreateAndForceBullet(unit, angle, 20, effect, nil, nil, 2, 1200,150)
+        local new = CreateAndForceBullet(unit, angle, 20, effect, nil, nil, 2, range,150)
         BlzSetSpecialEffectYaw(new, math.rad(angle))
     end)
 end
@@ -2918,28 +3006,28 @@ do
     end
 end
 
-
-function TrapShotByID(id, u)
+function TrapShotByID(id, u, range)
     if id == FourCC("h000") then
-        ActivateBulletTrap(u, "Abilities\\Weapons\\LichMissile\\LichMissile.mdl")
+        ActivateBulletTrap(u, "Abilities\\Weapons\\LichMissile\\LichMissile.mdl", range)
     elseif id == FourCC("h001") then
-        ActivateBulletTrap(u, "Abilities\\Weapons\\ChimaeraAcidMissile\\ChimaeraAcidMissile.mdl")
+        ActivateBulletTrap(u, "Abilities\\Weapons\\ChimaeraAcidMissile\\ChimaeraAcidMissile.mdl", range)
     end
 end
 
 function InitTrapByID(id)
     local _, k, rg = FindUnitOfType(id)
-    local radiusActivate=500
-    local distanceSee=1200
+    local radiusActivate = 500
+    local distanceSee = 1200
     --print(k)
     for i = 1, #rg do
         local u = rg[i]
         UnitAddAbility(u, FourCC("Aloc"))
         local enterTrig = CreateTrigger()
 
-        local hp = R2I(GetUnitLifePercent(u)) --тип ловушки определяется её процентом HP только НЕЧЕТНЫЕ
-        --print(hp.."%".." от "..R2S(BlzGetUnitMaxHP(u)))
-        if hp == 100 then -- ловушка работающая в радиусе
+        local hp = R2I(GetUnitLifePercent(u)) --тип ловушки определяется её процентом HP только НЕЧЕТНЫЕ, НЕТ лучше проверить дебагом
+        print(hp.."%".." от "..R2S(BlzGetUnitMaxHP(u)))
+        if hp == 100 then
+            -- ловушка работающая в радиусе
 
             TriggerRegisterUnitInRange(enterTrig, u, radiusActivate, nil)
             TriggerAddAction(enterTrig, function()
@@ -2952,7 +3040,7 @@ function InitTrapByID(id)
                     end
                 end
                 TimerStart(CreateTimer(), 0.5, true, function()
-                    if not IsUnitInRange(entering, u, radiusActivate+500) then
+                    if not IsUnitInRange(entering, u, radiusActivate + 500) then
                         --print("вышел из радиуса")
                         DestroyTimer(GetExpiredTimer())
                         --DestroyTrigger(enterTrig)
@@ -2978,6 +3066,30 @@ function InitTrapByID(id)
                     if count <= 0 then
                         DestroyTimer(GetExpiredTimer())
                     end
+                end)
+            end)
+        elseif hp == 5 then
+            --5-11 с разно задержкой
+            -- стреляет очень далеко
+            TimerStart(CreateTimer(), 2, true, function()
+                TrapShotByID(id, u, 2400)
+            end)
+        elseif hp == 7 then
+            TimerStart(CreateTimer(), 0.5, false, function()
+                TimerStart(CreateTimer(), 2, true, function()
+                    TrapShotByID(id, u, 2400)
+                end)
+            end)
+        elseif hp == 9 then
+            TimerStart(CreateTimer(), 1, false, function()
+                TimerStart(CreateTimer(), 2, true, function()
+                    TrapShotByID(id, u, 2400)
+                end)
+            end)
+        elseif hp == 10 then
+            TimerStart(CreateTimer(), 1.5, false, function()
+                TimerStart(CreateTimer(), 2, true, function()
+                    TrapShotByID(id, u, 2400)
                 end)
             end)
         end
@@ -3412,7 +3524,7 @@ function InitTrig_EnterInRectWolf()
         if IsUnitType(GetEnteringUnit(), UNIT_TYPE_HERO) then
             --print("12")
             local boss = FindUnitOfType(FourCC('n002'))
-            gbxWolf,gbyWolf=GetUnitXY(boss)
+            gbxWolf, gbyWolf = GetUnitXY(boss)
             StartWolfAI(GetUnitXY(boss))
             DisableTrigger(gg_trg_EnterInRect)
         end
@@ -3435,7 +3547,7 @@ function StartWolfAI(xs, ys)
     --local FW = CreateFogModifierRectBJ(false, Player(0), FOG_OF_WAR_VISIBLE, GlobalRect)
     --FogModifierStart(FW)
 
-    local phase = 5 --стартовая фаза
+    local phase = GetRandomInt(1, 6) --стартовая фаза
     local sec = 0
     local PhaseOn = true
     local OnAttack = true
@@ -3450,7 +3562,7 @@ function StartWolfAI(xs, ys)
             phase = 0
             print("Даём нарграду, победа")
             ClearMapMusicBJ()
-            PlayMusicBJ("Endless Snowbanks")
+            PlayMusicBJ("Salve Springs")
             SetMusicVolumeBJ(100)
             BlzFrameSetVisible(into, false)
 
@@ -3471,7 +3583,7 @@ function StartWolfAI(xs, ys)
                                 --print("подошел слишком близко")
                                 local angle = AngleBetweenUnits(boss, hero)
                                 SetUnitFacing(boss, angle)
-                                WolfSlashAttack(boss,phase)
+                                WolfSlashAttack(boss, phase)
 
                             end
                             --SetUnitTimeScale(boss,-1)
@@ -3505,7 +3617,7 @@ function StartWolfAI(xs, ys)
                     HealUnit(boss)
                     SetUnitPositionSmooth(boss, xs, ys)
                     ClearMapMusicBJ()
-                    PlayMusicBJ("Endless Snowbanks")
+                    PlayMusicBJ("Salve Springs")
                     SetMusicVolumeBJ(100)
                 end
             end
@@ -3516,7 +3628,7 @@ function StartWolfAI(xs, ys)
             sec = sec + 1
             if sec >= 5 then
                 sec = 0
-                phase = GetRandomInt(1, 6) -- переключатель, рандомизатор фаз
+                phase = GetRandomInt(1, 7) -- переключатель, рандомизатор фаз
                 PhaseOn = true
                 --print("phase " .. phase)
             end
@@ -3578,9 +3690,17 @@ function StartWolfAI(xs, ys)
                         DestroyTimer(GetExpiredTimer())
                     else
                         WolfIceDash(boss, GetUnitXY(hero))
+
                     end
                 end)
 
+            end
+            if phase == 7 and PhaseOn then
+                PhaseOn = false
+                print("фаза", phase)
+                WolfIceSpikeLine(boss, hero)
+                WolfIceSpikeLine(boss, false, GetUnitFacing(boss) + 35)
+                WolfIceSpikeLine(boss, false, GetUnitFacing(boss) - 35)
             end
 
 
@@ -3605,6 +3725,72 @@ function StartWolfAI(xs, ys)
             end
         end--конец
     end)
+end
+
+function WolfIceSpikeLine(boss, hero, hardAngle)
+    local xs, ys = GetUnitXY(boss)
+    local angle = hardAngle--AngleBetweenXY(xs, ys, x, y) / bj_DEGTORAD
+    if hero then
+        angle = AngleBetweenUnits(boss, hero)
+    end
+
+    xs, ys = MoveXY(xs, ys, 120, angle)
+    --BlzPauseUnitEx(boss, true)
+    SetUnitAnimation(boss, "Attack Slam")
+    SetUnitFacing(boss, angle)
+    local d = 0
+    local speed = 25
+    TimerStart(CreateTimer(), 1, false, function()
+        WolfRoundMove(boss)
+    end)
+    TimerStart(CreateTimer(), 0.30, false, function()
+        local t = CreateTimer()
+        TimerStart(t, 0.1, true, function()
+            if hero then
+                angle = AngleBetweenUnits(boss, hero)
+            end
+            local nx, ny = MoveXY(xs, ys , speed*d , angle)
+            d = d + 1
+            local eff = AddSpecialEffect("Ice Shard", nx, ny)
+            BlzSetSpecialEffectYaw(eff, math.rad(GetRandomInt(0, 360))) --angle
+            TimerStart(CreateTimer(), 0.3, false, function()
+                if UnitDamageArea(boss, 50, nx, ny, 80) then
+                    DestroyTimer(t)
+                    local eff2 = AddSpecialEffect("Ice Shard", nx, ny)
+                    BlzSetSpecialEffectYaw(eff2, math.rad(GetRandomInt(0, 360))) --angle
+                    BlzSetSpecialEffectScale(eff2, 4)
+                    TimerStart(CreateTimer(), 0.3, false, function()
+                        --UnitDamageArea(boss, 50, nx, ny, 250)
+                        local mark = AddSpecialEffect("Spell Marker TC", nx, ny)
+                        BlzSetSpecialEffectScale(mark, 2)
+                        DestroyEffect(mark)
+                    end)
+                    TimerStart(CreateTimer(), 0.7, false, function()
+                        DestroyEffect(eff2)
+                    end)
+                end
+            end)
+            TimerStart(CreateTimer(), 0.7, false, function()
+                DestroyEffect(eff)
+            end)
+            if d >= 30 then
+                DestroyTimer(GetExpiredTimer())
+                local eff2 = AddSpecialEffect("Ice Shard", nx, ny)
+                BlzSetSpecialEffectYaw(eff2, math.rad(GetRandomInt(0, 360))) --angle
+                BlzSetSpecialEffectScale(eff2, 4)
+                TimerStart(CreateTimer(), 0.3, false, function()
+                    UnitDamageArea(boss, 50, nx, ny, 250)
+                    local mark = AddSpecialEffect("Spell Marker TC", nx, ny)
+                    BlzSetSpecialEffectScale(mark, 2)
+                    DestroyEffect(mark)
+                end)
+                TimerStart(CreateTimer(), 0.7, false, function()
+                    DestroyEffect(eff2)
+                end)
+            end
+        end)
+    end)
+
 end
 
 function WolfIceDash(boss, xh, yh, delay)
@@ -3654,21 +3840,23 @@ function WolfWinterMove(boss, xs, ys)
         local ri = GetRandomInt(0, 360)
         --Blink2Point(boss, MoveXY(xs, ys, dist, ri))
         --print(ri, "ri")
-        local tpx, tpy = MoveXY(xs, ys, dist, ri)
+        local speed = 2
+        local tpx, tpy = MoveXY(xs, ys, dist, ri * speed)
 
         WolfIceDash(boss, tpx, tpy, 0.1)
 
         TimerStart(CreateTimer(), 0.7, false, function()
-            local revers=1
-            if GetRandomInt(1,1)==1 then
-                revers=-1
+            local revers = 1
+            if GetRandomInt(1, 2) == 1 then
+                revers = -1
             end
             WolfDoingFastWalk = true
             local i = ri
             --SetUnitAnimation(boss,"Walk")
+            local chargeEff=AddSpecialEffectTarget("IceCharge",boss,"origin")
             SetUnitAnimationByIndex(boss, 2)--WALK
             SetUnitTimeScale(boss, 3)
-            local speed = 2
+
             TimerStart(CreateTimer(), 1 / 64, true, function()
                 local nx, ny = MoveXY(xs, ys, dist, speed * i)
                 i = i + revers
@@ -3683,6 +3871,7 @@ function WolfWinterMove(boss, xs, ys)
                     UnitApplyTimedLife(new, FourCC('BTLF'), 5)
                 end
                 if not WolfDoingFastWalk then
+                    DestroyEffect(chargeEff)
                     DestroyTimer(GetExpiredTimer())
                     SetUnitTimeScale(boss, 1)
                     ResetUnitAnimation(boss)
@@ -3691,7 +3880,7 @@ function WolfWinterMove(boss, xs, ys)
         end)
     else
         --print("стадия двойной закрутки")
-        SandStorm(boss, gbxWolf,gbyWolf)
+        SandStorm(boss, gbxWolf, gbyWolf)
     end
 end
 
@@ -3786,7 +3975,7 @@ function WolfHowlFreeze(boss, k)
             local nx, ny = MoveXY(x, y, dist, angle * i)
             --print("i",angle*i)
             local eff = AddSpecialEffect("Ice Shard", nx, ny)
-            BlzSetSpecialEffectYaw(eff, math.rad(GetRandomInt(0,360))) --angle
+            BlzSetSpecialEffectYaw(eff, math.rad(GetRandomInt(0, 360))) --angle
             TimerStart(CreateTimer(), 0.3, false, function()
                 UnitDamageArea(boss, 50, nx, ny, 80)
             end)
@@ -3898,7 +4087,7 @@ function WolfRoundMove(boss)
     SetUnitLookAt(boss, 'bone_head', hero, 0, 0, 90)
 end
 
-function WolfSlashAttack(boss,phase)
+function WolfSlashAttack(boss, phase)
     local speed = 20
     SetUnitTimeScale(boss, 3)
     QueueUnitAnimation(boss, "Attack Slam")
@@ -3911,7 +4100,7 @@ function WolfSlashAttack(boss,phase)
     UnitDamageArea(boss, 50, xe, ye, 200, "ForceTotem")
     DestroyEffect(eff)
     MoveEffectTimedWSpeed(eff, speed, GetUnitFacing(boss), 1)
-    if phase==1 then
+    if phase == 1 then
         TimerStart(CreateTimer(), 0.2, false, function()
             SetUnitTimeScale(boss, 1)
         end)
@@ -4234,6 +4423,42 @@ function EttiDashAttackPrepare(boss, hero)
     end
 end
 
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 04.02.2023 21:54
+---
+do
+    local InitGlobalsOrigin = InitGlobals
+    function InitGlobals()
+        InitGlobalsOrigin()
+        TimerStart(CreateTimer(), .01, false, function()
+            InitSnowMan(FourCC("h005"))
+        end)
+    end
+end
+CreepsX={}
+CreepsY={}
+function InitSnowMan(id)
+    local _, k, rg = FindUnitOfType(id)
+    print(k,"снеговиков")
+    for i = 1, #rg do
+        local u = rg[i]
+        CreepsX[GetHandleId(u)],CreepsY[GetHandleId(u)]=GetUnitXY(u)
+    end
+end
+
+function InitDeathEvent()
+    local this = CreateTrigger()
+    TriggerRegisterAnyUnitEventBJ(this, EVENT_PLAYER_UNIT_DEATH)
+    TriggerAddAction(this, function()
+        local u = GetTriggerUnit() --тот кто умер
+        local killer = GetKillingUnit()
+        local xu, yu = GetUnitXY(u)
+
+    end )
+
+end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
 --- Created by Bergi.
@@ -4629,6 +4854,50 @@ function UnlockCard(texture,k)
 end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 04.02.2023 20:12
+---
+peonRescue = 0
+peonRescueMax = 50
+function CreatePeonCounter()
+    --print("111111111111111111111")
+    local box = BlzCreateFrameByType('BACKDROP', 'Face', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), '', 0)
+    BlzFrameSetParent(box, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+
+    local peon = BlzCreateFrameByType("BACKDROP", "Face", box, "", 0)
+
+    BlzFrameSetTexture(peon, "ReplaceableTextures\\CommandButtons\\BTNPeon.blp", 0, true)
+    BlzFrameSetSize(peon, 0.05, 0.05)
+    BlzFrameSetAbsPoint(peon, FRAMEPOINT_CENTER, -0.11, 0.025) ---0.11, 0.025
+
+    local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", peon, "", 0)
+
+    BlzFrameSetPoint(text, FRAMEPOINT_RIGHT, peon, FRAMEPOINT_RIGHT, 0.025, 0.)
+    -- BlzFrameSetSize(text, 0.05, 0.05)
+    local change=peonRescue
+    TimerStart(CreateTimer(), 1, true, function()
+        BlzFrameSetText(text, peonRescue .. "/" .. peonRescueMax)
+        if change<peonRescue then
+            change=peonRescue
+            --print("значение изменилось")
+            ShowFrameTimed(box)
+        end
+    end)
+    BlzFrameSetScale(text, 2)
+    BlzFrameSetVisible(box,false)
+end
+
+function ShowFrameTimed(fh)
+    if not BlzFrameIsVisible(fh) then
+        BlzFrameSetVisible(fh,true)
+        TimerStart(CreateTimer(), 1, false, function()
+            BlzFrameSetVisible(fh,false)
+        end)
+    end
+end
+
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
 --- Created by Bergi.
 --- DateTime: 06.10.2021 0:00
 ---
@@ -4640,6 +4909,7 @@ function InitMenu()
     CreateAndStartClock()
     DrawSelectionPortrait(true)
     CreateMiniCard()
+    CreatePeonCounter()
 end
 function ReturnFPS()
     local fps = BlzGetFrameByName("ResourceBarFrame", 0)
@@ -4706,19 +4976,17 @@ function MenuFrame()
 end
 
 function CreateAndStartClock()
-
     local charges = BlzCreateFrameByType("BACKDROP", "Face", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
     local new_FrameChargesText = BlzCreateFrameByType("TEXT", "ButtonChargesText", charges, "", 0)
-
+    local sec = 0 --стартовые секунды
+    local min = 0 -- стартовые минуты
+    local h = 23 -- стартовые часы
     BlzFrameSetTexture(charges, "UI\\Widgets\\Console\\Human\\CommandButton\\human-button-lvls-overlay", 0, true)
     BlzFrameSetSize(charges, 0.08, 0.02)
     BlzFrameSetAbsPoint(charges, FRAMEPOINT_CENTER, 0.48, 0.6 - 0.01)
-    --BlzFrameSetPoint(charges, FRAMEPOINT_BOTTOM, wood, FRAMEPOINT_BOTTOM, 0,0)
     BlzFrameSetText(new_FrameChargesText, Zero(0) .. ":" .. Zero(0) .. ":" .. Zero(0))
     BlzFrameSetPoint(new_FrameChargesText, FRAMEPOINT_CENTER, charges, FRAMEPOINT_CENTER, 0., 0.)
-    local sec = 0
-    local min = 0
-    local h = 23
+
     TimerStart(CreateTimer(), 1, true, function()
         sec = sec + 1
         if sec == 60 then
@@ -5372,11 +5640,13 @@ function InitWASD(hero)
                     end
                     x, y = data.ResPointX,data.ResPointY
                     ReviveHero(hero, x, y, true)
-                    if GetRandomInt(1, 2) == 1 then
-                        PlayMonoSpeech("Speech\\Peon\\etobilobolno", "Это было больно")
-                    else
-                        PlayMonoSpeech("Speech\\Peon\\yabessmertniy", "Я бессмертный!")
-                    end
+                    TimerStart(CreateTimer(), 0.5, false, function()
+                        if GetRandomInt(1, 2) == 1 then
+                            PlayMonoSpeech("Speech\\Peon\\etobilobolno", "Это было больно")
+                        else
+                            PlayMonoSpeech("Speech\\Peon\\yabessmertniy", "Я бессмертный!")
+                        end
+                    end)
                     HeroCandyHeal(data, 3)
                     SetUnitInvulnerable(hero, true)
                     TimerStart(CreateTimer(), 2, false, function()
@@ -5655,7 +5925,7 @@ function CreateWASDActions()
                 else
                     --print("не сломалась")
                 end
-                --UnitAddForceSimple(data.UnitHero, 90, 5, 15)
+                UnitAddForceSimple(data.UnitHero, 90, 5, 15)
                 data.DirectionMove = 90
 
                 if data.ReleaseW and data.ReleaseD then
@@ -5707,7 +5977,7 @@ function CreateWASDActions()
             --SelectUnitForPlayerSingle(data.UnitHero,Player(0))
             if not data.isAttacking and StunSystem[GetHandleId(data.UnitHero)].Time == 0 then
                 data.animStand = 1.8 --до полной анимации 2 секунды
-                --UnitAddForceSimple(data.UnitHero, 270, 5, 15)
+                UnitAddForceSimple(data.UnitHero, 270, 5, 15)
                 data.DirectionMove = 270
 
                 if data.ReleaseS and data.ReleaseD then
@@ -5756,7 +6026,7 @@ function CreateWASDActions()
             --SelectUnitForPlayerSingle(data.UnitHero,Player(0))
             if not data.isAttacking and StunSystem[GetHandleId(data.UnitHero)].Time == 0 then
                 data.animStand = 1.8 --до полной анимации 2 секунды
-                --UnitAddForceSimple(data.UnitHero, 0, 5, 15)
+                UnitAddForceSimple(data.UnitHero, 0, 5, 15)
                 data.DirectionMove = 0
                 SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationWalk)
 
@@ -5799,7 +6069,7 @@ function CreateWASDActions()
                 -- нет проверки на стан
                 data.animStand = 1.8 --до полной анимации 2 секунды
                 data.DirectionMove = 180
-                --UnitAddForceSimple(data.UnitHero, 180, 5, 15)
+                UnitAddForceSimple(data.UnitHero, 180, 5, 15)
                 if not LockAnimAnimation(data) then
                     SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationWalk)
 
@@ -6223,6 +6493,8 @@ end
 function Trig_BoundEnter_Actions()
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_EnterTrap))
 SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_TrapZone)
+    ClearMapMusicBJ()
+    PlayMusicBJ("Salve Springs")
 end
 
 function InitTrig_BoundEnter()
@@ -6242,6 +6514,8 @@ end
 function Trig_Exit_Actions()
 SetCameraBoundsToRectForPlayerBJ(Player(0), GetPlayableMapRect())
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_ExitTrapZone))
+    ClearMapMusicBJ()
+    PlayMusicBJ("Endless Snowbanks")
 end
 
 function InitTrig_Exit()
@@ -6656,7 +6930,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, -11840.0, -192.0)
+DefineStartLocation(0, -320.0, -768.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()

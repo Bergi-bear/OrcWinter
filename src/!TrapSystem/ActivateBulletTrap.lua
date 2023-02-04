@@ -3,11 +3,14 @@
 --- Created by Bergi.
 --- DateTime: 13.04.2022 16:56
 ---
-function ActivateBulletTrap(unit,effect)
+function ActivateBulletTrap(unit,effect,range)
+    if not range then
+        range=1200
+    end
     SetUnitAnimation(unit,"attack")
     TimerStart(CreateTimer(), 0.3, false, function()
         local angle = GetUnitFacing(unit)
-        local new = CreateAndForceBullet(unit, angle, 20, effect, nil, nil, 2, 1200,150)
+        local new = CreateAndForceBullet(unit, angle, 20, effect, nil, nil, 2, range,150)
         BlzSetSpecialEffectYaw(new, math.rad(angle))
     end)
 end
