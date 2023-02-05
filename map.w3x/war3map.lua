@@ -2496,9 +2496,9 @@ function normal_sound (s, x, y, volume)
     SetSoundVolume(snd, volume)
     SetSoundPitch(snd, 1)
     SetSoundDistances(snd, 600, 10000)
-    SetSoundDistanceCutoff(snd, 1200)
+    SetSoundDistanceCutoff(snd, 5000)
     SetSoundConeAngles(snd, 0.0, 0.0, 127)
-    SetSoundConeOrientation(snd, 0.0, 0.0, 1000)
+    SetSoundConeOrientation(snd, 0.0, 0.0, 5000)
     SetSoundPosition(snd, x, y, 50)
     StartSound(snd)
     return snd
@@ -4700,10 +4700,10 @@ end
 function PlayMonoSpeech(sound, text)
     if not BlzFrameIsVisible(TexBox) then
         local s = normal_sound(sound)
-        local sd=GetSoundDuration(s)
+        local sd = GetSoundDuration(s)
         --SetCinematicScene(HeroID, 1, "peon", "text", 2, 2)
-        if sd<=10 then
-            sd=1000
+        if sd <= 10 then
+            sd = 1000
         end
         BlzFrameSetVisible(TexBox, true)
         BlzFrameSetText(TexBoxText, text)
@@ -4716,50 +4716,86 @@ function PlayMonoSpeech(sound, text)
 end
 
 function RandomRescueSpeech()
-
+local path="Speech\\Peon\\Rescue\\"
     local table = {
         [1] = {
             text = "Иди на работу",
-            sound = ""
+            sound = path.."idinaraboty"
         },
         [2] = {
-            text = "Эй, ты, здарова",
-            sound = ""
+            text = "И тут же он отрубился",
+            sound = path.."itytzheonotrybilsa"
         },
         [3] = {
             text = "Ой, я случайно",
-            sound = ""
+            sound = path.."oiyaslychaino"
         },
         [4] = {
             text = "Я не хотел, брат",
-            sound = ""
+            sound = path.."yanehotelbrat"
         }
     ,
         [5] = {
-            text = "Это просто моя работа",
-            sound = ""
+            text = "Это просто моя работа, вырубать таких лентяев как ты",
+            sound = path.."etoprostomoyarabota"
         }
     ,
         [6] = {
-            text = "Осторожно, скользско",
-            sound = ""
+            text = "Осторожно, скользко",
+            sound = path.."ostorozhnoskolsko"
         }
     ,
         [7] = {
             text = "Просто, демонстрация силы",
-            sound = ""
+            sound = path.."prostodemonstraciasili"
         }
     ,
         [8] = {
             text = "Внимательней будь",
-            sound = ""
+            sound = path.."vnimatelneybud"
+        }
+    ,
+        [9] = {
+            text = "Выписан из пролетариата",
+            sound = path.."vipisanizproletariata"
+        }
+    ,
+        [10] = {
+            text = "Как бы я хотел лечь и отдохнуть, так же как и он",
+            sound = path.."kakbiyahotel"
+        }
+    ,
+        [11] = {
+            text = "Это всё потому, что ты стоишь и не работаешь",
+            sound = path.."etovsepotomychtotistoish"
+        }
+    ,
+        [12] = {
+            text = "Запомни брат такую фразу: тебе попал в ебало сразу",
+            sound = path.."zapomnibrattakyufrazy"
+        }
+    ,
+        [13] = {
+            text = "Брат, такова твоя судьба, сломал тебе я пол-ебла",
+            sound = path.."brattakovatvoyasydba"
+        }
+    ,
+        [14] = {
+            text = "Вот и выхватил ты бодрых пиздов, лежишь и никаких делов",
+            sound = path.."votavihvatiltibodrishpizdov"
+        }
+    ,
+        [15] = {
+            text = "Услышь моё ты возраженье, вьбу я на опереженье",
+            sound = path.."yslishmoyotivozrashenie"
         }
 
     }
-    local number=GetRandomInt(1,#table)
-    print(table[number].text)
+    local number = GetRandomInt(1, #table)
+    --print(number)
+    -- print(table[number].text)
     if number > #table then
-        number = table
+        number = #table
         print("фраза вне диапазона")
     end
     PlayMonoSpeech(table[number].sound, table[number].text)
@@ -5541,6 +5577,9 @@ TIMER_PERIOD64 = 1 / 64
 HERO = {}
 HeroID = FourCC("O000")
 
+
+Acceleration=false --скорение при клике
+
 function InitAnimations(hero, data)
     PlayUnitAnimationFromChat()
 
@@ -5637,6 +5676,7 @@ function InitWASD(hero)
             if not data.Desync then
                 ForceUIKeyBJ(GetOwningPlayer(hero), "M")
             else
+                ForceUIKeyBJ(GetOwningPlayer(hero), "M")
                 ForceUIKeyBJ(GetOwningPlayer(hero), "Q")
             end
 
@@ -5995,7 +6035,10 @@ function CreateWASDActions()
                 else
                     --print("не сломалась")
                 end
-                UnitAddForceSimple(data.UnitHero, 90, 5, 15)
+                if Acceleration then
+                    UnitAddForceSimple(data.UnitHero, 90, 5, 15)
+
+                end
                 data.DirectionMove = 90
 
                 if data.ReleaseW and data.ReleaseD then
@@ -6047,7 +6090,9 @@ function CreateWASDActions()
             --SelectUnitForPlayerSingle(data.UnitHero,Player(0))
             if not data.isAttacking and StunSystem[GetHandleId(data.UnitHero)].Time == 0 then
                 data.animStand = 1.8 --до полной анимации 2 секунды
-                UnitAddForceSimple(data.UnitHero, 270, 5, 15)
+                if Acceleration then
+                    UnitAddForceSimple(data.UnitHero, 270, 5, 15)
+                end
                 data.DirectionMove = 270
 
                 if data.ReleaseS and data.ReleaseD then
@@ -6096,7 +6141,9 @@ function CreateWASDActions()
             --SelectUnitForPlayerSingle(data.UnitHero,Player(0))
             if not data.isAttacking and StunSystem[GetHandleId(data.UnitHero)].Time == 0 then
                 data.animStand = 1.8 --до полной анимации 2 секунды
-                UnitAddForceSimple(data.UnitHero, 0, 5, 15)
+                if Acceleration then
+                    UnitAddForceSimple(data.UnitHero, 0, 5, 15)
+                end
                 data.DirectionMove = 0
                 SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationWalk)
 
@@ -6139,7 +6186,9 @@ function CreateWASDActions()
                 -- нет проверки на стан
                 data.animStand = 1.8 --до полной анимации 2 секунды
                 data.DirectionMove = 180
-                UnitAddForceSimple(data.UnitHero, 180, 5, 15)
+                if Acceleration then
+                    UnitAddForceSimple(data.UnitHero, 180, 5, 15)
+                end
                 if not LockAnimAnimation(data) then
                     SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationWalk)
 

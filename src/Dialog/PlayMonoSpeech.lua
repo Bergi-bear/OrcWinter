@@ -6,10 +6,10 @@
 function PlayMonoSpeech(sound, text)
     if not BlzFrameIsVisible(TexBox) then
         local s = normal_sound(sound)
-        local sd=GetSoundDuration(s)
+        local sd = GetSoundDuration(s)
         --SetCinematicScene(HeroID, 1, "peon", "text", 2, 2)
-        if sd<=10 then
-            sd=1000
+        if sd <= 10 then
+            sd = 1000
         end
         BlzFrameSetVisible(TexBox, true)
         BlzFrameSetText(TexBoxText, text)
@@ -22,65 +22,86 @@ function PlayMonoSpeech(sound, text)
 end
 
 function RandomRescueSpeech()
-
+local path="Speech\\Peon\\Rescue\\"
     local table = {
         [1] = {
             text = "Иди на работу",
-            sound = ""
+            sound = path.."idinaraboty"
         },
         [2] = {
-            text = "Эй, ты, здарова",
-            sound = ""
+            text = "И тут же он отрубился",
+            sound = path.."itytzheonotrybilsa"
         },
         [3] = {
             text = "Ой, я случайно",
-            sound = ""
+            sound = path.."oiyaslychaino"
         },
         [4] = {
             text = "Я не хотел, брат",
-            sound = ""
+            sound = path.."yanehotelbrat"
         }
     ,
         [5] = {
-            text = "Это просто моя работа",
-            sound = ""
+            text = "Это просто моя работа, вырубать таких лентяев как ты",
+            sound = path.."etoprostomoyarabota"
         }
     ,
         [6] = {
-            text = "Осторожно, скользско",
-            sound = ""
+            text = "Осторожно, скользко",
+            sound = path.."ostorozhnoskolsko"
         }
     ,
         [7] = {
             text = "Просто, демонстрация силы",
-            sound = ""
+            sound = path.."prostodemonstraciasili"
         }
     ,
         [8] = {
             text = "Внимательней будь",
-            sound = ""
+            sound = path.."vnimatelneybud"
         }
     ,
         [9] = {
             text = "Выписан из пролетариата",
-            sound = ""
+            sound = path.."vipisanizproletariata"
         }
     ,
         [10] = {
-            text = "Звуки неистового чилла",
-            sound = ""
+            text = "Как бы я хотел лечь и отдохнуть, так же как и он",
+            sound = path.."kakbiyahotel"
         }
     ,
         [11] = {
             text = "Это всё потому, что ты стоишь и не работаешь",
-            sound = ""
+            sound = path.."etovsepotomychtotistoish"
+        }
+    ,
+        [12] = {
+            text = "Запомни брат такую фразу: тебе попал в ебало сразу",
+            sound = path.."zapomnibrattakyufrazy"
+        }
+    ,
+        [13] = {
+            text = "Брат, такова твоя судьба, сломал тебе я пол-ебла",
+            sound = path.."brattakovatvoyasydba"
+        }
+    ,
+        [14] = {
+            text = "Вот и выхватил ты бодрых пиздов, лежишь и никаких делов",
+            sound = path.."votavihvatiltibodrishpizdov"
+        }
+    ,
+        [15] = {
+            text = "Услышь моё ты возраженье, вьбу я на опереженье",
+            sound = path.."yslishmoyotivozrashenie"
         }
 
     }
-    local number=GetRandomInt(1,#table)
-   -- print(table[number].text)
+    local number = GetRandomInt(1, #table)
+    --print(number)
+    -- print(table[number].text)
     if number > #table then
-        number = table
+        number = #table
         print("фраза вне диапазона")
     end
     PlayMonoSpeech(table[number].sound, table[number].text)

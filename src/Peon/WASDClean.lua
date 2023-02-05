@@ -4,6 +4,9 @@ TIMER_PERIOD64 = 1 / 64
 HERO = {}
 HeroID = FourCC("O000")
 
+
+Acceleration=false --скорение при клике
+
 function InitAnimations(hero, data)
     PlayUnitAnimationFromChat()
 
@@ -100,6 +103,7 @@ function InitWASD(hero)
             if not data.Desync then
                 ForceUIKeyBJ(GetOwningPlayer(hero), "M")
             else
+                ForceUIKeyBJ(GetOwningPlayer(hero), "M")
                 ForceUIKeyBJ(GetOwningPlayer(hero), "Q")
             end
 
@@ -458,7 +462,10 @@ function CreateWASDActions()
                 else
                     --print("не сломалась")
                 end
-                UnitAddForceSimple(data.UnitHero, 90, 5, 15)
+                if Acceleration then
+                    UnitAddForceSimple(data.UnitHero, 90, 5, 15)
+
+                end
                 data.DirectionMove = 90
 
                 if data.ReleaseW and data.ReleaseD then
@@ -510,7 +517,9 @@ function CreateWASDActions()
             --SelectUnitForPlayerSingle(data.UnitHero,Player(0))
             if not data.isAttacking and StunSystem[GetHandleId(data.UnitHero)].Time == 0 then
                 data.animStand = 1.8 --до полной анимации 2 секунды
-                UnitAddForceSimple(data.UnitHero, 270, 5, 15)
+                if Acceleration then
+                    UnitAddForceSimple(data.UnitHero, 270, 5, 15)
+                end
                 data.DirectionMove = 270
 
                 if data.ReleaseS and data.ReleaseD then
@@ -559,7 +568,9 @@ function CreateWASDActions()
             --SelectUnitForPlayerSingle(data.UnitHero,Player(0))
             if not data.isAttacking and StunSystem[GetHandleId(data.UnitHero)].Time == 0 then
                 data.animStand = 1.8 --до полной анимации 2 секунды
-                UnitAddForceSimple(data.UnitHero, 0, 5, 15)
+                if Acceleration then
+                    UnitAddForceSimple(data.UnitHero, 0, 5, 15)
+                end
                 data.DirectionMove = 0
                 SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationWalk)
 
@@ -602,7 +613,9 @@ function CreateWASDActions()
                 -- нет проверки на стан
                 data.animStand = 1.8 --до полной анимации 2 секунды
                 data.DirectionMove = 180
-                UnitAddForceSimple(data.UnitHero, 180, 5, 15)
+                if Acceleration then
+                    UnitAddForceSimple(data.UnitHero, 180, 5, 15)
+                end
                 if not LockAnimAnimation(data) then
                     SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationWalk)
 
