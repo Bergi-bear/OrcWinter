@@ -24,12 +24,29 @@ function InitTrig_EnterInRectBDragon()
     TriggerRegisterEnterRectSimple(gg_trg_EnterInRect, gg_rct_InitStartDragon)
     TriggerAddAction(gg_trg_EnterInRect, function()
         if IsUnitType(GetEnteringUnit(), UNIT_TYPE_HERO) then
-            StartDragonAI(GetRectCenterX(gg_rct_InitStartDragon), GetRectCenterY(gg_rct_InitStartDragon))
+            local boss = FindUnitOfType(FourCC('n001'))
+            StartDragonAI(GetUnitXY(boss))
             DisableTrigger(gg_trg_EnterInRect)
         end
     end)
 end
-
+dragonFrazeCount=1
+tFraze={
+    "",
+    "Зачем же вы пришли сюда??",
+    "Да не брал я ваши подарки, это мне бабушка передала",
+    "Моя бабушка меня очень любит, ведь я у неё один такой внучек",
+    "Вот так, сидишь, сидишь в своей драконьей пещере, драконишься понемножку, а потом приходят тут всякие",
+    "Вам не суждено узнать, чем я занимаюсь в своей драконьей пещере",
+    "Я не вылезал из своей берлоги уже целую вечность",
+    "А с другой стороны и хорошо, что вы пришли, мне надоело дёргать своего одноглазого змея под ваши звуки",
+    "Думаете, что даже если вы меня одолеете, вы не сможете проникнуть в мою пещеру",
+    "Когда всё это закончится, надо почистить историю браузера, чтобы вы не узнали моих секретов",
+    "Надо было начать открывать подарки ещё до вашего прихода, а то я таки не узнаю что там",
+    "Проход в пещеру откроется только после моей смерти, ой, взболтнул лишнего",
+    "Даже если я умру, я возрожусь в виде дракона-феникса, и смогу вернуться к старым делам",
+    "Что-то затянулся наш бой, наверное я пойду?"
+}
 function StartDragonAI(xs, ys)
     local boss = FindUnitOfType(FourCC('n001'))
     local BossFight = true
@@ -41,7 +58,7 @@ function StartDragonAI(xs, ys)
     local range = 1000
     local x, y = GetUnitXY(boss)
     ClearMapMusicBJ()
-    PlayMusicBJ("The Icefalcon's Crest")
+    PlayMusicBJ("A Wizard's Worst Nightmare")
     SetMusicVolumeBJ(100)
     local FW = CreateFogModifierRectBJ(false, Player(0), FOG_OF_WAR_VISIBLE, GlobalRect)
     FogModifierStart(FW)
@@ -119,11 +136,31 @@ function StartDragonAI(xs, ys)
         if BossFight then
             -- если идёт бой
             sec = sec + 1
-            if sec >= 5 then
+
+            local max=#tFraze[dragonFrazeCount]//14
+            if dragonFrazeCount>=#tFraze then
+                --print("последняя фраза")
+                max=5
+            end
+
+            if max<5 then
+                max=5
+            end
+            --print(max)
+            if sec >= max then
                 sec = 0
                 phase = GetRandomInt(1, 4) -- переключатель, рандомизатор фаз
                 PhaseOn = true
                 --print("phase " .. phase)
+                --print(#tFraze,dragonFrazeCount)
+                if dragonFrazeCount+1<=#tFraze then
+                    --print(tFraze[dragonFrazeCount+1])
+                    normal_sound("Speech\\Dragon\\"..dragonFrazeCount+1,GetUnitXY(boss))
+                    dragonFrazeCount=dragonFrazeCount+1
+                else
+                    print("этому супер удару научила меня моя бабушка")
+                    --print("Зачем, зачем ты каждый раз возвращаешься?")
+                end
             end
             --фазы
             local hero = HERO[0].UnitHero
@@ -141,6 +178,9 @@ function StartDragonAI(xs, ys)
 
                     if phase ~= 1 then
                         DestroyTimer(GetExpiredTimer())
+                    else
+                        angle = AngleBetweenUnits(boss, hero)
+                        IceImpale(boss, angle, false)
                     end
                 end)
 
@@ -181,7 +221,7 @@ function StartDragonAI(xs, ys)
             if k >= 1 then
                 --print("Лечим босса, и бой возобновляется")
                 ClearMapMusicBJ()
-                PlayMusicBJ("The Icefalcon's Crest")
+                PlayMusicBJ("A Wizard's Worst Nightmare")
                 SetMusicVolumeBJ(100)
                 BlzFrameSetVisible(into, true)
                 HealUnit(boss, 99999)
@@ -251,6 +291,7 @@ function IceCrest(boss)
             IceImpale(boss, angle - 180, true)
             IceImpale(boss, angle + 90, true)
             IceImpale(boss, angle - 90, true)
+            DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", GetUnitXY(boss)))
         end)
         TimerStart(CreateTimer(), 3, false, function()
             IssuePointOrder(boss, "move", GetUnitXY(HERO[0].UnitHero))
@@ -272,7 +313,7 @@ function IceImpale(boss, angle, notMove)
     local hero = HERO[0].UnitHero
     local k = 0
     local step = 50
-    local max = 23
+    local max = 26
     local range = 80
     local rangeAuto=100 --радиус поворота шипа на героя
     if notMove then
@@ -280,10 +321,9 @@ function IceImpale(boss, angle, notMove)
         max = 6
         range = 250
     end
-
     TimerStart(CreateTimer(), 0.7, false, function()
         BlzPauseUnitEx(boss, false)
-
+        DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", GetUnitXY(boss)))
         TimerStart(CreateTimer(), 0.05, true, function()
             k = k + 1
             if IsUnitInRangeXY(hero, x, y, rangeAuto) and not notMove then
@@ -296,7 +336,7 @@ function IceImpale(boss, angle, notMove)
                 CreateDestructableZ(FourCC("B006"), x, y, 900, GetRandomInt(0, 360), 2.5, 1)
                 DestroyTimer(GetExpiredTimer())
                 if not notMove then
-                    IssuePointOrder(boss, "move", GetUnitXY(hero))
+                   -- IssuePointOrder(boss, "move", GetUnitXY(hero))
                 end
             end
         end)
@@ -309,13 +349,14 @@ function DragonTripleShot(boss,hero)
     SetUnitFacing(boss,angle)
     local max=3
     BlzPauseUnitEx(boss,true)
+    local effModel="FrostWyrmMissileNoOmni"
     TimerStart(CreateTimer(), 0.5, true, function()
         max=max-1
         SetUnitTimeScale(boss,4)
         SetUnitAnimation(boss,"attack")
-        CreateAndForceBullet(boss,GetUnitFacing(boss)-30,20,"Abilities\\Weapons\\LichMissile\\LichMissile")
-        CreateAndForceBullet(boss,GetUnitFacing(boss),20,"Abilities\\Weapons\\LichMissile\\LichMissile")
-        CreateAndForceBullet(boss,GetUnitFacing(boss)+30,20,"Abilities\\Weapons\\LichMissile\\LichMissile")
+        CreateAndForceBullet(boss,GetUnitFacing(boss)-30,20,effModel)
+        CreateAndForceBullet(boss,GetUnitFacing(boss),20,effModel)
+        CreateAndForceBullet(boss,GetUnitFacing(boss)+30,20,effModel)
 
         if max <= 0 then
             SetUnitTimeScale(boss,1)
@@ -323,10 +364,12 @@ function DragonTripleShot(boss,hero)
             angle=AngleBetweenUnits(boss,hero)
             SetUnitFacing(boss,angle)
 
-            TimerStart(CreateTimer(), 1, false, function()
-                CreateAndForceBullet(boss,GetUnitFacing(boss)-30,20,"Abilities\\Weapons\\LichMissile\\LichMissile")
-                CreateAndForceBullet(boss,GetUnitFacing(boss),20,"Abilities\\Weapons\\LichMissile\\LichMissile")
-                CreateAndForceBullet(boss,GetUnitFacing(boss)+30,20,"Abilities\\Weapons\\LichMissile\\LichMissile")
+            TimerStart(CreateTimer(), 0.3, false, function()
+                CreateAndForceBullet(boss,GetUnitFacing(boss)-30,15,effModel)
+                CreateAndForceBullet(boss,GetUnitFacing(boss)-15,15,effModel)
+                CreateAndForceBullet(boss,GetUnitFacing(boss),15,effModel)
+                CreateAndForceBullet(boss,GetUnitFacing(boss)+30,15,effModel)
+                CreateAndForceBullet(boss,GetUnitFacing(boss)+15,15,effModel)
                 BlzPauseUnitEx(boss,false)
                 --IceImpale(boss, AngleBetweenUnits(boss,hero), true)
             end)

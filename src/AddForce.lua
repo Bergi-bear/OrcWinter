@@ -37,11 +37,11 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
             newVector = VectorSum(newVector, vector:yawPitchOffset(speed, angle * (math.pi / 180), 0.0))
             SetUnitPositionSmooth(hero, newVector.x, newVector.y)
         end
-        local countTick=0
+        local countTick = 0
 
         TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
             currentdistance = currentdistance + speed
-            countTick=countTick+1
+            countTick = countTick + 1
             local x, y = GetUnitXY(hero)
             local vector = Vector:new(x, y, GetUnitZ(hero))
             local newVector = vector
@@ -126,15 +126,20 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
             if flag == "RunSkeleton" then
                 UnitDamageArea(hero, 1, GetUnitX(hero), GetUnitY(hero), 120)
             end
+            if flag == "ScorpioRun" then
+                --UnitDamageArea(hero, 1, GetUnitX(hero), GetUnitY(hero), 120)
+                --QueueUnitAnimation(hero,"walk")
+            end
             if flag == "RunEtti" then
                 --print("етти наносит урон в рывке за каждый тик движения?")
                 UnitDamageArea(hero, 20, GetUnitX(hero), GetUnitY(hero), 120)
                 --DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic",x,y))
                 PlayerSeeNoiseInRangeTimed(0.5, x, y)
             end
-            if flag == "AttackAndRunWolf"  and countTick>=10 then --каждый тик движения
+            if flag == "AttackAndRunWolf" and countTick >= 10 then
+                --каждый тик движения
                 --print("эффекты ударов лап")
-                countTick=0
+                countTick = 0
                 WolfSlashAttack(hero)
             end
             if flag == "ignore" then
@@ -306,7 +311,7 @@ function MiniChargeOnArea(data)
         if UnitAlive(e) and e ~= data.UnitHero then
             local angle = AngleBetweenUnits(data.UnitHero, e)
             --print("чуть чуть толкаем при хождении")
-            if not IsUnitAlly(data.UnitHero,GetOwningPlayer(e)) then
+            if not IsUnitAlly(data.UnitHero, GetOwningPlayer(e)) then
                 UnitAddForceSimple(e, angle, 5, 80)
                 has = true
 
@@ -326,7 +331,7 @@ function Chk2Way(x, y, x1, x2)
     for i = 1, k do
         local nx, ny = MoveXY(x, y, step * (i - 1), angle)
         if not IsTerrainPathable(nx, ny, PATHING_TYPE_WALKABILITY) then
-           -- print("проходима")
+            -- print("проходима")
 
         else
             --print(" не проходима")
@@ -336,14 +341,14 @@ function Chk2Way(x, y, x1, x2)
     return wayClean
 end
 
-function MoveEffectTimedWSpeed(eff,speed,angle,timed)
-    TimerStart(CreateTimer(),TIMER_PERIOD64 , true, function()
-        timed=timed-TIMER_PERIOD64
-        local x,y,z=BlzGetLocalSpecialEffectX(eff),BlzGetLocalSpecialEffectY(eff),BlzGetLocalSpecialEffectZ(eff)
-        x,y=MoveXY(x,y,speed,angle)
-        BlzSetSpecialEffectPosition(eff,x,y,z)
+function MoveEffectTimedWSpeed(eff, speed, angle, timed)
+    TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
+        timed = timed - TIMER_PERIOD64
+        local x, y, z = BlzGetLocalSpecialEffectX(eff), BlzGetLocalSpecialEffectY(eff), BlzGetLocalSpecialEffectZ(eff)
+        x, y = MoveXY(x, y, speed, angle)
+        BlzSetSpecialEffectPosition(eff, x, y, z)
         BlzSetSpecialEffectYaw(eff, math.rad(angle))
-        if timed<=0 then
+        if timed <= 0 then
             DestroyEffect(eff)
             DestroyTimer(GetExpiredTimer())
         end

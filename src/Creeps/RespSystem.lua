@@ -7,9 +7,11 @@ do
     local InitGlobalsOrigin = InitGlobals
     function InitGlobals()
         InitGlobalsOrigin()
-        TimerStart(CreateTimer(), .01, false, function()
-            InitSnowMan(FourCC("h005"))
+        TimerStart(CreateTimer(), .5, false, function()
+            InitSnowMan(FourCC("h005")) --снеговик
+            InitSnowMan(FourCC("n003")) -- арахнид
             InitDeathEventCreep()
+            InitScorpionAI(FourCC("n003"))
         end)
     end
 end
@@ -29,7 +31,7 @@ function InitDeathEventCreep()
     TriggerRegisterAnyUnitEventBJ(this, EVENT_PLAYER_UNIT_DEATH)
     TriggerAddAction(this, function()
         local u = GetTriggerUnit() --тот кто умер
-        if GetUnitTypeId(u)==FourCC("h005") then
+        if GetUnitTypeId(u)==FourCC("h005") or GetUnitTypeId(u)==FourCC("n003") then
             local killer = GetKillingUnit()
             local id=GetUnitTypeId(u)
             local p=GetOwningPlayer(u)
@@ -38,7 +40,9 @@ function InitDeathEventCreep()
             TimerStart(CreateTimer(), delay, false, function()
                 local new=CreateUnit(p,id,x,y,GetRandomInt(0,360))
                 CreepsX[GetHandleId(new)],CreepsY[GetHandleId(new)]=GetUnitXY(new)
-
+                if GetUnitTypeId(u)==FourCC("n003") then
+                    StartScorpionAI(new)
+                end
 
             end)
             TimerStart(CreateTimer(), delay-5, false, function()

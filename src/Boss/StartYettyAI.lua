@@ -216,14 +216,14 @@ function StartYettyAI(xs, ys)
                         TimerStart(CreateTimer(), 0.5, true, function()
 
                             if IsUnitInRange(snowmanBlast, hero, 200) then
-                                DestroyEffect(AddSpecialEffect("Winter Blast SD", GetUnitXY(snowmanBlast)))
+                                DestroyEffect(AddSpecialEffect("FrostWyrmMissileNoOmni", GetUnitXY(snowmanBlast)))
                                 UnitDamageArea(snowmanBlast, 100, GetUnitX(snowmanBlast), GetUnitY(snowmanBlast), 250)
                                 KillUnit(snowmanBlast)
                                 ShowUnit(snowmanBlast, false)
                             end
                             if not UnitAlive(snowmanBlast) then
                                 DestroyTimer(GetExpiredTimer())
-                                DestroyEffect(AddSpecialEffect("Winter Blast SD", GetUnitXY(snowmanBlast)))
+                                DestroyEffect(AddSpecialEffect("FrostWyrmMissileNoOmni", GetUnitXY(snowmanBlast)))
                                 UnitDamageArea(snowmanBlast, 100, GetUnitX(snowmanBlast), GetUnitY(snowmanBlast), 150)
                                 KillUnit(snowmanBlast)
                                 ShowUnit(snowmanBlast, false)

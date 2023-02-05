@@ -31,6 +31,7 @@ gg_snd_Intro8 = nil
 gg_snd_Intro9 = nil
 gg_snd_Intro10 = nil
 gg_snd_Intro11 = nil
+gg_trg_Untitled_Trigger_001 = nil
 gg_trg_BoundEnter_Copy = nil
 gg_trg_ExitWolf = nil
 gg_trg_BoundEnter = nil
@@ -39,11 +40,13 @@ gg_trg_InitGUI = nil
 gg_trg_StartIntro = nil
 gg_trg_SkipIntro = nil
 gg_trg_ESCTEST = nil
+gg_unit_n001_0009 = nil
 gg_unit_Oths_0011 = nil
 gg_unit_opeo_0013 = nil
 gg_unit_opeo_0014 = nil
 gg_unit_opeo_0015 = nil
 gg_unit_opeo_0024 = nil
+gg_dest_B007_5312 = nil
 function InitGlobals()
 udg_PressESC = false
 end
@@ -106,6 +109,14 @@ SetSoundVolume(gg_snd_Intro11, 127)
 SetSoundPitch(gg_snd_Intro11, 1.0)
 end
 
+function CreateAllDestructables()
+local d
+local t
+local life
+
+gg_dest_B007_5312 = BlzCreateDestructableWithSkin(FourCC("B007"), -7552.0, 4224.0, 211.000, 3.000, 0, FourCC("B007"))
+end
+
 function CreateUnitsForPlayer0()
 local p = Player(0)
 local u
@@ -113,6 +124,7 @@ local unitID
 local t
 local life
 
+gg_unit_n001_0009 = BlzCreateUnitWithSkin(p, FourCC("n001"), -7570.0, 3830.9, 301.970, FourCC("n001"))
 gg_unit_Oths_0011 = BlzCreateUnitWithSkin(p, FourCC("Oths"), 63.2, -581.0, 211.076, FourCC("Oths"))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1652.2, -1430.7, 121.800, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
@@ -128,12 +140,13 @@ u = BlzCreateUnitWithSkin(p, FourCC("h002"), -12472.7, -2705.4, 5.812, FourCC("h
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), -6622.8, -8553.6, 5.812, FourCC("h002"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), -5681.4, -8453.4, 5.812, FourCC("h002"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), -10483.4, -6645.3, 5.812, FourCC("h002"))
-u = BlzCreateUnitWithSkin(p, FourCC("h004"), -11038.7, -8201.1, 159.380, FourCC("h004"))
+u = BlzCreateUnitWithSkin(p, FourCC("h004"), -11195.6, -8035.2, 159.380, FourCC("h004"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), -13274.1, -1596.1, 5.810, FourCC("h002"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), -12149.0, 4711.7, 5.810, FourCC("h002"))
 u = BlzCreateUnitWithSkin(p, FourCC("h004"), -5565.8, -8871.9, 159.380, FourCC("h004"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), -9942.4, 872.0, 5.810, FourCC("h002"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), -6551.2, -7066.3, 5.812, FourCC("h002"))
+u = BlzCreateUnitWithSkin(p, FourCC("h004"), -3852.9, 4153.2, 159.380, FourCC("h004"))
 end
 
 function CreateUnitsForPlayer1()
@@ -378,6 +391,12 @@ u = BlzCreateUnitWithSkin(p, FourCC("h005"), -11812.2, -9329.4, 33.020, FourCC("
 u = BlzCreateUnitWithSkin(p, FourCC("h005"), -11593.3, -9501.6, 66.800, FourCC("h005"))
 u = BlzCreateUnitWithSkin(p, FourCC("h005"), -11277.3, -9421.3, 109.959, FourCC("h005"))
 u = BlzCreateUnitWithSkin(p, FourCC("h005"), -11015.5, -9258.0, 153.806, FourCC("h005"))
+u = BlzCreateUnitWithSkin(p, FourCC("n003"), -12609.4, -7320.8, 316.550, FourCC("n003"))
+u = BlzCreateUnitWithSkin(p, FourCC("n003"), -13003.6, -9340.0, 35.720, FourCC("n003"))
+u = BlzCreateUnitWithSkin(p, FourCC("n003"), -9116.4, -6427.4, 103.486, FourCC("n003"))
+u = BlzCreateUnitWithSkin(p, FourCC("n003"), -11831.2, -114.1, 183.086, FourCC("n003"))
+u = BlzCreateUnitWithSkin(p, FourCC("n003"), -11377.3, -4649.0, 116.844, FourCC("n003"))
+u = BlzCreateUnitWithSkin(p, FourCC("n003"), -8393.8, -8947.7, 35.720, FourCC("n003"))
 end
 
 function CreateNeutralHostile()
@@ -388,7 +407,6 @@ local t
 local life
 
 u = BlzCreateUnitWithSkin(p, FourCC("n000"), -2863.2, -5340.3, 326.601, FourCC("n000"))
-u = BlzCreateUnitWithSkin(p, FourCC("n001"), -7570.0, 3830.9, 301.970, FourCC("n001"))
 u = BlzCreateUnitWithSkin(p, FourCC("n002"), -12134.0, 3783.0, 172.240, FourCC("n002"))
 end
 
@@ -468,6 +486,7 @@ u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -8082.3, -5380.2, 194.385, FourCC("
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -12755.9, -4965.9, 345.936, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("e003"), 4188.3, 2697.4, 248.540, FourCC("e003"))
 end
 
 function CreatePlayerBuildings()
@@ -498,7 +517,7 @@ gg_rct_ExitTrap = Rect(-5472.0, -9440.0, -5376.0, -8992.0)
 gg_rct_ExitTrapZone = Rect(-7616.0, 4224.0, -7424.0, 4480.0)
 gg_rct_Region_004 = Rect(-7648.0, 4480.0, -7424.0, 4640.0)
 gg_rct_BossDrakon = Rect(-8672.0, 1088.0, -5376.0, 4000.0)
-gg_rct_InitStartDragon = Rect(-7840.0, 3552.0, -7168.0, 3840.0)
+gg_rct_InitStartDragon = Rect(-7840.0, 2976.0, -6752.0, 3840.0)
 gg_rct_Towolf = Rect(-11936.0, 128.0, -11744.0, 192.0)
 gg_rct_FromWolf = Rect(-12000.0, 64.0, -11680.0, 128.0)
 gg_rct_ExitWolf = Rect(-11968.0, 1632.0, -11712.0, 1760.0)
@@ -639,11 +658,11 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
             newVector = VectorSum(newVector, vector:yawPitchOffset(speed, angle * (math.pi / 180), 0.0))
             SetUnitPositionSmooth(hero, newVector.x, newVector.y)
         end
-        local countTick=0
+        local countTick = 0
 
         TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
             currentdistance = currentdistance + speed
-            countTick=countTick+1
+            countTick = countTick + 1
             local x, y = GetUnitXY(hero)
             local vector = Vector:new(x, y, GetUnitZ(hero))
             local newVector = vector
@@ -728,15 +747,20 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
             if flag == "RunSkeleton" then
                 UnitDamageArea(hero, 1, GetUnitX(hero), GetUnitY(hero), 120)
             end
+            if flag == "ScorpioRun" then
+                --UnitDamageArea(hero, 1, GetUnitX(hero), GetUnitY(hero), 120)
+                --QueueUnitAnimation(hero,"walk")
+            end
             if flag == "RunEtti" then
                 --print("етти наносит урон в рывке за каждый тик движения?")
                 UnitDamageArea(hero, 20, GetUnitX(hero), GetUnitY(hero), 120)
                 --DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic",x,y))
                 PlayerSeeNoiseInRangeTimed(0.5, x, y)
             end
-            if flag == "AttackAndRunWolf"  and countTick>=10 then --каждый тик движения
+            if flag == "AttackAndRunWolf" and countTick >= 10 then
+                --каждый тик движения
                 --print("эффекты ударов лап")
-                countTick=0
+                countTick = 0
                 WolfSlashAttack(hero)
             end
             if flag == "ignore" then
@@ -908,7 +932,7 @@ function MiniChargeOnArea(data)
         if UnitAlive(e) and e ~= data.UnitHero then
             local angle = AngleBetweenUnits(data.UnitHero, e)
             --print("чуть чуть толкаем при хождении")
-            if not IsUnitAlly(data.UnitHero,GetOwningPlayer(e)) then
+            if not IsUnitAlly(data.UnitHero, GetOwningPlayer(e)) then
                 UnitAddForceSimple(e, angle, 5, 80)
                 has = true
 
@@ -928,7 +952,7 @@ function Chk2Way(x, y, x1, x2)
     for i = 1, k do
         local nx, ny = MoveXY(x, y, step * (i - 1), angle)
         if not IsTerrainPathable(nx, ny, PATHING_TYPE_WALKABILITY) then
-           -- print("проходима")
+            -- print("проходима")
 
         else
             --print(" не проходима")
@@ -938,14 +962,14 @@ function Chk2Way(x, y, x1, x2)
     return wayClean
 end
 
-function MoveEffectTimedWSpeed(eff,speed,angle,timed)
-    TimerStart(CreateTimer(),TIMER_PERIOD64 , true, function()
-        timed=timed-TIMER_PERIOD64
-        local x,y,z=BlzGetLocalSpecialEffectX(eff),BlzGetLocalSpecialEffectY(eff),BlzGetLocalSpecialEffectZ(eff)
-        x,y=MoveXY(x,y,speed,angle)
-        BlzSetSpecialEffectPosition(eff,x,y,z)
+function MoveEffectTimedWSpeed(eff, speed, angle, timed)
+    TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
+        timed = timed - TIMER_PERIOD64
+        local x, y, z = BlzGetLocalSpecialEffectX(eff), BlzGetLocalSpecialEffectY(eff), BlzGetLocalSpecialEffectZ(eff)
+        x, y = MoveXY(x, y, speed, angle)
+        BlzSetSpecialEffectPosition(eff, x, y, z)
         BlzSetSpecialEffectYaw(eff, math.rad(angle))
-        if timed<=0 then
+        if timed <= 0 then
             DestroyEffect(eff)
             DestroyTimer(GetExpiredTimer())
         end
@@ -3027,31 +3051,26 @@ function InitTrapByID(id)
         local enterTrig = CreateTrigger()
 
         local hp = R2I(GetUnitLifePercent(u)) --тип ловушки определяется её процентом HP только НЕЧЕТНЫЕ, НЕТ лучше проверить дебагом
-        print(hp.."%".." от "..R2S(BlzGetUnitMaxHP(u)))
+        --print(hp.."%".." от "..R2S(BlzGetUnitMaxHP(u)))
         if hp == 100 then
             -- ловушка работающая в радиусе
 
             TriggerRegisterUnitInRange(enterTrig, u, radiusActivate, nil)
             TriggerAddAction(enterTrig, function()
                 local entering = GetTriggerUnit()
-
-                if GetUnitTypeId(entering) == FourCC("opeo") then
-                    --print(GetUnitName(entering))
-                    if IsUnitInLine(entering, distanceSee, GetUnitFacing(u), GetUnitXY(u)) and IsUnitEnemy(u, GetOwningPlayer(entering)) then
-                        TrapShotByID(id, u)
-                    end
-                end
-                TimerStart(CreateTimer(), 0.5, true, function()
-                    if not IsUnitInRange(entering, u, radiusActivate + 500) then
-                        --print("вышел из радиуса")
-                        DestroyTimer(GetExpiredTimer())
-                        --DestroyTrigger(enterTrig)
-                    else
-                        if IsUnitInLine(entering, distanceSee, GetUnitFacing(u), GetUnitXY(u)) and IsUnitEnemy(u, GetOwningPlayer(entering)) then
-                            TrapShotByID(id, u)
+                if IsUnitType(entering,UNIT_TYPE_HERO) then
+                    TimerStart(CreateTimer(), 0.5, true, function()
+                        if not IsUnitInRange(entering, u, radiusActivate + 500) then
+                            --print("вышел из радиуса")
+                            DestroyTimer(GetExpiredTimer())
+                            --DestroyTrigger(enterTrig)
+                        else
+                            if IsUnitInLine(entering, distanceSee, GetUnitFacing(u), GetUnitXY(u)) and IsUnitEnemy(u, GetOwningPlayer(entering)) then
+                                TrapShotByID(id, u)
+                            end
                         end
-                    end
-                end)
+                    end)
+                end
             end)
         elseif hp == 1 then
             --print("первая вариация ловушки")
@@ -3168,12 +3187,29 @@ function InitTrig_EnterInRectBDragon()
     TriggerRegisterEnterRectSimple(gg_trg_EnterInRect, gg_rct_InitStartDragon)
     TriggerAddAction(gg_trg_EnterInRect, function()
         if IsUnitType(GetEnteringUnit(), UNIT_TYPE_HERO) then
-            StartDragonAI(GetRectCenterX(gg_rct_InitStartDragon), GetRectCenterY(gg_rct_InitStartDragon))
+            local boss = FindUnitOfType(FourCC('n001'))
+            StartDragonAI(GetUnitXY(boss))
             DisableTrigger(gg_trg_EnterInRect)
         end
     end)
 end
-
+dragonFrazeCount=1
+tFraze={
+    "",
+    "Зачем же вы пришли сюда??",
+    "Да не брал я ваши подарки, это мне бабушка передала",
+    "Моя бабушка меня очень любит, ведь я у неё один такой внучек",
+    "Вот так, сидишь, сидишь в своей драконьей пещере, драконишься понемножку, а потом приходят тут всякие",
+    "Вам не суждено узнать, чем я занимаюсь в своей драконьей пещере",
+    "Я не вылезал из своей берлоги уже целую вечность",
+    "А с другой стороны и хорошо, что вы пришли, мне надоело дёргать своего одноглазого змея под ваши звуки",
+    "Думаете, что даже если вы меня одолеете, вы не сможете проникнуть в мою пещеру",
+    "Когда всё это закончится, надо почистить историю браузера, чтобы вы не узнали моих секретов",
+    "Надо было начать открывать подарки ещё до вашего прихода, а то я таки не узнаю что там",
+    "Проход в пещеру откроется только после моей смерти, ой, взболтнул лишнего",
+    "Даже если я умру, я возрожусь в виде дракона-феникса, и смогу вернуться к старым делам",
+    "Что-то затянулся наш бой, наверное я пойду?"
+}
 function StartDragonAI(xs, ys)
     local boss = FindUnitOfType(FourCC('n001'))
     local BossFight = true
@@ -3185,7 +3221,7 @@ function StartDragonAI(xs, ys)
     local range = 1000
     local x, y = GetUnitXY(boss)
     ClearMapMusicBJ()
-    PlayMusicBJ("The Icefalcon's Crest")
+    PlayMusicBJ("A Wizard's Worst Nightmare")
     SetMusicVolumeBJ(100)
     local FW = CreateFogModifierRectBJ(false, Player(0), FOG_OF_WAR_VISIBLE, GlobalRect)
     FogModifierStart(FW)
@@ -3263,11 +3299,31 @@ function StartDragonAI(xs, ys)
         if BossFight then
             -- если идёт бой
             sec = sec + 1
-            if sec >= 5 then
+
+            local max=#tFraze[dragonFrazeCount]//14
+            if dragonFrazeCount>=#tFraze then
+                --print("последняя фраза")
+                max=5
+            end
+
+            if max<5 then
+                max=5
+            end
+            --print(max)
+            if sec >= max then
                 sec = 0
                 phase = GetRandomInt(1, 4) -- переключатель, рандомизатор фаз
                 PhaseOn = true
                 --print("phase " .. phase)
+                --print(#tFraze,dragonFrazeCount)
+                if dragonFrazeCount+1<=#tFraze then
+                    --print(tFraze[dragonFrazeCount+1])
+                    normal_sound("Speech\\Dragon\\"..dragonFrazeCount+1,GetUnitXY(boss))
+                    dragonFrazeCount=dragonFrazeCount+1
+                else
+                    print("этому супер удару научила меня моя бабушка")
+                    --print("Зачем, зачем ты каждый раз возвращаешься?")
+                end
             end
             --фазы
             local hero = HERO[0].UnitHero
@@ -3285,6 +3341,9 @@ function StartDragonAI(xs, ys)
 
                     if phase ~= 1 then
                         DestroyTimer(GetExpiredTimer())
+                    else
+                        angle = AngleBetweenUnits(boss, hero)
+                        IceImpale(boss, angle, false)
                     end
                 end)
 
@@ -3325,7 +3384,7 @@ function StartDragonAI(xs, ys)
             if k >= 1 then
                 --print("Лечим босса, и бой возобновляется")
                 ClearMapMusicBJ()
-                PlayMusicBJ("The Icefalcon's Crest")
+                PlayMusicBJ("A Wizard's Worst Nightmare")
                 SetMusicVolumeBJ(100)
                 BlzFrameSetVisible(into, true)
                 HealUnit(boss, 99999)
@@ -3395,6 +3454,7 @@ function IceCrest(boss)
             IceImpale(boss, angle - 180, true)
             IceImpale(boss, angle + 90, true)
             IceImpale(boss, angle - 90, true)
+            DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", GetUnitXY(boss)))
         end)
         TimerStart(CreateTimer(), 3, false, function()
             IssuePointOrder(boss, "move", GetUnitXY(HERO[0].UnitHero))
@@ -3416,7 +3476,7 @@ function IceImpale(boss, angle, notMove)
     local hero = HERO[0].UnitHero
     local k = 0
     local step = 50
-    local max = 23
+    local max = 26
     local range = 80
     local rangeAuto=100 --радиус поворота шипа на героя
     if notMove then
@@ -3424,10 +3484,9 @@ function IceImpale(boss, angle, notMove)
         max = 6
         range = 250
     end
-
     TimerStart(CreateTimer(), 0.7, false, function()
         BlzPauseUnitEx(boss, false)
-
+        DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", GetUnitXY(boss)))
         TimerStart(CreateTimer(), 0.05, true, function()
             k = k + 1
             if IsUnitInRangeXY(hero, x, y, rangeAuto) and not notMove then
@@ -3440,7 +3499,7 @@ function IceImpale(boss, angle, notMove)
                 CreateDestructableZ(FourCC("B006"), x, y, 900, GetRandomInt(0, 360), 2.5, 1)
                 DestroyTimer(GetExpiredTimer())
                 if not notMove then
-                    IssuePointOrder(boss, "move", GetUnitXY(hero))
+                   -- IssuePointOrder(boss, "move", GetUnitXY(hero))
                 end
             end
         end)
@@ -3453,13 +3512,14 @@ function DragonTripleShot(boss,hero)
     SetUnitFacing(boss,angle)
     local max=3
     BlzPauseUnitEx(boss,true)
+    local effModel="FrostWyrmMissileNoOmni"
     TimerStart(CreateTimer(), 0.5, true, function()
         max=max-1
         SetUnitTimeScale(boss,4)
         SetUnitAnimation(boss,"attack")
-        CreateAndForceBullet(boss,GetUnitFacing(boss)-30,20,"Abilities\\Weapons\\LichMissile\\LichMissile")
-        CreateAndForceBullet(boss,GetUnitFacing(boss),20,"Abilities\\Weapons\\LichMissile\\LichMissile")
-        CreateAndForceBullet(boss,GetUnitFacing(boss)+30,20,"Abilities\\Weapons\\LichMissile\\LichMissile")
+        CreateAndForceBullet(boss,GetUnitFacing(boss)-30,20,effModel)
+        CreateAndForceBullet(boss,GetUnitFacing(boss),20,effModel)
+        CreateAndForceBullet(boss,GetUnitFacing(boss)+30,20,effModel)
 
         if max <= 0 then
             SetUnitTimeScale(boss,1)
@@ -3467,10 +3527,12 @@ function DragonTripleShot(boss,hero)
             angle=AngleBetweenUnits(boss,hero)
             SetUnitFacing(boss,angle)
 
-            TimerStart(CreateTimer(), 1, false, function()
-                CreateAndForceBullet(boss,GetUnitFacing(boss)-30,20,"Abilities\\Weapons\\LichMissile\\LichMissile")
-                CreateAndForceBullet(boss,GetUnitFacing(boss),20,"Abilities\\Weapons\\LichMissile\\LichMissile")
-                CreateAndForceBullet(boss,GetUnitFacing(boss)+30,20,"Abilities\\Weapons\\LichMissile\\LichMissile")
+            TimerStart(CreateTimer(), 0.3, false, function()
+                CreateAndForceBullet(boss,GetUnitFacing(boss)-30,15,effModel)
+                CreateAndForceBullet(boss,GetUnitFacing(boss)-15,15,effModel)
+                CreateAndForceBullet(boss,GetUnitFacing(boss),15,effModel)
+                CreateAndForceBullet(boss,GetUnitFacing(boss)+30,15,effModel)
+                CreateAndForceBullet(boss,GetUnitFacing(boss)+15,15,effModel)
                 BlzPauseUnitEx(boss,false)
                 --IceImpale(boss, AngleBetweenUnits(boss,hero), true)
             end)
@@ -4326,14 +4388,14 @@ function StartYettyAI(xs, ys)
                         TimerStart(CreateTimer(), 0.5, true, function()
 
                             if IsUnitInRange(snowmanBlast, hero, 200) then
-                                DestroyEffect(AddSpecialEffect("Winter Blast SD", GetUnitXY(snowmanBlast)))
+                                DestroyEffect(AddSpecialEffect("FrostWyrmMissileNoOmni", GetUnitXY(snowmanBlast)))
                                 UnitDamageArea(snowmanBlast, 100, GetUnitX(snowmanBlast), GetUnitY(snowmanBlast), 250)
                                 KillUnit(snowmanBlast)
                                 ShowUnit(snowmanBlast, false)
                             end
                             if not UnitAlive(snowmanBlast) then
                                 DestroyTimer(GetExpiredTimer())
-                                DestroyEffect(AddSpecialEffect("Winter Blast SD", GetUnitXY(snowmanBlast)))
+                                DestroyEffect(AddSpecialEffect("FrostWyrmMissileNoOmni", GetUnitXY(snowmanBlast)))
                                 UnitDamageArea(snowmanBlast, 100, GetUnitX(snowmanBlast), GetUnitY(snowmanBlast), 150)
                                 KillUnit(snowmanBlast)
                                 ShowUnit(snowmanBlast, false)
@@ -4434,9 +4496,11 @@ do
     local InitGlobalsOrigin = InitGlobals
     function InitGlobals()
         InitGlobalsOrigin()
-        TimerStart(CreateTimer(), .01, false, function()
-            InitSnowMan(FourCC("h005"))
+        TimerStart(CreateTimer(), .5, false, function()
+            InitSnowMan(FourCC("h005")) --снеговик
+            InitSnowMan(FourCC("n003")) -- арахнид
             InitDeathEventCreep()
+            InitScorpionAI(FourCC("n003"))
         end)
     end
 end
@@ -4456,7 +4520,7 @@ function InitDeathEventCreep()
     TriggerRegisterAnyUnitEventBJ(this, EVENT_PLAYER_UNIT_DEATH)
     TriggerAddAction(this, function()
         local u = GetTriggerUnit() --тот кто умер
-        if GetUnitTypeId(u)==FourCC("h005") then
+        if GetUnitTypeId(u)==FourCC("h005") or GetUnitTypeId(u)==FourCC("n003") then
             local killer = GetKillingUnit()
             local id=GetUnitTypeId(u)
             local p=GetOwningPlayer(u)
@@ -4465,7 +4529,9 @@ function InitDeathEventCreep()
             TimerStart(CreateTimer(), delay, false, function()
                 local new=CreateUnit(p,id,x,y,GetRandomInt(0,360))
                 CreepsX[GetHandleId(new)],CreepsY[GetHandleId(new)]=GetUnitXY(new)
-
+                if GetUnitTypeId(u)==FourCC("n003") then
+                    StartScorpionAI(new)
+                end
 
             end)
             TimerStart(CreateTimer(), delay-5, false, function()
@@ -4476,6 +4542,136 @@ function InitDeathEventCreep()
     end)
 
 end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 05.02.2023 20:55
+---
+function InitScorpionAI(id)
+    local _, k, rg = FindUnitOfType(id)
+    print(k, "скорпионов")
+    for i = 1, #rg do
+        local unit = rg[i]
+        StartScorpionAI(unit)
+    end
+end
+
+function StartScorpionAI(unit)
+    local phase = 3
+    local sec = GetRandomInt(0,5)
+    local hero = HERO[0].UnitHero
+
+    local dmgTrig = CreateTrigger()
+    TriggerRegisterUnitEvent(dmgTrig, unit, EVENT_UNIT_DAMAGED)
+    TriggerAddAction(dmgTrig, function()
+        --print("скорпион получил урон")
+        local angle = AngleBetweenUnits(unit, hero) - 180
+        if onForces[GetHandleId(unit)] then
+            if phase==1 then
+                UnitAddForceSimple(unit, angle, 20, 200)
+
+            end
+        end
+    end)
+
+    TimerStart(CreateTimer(), 1, true, function()
+        sec = sec - 1
+        if sec <= 0 then
+            sec = 6
+            phase = GetRandomInt(1, 3)
+
+            if IsUnitInRange(unit, hero, 1000) and UnitAlive(unit)  then
+                --print("герой в радиусе")
+                --print(phase)
+                if phase == 1 then
+                    ScorpionRunTo(unit, hero, 5)
+                elseif phase == 2 then
+                    ScorpionRangeAttack(unit, hero, 5)
+                elseif phase == 3 then
+                    ScorpioUnderGroundMove(unit, hero, 5)
+                end
+            end
+        end
+        if not UnitAlive(unit) then
+            DestroyTimer(GetExpiredTimer())
+        end
+    end)
+end
+
+function ScorpioUnderGroundMove(unit, hero, duration)
+    local angle = AngleBetweenUnits(unit, hero)
+    local asp = 0.02
+    SetUnitAnimationByIndex(unit, 7)
+    SetUnitInvulnerable(unit,true)
+    TimerStart(CreateTimer(), 0.7, false, function()
+        TimerStart(CreateTimer(), asp, true, function()
+            duration = duration - asp
+            angle = AngleBetweenUnits(unit, hero)
+            BlzSetUnitFacingEx(unit, angle)
+            UnitAddForceSimple(unit, angle, 5, 60, "ScorpioRun")
+            DestroyEffect(AddSpecialEffect("Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl", GetUnitXY(unit)))
+            if GetRandomInt(1,5)==1 then
+                local eff=AddSpecialEffect("Ice Shard", GetUnitXY(unit))
+                BlzSetSpecialEffectScale(eff,GetRandomInt(2,3))
+                UnitDamageArea(unit, 50, GetUnitX(unit), GetUnitY(unit), 80)
+                TimerStart(CreateTimer(), 0.7, false, function()
+                    DestroyEffect(eff)
+                end)
+            end
+
+            if not UnitAlive(unit) or duration-0.7 <= 0 then
+                if not UnitAlive(unit) then
+                    SetUnitAnimation(unit, "death")
+                else
+                    SetUnitAnimationByIndex(unit, 10)
+                end
+                SetUnitInvulnerable(unit,false)
+                DestroyTimer(GetExpiredTimer())
+            end
+        end)
+    end)
+end
+
+function ScorpionRangeAttack(unit, hero, duration)
+    local angle = AngleBetweenUnits(unit, hero)
+    local asp = 0.5
+    TimerStart(CreateTimer(), asp, true, function()
+        duration = duration - asp
+        angle = AngleBetweenUnits(unit, hero)
+        BlzSetUnitFacingEx(unit, angle)
+        SetUnitAnimationByIndex(unit, 2)
+        CreateAndForceBullet(unit, angle, 20, "Abilities\\Weapons\\ChimaeraAcidMissile\\ChimaeraAcidMissile.mdl", nil, nil, 2, 1500,150)
+        if not UnitAlive(unit) or duration <= 0 then
+            if not UnitAlive(unit) then
+                SetUnitAnimation(unit, "death")
+            end
+            DestroyTimer(GetExpiredTimer())
+        end
+    end)
+end
+
+function ScorpionRunTo(unit, hero, duration)
+
+    SetUnitTimeScale(unit, 3)
+    --SetUnitFacing(unit, angle)
+    SetUnitAnimationByIndex(unit, 1)
+    TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
+        duration = duration - TIMER_PERIOD64
+        local angle = AngleBetweenUnits(unit, hero)
+        SetUnitFacing(unit, angle)
+        UnitAddForceSimple(unit, angle, 5, 20, "ScorpioRun")
+        UnitDamageArea(unit, 50, GetUnitX(unit), GetUnitY(unit), 80)
+        SetUnitAnimationByIndex(unit, 1)
+        if not UnitAlive(unit) or duration <= 0 then
+            SetUnitTimeScale(unit, 1)
+            if not UnitAlive(unit) then
+                SetUnitAnimation(unit, "death")
+            end
+            DestroyTimer(GetExpiredTimer())
+        end
+    end)
+end
+
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
 --- Created by Bergi.
@@ -6566,6 +6762,16 @@ function InitCamControl()
 end
 
 --CUSTOM_CODE
+function Trig_Untitled_Trigger_001_Actions()
+KillDestructable(gg_dest_B007_5312)
+end
+
+function InitTrig_Untitled_Trigger_001()
+gg_trg_Untitled_Trigger_001 = CreateTrigger()
+TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_n001_0009, EVENT_UNIT_DEATH)
+TriggerAddAction(gg_trg_Untitled_Trigger_001, Trig_Untitled_Trigger_001_Actions)
+end
+
 function Trig_BoundEnter_Copy_Conditions()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
@@ -6995,6 +7201,7 @@ TriggerAddAction(gg_trg_ESCTEST, Trig_ESCTEST_Actions)
 end
 
 function InitCustomTriggers()
+InitTrig_Untitled_Trigger_001()
 InitTrig_BoundEnter_Copy()
 InitTrig_ExitWolf()
 InitTrig_BoundEnter()
@@ -7036,6 +7243,7 @@ SetMapMusic("Music", true, 0)
 InitSounds()
 CreateRegions()
 CreateCameras()
+CreateAllDestructables()
 CreateAllUnits()
 InitBlizzard()
 InitGlobals()
@@ -7049,7 +7257,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, -384.0, -704.0)
+DefineStartLocation(0, 3008.0, 3328.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()

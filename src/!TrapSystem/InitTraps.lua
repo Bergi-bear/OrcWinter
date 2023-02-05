@@ -34,31 +34,26 @@ function InitTrapByID(id)
         local enterTrig = CreateTrigger()
 
         local hp = R2I(GetUnitLifePercent(u)) --тип ловушки определяется её процентом HP только НЕЧЕТНЫЕ, НЕТ лучше проверить дебагом
-        print(hp.."%%".." от "..R2S(BlzGetUnitMaxHP(u)))
+        --print(hp.."%%".." от "..R2S(BlzGetUnitMaxHP(u)))
         if hp == 100 then
             -- ловушка работающая в радиусе
 
             TriggerRegisterUnitInRange(enterTrig, u, radiusActivate, nil)
             TriggerAddAction(enterTrig, function()
                 local entering = GetTriggerUnit()
-
-                if GetUnitTypeId(entering) == FourCC("opeo") then
-                    --print(GetUnitName(entering))
-                    if IsUnitInLine(entering, distanceSee, GetUnitFacing(u), GetUnitXY(u)) and IsUnitEnemy(u, GetOwningPlayer(entering)) then
-                        TrapShotByID(id, u)
-                    end
-                end
-                TimerStart(CreateTimer(), 0.5, true, function()
-                    if not IsUnitInRange(entering, u, radiusActivate + 500) then
-                        --print("вышел из радиуса")
-                        DestroyTimer(GetExpiredTimer())
-                        --DestroyTrigger(enterTrig)
-                    else
-                        if IsUnitInLine(entering, distanceSee, GetUnitFacing(u), GetUnitXY(u)) and IsUnitEnemy(u, GetOwningPlayer(entering)) then
-                            TrapShotByID(id, u)
+                if IsUnitType(entering,UNIT_TYPE_HERO) then
+                    TimerStart(CreateTimer(), 0.5, true, function()
+                        if not IsUnitInRange(entering, u, radiusActivate + 500) then
+                            --print("вышел из радиуса")
+                            DestroyTimer(GetExpiredTimer())
+                            --DestroyTrigger(enterTrig)
+                        else
+                            if IsUnitInLine(entering, distanceSee, GetUnitFacing(u), GetUnitXY(u)) and IsUnitEnemy(u, GetOwningPlayer(entering)) then
+                                TrapShotByID(id, u)
+                            end
                         end
-                    end
-                end)
+                    end)
+                end
             end)
         elseif hp == 1 then
             --print("первая вариация ловушки")
