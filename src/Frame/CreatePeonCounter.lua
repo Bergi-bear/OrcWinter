@@ -27,6 +27,7 @@ function CreatePeonCounter()
             change=peonRescue
             --print("значение изменилось")
             ShowFrameTimed(box)
+            RandomRescueSpeech()
         end
     end)
     BlzFrameSetScale(text, 2)

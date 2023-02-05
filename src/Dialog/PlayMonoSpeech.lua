@@ -3,18 +3,85 @@
 --- Created by User.
 --- DateTime: 21.01.2023 23:57
 ---
-function PlayMonoSpeech(sound,text)
+function PlayMonoSpeech(sound, text)
     if not BlzFrameIsVisible(TexBox) then
-        local s=normal_sound(sound)
-
+        local s = normal_sound(sound)
+        local sd=GetSoundDuration(s)
         --SetCinematicScene(HeroID, 1, "peon", "text", 2, 2)
-
+        if sd<=10 then
+            sd=1000
+        end
         BlzFrameSetVisible(TexBox, true)
-        BlzFrameSetText(TexBoxText,text)
-        TransmissionFromUnitWithNameBJ( GetPlayersAll(), HERO[0].UnitHero, "", nil, "", bj_TIMETYPE_SET, GetSoundDuration(s)/700, false )
+        BlzFrameSetText(TexBoxText, text)
+        TransmissionFromUnitWithNameBJ(GetPlayersAll(), HERO[0].UnitHero, "", nil, "", bj_TIMETYPE_SET, GetSoundDuration(s) / 700, false)
         --print(GetSoundDuration(s))
-        TimerStart(CreateTimer(), GetSoundDuration(s)/700, false, function()
+        TimerStart(CreateTimer(), sd / 700, false, function()
             BlzFrameSetVisible(TexBox, false)
         end)
     end
+end
+
+function RandomRescueSpeech()
+
+    local table = {
+        [1] = {
+            text = "Иди на работу",
+            sound = ""
+        },
+        [2] = {
+            text = "Эй, ты, здарова",
+            sound = ""
+        },
+        [3] = {
+            text = "Ой, я случайно",
+            sound = ""
+        },
+        [4] = {
+            text = "Я не хотел, брат",
+            sound = ""
+        }
+    ,
+        [5] = {
+            text = "Это просто моя работа",
+            sound = ""
+        }
+    ,
+        [6] = {
+            text = "Осторожно, скользско",
+            sound = ""
+        }
+    ,
+        [7] = {
+            text = "Просто, демонстрация силы",
+            sound = ""
+        }
+    ,
+        [8] = {
+            text = "Внимательней будь",
+            sound = ""
+        }
+    ,
+        [9] = {
+            text = "Выписан из пролетариата",
+            sound = ""
+        }
+    ,
+        [10] = {
+            text = "Звуки неистового чилла",
+            sound = ""
+        }
+    ,
+        [11] = {
+            text = "Это всё потому, что ты стоишь и не работаешь",
+            sound = ""
+        }
+
+    }
+    local number=GetRandomInt(1,#table)
+   -- print(table[number].text)
+    if number > #table then
+        number = table
+        print("фраза вне диапазона")
+    end
+    PlayMonoSpeech(table[number].sound, table[number].text)
 end
