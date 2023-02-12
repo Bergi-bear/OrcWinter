@@ -259,30 +259,38 @@ function StartYettyAI(xs, ys)
     end)
 end
 
-function MarkAndFall(x, y, effModel, hero)
+function MarkAndFall(x, y, effModel, hero,delay)
     local mark = AddSpecialEffect("Snipe Target", x, y)
     BlzSetSpecialEffectScale(mark, 5)
-    TimerStart(CreateTimer(), 2, false, function()
+    if not delay then
+        delay=2
+    end
+    TimerStart(CreateTimer(), delay, false, function()
 
         local FallenEff = AddSpecialEffect(effModel, x, y)
-        BlzSetSpecialEffectZ(FallenEff, 1000)
+        BlzSetSpecialEffectZ(FallenEff, GetTerrainZ(x,y)+1000)
         BlzSetSpecialEffectYaw(FallenEff, math.rad(GetRandomReal(0, 360)))
         BlzSetSpecialEffectScale(FallenEff, 5)
         TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
             local z = BlzGetLocalSpecialEffectZ(FallenEff)
             BlzSetSpecialEffectZ(FallenEff, z - 50)
-            if z + GetRandomInt(200, 400) <= GetTerrainZ(x, y) then
+            if z + GetRandomInt(50, 50) <= GetTerrainZ(x, y) then
                 DestroyEffect(mark)
                 BlzSetSpecialEffectPosition(mark, 5000, 5000, 0)
                 DestroyTimer(GetExpiredTimer())
 
-                local nd = CreateDestructableZ(FourCC('B002'), x, y, 0, 0, 5, 1)
+                local nd =nil
                 --SetDestructableInvulnerable(nd,true)
                 DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", x, y))
                 PlayerSeeNoiseInRangeTimed(0.5, x, y)
-                UnitDamageArea(hero, 100, x, y, 150) --при падении камня
+                UnitDamageArea(hero, 300, x, y, 150) --при падении камня
                 local k = GetUnitLifePercent(hero) / 100
                 k = 1 - k
+                if effModel =="Abilities\\Weapons\\DemonHunterMissile\\DemonHunterMissile" then
+                    DestroyEffect(FallenEff)
+                else
+                    nd= CreateDestructableZ(FourCC('B002'), x, y, 0, 0, 5, 1)
+                end
                 TimerStart(CreateTimer(), 5 + (k * 5), false, function()
                     DestroyEffect(FallenEff)
                     BlzSetSpecialEffectPosition(FallenEff, 999, 999, 999)

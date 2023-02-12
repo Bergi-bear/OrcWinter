@@ -117,7 +117,7 @@ function OnPostDamage()
         --print(GetUnitName(caster),"попадание в большое ХП",GetUnitName(realUnit),tempDamage)
         BlzSetEventDamage(0)
         if GetUnitTypeId(realUnit)==FourCC("e003") and GetUnitTypeId(caster) == HeroID  then
-            HealUnit(realUnit,tempDamage)
+            HealUnit(realUnit,tempDamage*0.5)
         else
             UnitDamageTarget(caster, realUnit, tempDamage, true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WHOKNOWS)
         end

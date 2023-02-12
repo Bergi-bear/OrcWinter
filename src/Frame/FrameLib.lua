@@ -32,22 +32,22 @@ end
 function HideEverything()
     --print("скрытие панели?")
     --BlzFrameSetVisible(BlzGetFrameByName("ConsoleUIBackdrop", 0), false)
-    BlzFrameSetAbsPoint(BlzGetFrameByName("ConsoleUIBackdrop", 0), FRAMEPOINT_TOPRIGHT, 0, 0 ) --ЭТО ЧЕРНАЯ ПАНЕЛЬ!
+    BlzFrameSetAbsPoint(BlzGetFrameByName("ConsoleUIBackdrop", 0), FRAMEPOINT_TOPRIGHT, 0, 0) --ЭТО ЧЕРНАЯ ПАНЕЛЬ!
     --BlzFrameSetSize(BlzGetFrameByName("CommandButton_" .. 0, 0), 0, 0)-- M в позиции 0,0
     --BlzFrameClearAllPoints(BlzGetFrameByName("CommandButton_" .. 0, 0))
 
     --BlzFrameSetAbsPoint(BlzGetFrameByName("CommandButton_" .. 0, 0),FRAMEPOINT_CENTER,0,-0.1)
     for i = 0, 11 do
-       -- BlzFrameSetVisible(BlzGetFrameByName("CommandButton_"..i, 0), false) --отключить
+        -- BlzFrameSetVisible(BlzGetFrameByName("CommandButton_"..i, 0), false) --отключить
         --local fh=BlzGetFrameByName("CommandButton_" .. i,0)
 
-       -- print(i,BlzFrameGetText(BlzGetFrameByName("CommandButton_" .. i,0)))
+        -- print(i,BlzFrameGetText(BlzGetFrameByName("CommandButton_" .. i,0)))
         --print("GetChield",i,BlzFrameGetChildrenCount(fh))
         BlzFrameClearAllPoints(BlzGetFrameByName("CommandButton_" .. i, 0))
-        BlzFrameSetAbsPoint(BlzGetFrameByName("CommandButton_" .. i, 0),FRAMEPOINT_CENTER,0,-0.1)
+        BlzFrameSetAbsPoint(BlzGetFrameByName("CommandButton_" .. i, 0), FRAMEPOINT_CENTER, 0, -0.1)
     end
     BlzHideOriginFrames(true)--скрыть всё
-    BlzFrameSetScale(BlzFrameGetChild(BlzGetFrameByName("ConsoleUI",0),5), 0.001) --рамка мёртвой зоны отключение
+    BlzFrameSetScale(BlzFrameGetChild(BlzGetFrameByName("ConsoleUI", 0), 5), 0.001) --рамка мёртвой зоны отключение
 end
 
 function MenuFrame()
@@ -77,31 +77,76 @@ function MenuFrame()
     HideToolTips()
 end
 
-function CreateAndStartClock()
-    local charges = BlzCreateFrameByType("BACKDROP", "Face", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
+function CreateAndStartClock(x, y, reverse, sec, min, h,parentFH)
+    if not parentFH then
+        parentFH=BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
+    end
+    local charges = BlzCreateFrameByType("BACKDROP", "Face", parentFH, "", 0)
+    BlzFrameSetParent(charges, BlzGetFrameByName("ConsoleUIBackdrop", 0))
     local new_FrameChargesText = BlzCreateFrameByType("TEXT", "ButtonChargesText", charges, "", 0)
-    local sec = 0 --стартовые секунды
-    local min = 0 -- стартовые минуты
-    local h = 23 -- стартовые часы
+    if not x then
+        x=0.47
+    end
+    if not y then
+        y=0.59
+    end
+
+    if not sec then
+        sec = 0 --стартовые секунды
+    end
+    if not min then
+        min = 0 -- стартовые минуты
+    end
+    if not h then
+        h = 23 -- стартовые часы
+    end
     BlzFrameSetTexture(charges, "UI\\Widgets\\Console\\Human\\CommandButton\\human-button-lvls-overlay", 0, true)
     BlzFrameSetSize(charges, 0.08, 0.02)
-    BlzFrameSetAbsPoint(charges, FRAMEPOINT_CENTER, 0.48, 0.6 - 0.01)
+    BlzFrameSetAbsPoint(charges, FRAMEPOINT_CENTER, x, y)
     BlzFrameSetText(new_FrameChargesText, Zero(0) .. ":" .. Zero(0) .. ":" .. Zero(0))
     BlzFrameSetPoint(new_FrameChargesText, FRAMEPOINT_CENTER, charges, FRAMEPOINT_CENTER, 0., 0.)
 
     TimerStart(CreateTimer(), 1, true, function()
-        sec = sec + 1
-        if sec == 60 then
-            sec = 0
-            min = min + 1
-        end
-        if min == 60 then
-            min = 0
-            h = h + 1
+        if not reverse then
+            sec = sec + 1
+            if sec == 60 then
+                sec = 0
+                min = min + 1
+            end
+            if min == 60 then
+                min = 0
+                h = h + 1
+            end
+        else -- реверс времени
+            sec = sec - 1
+            if sec <= 0 then
+                sec = 59
+                min = min - 1
+                if min<0 then
+                    --print("Обратный таймер закончился")
+                    DEFENSEND=true
+                    BlzDestroyFrame(charges)
+                    DestroyTimer(GetExpiredTimer())
+                end
+            end
+
+            if min <= 0 then
+                if h>0 then
+                    min = 59
+                    h = h - 1
+                end
+                min=0
+            end
+            if sec<=0 and min <=0 and h<=0 then
+                print("Обратный таймер закончился ПОЛЧНОСТЬЮ")
+                BlzDestroyFrame(charges)
+                DestroyTimer(GetExpiredTimer())
+            end
         end
 
         BlzFrameSetText(new_FrameChargesText, Zero(h) .. ":" .. Zero(min) .. ":" .. Zero(sec))
     end)
+    return charges
 end
 
 function Zero(s)
@@ -127,18 +172,18 @@ end
 
 function DrawSelectionPortrait(state)
 
-    local Portrait =BlzGetOriginFrame(ORIGIN_FRAME_PORTRAIT, 0)-- BlzGetFrameByName("Portrait",0)
+    local Portrait = BlzGetOriginFrame(ORIGIN_FRAME_PORTRAIT, 0)-- BlzGetFrameByName("Portrait",0)
 
     BlzFrameClearAllPoints(Portrait)
     BlzFrameSetSize(Portrait, 0.08, 0.08)
-   -- BlzFrameSetParent(Portrait, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    -- BlzFrameSetParent(Portrait, BlzGetFrameByName("ConsoleUIBackdrop", 0))
     BlzFrameSetAbsPoint(Portrait, FRAMEPOINT_CENTER, -0.0, 0.59)
     BlzFrameSetVisible(Portrait, state)
 end
 
 function DrawSelectionPortrait1(state)
 
-    local Portrait =BlzGetOriginFrame(ORIGIN_FRAME_PORTRAIT, 0)-- BlzGetFrameByName("Portrait",0)
+    local Portrait = BlzGetOriginFrame(ORIGIN_FRAME_PORTRAIT, 0)-- BlzGetFrameByName("Portrait",0)
     --print("что-то не так с портретом")
     BlzFrameClearAllPoints(Portrait)
     BlzFrameSetSize(Portrait, 0.001, 0.001)

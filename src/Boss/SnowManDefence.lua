@@ -10,6 +10,9 @@ function StartSnowManDefence()
     local xs, ys = GetUnitXY(boss)
     local BossFight = true
     local into = CreateBOSSHPBar(boss, "Прочность снеговика")
+
+    local clock = CreateAndStartClock(0.05, 0.05, true, 0, 5, 0, into)
+
     UnitSetHitBoxOverSize(boss, 150)
     UnitAddAbility(boss, FourCC('Abun'))
     SetUnitState(boss, UNIT_STATE_LIFE, 5000)
@@ -18,18 +21,29 @@ function StartSnowManDefence()
     local range = 1000
     local x, y = GetUnitXY(boss)
     ClearMapMusicBJ()
-    PlayMusicBJ("A Wizard's Worst Nightmare")
+    PlayMusicBJ("The Broken Fellowship")
     SetMusicVolumeBJ(100)
     --local FW = CreateFogModifierRectBJ(false, Player(0), FOG_OF_WAR_VISIBLE, GlobalRect)
     --FogModifierStart(FW)
 
-    local phase = 2 --стартовая фаза
+    local phase = 4 --стартовая фаза
     local sec = 0
     local PhaseOn = true
     local OnAttack = true
     TimerStart(CreateTimer(), 1, true, function()
         --каждую секунду
         local bx, by = GetUnitXY(boss)
+
+        if DEFENSEND then
+            StartSound(bj_questCompletedSound)
+            DestroyTimer(GetExpiredTimer())
+            phase = 0
+            print("Снеговик уцелел, даём награду")
+            ClearMapMusicBJ()
+            PlayMusicBJ("Salve Springs")
+            SetMusicVolumeBJ(100)
+            BlzFrameSetVisible(into, false)
+        end
 
         if not UnitAlive(boss) then
             -- Место где босс
@@ -93,6 +107,7 @@ function StartSnowManDefence()
                     --HealUnit(boss)
                     SetUnitPositionSmooth(boss, xs, ys)
                     ClearMapMusicBJ()
+                    BlzDestroyFrame(clock)
                     PlayMusicBJ("Salve Springs")
                     SetMusicVolumeBJ(100)
                 end
@@ -104,7 +119,7 @@ function StartSnowManDefence()
             sec = sec + 1
             if sec >= 30 then
                 sec = 0
-                phase = GetRandomInt(1, 2) -- переключатель, рандомизатор фаз
+                phase = GetRandomInt(1, 5) -- переключатель, рандомизатор фаз
                 PhaseOn = true
                 --print("phase " .. phase)
             end
@@ -113,10 +128,10 @@ function StartSnowManDefence()
             if phase == 1 and PhaseOn then
                 PhaseOn = false
                 print("фаза", phase)
-                local k=6
+                local k = 6
                 TimerStart(CreateTimer(), 5, true, function()
-                    k=k-1
-                    if phase ~= 1 or k<=0  then
+                    k = k - 1
+                    if phase ~= 1 or k <= 0 then
                         DestroyTimer(GetExpiredTimer())
                     else
                         CreateUnitRoundOnFreePosition(FourCC("n004"), 6, 1500, boss)
@@ -128,32 +143,59 @@ function StartSnowManDefence()
             if phase == 2 and PhaseOn then
                 PhaseOn = false
                 print("фаза", phase)
-                CreateUnitRoundOnFreePosition(FourCC("n005"), 6, 1500, boss)
-                local k=3
-                TimerStart(CreateTimer(), 15, true, function()
-                    k=k-1
-                    if phase ~= 2 or k<=0 then
+                CreateUnitRoundOnFreePosition(FourCC("n005"), 6, GetRandomInt(1200,1800), boss)
+                local k = 3
+                TimerStart(CreateTimer(), 10, true, function()
+                    k = k - 1
+                    if phase ~= 2 or k <= 0 then
                         DestroyTimer(GetExpiredTimer())
                     else
-                        CreateUnitRoundOnFreePosition(FourCC("n005"), 6, 1500, boss)
+                        CreateUnitRoundOnFreePosition(FourCC("n005"), 6,  GetRandomInt(1200,1800), boss)
                     end
                 end)
             end
             if phase == 3 and PhaseOn then
                 PhaseOn = false
                 print("фаза", phase)
-
+                CreateUnitRoundOnFreePosition(FourCC("n006"), 8,  GetRandomInt(1200,1800), boss)
+                local k = 3
+                TimerStart(CreateTimer(), 10, true, function()
+                    k = k - 1
+                    if phase ~= 3 or k <= 1 then
+                        DestroyTimer(GetExpiredTimer())
+                    else
+                        CreateUnitRoundOnFreePosition(FourCC("n006"), 8,  GetRandomInt(1200,1800), boss)
+                    end
+                end)
 
             end
             if phase == 4 and PhaseOn then
                 PhaseOn = false
                 print("фаза", phase)
-
+                CreateUnitRoundOnFreePosition(FourCC("n007"), 8,  GetRandomInt(1200,1800), boss)
+                local k = 3
+                TimerStart(CreateTimer(), 10, true, function()
+                    k = k - 1
+                    if phase ~= 4 or k <= 1 then
+                        DestroyTimer(GetExpiredTimer())
+                    else
+                        CreateUnitRoundOnFreePosition(FourCC("n007"), 9,  GetRandomInt(1200,1800), boss)
+                    end
+                end)
 
             end
             if phase == 5 and PhaseOn then
                 PhaseOn = false
-
+                CreateUnitRoundOnFreePosition(FourCC("n008"), 2,  GetRandomInt(1200,1800), boss)
+                local k = 3
+                TimerStart(CreateTimer(), 15, true, function()
+                    k = k - 1
+                    if phase ~= 5 or k <= 1 then
+                        DestroyTimer(GetExpiredTimer())
+                    else
+                        CreateUnitRoundOnFreePosition(FourCC("n008"), 2,  GetRandomInt(1200,1800), boss)
+                    end
+                end)
 
             end
             if phase == 6 and PhaseOn then
@@ -180,8 +222,9 @@ function StartSnowManDefence()
             end
             if k >= 1 then
                 --print("Лечим босса, и бой возобновляется")
+                clock = CreateAndStartClock(0.05, 0.05, true, 0, 5, 0, into)
                 ClearMapMusicBJ()
-                PlayMusicBJ("A Wizard's Worst Nightmare")
+                PlayMusicBJ("The Broken Fellowship")
                 SetUnitPositionSmooth(boss, xs, ys) --возвращаем нарграду место
                 SetMusicVolumeBJ(100)
                 BlzFrameSetVisible(into, true)
@@ -192,16 +235,79 @@ function StartSnowManDefence()
     end)
 end
 
+function StarExplodeAI(unit,target)
+    TimerStart(CreateTimer(), GetRandomReal(0.8,1.2), true, function()
+        if not UnitAlive(unit) then
+            DestroyTimer(GetExpiredTimer())
+        else
+            if IsUnitInRange(unit, target, 200) then
+                local mark = AddSpecialEffect("Spell Marker TC", GetUnitXY(unit))
+                BlzSetSpecialEffectScale(mark, 2)
+                local delay=1
+                --local eff=AddSpecialEffect("Abilities\\Spells\\Human\\FlameStrike\\FlameStrike1.mdl",GetUnitX(unit), GetUnitY(unit))
+                TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
+                    delay=delay-TIMER_PERIOD64
+                    BlzSetSpecialEffectX(mark,GetUnitX(unit))
+                    BlzSetSpecialEffectY(mark,GetUnitY(unit))
+
+                    if delay<=0 then
+
+                        DestroyEffect(mark)
+                        UnitDamageArea(unit, 50, GetUnitX(unit), GetUnitY(unit), 250)
+                        local eff=AddSpecialEffect("Abilities\\Spells\\Human\\FlameStrike\\FlameStrike1.mdl",GetUnitX(unit), GetUnitY(unit))
+                        DestroyTimer(GetExpiredTimer())
+                        KillUnit(unit)
+                    end
+                end)
+            end
+        end
+    end)
+end
+
+function StartTrollMeteorFall(unit)
+    local k = 4
+    TimerStart(CreateTimer(), GetRandomReal(0.8,1.2), true, function()
+        k = k + 1
+        if not UnitAlive(unit) then
+            DestroyTimer(GetExpiredTimer())
+        else
+            -- все остальные действия
+            if IsUnitInRange(unit, enemy, 800) then
+                IssueImmediateOrder(unit, "stop")
+                SetUnitFacing(unit, AngleBetweenUnits(unit, enemy))
+            end
+            if k > 5 then
+                k = 0
+                local hero=HERO[0].UnitHero
+                if IsUnitInRange(unit,hero,700) then
+                    BlzPauseUnitEx(unit, true)
+                    SetUnitAnimation(unit, "spell")
+
+                    local x,y=GetUnitXY(hero)
+                    MarkAndFall(x, y, "Abilities\\Weapons\\DemonHunterMissile\\DemonHunterMissile", unit,1)
+                    TimerStart(CreateTimer(), 2, false, function()
+                        if UnitAlive(unit) then
+                            ResetUnitAnimation(unit)
+                        end
+                        BlzPauseUnitEx(unit, false)
+                    end)
+                end
+            end
+        end
+    end)
+end
+
 function StartTrollFireBallAI(unit, enemy)
     local k = 4
     TimerStart(CreateTimer(), 1, true, function()
         k = k + 1
         if not UnitAlive(unit) then
             DestroyTimer(GetExpiredTimer())
-        else -- все остальные действия
-            if IsUnitInRange(unit,enemy,800) then
-                IssueImmediateOrder(unit,"stop")
-                SetUnitFacing(unit,AngleBetweenUnits(unit, enemy))
+        else
+            -- все остальные действия
+            if IsUnitInRange(unit, enemy, 800) then
+                IssueImmediateOrder(unit, "stop")
+                SetUnitFacing(unit, AngleBetweenUnits(unit, enemy))
             end
             if k > 5 then
                 k = 0
@@ -209,7 +315,9 @@ function StartTrollFireBallAI(unit, enemy)
                 SetUnitAnimation(unit, "spell")
                 CreateAndForceBullet(unit, GetUnitFacing(unit), 15, "FireBallMissileNoOmni")
                 TimerStart(CreateTimer(), 1, false, function()
-                    ResetUnitAnimation(unit)
+                    if UnitAlive(unit) then
+                        ResetUnitAnimation(unit)
+                    end
                     BlzPauseUnitEx(unit, false)
                 end)
             end
@@ -219,13 +327,22 @@ end
 
 function CreateUnitRoundOnFreePosition(unitID, count, range, unitTarget)
     local x, y = GetUnitXY(unitTarget)
+    local hero=HERO[0].UnitHero
+    local ri=GetRandomReal(0,360)
     for i = 1, count do
-        local nx, ny = MoveXY(x, y, range, i * 360 / count)
-        if not IsTerrainPathable(nx, ny, PATHING_TYPE_WALKABILITY) then
+        local nx, ny = MoveXY(x, y, range, (i * 360 / count)+ri)
+        if not IsTerrainPathable(nx, ny, PATHING_TYPE_WALKABILITY) and not IsUnitInRangeXY(hero,nx,ny,800) then
             local new = CreateUnit(Player(10), unitID, nx, ny, 0)
             if unitID == FourCC("n005") then
                 StartTrollFireBallAI(new, unitTarget)
             end
+            if unitID == FourCC("n006") then
+                StartTrollMeteorFall(new)
+            end
+            if unitID == FourCC("n007") then
+                StarExplodeAI(new,unitTarget)
+            end
+
             if IssueTargetOrder(new, "attack", unitTarget) then
 
             else
