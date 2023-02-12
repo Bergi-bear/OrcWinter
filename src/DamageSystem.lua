@@ -110,6 +110,20 @@ function OnPostDamage()
             HeroCandyGetDamage(GetUnitData(target),caster)
         end
     end
+    if GetUnitTypeId(target)==BigHP_ID then
+
+        local realUnit=GetRealUnit(target)
+        local tempDamage=GetEventDamage()
+        --print(GetUnitName(caster),"попадание в большое ХП",GetUnitName(realUnit),tempDamage)
+        BlzSetEventDamage(0)
+        if GetUnitTypeId(realUnit)==FourCC("e003") and GetUnitTypeId(caster) == HeroID  then
+            HealUnit(realUnit,tempDamage)
+        else
+            UnitDamageTarget(caster, realUnit, tempDamage, true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WHOKNOWS)
+        end
+
+    end
+
     if GetUnitTypeId(target) ~= HeroID and GetUnitTypeId(caster) == HeroID then
         --Функция должна быть в самом низу
         AddDamage2Show(target, GetEventDamage())
@@ -213,7 +227,7 @@ function PointContentDestructable (x, y, range, iskill, damage, hero)
     SetRect(GlobalRect, x - range, y - range, x + range, y + range)
     EnumDestructablesInRect(GlobalRect, nil, function()
         local d = GetEnumDestructable()
-        if GetDestructableLife(d) > 0 and GetDestructableTypeId(d)~=FourCC("B005") then --игнор специальных блокираторов
+        if GetDestructableLife(d) > 0 and GetDestructableTypeId(d)~=FourCC("B005") and GetDestructableTypeId(d)~=FourCC("OTip")then --игнор специальных блокираторов
             --and unitZ<=GetTerrainZ(x,y)+50
             content = true
             contentedDest = d

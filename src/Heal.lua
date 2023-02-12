@@ -56,6 +56,10 @@ function HealUnit(hero, amount, flag, eff)
                 end)
             end
         end
+    else
+        if TotalHeal>0 then
+            FlyTextTagHealXY(GetUnitX(hero), GetUnitY(hero), "+" .. R2I(TotalHeal), p)
+        end
     end
     if not flag or flag == 1 then
         return TotalHeal

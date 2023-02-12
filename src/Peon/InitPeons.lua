@@ -68,6 +68,11 @@ function InitRegistryEvent(hero)
             data.ResPointX,data.ResPointY=x,y
 
         end
+        if GetUnitTypeId(entering)==FourCC("e003") then -- Снеговик для дефенса
+            if not SnowManDefenceGame then
+                StartSnowManDefence()
+            end
+        end
     end)
 end
 

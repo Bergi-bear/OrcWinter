@@ -4,9 +4,11 @@ BuildingKillsGiveExp=1
 ChanceToMiss=0.5
 DecayTime=18.0
 DissipateTime=20.0
+MaxCollisionRadius=600.0
 MaxHeroLevel=50
 MaxUnitSpeed=522.0
 MinUnitSpeed=1.0
+NeutralBuildingPollPeriod=0.25
 ReactionDelay=0.0
 StrHitPointBonus=5.0
 

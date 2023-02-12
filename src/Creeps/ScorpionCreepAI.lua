@@ -5,7 +5,7 @@
 ---
 function InitScorpionAI(id)
     local _, k, rg = FindUnitOfType(id)
-    print(k, "скорпионов")
+    --print(k, "скорпионов")
     for i = 1, #rg do
         local unit = rg[i]
         StartScorpionAI(unit)

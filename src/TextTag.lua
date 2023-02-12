@@ -81,7 +81,13 @@ function FlyTextTagShadowStrike(target, text, player)
 end
 
 function FlyTextTagHealXY(x, y, text, player)
-    return FlyTextTag(text, 0.024, x, y, 150, 88, 250, 13, 255, 0, 0.03, 1, 3, player)
+    --print("таг лечения?")
+    if player==Player(PLAYER_NEUTRAL_PASSIVE) then
+        player=Player(0)
+       -- print("видим лечение нейтрала")
+    end
+    local rx=GetRandomReal(-0.03,0.03)
+    return FlyTextTag(text, 0.024, x, y, 150, 88, 250, 13, 255, rx, 0.03, 1, 3, player)
 end
 
 function FlyTextTagShieldXY(x, y, text, player, flag)

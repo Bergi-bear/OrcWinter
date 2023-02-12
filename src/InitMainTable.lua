@@ -3,7 +3,7 @@
 --- Created by Bergi.
 --- DateTime: 01.12.2021 18:06
 ---
-HERO = {}
+--HERO = {}
 PlayerIsPlaying={}
 function InitHEROTable()
     for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
