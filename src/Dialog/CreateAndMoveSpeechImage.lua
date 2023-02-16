@@ -10,6 +10,7 @@ do
         InitGlobalsOrigin()
         TimerStart(CreateTimer(), 1, false, function()
             CreteDialogBox()
+            CreteDialogBoxBoss()
 
             --CreateAndMoveSpeechImage("start", 5, "left", "PeonEmotion\\normal_left", "Ну и долго мы ещё тут будем сидеть, пора исследовать этот остров", 0)
             --CreateAndMoveSpeechImage("end", 5, "right", "PeonEmotion\\thing_right", "Да пришло время размять булки, пойдём ребята, осмотримся", 5)

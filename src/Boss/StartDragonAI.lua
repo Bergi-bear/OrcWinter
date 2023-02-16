@@ -155,7 +155,8 @@ function StartDragonAI(xs, ys)
                 --print(#tFraze,dragonFrazeCount)
                 if dragonFrazeCount+1<=#tFraze then
                     --print(tFraze[dragonFrazeCount+1])
-                    normal_sound("Speech\\Dragon\\"..dragonFrazeCount+1,GetUnitXY(boss))
+                    --normal_sound("Speech\\Dragon\\"..dragonFrazeCount+1,GetUnitXY(boss))
+                    PlayBossSpeech("Speech\\Dragon\\"..dragonFrazeCount+1,tFraze[dragonFrazeCount+1])
                     dragonFrazeCount=dragonFrazeCount+1
                 else
                     print("этому супер удару научила меня моя бабушка")

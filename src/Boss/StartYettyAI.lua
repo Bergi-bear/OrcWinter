@@ -89,7 +89,7 @@ function StartYettyAI(xs, ys)
                             SetUnitFacing(boss, angle)
                             --SetUnitAnimation(boss,"Attack")
                             if phase ~= 1 then
-                                PlaySound("Speech\\Yetti\\tineproidesh")
+                                PlayBossSpeech("Speech\\Yetti\\tineproidesh","Ты не пройдёшь")
                                 EttiDashAttackPrepare(boss, hero)
                             end
 
@@ -144,11 +144,12 @@ function StartYettyAI(xs, ys)
 
                 local r=GetRandomInt(1,3)
                 if r==1 then
-                    PlaySound("Speech\\Yetti\\rastopchy")
+                    PlayBossSpeech("Speech\\Yetti\\rastopchy","Растопчу")
+
                 elseif r==2 then
-                    PlaySound("Speech\\Yetti\\dogony")
+                    PlayBossSpeech("Speech\\Yetti\\dogony", "Догоню")
                 elseif r==3 then
-                    PlaySound("Speech\\Yetti\\zatopchybolshiminogami")
+                    PlayBossSpeech("Speech\\Yetti\\zatopchybolshiminogami", "Затопчу большими ногами")
                 end
                 TimerStart(CreateTimer(), 2, true, function()
                     --по героям
@@ -164,7 +165,7 @@ function StartYettyAI(xs, ys)
                 PhaseOn = false
                 --print("Падающие сосульки")
                 local effmodel = "Icicle"
-                PlaySound("Speech\\Yetti\\polychisosulkojvglaz")
+                PlayBossSpeech("Speech\\Yetti\\polychisosulkojvglaz","Получи сосулькой в глаз")
                 TimerStart(CreateTimer(), .5, true, function()
                     -- случайные
 
@@ -200,19 +201,19 @@ function StartYettyAI(xs, ys)
                 --print("Фаза призыва")
                 local r=GetRandomInt(1,3)
                 if r==1 then
-                    PlaySound("Speech\\Yetti\\zanimmoiminioni")
+                    PlayBossSpeech("Speech\\Yetti\\zanimmoiminioni","За ним мои миньёны")
                 elseif r==2 then
-                    PlaySound("Speech\\Yetti\\nesmeilomatetypartiy")
+                    PlayBossSpeech("Speech\\Yetti\\nesmeilomatetypartiy","Не смей ломать эту партию")
                 elseif r==3 then
-                    PlaySound("Speech\\Yetti\\vsynochihlepil")
+                    PlayBossSpeech("Speech\\Yetti\\vsynochihlepil","Всю ночь их лепил")
                 end
 
                 local hero = HERO[0].UnitHero
                 for i = 1, GetRandomInt(10, 20) do
                     local xx, yy = GetLocationX(GetRandomLocInRect(gg_rct_Region_038)), GetLocationY(GetRandomLocInRect(gg_rct_Region_038))
-                    if not IsUnitInRangeXY(hero, xx, yy, 500) then
+                    if not IsUnitInRangeXY(hero, xx, yy, 600) then
                         local snowmanBlast = CreateUnit(GetOwningPlayer(boss), FourCC("e001"), xx, yy, 0)
-                        IssueTargetOrder(snowmanBlast, "attack", hero)
+                        IssueTargetOrder(snowmanBlast, "move", hero)
                         TimerStart(CreateTimer(), 0.5, true, function()
 
                             if IsUnitInRange(snowmanBlast, hero, 200) then
@@ -224,7 +225,7 @@ function StartYettyAI(xs, ys)
                             if not UnitAlive(snowmanBlast) then
                                 DestroyTimer(GetExpiredTimer())
                                 DestroyEffect(AddSpecialEffect("FrostWyrmMissileNoOmni", GetUnitXY(snowmanBlast)))
-                                UnitDamageArea(snowmanBlast, 100, GetUnitX(snowmanBlast), GetUnitY(snowmanBlast), 150)
+                                UnitDamageArea(snowmanBlast, 100, GetUnitX(snowmanBlast), GetUnitY(snowmanBlast), 250)
                                 KillUnit(snowmanBlast)
                                 ShowUnit(snowmanBlast, false)
                             end
@@ -265,6 +266,10 @@ function MarkAndFall(x, y, effModel, hero,delay)
     if not delay then
         delay=2
     end
+    local deep=50
+    if effModel=="Icicle" then
+        deep=GetRandomInt(200, 400)
+    end
     TimerStart(CreateTimer(), delay, false, function()
 
         local FallenEff = AddSpecialEffect(effModel, x, y)
@@ -274,7 +279,7 @@ function MarkAndFall(x, y, effModel, hero,delay)
         TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
             local z = BlzGetLocalSpecialEffectZ(FallenEff)
             BlzSetSpecialEffectZ(FallenEff, z - 50)
-            if z + GetRandomInt(50, 50) <= GetTerrainZ(x, y) then
+            if z + deep <= GetTerrainZ(x, y) then
                 DestroyEffect(mark)
                 BlzSetSpecialEffectPosition(mark, 5000, 5000, 0)
                 DestroyTimer(GetExpiredTimer())
