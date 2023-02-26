@@ -5,7 +5,7 @@
 ---
 function PlayBossSpeech(sound, text)
     if not TexBoxBoss then
-        print("первый диалог")
+        --print("первый диалог")
         CreteDialogBoxBoss()
     end
     if not BlzFrameIsVisible(TexBoxBoss) then
@@ -30,10 +30,8 @@ function CreteDialogBoxBoss()
     local tooltip = BlzCreateFrameByType("FRAME", "TestDialog", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "StandardFrameTemplate", 0)
     BlzFrameSetParent(tooltip, BlzGetFrameByName("ConsoleUIBackdrop", 0))
     --local backdrop = BlzCreateFrame("QuestButtonDisabledBackdropTemplate", tooltip, 0, 0)
-    local backdrop=BlzCreateFrameByType("BACKDROP", "Face", tooltip, "", 0)
+    local backdrop = BlzCreateFrameByType("BACKDROP", "Face", tooltip, "", 0)
     BlzFrameSetTexture(backdrop, "SpeechBoxBoss", 0, true)
-    --BlzFrameSetSize(backdrop, 0.76, 0.02)
-    --BlzFrameSetAbsPoint(backdrop, FRAMEPOINT_LEFT, 0.018, 0.03)
 
 
     local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", tooltip, "", 0)

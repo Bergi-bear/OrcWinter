@@ -47,6 +47,11 @@ gg_unit_opeo_0014 = nil
 gg_unit_opeo_0015 = nil
 gg_unit_opeo_0024 = nil
 gg_dest_B007_5312 = nil
+gg_rct_EnterWivern = nil
+gg_trg_InitEggs = nil
+gg_unit_h006_0173 = nil
+gg_unit_h006_0172 = nil
+gg_unit_h006_0174 = nil
 function InitGlobals()
 udg_PressESC = false
 end
@@ -124,6 +129,7 @@ local unitID
 local t
 local life
 
+u = BlzCreateUnitWithSkin(p, FourCC("u000"), -5777.8, 8019.1, -83.233, FourCC("u000"))
 gg_unit_n001_0009 = BlzCreateUnitWithSkin(p, FourCC("n001"), -7570.0, 3830.9, 301.970, FourCC("n001"))
 gg_unit_Oths_0011 = BlzCreateUnitWithSkin(p, FourCC("Oths"), 63.2, -581.0, 211.076, FourCC("Oths"))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1652.2, -1430.7, 121.800, FourCC("opeo"))
@@ -399,6 +405,9 @@ u = BlzCreateUnitWithSkin(p, FourCC("n003"), -9116.4, -6427.4, 103.486, FourCC("
 u = BlzCreateUnitWithSkin(p, FourCC("n003"), -11831.2, -114.1, 183.086, FourCC("n003"))
 u = BlzCreateUnitWithSkin(p, FourCC("n003"), -11377.3, -4649.0, 116.844, FourCC("n003"))
 u = BlzCreateUnitWithSkin(p, FourCC("n003"), -8393.8, -8947.7, 35.720, FourCC("n003"))
+gg_unit_h006_0172 = BlzCreateUnitWithSkin(p, FourCC("h006"), -6759.5, 7717.5, 186.040, FourCC("h006"))
+gg_unit_h006_0173 = BlzCreateUnitWithSkin(p, FourCC("h006"), -6127.4, 6115.0, 31.803, FourCC("h006"))
+gg_unit_h006_0174 = BlzCreateUnitWithSkin(p, FourCC("h006"), -4919.1, 7116.2, 93.123, FourCC("h006"))
 end
 
 function CreateNeutralHostile()
@@ -526,6 +535,7 @@ gg_rct_Towolf = Rect(-11936.0, 128.0, -11744.0, 192.0)
 gg_rct_FromWolf = Rect(-12000.0, 64.0, -11680.0, 128.0)
 gg_rct_ExitWolf = Rect(-11968.0, 1632.0, -11712.0, 1760.0)
 gg_rct_EnterWolf = Rect(-11968.0, 1760.0, -11712.0, 1888.0)
+gg_rct_EnterWivern = Rect(-7168.0, 6016.0, -4512.0, 8352.0)
 end
 
 function CreateCameras()
@@ -4051,6 +4061,196 @@ do
         TimerStart(CreateTimer(), .01, false, function()
             DestroyTimer(GetExpiredTimer())
 
+            InitTrig_EnterInRectWivern()
+        end)
+    end
+end
+
+function InitTrig_EnterInRectWivern()
+
+    --print("Инициализация босса волка")
+    local gg_trg_EnterInRect = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_EnterInRect, gg_rct_EnterWivern)
+    TriggerAddAction(gg_trg_EnterInRect, function()
+        if IsUnitType(GetEnteringUnit(), UNIT_TYPE_HERO) then
+            --print("12")
+            local boss = FindUnitOfType(FourCC('u000'))
+
+            StartWivernAI(GetUnitXY(boss))
+            DisableTrigger(gg_trg_EnterInRect)
+        end
+    end)
+end
+
+function StartWivernAI(xs, ys)
+    local boss = FindUnitOfType(FourCC('u000'))
+    local BossFight = true
+    local into = CreateBOSSHPBar(boss, "Беременная виверна")
+
+    UnitAddAbility(boss, FourCC('Abun'))
+    --SetUnitPosition(boss, xs, ys)
+    SetUnitOwner(boss, Player(10), true)
+    local range = 1000
+    local x, y = GetUnitXY(boss)
+    ClearMapMusicBJ()
+    PlayMusicBJ("The Hunter on the Heath")
+    SetMusicVolumeBJ(100)
+    --local FW = CreateFogModifierRectBJ(false, Player(0), FOG_OF_WAR_VISIBLE, GlobalRect)
+    --FogModifierStart(FW)
+
+    local phase = GetRandomInt(1, 1) --стартовая фаза
+    local sec = 0
+    local PhaseOn = true
+    local OnAttack = true
+    TimerStart(CreateTimer(), 1, true, function()
+        --каждую секунду
+        local bx, by = GetUnitXY(boss)
+
+        if not UnitAlive(boss) then
+            -- Место где босс
+            StartSound(bj_questCompletedSound)
+            DestroyTimer(GetExpiredTimer())
+            phase = 0
+            print("Даём нарграду, победа")
+            ClearMapMusicBJ()
+            PlayMusicBJ("Salve Springs")
+            SetMusicVolumeBJ(100)
+            BlzFrameSetVisible(into, false)
+
+        else
+            --Проверяем есть ли живые герои, когда тиник жив
+            if BossFight then
+                local k = 0
+                for i = 0, 3 do
+                    local hero = HERO[i].UnitHero
+                    if IsUnitInRange(hero, boss, 2000) then
+                        k = k + 1
+                    end
+
+                    --print("Отталкивание для особо умных")
+                    if OnAttack then
+                        if IsUnitInRange(hero, boss, 250) then
+                            if phase == 1 then
+                                --print("подошел слишком близко")
+
+                            end
+                            --SetUnitTimeScale(boss,-1)
+                            OnAttack = false
+                            TimerStart(CreateTimer(), 5, false, function()
+                                OnAttack = true
+                            end)
+
+                            --SetUnitAnimation(boss,"Attack")
+                            if phase ~= 1 then
+                                --PlaySound("Speech\\Yetti\\tineproidesh")
+                                --EttiDashAttackPrepare(boss, hero)
+                            end
+
+                        end
+
+                    end
+                end
+                if k > 0 and not BossFight then
+                    print("Возобновление прерванного боя") -- этого принта нет
+                    BlzFrameSetVisible(into, true)
+                end
+
+                if k == 0 then
+                    BossFight = false
+                    phase = 0
+                    --print("Нет ни 1 игрока рядов, босс файт прерван")
+                    --print(BlzFrameIsVisible(into))
+                    BlzFrameSetVisible(into, false)
+                    --print(BlzFrameIsVisible(into))
+                    HealUnit(boss)
+                    SetUnitPositionSmooth(boss, xs, ys)
+                    ClearMapMusicBJ()
+                    PlayMusicBJ("Salve Springs")
+                    SetMusicVolumeBJ(100)
+                end
+            end
+        end
+        local xb, yb = GetUnitXY(boss)
+        if BossFight then
+            -- если идёт бой
+            sec = sec + 1
+            if sec >= 5 then
+                sec = 0
+                phase = GetRandomInt(1, 1) -- переключатель, рандомизатор фаз
+                PhaseOn = true
+                --print("phase " .. phase)
+            end
+            --фазы
+            local hero = HERO[0].UnitHero
+            if phase == 1 and PhaseOn then
+                PhaseOn = false
+                print("фаза", phase)
+             end
+
+
+            if phase == 2 and PhaseOn then
+                PhaseOn = false
+
+            end
+            if phase == 3 and PhaseOn then
+                PhaseOn = false
+
+
+            end
+            if phase == 4 and PhaseOn then
+                PhaseOn = false
+                print("фаза", phase)
+
+            end
+            if phase == 5 and PhaseOn then
+                PhaseOn = false
+                print("фаза", phase)
+
+            end
+            if phase == 6 and PhaseOn then
+                PhaseOn = false
+                print("фаза", phase)
+
+
+            end
+            if phase == 7 and PhaseOn then
+                PhaseOn = false
+                print("фаза", phase)
+
+            end
+
+
+        else
+            -- перезапуск боссфайта
+            local k = 0
+            for i = 0, 3 do
+                local hero = HERO[i].UnitHero
+                if IsUnitInRange(hero, boss, 1500) then
+                    k = k + 1
+                end
+            end
+            if k >= 1 then
+                --print("Лечим босса, и бой возобновляется")
+                ClearMapMusicBJ()
+                PlayMusicBJ("The Hunter on the Heath")
+                SetUnitPositionSmooth(boss, xs, ys) --возвращаем нарграду место
+                SetMusicVolumeBJ(100)
+                BlzFrameSetVisible(into, true)
+                HealUnit(boss, 99999)
+                BossFight = true
+            end
+        end--конец
+    end)
+end
+
+
+do
+    local InitGlobalsOrigin = InitGlobals
+    function InitGlobals()
+        InitGlobalsOrigin()
+        TimerStart(CreateTimer(), .01, false, function()
+            DestroyTimer(GetExpiredTimer())
+
             InitTrig_EnterInRectWolf()
         end)
     end
@@ -4860,9 +5060,9 @@ function StartYettyAI(xs, ys)
                 local hero = HERO[0].UnitHero
                 for i = 1, GetRandomInt(10, 20) do
                     local xx, yy = GetLocationX(GetRandomLocInRect(gg_rct_Region_038)), GetLocationY(GetRandomLocInRect(gg_rct_Region_038))
-                    if not IsUnitInRangeXY(hero, xx, yy, 500) then
+                    if not IsUnitInRangeXY(hero, xx, yy, 600) then
                         local snowmanBlast = CreateUnit(GetOwningPlayer(boss), FourCC("e001"), xx, yy, 0)
-                        IssueTargetOrder(snowmanBlast, "attack", hero)
+                        IssueTargetOrder(snowmanBlast, "move", hero)
                         TimerStart(CreateTimer(), 0.5, true, function()
 
                             if IsUnitInRange(snowmanBlast, hero, 200) then
@@ -4874,7 +5074,7 @@ function StartYettyAI(xs, ys)
                             if not UnitAlive(snowmanBlast) then
                                 DestroyTimer(GetExpiredTimer())
                                 DestroyEffect(AddSpecialEffect("FrostWyrmMissileNoOmni", GetUnitXY(snowmanBlast)))
-                                UnitDamageArea(snowmanBlast, 100, GetUnitX(snowmanBlast), GetUnitY(snowmanBlast), 150)
+                                UnitDamageArea(snowmanBlast, 100, GetUnitX(snowmanBlast), GetUnitY(snowmanBlast), 250)
                                 KillUnit(snowmanBlast)
                                 ShowUnit(snowmanBlast, false)
                             end
@@ -5169,7 +5369,7 @@ end
 ---
 function PlayBossSpeech(sound, text)
     if not TexBoxBoss then
-        print("первый диалог")
+        --print("первый диалог")
         CreteDialogBoxBoss()
     end
     if not BlzFrameIsVisible(TexBoxBoss) then
@@ -5194,10 +5394,8 @@ function CreteDialogBoxBoss()
     local tooltip = BlzCreateFrameByType("FRAME", "TestDialog", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "StandardFrameTemplate", 0)
     BlzFrameSetParent(tooltip, BlzGetFrameByName("ConsoleUIBackdrop", 0))
     --local backdrop = BlzCreateFrame("QuestButtonDisabledBackdropTemplate", tooltip, 0, 0)
-    local backdrop=BlzCreateFrameByType("BACKDROP", "Face", tooltip, "", 0)
+    local backdrop = BlzCreateFrameByType("BACKDROP", "Face", tooltip, "", 0)
     BlzFrameSetTexture(backdrop, "SpeechBoxBoss", 0, true)
-    --BlzFrameSetSize(backdrop, 0.76, 0.02)
-    --BlzFrameSetAbsPoint(backdrop, FRAMEPOINT_LEFT, 0.018, 0.03)
 
 
     local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", tooltip, "", 0)
@@ -7356,6 +7554,18 @@ function InitCamControl()
 end
 
 --CUSTOM_CODE
+function Trig_InitEggs_Actions()
+AddUnitAnimationPropertiesBJ(true, "alternate", gg_unit_h006_0173)
+AddUnitAnimationPropertiesBJ(true, "alternate", gg_unit_h006_0172)
+AddUnitAnimationPropertiesBJ(true, "alternate", gg_unit_h006_0174)
+end
+
+function InitTrig_InitEggs()
+gg_trg_InitEggs = CreateTrigger()
+TriggerRegisterTimerEventSingle(gg_trg_InitEggs, 1.00)
+TriggerAddAction(gg_trg_InitEggs, Trig_InitEggs_Actions)
+end
+
 function Trig_Untitled_Trigger_001_Actions()
 KillDestructable(gg_dest_B007_5312)
 end
@@ -7795,6 +8005,7 @@ TriggerAddAction(gg_trg_ESCTEST, Trig_ESCTEST_Actions)
 end
 
 function InitCustomTriggers()
+InitTrig_InitEggs()
 InitTrig_Untitled_Trigger_001()
 InitTrig_BoundEnter_Copy()
 InitTrig_ExitWolf()
@@ -7851,7 +8062,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, -2240.0, -3840.0)
+DefineStartLocation(0, -4928.0, 5824.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()
