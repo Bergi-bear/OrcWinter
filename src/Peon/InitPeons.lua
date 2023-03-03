@@ -86,19 +86,19 @@ function AddPeonMAXHP(data, k)
         data.CurrentHP=0
     end
     for i = 1, k do
-        CreatePeonHPBAR(data)
+        CreateCandyHPBAR(data)
 
     end
 end
 
-function CreatePeonHPBAR(data)
-    local step = 0.02
+function CreateCandyHPBAR(data)
+    local step = 0.025
     local hpBarBox = BlzCreateFrameByType("BACKDROP", "Face", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
     BlzFrameSetParent(hpBarBox, BlzGetFrameByName("ConsoleUIBackdrop", 0))
     local HPfh = BlzCreateFrameByType("BACKDROP", "Face", hpBarBox, "", 0)
     BlzFrameSetTexture(HPfh, "HPCANDY", 0, true)
-    BlzFrameSetSize(HPfh, 0.02, 0.02)
-    BlzFrameSetAbsPoint(HPfh, FRAMEPOINT_CENTER, -0.1 + step * data.HPCount, 0.48)
+    BlzFrameSetSize(HPfh, 0.03, 0.03)
+    BlzFrameSetAbsPoint(HPfh, FRAMEPOINT_CENTER, -0.048 + step * data.HPCount, 0.56)
     data.HPCount = data.HPCount + 1
     data.HPTableFH[data.HPCount] = HPfh
     data.CurrentHP=data.CurrentHP+1
