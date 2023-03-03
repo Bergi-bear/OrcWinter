@@ -22,6 +22,25 @@ function InitTrig_EnterInRectWivern()
 
             StartWivernAI(GetUnitXY(boss))
             DisableTrigger(gg_trg_EnterInRect)
+            local enterTrig=CreateTrigger()
+            TriggerRegisterUnitInRange(enterTrig, boss, 200, nil)
+            TriggerAddAction(enterTrig, function()
+                local entering = GetTriggerUnit()
+                --print(GetUnitName(entering))
+
+                if GetUnitTypeId(entering)==FourCC("h006") then -- Яйца
+                    if GetUnitUserData(entering)~=1 then
+                        SetUnitUserData(entering,1)
+                        AddUnitAnimationProperties(entering,"alternate",false)
+                        TimerStart(CreateTimer(), 10, false, function()
+                            AddUnitAnimationProperties(entering,"alternate",true)
+                            SetUnitUserData(entering,0)
+                            BirthFromEgg(entering)
+                        end)
+                    end
+                end
+            end)
+
         end
     end)
 end
@@ -34,7 +53,7 @@ function StartWivernAI(xs, ys)
     UnitAddAbility(boss, FourCC('Abun'))
     --SetUnitPosition(boss, xs, ys)
     SetUnitOwner(boss, Player(10), true)
-    local range = 1000
+    local range = 2500
     local x, y = GetUnitXY(boss)
     ClearMapMusicBJ()
     PlayMusicBJ("The Hunter on the Heath")
@@ -67,7 +86,7 @@ function StartWivernAI(xs, ys)
                 local k = 0
                 for i = 0, 3 do
                     local hero = HERO[i].UnitHero
-                    if IsUnitInRange(hero, boss, 2000) then
+                    if IsUnitInRange(hero, boss, range) then -- поиск героя в радиусе ранге
                         k = k + 1
                     end
 
@@ -93,10 +112,6 @@ function StartWivernAI(xs, ys)
                         end
 
                     end
-                end
-                if k > 0 and not BossFight then
-                    print("Возобновление прерванного боя") -- этого принта нет
-                    BlzFrameSetVisible(into, true)
                 end
 
                 if k == 0 then
@@ -128,7 +143,9 @@ function StartWivernAI(xs, ys)
             local hero = HERO[0].UnitHero
             if phase == 1 and PhaseOn then
                 PhaseOn = false
-                print("фаза", phase)
+               -- print("фаза", phase)
+
+                FlyOverPlayerWMark(boss,hero)
              end
 
 
@@ -187,3 +204,38 @@ function StartWivernAI(xs, ys)
     end)
 end
 
+function BirthFromEgg(egg)
+    local x,y=GetUnitXY(egg)
+    --local hero=HERO[0].UnitHero
+    for i=1,4 do
+        local new=CreateUnit(GetOwningPlayer(egg),FourCC("n009"),x,y,GetRandomInt(0,360))
+        DestroyEffect(AddSpecialEffect("CrystalNova",GetUnitXY(new)))
+        UnitApplyTimedLife(new, FourCC('BTLF'), 30)
+    end
+end
+
+function FlyOverPlayerWMark(boss,hero)
+    SetUnitMoveSpeed(boss,522)
+    local x,y=GetUnitXY(boss)
+    local angle=AngleBetweenUnits(boss,hero)
+    local xEnd,yEnd=MoveXY(x,y,1900,angle)
+    IssuePointOrder(boss,"move",xEnd,yEnd)
+    local delay=4
+    local period=0.2
+    TimerStart(CreateTimer(), period, true, function()
+        delay=delay-period
+        if delay<=0 then
+            DestroyTimer(GetExpiredTimer())
+        end
+        x,y=GetUnitXY(boss)
+        local mark=AddSpecialEffect("Spell Marker TC",x,y)
+        BlzSetSpecialEffectColorByPlayer(mark,Player(1)) -- синий
+        BlzSetSpecialEffectScale(mark,2)
+
+        TimerStart(CreateTimer(), 0.4, false, function()
+            DestroyEffect(mark)
+            DestroyEffect(AddSpecialEffect("CrystalNova",x,y))
+            UnitDamageArea(boss,50,x,y,220)
+        end)
+    end)
+end

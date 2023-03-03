@@ -13,6 +13,7 @@ gg_rct_Towolf = nil
 gg_rct_FromWolf = nil
 gg_rct_ExitWolf = nil
 gg_rct_EnterWolf = nil
+gg_rct_EnterWivern = nil
 gg_cam_OnPeonsandTrall = nil
 gg_cam_OnPineRound = nil
 gg_cam_OnPeons = nil
@@ -31,6 +32,7 @@ gg_snd_Intro8 = nil
 gg_snd_Intro9 = nil
 gg_snd_Intro10 = nil
 gg_snd_Intro11 = nil
+gg_trg_InitEggs = nil
 gg_trg_Untitled_Trigger_001 = nil
 gg_trg_BoundEnter_Copy = nil
 gg_trg_ExitWolf = nil
@@ -46,12 +48,10 @@ gg_unit_opeo_0013 = nil
 gg_unit_opeo_0014 = nil
 gg_unit_opeo_0015 = nil
 gg_unit_opeo_0024 = nil
-gg_dest_B007_5312 = nil
-gg_rct_EnterWivern = nil
-gg_trg_InitEggs = nil
-gg_unit_h006_0173 = nil
-gg_unit_h006_0172 = nil
 gg_unit_h006_0174 = nil
+gg_unit_h006_0172 = nil
+gg_unit_h006_0173 = nil
+gg_dest_B007_5312 = nil
 function InitGlobals()
 udg_PressESC = false
 end
@@ -129,9 +129,8 @@ local unitID
 local t
 local life
 
-u = BlzCreateUnitWithSkin(p, FourCC("u000"), -5777.8, 8019.1, -83.233, FourCC("u000"))
 gg_unit_n001_0009 = BlzCreateUnitWithSkin(p, FourCC("n001"), -7570.0, 3830.9, 301.970, FourCC("n001"))
-gg_unit_Oths_0011 = BlzCreateUnitWithSkin(p, FourCC("Oths"), 63.2, -581.0, 211.076, FourCC("Oths"))
+gg_unit_Oths_0011 = BlzCreateUnitWithSkin(p, FourCC("Oths"), 63.2, -581.0, 211.080, FourCC("Oths"))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1652.2, -1430.7, 121.800, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("o001"), -1180.6, 1453.0, 262.550, FourCC("o001"))
@@ -431,6 +430,7 @@ local life
 u = BlzCreateUnitWithSkin(p, FourCC("e002"), 5726.2, -5277.6, 312.658, FourCC("e002"))
 u = BlzCreateUnitWithSkin(p, FourCC("e002"), 6357.5, -5150.5, 247.597, FourCC("e002"))
 u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -1377.3, 7311.8, 119.744, FourCC("nsno"))
+u = BlzCreateUnitWithSkin(p, FourCC("u000"), -5777.8, 8019.1, 276.770, FourCC("u000"))
 u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -4992.9, 4916.3, 230.423, FourCC("nsno"))
 u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -5043.9, 6247.3, 163.306, FourCC("nsno"))
 u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -5760.5, 6601.1, 203.528, FourCC("nsno"))
@@ -3233,7 +3233,7 @@ function StartSnowManDefence()
     local BossFight = true
     local into = CreateBOSSHPBar(boss, "Прочность снеговика")
 
-    local clock = CreateAndStartClock(0.05, 0.05, true, 0, 5, 0, into)
+    local clock = CreateAndStartClock(0.05, 0.06, true, 0, 5, 0, into)
 
     UnitSetHitBoxOverSize(boss, 150)
     UnitAddAbility(boss, FourCC('Abun'))
@@ -3444,7 +3444,7 @@ function StartSnowManDefence()
             end
             if k >= 1 then
                 --print("Лечим босса, и бой возобновляется")
-                clock = CreateAndStartClock(0.05, 0.05, true, 0, 5, 0, into)
+                clock = CreateAndStartClock(0.05, 0.06, true, 0, 5, 0, into)
                 ClearMapMusicBJ()
                 PlayMusicBJ("The Broken Fellowship")
                 SetUnitPositionSmooth(boss, xs, ys) --возвращаем нарграду место
@@ -4078,6 +4078,25 @@ function InitTrig_EnterInRectWivern()
 
             StartWivernAI(GetUnitXY(boss))
             DisableTrigger(gg_trg_EnterInRect)
+            local enterTrig=CreateTrigger()
+            TriggerRegisterUnitInRange(enterTrig, boss, 200, nil)
+            TriggerAddAction(enterTrig, function()
+                local entering = GetTriggerUnit()
+                --print(GetUnitName(entering))
+
+                if GetUnitTypeId(entering)==FourCC("h006") then -- Яйца
+                    if GetUnitUserData(entering)~=1 then
+                        SetUnitUserData(entering,1)
+                        AddUnitAnimationProperties(entering,"alternate",false)
+                        TimerStart(CreateTimer(), 10, false, function()
+                            AddUnitAnimationProperties(entering,"alternate",true)
+                            SetUnitUserData(entering,0)
+                            BirthFromEgg(entering)
+                        end)
+                    end
+                end
+            end)
+
         end
     end)
 end
@@ -4090,7 +4109,7 @@ function StartWivernAI(xs, ys)
     UnitAddAbility(boss, FourCC('Abun'))
     --SetUnitPosition(boss, xs, ys)
     SetUnitOwner(boss, Player(10), true)
-    local range = 1000
+    local range = 2500
     local x, y = GetUnitXY(boss)
     ClearMapMusicBJ()
     PlayMusicBJ("The Hunter on the Heath")
@@ -4123,7 +4142,7 @@ function StartWivernAI(xs, ys)
                 local k = 0
                 for i = 0, 3 do
                     local hero = HERO[i].UnitHero
-                    if IsUnitInRange(hero, boss, 2000) then
+                    if IsUnitInRange(hero, boss, range) then -- поиск героя в радиусе ранге
                         k = k + 1
                     end
 
@@ -4149,10 +4168,6 @@ function StartWivernAI(xs, ys)
                         end
 
                     end
-                end
-                if k > 0 and not BossFight then
-                    print("Возобновление прерванного боя") -- этого принта нет
-                    BlzFrameSetVisible(into, true)
                 end
 
                 if k == 0 then
@@ -4184,7 +4199,9 @@ function StartWivernAI(xs, ys)
             local hero = HERO[0].UnitHero
             if phase == 1 and PhaseOn then
                 PhaseOn = false
-                print("фаза", phase)
+               -- print("фаза", phase)
+
+                FlyOverPlayerWMark(boss,hero)
              end
 
 
@@ -4243,7 +4260,41 @@ function StartWivernAI(xs, ys)
     end)
 end
 
+function BirthFromEgg(egg)
+    local x,y=GetUnitXY(egg)
+    --local hero=HERO[0].UnitHero
+    for i=1,4 do
+        local new=CreateUnit(GetOwningPlayer(egg),FourCC("n009"),x,y,GetRandomInt(0,360))
+        DestroyEffect(AddSpecialEffect("CrystalNova",GetUnitXY(new)))
+        UnitApplyTimedLife(new, FourCC('BTLF'), 30)
+    end
+end
 
+function FlyOverPlayerWMark(boss,hero)
+    SetUnitMoveSpeed(boss,522)
+    local x,y=GetUnitXY(boss)
+    local angle=AngleBetweenUnits(boss,hero)
+    local xEnd,yEnd=MoveXY(x,y,1900,angle)
+    IssuePointOrder(boss,"move",xEnd,yEnd)
+    local delay=4
+    local period=0.2
+    TimerStart(CreateTimer(), period, true, function()
+        delay=delay-period
+        if delay<=0 then
+            DestroyTimer(GetExpiredTimer())
+        end
+        x,y=GetUnitXY(boss)
+        local mark=AddSpecialEffect("Spell Marker TC",x,y)
+        BlzSetSpecialEffectColorByPlayer(mark,Player(1)) -- синий
+        BlzSetSpecialEffectScale(mark,2)
+
+        TimerStart(CreateTimer(), 0.4, false, function()
+            DestroyEffect(mark)
+            DestroyEffect(AddSpecialEffect("CrystalNova",x,y))
+            UnitDamageArea(boss,50,x,y,220)
+        end)
+    end)
+end
 do
     local InitGlobalsOrigin = InitGlobals
     function InitGlobals()
@@ -5878,6 +5929,26 @@ end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
 --- Created by User.
+--- DateTime: 03.03.2023 5:44
+---
+function CreateMenu()
+    MenuBox = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), '', 0) -- глобалка всех карточек
+    BlzFrameSetParent(MenuBox, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    local x,y=0.89,0.57
+    local GearButton = BlzCreateFrameByType("BACKDROP", "Face", MenuBox, "", 0)
+    BlzFrameSetTexture(GearButton, "GearButton", 0, true)
+    BlzFrameSetSize(GearButton, 0.04, 0.04)
+    BlzFrameSetAbsPoint(GearButton, FRAMEPOINT_CENTER, x,y)
+
+    local TaskButton = BlzCreateFrameByType("BACKDROP", "Face", MenuBox, "", 0)
+    BlzFrameSetTexture(TaskButton, "TaskButton", 0, true)
+    BlzFrameSetSize(TaskButton, 0.04, 0.04)
+    BlzFrameSetAbsPoint(TaskButton, FRAMEPOINT_CENTER, x-0.06,y)
+
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
 --- DateTime: 23.01.2023 0:48
 ---
 function CreateMiniCard()
@@ -5948,12 +6019,13 @@ end
 ---
 function InitMenu()
     HideEverything()
-    ReturnFPS()
-    MenuFrame()
+    --ReturnFPS()
+    --MenuFrame()
     CreateAndStartClock()
     DrawSelectionPortrait(true)
-    CreateMiniCard()
+    --CreateMiniCard()
     CreatePeonCounter()
+    CreateMenu()
 end
 function ReturnFPS()
     local fps = BlzGetFrameByName("ResourceBarFrame", 0)
@@ -6027,10 +6099,10 @@ function CreateAndStartClock(x, y, reverse, sec, min, h,parentFH)
     BlzFrameSetParent(charges, BlzGetFrameByName("ConsoleUIBackdrop", 0))
     local new_FrameChargesText = BlzCreateFrameByType("TEXT", "ButtonChargesText", charges, "", 0)
     if not x then
-        x=0.47
+        x=0.4
     end
     if not y then
-        y=0.59
+        y=0.56
     end
 
     if not sec then
@@ -6042,11 +6114,13 @@ function CreateAndStartClock(x, y, reverse, sec, min, h,parentFH)
     if not h then
         h = 23 -- стартовые часы
     end
-    BlzFrameSetTexture(charges, "UI\\Widgets\\Console\\Human\\CommandButton\\human-button-lvls-overlay", 0, true)
-    BlzFrameSetSize(charges, 0.08, 0.02)
+    BlzFrameSetTexture(charges, "WhiteStaticFlat", 0, true)
+    BlzFrameSetSize(charges, 0.1, 0.05)
     BlzFrameSetAbsPoint(charges, FRAMEPOINT_CENTER, x, y)
     BlzFrameSetText(new_FrameChargesText, Zero(0) .. ":" .. Zero(0) .. ":" .. Zero(0))
     BlzFrameSetPoint(new_FrameChargesText, FRAMEPOINT_CENTER, charges, FRAMEPOINT_CENTER, 0., 0.)
+
+    BlzFrameSetScale(new_FrameChargesText,1.5)
 
     TimerStart(CreateTimer(), 1, true, function()
         if not reverse then
@@ -6113,14 +6187,22 @@ function HideToolTips()
 end
 
 function DrawSelectionPortrait(state)
-
+    local x,y=0.05,0.54
     local Portrait = BlzGetOriginFrame(ORIGIN_FRAME_PORTRAIT, 0)-- BlzGetFrameByName("Portrait",0)
-
+    --BlzEnableUIAutoPosition(false)
     BlzFrameClearAllPoints(Portrait)
-    BlzFrameSetSize(Portrait, 0.08, 0.08)
-    -- BlzFrameSetParent(Portrait, BlzGetFrameByName("ConsoleUIBackdrop", 0))
-    BlzFrameSetAbsPoint(Portrait, FRAMEPOINT_CENTER, -0.0, 0.59)
+    BlzFrameSetSize(Portrait, 0.06, 0.08)
+    BlzFrameSetParent(Portrait, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    BlzFrameSetAbsPoint(Portrait, FRAMEPOINT_CENTER, x,y)
     BlzFrameSetVisible(Portrait, state)
+
+    local charges = BlzCreateFrameByType("BACKDROP", "Face", BlzGetOriginFrame(ORIGIN_FRAME_PORTRAIT, 0), "", 0)
+    BlzFrameSetParent(charges, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    BlzFrameSetTexture(charges, "WhiteStatic", 0, true)
+    BlzFrameSetSize(charges, 0.095, 0.095)
+    BlzFrameSetAbsPoint(charges, FRAMEPOINT_CENTER, -0.068,y)
+
+    --BlzFrameSetPoint(charges, FRAMEPOINT_CENTER, Portrait, FRAMEPOINT_CENTER, 0, 0)
 end
 
 function DrawSelectionPortrait1(state)
@@ -6132,6 +6214,30 @@ function DrawSelectionPortrait1(state)
     --BlzFrameSetParent(Portrait, BlzGetFrameByName("ConsoleUIBackdrop", 0))
     BlzFrameSetAbsPoint(Portrait, FRAMEPOINT_LEFT, 0, 0)
     BlzFrameSetVisible(Portrait, true)
+end
+
+function CreateRamaSprite(path, parent, timed,scale)
+    --[[local button = BlzCreateFrame('ScriptDialogButton', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 0, 0)
+    BlzFrameSetAbsPoint(button, FRAMEPOINT_CENTER, pointx, pointy)
+    BlzFrameSetSize(button, 0.0435, 0.0435)
+
+    local new_Frame = BlzCreateFrameByType('BACKDROP', "PORTRAIT", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "",0)
+    BlzFrameSetAllPoints(new_Frame, button)
+    BlzFrameSetTexture(new_Frame, "ReplaceableTextures\\CommandButtons\\BTNFootman.blp", 0, true)
+    ]]
+
+    local sprite = BlzCreateFrameByType("SPRITE", "justAName", parent, "WarCraftIIILogo", 0)
+    BlzFrameClearAllPoints(sprite)
+    BlzFrameSetPoint(sprite, FRAMEPOINT_BOTTOMLEFT, parent, FRAMEPOINT_BOTTOMLEFT, 0, 0)
+    BlzFrameSetSize(sprite, 0.00001, 0.00001)
+    BlzFrameSetScale(sprite, scale)
+    BlzFrameSetModel(sprite, path, 0)
+
+    TimerStart(CreateTimer(), timed, false, function()
+        BlzDestroyFrame(sprite)
+    end)
+    --BlzFrameSetVisible(sprite,true)
+    return sprite
 end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
@@ -6448,7 +6554,7 @@ function CreatePeonHPBAR(data)
     local HPfh = BlzCreateFrameByType("BACKDROP", "Face", hpBarBox, "", 0)
     BlzFrameSetTexture(HPfh, "HPCANDY", 0, true)
     BlzFrameSetSize(HPfh, 0.02, 0.02)
-    BlzFrameSetAbsPoint(HPfh, FRAMEPOINT_CENTER, -0.07 + step * data.HPCount, 0.586)
+    BlzFrameSetAbsPoint(HPfh, FRAMEPOINT_CENTER, -0.1 + step * data.HPCount, 0.48)
     data.HPCount = data.HPCount + 1
     data.HPTableFH[data.HPCount] = HPfh
     data.CurrentHP=data.CurrentHP+1
@@ -8062,7 +8168,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, -4928.0, 5824.0)
+DefineStartLocation(0, -5504.0, 3840.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()

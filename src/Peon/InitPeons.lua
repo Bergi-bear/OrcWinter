@@ -98,7 +98,7 @@ function CreatePeonHPBAR(data)
     local HPfh = BlzCreateFrameByType("BACKDROP", "Face", hpBarBox, "", 0)
     BlzFrameSetTexture(HPfh, "HPCANDY", 0, true)
     BlzFrameSetSize(HPfh, 0.02, 0.02)
-    BlzFrameSetAbsPoint(HPfh, FRAMEPOINT_CENTER, -0.07 + step * data.HPCount, 0.586)
+    BlzFrameSetAbsPoint(HPfh, FRAMEPOINT_CENTER, -0.1 + step * data.HPCount, 0.48)
     data.HPCount = data.HPCount + 1
     data.HPTableFH[data.HPCount] = HPfh
     data.CurrentHP=data.CurrentHP+1

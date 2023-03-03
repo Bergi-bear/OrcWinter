@@ -11,7 +11,7 @@ function StartSnowManDefence()
     local BossFight = true
     local into = CreateBOSSHPBar(boss, "Прочность снеговика")
 
-    local clock = CreateAndStartClock(0.05, 0.05, true, 0, 5, 0, into)
+    local clock = CreateAndStartClock(0.05, 0.06, true, 0, 5, 0, into)
 
     UnitSetHitBoxOverSize(boss, 150)
     UnitAddAbility(boss, FourCC('Abun'))
@@ -222,7 +222,7 @@ function StartSnowManDefence()
             end
             if k >= 1 then
                 --print("Лечим босса, и бой возобновляется")
-                clock = CreateAndStartClock(0.05, 0.05, true, 0, 5, 0, into)
+                clock = CreateAndStartClock(0.05, 0.06, true, 0, 5, 0, into)
                 ClearMapMusicBJ()
                 PlayMusicBJ("The Broken Fellowship")
                 SetUnitPositionSmooth(boss, xs, ys) --возвращаем нарграду место

@@ -6,12 +6,13 @@
 ---
 function InitMenu()
     HideEverything()
-    ReturnFPS()
-    MenuFrame()
+    --ReturnFPS()
+    --MenuFrame()
     CreateAndStartClock()
     DrawSelectionPortrait(true)
-    CreateMiniCard()
+    --CreateMiniCard()
     CreatePeonCounter()
+    CreateMenu()
 end
 function ReturnFPS()
     local fps = BlzGetFrameByName("ResourceBarFrame", 0)
@@ -85,10 +86,10 @@ function CreateAndStartClock(x, y, reverse, sec, min, h,parentFH)
     BlzFrameSetParent(charges, BlzGetFrameByName("ConsoleUIBackdrop", 0))
     local new_FrameChargesText = BlzCreateFrameByType("TEXT", "ButtonChargesText", charges, "", 0)
     if not x then
-        x=0.47
+        x=0.4
     end
     if not y then
-        y=0.59
+        y=0.56
     end
 
     if not sec then
@@ -100,11 +101,13 @@ function CreateAndStartClock(x, y, reverse, sec, min, h,parentFH)
     if not h then
         h = 23 -- стартовые часы
     end
-    BlzFrameSetTexture(charges, "UI\\Widgets\\Console\\Human\\CommandButton\\human-button-lvls-overlay", 0, true)
-    BlzFrameSetSize(charges, 0.08, 0.02)
+    BlzFrameSetTexture(charges, "WhiteStaticFlat", 0, true)
+    BlzFrameSetSize(charges, 0.1, 0.05)
     BlzFrameSetAbsPoint(charges, FRAMEPOINT_CENTER, x, y)
     BlzFrameSetText(new_FrameChargesText, Zero(0) .. ":" .. Zero(0) .. ":" .. Zero(0))
     BlzFrameSetPoint(new_FrameChargesText, FRAMEPOINT_CENTER, charges, FRAMEPOINT_CENTER, 0., 0.)
+
+    BlzFrameSetScale(new_FrameChargesText,1.5)
 
     TimerStart(CreateTimer(), 1, true, function()
         if not reverse then
@@ -171,14 +174,22 @@ function HideToolTips()
 end
 
 function DrawSelectionPortrait(state)
-
+    local x,y=0.05,0.54
     local Portrait = BlzGetOriginFrame(ORIGIN_FRAME_PORTRAIT, 0)-- BlzGetFrameByName("Portrait",0)
-
+    --BlzEnableUIAutoPosition(false)
     BlzFrameClearAllPoints(Portrait)
-    BlzFrameSetSize(Portrait, 0.08, 0.08)
-    -- BlzFrameSetParent(Portrait, BlzGetFrameByName("ConsoleUIBackdrop", 0))
-    BlzFrameSetAbsPoint(Portrait, FRAMEPOINT_CENTER, -0.0, 0.59)
+    BlzFrameSetSize(Portrait, 0.06, 0.08)
+    BlzFrameSetParent(Portrait, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    BlzFrameSetAbsPoint(Portrait, FRAMEPOINT_CENTER, x,y)
     BlzFrameSetVisible(Portrait, state)
+
+    local charges = BlzCreateFrameByType("BACKDROP", "Face", BlzGetOriginFrame(ORIGIN_FRAME_PORTRAIT, 0), "", 0)
+    BlzFrameSetParent(charges, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    BlzFrameSetTexture(charges, "WhiteStatic", 0, true)
+    BlzFrameSetSize(charges, 0.095, 0.095)
+    BlzFrameSetAbsPoint(charges, FRAMEPOINT_CENTER, -0.068,y)
+
+    --BlzFrameSetPoint(charges, FRAMEPOINT_CENTER, Portrait, FRAMEPOINT_CENTER, 0, 0)
 end
 
 function DrawSelectionPortrait1(state)
@@ -190,4 +201,28 @@ function DrawSelectionPortrait1(state)
     --BlzFrameSetParent(Portrait, BlzGetFrameByName("ConsoleUIBackdrop", 0))
     BlzFrameSetAbsPoint(Portrait, FRAMEPOINT_LEFT, 0, 0)
     BlzFrameSetVisible(Portrait, true)
+end
+
+function CreateRamaSprite(path, parent, timed,scale)
+    --[[local button = BlzCreateFrame('ScriptDialogButton', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 0, 0)
+    BlzFrameSetAbsPoint(button, FRAMEPOINT_CENTER, pointx, pointy)
+    BlzFrameSetSize(button, 0.0435, 0.0435)
+
+    local new_Frame = BlzCreateFrameByType('BACKDROP', "PORTRAIT", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "",0)
+    BlzFrameSetAllPoints(new_Frame, button)
+    BlzFrameSetTexture(new_Frame, "ReplaceableTextures\\CommandButtons\\BTNFootman.blp", 0, true)
+    ]]
+
+    local sprite = BlzCreateFrameByType("SPRITE", "justAName", parent, "WarCraftIIILogo", 0)
+    BlzFrameClearAllPoints(sprite)
+    BlzFrameSetPoint(sprite, FRAMEPOINT_BOTTOMLEFT, parent, FRAMEPOINT_BOTTOMLEFT, 0, 0)
+    BlzFrameSetSize(sprite, 0.00001, 0.00001)
+    BlzFrameSetScale(sprite, scale)
+    BlzFrameSetModel(sprite, path, 0)
+
+    TimerStart(CreateTimer(), timed, false, function()
+        BlzDestroyFrame(sprite)
+    end)
+    --BlzFrameSetVisible(sprite,true)
+    return sprite
 end
