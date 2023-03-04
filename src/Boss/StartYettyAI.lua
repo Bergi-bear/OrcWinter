@@ -288,7 +288,7 @@ function MarkAndFall(x, y, effModel, hero,delay)
                 --SetDestructableInvulnerable(nd,true)
                 DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", x, y))
                 PlayerSeeNoiseInRangeTimed(0.5, x, y)
-                UnitDamageArea(hero, 300, x, y, 150) --при падении камня
+                UnitDamageArea(hero, 300, x, y, 140) --при падении камня
                 local k = GetUnitLifePercent(hero) / 100
                 k = 1 - k
                 if effModel =="Abilities\\Weapons\\DemonHunterMissile\\DemonHunterMissile" then
@@ -298,7 +298,7 @@ function MarkAndFall(x, y, effModel, hero,delay)
                 end
                 TimerStart(CreateTimer(), 5 + (k * 5), false, function()
                     DestroyEffect(FallenEff)
-                    BlzSetSpecialEffectPosition(FallenEff, 999, 999, 999)
+                    --BlzSetSpecialEffectPosition(FallenEff, 999, 999, 999)
                     KillDestructable(nd)
                 end)
             end

@@ -8,6 +8,7 @@ function GetPortraitFromBD(id)
        -- [FourCC("n000")]="TexturePortraits\\SnowManPortrait", -- етти
        -- [FourCC("n001")]="TexturePortraits\\SnowManPortrait", -- дракон
         --[FourCC("n002")]="TexturePortraits\\SnowManPortrait", -- волк
+        [FourCC("u000")]="TexturePortraits\\WivernPortrait",
     }
     if TexturePortraits[id] then
         return TexturePortraits[id]
@@ -61,4 +62,12 @@ function CreateBOSSHPBar(boss,name)
         end
     end)
     return into
+end
+
+function CreateMarkOnBossBar(into,marcPercent)
+    local mark = BlzCreateFrameByType("BACKDROP", "Face", into, "", 0)
+    BlzFrameSetParent(mark, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    BlzFrameSetTexture(mark, "HPBOXMark", 0, true)
+    BlzFrameSetSize(mark, 0.06, 0.06)
+    BlzFrameSetPoint(mark, FRAMEPOINT_CENTER, into, FRAMEPOINT_LEFT,0.77*marcPercent/100 , 0.0)
 end

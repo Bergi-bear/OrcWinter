@@ -14,6 +14,38 @@ do
         DestroyTimerOrigin(t) -- вызываем DestroyTimer из переменной
     end
 end]]
+
+local origResetUnitAnimation = ResetUnitAnimation
+function ResetUnitAnimation(whichUnit)
+    if UnitAlive(whichUnit) then
+        origResetUnitAnimation(whichUnit, "stand")
+        --print("reset from orin")
+    end
+end
+local origSetUnitAnimation=SetUnitAnimation
+function SetUnitAnimation(whichUnit, whichAnimation)
+    if UnitAlive(whichUnit) then
+        origSetUnitAnimation(whichUnit, whichAnimation)
+    end
+end
+
+local origSetUnitAnimationByIndex=SetUnitAnimationByIndex
+function SetUnitAnimationByIndex(whichUnit, whichAnimation)
+    if UnitAlive(whichUnit) then
+        origSetUnitAnimationByIndex(whichUnit, whichAnimation)
+    end
+end
+
+
+local origQueueUnitAnimation=QueueUnitAnimation
+function QueueUnitAnimation(whichUnit, whichAnimation)
+    if UnitAlive(whichUnit) then
+        origQueueUnitAnimation(whichUnit, whichAnimation)
+    end
+end
+
+
+
 local origDestroyTimer = DestroyTimer
 function DestroyTimer(t)
 
@@ -57,18 +89,19 @@ TriggerAddAction = function(trig, callback)
     realTriggerAddAction(trig, pcallback)
 end
 
-
 function StartGCTracker()
     local t = CreateTimer()
     local track_gc
     local meta = {
-        __gc = function (self)
+        __gc = function(self)
             --print('GC is called at ' .. TimerGetElapsed(t))
             track_gc()
         end
     }
 
-    track_gc = function() setmetatable({}, meta) end
+    track_gc = function()
+        setmetatable({}, meta)
+    end
 
     TimerStart(t, 86400, false)
     track_gc()

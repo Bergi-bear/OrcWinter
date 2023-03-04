@@ -13,7 +13,7 @@ function PlayBossSpeech(sound, text)
         local sd = GetSoundDuration(s)
         --SetCinematicScene(HeroID, 1, "peon", "text", 2, 2)
         if sd <= 10 then
-            sd = 1000
+            sd = 3000
         end
         BlzFrameSetVisible(TexBoxBoss, true)
         BlzFrameSetText(TexBoxTextBoss, text)

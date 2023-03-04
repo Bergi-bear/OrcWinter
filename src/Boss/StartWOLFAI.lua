@@ -317,7 +317,7 @@ function WolfIceDash(boss, xh, yh, delay)
 
             BlzPauseUnitEx(boss, true)
             -- local r=GetRandomInt(0,8)
-            --print(r,"волк")
+            --print("закончил")
             --SetUnitAnimationByIndex(boss, r)
             SetUnitTimeScale(boss, 3)
             BlzSetUnitFacingEx(boss, angle)

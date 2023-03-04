@@ -13,7 +13,8 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
         onForces[GetHandleId(hero)] = true
         --print("первый раз")
     end
-    if not IsUnitType(hero, UNIT_TYPE_STRUCTURE) and GetUnitTypeId(hero) ~= FourCC("nglm") and not IsUnitType(hero, UNIT_TYPE_FLYING) and (onForces[GetHandleId(hero)] or flag == "ignore") and GetUnitAbilityLevel(hero, FourCC("Beng")) == 0 and not UnitHasBow(hero) then
+    --TODO тут удалено and not IsUnitType(hero, UNIT_TYPE_FLYING)
+    if not IsUnitType(hero, UNIT_TYPE_STRUCTURE) and GetUnitTypeId(hero) ~= FourCC("nglm")  and (onForces[GetHandleId(hero)] or flag == "ignore") and GetUnitAbilityLevel(hero, FourCC("Beng")) == 0 and not UnitHasBow(hero) then
         onForces[GetHandleId(hero)] = false
         local m = 0
         --print("1")
