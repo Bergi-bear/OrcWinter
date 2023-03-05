@@ -48,10 +48,13 @@ function InitTrig_EnterInRectWivern()
                             AddUnitAnimationProperties(entering, "alternate", true)
                             SetUnitUserData(entering, 0)
                             BirthFromEgg(entering)
+                            r=GetRandomInt(1,3)
                             if r==1 then
                                 PlayBossSpeech("Speech\\Wyvern\\".."`","Будущее империи, в бой")
                             elseif r==2 then
                                 PlayBossSpeech("Speech\\Wyvern\\".."`","Мои малыши вылупились, я такая хорошая мать")
+                            elseif r==2 then
+                                PlayBossSpeech("Speech\\Wyvern\\".."`","Ты только посмотри на них, какие миленькие")
                             end
                         end)
                     end
@@ -61,6 +64,7 @@ function InitTrig_EnterInRectWivern()
         end
     end)
 end
+
 
 function StartWivernAI(xs, ys)
     local boss = FindUnitOfType(FourCC('u000'))
@@ -112,7 +116,8 @@ function StartWivernAI(xs, ys)
             StartSound(bj_questCompletedSound)
             DestroyTimer(GetExpiredTimer())
             phase = 0
-            print("Даём нарграду, победа")
+            --print("Даём нарграду, победа")
+            CreateVictoryElderBorder()
             ClearMapMusicBJ()
             PlayMusicBJ("Salve Springs")
             SetMusicVolumeBJ(100)

@@ -59,6 +59,7 @@ function StartYettyAI(xs, ys)
             DestroyTimer(GetExpiredTimer())
             phase = 0
             --print("Даём нарграду, победа")
+            CreateVictoryElderBorder()
             PlayMonoSpeech("Speech\\Peon\\nyizachemyaegoybil", "Ну и зачем я его убил")
 
             CreateUnit(Player(0),FourCC("h003"),GetUnitX(boss),GetUnitY(boss),0)
