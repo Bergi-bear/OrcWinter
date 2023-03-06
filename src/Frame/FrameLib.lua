@@ -12,7 +12,7 @@ function InitMenu()
     DrawSelectionPortrait(true)
     --CreateMiniCard()
     CreatePeonCounter()
-    --CreateVictoryElderBorder()
+    --CreateVictoryElderBorder() -- тестовый показ
     --CreateCustomPortrait()
     --CreateMenu()
 end

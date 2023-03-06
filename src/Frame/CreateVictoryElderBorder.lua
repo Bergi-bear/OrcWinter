@@ -15,7 +15,7 @@ function CreateVictoryElderBorder()
     local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", BoxBorder, "", 0)
     BlzFrameSetPoint(text, FRAMEPOINT_CENTER, BoxBorder, FRAMEPOINT_CENTER, 0, 0)
     BlzFrameSetText(text, ColorText2("МОГУЧИЙ ВРАГ ПЕРЕИГРАН И УНИЧТОЖЕН"))
-    BlzFrameSetScale(text, 4)
+    BlzFrameSetScale(text, 4.5)
 
     local text2 = BlzCreateFrameByType("TEXT", "ButtonChargesText", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
     BlzFrameSetPoint(text2, FRAMEPOINT_CENTER, BoxBorder, FRAMEPOINT_CENTER, 0, 0)
@@ -24,26 +24,27 @@ function CreateVictoryElderBorder()
     BlzFrameSetAlpha(text2, 20)
     local sec = 1
     local scale=4.5
+    TimerStart(CreateTimer(), 4, false, function()
+        TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
+            sec = sec - TIMER_PERIOD
+            alpha=alpha-4
+            --print(alpha)
+            BlzFrameSetAlpha(BoxBorder,alpha)
+            if alpha<=20 then
+                BlzFrameSetAlpha(text2,alpha)
+            end
+            if sec<=0 then
 
-    TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
-        sec = sec - TIMER_PERIOD
-        alpha=alpha-4
-        --print(alpha)
-        BlzFrameSetAlpha(BoxBorder,alpha)
-        if alpha<=20 then
-            BlzFrameSetAlpha(text2,alpha)
-        end
-        if sec<=0 then
+            else
+                scale=scale+0.02
+                BlzFrameSetScale(text2, scale)
+            end
 
-        else
-            scale=scale+0.02
-            BlzFrameSetScale(text2, scale)
-        end
-
-        if alpha<10 then
-            DestroyTimer(GetExpiredTimer())
-            BlzDestroyFrame(BoxBorder)
-            BlzDestroyFrame(text2)
-        end
+            if alpha<10 then
+                DestroyTimer(GetExpiredTimer())
+                BlzDestroyFrame(BoxBorder)
+                BlzDestroyFrame(text2)
+            end
+        end)
     end)
 end

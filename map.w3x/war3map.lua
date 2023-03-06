@@ -129,7 +129,6 @@ local unitID
 local t
 local life
 
-gg_unit_n001_0009 = BlzCreateUnitWithSkin(p, FourCC("n001"), -7570.0, 3830.9, 301.970, FourCC("n001"))
 gg_unit_Oths_0011 = BlzCreateUnitWithSkin(p, FourCC("Oths"), 63.2, -581.0, 211.080, FourCC("Oths"))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1652.2, -1430.7, 121.800, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
@@ -154,6 +153,8 @@ u = BlzCreateUnitWithSkin(p, FourCC("h002"), -6551.2, -7066.3, 5.812, FourCC("h0
 u = BlzCreateUnitWithSkin(p, FourCC("h004"), -3852.9, 4153.2, 159.380, FourCC("h004"))
 u = BlzCreateUnitWithSkin(p, FourCC("h004"), 3605.6, 3360.4, 159.380, FourCC("h004"))
 u = BlzCreateUnitWithSkin(p, FourCC("h004"), -476.6, -4225.4, 159.380, FourCC("h004"))
+u = BlzCreateUnitWithSkin(p, FourCC("h007"), 1041.6, -2467.3, 182.046, FourCC("h007"))
+u = BlzCreateUnitWithSkin(p, FourCC("h007"), 608.9, -879.9, 182.046, FourCC("h007"))
 end
 
 function CreateUnitsForPlayer1()
@@ -417,6 +418,8 @@ local t
 local life
 
 u = BlzCreateUnitWithSkin(p, FourCC("n000"), -2863.2, -5340.3, 326.601, FourCC("n000"))
+u = BlzCreateUnitWithSkin(p, FourCC("u000"), -5777.8, 8019.1, 276.770, FourCC("u000"))
+gg_unit_n001_0009 = BlzCreateUnitWithSkin(p, FourCC("n001"), -7570.0, 3830.9, 301.970, FourCC("n001"))
 u = BlzCreateUnitWithSkin(p, FourCC("n002"), -12134.0, 3783.0, 172.240, FourCC("n002"))
 end
 
@@ -430,7 +433,6 @@ local life
 u = BlzCreateUnitWithSkin(p, FourCC("e002"), 5726.2, -5277.6, 312.658, FourCC("e002"))
 u = BlzCreateUnitWithSkin(p, FourCC("e002"), 6357.5, -5150.5, 247.597, FourCC("e002"))
 u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -1377.3, 7311.8, 119.744, FourCC("nsno"))
-u = BlzCreateUnitWithSkin(p, FourCC("u000"), -5777.8, 8019.1, 276.770, FourCC("u000"))
 u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -4992.9, 4916.3, 230.423, FourCC("nsno"))
 u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -5043.9, 6247.3, 163.306, FourCC("nsno"))
 u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -5760.5, 6601.1, 203.528, FourCC("nsno"))
@@ -469,11 +471,11 @@ u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 491.9, -2341.9, 337.803, FourCC("op
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 689.2, -2273.3, 257.772, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 999.6, -2221.1, 233.399, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 987.4, -2183.5, 233.399, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 32.3, -2538.1, 28.538, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1468.0, 931.0, 54.255, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1543.3, 904.5, -16.742, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1213.6, 905.1, 102.463, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
@@ -499,6 +501,12 @@ u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -12755.9, -4965.9, 345.936, FourCC(
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("e003"), 4188.3, 2697.4, 248.540, FourCC("e003"))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 1214.4, 2660.8, 11.906, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 801.1, -2497.8, 28.538, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 873.8, -2488.1, 6.286, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 729.7, -2506.4, 0.344, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 end
 
@@ -3768,7 +3776,8 @@ function StartDragonAI(xs, ys)
             StartSound(bj_questCompletedSound)
             DestroyTimer(GetExpiredTimer())
             phase = 0
-            print("Даём нарграду, победа")
+            --print("Даём нарграду, победа")
+            CreateVictoryElderBorder()
             ClearMapMusicBJ()
             PlayMusicBJ("Endless Snowbanks")
             SetMusicVolumeBJ(100)
@@ -4147,10 +4156,13 @@ function InitTrig_EnterInRectWivern()
                             AddUnitAnimationProperties(entering, "alternate", true)
                             SetUnitUserData(entering, 0)
                             BirthFromEgg(entering)
+                            r=GetRandomInt(1,3)
                             if r==1 then
                                 PlayBossSpeech("Speech\\Wyvern\\".."`","Будущее империи, в бой")
                             elseif r==2 then
                                 PlayBossSpeech("Speech\\Wyvern\\".."`","Мои малыши вылупились, я такая хорошая мать")
+                            elseif r==2 then
+                                PlayBossSpeech("Speech\\Wyvern\\".."`","Ты только посмотри на них, какие миленькие")
                             end
                         end)
                     end
@@ -4160,6 +4172,7 @@ function InitTrig_EnterInRectWivern()
         end
     end)
 end
+
 
 function StartWivernAI(xs, ys)
     local boss = FindUnitOfType(FourCC('u000'))
@@ -4211,7 +4224,8 @@ function StartWivernAI(xs, ys)
             StartSound(bj_questCompletedSound)
             DestroyTimer(GetExpiredTimer())
             phase = 0
-            print("Даём нарграду, победа")
+            --print("Даём нарграду, победа")
+            CreateVictoryElderBorder()
             ClearMapMusicBJ()
             PlayMusicBJ("Salve Springs")
             SetMusicVolumeBJ(100)
@@ -4615,7 +4629,8 @@ function StartWolfAI(xs, ys)
             StartSound(bj_questCompletedSound)
             DestroyTimer(GetExpiredTimer())
             phase = 0
-            print("Даём нарграду, победа")
+            --print("Даём нарграду, победа")
+            CreateVictoryElderBorder()
             ClearMapMusicBJ()
             PlayMusicBJ("Salve Springs")
             SetMusicVolumeBJ(100)
@@ -5222,6 +5237,7 @@ function StartYettyAI(xs, ys)
             DestroyTimer(GetExpiredTimer())
             phase = 0
             --print("Даём нарграду, победа")
+            CreateVictoryElderBorder()
             PlayMonoSpeech("Speech\\Peon\\nyizachemyaegoybil", "Ну и зачем я его убил")
 
             CreateUnit(Player(0),FourCC("h003"),GetUnitX(boss),GetUnitY(boss),0)
@@ -6350,39 +6366,39 @@ function CreateVictoryElderBorder()
 
     local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", BoxBorder, "", 0)
     BlzFrameSetPoint(text, FRAMEPOINT_CENTER, BoxBorder, FRAMEPOINT_CENTER, 0, 0)
-    BlzFrameSetText(text, ColorText2("МОГУЧИЙ ВРАГ ПОВЕРЖЕН"))
-    BlzFrameSetScale(text, 4)
+    BlzFrameSetText(text, ColorText2("МОГУЧИЙ ВРАГ ПЕРЕИГРАН И УНИЧТОЖЕН"))
+    BlzFrameSetScale(text, 3)
 
     local text2 = BlzCreateFrameByType("TEXT", "ButtonChargesText", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
     BlzFrameSetPoint(text2, FRAMEPOINT_CENTER, BoxBorder, FRAMEPOINT_CENTER, 0, 0)
-    BlzFrameSetText(text2, ColorText2("МОГУЧИЙ ВРАГ ПОВЕРЖЕН"))
+    BlzFrameSetText(text2, ColorText2("МОГУЧИЙ ВРАГ ПЕРЕИГРАН И УНИЧТОЖЕН"))
     BlzFrameSetScale(text2, 4.5)
     BlzFrameSetAlpha(text2, 20)
     local sec = 1
     local scale=4.5
+    TimerStart(CreateTimer(), 4, false, function()
+        TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
+            sec = sec - TIMER_PERIOD
+            alpha=alpha-4
+            --print(alpha)
+            BlzFrameSetAlpha(BoxBorder,alpha)
+            if alpha<=20 then
+                BlzFrameSetAlpha(text2,alpha)
+            end
+            if sec<=0 then
 
-    TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
-        sec = sec - TIMER_PERIOD
-        alpha=alpha-4
-        --print(alpha)
-        BlzFrameSetAlpha(BoxBorder,alpha)
-        if alpha<=20 then
-            BlzFrameSetAlpha(text2,alpha)
-        end
-        if sec<=0 then
+            else
+                scale=scale+0.02
+                BlzFrameSetScale(text2, scale)
+            end
 
-        else
-            scale=scale+0.02
-            BlzFrameSetScale(text2, scale)
-        end
-
-        if alpha<10 then
-            DestroyTimer(GetExpiredTimer())
-            BlzDestroyFrame(BoxBorder)
-            BlzDestroyFrame(text2)
-        end
+            if alpha<10 then
+                DestroyTimer(GetExpiredTimer())
+                BlzDestroyFrame(BoxBorder)
+                BlzDestroyFrame(text2)
+            end
+        end)
     end)
-
 end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
@@ -6610,7 +6626,7 @@ end
 --- DateTime: 01.01.2023 17:35
 ---
 function CastSnowBall(data,directionAngle)
-    local effModel="snowball"--"Abilities\\Weapons\\LichMissile\\LichMissile"
+    local effModel="Firebrand Shot Silver"--snowball
     local hero=data.UnitHero
     if data.AttackIsReady and not data.SpaceForce and UnitAlive(hero) then
         --WolfSlashAttack(hero) --для проверки вставлял
@@ -6953,10 +6969,12 @@ function HeroCandyHeal(data, k)
         k = data.HPCount
     end
     --print("восстанеавливаем карамельки"..)
+    normal_sound("goulp1",GetUnitXY(data.UnitHero))
     for i = data.CurrentHP+1, k+data.CurrentHP do
         BlzFrameSetTexture(data.HPTableFH[i], "HPCANDY", 0, true)
         if data.CurrentHP<data.HPCount then
             data.CurrentHP=data.CurrentHP+1
+
         else
            -- print("получено сверхлечение")
         end
@@ -8523,7 +8541,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, -4992.0, 5824.0)
+DefineStartLocation(0, -256.0, -768.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()

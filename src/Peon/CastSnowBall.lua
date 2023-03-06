@@ -4,7 +4,7 @@
 --- DateTime: 01.01.2023 17:35
 ---
 function CastSnowBall(data,directionAngle)
-    local effModel="snowball"--"Abilities\\Weapons\\LichMissile\\LichMissile"
+    local effModel="Firebrand Shot Silver"--snowball
     local hero=data.UnitHero
     if data.AttackIsReady and not data.SpaceForce and UnitAlive(hero) then
         --WolfSlashAttack(hero) --для проверки вставлял

@@ -142,10 +142,12 @@ function HeroCandyHeal(data, k)
         k = data.HPCount
     end
     --print("восстанеавливаем карамельки"..)
+    normal_sound("goulp1",GetUnitXY(data.UnitHero))
     for i = data.CurrentHP+1, k+data.CurrentHP do
         BlzFrameSetTexture(data.HPTableFH[i], "HPCANDY", 0, true)
         if data.CurrentHP<data.HPCount then
             data.CurrentHP=data.CurrentHP+1
+
         else
            -- print("получено сверхлечение")
         end
