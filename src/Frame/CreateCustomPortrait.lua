@@ -5,56 +5,44 @@
 ---
 function CreateCustomPortrait()
     local parentBox = BlzCreateFrameByType('BACKDROP', "PORTRAIT", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
+    BlzFrameSetParent(parentBox, BlzGetFrameByName("ConsoleUIBackdrop", 0))
     BlzFrameSetAbsPoint(parentBox, FRAMEPOINT_CENTER, 0.45, 0.3)
-    BlzFrameSetSize(parentBox, 0.0435, 0.0435)
-    BlzFrameSetTexture(parentBox, "ReplaceableTextures\\CommandButtons\\BTNFootman", 0, true)
+    BlzFrameSetSize(parentBox, 0.000001, 0.000001)
 
-    model = BlzCreateFrameByType("SPRITE", "model", parentBox, "", 0)
-    --BlzFrameSetAbsPoint(model, FRAMEPOINT_CENTER, 0.4, 0.3)
-    BlzFrameSetPoint(model, FRAMEPOINT_CENTER, parentBox, FRAMEPOINT_CENTER, 0, 0)
-    BlzFrameSetSize(model, 0.01, 0.01)
-    BlzFrameSetScale(model, 0.0015)-- 1 ,было видно потрет
-    BlzFrameSetModel(model, "peonPortra", 1)-- //This is pretty self explanatory. 0 here is the animation index that you want to use.For most models, 0 is for stand, 1 is for death animations.
-    BlzFrameSetSpriteAnimate(model, 2, 0)
-    --  BlzFrameSetAbsPoint(peonp, FRAMEPOINT_CENTER, 0.4, 0.3)
-    -- BlzFrameSetSize(peonp, 0.01, 0.01)
-    -- BlzFrameSetModel(peonp, "peontest", 1)
-    -- BlzFrameSetScale(peonp, 0.0015)
-    -- BlzFrameSetSpriteAnimate(peonp, 2, 0)
-    -- birth = 0
-    -- death = 1
-    -- stand = 2
-    -- morph = 3
-    -- alternate = 4
+    CreateSprite("pico-boku-no-pico", parentBox, nil, 1,0,0.5)
+    CreateSprite("68f000b0feac0213a64a5d1dc93b2365251874e5", parentBox, nil, 1,0.2,0.5)
+    CreateSprite("6948ace06605aac9ab07548d22e72392aefc1278", parentBox, nil, 1,0.4,0.5)
+    CreateSprite("cool", parentBox, nil, 1,0.6,0.5)
+    CreateSprite("excalibur-soul-eater", parentBox, nil, 0.5,0,0.3)
+    CreateSprite("jojos-noriaki-kakyoin", parentBox, nil, 0.3,0.2,0.3)
+    CreateSprite("paimon", parentBox, nil, 1,0.4,0.3)
+    CreateSprite("rock-one-eyebrow-raised-rock-staring", parentBox, nil, 1,0.6,0.2)
+    CreateSprite("russia-ussr", parentBox, nil, 0.4,0,0.15)
+    CreateSprite("stonks-up-stongs", parentBox, nil, 0.5,0.2,0.15)
+    CreateSprite("sweaty-gamer-speedrun-whipping", parentBox, nil, 1,0.4,0.15)
 
-
-    CreateRamaSprite("hearts_sprite", parentBox, nil, 0.6)
 end
 
-function CreateRamaSprite(path, parent, timed, scale)
-    --[[local button = BlzCreateFrame('ScriptDialogButton', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 0, 0)
-    BlzFrameSetAbsPoint(button, FRAMEPOINT_CENTER, pointx, pointy)
-    BlzFrameSetSize(button, 0.0435, 0.0435)
-
-    local new_Frame = BlzCreateFrameByType('BACKDROP', "PORTRAIT", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "",0)
-    BlzFrameSetAllPoints(new_Frame, button)
-    BlzFrameSetTexture(new_Frame, "ReplaceableTextures\\CommandButtons\\BTNFootman.blp", 0, true)
-    ]]
-
+function CreateSprite(path, parent, timed, scale, x, y)
+    if not x then
+        x = 0.4
+    end
+    if not y then
+        y = 0.3
+    end
+    if not parent then
+        parent=BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
+    end
     local sprite = BlzCreateFrameByType("SPRITE", "justAName", parent, "WarCraftIIILogo", 0)
     BlzFrameClearAllPoints(sprite)
-    --BlzFrameSetParent(sprite, BlzGetFrameByName("ConsoleUIBackdrop", 0))
-    BlzFrameSetPoint(sprite, FRAMEPOINT_BOTTOMLEFT, parent, FRAMEPOINT_BOTTOMLEFT, 0, 0)
+    BlzFrameSetAbsPoint(sprite, FRAMEPOINT_CENTER, x, y)
     BlzFrameSetSize(sprite, 0.00001, 0.00001)
-    --BlzFrameSetSize(sprite,1,1)
     BlzFrameSetScale(sprite, scale)
     BlzFrameSetModel(sprite, path, 0)
-
     if timed then
         TimerStart(CreateTimer(), timed, false, function()
             BlzDestroyFrame(sprite)
         end)
     end
-    --BlzFrameSetVisible(sprite,true)
     return sprite
 end

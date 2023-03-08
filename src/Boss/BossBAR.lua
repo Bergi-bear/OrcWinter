@@ -5,7 +5,7 @@
 function GetPortraitFromBD(id)
     local TexturePortraits={
         [FourCC("e003")]="TexturePortraits\\SnowManPortrait",
-       -- [FourCC("n000")]="TexturePortraits\\SnowManPortrait", -- етти
+        [FourCC("n000")]="TexturePortraits\\Yetty", -- етти
        -- [FourCC("n001")]="TexturePortraits\\SnowManPortrait", -- дракон
         --[FourCC("n002")]="TexturePortraits\\SnowManPortrait", -- волк
         [FourCC("u000")]="TexturePortraits\\WivernPortrait",

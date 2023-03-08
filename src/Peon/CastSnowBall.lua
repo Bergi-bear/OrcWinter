@@ -6,7 +6,7 @@
 function CastSnowBall(data,directionAngle)
     local effModel="Firebrand Shot Silver"--snowball
     local hero=data.UnitHero
-    if data.AttackIsReady and not data.SpaceForce and UnitAlive(hero) then
+    if data.AttackIsReady and not data.SpaceForce and UnitAlive(hero) and not FREE_CAMERA then
         --WolfSlashAttack(hero) --для проверки вставлял
         BlzSetUnitFacingEx(hero,directionAngle)
         SetUnitAnimationByIndex(hero,3)

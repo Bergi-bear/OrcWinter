@@ -11,4 +11,5 @@ MinUnitSpeed=1.0
 NeutralBuildingPollPeriod=0.25
 ReactionDelay=0.0
 StrHitPointBonus=5.0
+UpkeepUsage=300,300,10000,10000,10000,10000,10000,10000,10000,10000
 

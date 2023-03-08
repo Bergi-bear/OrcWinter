@@ -51,10 +51,10 @@ function InitHEROTable()
             ThrowChargesCDFH       = nil,
             ThrowChargesReloadSec  = 5,
             --способность рывок
-            DashCharges            = 2,
+            DashCharges            = 1,-- число зарядов рывка
             DashChargesFH          = nil,
             DashChargesCDFH        = nil,
-            DashChargesReloadSec   = 2,
+            DashChargesReloadSec   = 1.5, -- кд рывка
             Time2HealDash          = 0, --лечение доступно только при нуле
             countFrame             = 0,
             BaseDashDamage         = 100,

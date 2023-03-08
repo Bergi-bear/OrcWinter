@@ -14,6 +14,8 @@ gg_rct_FromWolf = nil
 gg_rct_ExitWolf = nil
 gg_rct_EnterWolf = nil
 gg_rct_EnterWivern = nil
+gg_rct_Region_012 = nil
+gg_rct_Region_013 = nil
 gg_cam_OnPeonsandTrall = nil
 gg_cam_OnPineRound = nil
 gg_cam_OnPeons = nil
@@ -21,6 +23,9 @@ gg_cam_MindPeon = nil
 gg_cam_TrallSteal = nil
 gg_cam_Vine = nil
 gg_cam_ResetCam = nil
+gg_cam_LookYetty = nil
+gg_cam_PeonLookOnYetty = nil
+gg_cam_PeonReadyToYetty = nil
 gg_snd_Intro1 = nil
 gg_snd_Intro2 = nil
 gg_snd_Intro3 = nil
@@ -32,6 +37,11 @@ gg_snd_Intro8 = nil
 gg_snd_Intro9 = nil
 gg_snd_Intro10 = nil
 gg_snd_Intro11 = nil
+gg_snd_peon1 = nil
+gg_snd_peon2 = nil
+gg_snd_peon3 = nil
+gg_trg_InitYetty = nil
+gg_trg_StartYettyCinematic = nil
 gg_trg_InitEggs = nil
 gg_trg_Untitled_Trigger_001 = nil
 gg_trg_BoundEnter_Copy = nil
@@ -43,6 +53,7 @@ gg_trg_StartIntro = nil
 gg_trg_SkipIntro = nil
 gg_trg_ESCTEST = nil
 gg_unit_n001_0009 = nil
+gg_unit_n000_0001 = nil
 gg_unit_Oths_0011 = nil
 gg_unit_opeo_0013 = nil
 gg_unit_opeo_0014 = nil
@@ -112,6 +123,21 @@ SetSoundDuration(gg_snd_Intro11, 5976)
 SetSoundChannel(gg_snd_Intro11, 0)
 SetSoundVolume(gg_snd_Intro11, 127)
 SetSoundPitch(gg_snd_Intro11, 1.0)
+gg_snd_peon1 = CreateSound("Speech/Peon/Yetty/peon1.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_peon1, 6840)
+SetSoundChannel(gg_snd_peon1, 0)
+SetSoundVolume(gg_snd_peon1, 127)
+SetSoundPitch(gg_snd_peon1, 1.0)
+gg_snd_peon2 = CreateSound("Speech/Peon/Yetty/peon2.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_peon2, 5568)
+SetSoundChannel(gg_snd_peon2, 0)
+SetSoundVolume(gg_snd_peon2, 127)
+SetSoundPitch(gg_snd_peon2, 1.0)
+gg_snd_peon3 = CreateSound("Speech/Peon/Yetty/peon3.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_peon3, 4752)
+SetSoundChannel(gg_snd_peon3, 0)
+SetSoundVolume(gg_snd_peon3, 127)
+SetSoundPitch(gg_snd_peon3, 1.0)
 end
 
 function CreateAllDestructables()
@@ -133,7 +159,9 @@ gg_unit_Oths_0011 = BlzCreateUnitWithSkin(p, FourCC("Oths"), 63.2, -581.0, 211.0
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1652.2, -1430.7, 121.800, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("o001"), -1180.6, 1453.0, 262.550, FourCC("o001"))
+SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("o001"), -536.6, -1082.7, 42.330, FourCC("o001"))
+SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), -7827.9, -9605.2, 5.812, FourCC("h002"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), -9372.6, -9822.5, 5.812, FourCC("h002"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), -11168.0, -8085.8, 5.812, FourCC("h002"))
@@ -155,6 +183,7 @@ u = BlzCreateUnitWithSkin(p, FourCC("h004"), 3605.6, 3360.4, 159.380, FourCC("h0
 u = BlzCreateUnitWithSkin(p, FourCC("h004"), -476.6, -4225.4, 159.380, FourCC("h004"))
 u = BlzCreateUnitWithSkin(p, FourCC("h007"), 1041.6, -2467.3, 182.046, FourCC("h007"))
 u = BlzCreateUnitWithSkin(p, FourCC("h007"), 608.9, -879.9, 182.046, FourCC("h007"))
+u = BlzCreateUnitWithSkin(p, FourCC("h002"), 601.4, -1416.6, 5.812, FourCC("h002"))
 end
 
 function CreateUnitsForPlayer1()
@@ -417,9 +446,9 @@ local unitID
 local t
 local life
 
-u = BlzCreateUnitWithSkin(p, FourCC("n000"), -2863.2, -5340.3, 326.601, FourCC("n000"))
+gg_unit_n000_0001 = BlzCreateUnitWithSkin(p, FourCC("n000"), -2863.2, -5340.3, 326.601, FourCC("n000"))
 u = BlzCreateUnitWithSkin(p, FourCC("u000"), -5777.8, 8019.1, 276.770, FourCC("u000"))
-gg_unit_n001_0009 = BlzCreateUnitWithSkin(p, FourCC("n001"), -7570.0, 3830.9, 301.970, FourCC("n001"))
+gg_unit_n001_0009 = BlzCreateUnitWithSkin(p, FourCC("n001"), -7570.0, 3830.9, 99.384, FourCC("n001"))
 u = BlzCreateUnitWithSkin(p, FourCC("n002"), -12134.0, 3783.0, 172.240, FourCC("n002"))
 end
 
@@ -475,7 +504,7 @@ u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 987.4, -2183.5, 233.399, FourCC("op
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 32.3, -2538.1, 28.538, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1543.3, 904.5, -16.742, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1543.3, 904.5, 343.258, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1213.6, 905.1, 102.463, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
@@ -506,8 +535,22 @@ u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 801.1, -2497.8, 28.538, FourCC("ope
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 873.8, -2488.1, 6.286, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 729.7, -2506.4, 0.344, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("n00B"), 723.1, -2489.4, 349.040, FourCC("n00B"))
 SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("n00A"), -1760.2, -94.9, 298.310, FourCC("n00A"))
+u = BlzCreateUnitWithSkin(p, FourCC("n00A"), 529.2, -1354.5, 309.719, FourCC("n00A"))
+u = BlzCreateUnitWithSkin(p, FourCC("n00A"), 652.5, -1326.4, 239.706, FourCC("n00A"))
+u = BlzCreateUnitWithSkin(p, FourCC("n00A"), 663.6, -1460.5, 138.430, FourCC("n00A"))
+u = BlzCreateUnitWithSkin(p, FourCC("n00B"), 406.5, -885.8, 349.040, FourCC("n00B"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("n00A"), -341.6, -361.2, 36.327, FourCC("n00A"))
+u = BlzCreateUnitWithSkin(p, FourCC("n00A"), -2486.8, 3015.6, 291.738, FourCC("n00A"))
+u = BlzCreateUnitWithSkin(p, FourCC("n00A"), -5510.7, 3325.3, 209.402, FourCC("n00A"))
+u = BlzCreateUnitWithSkin(p, FourCC("n00A"), -5469.0, 3219.2, 167.670, FourCC("n00A"))
+u = BlzCreateUnitWithSkin(p, FourCC("n00A"), 4465.4, 2399.8, 137.073, FourCC("n00A"))
+u = BlzCreateUnitWithSkin(p, FourCC("n00A"), 4540.3, 2867.3, 175.058, FourCC("n00A"))
+u = BlzCreateUnitWithSkin(p, FourCC("n00A"), 3830.3, 2974.2, 320.768, FourCC("n00A"))
+u = BlzCreateUnitWithSkin(p, FourCC("n00A"), 3897.6, 2377.1, 61.057, FourCC("n00A"))
 end
 
 function CreatePlayerBuildings()
@@ -530,7 +573,7 @@ function CreateRegions()
 local we
 
 gg_rct________________037 = Rect(128.0, -384.0, 160.0, -352.0)
-gg_rct_Region_038 = Rect(-4224.0, -6208.0, -1568.0, -4608.0)
+gg_rct_Region_038 = Rect(-4224.0, -6208.0, -1568.0, -4480.0)
 gg_rct_Region_024 = Rect(-192.0, -352.0, -96.0, -256.0)
 gg_rct_TrapZone = Rect(-12832.0, -9088.0, -5600.0, 4864.0)
 gg_rct_EnterTrap = Rect(-5856.0, -9440.0, -5472.0, -8928.0)
@@ -544,6 +587,8 @@ gg_rct_FromWolf = Rect(-12000.0, 64.0, -11680.0, 128.0)
 gg_rct_ExitWolf = Rect(-11968.0, 1632.0, -11712.0, 1760.0)
 gg_rct_EnterWolf = Rect(-11968.0, 1760.0, -11712.0, 1888.0)
 gg_rct_EnterWivern = Rect(-7168.0, 6016.0, -4512.0, 8352.0)
+gg_rct_Region_012 = Rect(-2848.0, -4512.0, -2656.0, -4448.0)
+gg_rct_Region_013 = Rect(-3424.0, -5824.0, -2240.0, -4704.0)
 end
 
 function CreateCameras()
@@ -638,6 +683,45 @@ CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
 CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
 CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
 CameraSetupSetDestPosition(gg_cam_ResetCam, -276.9, -696.2, 0.0)
+gg_cam_LookYetty = CreateCameraSetup()
+CameraSetupSetField(gg_cam_LookYetty, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+CameraSetupSetField(gg_cam_LookYetty, CAMERA_FIELD_ROTATION, 124.8, 0.0)
+CameraSetupSetField(gg_cam_LookYetty, CAMERA_FIELD_ANGLE_OF_ATTACK, 328.0, 0.0)
+CameraSetupSetField(gg_cam_LookYetty, CAMERA_FIELD_TARGET_DISTANCE, 1051.5, 0.0)
+CameraSetupSetField(gg_cam_LookYetty, CAMERA_FIELD_ROLL, 0.0, 0.0)
+CameraSetupSetField(gg_cam_LookYetty, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+CameraSetupSetField(gg_cam_LookYetty, CAMERA_FIELD_FARZ, 5000.0, 0.0)
+CameraSetupSetField(gg_cam_LookYetty, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+CameraSetupSetField(gg_cam_LookYetty, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+CameraSetupSetField(gg_cam_LookYetty, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+CameraSetupSetField(gg_cam_LookYetty, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_LookYetty, -2902.1, -5366.9, 0.0)
+gg_cam_PeonLookOnYetty = CreateCameraSetup()
+CameraSetupSetField(gg_cam_PeonLookOnYetty, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+CameraSetupSetField(gg_cam_PeonLookOnYetty, CAMERA_FIELD_ROTATION, 258.2, 0.0)
+CameraSetupSetField(gg_cam_PeonLookOnYetty, CAMERA_FIELD_ANGLE_OF_ATTACK, 319.2, 0.0)
+CameraSetupSetField(gg_cam_PeonLookOnYetty, CAMERA_FIELD_TARGET_DISTANCE, 1272.3, 0.0)
+CameraSetupSetField(gg_cam_PeonLookOnYetty, CAMERA_FIELD_ROLL, 0.0, 0.0)
+CameraSetupSetField(gg_cam_PeonLookOnYetty, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+CameraSetupSetField(gg_cam_PeonLookOnYetty, CAMERA_FIELD_FARZ, 5000.0, 0.0)
+CameraSetupSetField(gg_cam_PeonLookOnYetty, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+CameraSetupSetField(gg_cam_PeonLookOnYetty, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+CameraSetupSetField(gg_cam_PeonLookOnYetty, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+CameraSetupSetField(gg_cam_PeonLookOnYetty, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_PeonLookOnYetty, -2922.1, -4613.7, 0.0)
+gg_cam_PeonReadyToYetty = CreateCameraSetup()
+CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_ROTATION, 87.4, 0.0)
+CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_ANGLE_OF_ATTACK, 338.0, 0.0)
+CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_TARGET_DISTANCE, 955.9, 0.0)
+CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_ROLL, 0.0, 0.0)
+CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_FARZ, 5000.0, 0.0)
+CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_PeonReadyToYetty, -2745.0, -4498.0, 0.0)
 end
 
 --CUSTOM_CODE
@@ -1880,10 +1964,10 @@ function InitHEROTable()
             ThrowChargesCDFH       = nil,
             ThrowChargesReloadSec  = 5,
             --способность рывок
-            DashCharges            = 2,
+            DashCharges            = 1,-- число зарядов рывка
             DashChargesFH          = nil,
             DashChargesCDFH        = nil,
-            DashChargesReloadSec   = 2,
+            DashChargesReloadSec   = 1.5, -- кд рывка
             Time2HealDash          = 0, --лечение доступно только при нуле
             countFrame             = 0,
             BaseDashDamage         = 100,
@@ -3205,7 +3289,7 @@ end
 function GetPortraitFromBD(id)
     local TexturePortraits={
         [FourCC("e003")]="TexturePortraits\\SnowManPortrait",
-       -- [FourCC("n000")]="TexturePortraits\\SnowManPortrait", -- етти
+        [FourCC("n000")]="TexturePortraits\\Yetty", -- етти
        -- [FourCC("n001")]="TexturePortraits\\SnowManPortrait", -- дракон
         --[FourCC("n002")]="TexturePortraits\\SnowManPortrait", -- волк
         [FourCC("u000")]="TexturePortraits\\WivernPortrait",
@@ -5198,14 +5282,23 @@ end
 function InitTrig_EnterInRectB()
     --вызывается в кастом триггерс
     --print("Инициализация босса")
-    local gg_trg_EnterInRect = CreateTrigger()
+        local gg_trg_EnterInRect = CreateTrigger()
     TriggerRegisterEnterRectSimple(gg_trg_EnterInRect, gg_rct_Region_038)
     TriggerAddAction(gg_trg_EnterInRect, function()
         if IsUnitType(GetEnteringUnit(), UNIT_TYPE_HERO) then
-            StartYettyAI(GetRectCenterX(gg_rct_Region_038), GetRectCenterY(gg_rct_Region_038))
+            --StartYettyAI(GetRectCenterX(gg_rct_Region_038), GetRectCenterY(gg_rct_Region_038))
             DisableTrigger(gg_trg_EnterInRect)
+            CustomCinematicMode(true)
+            --CinematicModeBJ(true, GetPlayersAll())
+            --BlzHideOriginFrames(false)
+            --TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_635", gg_snd_Intro4, "TRIGSTR_636", bj_TIMETYPE_ADD, 0.00, true)
         end
     end)
+end
+
+function StartYettyCinematic()
+    local boss = FindUnitOfType(FourCC('n000'))
+
 end
 
 function StartYettyAI(xs, ys)
@@ -6135,57 +6228,45 @@ end
 ---
 function CreateCustomPortrait()
     local parentBox = BlzCreateFrameByType('BACKDROP', "PORTRAIT", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
+    BlzFrameSetParent(parentBox, BlzGetFrameByName("ConsoleUIBackdrop", 0))
     BlzFrameSetAbsPoint(parentBox, FRAMEPOINT_CENTER, 0.45, 0.3)
-    BlzFrameSetSize(parentBox, 0.0435, 0.0435)
-    BlzFrameSetTexture(parentBox, "ReplaceableTextures\\CommandButtons\\BTNFootman", 0, true)
+    BlzFrameSetSize(parentBox, 0.000001, 0.000001)
 
-    model = BlzCreateFrameByType("SPRITE", "model", parentBox, "", 0)
-    --BlzFrameSetAbsPoint(model, FRAMEPOINT_CENTER, 0.4, 0.3)
-    BlzFrameSetPoint(model, FRAMEPOINT_CENTER, parentBox, FRAMEPOINT_CENTER, 0, 0)
-    BlzFrameSetSize(model, 0.01, 0.01)
-    BlzFrameSetScale(model, 0.0015)-- 1 ,было видно потрет
-    BlzFrameSetModel(model, "peonPortra", 1)-- //This is pretty self explanatory. 0 here is the animation index that you want to use.For most models, 0 is for stand, 1 is for death animations.
-    BlzFrameSetSpriteAnimate(model, 2, 0)
-    --  BlzFrameSetAbsPoint(peonp, FRAMEPOINT_CENTER, 0.4, 0.3)
-    -- BlzFrameSetSize(peonp, 0.01, 0.01)
-    -- BlzFrameSetModel(peonp, "peontest", 1)
-    -- BlzFrameSetScale(peonp, 0.0015)
-    -- BlzFrameSetSpriteAnimate(peonp, 2, 0)
-    -- birth = 0
-    -- death = 1
-    -- stand = 2
-    -- morph = 3
-    -- alternate = 4
+    CreateSprite("pico-boku-no-pico", parentBox, nil, 1,0,0.5)
+    CreateSprite("68f000b0feac0213a64a5d1dc93b2365251874e5", parentBox, nil, 1,0.2,0.5)
+    CreateSprite("6948ace06605aac9ab07548d22e72392aefc1278", parentBox, nil, 1,0.4,0.5)
+    CreateSprite("cool", parentBox, nil, 1,0.6,0.5)
+    CreateSprite("excalibur-soul-eater", parentBox, nil, 0.5,0,0.3)
+    CreateSprite("jojos-noriaki-kakyoin", parentBox, nil, 0.3,0.2,0.3)
+    CreateSprite("paimon", parentBox, nil, 1,0.4,0.3)
+    CreateSprite("rock-one-eyebrow-raised-rock-staring", parentBox, nil, 1,0.6,0.2)
+    CreateSprite("russia-ussr", parentBox, nil, 0.4,0,0.15)
+    CreateSprite("stonks-up-stongs", parentBox, nil, 0.5,0.2,0.15)
+    CreateSprite("sweaty-gamer-speedrun-whipping", parentBox, nil, 1,0.4,0.15)
 
-
-    CreateRamaSprite("hearts_sprite", parentBox, nil, 0.6)
 end
 
-function CreateRamaSprite(path, parent, timed, scale)
-    --[[local button = BlzCreateFrame('ScriptDialogButton', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 0, 0)
-    BlzFrameSetAbsPoint(button, FRAMEPOINT_CENTER, pointx, pointy)
-    BlzFrameSetSize(button, 0.0435, 0.0435)
-
-    local new_Frame = BlzCreateFrameByType('BACKDROP', "PORTRAIT", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "",0)
-    BlzFrameSetAllPoints(new_Frame, button)
-    BlzFrameSetTexture(new_Frame, "ReplaceableTextures\\CommandButtons\\BTNFootman.blp", 0, true)
-    ]]
-
+function CreateSprite(path, parent, timed, scale, x, y)
+    if not x then
+        x = 0.4
+    end
+    if not y then
+        y = 0.3
+    end
+    if not parent then
+        parent=BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
+    end
     local sprite = BlzCreateFrameByType("SPRITE", "justAName", parent, "WarCraftIIILogo", 0)
     BlzFrameClearAllPoints(sprite)
-    --BlzFrameSetParent(sprite, BlzGetFrameByName("ConsoleUIBackdrop", 0))
-    BlzFrameSetPoint(sprite, FRAMEPOINT_BOTTOMLEFT, parent, FRAMEPOINT_BOTTOMLEFT, 0, 0)
+    BlzFrameSetAbsPoint(sprite, FRAMEPOINT_CENTER, x, y)
     BlzFrameSetSize(sprite, 0.00001, 0.00001)
-    --BlzFrameSetSize(sprite,1,1)
     BlzFrameSetScale(sprite, scale)
     BlzFrameSetModel(sprite, path, 0)
-
     if timed then
         TimerStart(CreateTimer(), timed, false, function()
             BlzDestroyFrame(sprite)
         end)
     end
-    --BlzFrameSetVisible(sprite,true)
     return sprite
 end
 function CreateSimpleFrameGlue(posX, PosY, texture,parent)
@@ -6367,7 +6448,7 @@ function CreateVictoryElderBorder()
     local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", BoxBorder, "", 0)
     BlzFrameSetPoint(text, FRAMEPOINT_CENTER, BoxBorder, FRAMEPOINT_CENTER, 0, 0)
     BlzFrameSetText(text, ColorText2("МОГУЧИЙ ВРАГ ПЕРЕИГРАН И УНИЧТОЖЕН"))
-    BlzFrameSetScale(text, 3)
+    BlzFrameSetScale(text, 4.5)
 
     local text2 = BlzCreateFrameByType("TEXT", "ButtonChargesText", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
     BlzFrameSetPoint(text2, FRAMEPOINT_CENTER, BoxBorder, FRAMEPOINT_CENTER, 0, 0)
@@ -6414,7 +6495,7 @@ function InitMenu()
     DrawSelectionPortrait(true)
     --CreateMiniCard()
     CreatePeonCounter()
-    CreateVictoryElderBorder()
+    --CreateVictoryElderBorder() -- тестовый показ
     --CreateCustomPortrait()
     --CreateMenu()
 end
@@ -6628,7 +6709,7 @@ end
 function CastSnowBall(data,directionAngle)
     local effModel="Firebrand Shot Silver"--snowball
     local hero=data.UnitHero
-    if data.AttackIsReady and not data.SpaceForce and UnitAlive(hero) then
+    if data.AttackIsReady and not data.SpaceForce and UnitAlive(hero) and not FREE_CAMERA then
         --WolfSlashAttack(hero) --для проверки вставлял
         BlzSetUnitFacingEx(hero,directionAngle)
         SetUnitAnimationByIndex(hero,3)
@@ -6824,6 +6905,27 @@ function StatePercent(value,maxValue)
 		return 0.0
 	end
 	return value / maxValue * 100.0
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 08.03.2023 13:38
+---
+function CustomCinematicMode(state)
+    --CinematicModeBJ(state, GetPlayersAll())
+    BlzHideOriginFrames(not state)
+    local data=HERO[0]
+    FREE_CAMERA=state
+    data.ReleaseW=false
+    data.ReleaseA=false
+    data.ReleaseS=false
+    data.ReleaseD=false
+    data.IsMoving=false
+    ResetUnitAnimation(data.UnitHero)
+    BlzFrameSetVisible(BlzGetFrameByName("UpperButtonBarFrame", 0), not state)
+    --BlzFrameSetVisible(BlzGetOriginFrame(ORIGIN_FRAME_PORTRAIT, 0), not state)
+    BlzFrameSetVisible(BlzGetFrameByName("ResourceBarFrame", 0), not state)
+    DrawSelectionPortrait(not state)
 end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
@@ -7357,7 +7459,7 @@ function InitWASD(hero)
         end
         if StunSystem[GetHandleId(data.UnitHero)].Time == 0 and onForces[GetHandleId(hero)] then
             --and
-            if UnitAlive(hero) and not data.isShield and not data.isAttacking and not data.ReleaseRMB then
+            if UnitAlive(hero) and not data.isShield and not data.isAttacking and not data.ReleaseRMB  and not FREE_CAMERA then
 
 
                 if data.IsMoving and not UnitHasBow(hero) then
@@ -7658,7 +7760,6 @@ function CreateWASDActions()
                 end
                 if not LockAnimAnimation(data) then
                     SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationWalk)
-
                 end
             end
         end
@@ -8033,6 +8134,61 @@ function InitCamControl()
 end
 
 --CUSTOM_CODE
+function Trig_InitYetty_Actions()
+SetUnitAnimation(gg_unit_n000_0001, "death")
+end
+
+function InitTrig_InitYetty()
+gg_trg_InitYetty = CreateTrigger()
+TriggerRegisterTimerEventSingle(gg_trg_InitYetty, 0.50)
+TriggerAddAction(gg_trg_InitYetty, Trig_InitYetty_Actions)
+end
+
+function Trig_StartYettyCinematic_Conditions()
+if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
+return false
+end
+return true
+end
+
+function Trig_StartYettyCinematic_Func006A()
+KillDestructable(GetEnumDestructable())
+end
+
+function Trig_StartYettyCinematic_Actions()
+DisableTrigger(GetTriggeringTrigger())
+CinematicModeBJ(true, GetPlayersAll())
+CinematicFadeBJ(bj_CINEFADETYPE_FADEOUT, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
+TriggerSleepAction(1.00)
+CameraSetupApplyForPlayer(true, gg_cam_PeonLookOnYetty, Player(0), 0.00)
+EnumDestructablesInRectAll(gg_rct_Region_013, Trig_StartYettyCinematic_Func006A)
+SetUnitFacingToFaceUnitTimed(GetTriggerUnit(), gg_unit_n000_0001, 0)
+SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Region_012))
+SetUnitFacingToFaceUnitTimed(GetTriggerUnit(), gg_unit_n000_0001, 0)
+ResetUnitAnimation(GetTriggerUnit())
+CinematicFadeBJ(bj_CINEFADETYPE_FADEIN, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), GetTriggerUnit(), "TRIGSTR_688", gg_snd_peon1, "TRIGSTR_689", bj_TIMETYPE_ADD, 0.00, true)
+SetUnitFacingToFaceUnitTimed(GetTriggerUnit(), gg_unit_n000_0001, 0)
+CameraSetupApplyForPlayer(true, gg_cam_LookYetty, Player(0), 0.00)
+TriggerSleepAction(0.50)
+SetUnitFacingToFaceUnitTimed(GetTriggerUnit(), gg_unit_n000_0001, 0)
+RotateCameraAroundLocBJ(360.00, GetUnitLoc(gg_unit_n000_0001), Player(0), 8.00)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), GetTriggerUnit(), "TRIGSTR_690", gg_snd_peon2, "TRIGSTR_691", bj_TIMETYPE_ADD, 0.00, true)
+CameraSetupApplyForPlayer(true, gg_cam_PeonReadyToYetty, Player(0), 0.00)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), GetTriggerUnit(), "TRIGSTR_692", gg_snd_peon3, "TRIGSTR_693", bj_TIMETYPE_ADD, 0.00, true)
+CinematicModeBJ(false, GetPlayersAll())
+    CustomCinematicMode(false)
+SetUnitTimeScalePercent(gg_unit_n000_0001, 100.00)
+    StartYettyAI(GetRectCenterX(gg_rct_Region_038), GetRectCenterY(gg_rct_Region_038))
+end
+
+function InitTrig_StartYettyCinematic()
+gg_trg_StartYettyCinematic = CreateTrigger()
+TriggerRegisterEnterRectSimple(gg_trg_StartYettyCinematic, gg_rct_Region_038)
+TriggerAddCondition(gg_trg_StartYettyCinematic, Condition(Trig_StartYettyCinematic_Conditions))
+TriggerAddAction(gg_trg_StartYettyCinematic, Trig_StartYettyCinematic_Actions)
+end
+
 function Trig_InitEggs_Actions()
 AddUnitAnimationPropertiesBJ(true, "alternate", gg_unit_h006_0173)
 AddUnitAnimationPropertiesBJ(true, "alternate", gg_unit_h006_0172)
@@ -8484,6 +8640,8 @@ TriggerAddAction(gg_trg_ESCTEST, Trig_ESCTEST_Actions)
 end
 
 function InitCustomTriggers()
+InitTrig_InitYetty()
+InitTrig_StartYettyCinematic()
 InitTrig_InitEggs()
 InitTrig_Untitled_Trigger_001()
 InitTrig_BoundEnter_Copy()
@@ -8541,7 +8699,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, -256.0, -768.0)
+DefineStartLocation(0, -5248.0, 3968.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()

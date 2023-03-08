@@ -317,7 +317,7 @@ function InitWASD(hero)
         end
         if StunSystem[GetHandleId(data.UnitHero)].Time == 0 and onForces[GetHandleId(hero)] then
             --and
-            if UnitAlive(hero) and not data.isShield and not data.isAttacking and not data.ReleaseRMB then
+            if UnitAlive(hero) and not data.isShield and not data.isAttacking and not data.ReleaseRMB  and not FREE_CAMERA then
 
 
                 if data.IsMoving and not UnitHasBow(hero) then
@@ -618,7 +618,6 @@ function CreateWASDActions()
                 end
                 if not LockAnimAnimation(data) then
                     SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationWalk)
-
                 end
             end
         end

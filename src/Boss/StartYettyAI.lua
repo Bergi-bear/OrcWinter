@@ -20,14 +20,23 @@ end
 function InitTrig_EnterInRectB()
     --вызывается в кастом триггерс
     --print("Инициализация босса")
-    local gg_trg_EnterInRect = CreateTrigger()
+        local gg_trg_EnterInRect = CreateTrigger()
     TriggerRegisterEnterRectSimple(gg_trg_EnterInRect, gg_rct_Region_038)
     TriggerAddAction(gg_trg_EnterInRect, function()
         if IsUnitType(GetEnteringUnit(), UNIT_TYPE_HERO) then
-            StartYettyAI(GetRectCenterX(gg_rct_Region_038), GetRectCenterY(gg_rct_Region_038))
+            --StartYettyAI(GetRectCenterX(gg_rct_Region_038), GetRectCenterY(gg_rct_Region_038))
             DisableTrigger(gg_trg_EnterInRect)
+            CustomCinematicMode(true)
+            --CinematicModeBJ(true, GetPlayersAll())
+            --BlzHideOriginFrames(false)
+            --TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_635", gg_snd_Intro4, "TRIGSTR_636", bj_TIMETYPE_ADD, 0.00, true)
         end
     end)
+end
+
+function StartYettyCinematic()
+    local boss = FindUnitOfType(FourCC('n000'))
+
 end
 
 function StartYettyAI(xs, ys)
