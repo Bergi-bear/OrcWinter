@@ -17,8 +17,11 @@ function GetPortraitFromBD(id)
     end
 end
 
+BugsFH={}
+
 function CreateBOSSHPBar(boss,name)
     local into=BlzCreateFrameByType("BACKDROP", "Face", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
+
     BlzFrameSetTexture(into, "Replaceabletextures\\Teamcolor\\Teamcolor00.blp", 0, true)
     BlzFrameSetSize(into, 0.76, 0.02)
     BlzFrameSetAbsPoint(into, FRAMEPOINT_LEFT, 0.018, 0.03)
@@ -40,6 +43,7 @@ function CreateBOSSHPBar(boss,name)
     BlzFrameSetTexture(portrait, GetPortraitFromBD(GetUnitTypeId(boss)), 0, true)
     BlzFrameSetSize(portrait, 0.06, 0.06)
     BlzFrameSetAbsPoint(portrait, FRAMEPOINT_LEFT, -0.05, 0.05)
+    table.insert(BugsFH,portrait)
 
 
     TimerStart(CreateTimer(), 0.05, true, function()
@@ -70,4 +74,5 @@ function CreateMarkOnBossBar(into,marcPercent)
     BlzFrameSetTexture(mark, "HPBOXMark", 0, true)
     BlzFrameSetSize(mark, 0.06, 0.06)
     BlzFrameSetPoint(mark, FRAMEPOINT_CENTER, into, FRAMEPOINT_LEFT,0.77*marcPercent/100 , 0.0)
+    table.insert(BugsFH,mark)
 end

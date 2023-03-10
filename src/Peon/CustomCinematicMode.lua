@@ -18,4 +18,10 @@ function CustomCinematicMode(state)
     --BlzFrameSetVisible(BlzGetOriginFrame(ORIGIN_FRAME_PORTRAIT, 0), not state)
     BlzFrameSetVisible(BlzGetFrameByName("ResourceBarFrame", 0), not state)
     DrawSelectionPortrait(not state)
+    if BugsFH[1] then
+        for i=1,#BugsFH do
+            BlzFrameSetVisible(BugsFH[i],false)
+            --print("отображение старого босс бара?")
+        end
+    end
 end
