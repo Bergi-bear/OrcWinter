@@ -17,6 +17,7 @@ function InitMenu()
     --CreateMenu()
     --CreateQTEFrame() -- Тест QTE
     CreateMouseHelper()
+    --CreateBossIntro()
 end
 function ReturnFPS()
     local fps = BlzGetFrameByName("ResourceBarFrame", 0)
