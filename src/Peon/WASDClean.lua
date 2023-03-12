@@ -169,7 +169,7 @@ function InitWASD(hero)
 
                 --print("death")
                 SetUnitAnimation(data.UnitHero, "death")
-
+                FallCoffinMeme(data.UnitHero)
                 TimerStart(CreateTimer(), 3, false, function()
                     DestroyTimer(GetExpiredTimer())
                     if not data.ResPointX then
