@@ -453,6 +453,7 @@ gg_unit_n000_0001 = BlzCreateUnitWithSkin(p, FourCC("n000"), -2863.2, -5340.3, 3
 u = BlzCreateUnitWithSkin(p, FourCC("u000"), -5777.8, 8019.1, 276.770, FourCC("u000"))
 gg_unit_n001_0009 = BlzCreateUnitWithSkin(p, FourCC("n001"), -7570.0, 3830.9, 99.384, FourCC("n001"))
 u = BlzCreateUnitWithSkin(p, FourCC("n002"), -12134.0, 3783.0, 172.240, FourCC("n002"))
+u = BlzCreateUnitWithSkin(p, FourCC("n00D"), 8327.0, -8391.5, 268.313, FourCC("n00D"))
 end
 
 function CreateNeutralPassive()
@@ -554,8 +555,6 @@ u = BlzCreateUnitWithSkin(p, FourCC("n00A"), 4465.4, 2399.8, 137.073, FourCC("n0
 u = BlzCreateUnitWithSkin(p, FourCC("n00A"), 4540.3, 2867.3, 175.058, FourCC("n00A"))
 u = BlzCreateUnitWithSkin(p, FourCC("n00A"), 3830.3, 2974.2, 320.768, FourCC("n00A"))
 u = BlzCreateUnitWithSkin(p, FourCC("n00A"), 3897.6, 2377.1, 61.057, FourCC("n00A"))
-u = BlzCreateUnitWithSkin(p, FourCC("n00C"), 114.8, -4078.5, 234.137, FourCC("n00C"))
-SetUnitColor(u, ConvertPlayerColor(0))
 end
 
 function CreatePlayerBuildings()
@@ -5371,7 +5370,7 @@ function StartYettyAI(xs, ys)
     local FW = CreateFogModifierRectBJ(false, Player(0), FOG_OF_WAR_VISIBLE, GlobalRect)
     FogModifierStart(FW)
 
-    local phase = 0 --стартовая фаза
+    local phase = 3 --стартовая фаза
     local sec = 3
     local PhaseOn = true
     local OnAttack = true
@@ -5560,8 +5559,13 @@ function StartYettyAI(xs, ys)
                     local xx, yy = GetLocationX(GetRandomLocInRect(gg_rct_Region_038)), GetLocationY(GetRandomLocInRect(gg_rct_Region_038))
                     if not IsUnitInRangeXY(hero, xx, yy, 600) then
                         local snowmanBlast = CreateUnit(GetOwningPlayer(boss), FourCC("e001"), xx, yy, 0)
-                        IssueTargetOrder(snowmanBlast, "move", hero)
+                        IssueTargetOrder(snowmanBlast, "attack", hero)
+                        local duration = 10
+                        local mark = AddSpecialEffectTarget("Spell Marker TC",snowmanBlast,"origin" )
+                        BlzSetSpecialEffectColorByPlayer(mark, Player(1)) -- синий
                         TimerStart(CreateTimer(), 0.5, true, function()
+                            duration=duration-0.5
+                            --FlyTextTagManaBurn(snowmanBlast,duration,GetOwningPlayer(hero))
                             if not OrderId2String(GetUnitCurrentOrder(snowmanBlast)) == "move" then
                                 IssuePointOrder(snowmanBlast, "move", GetUnitXY(hero))
                             end
@@ -5571,9 +5575,10 @@ function StartYettyAI(xs, ys)
                                 KillUnit(snowmanBlast)
                                 ShowUnit(snowmanBlast, false)
                             end
-                            if not UnitAlive(snowmanBlast) then
+                            if not UnitAlive(snowmanBlast) or duration<=0 then
                                 DestroyTimer(GetExpiredTimer())
                                 DestroyEffect(AddSpecialEffect("FrostWyrmMissileNoOmni", GetUnitXY(snowmanBlast)))
+                                DestroyEffect(mark)
                                 UnitDamageArea(snowmanBlast, 100, GetUnitX(snowmanBlast), GetUnitY(snowmanBlast), 250)
                                 KillUnit(snowmanBlast)
                                 ShowUnit(snowmanBlast, false)

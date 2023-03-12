@@ -54,7 +54,7 @@ function StartYettyAI(xs, ys)
     local FW = CreateFogModifierRectBJ(false, Player(0), FOG_OF_WAR_VISIBLE, GlobalRect)
     FogModifierStart(FW)
 
-    local phase = 0 --стартовая фаза
+    local phase = 3 --стартовая фаза
     local sec = 3
     local PhaseOn = true
     local OnAttack = true
@@ -243,8 +243,13 @@ function StartYettyAI(xs, ys)
                     local xx, yy = GetLocationX(GetRandomLocInRect(gg_rct_Region_038)), GetLocationY(GetRandomLocInRect(gg_rct_Region_038))
                     if not IsUnitInRangeXY(hero, xx, yy, 600) then
                         local snowmanBlast = CreateUnit(GetOwningPlayer(boss), FourCC("e001"), xx, yy, 0)
-                        IssueTargetOrder(snowmanBlast, "move", hero)
+                        IssueTargetOrder(snowmanBlast, "attack", hero)
+                        local duration = 10
+                        local mark = AddSpecialEffectTarget("Spell Marker TC",snowmanBlast,"origin" )
+                        BlzSetSpecialEffectColorByPlayer(mark, Player(1)) -- синий
                         TimerStart(CreateTimer(), 0.5, true, function()
+                            duration=duration-0.5
+                            --FlyTextTagManaBurn(snowmanBlast,duration,GetOwningPlayer(hero))
                             if not OrderId2String(GetUnitCurrentOrder(snowmanBlast)) == "move" then
                                 IssuePointOrder(snowmanBlast, "move", GetUnitXY(hero))
                             end
@@ -254,9 +259,10 @@ function StartYettyAI(xs, ys)
                                 KillUnit(snowmanBlast)
                                 ShowUnit(snowmanBlast, false)
                             end
-                            if not UnitAlive(snowmanBlast) then
+                            if not UnitAlive(snowmanBlast) or duration<=0 then
                                 DestroyTimer(GetExpiredTimer())
                                 DestroyEffect(AddSpecialEffect("FrostWyrmMissileNoOmni", GetUnitXY(snowmanBlast)))
+                                DestroyEffect(mark)
                                 UnitDamageArea(snowmanBlast, 100, GetUnitX(snowmanBlast), GetUnitY(snowmanBlast), 250)
                                 KillUnit(snowmanBlast)
                                 ShowUnit(snowmanBlast, false)

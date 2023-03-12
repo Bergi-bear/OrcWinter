@@ -1712,3 +1712,21 @@ STRING 694
 Пеоны гробовщики
 }
 
+STRING 695
+// Doodads: YCc4 (16x16), Name (Name)
+{
+16x16
+}
+
+STRING 696
+// Doodads: D02F (16x16), Name (Name)
+{
+16x16
+}
+
+STRING 697
+// Units: n00D (Ледяной инфернал (БОСС)), Name (Name)
+{
+Ледяной инфернал (БОСС)
+}
+
