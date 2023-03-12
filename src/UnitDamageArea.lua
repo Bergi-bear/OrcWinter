@@ -7,6 +7,11 @@ function UnitDamageArea(u, damage, x, y, range, flag)
     local isdamage = false
     local e = nil
     local hero = nil
+    if not x then
+        x,y=GetUnitXY(u)
+        range=150
+    end
+
     GroupEnumUnitsInRange(perebor, x, y, range, nil)
     local k = 0
     local all = {}

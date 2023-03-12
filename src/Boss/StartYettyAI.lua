@@ -20,7 +20,7 @@ end
 function InitTrig_EnterInRectB()
     --вызывается в кастом триггерс
     --print("Инициализация босса")
-        local gg_trg_EnterInRect = CreateTrigger()
+    local gg_trg_EnterInRect = CreateTrigger()
     TriggerRegisterEnterRectSimple(gg_trg_EnterInRect, gg_rct_Region_038)
     TriggerAddAction(gg_trg_EnterInRect, function()
         if IsUnitType(GetEnteringUnit(), UNIT_TYPE_HERO) then
@@ -42,7 +42,7 @@ end
 function StartYettyAI(xs, ys)
     local boss = FindUnitOfType(FourCC('n000'))
     local BossFight = true
-    local into = CreateBOSSHPBar(boss,"Сытый Етти")
+    local into = CreateBOSSHPBar(boss, "Сытый Етти")
     UnitAddAbility(boss, FourCC('Abun'))
     SetUnitPosition(boss, xs, ys)
     SetUnitOwner(boss, Player(10), true)
@@ -71,7 +71,7 @@ function StartYettyAI(xs, ys)
             CreateVictoryElderBorder()
             PlayMonoSpeech("Speech\\Peon\\nyizachemyaegoybil", "Ну и зачем я его убил")
 
-            CreateUnit(Player(0),FourCC("h003"),GetUnitX(boss),GetUnitY(boss),0)
+            CreateUnit(Player(0), FourCC("h003"), GetUnitX(boss), GetUnitY(boss), 0)
             ClearMapMusicBJ()
             PlayMusicBJ("Endless Snowbanks")
             SetMusicVolumeBJ(100)
@@ -89,7 +89,7 @@ function StartYettyAI(xs, ys)
 
                     --print("Отталкивание для особо умных")
                     if OnAttack then
-                        if IsUnitInRange(hero, boss, 250) then
+                        if IsUnitInRange(hero, boss, 145) then
                             --SetUnitTimeScale(boss,-1)
                             OnAttack = false
                             TimerStart(CreateTimer(), 5, false, function()
@@ -98,19 +98,39 @@ function StartYettyAI(xs, ys)
                             local angle = AngleBetweenUnits(boss, hero)
                             SetUnitFacing(boss, angle)
                             --SetUnitAnimation(boss,"Attack")
+                            StunUnit(hero, 3)
+                            YettyCouchHero(boss, hero, 3)
+
+                            local r = GetRandomInt(1, 5)
+                            if r == 1 then
+                                PlayMonoSpeech("Speech\\Peon\\Yetty\\peon4", "Отпусти меня!")
+                            elseif r == 2 then
+                                normal_sound("spine-bone-break-1", GetUnitXY(hero))
+                                PlayMonoSpeech("Speech\\Peon\\Yetty\\peon5", "Рёбра сломаешь!")
+                            elseif r == 3 then
+                                PlayMonoSpeech("Speech\\Peon\\Yetty\\peon6", "Я не нуждаюсь в твоих объятьях!")
+                            elseif r == 4 then
+                                normal_sound("spine-bone-break-1", GetUnitXY(hero))
+                                PlayMonoSpeech("Speech\\Peon\\Yetty\\peon7", "О, позвонок на место встал!")
+                            elseif r == 5 then
+                                PlayBossSpeech("Speech\\Yetti\\tineproidesh", "Ты не пройдёшь")
+                            end
+
                             if phase ~= 1 then
-                                PlayBossSpeech("Speech\\Yetti\\tineproidesh","Ты не пройдёшь")
+
                                 EttiDashAttackPrepare(boss, hero)
+                                --print("момент хватания")
+
                             end
 
                         end
 
                     end
                 end
-				if k>0 and not BossFight then
-					print("Возобновление прерванного боя")
-					BlzFrameSetVisible(into, true)
-				end
+                if k > 0 and not BossFight then
+                    print("Возобновление прерванного боя")
+                    BlzFrameSetVisible(into, true)
+                end
 
                 if k == 0 then
                     BossFight = false
@@ -146,19 +166,19 @@ function StartYettyAI(xs, ys)
                 --print("Пытаемся разбежаться на игрока")
 
                 local hero = HERO[0].UnitHero
-                 --Speech\\Yetti\\rastopchy
+                --Speech\\Yetti\\rastopchy
                 EttiDashAttackPrepare(boss, hero)
                 --normal_sound("Speech\\Yetti\\rastopchy", GetUnitXY(HERO[0].UnitHero))
 
 
 
-                local r=GetRandomInt(1,3)
-                if r==1 then
-                    PlayBossSpeech("Speech\\Yetti\\rastopchy","Растопчу")
+                local r = GetRandomInt(1, 3)
+                if r == 1 then
+                    PlayBossSpeech("Speech\\Yetti\\rastopchy", "Растопчу")
 
-                elseif r==2 then
+                elseif r == 2 then
                     PlayBossSpeech("Speech\\Yetti\\dogony", "Догоню")
-                elseif r==3 then
+                elseif r == 3 then
                     PlayBossSpeech("Speech\\Yetti\\zatopchybolshiminogami", "Затопчу большими ногами")
                 end
                 TimerStart(CreateTimer(), 2, true, function()
@@ -175,7 +195,7 @@ function StartYettyAI(xs, ys)
                 PhaseOn = false
                 --print("Падающие сосульки")
                 local effmodel = "Icicle"
-                PlayBossSpeech("Speech\\Yetti\\polychisosulkojvglaz","Получи сосулькой в глаз")
+                PlayBossSpeech("Speech\\Yetti\\polychisosulkojvglaz", "Получи сосулькой в глаз")
                 TimerStart(CreateTimer(), .5, true, function()
                     -- случайные
 
@@ -209,13 +229,13 @@ function StartYettyAI(xs, ys)
                 -- оживление големов
                 PhaseOn = false
                 --print("Фаза призыва")
-                local r=GetRandomInt(1,3)
-                if r==1 then
-                    PlayBossSpeech("Speech\\Yetti\\zanimmoiminioni","За ним мои миньёны")
-                elseif r==2 then
-                    PlayBossSpeech("Speech\\Yetti\\nesmeilomatetypartiy","Не смей ломать эту партию")
-                elseif r==3 then
-                    PlayBossSpeech("Speech\\Yetti\\vsynochihlepil","Всю ночь их лепил")
+                local r = GetRandomInt(1, 3)
+                if r == 1 then
+                    PlayBossSpeech("Speech\\Yetti\\zanimmoiminioni", "За ним мои миньёны")
+                elseif r == 2 then
+                    PlayBossSpeech("Speech\\Yetti\\nesmeilomatetypartiy", "Не смей ломать эту партию")
+                elseif r == 3 then
+                    PlayBossSpeech("Speech\\Yetti\\vsynochihlepil", "Всю ночь их лепил")
                 end
 
                 local hero = HERO[0].UnitHero
@@ -225,7 +245,9 @@ function StartYettyAI(xs, ys)
                         local snowmanBlast = CreateUnit(GetOwningPlayer(boss), FourCC("e001"), xx, yy, 0)
                         IssueTargetOrder(snowmanBlast, "move", hero)
                         TimerStart(CreateTimer(), 0.5, true, function()
-
+                            if not OrderId2String(GetUnitCurrentOrder(snowmanBlast)) == "move" then
+                                IssuePointOrder(snowmanBlast, "move", GetUnitXY(hero))
+                            end
                             if IsUnitInRange(snowmanBlast, hero, 200) then
                                 DestroyEffect(AddSpecialEffect("FrostWyrmMissileNoOmni", GetUnitXY(snowmanBlast)))
                                 UnitDamageArea(snowmanBlast, 100, GetUnitX(snowmanBlast), GetUnitY(snowmanBlast), 250)
@@ -269,21 +291,60 @@ function StartYettyAI(xs, ys)
         end--конец
     end)
 end
+QTEReadyToPress = false
+function YettyCouchHero(boss, hero, duration)
+    local eff = AddSpecialEffect("CircleCastBarCannibalize", GetUnitXY(boss))
+    BlzSetSpecialEffectScale(eff, 2)
+    BlzSetSpecialEffectTimeScale(eff, duration)
+    local qteFH = CreateQTEFrame()
+    QTEReadyToPress = true
+    local x, y = GetUnitXY(boss)
+    TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
+        duration = duration - TIMER_PERIOD
+        if duration <= 0 then
+            UnitDamageArea(boss, 50)
+            --print("наносим урон")
+            normal_sound("spine-bone-break-1", GetUnitXY(hero))
+            BlzDestroyFrame(qteFH)
+            QTEReadyToPress = false
+            local effb = AddSpecialEffect("D9_blood_effect1", GetUnitXY(hero))
+            BlzSetSpecialEffectScale(effb, 0.1)
+            DestroyEffect(effb)
+        end
+        if duration <= 0 or not QTEReadyToPress or not UnitAlive(hero) then
+            DestroyTimer(GetExpiredTimer())
+            UnitAddForceSimple(hero, GetUnitFacing(boss), 40, 400)
+            --print("отпустил")
+            UnitRemoveStun(hero)
+            DestroyEffect(eff)
+            ResetUnitAnimation(boss)
+            BlzDestroyFrame(qteFH)
+            QTEReadyToPress = false
+        else
+            QueueUnitAnimation(boss, "spell")
+            x, y = GetUnitXY(boss)
+            local nx, ny = MoveXY(x, y, 100, GetUnitFacing(boss))
+            SetUnitPositionSmooth(hero, nx, ny)
+            local z = GetTerrainZ(nx, ny) + 200
+            BlzSetSpecialEffectPosition(eff, nx, ny, z)
+        end
+    end)
+end
 
-function MarkAndFall(x, y, effModel, hero,delay)
+function MarkAndFall(x, y, effModel, hero, delay)
     local mark = AddSpecialEffect("Snipe Target", x, y)
     BlzSetSpecialEffectScale(mark, 5)
     if not delay then
-        delay=2
+        delay = 2
     end
-    local deep=50
-    if effModel=="Icicle" then
-        deep=GetRandomInt(200, 400)
+    local deep = 50
+    if effModel == "Icicle" then
+        deep = GetRandomInt(200, 400)
     end
     TimerStart(CreateTimer(), delay, false, function()
 
         local FallenEff = AddSpecialEffect(effModel, x, y)
-        BlzSetSpecialEffectZ(FallenEff, GetTerrainZ(x,y)+1000)
+        BlzSetSpecialEffectZ(FallenEff, GetTerrainZ(x, y) + 1000)
         BlzSetSpecialEffectYaw(FallenEff, math.rad(GetRandomReal(0, 360)))
         BlzSetSpecialEffectScale(FallenEff, 5)
         TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
@@ -294,17 +355,17 @@ function MarkAndFall(x, y, effModel, hero,delay)
                 BlzSetSpecialEffectPosition(mark, 5000, 5000, 0)
                 DestroyTimer(GetExpiredTimer())
 
-                local nd =nil
+                local nd = nil
                 --SetDestructableInvulnerable(nd,true)
                 DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", x, y))
                 PlayerSeeNoiseInRangeTimed(0.5, x, y)
                 UnitDamageArea(hero, 300, x, y, 140) --при падении камня
                 local k = GetUnitLifePercent(hero) / 100
                 k = 1 - k
-                if effModel =="Abilities\\Weapons\\DemonHunterMissile\\DemonHunterMissile" then
+                if effModel == "Abilities\\Weapons\\DemonHunterMissile\\DemonHunterMissile" then
                     DestroyEffect(FallenEff)
                 else
-                    nd= CreateDestructableZ(FourCC('B002'), x, y, 0, 0, 5, 1)
+                    nd = CreateDestructableZ(FourCC('B002'), x, y, 0, 0, 5, 1)
                 end
                 TimerStart(CreateTimer(), 5 + (k * 5), false, function()
                     DestroyEffect(FallenEff)

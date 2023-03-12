@@ -31,7 +31,7 @@ do
             --InitMurlocAI()
 
             --PlayList()
-            --CreateEActions()
+            CreateEActions()
             --CreateTabActions()
             --wGeometry = wGeometryInit()
             --ShapeInit()

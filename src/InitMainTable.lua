@@ -94,7 +94,8 @@ function InitHEROTable()
             ItemSlotTooltip={}, -- фрейм тултипа описания
             ItemSlotText={}, -- описание предмета
             --- От снежной карты
-            AttackIsReady=true -- флаг готовности атаки
+            AttackIsReady=true, -- флаг готовности атаки
+            MHoldSec=0, -- по факту число выстрелов
 
 
         }

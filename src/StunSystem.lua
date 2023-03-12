@@ -51,6 +51,8 @@ function StunUnit(hero,dur,flag)
 			if flag=="stagger" or flag=="frise" then
 				SetUnitVertexColor(hero,255,255,255,255)
 			end
+			ClearStun(hero)
+			--[[
 			SetUnitTimeScale(hero,1)
 			BlzPauseUnitEx(hero,false)
 			--BlzPauseUnitEx(hero,false)
@@ -59,6 +61,7 @@ function StunUnit(hero,dur,flag)
 			DestroyEffect(data.Eff)
 			data.Timer=nil
 			data.Status=nil
+			]]
 		end
 	end)
 end
@@ -95,4 +98,40 @@ function IsUnitStunned(hero)
 		isStunned=true
 	end
 	return isStunned,data.Status
+end
+
+function UnitRemoveStun(hero)
+	if not StunSystem[GetHandleId(hero)] then
+		StunSystem[GetHandleId(hero)]={
+			Time=0,
+			Eff=nil,
+			Timer=nil,
+			Status=nil
+		}
+	end
+	local data=StunSystem[GetHandleId(hero)]
+	if data.Time>0 then
+		--print("досрочная очистка",data.Time)
+		ClearStun(hero)
+		--ResetUnitAnimation(hero)
+	end
+end
+
+function ClearStun(hero)
+	if not StunSystem[GetHandleId(hero)] then
+		StunSystem[GetHandleId(hero)]={
+			Time=0,
+			Eff=nil,
+			Timer=nil,
+			Status=nil
+		}
+	end
+	local data=StunSystem[GetHandleId(hero)]
+	SetUnitTimeScale(hero,1)
+	DestroyTimer(data.Timer)
+	data.Time=0
+	DestroyEffect(data.Eff)
+	data.Timer=nil
+	data.Status=nil
+	BlzPauseUnitEx(hero,false)
 end

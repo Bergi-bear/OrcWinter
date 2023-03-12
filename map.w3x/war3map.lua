@@ -1,4 +1,5 @@
 udg_PressESC = false
+udg_PressESCYETTY = false
 gg_rct________________037 = nil
 gg_rct_Region_038 = nil
 gg_rct_Region_024 = nil
@@ -42,6 +43,7 @@ gg_snd_peon2 = nil
 gg_snd_peon3 = nil
 gg_trg_InitYetty = nil
 gg_trg_StartYettyCinematic = nil
+gg_trg_SkipYetty = nil
 gg_trg_InitEggs = nil
 gg_trg_Untitled_Trigger_001 = nil
 gg_trg_BoundEnter_Copy = nil
@@ -63,9 +65,9 @@ gg_unit_h006_0174 = nil
 gg_unit_h006_0172 = nil
 gg_unit_h006_0173 = nil
 gg_dest_B007_5312 = nil
-gg_trg_SkipYetty = nil
 function InitGlobals()
 udg_PressESC = false
+udg_PressESCYETTY = false
 end
 
 function InitSounds()
@@ -1835,7 +1837,7 @@ do
             --InitMurlocAI()
 
             --PlayList()
-            --CreateEActions()
+            CreateEActions()
             --CreateTabActions()
             --wGeometry = wGeometryInit()
             --ShapeInit()
@@ -2008,7 +2010,8 @@ function InitHEROTable()
             ItemSlotTooltip={}, -- фрейм тултипа описания
             ItemSlotText={}, -- описание предмета
             --- От снежной карты
-            AttackIsReady=true -- флаг готовности атаки
+            AttackIsReady=true, -- флаг готовности атаки
+            MHoldSec=0, -- по факту число выстрелов
 
 
         }
@@ -2750,6 +2753,8 @@ function StunUnit(hero,dur,flag)
 			if flag=="stagger" or flag=="frise" then
 				SetUnitVertexColor(hero,255,255,255,255)
 			end
+			ClearStun(hero)
+			--[[
 			SetUnitTimeScale(hero,1)
 			BlzPauseUnitEx(hero,false)
 			--BlzPauseUnitEx(hero,false)
@@ -2758,6 +2763,7 @@ function StunUnit(hero,dur,flag)
 			DestroyEffect(data.Eff)
 			data.Timer=nil
 			data.Status=nil
+			]]
 		end
 	end)
 end
@@ -2794,6 +2800,42 @@ function IsUnitStunned(hero)
 		isStunned=true
 	end
 	return isStunned,data.Status
+end
+
+function UnitRemoveStun(hero)
+	if not StunSystem[GetHandleId(hero)] then
+		StunSystem[GetHandleId(hero)]={
+			Time=0,
+			Eff=nil,
+			Timer=nil,
+			Status=nil
+		}
+	end
+	local data=StunSystem[GetHandleId(hero)]
+	if data.Time>0 then
+		--print("досрочная очистка",data.Time)
+		ClearStun(hero)
+		--ResetUnitAnimation(hero)
+	end
+end
+
+function ClearStun(hero)
+	if not StunSystem[GetHandleId(hero)] then
+		StunSystem[GetHandleId(hero)]={
+			Time=0,
+			Eff=nil,
+			Timer=nil,
+			Status=nil
+		}
+	end
+	local data=StunSystem[GetHandleId(hero)]
+	SetUnitTimeScale(hero,1)
+	DestroyTimer(data.Timer)
+	data.Time=0
+	DestroyEffect(data.Eff)
+	data.Timer=nil
+	data.Status=nil
+	BlzPauseUnitEx(hero,false)
 end
 ---@param text string
 ---@param textSize real
@@ -2985,6 +3027,11 @@ function UnitDamageArea(u, damage, x, y, range, flag)
     local isdamage = false
     local e = nil
     local hero = nil
+    if not x then
+        x,y=GetUnitXY(u)
+        range=150
+    end
+
     GroupEnumUnitsInRange(perebor, x, y, range, nil)
     local k = 0
     local all = {}
@@ -5288,7 +5335,7 @@ end
 function InitTrig_EnterInRectB()
     --вызывается в кастом триггерс
     --print("Инициализация босса")
-        local gg_trg_EnterInRect = CreateTrigger()
+    local gg_trg_EnterInRect = CreateTrigger()
     TriggerRegisterEnterRectSimple(gg_trg_EnterInRect, gg_rct_Region_038)
     TriggerAddAction(gg_trg_EnterInRect, function()
         if IsUnitType(GetEnteringUnit(), UNIT_TYPE_HERO) then
@@ -5310,7 +5357,7 @@ end
 function StartYettyAI(xs, ys)
     local boss = FindUnitOfType(FourCC('n000'))
     local BossFight = true
-    local into = CreateBOSSHPBar(boss,"Сытый Етти")
+    local into = CreateBOSSHPBar(boss, "Сытый Етти")
     UnitAddAbility(boss, FourCC('Abun'))
     SetUnitPosition(boss, xs, ys)
     SetUnitOwner(boss, Player(10), true)
@@ -5339,7 +5386,7 @@ function StartYettyAI(xs, ys)
             CreateVictoryElderBorder()
             PlayMonoSpeech("Speech\\Peon\\nyizachemyaegoybil", "Ну и зачем я его убил")
 
-            CreateUnit(Player(0),FourCC("h003"),GetUnitX(boss),GetUnitY(boss),0)
+            CreateUnit(Player(0), FourCC("h003"), GetUnitX(boss), GetUnitY(boss), 0)
             ClearMapMusicBJ()
             PlayMusicBJ("Endless Snowbanks")
             SetMusicVolumeBJ(100)
@@ -5357,7 +5404,7 @@ function StartYettyAI(xs, ys)
 
                     --print("Отталкивание для особо умных")
                     if OnAttack then
-                        if IsUnitInRange(hero, boss, 250) then
+                        if IsUnitInRange(hero, boss, 145) then
                             --SetUnitTimeScale(boss,-1)
                             OnAttack = false
                             TimerStart(CreateTimer(), 5, false, function()
@@ -5366,19 +5413,39 @@ function StartYettyAI(xs, ys)
                             local angle = AngleBetweenUnits(boss, hero)
                             SetUnitFacing(boss, angle)
                             --SetUnitAnimation(boss,"Attack")
+                            StunUnit(hero, 3)
+                            YettyCouchHero(boss, hero, 3)
+
+                            local r = GetRandomInt(1, 5)
+                            if r == 1 then
+                                PlayMonoSpeech("Speech\\Peon\\Yetty\\peon4", "Отпусти меня!")
+                            elseif r == 2 then
+                                normal_sound("spine-bone-break-1", GetUnitXY(hero))
+                                PlayMonoSpeech("Speech\\Peon\\Yetty\\peon5", "Рёбра сломаешь!")
+                            elseif r == 3 then
+                                PlayMonoSpeech("Speech\\Peon\\Yetty\\peon6", "Я не нуждаюсь в твоих объятьях!")
+                            elseif r == 4 then
+                                normal_sound("spine-bone-break-1", GetUnitXY(hero))
+                                PlayMonoSpeech("Speech\\Peon\\Yetty\\peon7", "О, позвонок на место встал!")
+                            elseif r == 5 then
+                                PlayBossSpeech("Speech\\Yetti\\tineproidesh", "Ты не пройдёшь")
+                            end
+
                             if phase ~= 1 then
-                                PlayBossSpeech("Speech\\Yetti\\tineproidesh","Ты не пройдёшь")
+
                                 EttiDashAttackPrepare(boss, hero)
+                                --print("момент хватания")
+
                             end
 
                         end
 
                     end
                 end
-				if k>0 and not BossFight then
-					print("Возобновление прерванного боя")
-					BlzFrameSetVisible(into, true)
-				end
+                if k > 0 and not BossFight then
+                    print("Возобновление прерванного боя")
+                    BlzFrameSetVisible(into, true)
+                end
 
                 if k == 0 then
                     BossFight = false
@@ -5414,19 +5481,19 @@ function StartYettyAI(xs, ys)
                 --print("Пытаемся разбежаться на игрока")
 
                 local hero = HERO[0].UnitHero
-                 --Speech\\Yetti\\rastopchy
+                --Speech\\Yetti\\rastopchy
                 EttiDashAttackPrepare(boss, hero)
                 --normal_sound("Speech\\Yetti\\rastopchy", GetUnitXY(HERO[0].UnitHero))
 
 
 
-                local r=GetRandomInt(1,3)
-                if r==1 then
-                    PlayBossSpeech("Speech\\Yetti\\rastopchy","Растопчу")
+                local r = GetRandomInt(1, 3)
+                if r == 1 then
+                    PlayBossSpeech("Speech\\Yetti\\rastopchy", "Растопчу")
 
-                elseif r==2 then
+                elseif r == 2 then
                     PlayBossSpeech("Speech\\Yetti\\dogony", "Догоню")
-                elseif r==3 then
+                elseif r == 3 then
                     PlayBossSpeech("Speech\\Yetti\\zatopchybolshiminogami", "Затопчу большими ногами")
                 end
                 TimerStart(CreateTimer(), 2, true, function()
@@ -5443,7 +5510,7 @@ function StartYettyAI(xs, ys)
                 PhaseOn = false
                 --print("Падающие сосульки")
                 local effmodel = "Icicle"
-                PlayBossSpeech("Speech\\Yetti\\polychisosulkojvglaz","Получи сосулькой в глаз")
+                PlayBossSpeech("Speech\\Yetti\\polychisosulkojvglaz", "Получи сосулькой в глаз")
                 TimerStart(CreateTimer(), .5, true, function()
                     -- случайные
 
@@ -5477,13 +5544,13 @@ function StartYettyAI(xs, ys)
                 -- оживление големов
                 PhaseOn = false
                 --print("Фаза призыва")
-                local r=GetRandomInt(1,3)
-                if r==1 then
-                    PlayBossSpeech("Speech\\Yetti\\zanimmoiminioni","За ним мои миньёны")
-                elseif r==2 then
-                    PlayBossSpeech("Speech\\Yetti\\nesmeilomatetypartiy","Не смей ломать эту партию")
-                elseif r==3 then
-                    PlayBossSpeech("Speech\\Yetti\\vsynochihlepil","Всю ночь их лепил")
+                local r = GetRandomInt(1, 3)
+                if r == 1 then
+                    PlayBossSpeech("Speech\\Yetti\\zanimmoiminioni", "За ним мои миньёны")
+                elseif r == 2 then
+                    PlayBossSpeech("Speech\\Yetti\\nesmeilomatetypartiy", "Не смей ломать эту партию")
+                elseif r == 3 then
+                    PlayBossSpeech("Speech\\Yetti\\vsynochihlepil", "Всю ночь их лепил")
                 end
 
                 local hero = HERO[0].UnitHero
@@ -5493,7 +5560,9 @@ function StartYettyAI(xs, ys)
                         local snowmanBlast = CreateUnit(GetOwningPlayer(boss), FourCC("e001"), xx, yy, 0)
                         IssueTargetOrder(snowmanBlast, "move", hero)
                         TimerStart(CreateTimer(), 0.5, true, function()
-
+                            if not OrderId2String(GetUnitCurrentOrder(snowmanBlast)) == "move" then
+                                IssuePointOrder(snowmanBlast, "move", GetUnitXY(hero))
+                            end
                             if IsUnitInRange(snowmanBlast, hero, 200) then
                                 DestroyEffect(AddSpecialEffect("FrostWyrmMissileNoOmni", GetUnitXY(snowmanBlast)))
                                 UnitDamageArea(snowmanBlast, 100, GetUnitX(snowmanBlast), GetUnitY(snowmanBlast), 250)
@@ -5537,21 +5606,60 @@ function StartYettyAI(xs, ys)
         end--конец
     end)
 end
+QTEReadyToPress = false
+function YettyCouchHero(boss, hero, duration)
+    local eff = AddSpecialEffect("CircleCastBarCannibalize", GetUnitXY(boss))
+    BlzSetSpecialEffectScale(eff, 2)
+    BlzSetSpecialEffectTimeScale(eff, duration)
+    local qteFH = CreateQTEFrame()
+    QTEReadyToPress = true
+    local x, y = GetUnitXY(boss)
+    TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
+        duration = duration - TIMER_PERIOD
+        if duration <= 0 then
+            UnitDamageArea(boss, 50)
+            --print("наносим урон")
+            normal_sound("spine-bone-break-1", GetUnitXY(hero))
+            BlzDestroyFrame(qteFH)
+            QTEReadyToPress = false
+            local effb = AddSpecialEffect("D9_blood_effect1", GetUnitXY(hero))
+            BlzSetSpecialEffectScale(effb, 0.1)
+            DestroyEffect(effb)
+        end
+        if duration <= 0 or not QTEReadyToPress or not UnitAlive(hero) then
+            DestroyTimer(GetExpiredTimer())
+            UnitAddForceSimple(hero, GetUnitFacing(boss), 40, 400)
+            --print("отпустил")
+            UnitRemoveStun(hero)
+            DestroyEffect(eff)
+            ResetUnitAnimation(boss)
+            BlzDestroyFrame(qteFH)
+            QTEReadyToPress = false
+        else
+            QueueUnitAnimation(boss, "spell")
+            x, y = GetUnitXY(boss)
+            local nx, ny = MoveXY(x, y, 100, GetUnitFacing(boss))
+            SetUnitPositionSmooth(hero, nx, ny)
+            local z = GetTerrainZ(nx, ny) + 200
+            BlzSetSpecialEffectPosition(eff, nx, ny, z)
+        end
+    end)
+end
 
-function MarkAndFall(x, y, effModel, hero,delay)
+function MarkAndFall(x, y, effModel, hero, delay)
     local mark = AddSpecialEffect("Snipe Target", x, y)
     BlzSetSpecialEffectScale(mark, 5)
     if not delay then
-        delay=2
+        delay = 2
     end
-    local deep=50
-    if effModel=="Icicle" then
-        deep=GetRandomInt(200, 400)
+    local deep = 50
+    if effModel == "Icicle" then
+        deep = GetRandomInt(200, 400)
     end
     TimerStart(CreateTimer(), delay, false, function()
 
         local FallenEff = AddSpecialEffect(effModel, x, y)
-        BlzSetSpecialEffectZ(FallenEff, GetTerrainZ(x,y)+1000)
+        BlzSetSpecialEffectZ(FallenEff, GetTerrainZ(x, y) + 1000)
         BlzSetSpecialEffectYaw(FallenEff, math.rad(GetRandomReal(0, 360)))
         BlzSetSpecialEffectScale(FallenEff, 5)
         TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
@@ -5562,17 +5670,17 @@ function MarkAndFall(x, y, effModel, hero,delay)
                 BlzSetSpecialEffectPosition(mark, 5000, 5000, 0)
                 DestroyTimer(GetExpiredTimer())
 
-                local nd =nil
+                local nd = nil
                 --SetDestructableInvulnerable(nd,true)
                 DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", x, y))
                 PlayerSeeNoiseInRangeTimed(0.5, x, y)
                 UnitDamageArea(hero, 300, x, y, 140) --при падении камня
                 local k = GetUnitLifePercent(hero) / 100
                 k = 1 - k
-                if effModel =="Abilities\\Weapons\\DemonHunterMissile\\DemonHunterMissile" then
+                if effModel == "Abilities\\Weapons\\DemonHunterMissile\\DemonHunterMissile" then
                     DestroyEffect(FallenEff)
                 else
-                    nd= CreateDestructableZ(FourCC('B002'), x, y, 0, 0, 5, 1)
+                    nd = CreateDestructableZ(FourCC('B002'), x, y, 0, 0, 5, 1)
                 end
                 TimerStart(CreateTimer(), 5 + (k * 5), false, function()
                     DestroyEffect(FallenEff)
@@ -6504,6 +6612,8 @@ function InitMenu()
     --CreateVictoryElderBorder() -- тестовый показ
     --CreateCustomPortrait()
     --CreateMenu()
+    --CreateQTEFrame() -- Тест QTE
+    CreateMouseHelper()
 end
 function ReturnFPS()
     local fps = BlzGetFrameByName("ResourceBarFrame", 0)
@@ -6699,6 +6809,117 @@ end
 
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 12.03.2023 13:39
+---
+function CreateQTEFrame()
+    local QTE = BlzCreateFrameByType("BACKDROP", "Face", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
+    BlzFrameSetParent(QTE, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    BlzFrameSetTexture(QTE, "HadesE", 0, true)
+    BlzFrameSetSize(QTE, 0.05, 0.05)
+    BlzFrameSetAbsPoint(QTE, FRAMEPOINT_CENTER, 0.44, 0.3)
+
+    local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", QTE, "", 0)
+    BlzFrameSetPoint(text, FRAMEPOINT_LEFT, QTE, FRAMEPOINT_LEFT, 0.02, 0)
+    BlzFrameSetText(text, ColorText2("чтобы освободиться"))
+    BlzFrameSetScale(text, 2)
+    CreateJumpArrow(QTE)
+    return QTE
+end
+
+function CreateJumpArrow(parent)
+    local x=0.02
+    local speed=0.1
+    local arrow = BlzCreateFrameByType("BACKDROP", "Face", parent, "", 0)
+    BlzFrameSetParent(arrow, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    BlzFrameSetTexture(arrow, "ArrowDown", 0, true)
+    BlzFrameSetSize(arrow, 0.05, 0.05)
+    local i=0
+    local duration=5
+    TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
+        local y=math.sin(i)*x
+        duration=duration-TIMER_PERIOD
+       -- print(y)
+        i=i+speed
+        BlzFrameSetPoint(arrow,FRAMEPOINT_TOP,parent,FRAMEPOINT_TOP,0,y+0.04)
+        if duration<=0 then
+            DestroyTimer(GetExpiredTimer())
+        end
+    end)
+end
+
+function CreateEActions()
+    -----------------------------------------------------------------OSKEY_E
+    local gg_trg_EventUpE = CreateTrigger()
+    for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
+        BlzTriggerRegisterPlayerKeyEvent(gg_trg_EventUpE, Player(i), OSKEY_E, 0, true)
+    end
+    TriggerAddAction(gg_trg_EventUpE, function()
+        local pid = GetPlayerId(GetTriggerPlayer())
+        local data = HERO[pid]
+        if not data.ReleaseE and UnitAlive(data.UnitHero) then
+            data.ReleaseE = true
+            --StartEatingApple(data.UnitHero) -- УДАЛИТЬ!!
+            --print("нажал Е")
+            if QTEReadyToPress then
+                QTEReadyToPress=false
+                --print("нажал Е во время QTE")
+            end
+        end
+    end)
+
+    local TrigDepressE = CreateTrigger()
+    for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
+        BlzTriggerRegisterPlayerKeyEvent(TrigDepressE, Player(i), OSKEY_E, 0, false)
+    end
+    TriggerAddAction(TrigDepressE, function()
+        local pid = GetPlayerId(GetTriggerPlayer())
+        local data = HERO[pid]
+        data.ReleaseE = false
+    end)
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 12.03.2023 16:11
+---
+function CreateMouseHelper()
+    local wood=BlzCreateFrameByType("BACKDROP", "Face", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
+    BlzFrameSetTexture(wood, "RMB", 0, true)
+    BlzFrameSetSize(wood, 0.15, 0.15)
+    BlzFrameSetAbsPoint(wood, FRAMEPOINT_CENTER,0.1 , 0.4)
+
+    local new_FrameChargesText = BlzCreateFrameByType("TEXT", "ButtonChargesText", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
+    BlzFrameSetAbsPoint(new_FrameChargesText, FRAMEPOINT_CENTER, 0.1, 0.31)
+    BlzFrameSetText(new_FrameChargesText, "Hold LMB - Actions")
+
+    local new_FrameChargesText2 = BlzCreateFrameByType("TEXT", "ButtonChargesText", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
+    BlzFrameSetAbsPoint(new_FrameChargesText2, FRAMEPOINT_CENTER, 0.1, 0.17)
+    BlzFrameSetText(new_FrameChargesText2, "Use WASD for moving")
+
+    local new_FrameChargesText3 = BlzCreateFrameByType("TEXT", "ButtonChargesText", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
+    BlzFrameSetAbsPoint(new_FrameChargesText3, FRAMEPOINT_CENTER, 0.1, 0.29)
+    BlzFrameSetText(new_FrameChargesText3, "Hold RMB - Shield")
+
+    local wasd = BlzCreateFrameByType("BACKDROP", "Face", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
+    BlzFrameSetTexture(wasd, "WASD", 0, true)
+    BlzFrameSetSize(wasd, 0.10, 0.10)
+    BlzFrameSetAbsPoint(wasd, FRAMEPOINT_CENTER, 0.1, 0.25)
+
+    TimerStart(CreateTimer(), 1, true, function()
+        local data = HERO[0]
+
+        if data.MHoldSec >= 6 then
+            BlzFrameSetVisible(new_FrameChargesText, false)
+            BlzFrameSetVisible(wood, false)
+            BlzFrameSetVisible(wasd, false)
+            BlzFrameSetVisible(new_FrameChargesText2, false)
+            BlzFrameSetVisible(new_FrameChargesText3, false)
+        end
+    end)
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
 --- Created by Bergi.
 --- DateTime: 13.12.2021 0:39
 ---
@@ -6715,7 +6936,7 @@ end
 function CastSnowBall(data,directionAngle)
     local effModel="Firebrand Shot Silver"--snowball
     local hero=data.UnitHero
-    if data.AttackIsReady and not data.SpaceForce and UnitAlive(hero) and not FREE_CAMERA then
+    if data.AttackIsReady and not data.SpaceForce and UnitAlive(hero) and not FREE_CAMERA and not IsUnitStunned(hero) then
         --WolfSlashAttack(hero) --для проверки вставлял
         BlzSetUnitFacingEx(hero,directionAngle)
         SetUnitAnimationByIndex(hero,3)
@@ -6723,6 +6944,7 @@ function CastSnowBall(data,directionAngle)
         data.UnitInAttack=true
         TimerStart(CreateTimer(), 0.15, false, function() -- задержка замаха
             CreateAndForceBullet(hero,directionAngle,40,effModel)
+            data.MHoldSec=data.MHoldSec+1
             data.UnitInAttack=false
         end)
         TimerStart(CreateTimer(), 0.35, false, function()
@@ -8163,10 +8385,63 @@ end
 return true
 end
 
+function Trig_StartYettyCinematic_Func004C()
+if (not (udg_PressESCYETTY == true)) then
+return false
+end
+return true
+end
+
+function Trig_StartYettyCinematic_Func013C()
+if (not (udg_PressESCYETTY == true)) then
+return false
+end
+return true
+end
+
+function Trig_StartYettyCinematic_Func016C()
+if (not (udg_PressESCYETTY == true)) then
+return false
+end
+return true
+end
+
+function Trig_StartYettyCinematic_Func019C()
+if (not (udg_PressESCYETTY == true)) then
+return false
+end
+return true
+end
+
+function Trig_StartYettyCinematic_Func020C()
+if (not (udg_PressESCYETTY == true)) then
+return false
+end
+return true
+end
+
+function Trig_StartYettyCinematic_Func022C()
+if (not (udg_PressESCYETTY == true)) then
+return false
+end
+return true
+end
+
+function Trig_StartYettyCinematic_Func023C()
+if (not (udg_PressESCYETTY == true)) then
+return false
+end
+return true
+end
+
 function Trig_StartYettyCinematic_Actions()
 DisableTrigger(GetTriggeringTrigger())
 CinematicModeBJ(true, GetPlayersAll())
 CinematicFadeBJ(bj_CINEFADETYPE_FADEOUT, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
+if (Trig_StartYettyCinematic_Func004C()) then
+return 
+else
+end
 TriggerSleepAction(1.00)
 CameraSetupApplyForPlayer(true, gg_cam_PeonLookOnYetty, Player(0), 0.00)
 SetUnitFacingToFaceUnitTimed(GetTriggerUnit(), gg_unit_n000_0001, 0)
@@ -8174,14 +8449,36 @@ SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Region_012))
 SetUnitFacingToFaceUnitTimed(GetTriggerUnit(), gg_unit_n000_0001, 0)
 ResetUnitAnimation(GetTriggerUnit())
 CinematicFadeBJ(bj_CINEFADETYPE_FADEIN, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
+EnableTrigger(gg_trg_SkipYetty)
+if (Trig_StartYettyCinematic_Func013C()) then
+return 
+else
+end
 TransmissionFromUnitWithNameBJ(GetPlayersAll(), GetTriggerUnit(), "TRIGSTR_688", gg_snd_peon1, "TRIGSTR_689", bj_TIMETYPE_ADD, 0.00, true)
 SetUnitFacingToFaceUnitTimed(GetTriggerUnit(), gg_unit_n000_0001, 0)
+if (Trig_StartYettyCinematic_Func016C()) then
+else
 CameraSetupApplyForPlayer(true, gg_cam_LookYetty, Player(0), 0.00)
+end
 TriggerSleepAction(0.50)
 SetUnitFacingToFaceUnitTimed(GetTriggerUnit(), gg_unit_n000_0001, 0)
+if (Trig_StartYettyCinematic_Func019C()) then
+else
 RotateCameraAroundLocBJ(360.00, GetUnitLoc(gg_unit_n000_0001), Player(0), 8.00)
+end
+if (Trig_StartYettyCinematic_Func020C()) then
+return 
+else
+end
 TransmissionFromUnitWithNameBJ(GetPlayersAll(), GetTriggerUnit(), "TRIGSTR_690", gg_snd_peon2, "TRIGSTR_691", bj_TIMETYPE_ADD, 0.00, true)
+if (Trig_StartYettyCinematic_Func022C()) then
+else
 CameraSetupApplyForPlayer(true, gg_cam_PeonReadyToYetty, Player(0), 0.00)
+end
+if (Trig_StartYettyCinematic_Func023C()) then
+return 
+else
+end
 TransmissionFromUnitWithNameBJ(GetPlayersAll(), GetTriggerUnit(), "TRIGSTR_692", gg_snd_peon3, "TRIGSTR_693", bj_TIMETYPE_ADD, 0.00, true)
 ConditionalTriggerExecute(gg_trg_SkipYetty)
 end
@@ -8193,14 +8490,21 @@ TriggerAddCondition(gg_trg_StartYettyCinematic, Condition(Trig_StartYettyCinemat
 TriggerAddAction(gg_trg_StartYettyCinematic, Trig_StartYettyCinematic_Actions)
 end
 
-function Trig_SkipYetty_Func003A()
+function Trig_SkipYetty_Conditions()
+if (not (udg_PressESCYETTY == false)) then
+return false
+end
+return true
+end
+
+function Trig_SkipYetty_Func004A()
 KillDestructable(GetEnumDestructable())
 end
 
 function Trig_SkipYetty_Actions()
 CameraSetupApplyForPlayer(true, gg_cam_ResetCam, Player(0), 1.00)
-udg_PressESC = true
-EnumDestructablesInRectAll(gg_rct_Region_013, Trig_SkipYetty_Func003A)
+udg_PressESCYETTY = true
+EnumDestructablesInRectAll(gg_rct_Region_013, Trig_SkipYetty_Func004A)
 DisableTrigger(GetTriggeringTrigger())
 CinematicModeBJ(false, GetPlayersAll())
     CustomCinematicMode(false)
@@ -8212,6 +8516,7 @@ function InitTrig_SkipYetty()
 gg_trg_SkipYetty = CreateTrigger()
 DisableTrigger(gg_trg_SkipYetty)
 TriggerRegisterPlayerEventEndCinematic(gg_trg_SkipYetty, Player(0))
+TriggerAddCondition(gg_trg_SkipYetty, Condition(Trig_SkipYetty_Conditions))
 TriggerAddAction(gg_trg_SkipYetty, Trig_SkipYetty_Actions)
 end
 
@@ -8640,6 +8945,7 @@ function Trig_SkipIntro_Actions()
     BlzFrameSetVisible(CardBox,false)
 udg_PressESC = true
 DisableTrigger(GetTriggeringTrigger())
+DisableTrigger(gg_trg_StartIntro)
 CameraSetupApplyForPlayer(true, gg_cam_ResetCam, Player(0), 1.00)
 CinematicModeBJ(false, GetPlayersAll())
     CreateWASDActions()
@@ -8726,7 +9032,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, -320.0, -768.0)
+DefineStartLocation(0, -2752.0, -4352.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()

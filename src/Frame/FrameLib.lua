@@ -15,6 +15,8 @@ function InitMenu()
     --CreateVictoryElderBorder() -- тестовый показ
     --CreateCustomPortrait()
     --CreateMenu()
+    --CreateQTEFrame() -- Тест QTE
+    CreateMouseHelper()
 end
 function ReturnFPS()
     local fps = BlzGetFrameByName("ResourceBarFrame", 0)
