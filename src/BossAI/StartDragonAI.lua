@@ -74,6 +74,7 @@ function StartDragonAI(xs, ys)
     local OnAttack = true
     TimerStart(CreateTimer(), 1, true, function()
         --каждую секунду
+        GBoss=boss
         local bx, by = GetUnitXY(boss)
 
         if not UnitAlive(boss) then
@@ -144,7 +145,7 @@ function StartDragonAI(xs, ys)
             -- если идёт бой
             sec = sec + 1
 
-            local max=#tFraze[dragonFrazeCount]//10
+            local max=#tFraze[dragonFrazeCount]//8
             if dragonFrazeCount>=#tFraze then
                 --print("последняя фраза")
                 max=5
@@ -165,7 +166,7 @@ function StartDragonAI(xs, ys)
                     --normal_sound("Speech\\Dragon\\"..dragonFrazeCount+1,GetUnitXY(boss))
                     PlayBossSpeech("Speech\\Dragon\\"..dragonFrazeCount+1,tFraze[dragonFrazeCount+1])
                     dragonFrazeCount=dragonFrazeCount+1
-                    TimerStart(CreateTimer(), GBossSoundDuration, false, function()
+                    TimerStart(CreateTimer(), GBossSoundDuration+2, false, function()
                         if dragonFrazeCount==2 then
                             PlayMonoSpeech("Speech\\Peon\\Dragon\\tiykral", "Ты украл наши подарки!, и делал что-то непристойное рядом с ними")
                         elseif dragonFrazeCount==5 then

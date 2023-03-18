@@ -11,7 +11,8 @@ function FallCoffinMeme(hero)
     local z = zs + 1000
     local speed = 40
     SetUnitZ(new, z)
-    normal_sound("DeathSound", GetUnitXY(hero))
+    local s=normal_sound("DeathSound", GetUnitXY(hero))
+    SetSoundVolume(s,80)
     TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
         z = z - speed
         SetUnitZ(new, z)
@@ -26,6 +27,7 @@ function FallCoffinMeme(hero)
             SetUnitTimeScale(new, 2)
             TimerStart(CreateTimer(), 3, false, function()
                 RemoveUnit(new)
+                SetSoundVolume(s,0)
             end)
         end
     end)

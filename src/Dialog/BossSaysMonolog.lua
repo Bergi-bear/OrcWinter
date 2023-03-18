@@ -9,7 +9,6 @@ function PlayBossSpeech(sound, text)
         --print("первый диалог")
         CreteDialogBoxBoss()
     end
-
     if not BlzFrameIsVisible(TexBoxBoss) then
         local s = normal_sound(sound)
         local sd = GetSoundDuration(s)
@@ -17,20 +16,27 @@ function PlayBossSpeech(sound, text)
         if sd <= 10 then
             sd = 3000
         end
-        local v=20
-        SetMusicVolumeBJ(v)
+        GV=20
+        SetMusicVolumeBJ(GV)
         BlzFrameSetVisible(TexBoxBoss, true)
         BlzFrameSetText(TexBoxTextBoss, text)
         --TransmissionFromUnitWithNameBJ(GetPlayersAll(), HERO[0].UnitHero, "", nil, "", bj_TIMETYPE_SET, GetSoundDuration(s) / 700, false)
         --print(GetSoundDuration(s))
         GBossSoundDuration=sd / 700
+        local chkTimer=CreateTimer()
+        TimerStart(CreateTimer(), 0.5, true, function()
+            if not UnitAlive(GBoss) then
+                StopSound(s, false, 0.5)
+                DestroyTimer(chkTimer)
+            end
+        end)
         TimerStart(CreateTimer(), sd / 700, false, function()
             BlzFrameSetVisible(TexBoxBoss, false)
-
+            DestroyTimer(chkTimer)
             TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
-                SetMusicVolumeBJ(v)
-                v=v+1
-                if v>= 100 then
+                SetMusicVolumeBJ(GV)
+                GV=GV+1
+                if GV>= 100 then
                     DestroyTimer(GetExpiredTimer())
                 end
             end)

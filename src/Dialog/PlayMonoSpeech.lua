@@ -3,6 +3,7 @@
 --- Created by User.
 --- DateTime: 21.01.2023 23:57
 ---
+GV=20
 function PlayMonoSpeech(sound, text)
     if not BlzFrameIsVisible(TexBox) then
         local s = normal_sound(sound)
@@ -12,17 +13,17 @@ function PlayMonoSpeech(sound, text)
             sd = 1000
         end
         BlzFrameSetVisible(TexBox, true)
-        local v=20
-        SetMusicVolumeBJ(v)
+        local GV=20
+        SetMusicVolumeBJ(GV)
         BlzFrameSetText(TexBoxText, text)
         TransmissionFromUnitWithNameBJ(GetPlayersAll(), HERO[0].UnitHero, "", nil, "", bj_TIMETYPE_SET, GetSoundDuration(s) / 700, false)
         --print(GetSoundDuration(s))
         TimerStart(CreateTimer(), sd / 700, false, function()
             BlzFrameSetVisible(TexBox, false)
             TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
-                SetMusicVolumeBJ(v)
-                v=v+1
-                if v>= 100 then
+                SetMusicVolumeBJ(GV)
+                GV=GV+1
+                if GV>= 100 then
                     DestroyTimer(GetExpiredTimer())
                 end
             end)

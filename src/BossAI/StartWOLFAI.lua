@@ -48,6 +48,7 @@ function StartWolfAI(xs, ys)
     local OnAttack = true
     TimerStart(CreateTimer(), 1, true, function()
         --каждую секунду
+        GBoss=boss
         local bx, by = GetUnitXY(boss)
 
         if not UnitAlive(boss) then

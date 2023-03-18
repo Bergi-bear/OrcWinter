@@ -44,6 +44,10 @@ gg_snd_peon1 = nil
 gg_snd_peon2 = nil
 gg_snd_peon3 = nil
 gg_snd_Hlop = nil
+gg_snd_fyyachtoetozazvyki = nil
+gg_snd_oanenashilietopodarki = nil
+gg_snd_15 = nil
+gg_snd_16 = nil
 gg_trg_InitYetty = nil
 gg_trg_StartYettyCinematic = nil
 gg_trg_SkipYetty = nil
@@ -71,10 +75,6 @@ gg_unit_opeo_0024 = nil
 gg_unit_h006_0172 = nil
 gg_unit_h006_0173 = nil
 gg_dest_B007_5312 = nil
-gg_snd_fyyachtoetozazvyki = nil
-gg_snd_oanenashilietopodarki = nil
-gg_snd_15 = nil
-gg_snd_16 = nil
 function InitGlobals()
 udg_PressESC = false
 udg_PressESCYETTY = false
@@ -3967,6 +3967,7 @@ function StartDragonAI(xs, ys)
     local OnAttack = true
     TimerStart(CreateTimer(), 1, true, function()
         --каждую секунду
+        GBoss=boss
         local bx, by = GetUnitXY(boss)
 
         if not UnitAlive(boss) then
@@ -4037,7 +4038,7 @@ function StartDragonAI(xs, ys)
             -- если идёт бой
             sec = sec + 1
 
-            local max=#tFraze[dragonFrazeCount]//10
+            local max=#tFraze[dragonFrazeCount]//8
             if dragonFrazeCount>=#tFraze then
                 --print("последняя фраза")
                 max=5
@@ -4058,7 +4059,7 @@ function StartDragonAI(xs, ys)
                     --normal_sound("Speech\\Dragon\\"..dragonFrazeCount+1,GetUnitXY(boss))
                     PlayBossSpeech("Speech\\Dragon\\"..dragonFrazeCount+1,tFraze[dragonFrazeCount+1])
                     dragonFrazeCount=dragonFrazeCount+1
-                    TimerStart(CreateTimer(), GBossSoundDuration, false, function()
+                    TimerStart(CreateTimer(), GBossSoundDuration+2, false, function()
                         if dragonFrazeCount==2 then
                             PlayMonoSpeech("Speech\\Peon\\Dragon\\tiykral", "Ты украл наши подарки!, и делал что-то непристойное рядом с ними")
                         elseif dragonFrazeCount==5 then
@@ -4362,11 +4363,11 @@ function InitTrig_EnterInRectWivern()
 
                         local r=GetRandomInt(1,3)
                         if r==1 then
-                            PlayBossSpeech("Speech\\Wyvern\\".."`","Удобное место для кладки")
+                            PlayBossSpeech("Speech\\Wyvern\\".."1","Удобное место для кладки")
                         elseif r==2 then
-                            PlayBossSpeech("Speech\\Wyvern\\".."`","Хорошее место, тёпленькое")
+                            PlayBossSpeech("Speech\\Wyvern\\".."2","Хорошее место, тёпленькое")
                         elseif r==3 then
-                            PlayBossSpeech("Speech\\Wyvern\\".."`","Откладываю")
+                            PlayBossSpeech("Speech\\Wyvern\\".."3","Откладываю")
                         end
 
                         TimerStart(CreateTimer(), 10, false, function()
@@ -4375,11 +4376,11 @@ function InitTrig_EnterInRectWivern()
                             BirthFromEgg(entering)
                             r=GetRandomInt(1,3)
                             if r==1 then
-                                PlayBossSpeech("Speech\\Wyvern\\".."`","Будущее империи, в бой")
+                                PlayBossSpeech("Speech\\Wyvern\\".."4","Будущее империи, в бой!")
                             elseif r==2 then
-                                PlayBossSpeech("Speech\\Wyvern\\".."`","Мои малыши вылупились, я такая хорошая мать")
+                                PlayBossSpeech("Speech\\Wyvern\\".."5","Мои малыши вылупились, я такая хорошая мать")
                             elseif r==2 then
-                                PlayBossSpeech("Speech\\Wyvern\\".."`","Ты только посмотри на них, какие миленькие")
+                                PlayBossSpeech("Speech\\Wyvern\\".."6","Ты только посмотри на них, какие миленькие")
                             end
                         end)
                     end
@@ -4425,17 +4426,17 @@ function StartWivernAI(xs, ys)
 
     local r=GetRandomInt(1,3)
     if r==1 then
-        PlayBossSpeech("Speech\\Wyvern\\".."`","Нарушитель в гнезде драконов?!")
+        PlayBossSpeech("Speech\\Wyvern\\".."7","Нарушитель в гнезде драконов?!")
     elseif r==2 then
-        PlayBossSpeech("Speech\\Wyvern\\".."`","Тебе не стоило приходить в это место")
+        PlayBossSpeech("Speech\\Wyvern\\".."8","Тебе не стоило приходить в это место")
     elseif r==3 then
-        PlayBossSpeech("Speech\\Wyvern\\".."`","Нарушитель, нарушитель!")
+        PlayBossSpeech("Speech\\Wyvern\\".."9","Нарушитель, нарушитель!")
     end
 
     TimerStart(CreateTimer(), 1, true, function()
         --каждую секунду
         local bx, by = GetUnitXY(boss)
-
+        GBoss=boss
         if not UnitAlive(boss) then
             -- Место где босс
             StartSound(bj_questCompletedSound)
@@ -4497,11 +4498,11 @@ function StartWivernAI(xs, ys)
                     SetMusicVolumeBJ(100)
                     r=GetRandomInt(1,3)
                     if r==1 then
-                        PlayBossSpeech("Speech\\Wyvern\\".."`","Трус")
+                        PlayBossSpeech("Speech\\Wyvern\\".."10","Трус!")
                     elseif r==2 then
-                        PlayBossSpeech("Speech\\Wyvern\\".."`","Он ушел?")
+                        PlayBossSpeech("Speech\\Wyvern\\".."11","Он ушел?")
                     elseif r==3 then
-                        PlayBossSpeech("Speech\\Wyvern\\".."`","Беги беги, волосы назад")
+                        PlayBossSpeech("Speech\\Wyvern\\".."12","Беги беги, волосы назад")
                     end
                 end
             end
@@ -4524,11 +4525,11 @@ function StartWivernAI(xs, ys)
                     OnSecondPhaseMove = 0
                     local r=GetRandomInt(1,4)
                     if r==1 then
-                        PlayBossSpeech("Speech\\Wyvern\\".."`","Ой, яйца внутри меня тоже почувствовали этот удар")
+                        PlayBossSpeech("Speech\\Wyvern\\".."13","Ой, яйца внутри меня тоже почувствовали этот удар")
                     elseif r==2 then
-                        PlayBossSpeech("Speech\\Wyvern\\".."`","Эй, не надо так со мной обращаться, я же не просто ледяной босс, я еще и Виверна")
+                        PlayBossSpeech("Speech\\Wyvern\\".."14","Эй, не надо так со мной обращаться, я же не просто ледяной босс, я еще и Виверна")
                     elseif r==3 then
-                        PlayBossSpeech("Speech\\Wyvern\\".."`","Какой бессердечный противник, бьёт по будущим наследникам драконьей империи!")
+                        PlayBossSpeech("Speech\\Wyvern\\".."15","Какой бессердечный противник, бьёт по будущим наследникам драконьей империи!")
                     elseif r==4 then
 
                     end
@@ -4542,8 +4543,8 @@ function StartWivernAI(xs, ys)
                 phase = 3
                 if not phaseCHK[phase] then
                     --print("смена фазы на ", phase)
-                    PlayBossSpeech("Speech\\Wyvern\\".."`","Ну всё, ты меня разозлил")
-                    PlayBossSpeech("Speech\\Wyvern\\".."`","Я тебя заморожу, не стоит убегать")
+                    PlayBossSpeech("Speech\\Wyvern\\".."16","Ну всё, ты меня разозлил")
+                    PlayBossSpeech("Speech\\Wyvern\\".."17","Я тебя заморожу, не стоит убегать")
                     phaseCHK[phase] = true
                 end
             end
@@ -4551,9 +4552,9 @@ function StartWivernAI(xs, ys)
                 phase = 4
                 if not phaseCHK[phase] then
                     --print("смена фазы на ", phase)
-                    PlayBossSpeech("Speech\\Wyvern\\".."`","Не смей меня недооценивать")
-                    PlayBossSpeech("Speech\\Wyvern\\".."`","Не смей меня недооценивать, я покажу тебе всю свою мощь")
-                    PlayBossSpeech("Speech\\Wyvern\\".."`","Ты знаешь, как сложно получать по яйцам? Ну, теперь знаешь!")
+                    PlayBossSpeech("Speech\\Wyvern\\".."18","Не смей меня недооценивать")
+                    PlayBossSpeech("Speech\\Wyvern\\".."19","Не смей меня недооценивать, я покажу тебе всю свою мощь")
+                    PlayBossSpeech("Speech\\Wyvern\\".."20","Ты знаешь, как сложно получать по яйцам? Ну, теперь знаешь!")
                     phaseCHK[phase] = true
                 end
             end
@@ -4650,11 +4651,11 @@ function LineFastAttack(boss, hero)
 
     local r = GetRandomInt(1, 10)
     if r==1 then
-        PlayBossSpeech("Speech\\Wyvern\\".."`","Я ледяная пушка!")
+        PlayBossSpeech("Speech\\Wyvern\\".."21","Я ледяная пушка!")
     elseif r==2 then
-        PlayBossSpeech("Speech\\Wyvern\\".."`","Нет смысла уворачиваться")
+        PlayBossSpeech("Speech\\Wyvern\\".."22","Нет смысла уворачиваться")
     elseif r==3 then
-        PlayBossSpeech("Speech\\Wyvern\\".."`","Беги хоть по прямой, я всё равно тебя достану")
+        PlayBossSpeech("Speech\\Wyvern\\".."23","Беги хоть по прямой, я всё равно тебя достану")
     end
 
     local effModel = "FrostWyrmMissileNoOmni"
@@ -4690,13 +4691,13 @@ end
 function CreateCircleIce(boss, hero)
     local r = GetRandomInt(1, 10)
     if r==1 then
-        PlayBossSpeech("Speech\\Wyvern\\".."`","На обидчиков, сосульки падают")
+        PlayBossSpeech("Speech\\Wyvern\\".."24","На обидчиков, сосульки падают")
     elseif r==2 then
-        PlayBossSpeech("Speech\\Wyvern\\".."`","Да разверзнется град из небес")
+        PlayBossSpeech("Speech\\Wyvern\\".."25","Да разверзнется град из небес")
     elseif r==3 then
-        PlayBossSpeech("Speech\\Wyvern\\".."`","Ой, небо падает")
+        PlayBossSpeech("Speech\\Wyvern\\".."26","Ой, небо падает")
     elseif r==4 then
-        PlayBossSpeech("Speech\\Wyvern\\".."`","Из ловушки нет выхода")
+        PlayBossSpeech("Speech\\Wyvern\\".."27","Из ловушки нет выхода")
     end
 
 
@@ -4757,11 +4758,11 @@ function FlyOverPlayerWMark(boss, hero)
 
     local r = GetRandomInt(1, 10)
     if r==1 then
-        PlayBossSpeech("Speech\\Wyvern\\".."`","Сюда, сюда иди")
+        PlayBossSpeech("Speech\\Wyvern\\".."28","Сюда, сюда иди")
     elseif r==2 then
-        PlayBossSpeech("Speech\\Wyvern\\".."`","Нужно найти место для будущего гнезда")
+        PlayBossSpeech("Speech\\Wyvern\\".."29","Нужно найти место для будущего гнезда")
     elseif r==3 then
-        PlayBossSpeech("Speech\\Wyvern\\".."`","Беги беги, волосы назад")
+        PlayBossSpeech("Speech\\Wyvern\\".."30","Не потеряй свой клоунский колпак")
     end
 
 
@@ -4839,6 +4840,7 @@ function StartWolfAI(xs, ys)
     local OnAttack = true
     TimerStart(CreateTimer(), 1, true, function()
         --каждую секунду
+        GBoss=boss
         local bx, by = GetUnitXY(boss)
 
         if not UnitAlive(boss) then
@@ -5452,6 +5454,7 @@ function StartYettyAI(xs, ys)
     local OnAttack = true
     TimerStart(CreateTimer(), 1, true, function()
         --каждую секунду
+        GBoss=boss
         local bx, by = GetUnitXY(boss)
 
         if not UnitAlive(boss) then
@@ -5993,7 +5996,6 @@ function PlayBossSpeech(sound, text)
         --print("первый диалог")
         CreteDialogBoxBoss()
     end
-
     if not BlzFrameIsVisible(TexBoxBoss) then
         local s = normal_sound(sound)
         local sd = GetSoundDuration(s)
@@ -6001,20 +6003,27 @@ function PlayBossSpeech(sound, text)
         if sd <= 10 then
             sd = 3000
         end
-        local v=20
-        SetMusicVolumeBJ(v)
+        GV=20
+        SetMusicVolumeBJ(GV)
         BlzFrameSetVisible(TexBoxBoss, true)
         BlzFrameSetText(TexBoxTextBoss, text)
         --TransmissionFromUnitWithNameBJ(GetPlayersAll(), HERO[0].UnitHero, "", nil, "", bj_TIMETYPE_SET, GetSoundDuration(s) / 700, false)
         --print(GetSoundDuration(s))
         GBossSoundDuration=sd / 700
+        local chkTimer=CreateTimer()
+        TimerStart(CreateTimer(), 0.5, true, function()
+            if not UnitAlive(GBoss) then
+                StopSound(s, false, 0.5)
+                DestroyTimer(chkTimer)
+            end
+        end)
         TimerStart(CreateTimer(), sd / 700, false, function()
             BlzFrameSetVisible(TexBoxBoss, false)
-
+            DestroyTimer(chkTimer)
             TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
-                SetMusicVolumeBJ(v)
-                v=v+1
-                if v>= 100 then
+                SetMusicVolumeBJ(GV)
+                GV=GV+1
+                if GV>= 100 then
                     DestroyTimer(GetExpiredTimer())
                 end
             end)
@@ -6268,6 +6277,7 @@ end
 --- Created by User.
 --- DateTime: 21.01.2023 23:57
 ---
+GV=20
 function PlayMonoSpeech(sound, text)
     if not BlzFrameIsVisible(TexBox) then
         local s = normal_sound(sound)
@@ -6277,17 +6287,17 @@ function PlayMonoSpeech(sound, text)
             sd = 1000
         end
         BlzFrameSetVisible(TexBox, true)
-        local v=20
-        SetMusicVolumeBJ(v)
+        local GV=20
+        SetMusicVolumeBJ(GV)
         BlzFrameSetText(TexBoxText, text)
         TransmissionFromUnitWithNameBJ(GetPlayersAll(), HERO[0].UnitHero, "", nil, "", bj_TIMETYPE_SET, GetSoundDuration(s) / 700, false)
         --print(GetSoundDuration(s))
         TimerStart(CreateTimer(), sd / 700, false, function()
             BlzFrameSetVisible(TexBox, false)
             TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
-                SetMusicVolumeBJ(v)
-                v=v+1
-                if v>= 100 then
+                SetMusicVolumeBJ(GV)
+                GV=GV+1
+                if GV>= 100 then
                     DestroyTimer(GetExpiredTimer())
                 end
             end)
@@ -7325,7 +7335,8 @@ function FallCoffinMeme(hero)
     local z = zs + 1000
     local speed = 40
     SetUnitZ(new, z)
-    normal_sound("DeathSound", GetUnitXY(hero))
+    local s=normal_sound("DeathSound", GetUnitXY(hero))
+    SetSoundVolume(s,80)
     TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
         z = z - speed
         SetUnitZ(new, z)
@@ -7340,6 +7351,7 @@ function FallCoffinMeme(hero)
             SetUnitTimeScale(new, 2)
             TimerStart(CreateTimer(), 3, false, function()
                 RemoveUnit(new)
+                SetSoundVolume(s,0)
             end)
         end
     end)
@@ -9294,7 +9306,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, -5312.0, 4032.0)
+DefineStartLocation(0, -4928.0, 5760.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()

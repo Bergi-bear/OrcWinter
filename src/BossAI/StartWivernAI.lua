@@ -37,11 +37,11 @@ function InitTrig_EnterInRectWivern()
 
                         local r=GetRandomInt(1,3)
                         if r==1 then
-                            PlayBossSpeech("Speech\\Wyvern\\".."`","Удобное место для кладки")
+                            PlayBossSpeech("Speech\\Wyvern\\".."1","Удобное место для кладки")
                         elseif r==2 then
-                            PlayBossSpeech("Speech\\Wyvern\\".."`","Хорошее место, тёпленькое")
+                            PlayBossSpeech("Speech\\Wyvern\\".."2","Хорошее место, тёпленькое")
                         elseif r==3 then
-                            PlayBossSpeech("Speech\\Wyvern\\".."`","Откладываю")
+                            PlayBossSpeech("Speech\\Wyvern\\".."3","Откладываю")
                         end
 
                         TimerStart(CreateTimer(), 10, false, function()
@@ -50,11 +50,11 @@ function InitTrig_EnterInRectWivern()
                             BirthFromEgg(entering)
                             r=GetRandomInt(1,3)
                             if r==1 then
-                                PlayBossSpeech("Speech\\Wyvern\\".."`","Будущее империи, в бой")
+                                PlayBossSpeech("Speech\\Wyvern\\".."4","Будущее империи, в бой!")
                             elseif r==2 then
-                                PlayBossSpeech("Speech\\Wyvern\\".."`","Мои малыши вылупились, я такая хорошая мать")
+                                PlayBossSpeech("Speech\\Wyvern\\".."5","Мои малыши вылупились, я такая хорошая мать")
                             elseif r==2 then
-                                PlayBossSpeech("Speech\\Wyvern\\".."`","Ты только посмотри на них, какие миленькие")
+                                PlayBossSpeech("Speech\\Wyvern\\".."6","Ты только посмотри на них, какие миленькие")
                             end
                         end)
                     end
@@ -100,17 +100,17 @@ function StartWivernAI(xs, ys)
 
     local r=GetRandomInt(1,3)
     if r==1 then
-        PlayBossSpeech("Speech\\Wyvern\\".."`","Нарушитель в гнезде драконов?!")
+        PlayBossSpeech("Speech\\Wyvern\\".."7","Нарушитель в гнезде драконов?!")
     elseif r==2 then
-        PlayBossSpeech("Speech\\Wyvern\\".."`","Тебе не стоило приходить в это место")
+        PlayBossSpeech("Speech\\Wyvern\\".."8","Тебе не стоило приходить в это место")
     elseif r==3 then
-        PlayBossSpeech("Speech\\Wyvern\\".."`","Нарушитель, нарушитель!")
+        PlayBossSpeech("Speech\\Wyvern\\".."9","Нарушитель, нарушитель!")
     end
 
     TimerStart(CreateTimer(), 1, true, function()
         --каждую секунду
         local bx, by = GetUnitXY(boss)
-
+        GBoss=boss
         if not UnitAlive(boss) then
             -- Место где босс
             StartSound(bj_questCompletedSound)
@@ -172,11 +172,11 @@ function StartWivernAI(xs, ys)
                     SetMusicVolumeBJ(100)
                     r=GetRandomInt(1,3)
                     if r==1 then
-                        PlayBossSpeech("Speech\\Wyvern\\".."`","Трус")
+                        PlayBossSpeech("Speech\\Wyvern\\".."10","Трус!")
                     elseif r==2 then
-                        PlayBossSpeech("Speech\\Wyvern\\".."`","Он ушел?")
+                        PlayBossSpeech("Speech\\Wyvern\\".."11","Он ушел?")
                     elseif r==3 then
-                        PlayBossSpeech("Speech\\Wyvern\\".."`","Беги беги, волосы назад")
+                        PlayBossSpeech("Speech\\Wyvern\\".."12","Беги беги, волосы назад")
                     end
                 end
             end
@@ -199,11 +199,11 @@ function StartWivernAI(xs, ys)
                     OnSecondPhaseMove = 0
                     local r=GetRandomInt(1,4)
                     if r==1 then
-                        PlayBossSpeech("Speech\\Wyvern\\".."`","Ой, яйца внутри меня тоже почувствовали этот удар")
+                        PlayBossSpeech("Speech\\Wyvern\\".."13","Ой, яйца внутри меня тоже почувствовали этот удар")
                     elseif r==2 then
-                        PlayBossSpeech("Speech\\Wyvern\\".."`","Эй, не надо так со мной обращаться, я же не просто ледяной босс, я еще и Виверна")
+                        PlayBossSpeech("Speech\\Wyvern\\".."14","Эй, не надо так со мной обращаться, я же не просто ледяной босс, я еще и Виверна")
                     elseif r==3 then
-                        PlayBossSpeech("Speech\\Wyvern\\".."`","Какой бессердечный противник, бьёт по будущим наследникам драконьей империи!")
+                        PlayBossSpeech("Speech\\Wyvern\\".."15","Какой бессердечный противник, бьёт по будущим наследникам драконьей империи!")
                     elseif r==4 then
 
                     end
@@ -217,8 +217,8 @@ function StartWivernAI(xs, ys)
                 phase = 3
                 if not phaseCHK[phase] then
                     --print("смена фазы на ", phase)
-                    PlayBossSpeech("Speech\\Wyvern\\".."`","Ну всё, ты меня разозлил")
-                    PlayBossSpeech("Speech\\Wyvern\\".."`","Я тебя заморожу, не стоит убегать")
+                    PlayBossSpeech("Speech\\Wyvern\\".."16","Ну всё, ты меня разозлил")
+                    PlayBossSpeech("Speech\\Wyvern\\".."17","Я тебя заморожу, не стоит убегать")
                     phaseCHK[phase] = true
                 end
             end
@@ -226,9 +226,9 @@ function StartWivernAI(xs, ys)
                 phase = 4
                 if not phaseCHK[phase] then
                     --print("смена фазы на ", phase)
-                    PlayBossSpeech("Speech\\Wyvern\\".."`","Не смей меня недооценивать")
-                    PlayBossSpeech("Speech\\Wyvern\\".."`","Не смей меня недооценивать, я покажу тебе всю свою мощь")
-                    PlayBossSpeech("Speech\\Wyvern\\".."`","Ты знаешь, как сложно получать по яйцам? Ну, теперь знаешь!")
+                    PlayBossSpeech("Speech\\Wyvern\\".."18","Не смей меня недооценивать")
+                    PlayBossSpeech("Speech\\Wyvern\\".."19","Не смей меня недооценивать, я покажу тебе всю свою мощь")
+                    PlayBossSpeech("Speech\\Wyvern\\".."20","Ты знаешь, как сложно получать по яйцам? Ну, теперь знаешь!")
                     phaseCHK[phase] = true
                 end
             end
@@ -325,11 +325,11 @@ function LineFastAttack(boss, hero)
 
     local r = GetRandomInt(1, 10)
     if r==1 then
-        PlayBossSpeech("Speech\\Wyvern\\".."`","Я ледяная пушка!")
+        PlayBossSpeech("Speech\\Wyvern\\".."21","Я ледяная пушка!")
     elseif r==2 then
-        PlayBossSpeech("Speech\\Wyvern\\".."`","Нет смысла уворачиваться")
+        PlayBossSpeech("Speech\\Wyvern\\".."22","Нет смысла уворачиваться")
     elseif r==3 then
-        PlayBossSpeech("Speech\\Wyvern\\".."`","Беги хоть по прямой, я всё равно тебя достану")
+        PlayBossSpeech("Speech\\Wyvern\\".."23","Беги хоть по прямой, я всё равно тебя достану")
     end
 
     local effModel = "FrostWyrmMissileNoOmni"
@@ -365,13 +365,13 @@ end
 function CreateCircleIce(boss, hero)
     local r = GetRandomInt(1, 10)
     if r==1 then
-        PlayBossSpeech("Speech\\Wyvern\\".."`","На обидчиков, сосульки падают")
+        PlayBossSpeech("Speech\\Wyvern\\".."24","На обидчиков, сосульки падают")
     elseif r==2 then
-        PlayBossSpeech("Speech\\Wyvern\\".."`","Да разверзнется град из небес")
+        PlayBossSpeech("Speech\\Wyvern\\".."25","Да разверзнется град из небес")
     elseif r==3 then
-        PlayBossSpeech("Speech\\Wyvern\\".."`","Ой, небо падает")
+        PlayBossSpeech("Speech\\Wyvern\\".."26","Ой, небо падает")
     elseif r==4 then
-        PlayBossSpeech("Speech\\Wyvern\\".."`","Из ловушки нет выхода")
+        PlayBossSpeech("Speech\\Wyvern\\".."27","Из ловушки нет выхода")
     end
 
 
@@ -432,11 +432,11 @@ function FlyOverPlayerWMark(boss, hero)
 
     local r = GetRandomInt(1, 10)
     if r==1 then
-        PlayBossSpeech("Speech\\Wyvern\\".."`","Сюда, сюда иди")
+        PlayBossSpeech("Speech\\Wyvern\\".."28","Сюда, сюда иди")
     elseif r==2 then
-        PlayBossSpeech("Speech\\Wyvern\\".."`","Нужно найти место для будущего гнезда")
+        PlayBossSpeech("Speech\\Wyvern\\".."29","Нужно найти место для будущего гнезда")
     elseif r==3 then
-        PlayBossSpeech("Speech\\Wyvern\\".."`","Беги беги, волосы назад")
+        PlayBossSpeech("Speech\\Wyvern\\".."30","Не потеряй свой клоунский колпак")
     end
 
 
