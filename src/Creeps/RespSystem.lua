@@ -49,7 +49,19 @@ function InitDeathEventCreep()
                 DestroyEffect(AddSpecialEffect("HealingWater", x,y))
             end)
         end
-
+        if GetUnitTypeId(u)==FourCC("h005") then
+            UnitBlastArea(u,"FrostWyrmMissileNoOmni",12)
+        end
     end)
 
+end
+
+function UnitBlastArea(unit,effModel,count)
+    if not UnitAlive(unit) then
+        unit=FindUnitOfType(FourCC("e005"))-- даммик наносящий урон
+    end
+    local angle=360/count
+    for i=1,count do
+        CreateAndForceBullet(unit, angle*i, 30, effModel)
+    end
 end
