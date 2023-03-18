@@ -1,5 +1,6 @@
 udg_PressESC = false
 udg_PressESCYETTY = false
+udg_SHlop = nil
 gg_rct________________037 = nil
 gg_rct_Region_038 = nil
 gg_rct_Region_024 = nil
@@ -27,6 +28,7 @@ gg_cam_ResetCam = nil
 gg_cam_LookYetty = nil
 gg_cam_PeonLookOnYetty = nil
 gg_cam_PeonReadyToYetty = nil
+gg_cam_PeonLookOnPrise = nil
 gg_snd_Intro1 = nil
 gg_snd_Intro2 = nil
 gg_snd_Intro3 = nil
@@ -41,11 +43,15 @@ gg_snd_Intro11 = nil
 gg_snd_peon1 = nil
 gg_snd_peon2 = nil
 gg_snd_peon3 = nil
+gg_snd_Hlop = nil
 gg_trg_InitYetty = nil
 gg_trg_StartYettyCinematic = nil
 gg_trg_SkipYetty = nil
 gg_trg_InitEggs = nil
-gg_trg_Untitled_Trigger_001 = nil
+gg_trg_EndBoss = nil
+gg_trg_StartDragonCinematic = nil
+gg_trg_SkipDragon = nil
+gg_trg_Cum = nil
 gg_trg_BoundEnter_Copy = nil
 gg_trg_ExitWolf = nil
 gg_trg_BoundEnter = nil
@@ -55,16 +61,20 @@ gg_trg_StartIntro = nil
 gg_trg_SkipIntro = nil
 gg_trg_ESCTEST = nil
 gg_unit_n001_0009 = nil
+gg_unit_h006_0002 = nil
 gg_unit_n000_0001 = nil
 gg_unit_Oths_0011 = nil
 gg_unit_opeo_0013 = nil
 gg_unit_opeo_0014 = nil
 gg_unit_opeo_0015 = nil
 gg_unit_opeo_0024 = nil
-gg_unit_h006_0174 = nil
 gg_unit_h006_0172 = nil
 gg_unit_h006_0173 = nil
 gg_dest_B007_5312 = nil
+gg_snd_fyyachtoetozazvyki = nil
+gg_snd_oanenashilietopodarki = nil
+gg_snd_15 = nil
+gg_snd_16 = nil
 function InitGlobals()
 udg_PressESC = false
 udg_PressESCYETTY = false
@@ -141,6 +151,31 @@ SetSoundDuration(gg_snd_peon3, 4752)
 SetSoundChannel(gg_snd_peon3, 0)
 SetSoundVolume(gg_snd_peon3, 127)
 SetSoundPitch(gg_snd_peon3, 1.0)
+gg_snd_Hlop = CreateSound("Hlop.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_Hlop, 10710)
+SetSoundChannel(gg_snd_Hlop, 0)
+SetSoundVolume(gg_snd_Hlop, 127)
+SetSoundPitch(gg_snd_Hlop, 1.0)
+gg_snd_fyyachtoetozazvyki = CreateSound("Speech/Peon/Dragon/fyyachtoetozazvyki.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_fyyachtoetozazvyki, 3600)
+SetSoundChannel(gg_snd_fyyachtoetozazvyki, 0)
+SetSoundVolume(gg_snd_fyyachtoetozazvyki, 127)
+SetSoundPitch(gg_snd_fyyachtoetozazvyki, 1.0)
+gg_snd_oanenashilietopodarki = CreateSound("Speech/Peon/Dragon/oanenashilietopodarki.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_oanenashilietopodarki, 3696)
+SetSoundChannel(gg_snd_oanenashilietopodarki, 0)
+SetSoundVolume(gg_snd_oanenashilietopodarki, 127)
+SetSoundPitch(gg_snd_oanenashilietopodarki, 1.0)
+gg_snd_15 = CreateSound("Speech/Dragon/15.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_15, 2064)
+SetSoundChannel(gg_snd_15, 0)
+SetSoundVolume(gg_snd_15, 127)
+SetSoundPitch(gg_snd_15, 1.0)
+gg_snd_16 = CreateSound("Speech/Dragon/16.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_16, 6720)
+SetSoundChannel(gg_snd_16, 0)
+SetSoundVolume(gg_snd_16, 127)
+SetSoundPitch(gg_snd_16, 1.0)
 end
 
 function CreateAllDestructables()
@@ -184,7 +219,7 @@ u = BlzCreateUnitWithSkin(p, FourCC("h002"), -6551.2, -7066.3, 5.812, FourCC("h0
 u = BlzCreateUnitWithSkin(p, FourCC("h004"), -3852.9, 4153.2, 159.380, FourCC("h004"))
 u = BlzCreateUnitWithSkin(p, FourCC("h004"), 3605.6, 3360.4, 159.380, FourCC("h004"))
 u = BlzCreateUnitWithSkin(p, FourCC("h004"), -476.6, -4225.4, 159.380, FourCC("h004"))
-u = BlzCreateUnitWithSkin(p, FourCC("h007"), 1041.6, -2467.3, 182.046, FourCC("h007"))
+u = BlzCreateUnitWithSkin(p, FourCC("h007"), 1056.8, -2436.1, 182.046, FourCC("h007"))
 u = BlzCreateUnitWithSkin(p, FourCC("h007"), 608.9, -879.9, 182.046, FourCC("h007"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), 601.4, -1416.6, 5.812, FourCC("h002"))
 end
@@ -406,6 +441,7 @@ local unitID
 local t
 local life
 
+gg_unit_h006_0002 = BlzCreateUnitWithSkin(p, FourCC("h006"), -4919.2, 7152.6, 291.597, FourCC("h006"))
 u = BlzCreateUnitWithSkin(p, FourCC("h005"), -8953.9, -3879.1, 240.498, FourCC("h005"))
 u = BlzCreateUnitWithSkin(p, FourCC("h005"), -8975.7, -4115.6, 237.037, FourCC("h005"))
 u = BlzCreateUnitWithSkin(p, FourCC("h005"), -8913.5, -4274.9, 310.461, FourCC("h005"))
@@ -435,11 +471,10 @@ u = BlzCreateUnitWithSkin(p, FourCC("n003"), -12609.4, -7320.8, 316.550, FourCC(
 u = BlzCreateUnitWithSkin(p, FourCC("n003"), -13003.6, -9340.0, 35.720, FourCC("n003"))
 u = BlzCreateUnitWithSkin(p, FourCC("n003"), -9116.4, -6427.4, 103.486, FourCC("n003"))
 u = BlzCreateUnitWithSkin(p, FourCC("n003"), -11831.2, -114.1, 183.086, FourCC("n003"))
-u = BlzCreateUnitWithSkin(p, FourCC("n003"), -11377.3, -4649.0, 116.844, FourCC("n003"))
+u = BlzCreateUnitWithSkin(p, FourCC("n003"), -11096.5, -4005.4, 116.844, FourCC("n003"))
 u = BlzCreateUnitWithSkin(p, FourCC("n003"), -8393.8, -8947.7, 35.720, FourCC("n003"))
 gg_unit_h006_0172 = BlzCreateUnitWithSkin(p, FourCC("h006"), -6759.5, 7717.5, 186.040, FourCC("h006"))
 gg_unit_h006_0173 = BlzCreateUnitWithSkin(p, FourCC("h006"), -6127.4, 6115.0, 31.803, FourCC("h006"))
-gg_unit_h006_0174 = BlzCreateUnitWithSkin(p, FourCC("h006"), -4919.1, 7116.2, 93.123, FourCC("h006"))
 end
 
 function CreateNeutralHostile()
@@ -451,9 +486,8 @@ local life
 
 gg_unit_n000_0001 = BlzCreateUnitWithSkin(p, FourCC("n000"), -2863.2, -5340.3, 326.601, FourCC("n000"))
 u = BlzCreateUnitWithSkin(p, FourCC("u000"), -5777.8, 8019.1, 276.770, FourCC("u000"))
-gg_unit_n001_0009 = BlzCreateUnitWithSkin(p, FourCC("n001"), -7570.0, 3830.9, 99.384, FourCC("n001"))
+gg_unit_n001_0009 = BlzCreateUnitWithSkin(p, FourCC("n001"), -7570.0, 3830.9, 88.177, FourCC("n001"))
 u = BlzCreateUnitWithSkin(p, FourCC("n002"), -12134.0, 3783.0, 172.240, FourCC("n002"))
-u = BlzCreateUnitWithSkin(p, FourCC("n00D"), 8327.0, -8391.5, 268.313, FourCC("n00D"))
 end
 
 function CreateNeutralPassive()
@@ -463,8 +497,6 @@ local unitID
 local t
 local life
 
-u = BlzCreateUnitWithSkin(p, FourCC("e002"), 5726.2, -5277.6, 312.658, FourCC("e002"))
-u = BlzCreateUnitWithSkin(p, FourCC("e002"), 6357.5, -5150.5, 247.597, FourCC("e002"))
 u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -1377.3, 7311.8, 119.744, FourCC("nsno"))
 u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -4992.9, 4916.3, 230.423, FourCC("nsno"))
 u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -5043.9, 6247.3, 163.306, FourCC("nsno"))
@@ -585,7 +617,7 @@ gg_rct_ExitTrap = Rect(-5472.0, -9440.0, -5376.0, -8992.0)
 gg_rct_ExitTrapZone = Rect(-7616.0, 4224.0, -7424.0, 4480.0)
 gg_rct_Region_004 = Rect(-7648.0, 4480.0, -7424.0, 4640.0)
 gg_rct_BossDrakon = Rect(-8672.0, 1088.0, -5376.0, 4000.0)
-gg_rct_InitStartDragon = Rect(-7840.0, 2976.0, -6752.0, 3840.0)
+gg_rct_InitStartDragon = Rect(-8160.0, 2336.0, -6656.0, 3840.0)
 gg_rct_Towolf = Rect(-11936.0, 128.0, -11744.0, 192.0)
 gg_rct_FromWolf = Rect(-12000.0, 64.0, -11680.0, 128.0)
 gg_rct_ExitWolf = Rect(-11968.0, 1632.0, -11712.0, 1760.0)
@@ -726,6 +758,19 @@ CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
 CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
 CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
 CameraSetupSetDestPosition(gg_cam_PeonReadyToYetty, -2745.0, -4498.0, 0.0)
+gg_cam_PeonLookOnPrise = CreateCameraSetup()
+CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_ROTATION, 80.1, 0.0)
+CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_ANGLE_OF_ATTACK, 313.8, 0.0)
+CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_TARGET_DISTANCE, 955.9, 0.0)
+CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_ROLL, 0.0, 0.0)
+CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_FARZ, 5000.0, 0.0)
+CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_PeonLookOnPrise, -7408.1, 4600.5, 0.0)
 end
 
 --CUSTOM_CODE
@@ -1121,11 +1166,21 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
     local heroCurrent = hero
     local dist = 0
     local rotationShieldAngle = 0
+    local newAngle=angle
     TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
         dist = dist + speed
         delay = delay - speed
         local x, y, z = BlzGetLocalSpecialEffectX(bullet), BlzGetLocalSpecialEffectY(bullet), BlzGetLocalSpecialEffectZ(bullet)
         local zGround = GetTerrainZ(MoveX(x, speed * 2, angleCurrent), MoveY(y, speed * 2, angleCurrent))
+
+        if effectmodel=="Firebrand Shot Silver"  then -- самонаводка
+            local _,enemy=UnitDamageArea(hero, 0, x, y, 300)
+            if enemy then
+                newAngle=AngleBetweenXY(x,y,GetUnitXY(enemy))/ bj_DEGTORAD
+                angleCurrent = lerpTheta(angleCurrent, newAngle, TIMER_PERIOD * 2) -- хороший магнетизм уже при 8
+            end
+        end
+
         BlzSetSpecialEffectYaw(bullet, math.rad(angleCurrent))
         local nx, ny = MoveXY(x, y, speed, angleCurrent)
         BlzSetSpecialEffectPosition(bullet, nx, ny, z) -- было z-2
@@ -3339,7 +3394,7 @@ function GetPortraitFromBD(id)
     local TexturePortraits={
         [FourCC("e003")]="TexturePortraits\\SnowManPortrait",
         [FourCC("n000")]="TexturePortraits\\Yetty", -- етти
-       -- [FourCC("n001")]="TexturePortraits\\SnowManPortrait", -- дракон
+        [FourCC("n001")]="TexturePortraits\\DragonPortrait", -- дракон
         --[FourCC("n002")]="TexturePortraits\\SnowManPortrait", -- волк
         [FourCC("u000")]="TexturePortraits\\WivernPortrait",
     }
@@ -3863,7 +3918,12 @@ function InitTrig_EnterInRectBDragon()
     TriggerAddAction(gg_trg_EnterInRect, function()
         if IsUnitType(GetEnteringUnit(), UNIT_TYPE_HERO) then
             local boss = FindUnitOfType(FourCC('n001'))
-            StartDragonAI(GetUnitXY(boss))
+            --StartDragonAI(GetUnitXY(boss))
+            CustomCinematicMode(true)
+            local s=normal_sound("Hlop",GetUnitXY(boss))
+            TimerStart(CreateTimer(), 8, false, function()
+                SetSoundVolume(s, 0)
+            end)
             DisableTrigger(gg_trg_EnterInRect)
         end
     end)
@@ -3915,6 +3975,7 @@ function StartDragonAI(xs, ys)
             DestroyTimer(GetExpiredTimer())
             phase = 0
             --print("Даём нарграду, победа")
+            PlayMonoSpeech("Speech\\Peon\\Dragon\\vpeshereuavidelportal", "В пещере я видел портал, интересно, куда он ведёт?")
             CreateVictoryElderBorder()
             ClearMapMusicBJ()
             PlayMusicBJ("Endless Snowbanks")
@@ -3976,7 +4037,7 @@ function StartDragonAI(xs, ys)
             -- если идёт бой
             sec = sec + 1
 
-            local max=#tFraze[dragonFrazeCount]//14
+            local max=#tFraze[dragonFrazeCount]//10
             if dragonFrazeCount>=#tFraze then
                 --print("последняя фраза")
                 max=5
@@ -3997,8 +4058,26 @@ function StartDragonAI(xs, ys)
                     --normal_sound("Speech\\Dragon\\"..dragonFrazeCount+1,GetUnitXY(boss))
                     PlayBossSpeech("Speech\\Dragon\\"..dragonFrazeCount+1,tFraze[dragonFrazeCount+1])
                     dragonFrazeCount=dragonFrazeCount+1
+                    TimerStart(CreateTimer(), GBossSoundDuration, false, function()
+                        if dragonFrazeCount==2 then
+                            PlayMonoSpeech("Speech\\Peon\\Dragon\\tiykral", "Ты украл наши подарки!, и делал что-то непристойное рядом с ними")
+                        elseif dragonFrazeCount==5 then
+                            PlayMonoSpeech("Speech\\Peon\\Dragon\\tochemtizanimalsa", "То, чем ты занимался, было отвратительно")
+                        elseif dragonFrazeCount==6 then
+                            PlayMonoSpeech("Speech\\Peon\\Dragon\\ksozhaleniy", "К сожалению, я всё видел")
+                        elseif dragonFrazeCount==9 then
+                            PlayMonoSpeech("Speech\\Peon\\Dragon\\yztebetydasnezhkov", "Я тебе туда сейчас снежков натромбую")
+                        elseif dragonFrazeCount==11 then
+                            PlayMonoSpeech("Speech\\Peon\\Dragon\\nesmeytrogat", "Не смей трогать наши подарки!")
+                        end
+
+                    end)
                 else
-                    print("этому супер удару научила меня моя бабушка")
+                    --print("этому супер удару научила меня моя бабушка")
+                    local r=GetRandomInt(1,5)
+                    if r==1 then
+                        PlayBossSpeech("Speech\\Dragon\\Super","Этому супер удару научила меня моя бабушка")
+                    end
                     --print("Зачем, зачем ты каждый раз возвращаешься?")
                 end
             end
@@ -4170,9 +4249,9 @@ function IceImpale(boss, angle, notMove)
                 angle = AngleBetweenXY(x, y, GetUnitXY(hero)) / bj_DEGTORAD
             end
             x, y = MoveXY(x, y, step, angle)
-            UnitDamageArea(boss, 10, x, y, range)
+            local _,enemy=UnitDamageArea(boss, 10, x, y, range)
             CreateSpikeFromDeep(x, y, notMove)
-            if k > max then
+            if k > max or enemy then
                 CreateDestructableZ(FourCC("B006"), x, y, 900, GetRandomInt(0, 360), 2.5, 1)
                 DestroyTimer(GetExpiredTimer())
                 if not notMove then
@@ -4287,7 +4366,7 @@ function InitTrig_EnterInRectWivern()
                         elseif r==2 then
                             PlayBossSpeech("Speech\\Wyvern\\".."`","Хорошее место, тёпленькое")
                         elseif r==3 then
-                            PlayBossSpeech("Speech\\Wyvern\\".."`","Здесь будет роддом")
+                            PlayBossSpeech("Speech\\Wyvern\\".."`","Откладываю")
                         end
 
                         TimerStart(CreateTimer(), 10, false, function()
@@ -4315,7 +4394,7 @@ end
 function StartWivernAI(xs, ys)
     local boss = FindUnitOfType(FourCC('u000'))
     local BossFight = true
-    local into = CreateBOSSHPBar(boss, "Беременная виверна")
+    local into = CreateBOSSHPBar(boss, "Виверна")
     CreateMarkOnBossBar(into, 80)
     --CreateMarkOnBossBar(into,60)
     CreateMarkOnBossBar(into, 40)
@@ -4346,7 +4425,7 @@ function StartWivernAI(xs, ys)
 
     local r=GetRandomInt(1,3)
     if r==1 then
-        PlayBossSpeech("Speech\\Wyvern\\".."`","Нарушитель в родовом гнезде драконов?!")
+        PlayBossSpeech("Speech\\Wyvern\\".."`","Нарушитель в гнезде драконов?!")
     elseif r==2 then
         PlayBossSpeech("Speech\\Wyvern\\".."`","Тебе не стоило приходить в это место")
     elseif r==3 then
@@ -4447,11 +4526,11 @@ function StartWivernAI(xs, ys)
                     if r==1 then
                         PlayBossSpeech("Speech\\Wyvern\\".."`","Ой, яйца внутри меня тоже почувствовали этот удар")
                     elseif r==2 then
-                        PlayBossSpeech("Speech\\Wyvern\\".."`","Эй, не надо так со мной обращаться, я же не просто ледяной босс, я еще и беременная")
+                        PlayBossSpeech("Speech\\Wyvern\\".."`","Эй, не надо так со мной обращаться, я же не просто ледяной босс, я еще и Виверна")
                     elseif r==3 then
                         PlayBossSpeech("Speech\\Wyvern\\".."`","Какой бессердечный противник, бьёт по будущим наследникам драконьей империи!")
                     elseif r==4 then
-                        PlayBossSpeech("Speech\\Wyvern\\".."`","Ай, прямо в беременный пузырь! Ты знаешь, что такое беременный пузырь? Ну теперь знаешь!")
+
                     end
 
 
@@ -4474,7 +4553,7 @@ function StartWivernAI(xs, ys)
                     --print("смена фазы на ", phase)
                     PlayBossSpeech("Speech\\Wyvern\\".."`","Не смей меня недооценивать")
                     PlayBossSpeech("Speech\\Wyvern\\".."`","Не смей меня недооценивать, я покажу тебе всю свою мощь")
-                    PlayBossSpeech("Speech\\Wyvern\\".."`","Ты знаешь, как сложно быть беременным ледяным боссом? Ну, теперь знаешь!")
+                    PlayBossSpeech("Speech\\Wyvern\\".."`","Ты знаешь, как сложно получать по яйцам? Ну, теперь знаешь!")
                     phaseCHK[phase] = true
                 end
             end
@@ -4678,7 +4757,7 @@ function FlyOverPlayerWMark(boss, hero)
 
     local r = GetRandomInt(1, 10)
     if r==1 then
-        PlayBossSpeech("Speech\\Wyvern\\".."`","Сюда сюда иди")
+        PlayBossSpeech("Speech\\Wyvern\\".."`","Сюда, сюда иди")
     elseif r==2 then
         PlayBossSpeech("Speech\\Wyvern\\".."`","Нужно найти место для будущего гнезда")
     elseif r==3 then
@@ -5350,9 +5429,6 @@ function InitTrig_EnterInRectB()
     end)
 end
 
-function StartYettyCinematic()
-    local boss = FindUnitOfType(FourCC('n000'))
-end
 
 function StartYettyAI(xs, ys)
     CreateMoveTextureTimed(5)
@@ -5370,7 +5446,7 @@ function StartYettyAI(xs, ys)
     local FW = CreateFogModifierRectBJ(false, Player(0), FOG_OF_WAR_VISIBLE, GlobalRect)
     FogModifierStart(FW)
 
-    local phase = 3 --стартовая фаза
+    local phase = 1 --стартовая фаза
     local sec = 3
     local PhaseOn = true
     local OnAttack = true
@@ -5911,11 +5987,13 @@ end
 --- Created by User.
 --- DateTime: 16.02.2023 22:32
 ---
+GBossSoundDuration=0
 function PlayBossSpeech(sound, text)
     if not TexBoxBoss then
         --print("первый диалог")
         CreteDialogBoxBoss()
     end
+
     if not BlzFrameIsVisible(TexBoxBoss) then
         local s = normal_sound(sound)
         local sd = GetSoundDuration(s)
@@ -5923,12 +6001,23 @@ function PlayBossSpeech(sound, text)
         if sd <= 10 then
             sd = 3000
         end
+        local v=20
+        SetMusicVolumeBJ(v)
         BlzFrameSetVisible(TexBoxBoss, true)
         BlzFrameSetText(TexBoxTextBoss, text)
         --TransmissionFromUnitWithNameBJ(GetPlayersAll(), HERO[0].UnitHero, "", nil, "", bj_TIMETYPE_SET, GetSoundDuration(s) / 700, false)
         --print(GetSoundDuration(s))
+        GBossSoundDuration=sd / 700
         TimerStart(CreateTimer(), sd / 700, false, function()
             BlzFrameSetVisible(TexBoxBoss, false)
+
+            TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
+                SetMusicVolumeBJ(v)
+                v=v+1
+                if v>= 100 then
+                    DestroyTimer(GetExpiredTimer())
+                end
+            end)
         end)
     end
 end
@@ -6188,11 +6277,20 @@ function PlayMonoSpeech(sound, text)
             sd = 1000
         end
         BlzFrameSetVisible(TexBox, true)
+        local v=20
+        SetMusicVolumeBJ(v)
         BlzFrameSetText(TexBoxText, text)
         TransmissionFromUnitWithNameBJ(GetPlayersAll(), HERO[0].UnitHero, "", nil, "", bj_TIMETYPE_SET, GetSoundDuration(s) / 700, false)
         --print(GetSoundDuration(s))
         TimerStart(CreateTimer(), sd / 700, false, function()
             BlzFrameSetVisible(TexBox, false)
+            TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
+                SetMusicVolumeBJ(v)
+                v=v+1
+                if v>= 100 then
+                    DestroyTimer(GetExpiredTimer())
+                end
+            end)
         end)
     end
 end
@@ -6904,15 +7002,15 @@ function CreateMouseHelper()
 
     local new_FrameChargesText = BlzCreateFrameByType("TEXT", "ButtonChargesText", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
     BlzFrameSetAbsPoint(new_FrameChargesText, FRAMEPOINT_CENTER, 0.1, 0.31)
-    BlzFrameSetText(new_FrameChargesText, "Hold LMB - Actions")
+    BlzFrameSetText(new_FrameChargesText, "Удерживайте LMB, чтобы стрелять")
 
     local new_FrameChargesText2 = BlzCreateFrameByType("TEXT", "ButtonChargesText", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
     BlzFrameSetAbsPoint(new_FrameChargesText2, FRAMEPOINT_CENTER, 0.1, 0.17)
-    BlzFrameSetText(new_FrameChargesText2, "Use WASD for moving")
+    BlzFrameSetText(new_FrameChargesText2, "Нажимайте WASD, чтобы двигаться")
 
     local new_FrameChargesText3 = BlzCreateFrameByType("TEXT", "ButtonChargesText", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
     BlzFrameSetAbsPoint(new_FrameChargesText3, FRAMEPOINT_CENTER, 0.1, 0.29)
-    BlzFrameSetText(new_FrameChargesText3, "Hold RMB - Shield")
+    BlzFrameSetText(new_FrameChargesText3, "Space - рывок в направлении движения")
 
     local wasd = BlzCreateFrameByType("BACKDROP", "Face", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
     BlzFrameSetTexture(wasd, "WASD", 0, true)
@@ -7003,7 +7101,7 @@ function CastSnowBall(data,directionAngle)
         TimerStart(CreateTimer(), 0.35, false, function()
             data.AttackIsReady=true
 
-            if UnitAlive(hero) and not data.IsMoving then
+            if UnitAlive(hero) and not data.IsMoving and not LockAnimAnimation(data) then
                 ResetUnitAnimation(hero)
             end
             DestroyTimer(GetExpiredTimer())
@@ -7467,7 +7565,7 @@ HERO = {}
 HeroID = FourCC("O000")
 
 
-Acceleration=false --скорение при клике
+Acceleration=true --скорение при клике
 
 function InitAnimations(hero, data)
     PlayUnitAnimationFromChat()
@@ -7539,7 +7637,6 @@ function InitWASD(hero)
     --BlzEnableSelections(false, false)
 
     local angle = 0
-    local speed = 5
     local animWalk = 0
 
     TimerStart(CreateTimer(), 0.005, true, function()
@@ -7584,7 +7681,8 @@ function InitWASD(hero)
     local curAngle = angleCast
     local distance = DistanceBetweenXY(GetUnitX(hero), GetUnitY(hero), GetPlayerMouseX[data.pid], GetPlayerMouseY[data.pid])
     local cutDistance = distance
-
+    local speed = GetUnitMoveSpeed(hero) / 38
+    local curSpeed=0
     TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
         -- основной таймер для обработки всего
         hero = data.UnitHero -- костыль для смены героя
@@ -7631,12 +7729,13 @@ function InitWASD(hero)
 
                 --print("death")
                 SetUnitAnimation(data.UnitHero, "death")
+                if not data.ResPointX then
+                    data.ResPointX,data.ResPointY=GetPlayerStartLocationX(Player(data.pid)), GetPlayerStartLocationY(Player(data.pid))
+                end
                 FallCoffinMeme(data.UnitHero)
                 TimerStart(CreateTimer(), 3, false, function()
                     DestroyTimer(GetExpiredTimer())
-                    if not data.ResPointX then
-                        data.ResPointX,data.ResPointY=GetPlayerStartLocationX(Player(data.pid)), GetPlayerStartLocationY(Player(data.pid))
-                    end
+
                     x, y = data.ResPointX,data.ResPointY
                     ReviveHero(hero, x, y, true)
                     TimerStart(CreateTimer(), 0.5, false, function()
@@ -7758,14 +7857,16 @@ function InitWASD(hero)
             --data.ReleaseS = false
             --data.IsMoving = false
             --print("слишком много кнопок нажато")
-            DestroyEffect(AddSpecialEffect("Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl", GetUnitXY(data.UnitHero)))
+            --DestroyEffect(AddSpecialEffect("Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl", GetUnitXY(data.UnitHero)))
+            DestroyEffect(AddSpecialEffectTarget("Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl", data.UnitHero,"origin"))
         end
 
         if not data.ReleaseW and not data.ReleaseS and data.ReleaseA and data.ReleaseD then
             --data.ReleaseA = false
             --data.ReleaseD = false
             --data.IsMoving = false
-            DestroyEffect(AddSpecialEffect("Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl", GetUnitXY(data.UnitHero)))
+            --DestroyEffect(AddSpecialEffect("Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl", GetUnitXY(data.UnitHero)))
+            DestroyEffect(AddSpecialEffectTarget("Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl", data.UnitHero,"origin"))
             --print("слишком много кнопок нажато")
         end
         if not UnitAlive(hero) then
@@ -7786,26 +7887,32 @@ function InitWASD(hero)
                     -- двигается
                     data.DirectionMove = angle
 
-                    speed = GetUnitMoveSpeed(hero) / 38
+                    speed = GetUnitMoveSpeed(hero) / 38 -- примерно 5 стартовая
+                    curSpeed = math.lerp(curSpeed, speed, TIMER_PERIOD64 * 8) --плавное ускорение
+                    --print(curSpeed)
                     if data.UnitInAttack then
-                        speed = speed * 0.1
+                        curSpeed = curSpeed * 0.1-- замедление скорости при атаке
+                    else
+                        SetUnitTimeScale(hero, (speed * 20) / 100) --СКОРОСТЬ ПЕРЕБИРАНИЯ НОГАМИ
                     end
                     --print(speed)
                     if data.isAttacking or (data.ReleaseQ and data.CDSpellQ > 0) or data.ReleaseRMB then
-                        speed = 0.5
+                        curSpeed = 0.5
                     end
-                    if data.CurrentWeaponType == "pickaxe" and false then
-                        SetUnitTimeScale(hero, (speed * 20) / 100) --СКОРОСТЬ ПЕРЕБИРАНИЯ НОГАМИ
-                    end
+
 
                     if data.ReleaseQ and data.CurrentWeaponType ~= "bow" then
                         --нормализация скорости
                         SetUnitTimeScale(hero, 1)
                     end
                     local x, y = GetUnitXY(hero)
-                    local nx, ny = MoveXY(x, y, speed, angle)
-                    local dx, dy = nx - x, ny - y
+                    --local nx, ny = MoveXY(x, y, speed, angle)
+                    --local dx, dy = nx - x, ny - y
 
+                    local vector = Vector:new(GetUnitX(hero), GetUnitY(hero), GetUnitZ(hero))
+                    local newVector = vector
+                    newVector = VectorSum(newVector, vector:yawPitchOffset(curSpeed, angle * (math.pi / 180), 0.0))
+                    local nx,ny=newVector.x, newVector.y
                     if not data.isAttacking then
                         if data.CurrentWeaponType == "pickaxe" or not data.PressSpin then
                             --
@@ -7845,6 +7952,7 @@ function InitWASD(hero)
                         data.animStand = 3
                     end
                 else
+                    curSpeed=0
                     -- стоит на месте
                     --if animWalk==0 then
                     data.DirectionMove = GetUnitFacing(hero)
@@ -7860,7 +7968,7 @@ function InitWASD(hero)
                     if data.animStand >= 2 and not data.ReleaseQ and not data.ReleaseRMB then
                         --длительность анимации WALK
                         --print(animWalk)
-                        if data.CurrentWeaponType == "pickaxe" or true then
+                        if not LockAnimAnimation(data) then
                             ResetUnitAnimation(hero) -- сброс в положении стоя
                         end
                         if data.CurrentWeaponType == "shield" or data.CurrentWeaponType == "bow" then
@@ -7888,7 +7996,7 @@ function InitWASD(hero)
 end
 
 function CreateWASDActions()
-    -----------------------------------------------------------------OSKEY_W
+    -----------------------------------------------------------------OSKEY_W щылун
     --print("initwasdactions")
     local gg_trg_EventUpW = CreateTrigger()
     for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
@@ -7940,7 +8048,6 @@ function CreateWASDActions()
                 data.animStand = data.ResetDuration --до полной анимации 2 секунды
                 if not LockAnimAnimation(data) then
                     SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationWalk)
-
                 end
             end
 
@@ -8034,7 +8141,9 @@ function CreateWASDActions()
                     UnitAddForceSimple(data.UnitHero, 0, 5, 15)
                 end
                 data.DirectionMove = 0
-                SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationWalk)
+                if not LockAnimAnimation(data) then
+                    SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationWalk)
+                end
 
             end
         end
@@ -8392,7 +8501,7 @@ function GetUnitData(hero)
 end
 
 function LockAnimAnimation(data)
-    return data.BowReady
+    return data.BowReady or data.SpaceForce
 end
 
 function StopUnitMoving(data)
@@ -8609,7 +8718,7 @@ end
 function Trig_InitEggs_Actions()
 AddUnitAnimationPropertiesBJ(true, "alternate", gg_unit_h006_0173)
 AddUnitAnimationPropertiesBJ(true, "alternate", gg_unit_h006_0172)
-AddUnitAnimationPropertiesBJ(true, "alternate", gg_unit_h006_0174)
+AddUnitAnimationPropertiesBJ(true, "alternate", gg_unit_h006_0002)
 end
 
 function InitTrig_InitEggs()
@@ -8618,14 +8727,78 @@ TriggerRegisterTimerEventSingle(gg_trg_InitEggs, 1.00)
 TriggerAddAction(gg_trg_InitEggs, Trig_InitEggs_Actions)
 end
 
-function Trig_Untitled_Trigger_001_Actions()
+function Trig_EndBoss_Actions()
 KillDestructable(gg_dest_B007_5312)
 end
 
-function InitTrig_Untitled_Trigger_001()
-gg_trg_Untitled_Trigger_001 = CreateTrigger()
-TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_n001_0009, EVENT_UNIT_DEATH)
-TriggerAddAction(gg_trg_Untitled_Trigger_001, Trig_Untitled_Trigger_001_Actions)
+function InitTrig_EndBoss()
+gg_trg_EndBoss = CreateTrigger()
+TriggerRegisterUnitEvent(gg_trg_EndBoss, gg_unit_n001_0009, EVENT_UNIT_DEATH)
+TriggerAddAction(gg_trg_EndBoss, Trig_EndBoss_Actions)
+end
+
+function Trig_StartDragonCinematic_Conditions()
+if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
+return false
+end
+return true
+end
+
+function Trig_StartDragonCinematic_Actions()
+DisableTrigger(GetTriggeringTrigger())
+PlaySoundBJ(udg_SHlop)
+CinematicModeBJ(true, GetPlayersAll())
+CinematicFadeBJ(bj_CINEFADETYPE_FADEOUT, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
+SetUnitTimeScalePercent(gg_unit_n001_0009, 600.00)
+CameraSetupApplyForPlayer(true, gg_cam_PeonLookOnPrise, Player(0), 0.00)
+ResetUnitAnimation(GetTriggerUnit())
+CinematicFadeBJ(bj_CINEFADETYPE_FADEIN, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), GetTriggerUnit(), "TRIGSTR_704", gg_snd_oanenashilietopodarki, "TRIGSTR_705", bj_TIMETYPE_ADD, 0.00, true)
+PanCameraToTimedLocForPlayer(Player(0), GetUnitLoc(gg_unit_n001_0009), 2.00)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), GetTriggerUnit(), "TRIGSTR_706", gg_snd_fyyachtoetozazvyki, "TRIGSTR_707", bj_TIMETYPE_ADD, 0.00, true)
+SetUnitTimeScalePercent(gg_unit_n001_0009, 0.00)
+KillSoundWhenDoneBJ(udg_SHlop)
+DisableTrigger(gg_trg_Cum)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_n001_0009, "TRIGSTR_710", gg_snd_15, "TRIGSTR_711", bj_TIMETYPE_ADD, 0.00, true)
+SetUnitTimeScalePercent(gg_unit_n001_0009, 100.00)
+QueueUnitAnimationBJ(gg_unit_n001_0009, "Walk")
+SetUnitFacingToFaceUnitTimed(gg_unit_n001_0009, GetTriggerUnit(), 0)
+ResetUnitAnimation(gg_unit_n001_0009)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_n001_0009, "TRIGSTR_708", gg_snd_16, "TRIGSTR_709", bj_TIMETYPE_ADD, 0.00, true)
+ConditionalTriggerExecute(gg_trg_SkipDragon)
+end
+
+function InitTrig_StartDragonCinematic()
+gg_trg_StartDragonCinematic = CreateTrigger()
+TriggerRegisterEnterRectSimple(gg_trg_StartDragonCinematic, gg_rct_InitStartDragon)
+TriggerAddCondition(gg_trg_StartDragonCinematic, Condition(Trig_StartDragonCinematic_Conditions))
+TriggerAddAction(gg_trg_StartDragonCinematic, Trig_StartDragonCinematic_Actions)
+end
+
+function Trig_SkipDragon_Actions()
+CameraSetupApplyForPlayer(true, gg_cam_ResetCam, Player(0), 1.00)
+SetUnitTimeScalePercent(gg_unit_n001_0009, 100.00)
+DisableTrigger(gg_trg_Cum)
+CinematicModeBJ(false, GetPlayersAll())
+    CustomCinematicMode(false)
+    StartDragonAI(GetUnitXY(gg_unit_n001_0009))
+end
+
+function InitTrig_SkipDragon()
+gg_trg_SkipDragon = CreateTrigger()
+DisableTrigger(gg_trg_SkipDragon)
+TriggerRegisterPlayerEventEndCinematic(gg_trg_SkipDragon, Player(0))
+TriggerAddAction(gg_trg_SkipDragon, Trig_SkipDragon_Actions)
+end
+
+function Trig_Cum_Actions()
+QueueUnitAnimationBJ(gg_unit_n001_0009, "Attack")
+end
+
+function InitTrig_Cum()
+gg_trg_Cum = CreateTrigger()
+TriggerRegisterTimerEventPeriodic(gg_trg_Cum, 0.05)
+TriggerAddAction(gg_trg_Cum, Trig_Cum_Actions)
 end
 
 function Trig_BoundEnter_Copy_Conditions()
@@ -9062,7 +9235,10 @@ InitTrig_InitYetty()
 InitTrig_StartYettyCinematic()
 InitTrig_SkipYetty()
 InitTrig_InitEggs()
-InitTrig_Untitled_Trigger_001()
+InitTrig_EndBoss()
+InitTrig_StartDragonCinematic()
+InitTrig_SkipDragon()
+InitTrig_Cum()
 InitTrig_BoundEnter_Copy()
 InitTrig_ExitWolf()
 InitTrig_BoundEnter()
@@ -9092,10 +9268,10 @@ end
 function main()
 local we
 
-SetCameraBounds(-14336.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), -10240.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 10240.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 10240.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -14336.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 10240.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 10240.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), -10240.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
+SetCameraBounds(-14336.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), -14336.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 10240.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 10240.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -14336.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 10240.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 10240.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), -14336.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
 SetDayNightModels("Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl", "Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl")
 SetTerrainFogEx(0, 0.0, 5000.0, 0.500, 0.086, 0.043, 0.275)
-we = AddWeatherEffect(Rect(-14336.0, -10240.0, 10240.0, 10240.0), FourCC("SNls"))
+we = AddWeatherEffect(Rect(-14336.0, -14336.0, 10240.0, 10240.0), FourCC("SNls"))
 EnableWeatherEffect(we, true)
 NewSoundEnvironment("Default")
 SetAmbientDaySound("LordaeronWinterDay")
@@ -9118,7 +9294,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, 192.0, -4864.0)
+DefineStartLocation(0, -5312.0, 4032.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()

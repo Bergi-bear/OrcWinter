@@ -34,9 +34,6 @@ function InitTrig_EnterInRectB()
     end)
 end
 
-function StartYettyCinematic()
-    local boss = FindUnitOfType(FourCC('n000'))
-end
 
 function StartYettyAI(xs, ys)
     CreateMoveTextureTimed(5)
@@ -54,7 +51,7 @@ function StartYettyAI(xs, ys)
     local FW = CreateFogModifierRectBJ(false, Player(0), FOG_OF_WAR_VISIBLE, GlobalRect)
     FogModifierStart(FW)
 
-    local phase = 3 --стартовая фаза
+    local phase = 1 --стартовая фаза
     local sec = 3
     local PhaseOn = true
     local OnAttack = true

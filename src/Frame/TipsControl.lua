@@ -11,15 +11,15 @@ function CreateMouseHelper()
 
     local new_FrameChargesText = BlzCreateFrameByType("TEXT", "ButtonChargesText", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
     BlzFrameSetAbsPoint(new_FrameChargesText, FRAMEPOINT_CENTER, 0.1, 0.31)
-    BlzFrameSetText(new_FrameChargesText, "Hold LMB - Actions")
+    BlzFrameSetText(new_FrameChargesText, "Удерживайте LMB, чтобы стрелять")
 
     local new_FrameChargesText2 = BlzCreateFrameByType("TEXT", "ButtonChargesText", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
     BlzFrameSetAbsPoint(new_FrameChargesText2, FRAMEPOINT_CENTER, 0.1, 0.17)
-    BlzFrameSetText(new_FrameChargesText2, "Use WASD for moving")
+    BlzFrameSetText(new_FrameChargesText2, "Нажимайте WASD, чтобы двигаться")
 
     local new_FrameChargesText3 = BlzCreateFrameByType("TEXT", "ButtonChargesText", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
     BlzFrameSetAbsPoint(new_FrameChargesText3, FRAMEPOINT_CENTER, 0.1, 0.29)
-    BlzFrameSetText(new_FrameChargesText3, "Hold RMB - Shield")
+    BlzFrameSetText(new_FrameChargesText3, "Space - рывок в направлении движения")
 
     local wasd = BlzCreateFrameByType("BACKDROP", "Face", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
     BlzFrameSetTexture(wasd, "WASD", 0, true)

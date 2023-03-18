@@ -5,7 +5,7 @@ HERO = {}
 HeroID = FourCC("O000")
 
 
-Acceleration=false --скорение при клике
+Acceleration=true --скорение при клике
 
 function InitAnimations(hero, data)
     PlayUnitAnimationFromChat()
@@ -77,7 +77,6 @@ function InitWASD(hero)
     --BlzEnableSelections(false, false)
 
     local angle = 0
-    local speed = 5
     local animWalk = 0
 
     TimerStart(CreateTimer(), 0.005, true, function()
@@ -122,7 +121,8 @@ function InitWASD(hero)
     local curAngle = angleCast
     local distance = DistanceBetweenXY(GetUnitX(hero), GetUnitY(hero), GetPlayerMouseX[data.pid], GetPlayerMouseY[data.pid])
     local cutDistance = distance
-
+    local speed = GetUnitMoveSpeed(hero) / 38
+    local curSpeed=0
     TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
         -- основной таймер для обработки всего
         hero = data.UnitHero -- костыль для смены героя
@@ -169,12 +169,13 @@ function InitWASD(hero)
 
                 --print("death")
                 SetUnitAnimation(data.UnitHero, "death")
+                if not data.ResPointX then
+                    data.ResPointX,data.ResPointY=GetPlayerStartLocationX(Player(data.pid)), GetPlayerStartLocationY(Player(data.pid))
+                end
                 FallCoffinMeme(data.UnitHero)
                 TimerStart(CreateTimer(), 3, false, function()
                     DestroyTimer(GetExpiredTimer())
-                    if not data.ResPointX then
-                        data.ResPointX,data.ResPointY=GetPlayerStartLocationX(Player(data.pid)), GetPlayerStartLocationY(Player(data.pid))
-                    end
+
                     x, y = data.ResPointX,data.ResPointY
                     ReviveHero(hero, x, y, true)
                     TimerStart(CreateTimer(), 0.5, false, function()
@@ -296,14 +297,16 @@ function InitWASD(hero)
             --data.ReleaseS = false
             --data.IsMoving = false
             --print("слишком много кнопок нажато")
-            DestroyEffect(AddSpecialEffect("Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl", GetUnitXY(data.UnitHero)))
+            --DestroyEffect(AddSpecialEffect("Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl", GetUnitXY(data.UnitHero)))
+            DestroyEffect(AddSpecialEffectTarget("Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl", data.UnitHero,"origin"))
         end
 
         if not data.ReleaseW and not data.ReleaseS and data.ReleaseA and data.ReleaseD then
             --data.ReleaseA = false
             --data.ReleaseD = false
             --data.IsMoving = false
-            DestroyEffect(AddSpecialEffect("Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl", GetUnitXY(data.UnitHero)))
+            --DestroyEffect(AddSpecialEffect("Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl", GetUnitXY(data.UnitHero)))
+            DestroyEffect(AddSpecialEffectTarget("Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl", data.UnitHero,"origin"))
             --print("слишком много кнопок нажато")
         end
         if not UnitAlive(hero) then
@@ -324,26 +327,32 @@ function InitWASD(hero)
                     -- двигается
                     data.DirectionMove = angle
 
-                    speed = GetUnitMoveSpeed(hero) / 38
+                    speed = GetUnitMoveSpeed(hero) / 38 -- примерно 5 стартовая
+                    curSpeed = math.lerp(curSpeed, speed, TIMER_PERIOD64 * 8) --плавное ускорение
+                    --print(curSpeed)
                     if data.UnitInAttack then
-                        speed = speed * 0.1
+                        curSpeed = curSpeed * 0.1-- замедление скорости при атаке
+                    else
+                        SetUnitTimeScale(hero, (speed * 20) / 100) --СКОРОСТЬ ПЕРЕБИРАНИЯ НОГАМИ
                     end
                     --print(speed)
                     if data.isAttacking or (data.ReleaseQ and data.CDSpellQ > 0) or data.ReleaseRMB then
-                        speed = 0.5
+                        curSpeed = 0.5
                     end
-                    if data.CurrentWeaponType == "pickaxe" and false then
-                        SetUnitTimeScale(hero, (speed * 20) / 100) --СКОРОСТЬ ПЕРЕБИРАНИЯ НОГАМИ
-                    end
+
 
                     if data.ReleaseQ and data.CurrentWeaponType ~= "bow" then
                         --нормализация скорости
                         SetUnitTimeScale(hero, 1)
                     end
                     local x, y = GetUnitXY(hero)
-                    local nx, ny = MoveXY(x, y, speed, angle)
-                    local dx, dy = nx - x, ny - y
+                    --local nx, ny = MoveXY(x, y, speed, angle)
+                    --local dx, dy = nx - x, ny - y
 
+                    local vector = Vector:new(GetUnitX(hero), GetUnitY(hero), GetUnitZ(hero))
+                    local newVector = vector
+                    newVector = VectorSum(newVector, vector:yawPitchOffset(curSpeed, angle * (math.pi / 180), 0.0))
+                    local nx,ny=newVector.x, newVector.y
                     if not data.isAttacking then
                         if data.CurrentWeaponType == "pickaxe" or not data.PressSpin then
                             --
@@ -383,6 +392,7 @@ function InitWASD(hero)
                         data.animStand = 3
                     end
                 else
+                    curSpeed=0
                     -- стоит на месте
                     --if animWalk==0 then
                     data.DirectionMove = GetUnitFacing(hero)
@@ -398,7 +408,7 @@ function InitWASD(hero)
                     if data.animStand >= 2 and not data.ReleaseQ and not data.ReleaseRMB then
                         --длительность анимации WALK
                         --print(animWalk)
-                        if data.CurrentWeaponType == "pickaxe" or true then
+                        if not LockAnimAnimation(data) then
                             ResetUnitAnimation(hero) -- сброс в положении стоя
                         end
                         if data.CurrentWeaponType == "shield" or data.CurrentWeaponType == "bow" then
@@ -426,7 +436,7 @@ function InitWASD(hero)
 end
 
 function CreateWASDActions()
-    -----------------------------------------------------------------OSKEY_W
+    -----------------------------------------------------------------OSKEY_W щылун
     --print("initwasdactions")
     local gg_trg_EventUpW = CreateTrigger()
     for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
@@ -478,7 +488,6 @@ function CreateWASDActions()
                 data.animStand = data.ResetDuration --до полной анимации 2 секунды
                 if not LockAnimAnimation(data) then
                     SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationWalk)
-
                 end
             end
 
@@ -572,7 +581,9 @@ function CreateWASDActions()
                     UnitAddForceSimple(data.UnitHero, 0, 5, 15)
                 end
                 data.DirectionMove = 0
-                SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationWalk)
+                if not LockAnimAnimation(data) then
+                    SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationWalk)
+                end
 
             end
         end
@@ -930,7 +941,7 @@ function GetUnitData(hero)
 end
 
 function LockAnimAnimation(data)
-    return data.BowReady
+    return data.BowReady or data.SpaceForce
 end
 
 function StopUnitMoving(data)

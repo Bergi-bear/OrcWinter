@@ -25,7 +25,12 @@ function InitTrig_EnterInRectBDragon()
     TriggerAddAction(gg_trg_EnterInRect, function()
         if IsUnitType(GetEnteringUnit(), UNIT_TYPE_HERO) then
             local boss = FindUnitOfType(FourCC('n001'))
-            StartDragonAI(GetUnitXY(boss))
+            --StartDragonAI(GetUnitXY(boss))
+            CustomCinematicMode(true)
+            local s=normal_sound("Hlop",GetUnitXY(boss))
+            TimerStart(CreateTimer(), 8, false, function()
+                SetSoundVolume(s, 0)
+            end)
             DisableTrigger(gg_trg_EnterInRect)
         end
     end)
@@ -77,6 +82,7 @@ function StartDragonAI(xs, ys)
             DestroyTimer(GetExpiredTimer())
             phase = 0
             --print("Даём нарграду, победа")
+            PlayMonoSpeech("Speech\\Peon\\Dragon\\vpeshereuavidelportal", "В пещере я видел портал, интересно, куда он ведёт?")
             CreateVictoryElderBorder()
             ClearMapMusicBJ()
             PlayMusicBJ("Endless Snowbanks")
@@ -138,7 +144,7 @@ function StartDragonAI(xs, ys)
             -- если идёт бой
             sec = sec + 1
 
-            local max=#tFraze[dragonFrazeCount]//14
+            local max=#tFraze[dragonFrazeCount]//10
             if dragonFrazeCount>=#tFraze then
                 --print("последняя фраза")
                 max=5
@@ -159,8 +165,26 @@ function StartDragonAI(xs, ys)
                     --normal_sound("Speech\\Dragon\\"..dragonFrazeCount+1,GetUnitXY(boss))
                     PlayBossSpeech("Speech\\Dragon\\"..dragonFrazeCount+1,tFraze[dragonFrazeCount+1])
                     dragonFrazeCount=dragonFrazeCount+1
+                    TimerStart(CreateTimer(), GBossSoundDuration, false, function()
+                        if dragonFrazeCount==2 then
+                            PlayMonoSpeech("Speech\\Peon\\Dragon\\tiykral", "Ты украл наши подарки!, и делал что-то непристойное рядом с ними")
+                        elseif dragonFrazeCount==5 then
+                            PlayMonoSpeech("Speech\\Peon\\Dragon\\tochemtizanimalsa", "То, чем ты занимался, было отвратительно")
+                        elseif dragonFrazeCount==6 then
+                            PlayMonoSpeech("Speech\\Peon\\Dragon\\ksozhaleniy", "К сожалению, я всё видел")
+                        elseif dragonFrazeCount==9 then
+                            PlayMonoSpeech("Speech\\Peon\\Dragon\\yztebetydasnezhkov", "Я тебе туда сейчас снежков натромбую")
+                        elseif dragonFrazeCount==11 then
+                            PlayMonoSpeech("Speech\\Peon\\Dragon\\nesmeytrogat", "Не смей трогать наши подарки!")
+                        end
+
+                    end)
                 else
-                    print("этому супер удару научила меня моя бабушка")
+                    --print("этому супер удару научила меня моя бабушка")
+                    local r=GetRandomInt(1,5)
+                    if r==1 then
+                        PlayBossSpeech("Speech\\Dragon\\Super","Этому супер удару научила меня моя бабушка")
+                    end
                     --print("Зачем, зачем ты каждый раз возвращаешься?")
                 end
             end
@@ -332,9 +356,9 @@ function IceImpale(boss, angle, notMove)
                 angle = AngleBetweenXY(x, y, GetUnitXY(hero)) / bj_DEGTORAD
             end
             x, y = MoveXY(x, y, step, angle)
-            UnitDamageArea(boss, 10, x, y, range)
+            local _,enemy=UnitDamageArea(boss, 10, x, y, range)
             CreateSpikeFromDeep(x, y, notMove)
-            if k > max then
+            if k > max or enemy then
                 CreateDestructableZ(FourCC("B006"), x, y, 900, GetRandomInt(0, 360), 2.5, 1)
                 DestroyTimer(GetExpiredTimer())
                 if not notMove then

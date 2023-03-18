@@ -41,7 +41,7 @@ function InitTrig_EnterInRectWivern()
                         elseif r==2 then
                             PlayBossSpeech("Speech\\Wyvern\\".."`","Хорошее место, тёпленькое")
                         elseif r==3 then
-                            PlayBossSpeech("Speech\\Wyvern\\".."`","Здесь будет роддом")
+                            PlayBossSpeech("Speech\\Wyvern\\".."`","Откладываю")
                         end
 
                         TimerStart(CreateTimer(), 10, false, function()
@@ -69,7 +69,7 @@ end
 function StartWivernAI(xs, ys)
     local boss = FindUnitOfType(FourCC('u000'))
     local BossFight = true
-    local into = CreateBOSSHPBar(boss, "Беременная виверна")
+    local into = CreateBOSSHPBar(boss, "Виверна")
     CreateMarkOnBossBar(into, 80)
     --CreateMarkOnBossBar(into,60)
     CreateMarkOnBossBar(into, 40)
@@ -100,7 +100,7 @@ function StartWivernAI(xs, ys)
 
     local r=GetRandomInt(1,3)
     if r==1 then
-        PlayBossSpeech("Speech\\Wyvern\\".."`","Нарушитель в родовом гнезде драконов?!")
+        PlayBossSpeech("Speech\\Wyvern\\".."`","Нарушитель в гнезде драконов?!")
     elseif r==2 then
         PlayBossSpeech("Speech\\Wyvern\\".."`","Тебе не стоило приходить в это место")
     elseif r==3 then
@@ -201,11 +201,11 @@ function StartWivernAI(xs, ys)
                     if r==1 then
                         PlayBossSpeech("Speech\\Wyvern\\".."`","Ой, яйца внутри меня тоже почувствовали этот удар")
                     elseif r==2 then
-                        PlayBossSpeech("Speech\\Wyvern\\".."`","Эй, не надо так со мной обращаться, я же не просто ледяной босс, я еще и беременная")
+                        PlayBossSpeech("Speech\\Wyvern\\".."`","Эй, не надо так со мной обращаться, я же не просто ледяной босс, я еще и Виверна")
                     elseif r==3 then
                         PlayBossSpeech("Speech\\Wyvern\\".."`","Какой бессердечный противник, бьёт по будущим наследникам драконьей империи!")
                     elseif r==4 then
-                        PlayBossSpeech("Speech\\Wyvern\\".."`","Ай, прямо в беременный пузырь! Ты знаешь, что такое беременный пузырь? Ну теперь знаешь!")
+
                     end
 
 
@@ -228,7 +228,7 @@ function StartWivernAI(xs, ys)
                     --print("смена фазы на ", phase)
                     PlayBossSpeech("Speech\\Wyvern\\".."`","Не смей меня недооценивать")
                     PlayBossSpeech("Speech\\Wyvern\\".."`","Не смей меня недооценивать, я покажу тебе всю свою мощь")
-                    PlayBossSpeech("Speech\\Wyvern\\".."`","Ты знаешь, как сложно быть беременным ледяным боссом? Ну, теперь знаешь!")
+                    PlayBossSpeech("Speech\\Wyvern\\".."`","Ты знаешь, как сложно получать по яйцам? Ну, теперь знаешь!")
                     phaseCHK[phase] = true
                 end
             end
@@ -432,7 +432,7 @@ function FlyOverPlayerWMark(boss, hero)
 
     local r = GetRandomInt(1, 10)
     if r==1 then
-        PlayBossSpeech("Speech\\Wyvern\\".."`","Сюда сюда иди")
+        PlayBossSpeech("Speech\\Wyvern\\".."`","Сюда, сюда иди")
     elseif r==2 then
         PlayBossSpeech("Speech\\Wyvern\\".."`","Нужно найти место для будущего гнезда")
     elseif r==3 then

@@ -33,11 +33,21 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
     local heroCurrent = hero
     local dist = 0
     local rotationShieldAngle = 0
+    local newAngle=angle
     TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
         dist = dist + speed
         delay = delay - speed
         local x, y, z = BlzGetLocalSpecialEffectX(bullet), BlzGetLocalSpecialEffectY(bullet), BlzGetLocalSpecialEffectZ(bullet)
         local zGround = GetTerrainZ(MoveX(x, speed * 2, angleCurrent), MoveY(y, speed * 2, angleCurrent))
+
+        if effectmodel=="Firebrand Shot Silver"  then -- самонаводка
+            local _,enemy=UnitDamageArea(hero, 0, x, y, 300)
+            if enemy then
+                newAngle=AngleBetweenXY(x,y,GetUnitXY(enemy))/ bj_DEGTORAD
+                angleCurrent = lerpTheta(angleCurrent, newAngle, TIMER_PERIOD * 2) -- хороший магнетизм уже при 8
+            end
+        end
+
         BlzSetSpecialEffectYaw(bullet, math.rad(angleCurrent))
         local nx, ny = MoveXY(x, y, speed, angleCurrent)
         BlzSetSpecialEffectPosition(bullet, nx, ny, z) -- было z-2

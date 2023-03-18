@@ -12,11 +12,20 @@ function PlayMonoSpeech(sound, text)
             sd = 1000
         end
         BlzFrameSetVisible(TexBox, true)
+        local v=20
+        SetMusicVolumeBJ(v)
         BlzFrameSetText(TexBoxText, text)
         TransmissionFromUnitWithNameBJ(GetPlayersAll(), HERO[0].UnitHero, "", nil, "", bj_TIMETYPE_SET, GetSoundDuration(s) / 700, false)
         --print(GetSoundDuration(s))
         TimerStart(CreateTimer(), sd / 700, false, function()
             BlzFrameSetVisible(TexBox, false)
+            TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
+                SetMusicVolumeBJ(v)
+                v=v+1
+                if v>= 100 then
+                    DestroyTimer(GetExpiredTimer())
+                end
+            end)
         end)
     end
 end

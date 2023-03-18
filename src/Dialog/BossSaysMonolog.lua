@@ -3,11 +3,13 @@
 --- Created by User.
 --- DateTime: 16.02.2023 22:32
 ---
+GBossSoundDuration=0
 function PlayBossSpeech(sound, text)
     if not TexBoxBoss then
         --print("первый диалог")
         CreteDialogBoxBoss()
     end
+
     if not BlzFrameIsVisible(TexBoxBoss) then
         local s = normal_sound(sound)
         local sd = GetSoundDuration(s)
@@ -15,12 +17,23 @@ function PlayBossSpeech(sound, text)
         if sd <= 10 then
             sd = 3000
         end
+        local v=20
+        SetMusicVolumeBJ(v)
         BlzFrameSetVisible(TexBoxBoss, true)
         BlzFrameSetText(TexBoxTextBoss, text)
         --TransmissionFromUnitWithNameBJ(GetPlayersAll(), HERO[0].UnitHero, "", nil, "", bj_TIMETYPE_SET, GetSoundDuration(s) / 700, false)
         --print(GetSoundDuration(s))
+        GBossSoundDuration=sd / 700
         TimerStart(CreateTimer(), sd / 700, false, function()
             BlzFrameSetVisible(TexBoxBoss, false)
+
+            TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
+                SetMusicVolumeBJ(v)
+                v=v+1
+                if v>= 100 then
+                    DestroyTimer(GetExpiredTimer())
+                end
+            end)
         end)
     end
 end

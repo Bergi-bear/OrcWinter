@@ -20,7 +20,7 @@ function CastSnowBall(data,directionAngle)
         TimerStart(CreateTimer(), 0.35, false, function()
             data.AttackIsReady=true
 
-            if UnitAlive(hero) and not data.IsMoving then
+            if UnitAlive(hero) and not data.IsMoving and not LockAnimAnimation(data) then
                 ResetUnitAnimation(hero)
             end
             DestroyTimer(GetExpiredTimer())
