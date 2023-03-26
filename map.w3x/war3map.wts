@@ -1204,12 +1204,6 @@ STRING 484
 НТС
 }
 
-STRING 497
-// Abilities: A604 (SANTA HAT), Name (Name)
-{
-SANTA HAT
-}
-
 STRING 534
 // Doodads: D00V (+[Misc] smallLights 1), Name (Name)
 {
@@ -1790,5 +1784,29 @@ STRING 714
 // Doodads: D02J (Аниме Арена), Name (Name)
 {
 Аниме Арена
+}
+
+STRING 715
+// Doodads: D02K (Фейковый снег), Name (Name)
+{
+Фейковый снег
+}
+
+STRING 716
+// Units: h009 (Аниме Богиня Босс), Name (Name)
+{
+Аниме Богиня Босс
+}
+
+STRING 717
+// Units: h009 (Аниме Богиня Босс), Propernames (Proper Names)
+{
+Аниме Богиня (Босс)
+}
+
+STRING 718
+// Abilities: A604 (TalkToMe), Name (Name)
+{
+TalkToMe
 }
 

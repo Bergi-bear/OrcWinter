@@ -18,6 +18,11 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
         CollisionRange=60
         zhero = GetUnitZ(hero) + 95
     end
+    if effectmodel=="BlastMissile" then
+        CollisionRange=600
+        delay=CollisionRange
+    end
+
 
     local bullet = AddSpecialEffect(effectmodel, xs, ys)
     BlzSetSpecialEffectYaw(bullet, math.rad(angle))

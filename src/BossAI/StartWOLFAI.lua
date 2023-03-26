@@ -48,7 +48,7 @@ function StartWolfAI(xs, ys)
     local OnAttack = true
     TimerStart(CreateTimer(), 1, true, function()
         --каждую секунду
-        GBoss=boss
+        GBoss = boss
         local bx, by = GetUnitXY(boss)
 
         if not UnitAlive(boss) then
@@ -246,7 +246,7 @@ function WolfIceSpikeLine(boss, hero, hardAngle)
             if hero then
                 angle = AngleBetweenUnits(boss, hero)
             end
-            local nx, ny = MoveXY(xs, ys , speed*d , angle)
+            local nx, ny = MoveXY(xs, ys, speed * d, angle)
             d = d + 1
             local eff = AddSpecialEffect("Ice Shard", nx, ny)
             BlzSetSpecialEffectYaw(eff, math.rad(GetRandomInt(0, 360))) --angle
@@ -350,7 +350,7 @@ function WolfWinterMove(boss, xs, ys)
             WolfDoingFastWalk = true
             local i = ri
             --SetUnitAnimation(boss,"Walk")
-            local chargeEff=AddSpecialEffectTarget("IceCharge",boss,"origin")
+            local chargeEff = AddSpecialEffectTarget("IceCharge", boss, "origin")
             SetUnitAnimationByIndex(boss, 2)--WALK
             SetUnitTimeScale(boss, 3)
 
@@ -434,9 +434,8 @@ function UnitAddJumpForce(hero, angle, speed, distance, MaxHeight, HasMarker)
                 end
                 WolfRoundMove(hero)
             end
-            if UnitAlive(hero) then
-                ResetUnitAnimation(hero)
-            end
+
+            QueueUnitAnimation(hero,"stand")
 
             if true then
                 UnitDamageArea(hero, 150, newX, newY, 250)

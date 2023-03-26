@@ -18,6 +18,11 @@ gg_rct_EnterWolf = nil
 gg_rct_EnterWivern = nil
 gg_rct_Region_012 = nil
 gg_rct_Region_013 = nil
+gg_rct_Enter2Arena = nil
+gg_rct_ExitArena = nil
+gg_rct_AnimBossEnter = nil
+gg_rct_AnimBossStart = nil
+gg_rct_AIStartBoss = nil
 gg_cam_OnPeonsandTrall = nil
 gg_cam_OnPineRound = nil
 gg_cam_OnPeons = nil
@@ -48,6 +53,9 @@ gg_snd_fyyachtoetozazvyki = nil
 gg_snd_oanenashilietopodarki = nil
 gg_snd_15 = nil
 gg_snd_16 = nil
+gg_trg_EnterAnimeArena = nil
+gg_trg_ExitAnimeArena = nil
+gg_trg_InitAnimeArena = nil
 gg_trg_InitYetty = nil
 gg_trg_StartYettyCinematic = nil
 gg_trg_SkipYetty = nil
@@ -74,6 +82,7 @@ gg_unit_opeo_0015 = nil
 gg_unit_opeo_0024 = nil
 gg_unit_h006_0172 = nil
 gg_unit_h006_0173 = nil
+gg_unit_opeo_0198 = nil
 gg_dest_B007_5312 = nil
 function InitGlobals()
 udg_PressESC = false
@@ -223,6 +232,9 @@ u = BlzCreateUnitWithSkin(p, FourCC("h007"), 1056.8, -2436.1, 182.046, FourCC("h
 u = BlzCreateUnitWithSkin(p, FourCC("h007"), 608.9, -879.9, 182.046, FourCC("h007"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), 601.4, -1416.6, 5.812, FourCC("h002"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), -6012.7, 7349.6, 5.812, FourCC("h002"))
+u = BlzCreateUnitWithSkin(p, FourCC("h009"), -11217.1, 9574.6, 232.970, FourCC("h009"))
+gg_unit_opeo_0198 = BlzCreateUnitWithSkin(p, FourCC("opeo"), -13035.5, 8340.8, 288.363, FourCC("opeo"))
+SetUnitColor(gg_unit_opeo_0198, ConvertPlayerColor(0))
 end
 
 function CreateUnitsForPlayer1()
@@ -595,6 +607,14 @@ u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 5084.7, 6588.1, 172.683, FourCC("op
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 1002.6, -1770.7, 233.399, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -11344.4, 9409.7, 52.766, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -11398.5, 9345.9, 53.941, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -11462.6, 9264.5, 55.237, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -11595.2, 9268.2, 11.412, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
 end
 
 function CreatePlayerBuildings()
@@ -633,6 +653,11 @@ gg_rct_EnterWolf = Rect(-11968.0, 1760.0, -11712.0, 1888.0)
 gg_rct_EnterWivern = Rect(-7168.0, 6016.0, -4512.0, 8352.0)
 gg_rct_Region_012 = Rect(-2848.0, -4512.0, -2656.0, -4448.0)
 gg_rct_Region_013 = Rect(-3424.0, -5824.0, -2240.0, -4704.0)
+gg_rct_Enter2Arena = Rect(1024.0, 7104.0, 1216.0, 7328.0)
+gg_rct_ExitArena = Rect(1280.0, 7008.0, 1376.0, 7232.0)
+gg_rct_AnimBossEnter = Rect(-13184.0, 7488.0, -13088.0, 7584.0)
+gg_rct_AnimBossStart = Rect(-13088.0, 7584.0, -12832.0, 7840.0)
+gg_rct_AIStartBoss = Rect(-12256.0, 8576.0, -10304.0, 10240.0)
 end
 
 function CreateCameras()
@@ -1159,6 +1184,11 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
         CollisionRange=60
         zhero = GetUnitZ(hero) + 95
     end
+    if effectmodel=="BlastMissile" then
+        CollisionRange=600
+        delay=CollisionRange
+    end
+
 
     local bullet = AddSpecialEffect(effectmodel, xs, ys)
     BlzSetSpecialEffectYaw(bullet, math.rad(angle))
@@ -3924,6 +3954,331 @@ function UnitFakeCollisionPush(unit, range)
         GroupRemoveUnit(perebor, e)
     end
     return has
+end
+do
+    local InitGlobalsOrigin = InitGlobals
+    function InitGlobals()
+        InitGlobalsOrigin()
+        TimerStart(CreateTimer(), .01, false, function()
+            DestroyTimer(GetExpiredTimer())
+
+            InitTrig_EnterInRectAnime()
+        end)
+    end
+end
+
+function InitTrig_EnterInRectAnime()
+
+    --print("Инициализация босса ")
+    local gg_trg_EnterInRect = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_EnterInRect, gg_rct_AIStartBoss)
+    TriggerAddAction(gg_trg_EnterInRect, function()
+        if IsUnitType(GetEnteringUnit(), UNIT_TYPE_HERO) then
+            --print("12")
+            local boss = FindUnitOfType(FourCC('h009'))
+
+            StartAnimeAI(GetUnitXY(boss))
+            DisableTrigger(gg_trg_EnterInRect)
+            local enterTrig = CreateTrigger()
+            TriggerRegisterUnitInRange(enterTrig, boss, 200, nil)
+            TriggerAddAction(enterTrig, function()
+                local entering = GetTriggerUnit()
+                --print(GetUnitName(entering))
+
+            end)
+
+        end
+    end)
+end
+
+
+function StartAnimeAI(xs, ys)
+    xs,ys=-12079,8680 -- центр арены
+    local boss = FindUnitOfType(FourCC('h009'))
+    local BossFight = true
+    local into = CreateBOSSHPBar(boss, "Богиня Аниме")
+    CreateMarkOnBossBar(into, 80)
+    CreateMarkOnBossBar(into,60)
+    CreateMarkOnBossBar(into, 40)
+    CreateMarkOnBossBar(into, 20)
+    local phaseCHK = {
+        true,
+        false,
+        false,
+        false,
+        false
+    }
+    UnitAddAbility(boss, FourCC('Abun'))
+    --SetUnitPosition(boss, xs, ys)
+    SetUnitOwner(boss, Player(10), true)
+    local range = 2500
+    local x, y = GetUnitXY(boss)
+    ClearMapMusicBJ()
+    PlayMusicBJ("The Hollow Reef")
+    SetMusicVolumeBJ(100)
+    --local FW = CreateFogModifierRectBJ(false, Player(0), FOG_OF_WAR_VISIBLE, GlobalRect)
+    --FogModifierStart(FW)
+
+    local phase = 1--GetRandomInt(1, 1) --стартовая фаза
+    local sec = 0
+    local PhaseOn = true
+    local OnAttack = true
+    local OnSecondPhaseMove = 0
+    local bulletCounter=0
+    local r=GetRandomInt(1,3)
+
+
+    TimerStart(CreateTimer(), 1, true, function()
+        --каждую секунду
+        local bx, by = GetUnitXY(boss)
+        GBoss=boss
+        if not UnitAlive(boss) then
+            -- Место где босс
+            StartSound(bj_questCompletedSound)
+            DestroyTimer(GetExpiredTimer())
+            phase = 0
+            --print("Даём нарграду, победа")
+            CreateVictoryElderBorder()
+            ClearMapMusicBJ()
+            PlayMusicBJ("Salve Springs")
+            SetMusicVolumeBJ(100)
+            BlzFrameSetVisible(into, false)
+
+        else
+            --Проверяем есть ли живые герои, когда тиник жив
+            if BossFight then
+                local k = 0
+                for i = 0, 3 do
+                    local hero = HERO[i].UnitHero
+                    if IsUnitInRange(hero, boss, range) then
+                        -- поиск героя в радиусе ранге
+                        k = k + 1
+                    end
+
+                    --print("Отталкивание для особо умных")
+                    if OnAttack then
+                        if IsUnitInRange(hero, boss, 250) then
+                            if phase == 1 then
+                                --print("подошел слишком близко")
+
+                            end
+                            --SetUnitTimeScale(boss,-1)
+                            OnAttack = false
+                            TimerStart(CreateTimer(), 5, false, function()
+                                OnAttack = true
+                            end)
+
+                            --SetUnitAnimation(boss,"Attack")
+                            if phase ~= 1 then
+                                --PlaySound("Speech\\Yetti\\tineproidesh")
+                                --EttiDashAttackPrepare(boss, hero)
+                            end
+
+                        end
+
+                    end
+                end
+
+                if k == 0 then
+                    BossFight = false
+                    phase = 0
+                    --print("Нет ни 1 игрока рядов, босс файт прерван")
+                    --print(BlzFrameIsVisible(into))
+                    BlzFrameSetVisible(into, false)
+                    --print(BlzFrameIsVisible(into))
+                    HealUnit(boss)
+                    SetUnitPositionSmooth(boss, xs, ys)
+                    ClearMapMusicBJ()
+                    PlayMusicBJ("Salve Springs")
+                    SetMusicVolumeBJ(100)
+
+                end
+            end
+        end
+        local xb, yb = GetUnitXY(boss)
+        if BossFight then
+            -- если идёт бой
+            sec = sec + 1
+            if sec >= 5 then
+                sec = 0
+                phase = GetRandomInt(1, 1) -- переключатель, рандомизатор фаз
+                PhaseOn = true
+                --print("phase " .. phase)
+            end
+
+            if GetUnitLifePercent(boss) <= 80 then
+                phase = 2
+                if not phaseCHK[phase] then
+                    phaseCHK[phase] = true
+                    OnSecondPhaseMove = 0
+                    Blink2Point(boss,xs,ys)
+                    CreateBeemInRange(HERO[0].UnitHero,6)
+                    -- print("смена фазы на ", phase)
+                end
+            end
+
+            if GetUnitLifePercent(boss) <= 60 then
+                phase = 3
+                if not phaseCHK[phase] then
+                    --print("смена фазы на ", phase)
+
+                    phaseCHK[phase] = true
+                end
+            end
+
+            if GetUnitLifePercent(boss) <= 40 then
+                phase = 4
+                if not phaseCHK[phase] then
+                    --print("смена фазы на ", phase)
+
+                    phaseCHK[phase] = true
+                end
+            end
+            if GetUnitLifePercent(boss) <= 20 then
+                phase = 5
+                if not phaseCHK[phase] then
+                    --print("смена фазы на ", phase)
+
+                    phaseCHK[phase] = true
+                end
+            end
+
+            --фазы
+            local hero = HERO[0].UnitHero
+            bulletCounter=bulletCounter+1
+            if bulletCounter>=5 then
+                bulletCounter=1
+            end
+            if phase == 1 and PhaseOn then
+                PhaseOn = false
+                Blink2Point(boss,xs,ys)
+                CreateBeemInRange(boss,6)
+                print("фаза", phase)
+
+            end
+
+            if phase == 2 and PhaseOn then
+                PhaseOn = false
+                --print("фаза", phase)
+                AnimeRangeAttack(boss,hero,bulletCounter)
+            end
+            if phase == 3 and PhaseOn then
+                PhaseOn = false
+                --print("фаза", phase)
+
+            end
+            if phase == 5 and PhaseOn then
+                PhaseOn = false
+
+
+            end
+            if phase == 5 and PhaseOn then
+                PhaseOn = false
+                print("фаза", phase)
+
+            end
+            if phase == 6 and PhaseOn then
+                PhaseOn = false
+                print("фаза", phase)
+
+
+            end
+            if phase == 7 and PhaseOn then
+                PhaseOn = false
+                print("фаза", phase)
+
+            end
+
+
+        else
+            -- перезапуск боссфайта
+            local k = 0
+            for i = 0, 3 do
+                local hero = HERO[i].UnitHero
+                if IsUnitInRange(hero, boss, 1500) then
+                    k = k + 1
+                end
+            end
+            if k >= 1 then
+                --print("Лечим босса, и бой возобновляется")
+                ClearMapMusicBJ()
+                PlayMusicBJ("The Hollow Reef")
+                SetUnitPositionSmooth(boss, xs, ys) --возвращаем нарграду место
+                SetMusicVolumeBJ(100)
+                BlzFrameSetVisible(into, true)
+                HealUnit(boss, 99999)
+                BossFight = true
+                phaseCHK = {
+                    true,
+                    false,
+                    false,
+                    false,
+                    false
+                }
+            end
+        end--конец
+    end)
+end
+
+function CreateBeemInRange(boss,count)
+    local x,y=GetUnitXY(boss)
+    local angle=360/count
+    --CreateBeemLighting(boss)
+    local element={}
+    local t=CreateTimer()
+    for i=1,count do
+        local eff=AddSpecialEffect("LightOnly",x,y)
+        local z=GetTerrainZ(x,y)+80
+        BlzSetSpecialEffectZ(eff,z)
+        BlzSetSpecialEffectPitch(eff, math.rad(-90))
+        BlzSetSpecialEffectYaw(eff, math.rad(-180+angle*i))
+        BlzPlaySpecialEffect(eff,ANIM_TYPE_STAND)
+        BlzSetSpecialEffectMatrixScale(eff,1.5,1.5,5)
+
+        table.insert(element,eff)
+        TimerStart(CreateTimer(), 4.5, false, function()
+            DestroyEffect(eff)
+            DestroyTimer(t)
+        end)
+    end
+    local a=0
+    local r=1
+    if GetRandomInt(1,2)==1 then
+        r=-1
+    end
+    local speed=0.5*r
+    TimerStart(CreateTimer(), 1, false, function()
+        TimerStart(t, TIMER_PERIOD64, true, function()
+            a=a+speed
+            for i=1,#element do
+                BlzSetSpecialEffectYaw(element[i], math.rad(-180+angle*i+a))
+                BlzSetSpecialEffectMatrixScale(element[i],3,3,5)
+                BlzSetSpecialEffectColor(element[i],255,0,0)
+            end
+        end)
+    end)
+end
+
+function AnimeRangeAttack(boss,hero,max)
+    local eff=nil
+    local t=CreateTimer()
+    TimerStart(t, 1, true, function()
+        local angle=AngleBetweenUnits(boss,hero)
+        SetUnitFacing(boss,angle)
+        SetUnitAnimation(boss,"Attack")
+        QueueUnitAnimation(boss,"Stand")
+        eff=CreateAndForceBullet(boss,angle,20,"BlastMissile.mdl")
+        max=max-1
+        if max<=0 then
+            DestroyTimer(t)
+        end
+    end)
+
+    TimerStart(CreateTimer(), 4.5, false, function()
+        local xe,ye=BlzGetLocalSpecialEffectX(eff),BlzGetLocalSpecialEffectY(eff)
+        Blink2Point(boss, xe, ye)
+        SetUnitFacing(boss,AngleBetweenUnits(boss,hero))
+    end)
 end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
@@ -7131,9 +7486,9 @@ end
 --- DateTime: 13.12.2021 0:39
 ---
 function Blink2Point(unit, x, y)
-    DestroyEffect(AddSpecialEffect("Abilities\\Spells\\NightElf\\Blink\\BlinkCaster.mdl", GetUnitXY(unit)))
+    DestroyEffect(AddSpecialEffect("BlinkCasterNoOmni", GetUnitXY(unit)))
     SetUnitPositionSmooth(unit, x,y)
-    DestroyEffect(AddSpecialEffect("Abilities\\Spells\\NightElf\\Blink\\BlinkCaster.mdl", GetUnitXY(unit)))
+    DestroyEffect(AddSpecialEffect("BlinkCasterNoOmni", GetUnitXY(unit)))
 end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
@@ -8631,6 +8986,51 @@ function InitCamControl()
 end
 
 --CUSTOM_CODE
+function Trig_EnterAnimeArena_Conditions()
+if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+return false
+end
+return true
+end
+
+function Trig_EnterAnimeArena_Actions()
+SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_AnimBossStart))
+end
+
+function InitTrig_EnterAnimeArena()
+gg_trg_EnterAnimeArena = CreateTrigger()
+TriggerRegisterEnterRectSimple(gg_trg_EnterAnimeArena, gg_rct_Enter2Arena)
+TriggerAddCondition(gg_trg_EnterAnimeArena, Condition(Trig_EnterAnimeArena_Conditions))
+TriggerAddAction(gg_trg_EnterAnimeArena, Trig_EnterAnimeArena_Actions)
+end
+
+function Trig_ExitAnimeArena_Conditions()
+if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+return false
+end
+return true
+end
+
+function Trig_ExitAnimeArena_Actions()
+SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_ExitArena))
+end
+
+function InitTrig_ExitAnimeArena()
+gg_trg_ExitAnimeArena = CreateTrigger()
+TriggerRegisterEnterRectSimple(gg_trg_ExitAnimeArena, gg_rct_AnimBossEnter)
+TriggerAddCondition(gg_trg_ExitAnimeArena, Condition(Trig_ExitAnimeArena_Conditions))
+TriggerAddAction(gg_trg_ExitAnimeArena, Trig_ExitAnimeArena_Actions)
+end
+
+function Trig_InitAnimeArena_Actions()
+UnitAddAbilityBJ(FourCC("A604"), gg_unit_opeo_0198)
+end
+
+function InitTrig_InitAnimeArena()
+gg_trg_InitAnimeArena = CreateTrigger()
+TriggerAddAction(gg_trg_InitAnimeArena, Trig_InitAnimeArena_Actions)
+end
+
 function Trig_InitYetty_Actions()
 SetUnitAnimation(gg_unit_n000_0001, "death")
 end
@@ -9299,6 +9699,9 @@ TriggerAddAction(gg_trg_ESCTEST, Trig_ESCTEST_Actions)
 end
 
 function InitCustomTriggers()
+InitTrig_EnterAnimeArena()
+InitTrig_ExitAnimeArena()
+InitTrig_InitAnimeArena()
 InitTrig_InitYetty()
 InitTrig_StartYettyCinematic()
 InitTrig_SkipYetty()
@@ -9318,6 +9721,7 @@ InitTrig_ESCTEST()
 end
 
 function RunInitializationTriggers()
+ConditionalTriggerExecute(gg_trg_InitAnimeArena)
 ConditionalTriggerExecute(gg_trg_InitGUI)
 end
 
@@ -9362,7 +9766,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, -11648.0, 8000.0)
+DefineStartLocation(0, -12864.0, 7872.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()
