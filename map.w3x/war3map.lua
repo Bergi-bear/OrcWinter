@@ -222,6 +222,7 @@ u = BlzCreateUnitWithSkin(p, FourCC("h004"), -476.6, -4225.4, 159.380, FourCC("h
 u = BlzCreateUnitWithSkin(p, FourCC("h007"), 1056.8, -2436.1, 182.046, FourCC("h007"))
 u = BlzCreateUnitWithSkin(p, FourCC("h007"), 608.9, -879.9, 182.046, FourCC("h007"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), 601.4, -1416.6, 5.812, FourCC("h002"))
+u = BlzCreateUnitWithSkin(p, FourCC("h002"), -6012.7, 7349.6, 5.812, FourCC("h002"))
 end
 
 function CreateUnitsForPlayer1()
@@ -568,6 +569,8 @@ SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("e003"), 4188.3, 2697.4, 248.540, FourCC("e003"))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 1214.4, 2660.8, 11.906, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 4924.1, 6420.5, 102.463, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 801.1, -2497.8, 28.538, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 873.8, -2488.1, 6.286, FourCC("opeo"))
@@ -588,6 +591,10 @@ u = BlzCreateUnitWithSkin(p, FourCC("n00A"), 4465.4, 2399.8, 137.073, FourCC("n0
 u = BlzCreateUnitWithSkin(p, FourCC("n00A"), 4540.3, 2867.3, 175.058, FourCC("n00A"))
 u = BlzCreateUnitWithSkin(p, FourCC("n00A"), 3830.3, 2974.2, 320.768, FourCC("n00A"))
 u = BlzCreateUnitWithSkin(p, FourCC("n00A"), 3897.6, 2377.1, 61.057, FourCC("n00A"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 5084.7, 6588.1, 172.683, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 1002.6, -1770.7, 233.399, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
 end
 
 function CreatePlayerBuildings()
@@ -1168,6 +1175,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
     local dist = 0
     local rotationShieldAngle = 0
     local newAngle=angle
+    local enemy=nil
     TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
         dist = dist + speed
         delay = delay - speed
@@ -1175,10 +1183,12 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
         local zGround = GetTerrainZ(MoveX(x, speed * 2, angleCurrent), MoveY(y, speed * 2, angleCurrent))
 
         if effectmodel=="Firebrand Shot Silver"  then -- самонаводка
-            local _,enemy=UnitDamageArea(hero, 0, x, y, 300)
+
             if enemy then
                 newAngle=AngleBetweenXY(x,y,GetUnitXY(enemy))/ bj_DEGTORAD
                 angleCurrent = lerpTheta(angleCurrent, newAngle, TIMER_PERIOD * 2) -- хороший магнетизм уже при 8
+            else
+                _,enemy=UnitDamageArea(hero, 0, x, y, 300)
             end
         end
 
@@ -1775,7 +1785,7 @@ function PointContentDestructable (x, y, range, iskill, damage, hero)
 
                     end
                 end
-                if GetDestructableLife(d) >= 1 then
+                if GetDestructableLife(d) >= 1 and damage > 0 then
                     SetDestructableAnimation(d, "Stand Hit")
                     DamageFruitTree(d)
                 else
@@ -2393,21 +2403,28 @@ function InitMouseClickEvent()
     TriggerAddAction(TrigPressLMB, function()
         if BlzGetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_LEFT then
             --print("клик левой")
-            local x,y=BlzGetTriggerPlayerMouseX(),BlzGetTriggerPlayerMouseY()
+            local x, y = BlzGetTriggerPlayerMouseX(), BlzGetTriggerPlayerMouseY()
             local data = HERO[GetPlayerId(GetTriggerPlayer())]
-            local angle=AngleBetweenXY( GetUnitX(data.UnitHero), GetUnitY(data.UnitHero),x, y) / bj_DEGTORAD
-            CastSnowBall(data,angle)
-            if not data.StartRepeaterAttack then
-                data.StartRepeaterAttack=true
-                TimerStart(CreateTimer(), 0.05, true, function()
-                    if data.LMBIsPressed then
-                        x,y=data.fakeX,data.fakeY
-                        angle=AngleBetweenXY( GetUnitX(data.UnitHero), GetUnitY(data.UnitHero),x, y) / bj_DEGTORAD
-                        CastSnowBall(data,angle)
-                    end
-                end)
+            if x > -5 and x < 5 then
+                --print("по интерфейсу")
+            else
+                local angle = AngleBetweenXY(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), x, y) / bj_DEGTORAD
+                CastSnowBall(data, angle)
+                if not data.StartRepeaterAttack then
+                    data.StartRepeaterAttack = true
+                    local period=0.2
+                    TimerStart(CreateTimer(), period, true, function()
+                        if data.LMBIsPressed then
+                            x, y = data.fakeX, data.fakeY
+                            angle = AngleBetweenXY(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), x, y) / bj_DEGTORAD
+                            CastSnowBall(data, angle)
+                        end
+                    end)
+                end
+
 
             end
+
             data.LMBIsPressed = true
             data.inputEffectNumber = GetRandomInt(1, 8)
         end
@@ -3464,6 +3481,22 @@ function CreateMarkOnBossBar(into,marcPercent)
     BlzFrameSetSize(mark, 0.06, 0.06)
     BlzFrameSetPoint(mark, FRAMEPOINT_CENTER, into, FRAMEPOINT_LEFT,0.77*marcPercent/100 , 0.0)
     table.insert(BugsFH,mark)
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 26.03.2023 14:27
+---
+function CreateBeemLighting(hero,x,y,xEnd,yEnd,timed)
+    x,y=GetUnitXY(hero)
+    local angle=GetUnitFacing(hero)
+    local eff=AddSpecialEffect("LightOnly",x,y)
+    local z=GetTerrainZ(x,y)+80
+    BlzSetSpecialEffectZ(eff,z)
+    BlzSetSpecialEffectPitch(eff, math.rad(-90))
+    BlzSetSpecialEffectYaw(eff, math.rad(-180+angle))
+    BlzPlaySpecialEffect(eff,ANIM_TYPE_STAND)
+    BlzSetSpecialEffectMatrixScale(eff,1.5,1.5,5)
 end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
@@ -7109,6 +7142,8 @@ end
 ---
 function CastSnowBall(data,directionAngle)
     local effModel="Firebrand Shot Silver"--snowball
+    --effModel="PrismBeam_Initiate"
+
     local hero=data.UnitHero
     if data.AttackIsReady and not data.SpaceForce and UnitAlive(hero) and not FREE_CAMERA and not IsUnitStunned(hero) then
         --WolfSlashAttack(hero) --для проверки вставлял
@@ -7116,6 +7151,7 @@ function CastSnowBall(data,directionAngle)
         SetUnitAnimationByIndex(hero,3)
         data.AttackIsReady=false
         data.UnitInAttack=true
+        --CreateBeemLighting(hero)
         TimerStart(CreateTimer(), 0.15, false, function() -- задержка замаха
             CreateAndForceBullet(hero,directionAngle,40,effModel)
             data.MHoldSec=data.MHoldSec+1
@@ -7788,7 +7824,14 @@ function InitWASD(hero)
             data.CameraStabUnit = nil
             if not FREE_CAMERA then
                 SetCameraQuickPosition(GetUnitX(hero), GetUnitY(hero))
-                SetCameraTargetControllerNoZForPlayer(GetOwningPlayer(hero), hero, 10, 200, false) -- не дергается
+                --print("камера живого героя")
+                --local xcam,ycam=MoveXY(hx, hy,300,curAngle)
+                --xcam=xcam-hx
+                --ycam=ycam-hy
+                --GetPlayerMouseX[0],GetPlayerMouseY[0]
+                --print(xcam,ycam)
+
+                SetCameraTargetControllerNoZForPlayer(GetOwningPlayer(hero), hero, 0,200, false) -- не дергается
                 --print(GetCameraField(CAMERA_FIELD_ANGLE_OF_ATTACK))
                 --print(GetCameraField(CAMERA_FIELD_TARGET_DISTANCE))
                 local z = GetUnitZ(hero)
@@ -9319,7 +9362,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, -4928.0, 5760.0)
+DefineStartLocation(0, -11648.0, 8000.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()

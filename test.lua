@@ -1,0 +1,20 @@
+function InitAllSprites()
+    CreateSprite("kenosbynpesta", 0.3, 0.0, 0.5)
+    CreateSprite("anime", 1, 0.2, 0.5)
+    CreateSprite("anime-nigarundayo", 0.8, 0.5, 0.5)
+    CreateSprite("cat-walking", 0.5, 0, 0.3)
+    CreateSprite("excalibur-soul-eater", 0.5, 0.2, 0.3)
+    CreateSprite("futurama-fry", 0.7, 0.5, 0.3)
+    CreateSprite("hp-baxxter", 1, 0.8, 0.3)
+    CreateSprite("cat-love", 0.3, 0.0, 0.15)
+    CreateSprite("paimon", 0.4, 0.2, 0.15)
+    CreateSprite("pico-boku-no-pico", 0.45, 0.45, 0.12)
+end
+
+function CreateSprite(path, scale, x, y)
+    local sprite = BlzCreateFrameByType("SPRITE", "SpriteName", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
+    BlzFrameSetAbsPoint(sprite, FRAMEPOINT_CENTER, x, y)
+    BlzFrameSetSize(sprite, 0.0001, 0.0001)
+    BlzFrameSetModel(sprite, path, 0)
+    BlzFrameSetScale(sprite, scale)
+end

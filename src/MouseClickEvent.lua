@@ -12,21 +12,28 @@ function InitMouseClickEvent()
     TriggerAddAction(TrigPressLMB, function()
         if BlzGetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_LEFT then
             --print("клик левой")
-            local x,y=BlzGetTriggerPlayerMouseX(),BlzGetTriggerPlayerMouseY()
+            local x, y = BlzGetTriggerPlayerMouseX(), BlzGetTriggerPlayerMouseY()
             local data = HERO[GetPlayerId(GetTriggerPlayer())]
-            local angle=AngleBetweenXY( GetUnitX(data.UnitHero), GetUnitY(data.UnitHero),x, y) / bj_DEGTORAD
-            CastSnowBall(data,angle)
-            if not data.StartRepeaterAttack then
-                data.StartRepeaterAttack=true
-                TimerStart(CreateTimer(), 0.05, true, function()
-                    if data.LMBIsPressed then
-                        x,y=data.fakeX,data.fakeY
-                        angle=AngleBetweenXY( GetUnitX(data.UnitHero), GetUnitY(data.UnitHero),x, y) / bj_DEGTORAD
-                        CastSnowBall(data,angle)
-                    end
-                end)
+            if x > -5 and x < 5 then
+                --print("по интерфейсу")
+            else
+                local angle = AngleBetweenXY(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), x, y) / bj_DEGTORAD
+                CastSnowBall(data, angle)
+                if not data.StartRepeaterAttack then
+                    data.StartRepeaterAttack = true
+                    local period=0.2
+                    TimerStart(CreateTimer(), period, true, function()
+                        if data.LMBIsPressed then
+                            x, y = data.fakeX, data.fakeY
+                            angle = AngleBetweenXY(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), x, y) / bj_DEGTORAD
+                            CastSnowBall(data, angle)
+                        end
+                    end)
+                end
+
 
             end
+
             data.LMBIsPressed = true
             data.inputEffectNumber = GetRandomInt(1, 8)
         end

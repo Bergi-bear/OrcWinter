@@ -5,6 +5,8 @@
 ---
 function CastSnowBall(data,directionAngle)
     local effModel="Firebrand Shot Silver"--snowball
+    --effModel="PrismBeam_Initiate"
+
     local hero=data.UnitHero
     if data.AttackIsReady and not data.SpaceForce and UnitAlive(hero) and not FREE_CAMERA and not IsUnitStunned(hero) then
         --WolfSlashAttack(hero) --для проверки вставлял
@@ -12,6 +14,7 @@ function CastSnowBall(data,directionAngle)
         SetUnitAnimationByIndex(hero,3)
         data.AttackIsReady=false
         data.UnitInAttack=true
+        --CreateBeemLighting(hero)
         TimerStart(CreateTimer(), 0.15, false, function() -- задержка замаха
             CreateAndForceBullet(hero,directionAngle,40,effModel)
             data.MHoldSec=data.MHoldSec+1
