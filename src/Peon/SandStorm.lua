@@ -3,7 +3,7 @@
 --- Created by Bergi.
 --- DateTime: 17.12.2021 20:58
 ---
-function SandStorm(boss, x, y)
+function SandStorm(boss, x, y,range)
     --local eff = AddSpecialEffect("SandAura", x, y)
     local duration = 4
     TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()

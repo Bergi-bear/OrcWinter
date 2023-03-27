@@ -399,7 +399,7 @@ function WolfJump2Point(boss, HasMarker, x, y)
     end)
 end
 
-function UnitAddJumpForce(hero, angle, speed, distance, MaxHeight, HasMarker)
+function UnitAddJumpForce(hero, angle, speed, distance, MaxHeight, HasMarker,effModel)
     local currentdistance = 0
     local i = 0
     local ZStart = GetUnitZ(hero)
@@ -436,11 +436,11 @@ function UnitAddJumpForce(hero, angle, speed, distance, MaxHeight, HasMarker)
             end
 
             QueueUnitAnimation(hero,"stand")
-
-            if true then
-                UnitDamageArea(hero, 150, newX, newY, 250)
+            UnitDamageArea(hero, 150, newX, newY, 250)
+            if not effModel then
                 DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", newX, newY))
-
+            else
+                DestroyEffect(AddSpecialEffect(effModel, newX, newY))
             end
         end
     end)
