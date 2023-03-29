@@ -34,7 +34,6 @@ function InitTrig_EnterInRectB()
     end)
 end
 
-
 function StartYettyAI(xs, ys)
     CreateMoveTextureTimed(5)
     local boss = FindUnitOfType(FourCC('n000'))
@@ -57,7 +56,7 @@ function StartYettyAI(xs, ys)
     local OnAttack = true
     TimerStart(CreateTimer(), 1, true, function()
         --каждую секунду
-        GBoss=boss
+        GBoss = boss
         local bx, by = GetUnitXY(boss)
 
         if not UnitAlive(boss) then
@@ -243,10 +242,10 @@ function StartYettyAI(xs, ys)
                         local snowmanBlast = CreateUnit(GetOwningPlayer(boss), FourCC("e001"), xx, yy, 0)
                         IssueTargetOrder(snowmanBlast, "attack", hero)
                         local duration = 10
-                        local mark = AddSpecialEffectTarget("Spell Marker TC",snowmanBlast,"origin" )
+                        local mark = AddSpecialEffectTarget("Spell Marker TC", snowmanBlast, "origin")
                         BlzSetSpecialEffectColorByPlayer(mark, Player(1)) -- синий
                         TimerStart(CreateTimer(), 0.5, true, function()
-                            duration=duration-0.5
+                            duration = duration - 0.5
                             --FlyTextTagManaBurn(snowmanBlast,duration,GetOwningPlayer(hero))
                             if not OrderId2String(GetUnitCurrentOrder(snowmanBlast)) == "move" then
                                 IssuePointOrder(snowmanBlast, "move", GetUnitXY(hero))
@@ -257,7 +256,7 @@ function StartYettyAI(xs, ys)
                                 KillUnit(snowmanBlast)
                                 ShowUnit(snowmanBlast, false)
                             end
-                            if not UnitAlive(snowmanBlast) or duration<=0 then
+                            if not UnitAlive(snowmanBlast) or duration <= 0 then
                                 DestroyTimer(GetExpiredTimer())
                                 DestroyEffect(AddSpecialEffect("FrostWyrmMissileNoOmni", GetUnitXY(snowmanBlast)))
                                 DestroyEffect(mark)
@@ -341,6 +340,7 @@ function MarkAndFall(x, y, effModel, hero, delay)
     if not delay then
         delay = 2
     end
+
     local deep = 50
     if effModel == "Icicle" then
         deep = GetRandomInt(200, 400)
@@ -371,7 +371,8 @@ function MarkAndFall(x, y, effModel, hero, delay)
                 else
                     nd = CreateDestructableZ(FourCC('B002'), x, y, 0, 0, 5, 1)
                 end
-                TimerStart(CreateTimer(), 5 + (k * 5), false, function()
+                local duration = 5-- + (k * 5)
+                TimerStart(CreateTimer(), duration, false, function()
                     DestroyEffect(FallenEff)
                     --BlzSetSpecialEffectPosition(FallenEff, 999, 999, 999)
                     KillDestructable(nd)

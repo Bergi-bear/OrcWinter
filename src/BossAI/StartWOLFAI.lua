@@ -436,11 +436,12 @@ function UnitAddJumpForce(hero, angle, speed, distance, MaxHeight, HasMarker,eff
             end
 
             QueueUnitAnimation(hero,"stand")
-            UnitDamageArea(hero, 150, newX, newY, 250)
+            UnitDamageArea(hero, 150, newX, newY, 235)
             if not effModel then
                 DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", newX, newY))
             else
                 DestroyEffect(AddSpecialEffect(effModel, newX, newY))
+                DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", newX, newY))
             end
         end
     end)

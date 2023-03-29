@@ -110,6 +110,7 @@ function OnPostDamage()
             HeroCandyGetDamage(GetUnitData(target),caster)
         end
     end
+
     if GetUnitTypeId(target)==BigHP_ID then
 
         local realUnit=GetRealUnit(target)
@@ -122,6 +123,16 @@ function OnPostDamage()
             UnitDamageTarget(caster, realUnit, tempDamage, true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WHOKNOWS)
         end
 
+    end
+    if GetUnitTypeId(target)==FourCC("h009") then
+        --print("аниме")
+        if GetUnitUserData(target)==100 then
+            BlzSetEventDamage(0)
+            normal_sound("Sound\\Units\\Combat\\MetalLightSliceFlesh2", GetUnitX(target), GetUnitY(target))
+            --print("обнуление в эвенте дамага")
+            FlyTextTagShieldXY(GetUnitX(target), GetUnitY(target), "Отбила", GetOwningPlayer(caster))
+            CreateAndForceBullet(target,GetUnitFacing(target)+GetRandomInt(-15,15),60,"Firebrand Shot Silver")
+        end
     end
 
     if GetUnitTypeId(target) ~= HeroID and GetUnitTypeId(caster) == HeroID then

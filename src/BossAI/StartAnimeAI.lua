@@ -39,13 +39,23 @@ function StartAnimeAI(xs, ys)
     local boss = FindUnitOfType(FourCC('h009'))
     local BossFight = true
     local into = CreateBOSSHPBar(boss, "Богиня Аниме")
-    local hpMark = { 100, 88, 76, 64, 52, 40, 28, 16 }
-    local phaseCHK = {}
+    local hpMark = { 100, 88, 76, 64, 52, 40, 28 }
+    local phaseCHK = {
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+    }
+    local HPMarkFH={}
     for i = 1, #hpMark do
-        table.insert(phaseCHK, true)
+        --table.insert(phaseCHK, true)
         if i >= 2 then
-            CreateMarkOnBossBar(into, hpMark[i])
-            table.insert(phaseCHK, false)
+            table.insert(HPMarkFH,CreateMarkOnBossBar(into, hpMark[i]))
+            --table.insert(phaseCHK, false)
         end
     end
 
@@ -137,6 +147,7 @@ function StartAnimeAI(xs, ys)
         end
         local xb, yb = GetUnitXY(boss)
         if BossFight then
+            local hero = HERO[0].UnitHero
             -- если идёт бой
             sec = sec + 1
             if sec >= 5 then
@@ -145,24 +156,32 @@ function StartAnimeAI(xs, ys)
                 PhaseOn = true
                 --print("phase " .. phase)
             end
-
+           -- print("хп босса",GetUnitLifePercent(boss))
             if GetUnitLifePercent(boss) <= hpMark[2] then
                 phase = 2
+                --print("отработало 1")
                 if not phaseCHK[phase] then
+                    --print("отработало 2")
+                    AnitAddArmorTimed(boss,50,10)
+                    BlzFrameSetVisible(HPMarkFH[phase-1],false)
                     phaseCHK[phase] = true
                     OnSecondPhaseMove = 0
-                    Blink2Point(boss, xs, ys)
+                    --Blink2Point(boss, xs, ys)
                     --CreateBeemInRange(boss, 7)
+
+                    --print("смена фазы на ", phase, "Текущая секунда", sec)
                     sec = 0
-                    -- print("смена фазы на ", phase)
                 end
             end
 
             if GetUnitLifePercent(boss) <= hpMark[3] then
                 phase = 3
                 if not phaseCHK[phase] then
-                    --print("смена фазы на ", phase)
-
+                    AnitAddArmorTimed(boss,50,10)
+                    BlzFrameSetVisible(HPMarkFH[phase-1],false)
+                    --print("смена фазы на ", phase, "Текущая секунда", sec)
+                    sec = 0
+                    --AnimeJumpToPoint(boss, true, GetUnitXY(hero))
                     phaseCHK[phase] = true
                 end
             end
@@ -170,15 +189,20 @@ function StartAnimeAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[4] then
                 phase = 4
                 if not phaseCHK[phase] then
+                    AnitAddArmorTimed(boss,50,10)
+                    BlzFrameSetVisible(HPMarkFH[phase-1],false)
                     --print("смена фазы на ", phase)
-
+                    --CreateAndMoveChakram(boss, hero, bulletCounter)
                     phaseCHK[phase] = true
                 end
             end
             if GetUnitLifePercent(boss) <= hpMark[5] then
                 phase = 5
                 if not phaseCHK[phase] then
+                    AnitAddArmorTimed(boss,50,10)
+                    BlzFrameSetVisible(HPMarkFH[phase-1],false)
                     --print("смена фазы на ", phase)
+                    --FlyAroundHero(boss, hero)
 
                     phaseCHK[phase] = true
                 end
@@ -186,22 +210,26 @@ function StartAnimeAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[6] then
                 phase = 6
                 if not phaseCHK[phase] then
+                    AnitAddArmorTimed(boss,50,10)
+                    BlzFrameSetVisible(HPMarkFH[phase-1],false)
                     --print("смена фазы на ", phase)
-
+                    --CreateAnimeLineDelay(boss, hero, 10)
                     phaseCHK[phase] = true
                 end
             end
             if GetUnitLifePercent(boss) <= hpMark[7] then
                 phase = 7
                 if not phaseCHK[phase] then
+                    AnitAddArmorTimed(boss,50,120)
+                    BlzFrameSetVisible(HPMarkFH[phase-1],false)
                     --print("смена фазы на ", phase)
-
+                    SunStrikeArea(boss, hero, xs, ys)
                     phaseCHK[phase] = true
                 end
             end
 
             --фазы
-            local hero = HERO[0].UnitHero
+
             bulletCounter = bulletCounter + 1
             if bulletCounter >= 5 then
                 bulletCounter = 1
@@ -209,6 +237,7 @@ function StartAnimeAI(xs, ys)
             if phase == 1 and PhaseOn then
                 PhaseOn = false
                 AnimeRangeAttack(boss, hero, bulletCounter)
+                MakeUnitBulletCatcherTimed(boss,2)
             end
 
             if phase == 2 and PhaseOn then
@@ -340,10 +369,31 @@ function StartAnimeAI(xs, ys)
                     false,
                     false,
                     false,
-                    false
+                    false,
+                    false,
+                    false,
+                    false,
                 }
             end
         end--конец
+    end)
+end
+
+
+function MakeUnitBulletCatcherTimed(boss,timed)
+    SetUnitUserData(boss,100)
+    TimerStart(CreateTimer(), timed, false, function()
+        SetUnitUserData(boss,0)
+    end)
+end
+
+
+function AnitAddArmorTimed(unit,armor,timed)
+    BlzSetUnitArmor(unit, BlzGetUnitArmor(unit) + armor)
+    local eff=AddSpecialEffectTarget("effect\\Bubble",unit,"chest")
+    TimerStart(CreateTimer(), timed, false, function()
+        BlzSetUnitArmor(unit, BlzGetUnitArmor(unit) - armor)
+        DestroyEffect(eff)
     end)
 end
 
@@ -352,6 +402,7 @@ function SunStrikeArea(boss, hero, xs, ys)
     local period = 0.5
     local dist = 1500
     TimerStart(CreateTimer(), period, true, function()
+        normal_sound("sun_strike", GetUnitXY(boss))
         local max = dist // 30
         local angle = 360 / max
         for i = 1, max do
@@ -369,6 +420,7 @@ function CreateSunStrikeSingle(boss, x, y)
     local eff1 = AddSpecialEffect("SunStrikeCharge", x, y)
     local eff2 = AddSpecialEffect("SunStrikeImpact", x, y)
     local mark = AddSpecialEffect("Spell Marker TC", x, y)
+
     TimerStart(CreateTimer(), 1.8, false, function()
         DestroyEffect(eff1)
         DestroyEffect(eff2)
@@ -387,7 +439,7 @@ function CreateAndMoveChakram(boss, hero, max)
         local timed = 10
         --gr=gr+1
         --print(gr)
-
+        normal_sound("Buildings/Human/HumanLumberMill/HumanLumberMillWhat1",x, y)
         TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
             timed = timed - TIMER_PERIOD64
             x, y, z = BlzGetLocalSpecialEffectX(eff), BlzGetLocalSpecialEffectY(eff), BlzGetLocalSpecialEffectZ(eff)
@@ -427,6 +479,9 @@ function CreateAndMoveChakram(boss, hero, max)
     end)
 end
 
+
+
+
 function FlyAroundHero(boss, hero)
     local t = CreateTimer()
     local dist = 500
@@ -453,7 +508,7 @@ function FlyAroundHero(boss, hero)
         SetUnitPosition(boss, nx, ny)
         BlzSetUnitFacingEx(boss, angle)
     end)
-    TimerStart(CreateTimer(), 3.8, false, function()
+    TimerStart(CreateTimer(), 3.4, false, function()
         DestroyTimer(t)
         AnimeJumpToPoint(boss, true, GetUnitXY(hero))
     end)
@@ -467,7 +522,7 @@ function AnimeJumpToPoint(boss, HasMarker, x, y)
         mark = AddSpecialEffect("Spell Marker TC", x, y)
         BlzSetSpecialEffectScale(mark, 3)
     end
-    TimerStart(CreateTimer(), 0.5, false, function()
+    TimerStart(CreateTimer(), 0.9, false, function()
         DestroyEffect(mark)
         --SetUnitTimeScale(boss, 0.3)
         SetUnitAnimation(boss, "Spell Slam")
@@ -475,6 +530,7 @@ function AnimeJumpToPoint(boss, HasMarker, x, y)
         --print(r)
         --r=r+1
         UnitAddJumpForce(boss, angle, 60, dist, 500, false, "Earthshock")
+        MakeUnitBulletCatcherTimed(boss,3)
     end)
 end
 
@@ -485,6 +541,7 @@ function CreateAnimeLineDelay(boss, hero, max)
         local angle = AngleBetweenUnits(boss, hero)
         SetUnitFacing(boss, angle)
         SetUnitAnimation(boss, "Attack")
+        normal_sound("Sound\\Units\\Combat\\MetalLightSliceFlesh2", GetUnitXY(hero))
         QueueUnitAnimation(boss, "Stand")
         local x, y = GetUnitXY(hero)
         x, y = MoveXY(x, y, 1000, GetRandomInt(0, 360))
@@ -524,6 +581,7 @@ function CreateBeemInRange(boss, count)
     --CreateBeemLighting(boss)
     local element = {}
     local t = CreateTimer()
+    SetUnitAnimation(boss, "Spell looping")
     for i = 1, count do
         local eff = AddSpecialEffect("LightOnly", x, y)
         local z = GetTerrainZ(x, y) + 80
@@ -548,6 +606,7 @@ function CreateBeemInRange(boss, count)
     local damageTime = false
     TimerStart(CreateTimer(), 1, false, function()
         damageTime = true
+        normal_sound("LaserSound3",x,y)
     end)
     TimerStart(t, TIMER_PERIOD, true, function()
         a = a + speed
@@ -578,8 +637,9 @@ function DamageInLine(x, y, angle, distance, boss, eff)
     for i = 1, max do
         local nx, ny = MoveXY(x, y, step * i, angle - 180)
         --DestroyEffect(AddSpecialEffect("BlinkCasterNoOmni", nx, ny))
-        if UnitDamageArea(boss, 50, nx, ny, step) then
-
+        local is,enemy=UnitDamageArea(boss, 50, nx, ny, step)
+        if is then
+            DestroyEffect(AddSpecialEffect("AncestralGuardianMissileNoOmni",GetUnitXY(enemy)))
             isDamage = i * step
             --print(isDamage)
         end
@@ -590,12 +650,15 @@ end
 function AnimeRangeAttack(boss, hero, max)
     local eff = nil
     local t = CreateTimer()
+
+
     TimerStart(t, 1, true, function()
         local angle = AngleBetweenUnits(boss, hero)
         SetUnitFacing(boss, angle)
         SetUnitAnimation(boss, "Attack")
         QueueUnitAnimation(boss, "Stand")
-        eff = CreateAndForceBullet(boss, angle, 20, "BlastMissile.mdl")
+        normal_sound("PoisonArrowHit1", GetUnitXY(boss))
+        eff = CreateAndForceBullet(boss, angle, 20, "BlastMissile")
         max = max - 1
         if max <= 0 then
             DestroyTimer(t)

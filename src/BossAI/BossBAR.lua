@@ -72,7 +72,8 @@ function CreateMarkOnBossBar(into,marcPercent)
     local mark = BlzCreateFrameByType("BACKDROP", "Face", into, "", 0)
     BlzFrameSetParent(mark, BlzGetFrameByName("ConsoleUIBackdrop", 0))
     BlzFrameSetTexture(mark, "HPBOXMark", 0, true)
-    BlzFrameSetSize(mark, 0.01, 0.03)
-    BlzFrameSetPoint(mark, FRAMEPOINT_CENTER, into, FRAMEPOINT_LEFT,0.77*marcPercent/100 , 0.0)
+    BlzFrameSetSize(mark, 0.05, 0.05)
+    BlzFrameSetPoint(mark, FRAMEPOINT_CENTER, into, FRAMEPOINT_LEFT,0.77*marcPercent/100 , 0.02)
     table.insert(BugsFH,mark)
+    return mark
 end

@@ -397,7 +397,7 @@ function CreateCircleIce(boss, hero)
             local max = 16
             local angle = 360 / max
             local r = GetRandomInt(0, max)
-            for i = 0, max do
+            for i = 1, max do
                 local nx, ny = MoveXY(x, y, 400, angle * i)
                 if i ~= r then
                     MarkAndFall(nx, ny, "Icicle", boss, 0.01)

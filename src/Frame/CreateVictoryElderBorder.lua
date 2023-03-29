@@ -5,6 +5,8 @@
 ---
 function CreateVictoryElderBorder()
     --GausBorder
+    HeroCandyHeal(HERO[0],10)
+    AddPeonMAXHP(HERO[0], 1)
     local alpha=255
     local BoxBorder = BlzCreateFrameByType("BACKDROP", "Face", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
     BlzFrameSetParent(BoxBorder, BlzGetFrameByName("ConsoleUIBackdrop", 0))
