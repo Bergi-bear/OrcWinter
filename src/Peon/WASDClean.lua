@@ -185,7 +185,7 @@ function InitWASD(hero)
                             PlayMonoSpeech("Speech\\Peon\\yabessmertniy", "Я бессмертный!")
                         end
                     end)
-                    HeroCandyHeal(data, 3)
+                    HeroCandyHeal(data, 10)
                     SetUnitInvulnerable(hero, true)
                     TimerStart(CreateTimer(), 2, false, function()
                         SetUnitInvulnerable(hero, false)
