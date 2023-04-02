@@ -1,6 +1,10 @@
 udg_PressESC = false
 udg_PressESCYETTY = false
 udg_SHlop = nil
+udg_HERO = nil
+udg_QNudeFriend = nil
+udg_QStarAnime = nil
+udg_QYetty = nil
 gg_rct________________037 = nil
 gg_rct_Region_038 = nil
 gg_rct_Region_024 = nil
@@ -34,6 +38,8 @@ gg_cam_LookYetty = nil
 gg_cam_PeonLookOnYetty = nil
 gg_cam_PeonReadyToYetty = nil
 gg_cam_PeonLookOnPrise = nil
+gg_cam_NydePeon = nil
+gg_cam_LookAnime = nil
 gg_snd_Intro1 = nil
 gg_snd_Intro2 = nil
 gg_snd_Intro3 = nil
@@ -56,10 +62,14 @@ gg_snd_16 = nil
 gg_trg_EnterAnimeArena = nil
 gg_trg_ExitAnimeArena = nil
 gg_trg_InitAnimeArena = nil
+gg_trg_NudeCinematic = nil
+gg_trg_SkipNude = nil
+gg_trg_DeathNudeFriend = nil
 gg_trg_InitYetty = nil
 gg_trg_StartYettyCinematic = nil
 gg_trg_SkipYetty = nil
 gg_trg_InitEggs = nil
+gg_trg_Task = nil
 gg_trg_EndBoss = nil
 gg_trg_StartDragonCinematic = nil
 gg_trg_SkipDragon = nil
@@ -82,7 +92,8 @@ gg_unit_opeo_0015 = nil
 gg_unit_opeo_0024 = nil
 gg_unit_h006_0172 = nil
 gg_unit_h006_0173 = nil
-gg_unit_opeo_0198 = nil
+gg_unit_o002_0203 = nil
+gg_unit_h009_0197 = nil
 gg_dest_B007_5312 = nil
 function InitGlobals()
 udg_PressESC = false
@@ -232,9 +243,8 @@ u = BlzCreateUnitWithSkin(p, FourCC("h007"), 1056.8, -2436.1, 182.046, FourCC("h
 u = BlzCreateUnitWithSkin(p, FourCC("h007"), 608.9, -879.9, 182.046, FourCC("h007"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), 601.4, -1416.6, 5.812, FourCC("h002"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), -6012.7, 7349.6, 5.812, FourCC("h002"))
-u = BlzCreateUnitWithSkin(p, FourCC("h009"), -11217.1, 9574.6, 232.970, FourCC("h009"))
-gg_unit_opeo_0198 = BlzCreateUnitWithSkin(p, FourCC("opeo"), -13035.5, 8340.8, 288.363, FourCC("opeo"))
-SetUnitColor(gg_unit_opeo_0198, ConvertPlayerColor(0))
+gg_unit_h009_0197 = BlzCreateUnitWithSkin(p, FourCC("h009"), -11217.1, 9574.6, 232.970, FourCC("h009"))
+gg_unit_o002_0203 = BlzCreateUnitWithSkin(p, FourCC("o002"), -13047.3, 8357.1, 308.530, FourCC("o002"))
 end
 
 function CreateUnitsForPlayer1()
@@ -607,13 +617,13 @@ u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 5084.7, 6588.1, 172.683, FourCC("op
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 1002.6, -1770.7, 233.399, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -11344.4, 9409.7, 52.766, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -11509.9, 9591.8, 23.954, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -11398.5, 9345.9, 53.941, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -11480.3, 9420.0, 46.008, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -11462.6, 9264.5, 55.237, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -11338.5, 9298.9, 69.005, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -11595.2, 9268.2, 11.412, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -11153.9, 9318.8, 91.867, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 end
 
@@ -804,6 +814,32 @@ CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
 CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
 CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
 CameraSetupSetDestPosition(gg_cam_PeonLookOnPrise, -7408.1, 4600.5, 0.0)
+gg_cam_NydePeon = CreateCameraSetup()
+CameraSetupSetField(gg_cam_NydePeon, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+CameraSetupSetField(gg_cam_NydePeon, CAMERA_FIELD_ROTATION, 100.1, 0.0)
+CameraSetupSetField(gg_cam_NydePeon, CAMERA_FIELD_ANGLE_OF_ATTACK, 325.4, 0.0)
+CameraSetupSetField(gg_cam_NydePeon, CAMERA_FIELD_TARGET_DISTANCE, 228.8, 0.0)
+CameraSetupSetField(gg_cam_NydePeon, CAMERA_FIELD_ROLL, 0.0, 0.0)
+CameraSetupSetField(gg_cam_NydePeon, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+CameraSetupSetField(gg_cam_NydePeon, CAMERA_FIELD_FARZ, 5000.0, 0.0)
+CameraSetupSetField(gg_cam_NydePeon, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+CameraSetupSetField(gg_cam_NydePeon, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+CameraSetupSetField(gg_cam_NydePeon, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+CameraSetupSetField(gg_cam_NydePeon, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_NydePeon, -13022.1, 8406.6, 0.0)
+gg_cam_LookAnime = CreateCameraSetup()
+CameraSetupSetField(gg_cam_LookAnime, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+CameraSetupSetField(gg_cam_LookAnime, CAMERA_FIELD_ROTATION, 27.4, 0.0)
+CameraSetupSetField(gg_cam_LookAnime, CAMERA_FIELD_ANGLE_OF_ATTACK, 327.6, 0.0)
+CameraSetupSetField(gg_cam_LookAnime, CAMERA_FIELD_TARGET_DISTANCE, 869.0, 0.0)
+CameraSetupSetField(gg_cam_LookAnime, CAMERA_FIELD_ROLL, 0.0, 0.0)
+CameraSetupSetField(gg_cam_LookAnime, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+CameraSetupSetField(gg_cam_LookAnime, CAMERA_FIELD_FARZ, 5000.0, 0.0)
+CameraSetupSetField(gg_cam_LookAnime, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+CameraSetupSetField(gg_cam_LookAnime, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+CameraSetupSetField(gg_cam_LookAnime, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+CameraSetupSetField(gg_cam_LookAnime, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_LookAnime, -11145.9, 9598.4, 0.0)
 end
 
 --CUSTOM_CODE
@@ -1376,6 +1412,21 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
                 BlzSetSpecialEffectZ(tempEff,z)
                 DestroyEffect(tempEff)
             end
+            if GetUnitTypeId(DamagingUnit)==FourCC("h009") and GetUnitUserData(DamagingUnit)==100 then -- аниме девочка
+                SetUnitFacingToFaceUnitTimed(DamagingUnit,heroCurrent,0)
+                SetUnitAnimation(DamagingUnit,"attack")
+                --HealUnit(DamagingUnit,damage*0.7)
+                --print("обнулённый урон?")
+                FlyTextTagShieldXY(GetUnitX(DamagingUnit), GetUnitY(DamagingUnit), "Отбила", GetOwningPlayer(heroCurrent))
+                CreateAndForceBullet(DamagingUnit,GetUnitFacing(DamagingUnit)+GetRandomInt(-15,15),60,effectmodel)
+
+                local eff = AddSpecialEffect("DefendCaster", GetUnitXY(DamagingUnit))
+                local AngleSource = AngleBetweenUnits(heroCurrent, DamagingUnit)
+                BlzSetSpecialEffectYaw(eff, math.rad(AngleSource - 180))
+                DestroyEffect(eff)
+                QueueUnitAnimation(DamagingUnit,"stand")
+            end
+
             if DamagingUnit and IsUnitType(heroCurrent, UNIT_TYPE_HERO) then
                 local data = GetUnitData(heroCurrent)
                 --print("Мы в ког-то попали")
@@ -1386,17 +1437,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
                     normal_sound("Speech\\Rofl\\disconnect_"..GetRandomInt(1,4),GetUnitXY(DamagingUnit))
 
                 end
-                if GetUnitTypeId(DamagingUnit)==FourCC("h009") and GetUnitUserData(DamagingUnit)==100 then -- аниме девочка
-                    SetUnitFacingToFaceUnitTimed(DamagingUnit,heroCurrent,0)
-                    SetUnitAnimation(DamagingUnit,"attack")
-                    --HealUnit(DamagingUnit,damage*0.7)
-                    --print("обнулённый урон?")
-                    local eff = AddSpecialEffect("DefendCaster", GetUnitXY(DamagingUnit))
-                    local AngleSource = AngleBetweenUnits(heroCurrent, DamagingUnit)
-                    BlzSetSpecialEffectYaw(eff, math.rad(AngleSource - 180))
-                    DestroyEffect(eff)
-                    QueueUnitAnimation(DamagingUnit,"stand")
-                end
+
                 if data.KnockRMB then
                     UnitAddForceSimple(DamagingUnit, angleCurrent, speed / 4, 300, nil, heroCurrent)
                 end
@@ -1642,12 +1683,16 @@ function OnPostDamage()
             BlzSetEventDamage(0)
             normal_sound("Sound\\Units\\Combat\\MetalLightSliceFlesh2", GetUnitX(target), GetUnitY(target))
             --print("обнуление в эвенте дамага")
-            FlyTextTagShieldXY(GetUnitX(target), GetUnitY(target), "Отбила", GetOwningPlayer(caster))
-            CreateAndForceBullet(target,GetUnitFacing(target)+GetRandomInt(-15,15),60,"Firebrand Shot Silver")
+
         end
     end
 
-    if GetUnitTypeId(target) ~= HeroID and GetUnitTypeId(caster) == HeroID then
+    if GetOwningPlayer(caster)==Player(0) then
+        --print("урон от союзника")
+        caster=HERO[0].UnitHero
+    end
+
+    if GetUnitTypeId(target) ~= HeroID and GetUnitTypeId(caster) == HeroID  then
         --Функция должна быть в самом низу
         AddDamage2Show(target, GetEventDamage())
         local data = GetUnitData(caster)
@@ -1837,9 +1882,9 @@ function PointContentDestructable (x, y, range, iskill, damage, hero)
 
                     end
                 end
-                if GetDestructableLife(d) >= 1 and damage > 0 then
+                if GetDestructableLife(d) >= 1 and damage > 1 then
                     SetDestructableAnimation(d, "Stand Hit")
-                    DamageFruitTree(d)
+                    --DamageFruitTree(d)
                 else
                 end
             end
@@ -4019,6 +4064,12 @@ function StartAnimeAI(xs, ys)
     local boss = FindUnitOfType(FourCC('h009'))
     local BossFight = true
     local into = CreateBOSSHPBar(boss, "Богиня Аниме")
+
+    local allyPeon = FindUnitOfType(FourCC('o002'))
+    if UnitRemoveAbility(allyPeon, FourCC("A604")) then
+        StartPeonAllyAI()
+    end
+
     local hpMark = { 100, 88, 76, 64, 52, 40, 28 }
     local phaseCHK = {
         true,
@@ -4030,11 +4081,11 @@ function StartAnimeAI(xs, ys)
         false,
         false,
     }
-    local HPMarkFH={}
+    local HPMarkFH = {}
     for i = 1, #hpMark do
         --table.insert(phaseCHK, true)
         if i >= 2 then
-            table.insert(HPMarkFH,CreateMarkOnBossBar(into, hpMark[i]))
+            table.insert(HPMarkFH, CreateMarkOnBossBar(into, hpMark[i]))
             --table.insert(phaseCHK, false)
         end
     end
@@ -4069,6 +4120,14 @@ function StartAnimeAI(xs, ys)
             phase = 0
             --print("Даём нарграду, победа")
             CreateVictoryElderBorder()
+            QuestSetCompletedBJ(udg_QStarAnime, true)
+            if UnitAlive(allyPeon) then
+                QuestSetCompletedBJ(udg_QNudeFriend, true)
+                HealUnit(allyPeon)
+                AllyPeonCanTP=true
+                DisableTrigger(gg_trg_DeathNudeFriend)
+            end
+            CreateUnit(Player(0), FourCC("h008"), GetUnitX(boss), GetUnitY(boss), 0)
             ClearMapMusicBJ()
             PlayMusicBJ("Salve Springs")
             SetMusicVolumeBJ(100)
@@ -4136,14 +4195,14 @@ function StartAnimeAI(xs, ys)
                 PhaseOn = true
                 --print("phase " .. phase)
             end
-           -- print("хп босса",GetUnitLifePercent(boss))
+            -- print("хп босса",GetUnitLifePercent(boss))
             if GetUnitLifePercent(boss) <= hpMark[2] then
                 phase = 2
                 --print("отработало 1")
                 if not phaseCHK[phase] then
                     --print("отработало 2")
-                    AnitAddArmorTimed(boss,50,10)
-                    BlzFrameSetVisible(HPMarkFH[phase-1],false)
+                    AnitAddArmorTimed(boss, 50, 10)
+                    BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     phaseCHK[phase] = true
                     OnSecondPhaseMove = 0
                     --Blink2Point(boss, xs, ys)
@@ -4157,8 +4216,8 @@ function StartAnimeAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[3] then
                 phase = 3
                 if not phaseCHK[phase] then
-                    AnitAddArmorTimed(boss,50,10)
-                    BlzFrameSetVisible(HPMarkFH[phase-1],false)
+                    AnitAddArmorTimed(boss, 50, 10)
+                    BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     --print("смена фазы на ", phase, "Текущая секунда", sec)
                     sec = 0
                     --AnimeJumpToPoint(boss, true, GetUnitXY(hero))
@@ -4169,8 +4228,8 @@ function StartAnimeAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[4] then
                 phase = 4
                 if not phaseCHK[phase] then
-                    AnitAddArmorTimed(boss,50,10)
-                    BlzFrameSetVisible(HPMarkFH[phase-1],false)
+                    AnitAddArmorTimed(boss, 50, 10)
+                    BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     --print("смена фазы на ", phase)
                     --CreateAndMoveChakram(boss, hero, bulletCounter)
                     phaseCHK[phase] = true
@@ -4179,8 +4238,8 @@ function StartAnimeAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[5] then
                 phase = 5
                 if not phaseCHK[phase] then
-                    AnitAddArmorTimed(boss,50,10)
-                    BlzFrameSetVisible(HPMarkFH[phase-1],false)
+                    AnitAddArmorTimed(boss, 50, 10)
+                    BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     --print("смена фазы на ", phase)
                     --FlyAroundHero(boss, hero)
 
@@ -4190,8 +4249,8 @@ function StartAnimeAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[6] then
                 phase = 6
                 if not phaseCHK[phase] then
-                    AnitAddArmorTimed(boss,50,10)
-                    BlzFrameSetVisible(HPMarkFH[phase-1],false)
+                    AnitAddArmorTimed(boss, 50, 10)
+                    BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     --print("смена фазы на ", phase)
                     --CreateAnimeLineDelay(boss, hero, 10)
                     phaseCHK[phase] = true
@@ -4200,8 +4259,8 @@ function StartAnimeAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[7] then
                 phase = 7
                 if not phaseCHK[phase] then
-                    AnitAddArmorTimed(boss,50,120)
-                    BlzFrameSetVisible(HPMarkFH[phase-1],false)
+                    AnitAddArmorTimed(boss, 50, 120)
+                    BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     --print("смена фазы на ", phase)
                     SunStrikeArea(boss, hero, xs, ys)
                     phaseCHK[phase] = true
@@ -4217,29 +4276,29 @@ function StartAnimeAI(xs, ys)
             if phase == 1 and PhaseOn then
                 PhaseOn = false
                 AnimeRangeAttack(boss, hero, bulletCounter)
-                MakeUnitBulletCatcherTimed(boss,2)
+                MakeUnitBulletCatcherTimed(boss, 2)
             end
 
             if phase == 2 and PhaseOn then
                 PhaseOn = false
                 --print("фаза", phase)
-                local rph=GetRandomInt(1,phase)
+                local rph = GetRandomInt(1, phase)
                 if rph == 1 then
                     Blink2Point(boss, xs, ys)
                     CreateBeemInRange(boss, GetRandomInt(phase, 7))
-                elseif rph==2 then
+                elseif rph == 2 then
                     AnimeRangeAttack(boss, hero, bulletCounter)
                 end
             end
             if phase == 3 and PhaseOn then
                 PhaseOn = false
                 --print("фаза", phase)
-                local rph=GetRandomInt(1,phase)
+                local rph = GetRandomInt(1, phase)
                 if rph == 1 then
                     AnimeJumpToPoint(boss, true, GetUnitXY(hero)) -- надо заменить
-                elseif rph==2 then
+                elseif rph == 2 then
                     AnimeRangeAttack(boss, hero, bulletCounter)
-                elseif rph==3 then
+                elseif rph == 3 then
                     Blink2Point(boss, xs, ys)
                     CreateBeemInRange(boss, GetRandomInt(phase, 7))
                 end
@@ -4247,35 +4306,34 @@ function StartAnimeAI(xs, ys)
             end
             if phase == 4 and PhaseOn then
                 PhaseOn = false
-                local rph=GetRandomInt(1,phase)
+                local rph = GetRandomInt(1, phase)
                 if rph == 1 then
                     AnimeJumpToPoint(boss, true, GetUnitXY(hero)) -- надо заменить
-                elseif rph==2 then
+                elseif rph == 2 then
                     AnimeRangeAttack(boss, hero, bulletCounter)
-                elseif rph==3 then
+                elseif rph == 3 then
                     Blink2Point(boss, xs, ys)
                     CreateBeemInRange(boss, GetRandomInt(phase, 7))
-                elseif rph==4 then
+                elseif rph == 4 then
                     CreateAndMoveChakram(boss, hero, bulletCounter)
                 end
-
 
 
             end
             if phase == 5 and PhaseOn then
                 PhaseOn = false
 
-                local rph=GetRandomInt(1,phase)
+                local rph = GetRandomInt(1, phase)
                 if rph == 1 then
                     AnimeJumpToPoint(boss, true, GetUnitXY(hero)) -- надо заменить
-                elseif rph==2 then
+                elseif rph == 2 then
                     AnimeRangeAttack(boss, hero, bulletCounter)
-                elseif rph==3 then
+                elseif rph == 3 then
                     Blink2Point(boss, xs, ys)
                     CreateBeemInRange(boss, GetRandomInt(phase, 7))
-                elseif rph==4 then
+                elseif rph == 4 then
                     CreateAndMoveChakram(boss, hero, bulletCounter)
-                elseif rph==5 then
+                elseif rph == 5 then
                     FlyAroundHero(boss, hero)
                 end
 
@@ -4285,19 +4343,19 @@ function StartAnimeAI(xs, ys)
                 PhaseOn = false
                 --print("фаза", phase)
 
-                local rph=GetRandomInt(1,phase)
+                local rph = GetRandomInt(1, phase)
                 if rph == 1 then
                     AnimeJumpToPoint(boss, true, GetUnitXY(hero)) -- надо заменить
-                elseif rph==2 then
+                elseif rph == 2 then
                     AnimeRangeAttack(boss, hero, bulletCounter)
-                elseif rph==3 then
+                elseif rph == 3 then
                     Blink2Point(boss, xs, ys)
                     CreateBeemInRange(boss, GetRandomInt(phase, 7))
-                elseif rph==4 then
+                elseif rph == 4 then
                     CreateAndMoveChakram(boss, hero, bulletCounter)
-                elseif rph==5 then
+                elseif rph == 5 then
                     FlyAroundHero(boss, hero)
-                elseif rph==6 then
+                elseif rph == 6 then
                     CreateAnimeLineDelay(boss, hero, 10)
                 end
 
@@ -4306,21 +4364,21 @@ function StartAnimeAI(xs, ys)
                 PhaseOn = false
                 --print("фаза", phase)
 
-                local rph=GetRandomInt(1,phase)
+                local rph = GetRandomInt(1, phase)
                 if rph == 1 then
                     AnimeJumpToPoint(boss, true, GetUnitXY(hero)) -- надо заменить
-                elseif rph==2 then
+                elseif rph == 2 then
                     AnimeRangeAttack(boss, hero, bulletCounter)
-                elseif rph==3 then
+                elseif rph == 3 then
                     Blink2Point(boss, xs, ys)
                     CreateBeemInRange(boss, GetRandomInt(phase, 7))
-                elseif rph==4 then
+                elseif rph == 4 then
                     CreateAndMoveChakram(boss, hero, bulletCounter)
-                elseif rph==5 then
+                elseif rph == 5 then
                     FlyAroundHero(boss, hero)
-                elseif rph==6 then
+                elseif rph == 6 then
                     CreateAnimeLineDelay(boss, hero, 10)
-                elseif rph==7 then
+                elseif rph == 7 then
                     SunStrikeArea(boss, hero, xs, ys)
                 end
             end
@@ -4359,18 +4417,18 @@ function StartAnimeAI(xs, ys)
     end)
 end
 
-
-function MakeUnitBulletCatcherTimed(boss,timed)
-    SetUnitUserData(boss,100)
+function MakeUnitBulletCatcherTimed(boss, timed)
+    SetUnitUserData(boss, 100)
     TimerStart(CreateTimer(), timed, false, function()
-        SetUnitUserData(boss,0)
+        SetUnitUserData(boss, 0)
     end)
 end
 
-
-function AnitAddArmorTimed(unit,armor,timed)
+function AnitAddArmorTimed(unit, armor, timed)
     BlzSetUnitArmor(unit, BlzGetUnitArmor(unit) + armor)
-    local eff=AddSpecialEffectTarget("effect\\Bubble",unit,"chest")
+    local eff = AddSpecialEffectTarget("effect\\Bubble", unit, "chest")
+    DestroyEffect(AddSpecialEffectTarget("Effect\\File00000341", unit, "chest"))
+
     TimerStart(CreateTimer(), timed, false, function()
         BlzSetUnitArmor(unit, BlzGetUnitArmor(unit) - armor)
         DestroyEffect(eff)
@@ -4419,7 +4477,7 @@ function CreateAndMoveChakram(boss, hero, max)
         local timed = 10
         --gr=gr+1
         --print(gr)
-        normal_sound("Buildings/Human/HumanLumberMill/HumanLumberMillWhat1",x, y)
+        normal_sound("Buildings/Human/HumanLumberMill/HumanLumberMillWhat1", x, y)
         TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
             timed = timed - TIMER_PERIOD64
             x, y, z = BlzGetLocalSpecialEffectX(eff), BlzGetLocalSpecialEffectY(eff), BlzGetLocalSpecialEffectZ(eff)
@@ -4458,9 +4516,6 @@ function CreateAndMoveChakram(boss, hero, max)
         end
     end)
 end
-
-
-
 
 function FlyAroundHero(boss, hero)
     local t = CreateTimer()
@@ -4510,7 +4565,7 @@ function AnimeJumpToPoint(boss, HasMarker, x, y)
         --print(r)
         --r=r+1
         UnitAddJumpForce(boss, angle, 60, dist, 500, false, "Earthshock")
-        MakeUnitBulletCatcherTimed(boss,3)
+        MakeUnitBulletCatcherTimed(boss, 3)
     end)
 end
 
@@ -4586,7 +4641,7 @@ function CreateBeemInRange(boss, count)
     local damageTime = false
     TimerStart(CreateTimer(), 1, false, function()
         damageTime = true
-        normal_sound("LaserSound3",x,y)
+        normal_sound("LaserSound3", x, y)
     end)
     TimerStart(t, TIMER_PERIOD, true, function()
         a = a + speed
@@ -4617,9 +4672,9 @@ function DamageInLine(x, y, angle, distance, boss, eff)
     for i = 1, max do
         local nx, ny = MoveXY(x, y, step * i, angle - 180)
         --DestroyEffect(AddSpecialEffect("BlinkCasterNoOmni", nx, ny))
-        local is,enemy=UnitDamageArea(boss, 50, nx, ny, step)
+        local is, enemy = UnitDamageArea(boss, 50, nx, ny, step)
         if is then
-            DestroyEffect(AddSpecialEffect("AncestralGuardianMissileNoOmni",GetUnitXY(enemy)))
+            DestroyEffect(AddSpecialEffect("AncestralGuardianMissileNoOmni", GetUnitXY(enemy)))
             isDamage = i * step
             --print(isDamage)
         end
@@ -4630,7 +4685,6 @@ end
 function AnimeRangeAttack(boss, hero, max)
     local eff = nil
     local t = CreateTimer()
-
 
     TimerStart(t, 1, true, function()
         local angle = AngleBetweenUnits(boss, hero)
@@ -4817,7 +4871,13 @@ function StartDragonAI(xs, ys)
                 if dragonFrazeCount+1<=#tFraze then
                     --print(tFraze[dragonFrazeCount+1])
                     --normal_sound("Speech\\Dragon\\"..dragonFrazeCount+1,GetUnitXY(boss))
-                    PlayBossSpeech("Speech\\Dragon\\"..dragonFrazeCount+1,tFraze[dragonFrazeCount+1])
+                    if dragonFrazeCount==3 then
+                        TimerStart(CreateTimer(), 5, false, function()
+                            PlayBossSpeech("Speech\\Dragon\\"..dragonFrazeCount+1,tFraze[dragonFrazeCount+1])
+                        end)
+                    else
+                        PlayBossSpeech("Speech\\Dragon\\"..dragonFrazeCount+1,tFraze[dragonFrazeCount+1])
+                    end
                     dragonFrazeCount=dragonFrazeCount+1
                     TimerStart(CreateTimer(), GBossSoundDuration+2, false, function()
                         if dragonFrazeCount==2 then
@@ -5083,6 +5143,99 @@ function AuraDestroyableON(boss)
             end
         end)
     end)
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 02.04.2023 16:47
+---
+function StartPeonAllyAI()
+    local unit = FindUnitOfType(FourCC('o002'))
+    local hero = HERO[0].UnitHero
+
+    --print("союзник активирован")
+    local reactSpeed = 1
+    BlzSetUnitMaxHP(unit, 5000)
+    HealUnit(unit)
+    UnitAddAbility(unit, FourCC("Abun"))
+    TimerStart(CreateTimer(), 1, true, function()
+        local xh, yh = GetUnitXY(hero)
+        local boss = FindFirstEnemy(unit,2000)
+        if boss then
+            if not IsUnitInRange(unit, hero, 800) then
+                IssuePointOrder(unit, "move", xh, yh)
+
+            else
+                if IsUnitInRange(unit, boss, 1500)  and UnitAlive(boss) and UnitAlive(unit)  then
+                    SetUnitFacingToFaceUnitTimed(unit, boss, 0)
+                    --print("пора атаковать")
+
+                    AllyAttackBoss(unit)
+
+                    IssueImmediateOrder(unit, "stop")
+                end
+            end
+        end
+
+        if AllyPeonCanTP then
+            if not IsUnitInRange(unit, hero, 2000) then
+                Blink2Point(unit,GetUnitXY(hero))
+            end
+        end
+        if not UnitAlive(unit) then
+            DestroyTimer(GetExpiredTimer())
+            PlayMonoSpeech("Speech\\Peon\\yabessmertniy", "Жил до конца, умер как герой")
+        end
+    end)
+    --
+
+    local DamageTrigger = CreateTrigger()
+    TriggerRegisterUnitEvent(DamageTrigger, unit, EVENT_UNIT_DAMAGED) -- После вычета брони
+    DestroyEffect(AddSpecialEffectTarget("Effect\\Concecration", unit, "chest"))
+    TriggerAddAction(DamageTrigger, function()
+       -- print("ПОЛУЧИЛ УРОН!")
+        DisableTrigger(DamageTrigger)
+        local angle = GetRandomInt(0, 360)
+        UnitAddJumpForce(unit, angle, 40, 300, 500, false)
+        SetUnitInvulnerable(unit, true)
+        TimerStart(CreateTimer(), 1, false, function()
+            SetUnitInvulnerable(unit, false)
+            EnableTrigger(DamageTrigger)
+        end)
+    end)
+end
+
+function AllyAttackBoss(unit, boss)
+    SetUnitAnimation(unit, "Attack")
+    TimerStart(CreateTimer(), 0.2, false, function()
+        if not BlzIsUnitInvulnerable(unit) then
+            local angle = GetUnitFacing(unit)
+            CreateAndForceBullet(unit, angle, 40, "Melee")
+            QueueUnitAnimation(unit,"stand")
+        end
+    end)
+
+end
+
+function FindFirstEnemy(unit, range)
+    local e = nil
+    local result = nil
+    local xs, ys = GetUnitXY(unit)
+    -- DestroyEffect(AddSpecialEffect("Abilities\\Spells\\NightElf\\Blink\\BlinkCaster.mdl", xs, ys))
+    GroupEnumUnitsInRange(perebor, xs, ys, range, nil)
+    while true do
+        e = FirstOfGroup(perebor)
+        if e == nil then
+            break
+        end
+
+        if UnitAlive(e) and IsUnitEnemy(e, GetOwningPlayer(unit)) and not BlzIsUnitInvulnerable(e) then
+            --print("найден для сетки",GetUnitName(e))
+            result = e
+        end
+        GroupRemoveUnit(perebor, e)
+    end
+    return result
 end
 do
     local InitGlobalsOrigin = InitGlobals
@@ -5582,7 +5735,7 @@ function StartWolfAI(xs, ys)
     local boss = FindUnitOfType(FourCC('n002'))
     local BossFight = true
     local into = CreateBOSSHPBar(boss, "Отмороженный волк")
-
+    AddSpecialEffectTarget("peonAttach",boss,"chest")
     UnitAddAbility(boss, FourCC('Abun'))
     --SetUnitPosition(boss, xs, ys)
     SetUnitOwner(boss, Player(10), true)
@@ -6769,7 +6922,7 @@ function PlayBossSpeech(sound, text)
         --print("первый диалог")
         CreteDialogBoxBoss()
     end
-    if not BlzFrameIsVisible(TexBoxBoss) then
+    if not BlzFrameIsVisible(TexBoxBoss) and UnitAlive(GBoss)  then
         local s = normal_sound(sound)
         local sd = GetSoundDuration(s)
         --SetCinematicScene(HeroID, 1, "peon", "text", 2, 2)
@@ -7761,6 +7914,14 @@ function CreateEActions()
                 QTEReadyToPress=false
                 --print("нажал Е во время QTE")
             end
+            if data.ShowE then-- нажать можно только тогда когда активен Е
+                if data.CurrentQuest=="AllyPeonOnAnime" then
+                    UnitRemoveAbility(data.QuestUnit,FourCC("A604"))
+                    print("запускает ролик про помощника пеона")
+                    CustomCinematicMode(true)
+                    Trig_NudeCinematic_Actions() -- год из гуи
+                end
+            end
         end
     end)
 
@@ -8152,6 +8313,7 @@ function CreatePeonForPlayer(data)
         --CreateDownInterface(data)
         local x, y = GetPlayerStartLocationX(Player(data.pid)), GetPlayerStartLocationY(Player(data.pid))
         data.UnitHero = CreateUnit(Player(data.pid), HeroID, x, y, 0)
+        udg_HERO=data.UnitHero
         UnitAddForceSimple(data.UnitHero, 90, 5, 15)
         SelectUnitForPlayerSingle(data.UnitHero, Player(data.pid))
         UnitAddAbility(data.UnitHero, FourCC("Abun"))
@@ -8176,6 +8338,9 @@ function CreatePeonForPlayer(data)
         --SetDNCForPlayer(data.UnitHero,"Environment\\DNC\\DNCAshenvale\\DNCAshenvaleTerrain\\DNCAshenvaleTerrain.mdl","Луга слаймов")
     end
 end
+ShowESystem={
+
+}
 function InitRegistryEvent(hero)
     local enterTrig=CreateTrigger()
     TriggerRegisterUnitInRange(enterTrig, hero, 120, nil)
@@ -8184,9 +8349,32 @@ function InitRegistryEvent(hero)
         --print(GetUnitName(entering))
         if GetUnitTypeId(entering)==FourCC("h003") then -- салат оливье
             KillUnit(entering)
-            UnlockCard("CardOlivie",2)
-        elseif true  then
+            QuestSetCompletedBJ(udg_QYetty, true)
+            --UnlockCard("CardOlivie",2)
+        elseif GetUnitTypeId(entering)==FourCC("h008") then -- звезда хигамы
+            KillUnit(entering)
+        elseif GetUnitAbilityLevel(entering,FourCC("A604"))>=1 and GetUnitTypeId(entering)==FourCC("o002") then --голый пеон и его квест
+            local h=GetHandleId(entering)
+            local data=GetUnitData(hero)
+            if not data.ShowE then
+                --print("время показа")
+                data.ShowE=true
+                data.CurrentQuest="AllyPeonOnAnime"
+                data.QuestUnit=entering
+                local eff = AddSpecialEffect("ActionsE", GetUnitXY(entering))
+                TimerStart(CreateTimer(), 0.1, true, function()
+                    if not IsUnitInRange(hero,entering,140) or GetUnitAbilityLevel(entering,FourCC("A604"))==0 then
+                        --print("покинул радиус")
+                        data.CurrentQuest=""
+                        data.QuestUnit=nil
+                        DestroyTimer(GetExpiredTimer())
+                        DestroyEffect(eff)
+                        BlzSetSpecialEffectPosition(eff,0,0,0)
+                        data.ShowE=false
+                    end
+                end)
 
+            end
         end
     end)
     --больший радиус
@@ -9399,12 +9587,65 @@ TriggerAddAction(gg_trg_ExitAnimeArena, Trig_ExitAnimeArena_Actions)
 end
 
 function Trig_InitAnimeArena_Actions()
-UnitAddAbilityBJ(FourCC("A604"), gg_unit_opeo_0198)
+UnitAddAbilityBJ(FourCC("A604"), gg_unit_o002_0203)
 end
 
 function InitTrig_InitAnimeArena()
 gg_trg_InitAnimeArena = CreateTrigger()
 TriggerAddAction(gg_trg_InitAnimeArena, Trig_InitAnimeArena_Actions)
+end
+
+function Trig_NudeCinematic_Actions()
+CinematicModeBJ(true, GetPlayersAll())
+SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_o002_0203, 0)
+CameraSetupApplyForPlayer(true, gg_cam_NydePeon, Player(0), 1.00)
+ResetUnitAnimation(udg_HERO)
+SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_o002_0203, 0)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_739", gg_snd_oanenashilietopodarki, "TRIGSTR_740", bj_TIMETYPE_ADD, 0.00, true)
+SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_o002_0203, 0)
+SetUnitLookAt(gg_unit_o002_0203, "bone_head", udg_HERO, 0, 0, 90)
+SetUnitLookAt(udg_HERO, "bone_head", gg_unit_o002_0203, 0, 0, 90)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_o002_0203, "TRIGSTR_744", gg_snd_oanenashilietopodarki, "TRIGSTR_745", bj_TIMETYPE_ADD, 0.00, true)
+CameraSetupApplyForPlayer(true, gg_cam_LookAnime, Player(0), 0.00)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_746", gg_snd_oanenashilietopodarki, "TRIGSTR_747", bj_TIMETYPE_ADD, 0.00, true)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_748", gg_snd_oanenashilietopodarki, "TRIGSTR_749", bj_TIMETYPE_ADD, 0.00, true)
+CameraSetupApplyForPlayer(true, gg_cam_NydePeon, Player(0), 0.50)
+SetUnitFacingToFaceUnitTimed(gg_unit_o002_0203, gg_unit_h009_0197, 0)
+SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_h009_0197, 0)
+ResetUnitLookAt(gg_unit_o002_0203)
+ResetUnitLookAt(udg_HERO)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_o002_0203, "TRIGSTR_750", gg_snd_oanenashilietopodarki, "TRIGSTR_751", bj_TIMETYPE_ADD, 0.00, true)
+ConditionalTriggerExecute(gg_trg_SkipNude)
+end
+
+function InitTrig_NudeCinematic()
+gg_trg_NudeCinematic = CreateTrigger()
+TriggerAddAction(gg_trg_NudeCinematic, Trig_NudeCinematic_Actions)
+end
+
+function Trig_SkipNude_Actions()
+CameraSetupApplyForPlayer(true, gg_cam_ResetCam, Player(0), 1.00)
+CinematicModeBJ(false, GetPlayersAll())
+    CustomCinematicMode(false)
+ResetUnitLookAt(gg_unit_o002_0203)
+ResetUnitLookAt(udg_HERO)
+    StartPeonAllyAI()
+end
+
+function InitTrig_SkipNude()
+gg_trg_SkipNude = CreateTrigger()
+DisableTrigger(gg_trg_SkipNude)
+TriggerAddAction(gg_trg_SkipNude, Trig_SkipNude_Actions)
+end
+
+function Trig_DeathNudeFriend_Actions()
+QuestSetFailedBJ(udg_QNudeFriend, true)
+end
+
+function InitTrig_DeathNudeFriend()
+gg_trg_DeathNudeFriend = CreateTrigger()
+TriggerRegisterUnitEvent(gg_trg_DeathNudeFriend, gg_unit_o002_0203, EVENT_UNIT_DEATH)
+TriggerAddAction(gg_trg_DeathNudeFriend, Trig_DeathNudeFriend_Actions)
 end
 
 function Trig_InitYetty_Actions()
@@ -9569,6 +9810,28 @@ function InitTrig_InitEggs()
 gg_trg_InitEggs = CreateTrigger()
 TriggerRegisterTimerEventSingle(gg_trg_InitEggs, 1.00)
 TriggerAddAction(gg_trg_InitEggs, Trig_InitEggs_Actions)
+end
+
+function Trig_Task_Actions()
+CreateQuestBJ(bj_QUESTTYPE_REQ_DISCOVERED, "TRIGSTR_719", "TRIGSTR_720", "ReplaceableTextures\\CommandButtons\\BTNThrall.blp")
+CreateQuestBJ(bj_QUESTTYPE_REQ_DISCOVERED, "TRIGSTR_721", "TRIGSTR_722", "ReplaceableTextures\\CommandButtons\\BTNWendigo.blp")
+udg_QYetty = GetLastCreatedQuestBJ()
+CreateQuestBJ(bj_QUESTTYPE_REQ_DISCOVERED, "TRIGSTR_725", "TRIGSTR_726", "ReplaceableTextures\\CommandButtons\\BTNpurpleDragonSpawn.blp")
+CreateQuestBJ(bj_QUESTTYPE_REQ_DISCOVERED, "TRIGSTR_727", "TRIGSTR_728", "ReplaceableTextures\\CommandButtons\\BTNStrongDrink.blp")
+CreateQuestBJ(bj_QUESTTYPE_REQ_DISCOVERED, "TRIGSTR_729", "TRIGSTR_730", "ReplaceableTextures\\CommandButtons\\BTNTimberWolf.blp")
+CreateQuestBJ(bj_QUESTTYPE_REQ_DISCOVERED, "TRIGSTR_731", "TRIGSTR_732", "ReplaceableTextures\\CommandButtons\\BTNStarWand.blp")
+udg_QStarAnime = GetLastCreatedQuestBJ()
+CreateQuestBJ(bj_QUESTTYPE_OPT_DISCOVERED, "TRIGSTR_733", "TRIGSTR_734", "ReplaceableTextures\\CommandButtons\\BTNPeon.blp")
+CreateQuestBJ(bj_QUESTTYPE_OPT_DISCOVERED, "TRIGSTR_735", "TRIGSTR_736", "ReplaceableTextures\\CommandButtons\\BTNForestTrollShadowPriest.blp")
+CreateQuestBJ(bj_QUESTTYPE_OPT_DISCOVERED, "TRIGSTR_737", "TRIGSTR_738", "CandyCane.blp")
+CreateQuestBJ(bj_QUESTTYPE_OPT_DISCOVERED, "TRIGSTR_752", "TRIGSTR_753", "ReplaceableTextures\\CommandButtons\\BTNGrunt.blp")
+udg_QNudeFriend = GetLastCreatedQuestBJ()
+end
+
+function InitTrig_Task()
+gg_trg_Task = CreateTrigger()
+TriggerRegisterTimerEventSingle(gg_trg_Task, 1.00)
+TriggerAddAction(gg_trg_Task, Trig_Task_Actions)
 end
 
 function Trig_EndBoss_Actions()
@@ -10078,10 +10341,14 @@ function InitCustomTriggers()
 InitTrig_EnterAnimeArena()
 InitTrig_ExitAnimeArena()
 InitTrig_InitAnimeArena()
+InitTrig_NudeCinematic()
+InitTrig_SkipNude()
+InitTrig_DeathNudeFriend()
 InitTrig_InitYetty()
 InitTrig_StartYettyCinematic()
 InitTrig_SkipYetty()
 InitTrig_InitEggs()
+InitTrig_Task()
 InitTrig_EndBoss()
 InitTrig_StartDragonCinematic()
 InitTrig_SkipDragon()
@@ -10142,7 +10409,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, -12864.0, 7872.0)
+DefineStartLocation(0, -11840.0, -832.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()

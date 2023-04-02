@@ -210,6 +210,21 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
                 BlzSetSpecialEffectZ(tempEff,z)
                 DestroyEffect(tempEff)
             end
+            if GetUnitTypeId(DamagingUnit)==FourCC("h009") and GetUnitUserData(DamagingUnit)==100 then -- аниме девочка
+                SetUnitFacingToFaceUnitTimed(DamagingUnit,heroCurrent,0)
+                SetUnitAnimation(DamagingUnit,"attack")
+                --HealUnit(DamagingUnit,damage*0.7)
+                --print("обнулённый урон?")
+                FlyTextTagShieldXY(GetUnitX(DamagingUnit), GetUnitY(DamagingUnit), "Отбила", GetOwningPlayer(heroCurrent))
+                CreateAndForceBullet(DamagingUnit,GetUnitFacing(DamagingUnit)+GetRandomInt(-15,15),60,effectmodel)
+
+                local eff = AddSpecialEffect("DefendCaster", GetUnitXY(DamagingUnit))
+                local AngleSource = AngleBetweenUnits(heroCurrent, DamagingUnit)
+                BlzSetSpecialEffectYaw(eff, math.rad(AngleSource - 180))
+                DestroyEffect(eff)
+                QueueUnitAnimation(DamagingUnit,"stand")
+            end
+
             if DamagingUnit and IsUnitType(heroCurrent, UNIT_TYPE_HERO) then
                 local data = GetUnitData(heroCurrent)
                 --print("Мы в ког-то попали")
@@ -220,17 +235,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
                     normal_sound("Speech\\Rofl\\disconnect_"..GetRandomInt(1,4),GetUnitXY(DamagingUnit))
 
                 end
-                if GetUnitTypeId(DamagingUnit)==FourCC("h009") and GetUnitUserData(DamagingUnit)==100 then -- аниме девочка
-                    SetUnitFacingToFaceUnitTimed(DamagingUnit,heroCurrent,0)
-                    SetUnitAnimation(DamagingUnit,"attack")
-                    --HealUnit(DamagingUnit,damage*0.7)
-                    --print("обнулённый урон?")
-                    local eff = AddSpecialEffect("DefendCaster", GetUnitXY(DamagingUnit))
-                    local AngleSource = AngleBetweenUnits(heroCurrent, DamagingUnit)
-                    BlzSetSpecialEffectYaw(eff, math.rad(AngleSource - 180))
-                    DestroyEffect(eff)
-                    QueueUnitAnimation(DamagingUnit,"stand")
-                end
+
                 if data.KnockRMB then
                     UnitAddForceSimple(DamagingUnit, angleCurrent, speed / 4, 300, nil, heroCurrent)
                 end

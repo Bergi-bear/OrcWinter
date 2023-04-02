@@ -1114,84 +1114,6 @@ STRING 382
 Kel9290
 }
 
-STRING 395
-// Units: H60K (Lord Vampire), Hotkey (Hotkey)
-{
-Q
-}
-
-STRING 396
-// Units: H60K (Lord Vampire), Propernames (Proper Names)
-{
-Lord Vampire
-}
-
-STRING 397
-// Units: H60K (Lord Vampire), Name (Name)
-{
-Lord Vampire
-}
-
-STRING 398
-// Units: H60K (Lord Vampire), Tip (Tooltip - Basic)
-{
-Яррррр! (|cffffcc00L|r)
-}
-
-STRING 399
-// Units: H60K (Lord Vampire), Revivetip (Tooltip - Revive)
-{
-Воскресить Яррррра! (|cffffcc00L|r)
-}
-
-STRING 400
-// Units: H60K (Lord Vampire), Ubertip (Tooltip - Extended)
-{
-Яррррр! Яррррр! Яррррр! Яррррр!
-}
-
-STRING 401
-// Units: H60K (Lord Vampire), Awakentip (Tooltip - Awaken)
-{
-Воскресить Яррррра! (|cffffcc00L|r)
-}
-
-STRING 469
-// Units: H60W (Вурдалак), Name (Name)
-{
-Вурдалак
-}
-
-STRING 470
-// Units: H60W (Вурдалак), Propernames (Proper Names)
-{
-Мясникадзе Вурдалакович
-}
-
-STRING 471
-// Units: H60W (Вурдалак), Tip (Tooltip - Basic)
-{
-Санта-мясник (|cffffcc00L|r)
-}
-
-STRING 472
-// Units: H60W (Вурдалак), Revivetip (Tooltip - Revive)
-{
-Воскресить Санта-мясник (|cffffcc00L|r)
-}
-
-STRING 473
-// Units: H60W (Вурдалак), Awakentip (Tooltip - Awaken)
-{
-Воскресить Санта-мясник (|cffffcc00L|r)
-}
-
-STRING 474
-// Units: H60W (Вурдалак), Ubertip (Tooltip - Extended)
-{
-Мясникадзе Вурдалакович готов служить. Равняйсь  на ХГМ!
-}
-
 STRING 483
 // Units: H60Z (HTC), Name (Name)
 {
@@ -1309,13 +1231,13 @@ STRING 569
 }
 
 STRING 570
-// Units: O000 (Батрак), Description (Description)
+// Units: O000 (Герой пеон), Description (Description)
 {
 Настоящий герой
 }
 
 STRING 571
-// Units: O000 (Батрак), Propernames (Proper Names)
+// Units: O000 (Герой пеон), Propernames (Proper Names)
 {
 Пеонетти
 }
@@ -1808,5 +1730,191 @@ STRING 718
 // Abilities: A604 (TalkToMe), Name (Name)
 {
 TalkToMe
+}
+
+STRING 719
+{
+Новогоднее настроение
+}
+
+STRING 720
+{
+Выполнить все основные задания до истечения таймера и доложить об этом Траллу
+|cff808080Пророчество: Пеоны получили по ебалу|r
+}
+
+STRING 721
+{
+Вернуть салаты
+}
+
+STRING 722
+{
+Найти украденные салаты, и постараться вернуть ну хоть что-нибудь!
+|cff808080Пророчество: на юге от деревни пеонов обитает большой любить покушать|r
+}
+
+STRING 725
+{
+Отыскать подарки
+}
+
+STRING 726
+{
+Найти украденные подарки и организовать их транспортировку
+|cff808080Пророчество: в зелёной пещере на западе, лежат какие-то коробки|r
+}
+
+STRING 727
+{
+Купить спиртные напитки
+}
+
+STRING 728
+{
+Тралл сказал, значит надо добыть!
+|cff808080Пророчество: Магнит работает до полуночи, но нужны деньги|r
+}
+
+STRING 729
+{
+Найти Гирлянду
+}
+
+STRING 730
+{
+А что такое это ваша гирляндия?
+|cff808080Пророчество: В далёких краях живёт гламурный волк, любящий всё блестящее|r
+}
+
+STRING 731
+{
+Добыть звезду
+}
+
+STRING 732
+{
+Звезда это кто-то красивый и очень популярный
+|cff808080Пророчество: Однажды пеонам пришлось достать звезду прямо с небес|r
+}
+
+STRING 733
+{
+Получай лентяй
+}
+
+STRING 734
+{
+|cff808080Пророчество: Однажды герой пеон, попадёт снежком в 50 ленивых пеонов|r
+}
+
+STRING 735
+{
+Огненные тролли
+}
+
+STRING 736
+{
+|cff808080Пророчество: Однажды герой пеон, помешает сломать тролям большого снеговика|r
+}
+
+STRING 737
+{
+Чекпоинты
+}
+
+STRING 738
+{
+Понять механику чекпоинтов
+|cff808080Пророчество: Однажды герой пеон, возродится возле 3-х карамельных палочек|r
+}
+
+STRING 739
+{
+Пеон
+}
+
+STRING 740
+// Speech/Peon/Dragon/oanenashilietopodarki.mp3
+{
+Тебе не холодно брат?
+}
+
+STRING 742
+// Units: o002 (Голый пеон), Propernames (Proper Names)
+{
+Пеонетти
+}
+
+STRING 743
+// Units: o002 (Голый пеон), Name (Name)
+{
+Голый пеон
+}
+
+STRING 744
+{
+Зарк
+}
+
+STRING 745
+// Speech/Peon/Dragon/oanenashilietopodarki.mp3
+{
+Меня бодогревает ярость к этой "женщине". Столько роботяг она уже склонила на свою сторону. Раньше все они смотрели только на кубики на моём животе, а теперь не отводяд вгляд от её силиконовых шаров!
+}
+
+STRING 746
+{
+Пеон
+}
+
+STRING 747
+// Speech/Peon/Dragon/oanenashilietopodarki.mp3
+{
+Я не видел женщин уже десят... Эта чтоле?
+}
+
+STRING 748
+{
+Пеон
+}
+
+STRING 749
+// Speech/Peon/Dragon/oanenashilietopodarki.mp3
+{
+Она хороша, но она буд-то не из этого мира, из каких-то японских мультиков!
+}
+
+STRING 750
+{
+Зарк
+}
+
+STRING 751
+// Speech/Peon/Dragon/oanenashilietopodarki.mp3
+{
+Это, мой друг, называется АНИМЕ, и кажется она |cffffff00зазвездилась|r, я больше не могу терперь эту конкуренцию, пора ощипать крылышке этой курице!
+}
+
+STRING 752
+{
+Прокаченный друг
+}
+
+STRING 753
+{
+|cff808080Пророчество: Однажды герой пеон, обретёт верного друга и они вместе победят вселенское зло|r
+}
+
+STRING 754
+// Units: O000 (Герой пеон), Name (Name)
+{
+Герой пеон
+}
+
+STRING 755
+// Units: h008 (Звезда на хигаму), Name (Name)
+{
+Звезда на хигаму
 }
 

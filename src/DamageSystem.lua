@@ -130,12 +130,16 @@ function OnPostDamage()
             BlzSetEventDamage(0)
             normal_sound("Sound\\Units\\Combat\\MetalLightSliceFlesh2", GetUnitX(target), GetUnitY(target))
             --print("обнуление в эвенте дамага")
-            FlyTextTagShieldXY(GetUnitX(target), GetUnitY(target), "Отбила", GetOwningPlayer(caster))
-            CreateAndForceBullet(target,GetUnitFacing(target)+GetRandomInt(-15,15),60,"Firebrand Shot Silver")
+
         end
     end
 
-    if GetUnitTypeId(target) ~= HeroID and GetUnitTypeId(caster) == HeroID then
+    if GetOwningPlayer(caster)==Player(0) then
+        --print("урон от союзника")
+        caster=HERO[0].UnitHero
+    end
+
+    if GetUnitTypeId(target) ~= HeroID and GetUnitTypeId(caster) == HeroID  then
         --Функция должна быть в самом низу
         AddDamage2Show(target, GetEventDamage())
         local data = GetUnitData(caster)
@@ -325,9 +329,9 @@ function PointContentDestructable (x, y, range, iskill, damage, hero)
 
                     end
                 end
-                if GetDestructableLife(d) >= 1 and damage > 0 then
+                if GetDestructableLife(d) >= 1 and damage > 1 then
                     SetDestructableAnimation(d, "Stand Hit")
-                    DamageFruitTree(d)
+                    --DamageFruitTree(d)
                 else
                 end
             end

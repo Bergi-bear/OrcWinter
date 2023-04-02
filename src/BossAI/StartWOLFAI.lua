@@ -30,7 +30,7 @@ function StartWolfAI(xs, ys)
     local boss = FindUnitOfType(FourCC('n002'))
     local BossFight = true
     local into = CreateBOSSHPBar(boss, "Отмороженный волк")
-
+    --AddSpecialEffectTarget("peonAttach",boss,"chest") -- Пеон аттач на волка
     UnitAddAbility(boss, FourCC('Abun'))
     --SetUnitPosition(boss, xs, ys)
     SetUnitOwner(boss, Player(10), true)

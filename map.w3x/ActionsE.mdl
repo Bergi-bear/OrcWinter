@@ -1,0 +1,100 @@
+//Modified with MdlVis.
+Version {
+	FormatVersion 800,
+}
+Model "G_Scroll01" {
+	NumGeosets 1,
+	NumBones 1,
+	BlendTime 150,
+	MinimumExtent { 0, -1.75, -1.75 },
+	MaximumExtent { 0, 1.75, 1.75 },
+	BoundsRadius 2.474874,
+}
+Sequences 2 {
+	Anim "Stand" {
+		Interval { 0, 167 },
+		MinimumExtent { 0, -1.75, -1.75 },
+		MaximumExtent { 0, 1.75, 1.75 },
+		BoundsRadius 2.474874,
+	}
+	Anim "Death" {
+		Interval { 1000, 1010 },
+		NonLooping,
+		MinimumExtent { 0, -1.75, -1.75 },
+		MaximumExtent { 19.65988, 31.01877, 24.75071 },
+		BoundsRadius 2.474874,
+	}
+}
+Textures 1 {
+	Bitmap {
+		Image "HadesE.blp",
+	}
+}
+Materials 1 {
+	Material {
+		Layer {
+			FilterMode Transparent,
+			Unshaded,
+			Unfogged,
+			static TextureID 0,
+		}
+	}
+}
+Geoset {
+	Vertices 4 {
+		{ 194.3025, -44.85495, 208.4674 },
+		{ 194.3025, -44.85495, 110.7714 },
+		{ 194.3025, 52.84108, 110.7714 },
+		{ 194.3025, 52.84108, 208.4674 },
+	}
+	Normals 4 {
+		{ 1, 0, 0 },
+		{ 1, 0, 0 },
+		{ 1, 0, 0 },
+		{ 1, 0, 0 },
+	}
+	TVertices 4 {
+		{ 0, 0 },
+		{ 0, 1 },
+		{ 1, 1 },
+		{ 1, 0 },
+	}
+	VertexGroup {
+		0,
+		0,
+		0,
+		0,
+	}
+	Faces 1 6 {
+		Triangles {
+			{ 3, 0, 1, 1, 2, 3 },
+		}
+	}
+	Groups 1 1 {
+		Matrices { 0 },
+	}
+	MinimumExtent { 194.3025055, -44.85495, 110.7714 },
+	MaximumExtent { 194.3025055, 52.84108, 208.4674 },
+	BoundsRadius 138.16302,
+	Anim {
+		MinimumExtent { 194.3025055, -44.85494995, 110.7714081 },
+		MaximumExtent { 194.3025, 52.84108, 208.4674 },
+		BoundsRadius 138.163,
+	}
+	Anim {
+		MinimumExtent { 194.3025055, -44.85494995, 110.7714081 },
+		MaximumExtent { 194.3025, 52.84108, 208.4674 },
+		BoundsRadius 138.163,
+	}
+	MaterialID 0,
+	SelectionGroup 0,
+}
+Bone "root" {
+	ObjectId 0,
+	Billboarded,
+	GeosetId Multiple,
+	GeosetAnimId None,
+}
+PivotPoints 1 {
+	{ 0, 0, 0 },
+}

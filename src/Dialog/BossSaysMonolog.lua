@@ -9,7 +9,7 @@ function PlayBossSpeech(sound, text)
         --print("первый диалог")
         CreteDialogBoxBoss()
     end
-    if not BlzFrameIsVisible(TexBoxBoss) then
+    if not BlzFrameIsVisible(TexBoxBoss) and UnitAlive(GBoss)  then
         local s = normal_sound(sound)
         local sd = GetSoundDuration(s)
         --SetCinematicScene(HeroID, 1, "peon", "text", 2, 2)

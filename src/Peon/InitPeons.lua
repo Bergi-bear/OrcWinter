@@ -13,6 +13,7 @@ function CreatePeonForPlayer(data)
         --CreateDownInterface(data)
         local x, y = GetPlayerStartLocationX(Player(data.pid)), GetPlayerStartLocationY(Player(data.pid))
         data.UnitHero = CreateUnit(Player(data.pid), HeroID, x, y, 0)
+        udg_HERO=data.UnitHero
         UnitAddForceSimple(data.UnitHero, 90, 5, 15)
         SelectUnitForPlayerSingle(data.UnitHero, Player(data.pid))
         UnitAddAbility(data.UnitHero, FourCC("Abun"))
@@ -37,6 +38,9 @@ function CreatePeonForPlayer(data)
         --SetDNCForPlayer(data.UnitHero,"Environment\\DNC\\DNCAshenvale\\DNCAshenvaleTerrain\\DNCAshenvaleTerrain.mdl","Луга слаймов")
     end
 end
+ShowESystem={
+
+}
 function InitRegistryEvent(hero)
     local enterTrig=CreateTrigger()
     TriggerRegisterUnitInRange(enterTrig, hero, 120, nil)
@@ -45,9 +49,32 @@ function InitRegistryEvent(hero)
         --print(GetUnitName(entering))
         if GetUnitTypeId(entering)==FourCC("h003") then -- салат оливье
             KillUnit(entering)
-            UnlockCard("CardOlivie",2)
-        elseif true  then
+            QuestSetCompletedBJ(udg_QYetty, true)
+            --UnlockCard("CardOlivie",2)
+        elseif GetUnitTypeId(entering)==FourCC("h008") then -- звезда хигамы
+            KillUnit(entering)
+        elseif GetUnitAbilityLevel(entering,FourCC("A604"))>=1 and GetUnitTypeId(entering)==FourCC("o002") then --голый пеон и его квест
+            local h=GetHandleId(entering)
+            local data=GetUnitData(hero)
+            if not data.ShowE then
+                --print("время показа")
+                data.ShowE=true
+                data.CurrentQuest="AllyPeonOnAnime"
+                data.QuestUnit=entering
+                local eff = AddSpecialEffect("ActionsE", GetUnitXY(entering))
+                TimerStart(CreateTimer(), 0.1, true, function()
+                    if not IsUnitInRange(hero,entering,140) or GetUnitAbilityLevel(entering,FourCC("A604"))==0 then
+                        --print("покинул радиус")
+                        data.CurrentQuest=""
+                        data.QuestUnit=nil
+                        DestroyTimer(GetExpiredTimer())
+                        DestroyEffect(eff)
+                        BlzSetSpecialEffectPosition(eff,0,0,0)
+                        data.ShowE=false
+                    end
+                end)
 
+            end
         end
     end)
     --больший радиус

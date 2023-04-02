@@ -39,6 +39,12 @@ function StartAnimeAI(xs, ys)
     local boss = FindUnitOfType(FourCC('h009'))
     local BossFight = true
     local into = CreateBOSSHPBar(boss, "Богиня Аниме")
+
+    local allyPeon = FindUnitOfType(FourCC('o002'))
+    if UnitRemoveAbility(allyPeon, FourCC("A604")) then
+        StartPeonAllyAI()
+    end
+
     local hpMark = { 100, 88, 76, 64, 52, 40, 28 }
     local phaseCHK = {
         true,
@@ -50,11 +56,11 @@ function StartAnimeAI(xs, ys)
         false,
         false,
     }
-    local HPMarkFH={}
+    local HPMarkFH = {}
     for i = 1, #hpMark do
         --table.insert(phaseCHK, true)
         if i >= 2 then
-            table.insert(HPMarkFH,CreateMarkOnBossBar(into, hpMark[i]))
+            table.insert(HPMarkFH, CreateMarkOnBossBar(into, hpMark[i]))
             --table.insert(phaseCHK, false)
         end
     end
@@ -89,6 +95,14 @@ function StartAnimeAI(xs, ys)
             phase = 0
             --print("Даём нарграду, победа")
             CreateVictoryElderBorder()
+            QuestSetCompletedBJ(udg_QStarAnime, true)
+            if UnitAlive(allyPeon) then
+                QuestSetCompletedBJ(udg_QNudeFriend, true)
+                HealUnit(allyPeon)
+                AllyPeonCanTP=true
+                DisableTrigger(gg_trg_DeathNudeFriend)
+            end
+            CreateUnit(Player(0), FourCC("h008"), GetUnitX(boss), GetUnitY(boss), 0)
             ClearMapMusicBJ()
             PlayMusicBJ("Salve Springs")
             SetMusicVolumeBJ(100)
@@ -156,14 +170,14 @@ function StartAnimeAI(xs, ys)
                 PhaseOn = true
                 --print("phase " .. phase)
             end
-           -- print("хп босса",GetUnitLifePercent(boss))
+            -- print("хп босса",GetUnitLifePercent(boss))
             if GetUnitLifePercent(boss) <= hpMark[2] then
                 phase = 2
                 --print("отработало 1")
                 if not phaseCHK[phase] then
                     --print("отработало 2")
-                    AnitAddArmorTimed(boss,50,10)
-                    BlzFrameSetVisible(HPMarkFH[phase-1],false)
+                    AnitAddArmorTimed(boss, 50, 10)
+                    BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     phaseCHK[phase] = true
                     OnSecondPhaseMove = 0
                     --Blink2Point(boss, xs, ys)
@@ -177,8 +191,8 @@ function StartAnimeAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[3] then
                 phase = 3
                 if not phaseCHK[phase] then
-                    AnitAddArmorTimed(boss,50,10)
-                    BlzFrameSetVisible(HPMarkFH[phase-1],false)
+                    AnitAddArmorTimed(boss, 50, 10)
+                    BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     --print("смена фазы на ", phase, "Текущая секунда", sec)
                     sec = 0
                     --AnimeJumpToPoint(boss, true, GetUnitXY(hero))
@@ -189,8 +203,8 @@ function StartAnimeAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[4] then
                 phase = 4
                 if not phaseCHK[phase] then
-                    AnitAddArmorTimed(boss,50,10)
-                    BlzFrameSetVisible(HPMarkFH[phase-1],false)
+                    AnitAddArmorTimed(boss, 50, 10)
+                    BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     --print("смена фазы на ", phase)
                     --CreateAndMoveChakram(boss, hero, bulletCounter)
                     phaseCHK[phase] = true
@@ -199,8 +213,8 @@ function StartAnimeAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[5] then
                 phase = 5
                 if not phaseCHK[phase] then
-                    AnitAddArmorTimed(boss,50,10)
-                    BlzFrameSetVisible(HPMarkFH[phase-1],false)
+                    AnitAddArmorTimed(boss, 50, 10)
+                    BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     --print("смена фазы на ", phase)
                     --FlyAroundHero(boss, hero)
 
@@ -210,8 +224,8 @@ function StartAnimeAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[6] then
                 phase = 6
                 if not phaseCHK[phase] then
-                    AnitAddArmorTimed(boss,50,10)
-                    BlzFrameSetVisible(HPMarkFH[phase-1],false)
+                    AnitAddArmorTimed(boss, 50, 10)
+                    BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     --print("смена фазы на ", phase)
                     --CreateAnimeLineDelay(boss, hero, 10)
                     phaseCHK[phase] = true
@@ -220,8 +234,8 @@ function StartAnimeAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[7] then
                 phase = 7
                 if not phaseCHK[phase] then
-                    AnitAddArmorTimed(boss,50,120)
-                    BlzFrameSetVisible(HPMarkFH[phase-1],false)
+                    AnitAddArmorTimed(boss, 50, 120)
+                    BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     --print("смена фазы на ", phase)
                     SunStrikeArea(boss, hero, xs, ys)
                     phaseCHK[phase] = true
@@ -237,29 +251,29 @@ function StartAnimeAI(xs, ys)
             if phase == 1 and PhaseOn then
                 PhaseOn = false
                 AnimeRangeAttack(boss, hero, bulletCounter)
-                MakeUnitBulletCatcherTimed(boss,2)
+                MakeUnitBulletCatcherTimed(boss, 2)
             end
 
             if phase == 2 and PhaseOn then
                 PhaseOn = false
                 --print("фаза", phase)
-                local rph=GetRandomInt(1,phase)
+                local rph = GetRandomInt(1, phase)
                 if rph == 1 then
                     Blink2Point(boss, xs, ys)
                     CreateBeemInRange(boss, GetRandomInt(phase, 7))
-                elseif rph==2 then
+                elseif rph == 2 then
                     AnimeRangeAttack(boss, hero, bulletCounter)
                 end
             end
             if phase == 3 and PhaseOn then
                 PhaseOn = false
                 --print("фаза", phase)
-                local rph=GetRandomInt(1,phase)
+                local rph = GetRandomInt(1, phase)
                 if rph == 1 then
                     AnimeJumpToPoint(boss, true, GetUnitXY(hero)) -- надо заменить
-                elseif rph==2 then
+                elseif rph == 2 then
                     AnimeRangeAttack(boss, hero, bulletCounter)
-                elseif rph==3 then
+                elseif rph == 3 then
                     Blink2Point(boss, xs, ys)
                     CreateBeemInRange(boss, GetRandomInt(phase, 7))
                 end
@@ -267,35 +281,34 @@ function StartAnimeAI(xs, ys)
             end
             if phase == 4 and PhaseOn then
                 PhaseOn = false
-                local rph=GetRandomInt(1,phase)
+                local rph = GetRandomInt(1, phase)
                 if rph == 1 then
                     AnimeJumpToPoint(boss, true, GetUnitXY(hero)) -- надо заменить
-                elseif rph==2 then
+                elseif rph == 2 then
                     AnimeRangeAttack(boss, hero, bulletCounter)
-                elseif rph==3 then
+                elseif rph == 3 then
                     Blink2Point(boss, xs, ys)
                     CreateBeemInRange(boss, GetRandomInt(phase, 7))
-                elseif rph==4 then
+                elseif rph == 4 then
                     CreateAndMoveChakram(boss, hero, bulletCounter)
                 end
-
 
 
             end
             if phase == 5 and PhaseOn then
                 PhaseOn = false
 
-                local rph=GetRandomInt(1,phase)
+                local rph = GetRandomInt(1, phase)
                 if rph == 1 then
                     AnimeJumpToPoint(boss, true, GetUnitXY(hero)) -- надо заменить
-                elseif rph==2 then
+                elseif rph == 2 then
                     AnimeRangeAttack(boss, hero, bulletCounter)
-                elseif rph==3 then
+                elseif rph == 3 then
                     Blink2Point(boss, xs, ys)
                     CreateBeemInRange(boss, GetRandomInt(phase, 7))
-                elseif rph==4 then
+                elseif rph == 4 then
                     CreateAndMoveChakram(boss, hero, bulletCounter)
-                elseif rph==5 then
+                elseif rph == 5 then
                     FlyAroundHero(boss, hero)
                 end
 
@@ -305,19 +318,19 @@ function StartAnimeAI(xs, ys)
                 PhaseOn = false
                 --print("фаза", phase)
 
-                local rph=GetRandomInt(1,phase)
+                local rph = GetRandomInt(1, phase)
                 if rph == 1 then
                     AnimeJumpToPoint(boss, true, GetUnitXY(hero)) -- надо заменить
-                elseif rph==2 then
+                elseif rph == 2 then
                     AnimeRangeAttack(boss, hero, bulletCounter)
-                elseif rph==3 then
+                elseif rph == 3 then
                     Blink2Point(boss, xs, ys)
                     CreateBeemInRange(boss, GetRandomInt(phase, 7))
-                elseif rph==4 then
+                elseif rph == 4 then
                     CreateAndMoveChakram(boss, hero, bulletCounter)
-                elseif rph==5 then
+                elseif rph == 5 then
                     FlyAroundHero(boss, hero)
-                elseif rph==6 then
+                elseif rph == 6 then
                     CreateAnimeLineDelay(boss, hero, 10)
                 end
 
@@ -326,21 +339,21 @@ function StartAnimeAI(xs, ys)
                 PhaseOn = false
                 --print("фаза", phase)
 
-                local rph=GetRandomInt(1,phase)
+                local rph = GetRandomInt(1, phase)
                 if rph == 1 then
                     AnimeJumpToPoint(boss, true, GetUnitXY(hero)) -- надо заменить
-                elseif rph==2 then
+                elseif rph == 2 then
                     AnimeRangeAttack(boss, hero, bulletCounter)
-                elseif rph==3 then
+                elseif rph == 3 then
                     Blink2Point(boss, xs, ys)
                     CreateBeemInRange(boss, GetRandomInt(phase, 7))
-                elseif rph==4 then
+                elseif rph == 4 then
                     CreateAndMoveChakram(boss, hero, bulletCounter)
-                elseif rph==5 then
+                elseif rph == 5 then
                     FlyAroundHero(boss, hero)
-                elseif rph==6 then
+                elseif rph == 6 then
                     CreateAnimeLineDelay(boss, hero, 10)
-                elseif rph==7 then
+                elseif rph == 7 then
                     SunStrikeArea(boss, hero, xs, ys)
                 end
             end
@@ -379,18 +392,18 @@ function StartAnimeAI(xs, ys)
     end)
 end
 
-
-function MakeUnitBulletCatcherTimed(boss,timed)
-    SetUnitUserData(boss,100)
+function MakeUnitBulletCatcherTimed(boss, timed)
+    SetUnitUserData(boss, 100)
     TimerStart(CreateTimer(), timed, false, function()
-        SetUnitUserData(boss,0)
+        SetUnitUserData(boss, 0)
     end)
 end
 
-
-function AnitAddArmorTimed(unit,armor,timed)
+function AnitAddArmorTimed(unit, armor, timed)
     BlzSetUnitArmor(unit, BlzGetUnitArmor(unit) + armor)
-    local eff=AddSpecialEffectTarget("effect\\Bubble",unit,"chest")
+    local eff = AddSpecialEffectTarget("effect\\Bubble", unit, "chest")
+    DestroyEffect(AddSpecialEffectTarget("Effect\\File00000341", unit, "chest"))
+
     TimerStart(CreateTimer(), timed, false, function()
         BlzSetUnitArmor(unit, BlzGetUnitArmor(unit) - armor)
         DestroyEffect(eff)
@@ -439,7 +452,7 @@ function CreateAndMoveChakram(boss, hero, max)
         local timed = 10
         --gr=gr+1
         --print(gr)
-        normal_sound("Buildings/Human/HumanLumberMill/HumanLumberMillWhat1",x, y)
+        normal_sound("Buildings/Human/HumanLumberMill/HumanLumberMillWhat1", x, y)
         TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
             timed = timed - TIMER_PERIOD64
             x, y, z = BlzGetLocalSpecialEffectX(eff), BlzGetLocalSpecialEffectY(eff), BlzGetLocalSpecialEffectZ(eff)
@@ -478,9 +491,6 @@ function CreateAndMoveChakram(boss, hero, max)
         end
     end)
 end
-
-
-
 
 function FlyAroundHero(boss, hero)
     local t = CreateTimer()
@@ -530,7 +540,7 @@ function AnimeJumpToPoint(boss, HasMarker, x, y)
         --print(r)
         --r=r+1
         UnitAddJumpForce(boss, angle, 60, dist, 500, false, "Earthshock")
-        MakeUnitBulletCatcherTimed(boss,3)
+        MakeUnitBulletCatcherTimed(boss, 3)
     end)
 end
 
@@ -606,7 +616,7 @@ function CreateBeemInRange(boss, count)
     local damageTime = false
     TimerStart(CreateTimer(), 1, false, function()
         damageTime = true
-        normal_sound("LaserSound3",x,y)
+        normal_sound("LaserSound3", x, y)
     end)
     TimerStart(t, TIMER_PERIOD, true, function()
         a = a + speed
@@ -637,9 +647,9 @@ function DamageInLine(x, y, angle, distance, boss, eff)
     for i = 1, max do
         local nx, ny = MoveXY(x, y, step * i, angle - 180)
         --DestroyEffect(AddSpecialEffect("BlinkCasterNoOmni", nx, ny))
-        local is,enemy=UnitDamageArea(boss, 50, nx, ny, step)
+        local is, enemy = UnitDamageArea(boss, 50, nx, ny, step)
         if is then
-            DestroyEffect(AddSpecialEffect("AncestralGuardianMissileNoOmni",GetUnitXY(enemy)))
+            DestroyEffect(AddSpecialEffect("AncestralGuardianMissileNoOmni", GetUnitXY(enemy)))
             isDamage = i * step
             --print(isDamage)
         end
@@ -650,7 +660,6 @@ end
 function AnimeRangeAttack(boss, hero, max)
     local eff = nil
     local t = CreateTimer()
-
 
     TimerStart(t, 1, true, function()
         local angle = AngleBetweenUnits(boss, hero)

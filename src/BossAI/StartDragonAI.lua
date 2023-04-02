@@ -164,7 +164,13 @@ function StartDragonAI(xs, ys)
                 if dragonFrazeCount+1<=#tFraze then
                     --print(tFraze[dragonFrazeCount+1])
                     --normal_sound("Speech\\Dragon\\"..dragonFrazeCount+1,GetUnitXY(boss))
-                    PlayBossSpeech("Speech\\Dragon\\"..dragonFrazeCount+1,tFraze[dragonFrazeCount+1])
+                    if dragonFrazeCount==3 then
+                        TimerStart(CreateTimer(), 5, false, function()
+                            PlayBossSpeech("Speech\\Dragon\\"..dragonFrazeCount+1,tFraze[dragonFrazeCount+1])
+                        end)
+                    else
+                        PlayBossSpeech("Speech\\Dragon\\"..dragonFrazeCount+1,tFraze[dragonFrazeCount+1])
+                    end
                     dragonFrazeCount=dragonFrazeCount+1
                     TimerStart(CreateTimer(), GBossSoundDuration+2, false, function()
                         if dragonFrazeCount==2 then

@@ -56,6 +56,14 @@ function CreateEActions()
                 QTEReadyToPress=false
                 --print("нажал Е во время QTE")
             end
+            if data.ShowE then-- нажать можно только тогда когда активен Е
+                if data.CurrentQuest=="AllyPeonOnAnime" then
+                    UnitRemoveAbility(data.QuestUnit,FourCC("A604"))
+                    print("запускает ролик про помощника пеона")
+                    CustomCinematicMode(true)
+                    Trig_NudeCinematic_Actions() -- год из гуи
+                end
+            end
         end
     end)
 
