@@ -14,6 +14,21 @@ do
         DestroyTimerOrigin(t) -- вызываем DestroyTimer из переменной
     end
 end]]
+UnitPauseCounter = {}
+local origBlzPauseUnitEx = BlzPauseUnitEx
+function BlzPauseUnitEx(whichUnit, flag)
+    origBlzPauseUnitEx(whichUnit, flag)
+    local h = GetHandleId(whichUnit)
+    if not UnitPauseCounter[h] then
+        UnitPauseCounter[h] = 0
+    end
+    if flag then
+        UnitPauseCounter[h] = UnitPauseCounter[h] + 1
+    else
+        UnitPauseCounter[h] = UnitPauseCounter[h] - 1
+    end
+    --print("считаем паузы для ", GetUnitName(whichUnit), UnitPauseCounter[h])
+end
 
 local origResetUnitAnimation = ResetUnitAnimation
 function ResetUnitAnimation(whichUnit)
@@ -22,29 +37,26 @@ function ResetUnitAnimation(whichUnit)
         --print("reset from orin")
     end
 end
-local origSetUnitAnimation=SetUnitAnimation
+local origSetUnitAnimation = SetUnitAnimation
 function SetUnitAnimation(whichUnit, whichAnimation)
     if UnitAlive(whichUnit) then
         origSetUnitAnimation(whichUnit, whichAnimation)
     end
 end
 
-local origSetUnitAnimationByIndex=SetUnitAnimationByIndex
+local origSetUnitAnimationByIndex = SetUnitAnimationByIndex
 function SetUnitAnimationByIndex(whichUnit, whichAnimation)
     if UnitAlive(whichUnit) then
         origSetUnitAnimationByIndex(whichUnit, whichAnimation)
     end
 end
 
-
-local origQueueUnitAnimation=QueueUnitAnimation
+local origQueueUnitAnimation = QueueUnitAnimation
 function QueueUnitAnimation(whichUnit, whichAnimation)
     if UnitAlive(whichUnit) then
         origQueueUnitAnimation(whichUnit, whichAnimation)
     end
 end
-
-
 
 local origDestroyTimer = DestroyTimer
 function DestroyTimer(t)

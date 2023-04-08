@@ -100,6 +100,11 @@ function InitRegistryEvent(hero)
                 StartSnowManDefence()
             end
         end
+        if GetUnitTypeId(entering)==FourCC("n002") then -- Снеговик для дефенса
+            if not StartWolOnce then
+                StartWolfAI()
+            end
+        end
     end)
 end
 

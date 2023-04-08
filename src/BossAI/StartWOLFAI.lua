@@ -1,4 +1,4 @@
-do
+--[[do
     local InitGlobalsOrigin = InitGlobals
     function InitGlobals()
         InitGlobalsOrigin()
@@ -25,12 +25,16 @@ function InitTrig_EnterInRectWolf()
         end
     end)
 end
+]]
 
-function StartWolfAI(xs, ys)
+function StartWolfAI()
+    StartWolOnce = true
     local boss = FindUnitOfType(FourCC('n002'))
+    local xs, ys = GetUnitXY(boss)
     local BossFight = true
     local into = CreateBOSSHPBar(boss, "Отмороженный волк")
-    --AddSpecialEffectTarget("peonAttach",boss,"chest") -- Пеон аттач на волка
+    SetUnitLifePercentBJ(boss, 1)
+    --
     UnitAddAbility(boss, FourCC('Abun'))
     --SetUnitPosition(boss, xs, ys)
     SetUnitOwner(boss, Player(10), true)
@@ -46,13 +50,15 @@ function StartWolfAI(xs, ys)
     local sec = 0
     local PhaseOn = true
     local OnAttack = true
+    local Control = false
     TimerStart(CreateTimer(), 1, true, function()
         --каждую секунду
         GBoss = boss
         local bx, by = GetUnitXY(boss)
 
-        if not UnitAlive(boss) then
-            -- Место где босс
+        if not UnitAlive(boss) and not Control then
+            Control = true
+            local hero = HERO[0].UnitHero
             StartSound(bj_questCompletedSound)
             DestroyTimer(GetExpiredTimer())
             phase = 0
@@ -62,6 +68,38 @@ function StartWolfAI(xs, ys)
             PlayMusicBJ("Salve Springs")
             SetMusicVolumeBJ(100)
             BlzFrameSetVisible(into, false)
+            SetUnitAnimation(boss, "death")
+            print("Волк: Всё замотал ты меня, хочешь прокачу?")
+            print("Это очень неожиданно, но я соглашусь")
+
+            SetUnitOwner(boss, Player(0), true)
+            ResetUnitLookAt(boss)
+
+            UnitAddAbility(hero, FourCC("AInv"))
+
+
+            --StunUnit(hero,7)
+            SetUnitFacingToFaceUnitTimed(hero, boss, 0)
+            TimerStart(CreateTimer(), 5, false, function()
+                UnitAddItemById(hero, FourCC("I000"))
+                local dist = DistanceBetweenXY(GetUnitX(boss), GetUnitY(boss), GetUnitXY(hero))
+                BlzPauseUnitEx(hero, true) -- починка бага
+                local angle = AngleBetweenUnits(hero, boss)
+                UnitAddJumpForce(hero, angle, 40, dist, 400)
+                ResetUnitLookAt(boss)
+                ResetUnitCustomPause(boss)
+            end)
+            TimerStart(CreateTimer(), 7, false, function()
+                ShowUnit(hero, false)
+
+                local data = GetUnitData(hero)
+                data.peonAttach=AddSpecialEffectTarget("peonAttach", boss, "chest") -- Пеон аттач на волка
+                data.UnitHero = boss
+                InitAnimations(hero, data)
+                --InitAnimations(udg_HERO, HERO[0])
+                --
+            end)
+
 
         else
             --Проверяем есть ли живые герои, когда тиник жив
@@ -399,7 +437,7 @@ function WolfJump2Point(boss, HasMarker, x, y)
     end)
 end
 
-function UnitAddJumpForce(hero, angle, speed, distance, MaxHeight, HasMarker,effModel)
+function UnitAddJumpForce(hero, angle, speed, distance, MaxHeight, HasMarker, effModel)
     local currentdistance = 0
     local i = 0
     local ZStart = GetUnitZ(hero)
@@ -408,43 +446,46 @@ function UnitAddJumpForce(hero, angle, speed, distance, MaxHeight, HasMarker,eff
     end
     --SetUnitPathing(hero,false)
     --UnitDisablePath(hero)
-    SetUnitFacing(hero, angle)
-    TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
+    if UnitAlive(hero) then
+        -- мертвые не прыгают
+        SetUnitFacing(hero, angle)
+        TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
 
-        currentdistance = currentdistance + speed
-        local x, y = GetUnitXY(hero)
-        local f = ParabolaZ(MaxHeight / 2, distance, i * speed) + ZStart
-        SetUnitZ(hero, f)
-        i = i + 1
-        local newX, newY = MoveX(x, speed, angle), MoveY(y, speed, angle)
-        --local perepad = GetUnitZ(hero) - GetTerrainZ(MoveXY(x, y, speed * 3, angle))
-        SetUnitX(hero, newX)
-        SetUnitY(hero, newY)
+            currentdistance = currentdistance + speed
+            local x, y = GetUnitXY(hero)
+            local f = ParabolaZ(MaxHeight / 2, distance, i * speed) + ZStart
+            SetUnitZ(hero, f)
+            i = i + 1
+            local newX, newY = MoveX(x, speed, angle), MoveY(y, speed, angle)
+            --local perepad = GetUnitZ(hero) - GetTerrainZ(MoveXY(x, y, speed * 3, angle))
+            SetUnitX(hero, newX)
+            SetUnitY(hero, newY)
 
-        if i > 3 and f <= GetTerrainZ(GetUnitXY(hero)) then
-            DestroyTimer(GetExpiredTimer())
-            BlzPauseUnitEx(hero, false)
-            SetUnitTimeScale(hero, 1)
-            --SetUnitPathing(hero,true)
-            SetUnitZ(hero, 0)
-            --print("приземлился")
-            if HasMarker then
-                if GetRandomInt(1, 3) == 1 then
-                    WolfHowlFreeze(hero, GetRandomInt(4, 8))
+            if i > 3 and f <= GetTerrainZ(GetUnitXY(hero)) then
+                DestroyTimer(GetExpiredTimer())
+                BlzPauseUnitEx(hero, false)
+                SetUnitTimeScale(hero, 1)
+                --SetUnitPathing(hero,true)
+                SetUnitZ(hero, 0)
+                --print("приземлился")
+                if HasMarker then
+                    if GetRandomInt(1, 3) == 1 then
+                        WolfHowlFreeze(hero, GetRandomInt(4, 8))
+                    end
+                    WolfRoundMove(hero)
                 end
-                WolfRoundMove(hero)
-            end
 
-            QueueUnitAnimation(hero,"stand")
-            UnitDamageArea(hero, 150, newX, newY, 235)
-            if not effModel then
-                DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", newX, newY))
-            else
-                DestroyEffect(AddSpecialEffect(effModel, newX, newY))
-                DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", newX, newY))
+                QueueUnitAnimation(hero, "stand")
+                UnitDamageArea(hero, 150, newX, newY, 235)
+                if not effModel then
+                    --DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", newX, newY))
+                else
+                    DestroyEffect(AddSpecialEffect(effModel, newX, newY))
+                    DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", newX, newY))
+                end
             end
-        end
-    end)
+        end)
+    end
 end
 
 function UnitDisablePath(unit)
@@ -594,7 +635,7 @@ function WolfSlashAttack(boss, phase)
     normal_sound("Sound\\Units\\Combat\\MetalLightSliceFlesh2", x, y)
     BlzSetSpecialEffectPosition(eff, xe, ye, GetTerrainZ(xe, ye) + 80)
     BlzSetSpecialEffectYaw(eff, math.rad(GetUnitFacing(boss)))
-    UnitDamageArea(boss, 50, xe, ye, 200, "ForceTotem")
+    UnitDamageArea(boss, 300, xe, ye, 200)
     DestroyEffect(eff)
     MoveEffectTimedWSpeed(eff, speed, GetUnitFacing(boss), 1)
     if phase == 1 then
@@ -603,3 +644,22 @@ function WolfSlashAttack(boss, phase)
         end)
     end
 end
+
+function ResetUnitCustomPause(unit)
+    local k = UnitPauseCounter[GetHandleId(unit)]
+    if not k then
+        k=0
+    end
+    if k < 0 then
+        k = k * -1
+        for _ = 1, k do
+            PauseUnit(unit, true)
+        end
+    end
+    if k > 0 then
+        for _ = 1, k do
+            PauseUnit(unit, false)
+        end
+    end
+end
+

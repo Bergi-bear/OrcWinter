@@ -139,7 +139,7 @@ function OnPostDamage()
         caster=HERO[0].UnitHero
     end
 
-    if GetUnitTypeId(target) ~= HeroID and GetUnitTypeId(caster) == HeroID  then
+    if GetUnitTypeId(target) ~= HeroID and GetOwningPlayer(caster)==Player(0) then
         --Функция должна быть в самом низу
         AddDamage2Show(target, GetEventDamage())
         local data = GetUnitData(caster)

@@ -23,15 +23,15 @@ function InitAnimations(hero, data)
         data.IndexAnimationAttack2 = 4 --индекс анимации атаки в серии
         data.IndexAnimationAttack3 = 5 --индекс анимации  атаки в серии
         data.IndexAnimationSpin = 3 -- индекс анимации для удара во вращении
-    elseif GetUnitTypeId(data.UnitHero) == FourCC("Ewar") then
+    elseif GetUnitTypeId(data.UnitHero) == FourCC("n002") then
         -- смотрящая в ночь
-        data.AnimDurationWalk = 0.733 --длительность анимации движения, полный круг
+        data.AnimDurationWalk = 0.9 --длительность анимации движения, полный круг
         data.IndexAnimationWalk = 2 -- индекс анимации движения
-        data.ResetDuration = 2.667 -- время сброса для анимации stand, длительность анимации stand
+        data.ResetDuration = 1.367 -- время сброса для анимации stand, длительность анимации stand
         data.IndexAnimationQ = 6 -- анимация сплеш удара
         data.IndexAnimationSpace = 2 -- анимация для рывка, если анимации нет, ставь индекс аналогичный бегу
         data.IndexAnimationAttackInDash = 4 --анимация удара в рывке
-        data.IndexAnimationThrow = 7 -- индекс анимациии броска чего либо
+        data.IndexAnimationThrow = 6 -- индекс анимациии броска чего либо
         data.IndexAnimationAttack1 = 5 --индекс анимации атаки в серии
         data.IndexAnimationAttack2 = 5 --индекс анимации атаки в серии
         data.IndexAnimationAttack3 = 6 --индекс анимации  атаки в серии
@@ -671,6 +671,8 @@ function CreateWASDActions()
 
                 local dist = 400
                 local delay = 0.5
+                local dashSpeed=10
+
                 if data.ReleaseQ and not data.QJump2Pointer then
                     -- print("сплеш в рывке, пробуем прыгнуть прыжок")
                     dist = 400
@@ -742,7 +744,15 @@ function CreateWASDActions()
                         end
                     else
                         --print("перекат тут?")
-                        UnitAddForceSimple(data.UnitHero, data.DirectionMove, 10, dist, "ignore") --САМ рывок при нажатии пробела
+                        if GetUnitTypeId(data.UnitHero)==FourCC("n002") then
+                            dist=700
+                            dashSpeed=40
+                            --print("Волк делает рывок дальше")
+                            data.chargeEff = AddSpecialEffectTarget("IceCharge", data.UnitHero, "origin")
+
+                        end
+                        UnitAddForceSimple(data.UnitHero, data.DirectionMove, dashSpeed, dist, "ignore") --САМ рывок при нажатии пробела
+
                     end
                 end
                 if data.ArrowDamageAfterCharge then

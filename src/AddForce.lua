@@ -215,6 +215,7 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
                             end
                         end
                     end
+                    DestroyEffect(data.chargeEff)
                     data.ResetSeriesTime = 0
                     if data.IllusionDashCDFH then
                         if not data.IllusionDashCurrentCD then

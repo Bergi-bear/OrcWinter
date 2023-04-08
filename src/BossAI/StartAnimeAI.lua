@@ -237,7 +237,7 @@ function StartAnimeAI(xs, ys)
                     AnitAddArmorTimed(boss, 50, 120)
                     BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     --print("смена фазы на ", phase)
-                    SunStrikeArea(boss, hero, xs, ys)
+                    --SunStrikeArea(boss, hero, xs, ys)
                     phaseCHK[phase] = true
                 end
             end
@@ -403,7 +403,15 @@ function AnitAddArmorTimed(unit, armor, timed)
     BlzSetUnitArmor(unit, BlzGetUnitArmor(unit) + armor)
     local eff = AddSpecialEffectTarget("effect\\Bubble", unit, "chest")
     DestroyEffect(AddSpecialEffectTarget("Effect\\File00000341", unit, "chest"))
+    local x,y=GetUnitXY(unit)
+    local _, _, _, units = UnitDamageArea(unit, 1, x, y, 500)
 
+    for i = 1, #units do
+        local angle=AngleBetweenUnits(unit,units[i])
+        local dist=500-DistanceBetweenXY(x,y,GetUnitXY(units[i]))
+        BlzPauseUnitEx(units[i], true) -- починка бага
+        UnitAddJumpForce(units[i],angle,40,dist,250)
+    end
     TimerStart(CreateTimer(), timed, false, function()
         BlzSetUnitArmor(unit, BlzGetUnitArmor(unit) - armor)
         DestroyEffect(eff)
@@ -467,17 +475,18 @@ function CreateAndMoveChakram(boss, hero, max)
             if IsUnitInRangeXY(enemy, x, y, 300) then
                 angle = -180 + AngleBetweenXY(x, y, GetUnitXY(hero)) / bj_DEGTORAD
             end
-
-            local _, _, _, units = UnitDamageArea(boss, 1, x, y, 300)
-            for i = 1, #units do
-                --print("засасывание")
-                local xu, yu = GetUnitXY(units[i])
-                local d = DistanceBetweenXY(x, y, xu, yu) - 1
-                local angleW = 1 + AngleBetweenXY(x, y, xu, yu) / bj_DEGTORAD
-                local vector = Vector:new(x, y, z)
-                local newVector = vector
-                newVector = VectorSum(newVector, vector:yawPitchOffset(d, angleW * (math.pi / 180), 0.0))
-                SetUnitPositionSmooth(units[i], newVector.x, newVector.y)
+            if false then
+                local _, _, _, units = UnitDamageArea(boss, 1, x, y, 300)
+                for i = 1, #units do
+                    --print("засасывание")
+                    local xu, yu = GetUnitXY(units[i])
+                    local d = DistanceBetweenXY(x, y, xu, yu) - 1
+                    local angleW = 1 + AngleBetweenXY(x, y, xu, yu) / bj_DEGTORAD
+                    local vector = Vector:new(x, y, z)
+                    local newVector = vector
+                    newVector = VectorSum(newVector, vector:yawPitchOffset(d, angleW * (math.pi / 180), 0.0))
+                    SetUnitPositionSmooth(units[i], newVector.x, newVector.y)
+                end
             end
 
             if timed <= 0 then

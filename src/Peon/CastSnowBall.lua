@@ -3,30 +3,38 @@
 --- Created by User.
 --- DateTime: 01.01.2023 17:35
 ---
-function CastSnowBall(data,directionAngle)
-    local effModel="Firebrand Shot Silver"--snowball
+function CastSnowBall(data, directionAngle)
+    local effModel = "Firebrand Shot Silver"--snowball
     --effModel="PrismBeam_Initiate"
 
-    local hero=data.UnitHero
-    if data.AttackIsReady and not data.SpaceForce and UnitAlive(hero) and not FREE_CAMERA and not IsUnitStunned(hero) then
-        --WolfSlashAttack(hero) --для проверки вставлял
-        BlzSetUnitFacingEx(hero,directionAngle)
-        SetUnitAnimationByIndex(hero,3)
-        data.AttackIsReady=false
-        data.UnitInAttack=true
-        --CreateBeemLighting(hero)
-        TimerStart(CreateTimer(), 0.15, false, function() -- задержка замаха
-            CreateAndForceBullet(hero,directionAngle,40,effModel)
-            data.MHoldSec=data.MHoldSec+1
-            data.UnitInAttack=false
-        end)
-        TimerStart(CreateTimer(), 0.35, false, function()
-            data.AttackIsReady=true
+    local hero = data.UnitHero
 
-            if UnitAlive(hero) and not data.IsMoving and not LockAnimAnimation(data) then
-                ResetUnitAnimation(hero)
-            end
-            DestroyTimer(GetExpiredTimer())
-        end)
+    if data.AttackIsReady and not data.SpaceForce and UnitAlive(hero) and not FREE_CAMERA and not IsUnitStunned(hero) then
+        if GetUnitTypeId(hero) == HeroID then
+            --WolfSlashAttack(hero) --для проверки вставлял
+            BlzSetUnitFacingEx(hero, directionAngle)
+            SetUnitAnimationByIndex(hero, 3)
+            data.AttackIsReady = false
+            data.UnitInAttack = true
+            --CreateBeemLighting(hero)
+            TimerStart(CreateTimer(), 0.15, false, function()
+                -- задержка замаха
+                CreateAndForceBullet(hero, directionAngle, 40, effModel)
+                data.MHoldSec = data.MHoldSec + 1
+                data.UnitInAttack = false
+            end)
+            TimerStart(CreateTimer(), 0.35, false, function()
+                data.AttackIsReady = true
+
+                if UnitAlive(hero) and not data.IsMoving and not LockAnimAnimation(data) then
+                    ResetUnitAnimation(hero)
+                end
+                DestroyTimer(GetExpiredTimer())
+            end)
+        elseif GetUnitTypeId(hero) == FourCC("n002") then
+            -- верхом на волке
+           -- print("волк атакует рукой")
+            WolfAttackPeon(hero, directionAngle)
+        end
     end
 end

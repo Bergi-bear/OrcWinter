@@ -1835,7 +1835,7 @@ STRING 739
 }
 
 STRING 740
-// Speech/Peon/Dragon/oanenashilietopodarki.mp3
+// Speech/Anime/Peon/animepeon1.mp3
 {
 Тебе не холодно брат?
 }
@@ -1858,9 +1858,9 @@ STRING 744
 }
 
 STRING 745
-// Speech/Peon/Dragon/oanenashilietopodarki.mp3
+// Speech/Anime/Peon/animeZurck1.mp3
 {
-Меня бодогревает ярость к этой "женщине". Столько роботяг она уже склонила на свою сторону. Раньше все они смотрели только на кубики на моём животе, а теперь не отводяд вгляд от её силиконовых шаров!
+Меня подогревает ярость к этой "женщине". Столько работяг она уже склонила на свою сторону. Раньше все они смотрели только на кубики на моём животе, а теперь не отводят взгляд от её шаров!
 }
 
 STRING 746
@@ -1869,9 +1869,9 @@ STRING 746
 }
 
 STRING 747
-// Speech/Peon/Dragon/oanenashilietopodarki.mp3
+// Speech/Anime/Peon/animepeon2.mp3
 {
-Я не видел женщин уже десят... Эта чтоле?
+Я не видел женщин уже десять тысяч ле... Эта чтоле?
 }
 
 STRING 748
@@ -1880,7 +1880,7 @@ STRING 748
 }
 
 STRING 749
-// Speech/Peon/Dragon/oanenashilietopodarki.mp3
+// Speech/Anime/Peon/animepeon3.mp3
 {
 Она хороша, но она буд-то не из этого мира, из каких-то японских мультиков!
 }
@@ -1891,9 +1891,9 @@ STRING 750
 }
 
 STRING 751
-// Speech/Peon/Dragon/oanenashilietopodarki.mp3
+// Speech/Anime/Peon/animeZurck2.mp3
 {
-Это, мой друг, называется АНИМЕ, и кажется она |cffffff00зазвездилась|r, я больше не могу терперь эту конкуренцию, пора ощипать крылышке этой курице!
+Это, мой друг, называется АНИМЕ, и кажется она зазвездилась, я больше не могу терпеть этой конкуренции, пора ощипать крылышке этой курице!
 }
 
 STRING 752
@@ -1916,5 +1916,55 @@ STRING 755
 // Units: h008 (Звезда на хигаму), Name (Name)
 {
 Звезда на хигаму
+}
+
+STRING 756
+// Doodads: D02P (Белое дерево), Name (Name)
+{
+Белое дерево
+}
+
+STRING 757
+{
+Волк
+}
+
+STRING 758
+// Speech/Peon/Yetty/peon1.mp3
+{
+Конечная, оплачиваем
+}
+
+STRING 759
+{
+Волк
+}
+
+STRING 760
+// Speech/Peon/Yetty/peon1.mp3
+{
+Какие деньги? может тебе опять вломить, пёс?
+}
+
+STRING 761
+{
+Волк
+}
+
+STRING 762
+// Speech/Peon/Yetty/peon1.mp3
+{
+...
+}
+
+STRING 763
+{
+Волк
+}
+
+STRING 764
+// Speech/Peon/Yetty/peon1.mp3
+{
+Если волк молчит лучше его не перебивать
 }
 
