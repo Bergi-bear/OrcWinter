@@ -5,6 +5,11 @@
 ---
 function CustomCinematicMode(state)
     --CinematicModeBJ(state, GetPlayersAll())
+    if state then
+        SetMusicVolumeBJ(20)
+    else
+        SetMusicVolumeBJ(100)
+    end
     BlzHideOriginFrames(not state)
     local data=HERO[0]
     FREE_CAMERA=state

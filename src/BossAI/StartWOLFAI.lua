@@ -33,7 +33,7 @@ function StartWolfAI()
     local xs, ys = GetUnitXY(boss)
     local BossFight = true
     local into = CreateBOSSHPBar(boss, "Отмороженный волк")
-    SetUnitLifePercentBJ(boss, 1)
+    --SetUnitLifePercentBJ(boss, 1)
     --
     UnitAddAbility(boss, FourCC('Abun'))
     --SetUnitPosition(boss, xs, ys)
@@ -69,15 +69,13 @@ function StartWolfAI()
             SetMusicVolumeBJ(100)
             BlzFrameSetVisible(into, false)
             SetUnitAnimation(boss, "death")
-            print("Волк: Всё замотал ты меня, хочешь прокачу?")
-            print("Это очень неожиданно, но я соглашусь")
 
             SetUnitOwner(boss, Player(0), true)
             ResetUnitLookAt(boss)
 
             UnitAddAbility(hero, FourCC("AInv"))
-
-
+            PlayMonoSpeech("Speech\\Wolf\\Peon\\PenFromWolf7", "Я же говорил, что сделаю тебя ездовым пёсиком?")
+            StunUnit(hero, 4)
             --StunUnit(hero,7)
             SetUnitFacingToFaceUnitTimed(hero, boss, 0)
             TimerStart(CreateTimer(), 5, false, function()
@@ -93,7 +91,7 @@ function StartWolfAI()
                 ShowUnit(hero, false)
 
                 local data = GetUnitData(hero)
-                data.peonAttach=AddSpecialEffectTarget("peonAttach", boss, "chest") -- Пеон аттач на волка
+                data.peonAttach = AddSpecialEffectTarget("peonAttach", boss, "chest") -- Пеон аттач на волка
                 data.UnitHero = boss
                 InitAnimations(hero, data)
                 --InitAnimations(udg_HERO, HERO[0])
@@ -171,7 +169,7 @@ function StartWolfAI()
             local hero = HERO[0].UnitHero
             if phase == 1 and PhaseOn then
                 PhaseOn = false
-                print("фаза", phase)
+                --print("фаза", phase)
                 WolfRoundMove(boss)
 
             end
@@ -184,32 +182,32 @@ function StartWolfAI()
             end
             if phase == 2 and PhaseOn then
                 PhaseOn = false
-                print("фаза", phase)
+                --print("фаза", phase)
                 WolfDashAttack(boss, hero)
             end
             if phase == 3 and PhaseOn then
                 PhaseOn = false
-                print("фаза", phase)
+                --("фаза", phase)
                 sec = sec + GetRandomInt(2, 4)
                 WolfHowlFreeze(boss)
 
             end
             if phase == 4 and PhaseOn then
                 PhaseOn = false
-                print("фаза", phase)
+                --print("фаза", phase)
                 WolfJump2Point(boss, true, GetUnitXY(hero))
                 --DragonTripleShot(boss, hero)
 
             end
             if phase == 5 and PhaseOn then
                 PhaseOn = false
-                print("фаза", phase)
+                --print("фаза", phase)
                 WolfWinterMove(boss, xs, ys)
 
             end
             if phase == 6 and PhaseOn then
                 PhaseOn = false
-                print("фаза", phase)
+                --print("фаза", phase)
                 WolfIceDash(boss, GetUnitXY(hero))
                 local eff = AddSpecialEffect("BossArrow", GetUnitXY(boss))
                 local angle = AngleBetweenUnits(boss, hero)
@@ -232,7 +230,7 @@ function StartWolfAI()
             end
             if phase == 7 and PhaseOn then
                 PhaseOn = false
-                print("фаза", phase)
+                --print("фаза", phase)
                 WolfIceSpikeLine(boss, hero)
                 WolfIceSpikeLine(boss, false, GetUnitFacing(boss) + 35)
                 WolfIceSpikeLine(boss, false, GetUnitFacing(boss) - 35)
@@ -648,18 +646,24 @@ end
 function ResetUnitCustomPause(unit)
     local k = UnitPauseCounter[GetHandleId(unit)]
     if not k then
-        k=0
+        k = 0
+    end
+    --print(k)
+    if k > 0 then
+        for i = 1, k do
+            --print("снимаем паузу", i)
+            BlzPauseUnitEx(unit, false)
+        end
     end
     if k < 0 then
         k = k * -1
-        for _ = 1, k do
-            PauseUnit(unit, true)
+        for i = 1, k do
+            --print("ставим паузу", i)
+            BlzPauseUnitEx(unit, true)
         end
     end
-    if k > 0 then
-        for _ = 1, k do
-            PauseUnit(unit, false)
-        end
-    end
+
+
+    return k
 end
 

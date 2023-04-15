@@ -3,13 +3,24 @@
 --- Created by Bergi.
 --- DateTime: 28.04.2021 23:56
 ---
-function UnitDamageArea(u, damage, x, y, range, flag)
+function UnitDamageArea(u, damage, x, y, range, flag, paramTable)
     local isdamage = false
     local e = nil
     local hero = nil
     if not x then
-        x,y=GetUnitXY(u)
-        range=150
+        x, y = GetUnitXY(u)
+        range = 150
+    end
+    local attackIsLow=false
+    local missDamage=false
+    if paramTable then
+        for i = 1, #paramTable do
+            if paramTable[i]=="low" then
+                --print("низкая атака, можно увернуться прыжком или перекатом")
+                attackIsLow=true
+            end
+        end
+
     end
 
     GroupEnumUnitsInRange(perebor, x, y, range, nil)
@@ -25,7 +36,7 @@ function UnitDamageArea(u, damage, x, y, range, flag)
 
         if UnitAlive(e) and not UnitAlive(u) and (IsUnitEnemy(e, GetOwningPlayer(u)) or GetOwningPlayer(e) == Player(PLAYER_NEUTRAL_PASSIVE)) and IsUnitType(u, UNIT_TYPE_HERO) then
             --print("Герой нанёс урон будучи мертвым "..GetUnitName(u))
-            local data=GetUnitData(u)
+            local data = GetUnitData(u)
             --local talon = GlobalTalons[GetPlayerId(GetOwningPlayer(u)) + 1]["HeroBlademaster"][8]
             if data.KamikazeCDGH then
                 local m = data.KamikazeMDamage
@@ -124,19 +135,32 @@ function UnitDamageArea(u, damage, x, y, range, flag)
                     damage = 0
                 end
             end
-
-            if UnitDamageTarget(u, e, damage, true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WHOKNOWS) then
-                if GetUnitTypeId(e)~=FourCC("nglm") and GetUnitTypeId(e)~=FourCC("hdhw") then --нет раекцтии на мину и точку входа
-                    isdamage = true
-                    hero = e
-                    k = k + 1
-                    all[k] = e
-                    --print(GetUnitName(e))
+            if attackIsLow and IsUnitType(e,UNIT_TYPE_HERO) then
+                local data=GetUnitData(hero)
+                if data then
+                    if data.SpaceForce then
+                        missDamage=true
+                    end
                 end
+            end
+            if not missDamage then
+                if UnitDamageTarget(u, e, damage, true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WHOKNOWS) then
+                    if GetUnitTypeId(e) ~= FourCC("nglm") and GetUnitTypeId(e) ~= FourCC("hdhw") then
+                        --нет раекцтии на мину и точку входа
+                        isdamage = true
+                        hero = e
+                        k = k + 1
+                        all[k] = e
+                        --print(GetUnitName(e))
+
+                    end
+                end
+            else
+                FlyTextTagShieldXY(GetUnitX(e), GetUnitY(e), "Увернулся", GetOwningPlayer(e))
             end
             if (flag == "all" or IsUnitTrap(u)) and not UnitAlive(e) then
                 local ex, ey = GetUnitXY(e)
-                FlyTextTagShieldXY(ex, ey, "Смерть от ловушки",  GetOwningPlayer(e), "SeeAll")
+                FlyTextTagShieldXY(ex, ey, "Смерть от ловушки", GetOwningPlayer(e), "SeeAll")
                 for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
                     if PlayerIsPlaying[i] then
                         local data = HERO[i]

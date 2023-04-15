@@ -7,7 +7,9 @@ function WolfAttackPeon(hero,angle)
     local speed = 20
     --SetUnitTimeScale(hero, 3)
     SetUnitFacing(hero,angle)
-    ResetUnitCustomPause(hero)
+    if ResetUnitCustomPause(hero)>=1 then
+
+    end
     local index={6,8}
     SetUnitAnimationByIndex(hero,index[GetRandomInt(1,#index)])
     local x, y = GetUnitXY(hero)
@@ -18,6 +20,6 @@ function WolfAttackPeon(hero,angle)
     BlzSetSpecialEffectYaw(eff, math.rad(GetUnitFacing(hero)))
     UnitDamageArea(hero, 1000, xe, ye, 200, "ForceTotem")
     DestroyEffect(eff)
-    MoveEffectTimedWSpeed(eff, speed, GetUnitFacing(hero), 1)
+    MoveEffectTimedWSpeed(eff, speed, GetUnitFacing(hero), .5)
 
 end

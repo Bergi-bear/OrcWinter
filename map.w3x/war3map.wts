@@ -1783,8 +1783,8 @@ STRING 729
 
 STRING 730
 {
-А что такое это ваша гирляндия?
-|cff808080Пророчество: В далёких краях живёт гламурный волк, любящий всё блестящее|r
+Где гирлянда?
+|cff808080Пророчество: В далёких краях живёт отмороженный волк, любящий всё блестящее, возможно, что гирлянда у него|r
 }
 
 STRING 731
@@ -1930,18 +1930,18 @@ STRING 757
 }
 
 STRING 758
-// Speech/Peon/Yetty/peon1.mp3
+// Speech/Wolf/Wolf/WolfCinematic3.mp3
 {
 Конечная, оплачиваем
 }
 
 STRING 759
 {
-Волк
+Пеон
 }
 
 STRING 760
-// Speech/Peon/Yetty/peon1.mp3
+// Speech/Wolf/Peon/PenFromWolf5.mp3
 {
 Какие деньги? может тебе опять вломить, пёс?
 }
@@ -1952,7 +1952,6 @@ STRING 761
 }
 
 STRING 762
-// Speech/Peon/Yetty/peon1.mp3
 {
 ...
 }
@@ -1963,8 +1962,74 @@ STRING 763
 }
 
 STRING 764
-// Speech/Peon/Yetty/peon1.mp3
+// Speech/Wolf/Peon/PenFromWolf6.mp3
 {
 Если волк молчит лучше его не перебивать
+}
+
+STRING 765
+{
+Пеон
+}
+
+STRING 766
+// Speech/Wolf/Peon/PenFromWolf1.mp3
+{
+Какое красивое место...
+}
+
+STRING 767
+{
+Пеон
+}
+
+STRING 768
+// Speech/Wolf/Peon/PenFromWolf2.mp3
+{
+Этот ездовой пёс украл нашу гирлянду, и довольно такие не плохо обставил ей свою пещеру
+}
+
+STRING 769
+{
+Ездовой пёс
+}
+
+STRING 770
+// Speech/Wolf/Wolf/WolfCinematic1.mp3
+{
+Ты кого назвал ездовым псом, я - Волк!, а волк хоть слабее льва и тигра, но волк в цирке не выступает.
+}
+
+STRING 771
+{
+Пеон
+}
+
+STRING 772
+// Speech/Wolf/Peon/PenFromWolf3.mp3
+{
+Мне всё равно, как ты себя называешь,я пришел сюда за гирляндой, и я уйду от сюда, с ней и ВЕРХОМ на тебе, ездовой пёсик
+}
+
+STRING 773
+{
+Волк
+}
+
+STRING 774
+// Speech/Wolf/Wolf/WolfCinematic2.mp3
+{
+Я буду драться с тобой, до последнего вздоха если волк дышит - он жим, если не дышит - мёртв
+}
+
+STRING 775
+{
+Пеон
+}
+
+STRING 776
+// Speech/Wolf/Peon/PenFromWolf4.mp3
+{
+Плохой пёс!
 }
 

@@ -44,7 +44,7 @@ function StartAnimeAI(xs, ys)
     if UnitRemoveAbility(allyPeon, FourCC("A604")) then
         StartPeonAllyAI()
     end
-
+    StartFlowerCreation(boss)
     local hpMark = { 100, 88, 76, 64, 52, 40, 28 }
     local phaseCHK = {
         true,
@@ -392,6 +392,27 @@ function StartAnimeAI(xs, ys)
     end)
 end
 
+function StartFlowerCreation(boss)
+    --Doodads\Felwood\Rocks\Felwood_Spires\Felwood_Spires
+    TimerStart(CreateTimer(), 0.1, true, function()
+        local x,y=GetUnitXY(boss)
+        local dist=GetRandomInt(0,300)
+        local angle=GetRandomInt(0,360)
+        local nx,ny=MoveXY(x,y,dist,angle)
+        local r=GetRandomInt(0,2)
+        local eff=AddSpecialEffect("Doodads\\Felwood\\Rocks\\Felwood_Spires\\Felwood_Spires"..r,nx,ny)
+        BlzSetSpecialEffectYaw(eff, math.rad(GetRandomInt(0,360)))
+        BlzSetSpecialEffectScale(eff,GetRandomReal(3,5))
+        BlzPlaySpecialEffect(eff,ANIM_TYPE_STAND)
+        TimerStart(CreateTimer(), 10, false, function()
+            DestroyEffect(eff)
+        end)
+        if not UnitAlive(boss) then
+            DestroyTimer(GetExpiredTimer())
+        end
+    end)
+end
+
 function MakeUnitBulletCatcherTimed(boss, timed)
     SetUnitUserData(boss, 100)
     TimerStart(CreateTimer(), timed, false, function()
@@ -656,7 +677,7 @@ function DamageInLine(x, y, angle, distance, boss, eff)
     for i = 1, max do
         local nx, ny = MoveXY(x, y, step * i, angle - 180)
         --DestroyEffect(AddSpecialEffect("BlinkCasterNoOmni", nx, ny))
-        local is, enemy = UnitDamageArea(boss, 50, nx, ny, step)
+        local is, enemy = UnitDamageArea(boss, 50, nx, ny, step,nil,{"low"})
         if is then
             DestroyEffect(AddSpecialEffect("AncestralGuardianMissileNoOmni", GetUnitXY(enemy)))
             isDamage = i * step
