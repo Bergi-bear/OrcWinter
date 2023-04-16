@@ -9,7 +9,7 @@ function CastSnowBall(data, directionAngle)
 
     local hero = data.UnitHero
 
-    if data.AttackIsReady and not data.SpaceForce and UnitAlive(hero) and not FREE_CAMERA and not IsUnitStunned(hero) then
+    if data.AttackIsReady and not data.SpaceForce and UnitAlive(hero) and not FREE_CAMERA and not IsUnitStunned(hero) and not BlzFrameIsVisible(SHOP) then
         if GetUnitTypeId(hero) == HeroID then
             --WolfSlashAttack(hero) --для проверки вставлял
             BlzSetUnitFacingEx(hero, directionAngle)

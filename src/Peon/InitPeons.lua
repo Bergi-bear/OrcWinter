@@ -13,7 +13,7 @@ function CreatePeonForPlayer(data)
         --CreateDownInterface(data)
         local x, y = GetPlayerStartLocationX(Player(data.pid)), GetPlayerStartLocationY(Player(data.pid))
         data.UnitHero = CreateUnit(Player(data.pid), HeroID, x, y, 0)
-        udg_HERO=data.UnitHero
+        udg_HERO = data.UnitHero
         UnitAddForceSimple(data.UnitHero, 90, 5, 15)
         SelectUnitForPlayerSingle(data.UnitHero, Player(data.pid))
         UnitAddAbility(data.UnitHero, FourCC("Abun"))
@@ -24,7 +24,7 @@ function CreatePeonForPlayer(data)
         InitRegistryEvent(data.UnitHero)
         AddPeonMAXHP(data, 7)
         AddPeonMAXHP(data, 3)
-        IssuePointOrder(data.UnitHero,"smart",GetUnitXY(data.UnitHero))
+        IssuePointOrder(data.UnitHero, "smart", GetUnitXY(data.UnitHero))
         --InitInventory(data)
 
         --CreateHPBar(data)
@@ -38,69 +38,81 @@ function CreatePeonForPlayer(data)
         --SetDNCForPlayer(data.UnitHero,"Environment\\DNC\\DNCAshenvale\\DNCAshenvaleTerrain\\DNCAshenvaleTerrain.mdl","Луга слаймов")
     end
 end
-ShowESystem={
+ShowESystem = {
 
 }
 function InitRegistryEvent(hero)
-    local enterTrig=CreateTrigger()
+    local enterTrig = CreateTrigger()
     TriggerRegisterUnitInRange(enterTrig, hero, 120, nil)
     TriggerAddAction(enterTrig, function()
         local entering = GetTriggerUnit()
         --print(GetUnitName(entering))
-        if GetUnitTypeId(entering)==FourCC("h003") then -- салат оливье
+        if GetUnitTypeId(entering) == FourCC("h003") then
+            -- салат оливье
             KillUnit(entering)
             QuestSetCompletedBJ(udg_QYetty, true)
             --UnlockCard("CardOlivie",2)
-        elseif GetUnitTypeId(entering)==FourCC("h008") then -- звезда хигамы
+        elseif GetUnitTypeId(entering) == FourCC("h008") then
+            -- звезда хигамы
             KillUnit(entering)
-        elseif GetUnitAbilityLevel(entering,FourCC("A604"))>=1 and GetUnitTypeId(entering)==FourCC("o002") then --голый пеон и его квест
-            local h=GetHandleId(entering)
-            local data=GetUnitData(hero)
+        elseif GetUnitAbilityLevel(entering, FourCC("A604")) >= 1 then
+
+            local h = GetHandleId(entering)
+            local data = GetUnitData(hero)
             if not data.ShowE then
                 --print("время показа")
-                data.ShowE=true
-                data.CurrentQuest="AllyPeonOnAnime"
-                data.QuestUnit=entering
+                data.ShowE = true
+                if GetUnitTypeId(entering) == FourCC("o002") then
+                    --голый пеон и его квест
+                    data.CurrentQuest = "AllyPeonOnAnime"
+                elseif GetUnitTypeId(entering) == FourCC("H60Z") then
+                    data.CurrentQuest = "Shop"
+                elseif GetUnitTypeId(entering) == FourCC("h00A") then
+                    data.CurrentQuest = "MagnetIsClosed"
+                end
+                data.QuestUnit = entering
                 local eff = AddSpecialEffect("ActionsE", GetUnitXY(entering))
                 TimerStart(CreateTimer(), 0.1, true, function()
-                    if not IsUnitInRange(hero,entering,140) or GetUnitAbilityLevel(entering,FourCC("A604"))==0 then
-                        --print("покинул радиус")
-                        data.CurrentQuest=""
-                        data.QuestUnit=nil
+                    if not IsUnitInRange(hero, entering, 140) or GetUnitAbilityLevel(entering, FourCC("A604")) == 0 then
+                        --print("покинул радиус или квест уже завершен")
+                        data.CurrentQuest = ""
+                        data.QuestUnit = nil
                         DestroyTimer(GetExpiredTimer())
                         DestroyEffect(eff)
-                        BlzSetSpecialEffectPosition(eff,0,0,0)
-                        data.ShowE=false
+                        BlzSetSpecialEffectPosition(eff, 0, 0, 0)
+                        data.ShowE = false
                     end
                 end)
-
             end
         end
     end)
     --больший радиус
-    local enterTrig500=CreateTrigger()
+    local enterTrig500 = CreateTrigger()
     TriggerRegisterUnitInRange(enterTrig500, hero, 500, nil)
     TriggerAddAction(enterTrig500, function()
         local entering = GetTriggerUnit()
         --print(GetUnitName(entering))
-        if GetUnitTypeId(entering)==FourCC("h004") then -- Чекпоинт
+        if GetUnitTypeId(entering) == FourCC("h004") then
+            -- Чекпоинт
             --print("чекпоинт ")
-            local data=GetUnitData(hero)
-            local x,y=GetUnitXY(entering)
-            if data.ResPointX==x then
+            local data = GetUnitData(hero)
+            local x, y = GetUnitXY(entering)
+            if data.ResPointX == x then
 
             else
                 print("Контрольная точка изменена")
             end
-            data.ResPointX,data.ResPointY=x,y
+            data.ResPointX, data.ResPointY = x, y
 
         end
-        if GetUnitTypeId(entering)==FourCC("e003") then -- Снеговик для дефенса
+        if GetUnitTypeId(entering) == FourCC("e003") then
+            -- Снеговик для дефенса
             if not SnowManDefenceGame then
                 StartSnowManDefence()
             end
         end
-        if GetUnitTypeId(entering)==FourCC("n002") then -- Снеговик для дефенса
+        if GetUnitTypeId(entering) == FourCC("n002") then
+            -- Снеговик для дефенса
             if not StartWolOnce then
                 StartWolfAI()
             end
@@ -108,14 +120,13 @@ function InitRegistryEvent(hero)
     end)
 end
 
-
 function AddPeonMAXHP(data, k)
     if not data.HPMAX then
         --print("первичное добавление ХП")
         data.HPMAX = 5
         data.HPTableFH = {}
         data.HPCount = 0
-        data.CurrentHP=0
+        data.CurrentHP = 0
     end
     for i = 1, k do
         CreateCandyHPBAR(data)
@@ -133,7 +144,7 @@ function CreateCandyHPBAR(data)
     BlzFrameSetAbsPoint(HPfh, FRAMEPOINT_CENTER, -0.048 + step * data.HPCount, 0.56)
     data.HPCount = data.HPCount + 1
     data.HPTableFH[data.HPCount] = HPfh
-    data.CurrentHP=data.CurrentHP+1
+    data.CurrentHP = data.CurrentHP + 1
 end
 
 function HeroCandyGetDamage(data, damageSource)
@@ -150,9 +161,9 @@ function HeroCandyGetDamage(data, damageSource)
 
     local hero = data.UnitHero
     HealUnit(hero)
-    BlinkUnit(hero,1)
-    local angle=AngleBetweenUnits(damageSource,hero)
-    UnitAddForceSimple(hero,angle,25,80)
+    BlinkUnit(hero, 1)
+    local angle = AngleBetweenUnits(damageSource, hero)
+    UnitAddForceSimple(hero, angle, 25, 80)
     SetUnitInvulnerable(hero, true)
     --SetUnitAnimationByIndex(hero,24)--анимация прыжка назад
     TimerStart(CreateTimer(), 1, false, function()
@@ -174,40 +185,40 @@ function HeroCandyHeal(data, k)
         k = data.HPCount
     end
     --print("восстанеавливаем карамельки"..)
-    normal_sound("goulp1",GetUnitXY(data.UnitHero))
-    for i = data.CurrentHP+1, k+data.CurrentHP do
+    normal_sound("goulp1", GetUnitXY(data.UnitHero))
+    for i = data.CurrentHP + 1, k + data.CurrentHP do
         BlzFrameSetTexture(data.HPTableFH[i], "HPCANDY", 0, true)
-        if data.CurrentHP<data.HPCount then
-            data.CurrentHP=data.CurrentHP+1
+        if data.CurrentHP < data.HPCount then
+            data.CurrentHP = data.CurrentHP + 1
 
         else
-           -- print("получено сверхлечение")
+            -- print("получено сверхлечение")
         end
-       -- print(i)
+        -- print(i)
     end
 end
 
-function BlinkUnit(hero,timed)
-    local period=0.05
-    local flag=false
-    SetUnitScale(hero,0,0,0)
+function BlinkUnit(hero, timed)
+    local period = 0.05
+    local flag = false
+    SetUnitScale(hero, 0, 0, 0)
     TimerStart(CreateTimer(), period, true, function()
-        timed=timed-period
+        timed = timed - period
         if UnitAlive(hero) then
             if flag then
-                flag=false
-                SetUnitScale(hero,0,0,0)
+                flag = false
+                SetUnitScale(hero, 0, 0, 0)
             else
-                flag=true
-                SetUnitScale(hero,1,1,1)
+                flag = true
+                SetUnitScale(hero, 1, 1, 1)
             end
         else
             DestroyTimer(GetExpiredTimer())
-            SetUnitScale(hero,1,1,1)
+            SetUnitScale(hero, 1, 1, 1)
         end
-        if timed<=0 then
+        if timed <= 0 then
             DestroyTimer(GetExpiredTimer())
-            SetUnitScale(hero,1,1,1)
+            SetUnitScale(hero, 1, 1, 1)
         end
     end)
 end

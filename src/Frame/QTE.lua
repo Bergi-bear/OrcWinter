@@ -59,9 +59,30 @@ function CreateEActions()
             if data.ShowE then-- нажать можно только тогда когда активен Е
                 if data.CurrentQuest=="AllyPeonOnAnime" then
                     UnitRemoveAbility(data.QuestUnit,FourCC("A604"))
-                    print("запускает ролик про помощника пеона")
+                    --print("запускает ролик про помощника пеона")
                     CustomCinematicMode(true)
-                    Trig_NudeCinematic_Actions() -- год из гуи
+                    Trig_NudeCinematic_Actions() -- код из гуи
+                elseif data.CurrentQuest == "MagnetIsClosed" then
+                    local r=GetRandomInt(1,5)
+                    if r==1 then
+                        PlayMonoSpeech("","Работает до 23:00")
+                    elseif r==2 then
+                        PlayMonoSpeech("","Я кажись не успел")
+                    elseif r==3 then
+                        PlayMonoSpeech("","Заперто")
+                    elseif r==4 then
+                        PlayMonoSpeech("","Не получается открыть")
+                    elseif r==5 then
+                        PlayMonoSpeech("","Нужно поискать, другое место для покупки")
+                    end
+                elseif data.CurrentQuest == "Shop" then
+                    --UnitRemoveAbility(data.QuestUnit,FourCC("A604"))
+                    --print("показываем магазин")
+                    CreateShop()
+                    DisableTrigger(gg_trg_EventUpE)
+                    TimerStart(CreateTimer(), 1, false, function()
+                        EnableTrigger(gg_trg_EventUpE)
+                    end)
                 end
             end
         end

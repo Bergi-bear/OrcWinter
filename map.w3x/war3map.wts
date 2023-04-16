@@ -1114,14 +1114,8 @@ STRING 382
 Kel9290
 }
 
-STRING 483
-// Units: H60Z (HTC), Name (Name)
-{
-HTC
-}
-
 STRING 484
-// Units: H60Z (HTC), Propernames (Proper Names)
+// Units: H60Z (Пеон Тускарец), Propernames (Proper Names)
 {
 НТС
 }
@@ -2031,5 +2025,17 @@ STRING 776
 // Speech/Wolf/Peon/PenFromWolf4.mp3
 {
 Плохой пёс!
+}
+
+STRING 777
+// Units: H60Z (Пеон Тускарец), Name (Name)
+{
+Пеон Тускарец
+}
+
+STRING 778
+// Units: h00A (Вход в магнит), Name (Name)
+{
+Вход в магнит
 }
 

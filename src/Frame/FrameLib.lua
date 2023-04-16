@@ -13,6 +13,8 @@ function InitMenu()
     --CreateMiniCard()
     CreatePeonCounter()
     --CreateVictoryElderBorder() -- тестовый показ
+    CreateShop()
+    CreateGoldInterFace(HERO[0])
     --CreateCustomPortrait()
     --CreateMenu()
     --CreateQTEFrame() -- Тест QTE

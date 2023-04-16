@@ -31,8 +31,8 @@ function CreateSimpleFrameGlue(posX, PosY, texture,parent)
     TriggerAddAction(ClickTrig, function()
         --call()
         local data=HERO[GetPlayerId(GetTriggerPlayer())]
-        BlzFrameSetEnable(BlzGetTriggerFrame(), false)
-        BlzFrameSetEnable(BlzGetTriggerFrame(), true)
+        --BlzFrameSetEnable(BlzGetTriggerFrame(), false)
+        --BlzFrameSetEnable(BlzGetTriggerFrame(), true)
         StopUnitMoving(data)
     end)
 
@@ -78,4 +78,20 @@ end
 function ColorText2Black(s)
     s = "|cff000000" .. s .. "|r"
     return s
+end
+
+function DSColorDescription(talon)
+    if talon.DS then
+        if #talon.DS > 0 and talon["DS"][talon.lvl] ~= nil then
+            local s = string.gsub(talon.descriptions, "DS", ColorText2(talon["DS"][talon.lvl]))
+            return s
+        elseif talon["DS"][talon.lvl] == nil and #talon.DS > 0 then
+            local s = string.gsub(talon.descriptions, "DS", ColorText2(talon["DS"][#talon.DS]))
+            return s
+        else
+            return talon.descriptions
+        end
+    else
+        return talon.descriptions
+    end
 end

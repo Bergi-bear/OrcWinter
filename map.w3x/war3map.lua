@@ -337,7 +337,9 @@ u = BlzCreateUnitWithSkin(p, FourCC("h007"), 608.9, -879.9, 182.046, FourCC("h00
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), 601.4, -1416.6, 5.812, FourCC("h002"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), -6012.7, 7349.6, 5.812, FourCC("h002"))
 gg_unit_h009_0197 = BlzCreateUnitWithSkin(p, FourCC("h009"), -11217.1, 9574.6, 232.970, FourCC("h009"))
+u = BlzCreateUnitWithSkin(p, FourCC("H60Z"), 6543.3, 6651.6, 223.130, FourCC("H60Z"))
 gg_unit_o002_0203 = BlzCreateUnitWithSkin(p, FourCC("o002"), -13047.3, 8357.1, 308.530, FourCC("o002"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00A"), 5159.2, 6586.8, 281.200, FourCC("h00A"))
 end
 
 function CreateUnitsForPlayer1()
@@ -2264,7 +2266,7 @@ function InitHEROTable()
             DamageThrow            = 150, -- урон от кирки
             InvulPreDeathCurrentCD = 1, --кулдаун бессмертия от трала
             LifeFHTable            = {},
-            gold                   = 0,
+            gold                   = 9999,
             ShowGold               = true, -- показ накопления золота
             ShowHeal               = true,
             ShowGoldAmount         = 0,
@@ -7710,8 +7712,8 @@ function CreateSimpleFrameGlue(posX, PosY, texture,parent)
     TriggerAddAction(ClickTrig, function()
         --call()
         local data=HERO[GetPlayerId(GetTriggerPlayer())]
-        BlzFrameSetEnable(BlzGetTriggerFrame(), false)
-        BlzFrameSetEnable(BlzGetTriggerFrame(), true)
+        --BlzFrameSetEnable(BlzGetTriggerFrame(), false)
+        --BlzFrameSetEnable(BlzGetTriggerFrame(), true)
         StopUnitMoving(data)
     end)
 
@@ -7757,6 +7759,22 @@ end
 function ColorText2Black(s)
     s = "|cff000000" .. s .. "|r"
     return s
+end
+
+function DSColorDescription(talon)
+    if talon.DS then
+        if #talon.DS > 0 and talon["DS"][talon.lvl] ~= nil then
+            local s = string.gsub(talon.descriptions, "DS", ColorText2(talon["DS"][talon.lvl]))
+            return s
+        elseif talon["DS"][talon.lvl] == nil and #talon.DS > 0 then
+            local s = string.gsub(talon.descriptions, "DS", ColorText2(talon["DS"][#talon.DS]))
+            return s
+        else
+            return talon.descriptions
+        end
+    else
+        return talon.descriptions
+    end
 end
 
 ---
@@ -7911,6 +7929,8 @@ function InitMenu()
     --CreateMiniCard()
     CreatePeonCounter()
     --CreateVictoryElderBorder() -- тестовый показ
+    CreateShop()
+    CreateGoldInterFace(HERO[0])
     --CreateCustomPortrait()
     --CreateMenu()
     --CreateQTEFrame() -- Тест QTE
@@ -8159,9 +8179,30 @@ function CreateEActions()
             if data.ShowE then-- нажать можно только тогда когда активен Е
                 if data.CurrentQuest=="AllyPeonOnAnime" then
                     UnitRemoveAbility(data.QuestUnit,FourCC("A604"))
-                    print("запускает ролик про помощника пеона")
+                    --print("запускает ролик про помощника пеона")
                     CustomCinematicMode(true)
-                    Trig_NudeCinematic_Actions() -- год из гуи
+                    Trig_NudeCinematic_Actions() -- код из гуи
+                elseif data.CurrentQuest == "MagnetIsClosed" then
+                    local r=GetRandomInt(1,5)
+                    if r==1 then
+                        PlayMonoSpeech("","Работает до 23:00")
+                    elseif r==2 then
+                        PlayMonoSpeech("","Я кажись не успел")
+                    elseif r==3 then
+                        PlayMonoSpeech("","Заперто")
+                    elseif r==4 then
+                        PlayMonoSpeech("","Не получается открыть")
+                    elseif r==5 then
+                        PlayMonoSpeech("","Нужно поискать, другое место для покупки")
+                    end
+                elseif data.CurrentQuest == "Shop" then
+                    --UnitRemoveAbility(data.QuestUnit,FourCC("A604"))
+                    --print("показываем магазин")
+                    CreateShop()
+                    DisableTrigger(gg_trg_EventUpE)
+                    TimerStart(CreateTimer(), 1, false, function()
+                        EnableTrigger(gg_trg_EventUpE)
+                    end)
                 end
             end
         end
@@ -8278,7 +8319,7 @@ function CastSnowBall(data, directionAngle)
 
     local hero = data.UnitHero
 
-    if data.AttackIsReady and not data.SpaceForce and UnitAlive(hero) and not FREE_CAMERA and not IsUnitStunned(hero) then
+    if data.AttackIsReady and not data.SpaceForce and UnitAlive(hero) and not FREE_CAMERA and not IsUnitStunned(hero) and not BlzFrameIsVisible(SHOP) then
         if GetUnitTypeId(hero) == HeroID then
             --WolfSlashAttack(hero) --для проверки вставлял
             BlzSetUnitFacingEx(hero, directionAngle)
@@ -8568,7 +8609,7 @@ function CreatePeonForPlayer(data)
         --CreateDownInterface(data)
         local x, y = GetPlayerStartLocationX(Player(data.pid)), GetPlayerStartLocationY(Player(data.pid))
         data.UnitHero = CreateUnit(Player(data.pid), HeroID, x, y, 0)
-        udg_HERO=data.UnitHero
+        udg_HERO = data.UnitHero
         UnitAddForceSimple(data.UnitHero, 90, 5, 15)
         SelectUnitForPlayerSingle(data.UnitHero, Player(data.pid))
         UnitAddAbility(data.UnitHero, FourCC("Abun"))
@@ -8579,7 +8620,7 @@ function CreatePeonForPlayer(data)
         InitRegistryEvent(data.UnitHero)
         AddPeonMAXHP(data, 7)
         AddPeonMAXHP(data, 3)
-        IssuePointOrder(data.UnitHero,"smart",GetUnitXY(data.UnitHero))
+        IssuePointOrder(data.UnitHero, "smart", GetUnitXY(data.UnitHero))
         --InitInventory(data)
 
         --CreateHPBar(data)
@@ -8593,69 +8634,81 @@ function CreatePeonForPlayer(data)
         --SetDNCForPlayer(data.UnitHero,"Environment\\DNC\\DNCAshenvale\\DNCAshenvaleTerrain\\DNCAshenvaleTerrain.mdl","Луга слаймов")
     end
 end
-ShowESystem={
+ShowESystem = {
 
 }
 function InitRegistryEvent(hero)
-    local enterTrig=CreateTrigger()
+    local enterTrig = CreateTrigger()
     TriggerRegisterUnitInRange(enterTrig, hero, 120, nil)
     TriggerAddAction(enterTrig, function()
         local entering = GetTriggerUnit()
         --print(GetUnitName(entering))
-        if GetUnitTypeId(entering)==FourCC("h003") then -- салат оливье
+        if GetUnitTypeId(entering) == FourCC("h003") then
+            -- салат оливье
             KillUnit(entering)
             QuestSetCompletedBJ(udg_QYetty, true)
             --UnlockCard("CardOlivie",2)
-        elseif GetUnitTypeId(entering)==FourCC("h008") then -- звезда хигамы
+        elseif GetUnitTypeId(entering) == FourCC("h008") then
+            -- звезда хигамы
             KillUnit(entering)
-        elseif GetUnitAbilityLevel(entering,FourCC("A604"))>=1 and GetUnitTypeId(entering)==FourCC("o002") then --голый пеон и его квест
-            local h=GetHandleId(entering)
-            local data=GetUnitData(hero)
+        elseif GetUnitAbilityLevel(entering, FourCC("A604")) >= 1 then
+
+            local h = GetHandleId(entering)
+            local data = GetUnitData(hero)
             if not data.ShowE then
                 --print("время показа")
-                data.ShowE=true
-                data.CurrentQuest="AllyPeonOnAnime"
-                data.QuestUnit=entering
+                data.ShowE = true
+                if GetUnitTypeId(entering) == FourCC("o002") then
+                    --голый пеон и его квест
+                    data.CurrentQuest = "AllyPeonOnAnime"
+                elseif GetUnitTypeId(entering) == FourCC("H60Z") then
+                    data.CurrentQuest = "Shop"
+                elseif GetUnitTypeId(entering) == FourCC("h00A") then
+                    data.CurrentQuest = "MagnetIsClosed"
+                end
+                data.QuestUnit = entering
                 local eff = AddSpecialEffect("ActionsE", GetUnitXY(entering))
                 TimerStart(CreateTimer(), 0.1, true, function()
-                    if not IsUnitInRange(hero,entering,140) or GetUnitAbilityLevel(entering,FourCC("A604"))==0 then
-                        --print("покинул радиус")
-                        data.CurrentQuest=""
-                        data.QuestUnit=nil
+                    if not IsUnitInRange(hero, entering, 140) or GetUnitAbilityLevel(entering, FourCC("A604")) == 0 then
+                        --print("покинул радиус или квест уже завершен")
+                        data.CurrentQuest = ""
+                        data.QuestUnit = nil
                         DestroyTimer(GetExpiredTimer())
                         DestroyEffect(eff)
-                        BlzSetSpecialEffectPosition(eff,0,0,0)
-                        data.ShowE=false
+                        BlzSetSpecialEffectPosition(eff, 0, 0, 0)
+                        data.ShowE = false
                     end
                 end)
-
             end
         end
     end)
     --больший радиус
-    local enterTrig500=CreateTrigger()
+    local enterTrig500 = CreateTrigger()
     TriggerRegisterUnitInRange(enterTrig500, hero, 500, nil)
     TriggerAddAction(enterTrig500, function()
         local entering = GetTriggerUnit()
         --print(GetUnitName(entering))
-        if GetUnitTypeId(entering)==FourCC("h004") then -- Чекпоинт
+        if GetUnitTypeId(entering) == FourCC("h004") then
+            -- Чекпоинт
             --print("чекпоинт ")
-            local data=GetUnitData(hero)
-            local x,y=GetUnitXY(entering)
-            if data.ResPointX==x then
+            local data = GetUnitData(hero)
+            local x, y = GetUnitXY(entering)
+            if data.ResPointX == x then
 
             else
                 print("Контрольная точка изменена")
             end
-            data.ResPointX,data.ResPointY=x,y
+            data.ResPointX, data.ResPointY = x, y
 
         end
-        if GetUnitTypeId(entering)==FourCC("e003") then -- Снеговик для дефенса
+        if GetUnitTypeId(entering) == FourCC("e003") then
+            -- Снеговик для дефенса
             if not SnowManDefenceGame then
                 StartSnowManDefence()
             end
         end
-        if GetUnitTypeId(entering)==FourCC("n002") then -- Снеговик для дефенса
+        if GetUnitTypeId(entering) == FourCC("n002") then
+            -- Снеговик для дефенса
             if not StartWolOnce then
                 StartWolfAI()
             end
@@ -8663,14 +8716,13 @@ function InitRegistryEvent(hero)
     end)
 end
 
-
 function AddPeonMAXHP(data, k)
     if not data.HPMAX then
         --print("первичное добавление ХП")
         data.HPMAX = 5
         data.HPTableFH = {}
         data.HPCount = 0
-        data.CurrentHP=0
+        data.CurrentHP = 0
     end
     for i = 1, k do
         CreateCandyHPBAR(data)
@@ -8688,7 +8740,7 @@ function CreateCandyHPBAR(data)
     BlzFrameSetAbsPoint(HPfh, FRAMEPOINT_CENTER, -0.048 + step * data.HPCount, 0.56)
     data.HPCount = data.HPCount + 1
     data.HPTableFH[data.HPCount] = HPfh
-    data.CurrentHP=data.CurrentHP+1
+    data.CurrentHP = data.CurrentHP + 1
 end
 
 function HeroCandyGetDamage(data, damageSource)
@@ -8705,9 +8757,9 @@ function HeroCandyGetDamage(data, damageSource)
 
     local hero = data.UnitHero
     HealUnit(hero)
-    BlinkUnit(hero,1)
-    local angle=AngleBetweenUnits(damageSource,hero)
-    UnitAddForceSimple(hero,angle,25,80)
+    BlinkUnit(hero, 1)
+    local angle = AngleBetweenUnits(damageSource, hero)
+    UnitAddForceSimple(hero, angle, 25, 80)
     SetUnitInvulnerable(hero, true)
     --SetUnitAnimationByIndex(hero,24)--анимация прыжка назад
     TimerStart(CreateTimer(), 1, false, function()
@@ -8729,40 +8781,40 @@ function HeroCandyHeal(data, k)
         k = data.HPCount
     end
     --print("восстанеавливаем карамельки"..)
-    normal_sound("goulp1",GetUnitXY(data.UnitHero))
-    for i = data.CurrentHP+1, k+data.CurrentHP do
+    normal_sound("goulp1", GetUnitXY(data.UnitHero))
+    for i = data.CurrentHP + 1, k + data.CurrentHP do
         BlzFrameSetTexture(data.HPTableFH[i], "HPCANDY", 0, true)
-        if data.CurrentHP<data.HPCount then
-            data.CurrentHP=data.CurrentHP+1
+        if data.CurrentHP < data.HPCount then
+            data.CurrentHP = data.CurrentHP + 1
 
         else
-           -- print("получено сверхлечение")
+            -- print("получено сверхлечение")
         end
-       -- print(i)
+        -- print(i)
     end
 end
 
-function BlinkUnit(hero,timed)
-    local period=0.05
-    local flag=false
-    SetUnitScale(hero,0,0,0)
+function BlinkUnit(hero, timed)
+    local period = 0.05
+    local flag = false
+    SetUnitScale(hero, 0, 0, 0)
     TimerStart(CreateTimer(), period, true, function()
-        timed=timed-period
+        timed = timed - period
         if UnitAlive(hero) then
             if flag then
-                flag=false
-                SetUnitScale(hero,0,0,0)
+                flag = false
+                SetUnitScale(hero, 0, 0, 0)
             else
-                flag=true
-                SetUnitScale(hero,1,1,1)
+                flag = true
+                SetUnitScale(hero, 1, 1, 1)
             end
         else
             DestroyTimer(GetExpiredTimer())
-            SetUnitScale(hero,1,1,1)
+            SetUnitScale(hero, 1, 1, 1)
         end
-        if timed<=0 then
+        if timed <= 0 then
             DestroyTimer(GetExpiredTimer())
-            SetUnitScale(hero,1,1,1)
+            SetUnitScale(hero, 1, 1, 1)
         end
     end)
 end
@@ -9844,6 +9896,439 @@ function WolfAttackPeon(hero,angle)
     MoveEffectTimedWSpeed(eff, speed, GetUnitFacing(hero), .5)
 
 end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 16.04.2023 18:30
+---
+function ByItemByName(item)
+    local data=HERO[0]
+    if data.gold>=item.cost then
+        --print("успешная покупка")
+        data.gold=data.gold-item.cost
+        item.cost=item.cost*2
+        if not item.lvl then
+            item.lvl=1
+            --print("первая покупка")
+        end
+        item.lvl=item.lvl+1
+        --print("lvl=",item.lvl)
+        BlzFrameSetText(item.FHcost,item.cost)
+        if not item.DS then
+            item.isSold=true
+            BlzFrameSetScale(item.FHcost,0.7)
+            BlzFrameSetText(item.FHcost,"Продано")
+        else
+            if item.lvl>=#item.DS then
+                item.isSold=true
+                BlzFrameSetScale(item.FHcost,0.7)
+                BlzFrameSetText(item.FHcost,"Продано")
+            end
+        end
+    else
+        print("недостаточно",item.cost-data.gold,"золота")
+    end
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 16.04.2023 14:49
+---
+function CreateShop()
+    if SHOP then
+        BlzFrameSetVisible(SHOP, true)
+        return
+    end
+    SHOP = BlzCreateFrameByType("BACKDROP", "Face", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
+    InitItemBDForShop()
+    --print(#SHOP_BD,SHOP_BD[1].descriptions)
+    local rama = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', SHOP, '', 0)
+    local NextPoint = 0.039 + 0.011
+    BlzFrameSetTexture(rama, "Textures\\Black32", 0, true) --HPElement
+    BlzFrameSetSize(rama, 0.4, 0.3)
+    BlzFrameSetAbsPoint(rama, FRAMEPOINT_CENTER, 0.4, 0.3)
+    local x, y = 0.25, 0.4 - NextPoint
+    local max = #SHOP_BD -- число предметов в БД магазина
+    local k = 1
+    for j = 1, 4 do
+        for i = 1, 7 do
+            if k <= max then
+                CreateItemForShop(x + NextPoint * (i - 1), y - NextPoint * (j - 1), SHOP, SHOP_BD[k])
+                k = k + 1
+            end
+        end
+    end
+    CreateCloseButton(SHOP, rama)
+    CurrentGoldInShop(rama)
+    CreateToolTipBox(rama)
+end
+
+function CreateItemForShop(posX, PosY, parent, item)
+    local NextPoint = 0.039
+    local cost = item.cost
+    local name = item.name
+    local descriptions = item.descriptions
+    local texture = item.texture
+    if not texture then
+        texture = "ReplaceableTextures\\CommandButtons\\BTNSelectHeroOn"
+    end
+    local SelfFrame = BlzCreateFrameByType('GLUEBUTTON', 'FaceButton', parent, 'ScoreScreenTabButtonTemplate', 0)
+    local buttonIconFrame = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', SelfFrame, '', 0)
+    --BlzFrameSetVisible(SelfFrame, false)
+    -- BlzFrameSetVisible(SelfFrame, GetLocalPlayer() == player)
+
+    item.FHcost=ItemAddCostFromShop(buttonIconFrame, cost)
+    BlzFrameSetAllPoints(buttonIconFrame, SelfFrame)
+    BlzFrameSetTexture(buttonIconFrame, texture, 0, true)
+    BlzFrameSetSize(SelfFrame, NextPoint, NextPoint)
+    BlzFrameSetAbsPoint(SelfFrame, FRAMEPOINT_CENTER, posX, PosY)
+
+    local ClickTrig = CreateTrigger()
+    BlzTriggerRegisterFrameEvent(ClickTrig, SelfFrame, FRAMEEVENT_CONTROL_CLICK)
+    TriggerAddAction(ClickTrig, function()
+        --print("Нажата кнопка ")
+        BlzFrameSetEnable(BlzGetTriggerFrame(), false)
+        BlzFrameSetEnable(BlzGetTriggerFrame(), true)
+        if not item.isSold then
+            ByItemByName(item)
+        end
+    end)
+
+    local TrigMOUSE_ENTER = CreateTrigger()
+    BlzTriggerRegisterFrameEvent(TrigMOUSE_ENTER, SelfFrame, FRAMEEVENT_MOUSE_ENTER)
+    TriggerAddAction(TrigMOUSE_ENTER, function()
+        --print("показать подсказку ",flag)
+        BlzFrameSetText(SHOP_TOOLTIP, ColorText2(name) .. "\n" .. DSColorDescription(item))
+    end)
+    local TrigMOUSE_LEAVE = CreateTrigger()
+    BlzTriggerRegisterFrameEvent(TrigMOUSE_LEAVE, SelfFrame, FRAMEEVENT_MOUSE_LEAVE)
+    TriggerAddAction(TrigMOUSE_LEAVE, function()
+        --print("убрать подсказку")
+        BlzFrameSetText(SHOP_TOOLTIP, "Если у вас достаточно золота, нажмите на иконку предмета левой кнопкой, чтобы купить его")
+    end)
+    return SelfFrame
+end
+
+function CreateToolTipBox(rama)
+    local tooltip = BlzCreateFrameByType("FRAME", "TestDialog", rama, "StandardFrameTemplate", 0)
+    local backdrop = BlzCreateFrame("QuestButtonDisabledBackdropTemplate", tooltip, 0, 0)
+    local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", rama, "", 0)
+    --BlzFrameSetAbsPoint(tooltip, FRAMEPOINT_CENTER, 0.04+0.04, 0.6-0.04-0.04)
+    BlzFrameSetPoint(tooltip, FRAMEPOINT_TOP, rama, FRAMEPOINT_TOP, 0.00, 0.00)
+    BlzFrameSetSize(tooltip, 0.18, 0.06)
+    BlzFrameSetSize(backdrop, 0.2, 0.07)
+    BlzFrameSetPoint(backdrop, FRAMEPOINT_CENTER, tooltip, FRAMEPOINT_CENTER, 0.0, 0.0)
+    BlzFrameSetAlpha(backdrop, 100)
+
+    BlzFrameSetSize(text, 0.18, 0.06)
+    BlzFrameSetText(text, "Первичный текст")
+    BlzFrameSetPoint(text, FRAMEPOINT_CENTER, backdrop, FRAMEPOINT_CENTER, 0.0, -0.005)
+    --BlzFrameSetVisible(tooltip,false)
+    SHOP_TOOLTIP = text
+    --return tooltip,backdrop,text
+end
+
+function CurrentGoldInShop(parent)
+    local goldIco = "Textures\\GOLDCoin.blp"
+    local GoldFrame = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', parent, '', 0)
+    local data = HERO[0]
+    BlzFrameSetParent(GoldFrame, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    BlzFrameSetTexture(GoldFrame, goldIco, 0, true)
+    BlzFrameSetSize(GoldFrame, NextPoint / 2, NextPoint / 2)
+    BlzFrameSetPoint(GoldFrame, FRAMEPOINT_TOPLEFT, parent, FRAMEPOINT_TOPLEFT, 0.00, 0.00)
+
+    local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", GoldFrame, "", 0)
+    BlzFrameSetParent(text, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    BlzFrameSetText(text, 9999)
+    BlzFrameSetScale(text, 2)
+    BlzFrameSetPoint(text, FRAMEPOINT_RIGHT, GoldFrame, FRAMEPOINT_RIGHT, 0.02, 0.0)
+    TimerStart(CreateTimer(), 0.1, true, function()
+        BlzFrameSetText(text, R2I(data.gold))
+    end)
+end
+
+function ItemAddCostFromShop(FHItem, cost)
+    local goldIco = "Textures\\GOLDCoin.blp"
+    local GoldFrame = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', FHItem, '', 0)
+    BlzFrameSetParent(GoldFrame, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    BlzFrameSetTexture(GoldFrame, goldIco, 0, true)
+    BlzFrameSetSize(GoldFrame, NextPoint / 4, NextPoint / 4)
+    BlzFrameSetPoint(GoldFrame, FRAMEPOINT_BOTTOMLEFT, FHItem, FRAMEPOINT_BOTTOMLEFT, 0.0005, -0.009)
+    BlzFrameSetEnable(GoldFrame, false)
+    local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", GoldFrame, "", 0)
+    BlzFrameSetParent(text, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    BlzFrameSetText(text, cost)
+    BlzFrameSetScale(text, 1)
+    BlzFrameSetPoint(text, FRAMEPOINT_BOTTOMLEFT, GoldFrame, FRAMEPOINT_BOTTOMLEFT, 0.01, 0.0)
+    BlzFrameSetEnable(text, false)
+    return text
+end
+
+function CreateCloseButton(BoxBorder, rama)
+    local NextPoint = 0.039
+    local SelfFrame = BlzCreateFrameByType('GLUEBUTTON', 'FaceButton', BoxBorder, 'ScoreScreenTabButtonTemplate', 0)
+    local buttonIconFrame = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', SelfFrame, '', 0)
+    BlzFrameSetAllPoints(buttonIconFrame, SelfFrame)
+    BlzFrameSetTexture(buttonIconFrame, "CloseCross", 0, true)
+    BlzFrameSetSize(SelfFrame, NextPoint / 2, NextPoint / 2)
+    BlzFrameSetPoint(SelfFrame, FRAMEPOINT_TOPRIGHT, rama, FRAMEPOINT_TOPRIGHT, 0.00, 0.00)
+    local ClickTrig = CreateTrigger()
+    BlzTriggerRegisterFrameEvent(ClickTrig, SelfFrame, FRAMEEVENT_CONTROL_CLICK)
+    TriggerAddAction(ClickTrig, function()
+        --print("Закрыть")
+        BlzFrameSetEnable(BlzGetTriggerFrame(), false)
+        BlzFrameSetEnable(BlzGetTriggerFrame(), true)
+        BlzFrameSetVisible(BoxBorder, false)
+    end)
+    local TrigMOUSE_ENTER = CreateTrigger()
+    BlzTriggerRegisterFrameEvent(TrigMOUSE_ENTER, SelfFrame, FRAMEEVENT_MOUSE_ENTER)
+    TriggerAddAction(TrigMOUSE_ENTER, function()
+        --print("показать подсказку ",flag)
+        BlzFrameSetText(SHOP_TOOLTIP, "Нажмите чтобы закрыть магазин")
+    end)
+    local TrigMOUSE_LEAVE = CreateTrigger()
+    BlzTriggerRegisterFrameEvent(TrigMOUSE_LEAVE, SelfFrame, FRAMEEVENT_MOUSE_LEAVE)
+    TriggerAddAction(TrigMOUSE_LEAVE, function()
+        --print("убрать подсказку")
+        BlzFrameSetText(SHOP_TOOLTIP, "Если у вас достаточно золота, нажмите на иконку предмета левой кнопкой, чтобы купить его")
+    end)
+end
+NextPoint = 0.039
+function CreateGoldInterFace(data)
+    local goldIco = "Textures\\GOLDCoin.blp"
+    local GoldFrame = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), '', 0)
+    BlzFrameSetParent(GoldFrame, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    BlzFrameSetTexture(GoldFrame, goldIco, 0, true)
+    BlzFrameSetSize(GoldFrame, NextPoint / 2, NextPoint / 2)
+    BlzFrameSetAbsPoint(GoldFrame, FRAMEPOINT_CENTER, 0.85, 0.02)
+    BlzFrameSetVisible(GoldFrame, GetLocalPlayer() == Player(data.pid))
+
+    local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", GoldFrame, "", 0)
+    BlzFrameSetParent(text, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    BlzFrameSetText(text, "0")
+    BlzFrameSetScale(text, 2)
+    BlzFrameSetPoint(text, FRAMEPOINT_RIGHT, GoldFrame, FRAMEPOINT_RIGHT, 0.02, 0.0)
+    BlzFrameSetVisible(text, GetLocalPlayer() == Player(data.pid))
+    BlzFrameSetText(text, data.gold)
+    TimerStart(CreateTimer(), 0.1, true, function()
+        BlzFrameSetText(text, R2I(data.gold))
+    end)
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 16.04.2023 15:20
+---
+
+function InitItemBDForShop()
+    SHOP_BD = {
+        [1] = {
+            name         = "Гирлянда",
+            descriptions = "Отличное украшение для новогодней ёлки",
+            texture      = "ReplaceableTextures\\CommandButtons\\BTNScatterRockets",
+            cost         = 5000,
+            lvl          = 1,
+        },
+        [2] = {
+            name         = "Носочки",
+            descriptions = "Тёплые шерстяные носки,где каждая петелька, связана с любовью, DS% шанс уклонится от атак холода",
+            texture      = "ReplaceableTextures\\CommandButtons\\BTNSlippersOfAgility",
+            cost         = 900,
+            DS           = {10,20,30},
+            lvl          = 1
+        },
+        [3] = {
+            name         = "Имитация",
+            descriptions = "Бутерброды с икрой из желатина, восстанавливают максимум отсутствующего здоровья",
+            texture      = "ReplaceableTextures\\CommandButtons\\BTNScrollOfHaste",
+            cost         = 50,
+            DS           = {1,1,1,1,1,1,1,1,1,1},
+            lvl          = 1
+        },
+        [4] = {
+            name         = "Набор для оливье",
+            descriptions = "Готовый набор продуктов, позволяющий сделать идеальный новогодний салат",
+            texture      = "ReplaceableTextures\\CommandButtons\\BTNHealingWard",
+            cost         = 6000,
+            lvl          = 1
+        },
+        [5] = {
+            name         = "Майонез",
+            descriptions = "Белая субстанция, без неё салата не приготовить, делает вас толще",
+            texture      = "ReplaceableTextures\\CommandButtons\\BTNHealingSalve",
+            cost         = 49,
+            DS           = {1,1,1},
+            lvl          = 1
+        },
+        [6] = {
+            name         = "Розовый майонез",
+            descriptions = "Тот самый ингредиент, для приготовления селедки под шубой",
+            texture      = "ReplaceableTextures\\CommandButtons\\BTNLesserInvisibility",
+            cost         = 200,
+            lvl          = 1,
+        },
+        [7] = {
+            name         = "Подштанники",
+            descriptions = "Прекрасно защитят ваш зад от мороза, даёт + DS к максимальному здоровью",
+            texture      = "ReplaceableTextures\\CommandButtons\\BTNLeatherUpgradeOne",
+            cost         = 1000,
+            lvl          = 1,
+            DS           = {1}
+        },
+        [8] = {
+            name         = "Колбаса",
+            descriptions = "Насыщает вас на пару часов, повышая максимальный запас здоровья на DS",
+            texture      = "ReplaceableTextures\\CommandButtons\\BTNMonsterLure.blp",
+            cost         = 500,
+            lvl          = 1,
+            DS           = {1,1,1}
+        },
+        [9] = {
+            name         = "Фигурка морозко",
+            descriptions = "Позволяет вам иногда стрелять двойным снежком",
+            texture      = "ReplaceableTextures\\CommandButtons\\BTNClayFigurine.blp",
+            cost         = 600,
+            lvl          = 1,
+        },
+        [10] = {
+            name         = "Яйца",
+            descriptions = "Можно в салат, можно и бросить в кого-нибудь",
+            texture      = "ReplaceableTextures\\CommandButtons\\BTNOrbOfLightning.blp",
+            cost         = 5,
+            lvl          = 1,
+        },
+        [11] = {
+            name         = "Уголь",
+            descriptions = "Плохие дети получаются в подарок уголь, чем дальше враг тем выше урон он снаряда",
+            texture      = "ReplaceableTextures\\CommandButtons\\BTNOrbOfDarkness.blp",
+            cost         = 800,
+            lvl          = 1,
+        },
+        [12] = {
+            name         = "Звезда",
+            descriptions = "Прекрасное украшение для вашей ёлки",
+            texture      = "ReplaceableTextures\\CommandButtons\\BTNStarWand.blp",
+            cost         = 500,
+            lvl          = 1,
+        },
+        [13] = {
+            name         = "Штопор",
+            descriptions = "Без него не открыть шампанское",
+            texture      = "ReplaceableTextures\\CommandButtons\\BTNSentryWard.blp",
+            cost         = 200,
+            lvl          = 1,
+        },
+        [14] = {
+            name         = "Шампанское",
+            descriptions = "Идеальный напиток для создания новогоднего настроения",
+            texture      = "ReplaceableTextures\\CommandButtons\\BTNStrongDrink.blp",
+            cost         = 3000,
+            lvl          = 1,
+        },
+        [15] = {
+            name         = "Вино",
+            descriptions = "Прекрасно защитят ваш зад от мороза",
+            texture      = "ReplaceableTextures\\CommandButtons\\BTNJanggo.blp",
+            cost         = 3000,
+            lvl          = 1,
+        },
+        [16] = {
+            name         = "Горошек",
+            descriptions = "Какой салат без него?",
+            texture      = "ReplaceableTextures\\CommandButtons\\BTNHealthStone.blp",
+            cost         = 200,
+            lvl          = 1,
+        },
+        [17] = {
+            name         = "Подарочная упаковка",
+            descriptions = "Позволяет украсить даже самый обычный подарок",
+            texture      = "ReplaceableTextures\\CommandButtons\\BTNSnazzyScroll.blp",
+            cost         = 200,
+            lvl          = 1,
+        },
+        [18] = {
+            name         = "Фейерве́рк",
+            descriptions = "Пустая трата денег",
+            texture      = "ReplaceableTextures\\CommandButtons\\BTNFlare.blp",
+            cost         = 200,
+            lvl          = 1,
+        },
+        [19] = {
+            name         = "Соленья",
+            descriptions = "Зомби огурцы",
+            texture      = "ReplaceableTextures\\CommandButtons\\BTNCrystalBall.blp",
+            cost         = 200,
+            lvl          = 1,
+        },
+        [20] = {
+            name         = "Мандарины",
+            descriptions = "Источник витаминов",
+            texture      = "ReplaceableTextures\\CommandButtons\\BTNPeriapt.blp",
+            cost         = 200,
+            lvl          = 1,
+        },
+        [21] = {
+            name         = "Бананы",
+            descriptions = "Хорошо закрепляют",
+            texture      = "ReplaceableTextures\\CommandButtons\\BTNPotionOfRestoration.blp",
+            cost         = 200,
+            lvl          = 1,
+        },
+        [22] = {
+            name         = "Скидочный купон",
+            descriptions = "Позволяет покупать товары со скидкой в DS%",
+            texture      = "ReplaceableTextures\\CommandButtons\\BTNSnazzyScrollPurple.blp",
+            cost         = 300,
+            lvl          = 1,
+            DS           = {50},
+        },
+        [23] = {
+            name         = "Открытка с дурацкой музыкой",
+            descriptions = "Ужасно бесит, подарите её своему самому злому врагу",
+            texture      = "ReplaceableTextures\\CommandButtons\\BTNTomeRed.blp",
+            cost         = 200,
+            lvl          = 1,
+        },
+        [24] = {
+            name         = "Приглашение",
+            descriptions = "Приглашение на ёлку, позволяет пройти на голубой огонёк",
+            texture      = "ReplaceableTextures\\CommandButtons\\BTNTome.blp",
+            cost         = 200,
+            lvl          = 1,
+        },
+        [25] = {
+            name         = "Время",
+            descriptions = "В этой игре можно купить даже время, отматывает игровой таймер на 5 минут назад",
+            texture      = "ReplaceableTextures\\CommandButtons\\BTNOrbofSlowness.blp",
+            cost         = 500,
+            lvl          = 1,
+        },
+        [26] = {
+            name         = "Очки",
+            descriptions = "Защищают вас от снежной слепоты",
+            texture      = "ReplaceableTextures\\CommandButtons\\BTNGrimWard.blp",
+            cost         = 1000,
+            lvl          = 1,
+        },
+        [27] = {
+            name         = "Утяжелите Рока Ли",
+            descriptions = "Замедляют скорость передвижения на 10 минут, но когда их снять дальность и переката увеличится",
+            texture      = "ReplaceableTextures\\CommandButtons\\BTNHumanArmorUpThree.blp",
+            cost         = 1000,
+            lvl          = 1,
+        },
+        [28] = {
+            name         = "Повязка Хокаге",
+            descriptions = "Меняет дурацкую шапочки, на стильную повязку шиноби",
+            texture      = "ReplaceableTextures\\CommandButtons\\BTNEntrapmentWard.blp",
+            cost         = 1000,
+            lvl          = 1,
+        },
+
+
+    }
+end
+
 --CUSTOM_CODE
 function Trig_EnterAnimeArena_Conditions()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
@@ -10844,7 +11329,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, 1984.0, 7040.0)
+DefineStartLocation(0, 4608.0, 6336.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()
