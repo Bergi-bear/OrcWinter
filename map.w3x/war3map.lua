@@ -6,6 +6,10 @@ udg_QNudeFriend = nil
 udg_QStarAnime = nil
 udg_QYetty = nil
 udg_QWolf = nil
+udg_QWine = nil
+udg_QDragon = nil
+udg_QWiverna = nil
+udg_QCHKPoint = nil
 gg_rct________________037 = nil
 gg_rct_Region_038 = nil
 gg_rct_Region_024 = nil
@@ -29,6 +33,8 @@ gg_rct_AnimBossEnter = nil
 gg_rct_AnimBossStart = nil
 gg_rct_AIStartBoss = nil
 gg_rct_Region_019 = nil
+gg_rct_Region_020 = nil
+gg_rct_Region_021 = nil
 gg_cam_OnPeonsandTrall = nil
 gg_cam_OnPineRound = nil
 gg_cam_OnPeons = nil
@@ -44,6 +50,7 @@ gg_cam_NydePeon = nil
 gg_cam_LookAnime = nil
 gg_cam_WolfEnd = nil
 gg_cam_SeeOnWolf = nil
+gg_cam_TalkMerch = nil
 gg_snd_Intro1 = nil
 gg_snd_Intro2 = nil
 gg_snd_Intro3 = nil
@@ -88,6 +95,9 @@ gg_trg_StartYettyCinematic = nil
 gg_trg_SkipYetty = nil
 gg_trg_InitEggs = nil
 gg_trg_Task = nil
+gg_trg_InitMerchantQuest = nil
+gg_trg_MerchQuestCinematic = nil
+gg_trg_MerchEndCinematic1 = nil
 gg_trg_EndBoss = nil
 gg_trg_StartDragonCinematic = nil
 gg_trg_SkipDragon = nil
@@ -115,6 +125,7 @@ gg_unit_opeo_0024 = nil
 gg_unit_n002_0045 = nil
 gg_unit_h006_0172 = nil
 gg_unit_h006_0173 = nil
+gg_unit_h007_0171 = nil
 gg_unit_o002_0203 = nil
 gg_unit_h009_0197 = nil
 gg_dest_B007_5312 = nil
@@ -332,12 +343,13 @@ u = BlzCreateUnitWithSkin(p, FourCC("h002"), -6551.2, -7066.3, 5.812, FourCC("h0
 u = BlzCreateUnitWithSkin(p, FourCC("h004"), -3852.9, 4153.2, 159.380, FourCC("h004"))
 u = BlzCreateUnitWithSkin(p, FourCC("h004"), 3605.6, 3360.4, 159.380, FourCC("h004"))
 u = BlzCreateUnitWithSkin(p, FourCC("h004"), -476.6, -4225.4, 159.380, FourCC("h004"))
-u = BlzCreateUnitWithSkin(p, FourCC("h007"), 1056.8, -2436.1, 182.046, FourCC("h007"))
+gg_unit_h007_0171 = BlzCreateUnitWithSkin(p, FourCC("h007"), 1056.8, -2436.1, 182.046, FourCC("h007"))
 u = BlzCreateUnitWithSkin(p, FourCC("h007"), 608.9, -879.9, 182.046, FourCC("h007"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), 601.4, -1416.6, 5.812, FourCC("h002"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), -6012.7, 7349.6, 5.812, FourCC("h002"))
 gg_unit_h009_0197 = BlzCreateUnitWithSkin(p, FourCC("h009"), -11217.1, 9574.6, 232.970, FourCC("h009"))
 u = BlzCreateUnitWithSkin(p, FourCC("H60Z"), 6543.3, 6651.6, 223.130, FourCC("H60Z"))
+SetUnitAcquireRange(u, 200.0)
 gg_unit_o002_0203 = BlzCreateUnitWithSkin(p, FourCC("o002"), -13047.3, 8357.1, 308.530, FourCC("o002"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00A"), 5159.2, 6586.8, 281.200, FourCC("h00A"))
 end
@@ -550,6 +562,9 @@ SetUnitState(u, UNIT_STATE_LIFE, 0.07 * life)
 u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10299.4, -2007.8, 270.000, FourCC("h000"))
 life = GetUnitState(u, UNIT_STATE_LIFE)
 SetUnitState(u, UNIT_STATE_LIFE, 0.10 * life)
+u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 5278.5, 5902.6, 201.243, FourCC("uaco"))
+u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 5353.8, 6056.5, 192.036, FourCC("uaco"))
+u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 5387.5, 5881.8, 86.465, FourCC("uaco"))
 end
 
 function CreateUnitsForPlayer10()
@@ -764,6 +779,8 @@ gg_rct_AnimBossEnter = Rect(-13184.0, 7488.0, -13088.0, 7584.0)
 gg_rct_AnimBossStart = Rect(-13088.0, 7584.0, -12832.0, 7840.0)
 gg_rct_AIStartBoss = Rect(-12256.0, 8576.0, -10304.0, 10240.0)
 gg_rct_Region_019 = Rect(-12128.0, 2720.0, -11904.0, 2912.0)
+gg_rct_Region_020 = Rect(800.0, -2496.0, 896.0, -2400.0)
+gg_rct_Region_021 = Rect(672.0, -2400.0, 800.0, -2272.0)
 end
 
 function CreateCameras()
@@ -962,6 +979,19 @@ CameraSetupSetField(gg_cam_SeeOnWolf, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
 CameraSetupSetField(gg_cam_SeeOnWolf, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
 CameraSetupSetField(gg_cam_SeeOnWolf, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
 CameraSetupSetDestPosition(gg_cam_SeeOnWolf, -11820.9, 3269.4, 0.0)
+gg_cam_TalkMerch = CreateCameraSetup()
+CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_ROTATION, 73.1, 0.0)
+CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_ANGLE_OF_ATTACK, 316.4, 0.0)
+CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_TARGET_DISTANCE, 955.9, 0.0)
+CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_ROLL, 0.0, 0.0)
+CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_FARZ, 5000.0, 0.0)
+CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_TalkMerch, 982.6, -2286.1, 0.0)
 end
 
 --CUSTOM_CODE
@@ -1348,7 +1378,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
         delay=CollisionRange
     end
 
-
+    local currentDistance=0
     local bullet = AddSpecialEffect(effectmodel, xs, ys)
     BlzSetSpecialEffectYaw(bullet, math.rad(angle))
     local CollisionEnemy = false
@@ -1368,10 +1398,11 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
     TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
         dist = dist + speed
         delay = delay - speed
+        currentDistance=currentDistance+speed
         local x, y, z = BlzGetLocalSpecialEffectX(bullet), BlzGetLocalSpecialEffectY(bullet), BlzGetLocalSpecialEffectZ(bullet)
         local zGround = GetTerrainZ(MoveX(x, speed * 2, angleCurrent), MoveY(y, speed * 2, angleCurrent))
 
-        if effectmodel=="Firebrand Shot Silver"  then -- самонаводка
+        if effectmodel=="Firebrand Shot Silver"  and currentDistance>=300 then -- самонаводка
 
             if enemy then
                 newAngle=AngleBetweenXY(x,y,GetUnitXY(enemy))/ bj_DEGTORAD
@@ -2020,6 +2051,37 @@ end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
 --- Created by Bergi.
+--- DateTime: 08.03.2021 21:07
+---
+do
+    local InitGlobalsOrigin = InitGlobals
+    function InitGlobals()
+        InitGlobalsOrigin()
+        TimerStart(CreateTimer(), 1, false, function()
+            InitDeathEvent()
+            DestroyTimer(GetExpiredTimer())
+        end)
+    end
+end
+function InitDeathEvent()
+    local this = CreateTrigger()
+    TriggerRegisterAnyUnitEventBJ(this, EVENT_PLAYER_UNIT_DEATH)
+    TriggerAddAction(this, function()
+        local u = GetTriggerUnit()
+        local killer = GetKillingUnit()
+
+        if GetPlayerController(GetOwningPlayer(killer)) == MAP_CONTROL_USER then
+            local data = HERO[GetPlayerId(GetOwningPlayer(killer))]
+            killer = data.UnitHero
+            local amount=BlzGetUnitMaxHP(u)//100
+            RewardGoldForKill(data,amount)
+
+        end
+    end)
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by Bergi.
 --- DateTime: 15.02.2021 18:51
 ---
 function HealUnit(hero, amount, flag, eff)
@@ -2125,6 +2187,7 @@ do
 
             --PlayList()
             CreateEActions()
+            CreateESCActions()
             --CreateTabActions()
             --wGeometry = wGeometryInit()
             --ShapeInit()
@@ -2266,7 +2329,7 @@ function InitHEROTable()
             DamageThrow            = 150, -- урон от кирки
             InvulPreDeathCurrentCD = 1, --кулдаун бессмертия от трала
             LifeFHTable            = {},
-            gold                   = 9999,
+            gold                   = 50,
             ShowGold               = true, -- показ накопления золота
             ShowHeal               = true,
             ShowGoldAmount         = 0,
@@ -7924,12 +7987,12 @@ function InitMenu()
     HideEverything()
     ReturnFPS()
     MenuFrame()
-    CreateAndStartClock()
+    GTimer = CreateAndStartClock()
     DrawSelectionPortrait(true)
     --CreateMiniCard()
     CreatePeonCounter()
     --CreateVictoryElderBorder() -- тестовый показ
-    CreateShop()
+    --CreateShop() --для теста опять таки
     CreateGoldInterFace(HERO[0])
     --CreateCustomPortrait()
     --CreateMenu()
@@ -7990,18 +8053,22 @@ function MenuFrame()
     HideToolTips()
 end
 
-function CreateAndStartClock(x, y, reverse, sec, min, h,parentFH)
+WindowTimer = {}
+WindowTimerIndex = 0
+function CreateAndStartClock(x, y, reverse, sec, min, h, parentFH)
     if not parentFH then
-        parentFH=BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
+        parentFH = BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
     end
     local charges = BlzCreateFrameByType("BACKDROP", "Face", parentFH, "", 0)
     BlzFrameSetParent(charges, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+
     local new_FrameChargesText = BlzCreateFrameByType("TEXT", "ButtonChargesText", charges, "", 0)
+
     if not x then
-        x=0.4
+        x = 0.4
     end
     if not y then
-        y=0.58
+        y = 0.58
     end
 
     if not sec then
@@ -8013,6 +8080,19 @@ function CreateAndStartClock(x, y, reverse, sec, min, h,parentFH)
     if not h then
         h = 23 -- стартовые часы
     end
+
+
+    if not WindowTimer[1] then
+        WindowTimer[1] = {
+            textFH = new_FrameChargesText,
+            sec = sec,
+            min = min,
+            h = h
+        }
+
+    end
+    local data=WindowTimer[1]
+
     --BlzFrameSetTexture(charges, "WhiteStaticFlat", 0, true)
     BlzFrameSetSize(charges, 0.0001, 0.0001)
     BlzFrameSetAbsPoint(charges, FRAMEPOINT_CENTER, x, y)
@@ -8023,45 +8103,54 @@ function CreateAndStartClock(x, y, reverse, sec, min, h,parentFH)
 
     TimerStart(CreateTimer(), 1, true, function()
         if not reverse then
-            sec = sec + 1
-            if sec == 60 then
-                sec = 0
-                min = min + 1
+            data.sec = data.sec + 1
+
+            if data.sec >= 60 then
+                data.sec = 0
+                data.min = data.min + 1
             end
-            if min == 60 then
-                min = 0
-                h = h + 1
+            if data.min >= 60 then
+                data.min = 0
+                data.h = data.h + 1
             end
-        else -- реверс времени
+            if data.min <0 then
+                data.min=0
+            end
+        else
+            -- реверс времени
             sec = sec - 1
             if sec <= 0 then
                 sec = 59
                 min = min - 1
-                if min<0 then
+                if min < 0 then
                     --print("Обратный таймер закончился")
-                    DEFENSEND=true
+                    DEFENSEND = true
                     BlzDestroyFrame(charges)
                     DestroyTimer(GetExpiredTimer())
                 end
             end
 
             if min <= 0 then
-                if h>0 then
+                if h > 0 then
                     min = 59
                     h = h - 1
                 end
-                min=0
+                min = 0
             end
-            if sec<=0 and min <=0 and h<=0 then
+            if sec <= 0 and min <= 0 and h <= 0 then
                 print("Обратный таймер закончился ПОЛЧНОСТЬЮ")
                 BlzDestroyFrame(charges)
                 DestroyTimer(GetExpiredTimer())
             end
         end
 
-        BlzFrameSetText(new_FrameChargesText, Zero(h) .. ":" .. Zero(min) .. ":" .. Zero(sec))
+        BlzFrameSetText(new_FrameChargesText, Zero(data.h) .. ":" .. Zero(data.min) .. ":" .. Zero(data.sec))
     end)
     return charges
+end
+function AddTimeToTimer(charges, h, min, sec)
+    local data=WindowTimer[1]
+    data.min=data.min+min
 end
 
 function Zero(s)
@@ -8086,13 +8175,13 @@ function HideToolTips()
 end
 
 function DrawSelectionPortrait(state)
-    local x,y=0.04,0.56
+    local x, y = 0.04, 0.56
     local Portrait = BlzGetOriginFrame(ORIGIN_FRAME_PORTRAIT, 0)-- BlzGetFrameByName("Portrait",0)
     --BlzEnableUIAutoPosition(false)
     BlzFrameClearAllPoints(Portrait)
     BlzFrameSetSize(Portrait, 0.03, 0.04)
     BlzFrameSetParent(Portrait, BlzGetFrameByName("ConsoleUIBackdrop", 0))
-    BlzFrameSetAbsPoint(Portrait, FRAMEPOINT_CENTER, x,y)
+    BlzFrameSetAbsPoint(Portrait, FRAMEPOINT_CENTER, x, y)
     BlzFrameSetVisible(Portrait, state)
 
     --CreateRamaSprite("NeonBlue (2)", Portrait, nil, 0.6)
@@ -8139,21 +8228,21 @@ function CreateQTEFrame()
 end
 
 function CreateJumpArrow(parent)
-    local x=0.02
-    local speed=0.1
+    local x = 0.02
+    local speed = 0.1
     local arrow = BlzCreateFrameByType("BACKDROP", "Face", parent, "", 0)
     BlzFrameSetParent(arrow, BlzGetFrameByName("ConsoleUIBackdrop", 0))
     BlzFrameSetTexture(arrow, "ArrowDown", 0, true)
     BlzFrameSetSize(arrow, 0.05, 0.05)
-    local i=0
-    local duration=5
+    local i = 0
+    local duration = 5
     TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
-        local y=math.sin(i)*x
-        duration=duration-TIMER_PERIOD
-       -- print(y)
-        i=i+speed
-        BlzFrameSetPoint(arrow,FRAMEPOINT_TOP,parent,FRAMEPOINT_TOP,0,y+0.04)
-        if duration<=0 then
+        local y = math.sin(i) * x
+        duration = duration - TIMER_PERIOD
+        -- print(y)
+        i = i + speed
+        BlzFrameSetPoint(arrow, FRAMEPOINT_TOP, parent, FRAMEPOINT_TOP, 0, y + 0.04)
+        if duration <= 0 then
             DestroyTimer(GetExpiredTimer())
         end
     end)
@@ -8173,27 +8262,28 @@ function CreateEActions()
             --StartEatingApple(data.UnitHero) -- УДАЛИТЬ!!
             --print("нажал Е")
             if QTEReadyToPress then
-                QTEReadyToPress=false
+                QTEReadyToPress = false
                 --print("нажал Е во время QTE")
             end
-            if data.ShowE then-- нажать можно только тогда когда активен Е
-                if data.CurrentQuest=="AllyPeonOnAnime" then
-                    UnitRemoveAbility(data.QuestUnit,FourCC("A604"))
+            if data.ShowE then
+                -- нажать можно только тогда когда активен Е
+                if data.CurrentQuest == "AllyPeonOnAnime" then
+                    UnitRemoveAbility(data.QuestUnit, FourCC("A604"))
                     --print("запускает ролик про помощника пеона")
                     CustomCinematicMode(true)
                     Trig_NudeCinematic_Actions() -- код из гуи
                 elseif data.CurrentQuest == "MagnetIsClosed" then
-                    local r=GetRandomInt(1,5)
-                    if r==1 then
-                        PlayMonoSpeech("","Работает до 23:00")
-                    elseif r==2 then
-                        PlayMonoSpeech("","Я кажись не успел")
-                    elseif r==3 then
-                        PlayMonoSpeech("","Заперто")
-                    elseif r==4 then
-                        PlayMonoSpeech("","Не получается открыть")
-                    elseif r==5 then
-                        PlayMonoSpeech("","Нужно поискать, другое место для покупки")
+                    local r = GetRandomInt(1, 5)
+                    if r == 1 then
+                        PlayMonoSpeech("", "Работает до 23:00")
+                    elseif r == 2 then
+                        PlayMonoSpeech("", "Я кажись не успел")
+                    elseif r == 3 then
+                        PlayMonoSpeech("", "Заперто")
+                    elseif r == 4 then
+                        PlayMonoSpeech("", "Не получается открыть")
+                    elseif r == 5 then
+                        PlayMonoSpeech("", "Нужно поискать, другое место для покупки")
                     end
                 elseif data.CurrentQuest == "Shop" then
                     --UnitRemoveAbility(data.QuestUnit,FourCC("A604"))
@@ -8203,6 +8293,9 @@ function CreateEActions()
                     TimerStart(CreateTimer(), 1, false, function()
                         EnableTrigger(gg_trg_EventUpE)
                     end)
+                elseif data.CurrentQuest == "KillWyvern" then
+                    UnitRemoveAbility(data.QuestUnit, FourCC("A604"))
+                    Trig_MerchQuestCinematic_Actions()
                 end
             end
         end
@@ -8216,6 +8309,33 @@ function CreateEActions()
         local pid = GetPlayerId(GetTriggerPlayer())
         local data = HERO[pid]
         data.ReleaseE = false
+    end)
+end
+
+function CreateESCActions()
+    -----------------------------------------------------------------OSKEY_ESC
+    local gg_trg_EventUpESCAPE = CreateTrigger()
+    for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
+        BlzTriggerRegisterPlayerKeyEvent(gg_trg_EventUpESCAPE, Player(i), OSKEY_ESCAPE, 0, true)
+    end
+    TriggerAddAction(gg_trg_EventUpESCAPE, function()
+        local pid = GetPlayerId(GetTriggerPlayer())
+        local data = HERO[pid]
+        if not data.ReleaseESCAPE then
+            data.ReleaseESCAPE = true
+            --print("нажал ESCAPE")
+            CloseShop()
+        end
+    end)
+
+    local TrigDepressESCAPE = CreateTrigger()
+    for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
+        BlzTriggerRegisterPlayerKeyEvent(TrigDepressESCAPE, Player(i), OSKEY_ESCAPE, 0, false)
+    end
+    TriggerAddAction(TrigDepressESCAPE, function()
+        local pid = GetPlayerId(GetTriggerPlayer())
+        local data = HERO[pid]
+        data.ReleaseESCAPE = false
     end)
 end
 ---
@@ -8618,7 +8738,7 @@ function CreatePeonForPlayer(data)
         InitWASD(data.UnitHero)
         --CreatePeonHPBAR(data)
         InitRegistryEvent(data.UnitHero)
-        AddPeonMAXHP(data, 7)
+        AddPeonMAXHP(data, 2)
         AddPeonMAXHP(data, 3)
         IssuePointOrder(data.UnitHero, "smart", GetUnitXY(data.UnitHero))
         --InitInventory(data)
@@ -8639,7 +8759,8 @@ ShowESystem = {
 }
 function InitRegistryEvent(hero)
     local enterTrig = CreateTrigger()
-    TriggerRegisterUnitInRange(enterTrig, hero, 120, nil)
+    local range=200
+    TriggerRegisterUnitInRange(enterTrig, hero, range, nil)
     TriggerAddAction(enterTrig, function()
         local entering = GetTriggerUnit()
         --print(GetUnitName(entering))
@@ -8665,11 +8786,13 @@ function InitRegistryEvent(hero)
                     data.CurrentQuest = "Shop"
                 elseif GetUnitTypeId(entering) == FourCC("h00A") then
                     data.CurrentQuest = "MagnetIsClosed"
+                elseif GetUnitTypeId(entering) == FourCC("h007") then
+                    data.CurrentQuest = "KillWyvern" -- орк дающий квест на виверну
                 end
                 data.QuestUnit = entering
                 local eff = AddSpecialEffect("ActionsE", GetUnitXY(entering))
                 TimerStart(CreateTimer(), 0.1, true, function()
-                    if not IsUnitInRange(hero, entering, 140) or GetUnitAbilityLevel(entering, FourCC("A604")) == 0 then
+                    if not IsUnitInRange(hero, entering, range*1.2) or GetUnitAbilityLevel(entering, FourCC("A604")) == 0 then
                         --print("покинул радиус или квест уже завершен")
                         data.CurrentQuest = ""
                         data.QuestUnit = nil
@@ -8696,7 +8819,20 @@ function InitRegistryEvent(hero)
             if data.ResPointX == x then
 
             else
-                print("Контрольная точка изменена")
+                --print("Контрольная точка изменена")
+                QuestSetCompletedBJ(udg_QCHKPoint, true)
+                local r=GetRandomInt(1,8)
+                if r==1 then
+                    PlayMonoSpeech("Speech\\Peon\\CHKPoint\\1", "Новая зона воскрешения")
+                elseif r==2 then
+                    PlayMonoSpeech("Speech\\Peon\\CHKPoint\\2", "Сюда меня отнесут гробовщики пеоны после смерти")
+                elseif r==3 then
+                    PlayMonoSpeech("Speech\\Peon\\CHKPoint\\3", "Очень странно, почему я воскрешаюсь возле 3х леденцов...")
+                elseif r==4 then
+                    PlayMonoSpeech("Speech\\Peon\\CHKPoint\\4", "Контрольная точка")
+                elseif r==5 then
+                    PlayMonoSpeech("Speech\\Peon\\CHKPoint\\5", "Местное городское кладбище или камень воскрешения?")
+                end
             end
             data.ResPointX, data.ResPointY = x, y
 
@@ -9901,32 +10037,93 @@ end
 --- Created by User.
 --- DateTime: 16.04.2023 18:30
 ---
-function ByItemByName(item)
-    local data=HERO[0]
-    if data.gold>=item.cost then
+function UnitGetItemByName(item, data)
+    if item.name == "Гирлянда" then
+        QuestSetCompletedBJ(udg_QWolf, true)
+    elseif item.name == "Носочки" then
+        if not data.BlockDamageSocks then
+            data.BlockDamageSocks=10
+        else
+            data.BlockDamageSocks=data.BlockDamageSocks+10
+        end
+    elseif item.name == "Имитация красной икры" then
+        HeroCandyHeal(data,99)
+    elseif item.name == "Набор для оливье" then
+        data.haveOlivier=true
+        if data.haveMayonnaise then
+            QuestSetCompletedBJ(udg_QYetty, true)
+        end
+    elseif item.name == "Майонез" then
+        data.haveMayonnaise=true
+        if data.haveOlivier then
+            QuestSetCompletedBJ(udg_QYetty, true)
+        end
+    elseif item.name == "Розовый майонез" then
+    elseif item.name == "Подштанники" then
+    elseif item.name == "Колбаса" then
+    elseif item.name == "Фигурка морозко" then
+    elseif item.name == "Яйца" then
+    elseif item.name == "Уголь" then
+    elseif item.name == "Звезда" then
+    elseif item.name == "Штопор" then
+    elseif item.name == "Шампанское" then
+        QuestSetCompletedBJ(udg_QWine, true)
+    elseif item.name == "Вино" then
+        QuestSetCompletedBJ(udg_QWine, true)
+    elseif item.name == "Горошек" then
+        UnitAddAbility(data.UnitHero,FourCC("AIms"))
+    elseif item.name == "Подарочная упаковка" then
+    elseif item.name == "Фейерве́рк" then
+    elseif item.name == "Соленья" then
+    elseif item.name == "Мандарины" then
+    elseif item.name == "Бананы" then
+    elseif item.name == "Скидочный купон" then
+        data.SteamSale=item.DS[item.lvl]
+        print("Скидка",item.DS[item.lvl],item.lvl)
+    elseif item.name == "Открытка с дурацкой музыкой" then
+
+    elseif item.name == "Приглашение" then
+    elseif item.name == "Время" then
+        AddTimeToTimer(GTimer,0,-5 ,0)
+    elseif item.name == "Очки" then
+    elseif item.name == "Утяжелите Рока Ли" then
+    elseif item.name == "Повязка Хокаге" then
+
+
+    end
+end
+function ByItemByName(item, data)
+    if data.gold >= item.cost then
         --print("успешная покупка")
-        data.gold=data.gold-item.cost
-        item.cost=item.cost*2
+        data.gold = data.gold - item.cost
+        item.cost = item.cost * 2
         if not item.lvl then
-            item.lvl=1
+            item.lvl = 1
             --print("первая покупка")
         end
-        item.lvl=item.lvl+1
+
         --print("lvl=",item.lvl)
-        BlzFrameSetText(item.FHcost,item.cost)
+        BlzFrameSetText(item.FHcost, item.cost)
         if not item.DS then
-            item.isSold=true
-            BlzFrameSetScale(item.FHcost,0.7)
-            BlzFrameSetText(item.FHcost,"Продано")
+            item.isSold = true
+            BlzFrameSetScale(item.FHcost, 0.7)
+            BlzFrameSetText(item.FHcost, "Продано")
+            BlzFrameSetPoint(item.FHcost, FRAMEPOINT_BOTTOMLEFT, item.FHgold, FRAMEPOINT_BOTTOMLEFT, 0.012, 0.003)
         else
-            if item.lvl>=#item.DS then
-                item.isSold=true
-                BlzFrameSetScale(item.FHcost,0.7)
-                BlzFrameSetText(item.FHcost,"Продано")
+            if item.lvl >= #item.DS then
+                item.isSold = true
+                BlzFrameSetScale(item.FHcost, 0.7)
+                BlzFrameSetText(item.FHcost, "Продано")
+                BlzFrameSetPoint(item.FHcost, FRAMEPOINT_BOTTOMLEFT, item.FHgold, FRAMEPOINT_BOTTOMLEFT, 0.012, 0.003)
+            else
+                item.lvl = item.lvl + 1
             end
         end
+        normal_sound("Abilities\\Spells\\Items\\ResourceItems\\ReceiveGold")
+        UnitGetItemByName(item, data)
     else
-        print("недостаточно",item.cost-data.gold,"золота")
+        print("недостаточно", item.cost - data.gold, "золота")
+        normal_sound("Sound\\Interface\\Warning\\Orc\\GruntNoGold1.flac")
     end
 end
 ---
@@ -9936,36 +10133,72 @@ end
 ---
 function CreateShop()
     if SHOP then
-        BlzFrameSetVisible(SHOP, true)
+        if not BlzFrameIsVisible(SHOP) then
+            BlzFrameSetVisible(SHOP, true)
+            normal_sound("Sound\\Interface\\ItemReceived")
+            CreateItemsForSell()
+        end
         return
     end
+
+    normal_sound("Sound\\Interface\\ItemReceived")
     SHOP = BlzCreateFrameByType("BACKDROP", "Face", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
     InitItemBDForShop()
     --print(#SHOP_BD,SHOP_BD[1].descriptions)
     local rama = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', SHOP, '', 0)
-    local NextPoint = 0.039 + 0.011
     BlzFrameSetTexture(rama, "Textures\\Black32", 0, true) --HPElement
     BlzFrameSetSize(rama, 0.4, 0.3)
     BlzFrameSetAbsPoint(rama, FRAMEPOINT_CENTER, 0.4, 0.3)
-    local x, y = 0.25, 0.4 - NextPoint
-    local max = #SHOP_BD -- число предметов в БД магазина
-    local k = 1
-    for j = 1, 4 do
-        for i = 1, 7 do
-            if k <= max then
-                CreateItemForShop(x + NextPoint * (i - 1), y - NextPoint * (j - 1), SHOP, SHOP_BD[k])
-                k = k + 1
-            end
-        end
-    end
+    CreateItemsForSell()
     CreateCloseButton(SHOP, rama)
     CurrentGoldInShop(rama)
     CreateToolTipBox(rama)
 end
 
+function ClearShop(originalBD)
+    local newBD = {}
+    for i = 1, #originalBD do
+        if not originalBD[i].isSold then
+            table.insert(newBD, originalBD[i])
+        end
+    end
+    return newBD
+end
+
+function CreateItemsForSell()
+    local NextPoint = 0.039 + 0.011
+    local x, y = 0.25, 0.4 - NextPoint
+    local currentSHOP = ClearShop(SHOP_BD)
+    local max = #currentSHOP
+    local w=7
+    local h=4
+    local limit=h*w
+    if max>limit then
+        max=limit-- число предметов в БД магазина ограничено h на w
+    end
+    local k = 1
+    --print(max)
+    AllItemsInShop = {}
+    for j = 1, h do
+        for i = 1, w do
+            if k <= max then
+                local SelfFrame = CreateItemForShop(x + NextPoint * (i - 1), y - NextPoint * (j - 1), SHOP, currentSHOP[k])
+                table.insert(AllItemsInShop, SelfFrame)
+                k = k + 1
+            end
+        end
+    end
+end
+
 function CreateItemForShop(posX, PosY, parent, item)
+    local data=HERO[0]
     local NextPoint = 0.039
-    local cost = item.cost
+
+    if data.SteamSale then
+        --print("скидка пременена")
+        data.SteamSale=false
+        item.cost=item.cost*data.SteamSale//100
+    end
     local name = item.name
     local descriptions = item.descriptions
     local texture = item.texture
@@ -9977,7 +10210,7 @@ function CreateItemForShop(posX, PosY, parent, item)
     --BlzFrameSetVisible(SelfFrame, false)
     -- BlzFrameSetVisible(SelfFrame, GetLocalPlayer() == player)
 
-    item.FHcost=ItemAddCostFromShop(buttonIconFrame, cost)
+    item.FHcost, item.FHgold = ItemAddCostFromShop(buttonIconFrame, item.cost)
     BlzFrameSetAllPoints(buttonIconFrame, SelfFrame)
     BlzFrameSetTexture(buttonIconFrame, texture, 0, true)
     BlzFrameSetSize(SelfFrame, NextPoint, NextPoint)
@@ -9990,7 +10223,8 @@ function CreateItemForShop(posX, PosY, parent, item)
         BlzFrameSetEnable(BlzGetTriggerFrame(), false)
         BlzFrameSetEnable(BlzGetTriggerFrame(), true)
         if not item.isSold then
-            ByItemByName(item)
+            data = HERO[GetPlayerId(GetTriggerPlayer())]
+            ByItemByName(item, data)
         end
     end)
 
@@ -10041,10 +10275,11 @@ function CurrentGoldInShop(parent)
     BlzFrameSetParent(text, BlzGetFrameByName("ConsoleUIBackdrop", 0))
     BlzFrameSetText(text, 9999)
     BlzFrameSetScale(text, 2)
-    BlzFrameSetPoint(text, FRAMEPOINT_RIGHT, GoldFrame, FRAMEPOINT_RIGHT, 0.02, 0.0)
+    BlzFrameSetPoint(text, FRAMEPOINT_LEFT, GoldFrame, FRAMEPOINT_LEFT, 0.011, 0.0)
     TimerStart(CreateTimer(), 0.1, true, function()
         BlzFrameSetText(text, R2I(data.gold))
     end)
+    table.insert(BugsFH,GoldFrame)
 end
 
 function ItemAddCostFromShop(FHItem, cost)
@@ -10061,7 +10296,17 @@ function ItemAddCostFromShop(FHItem, cost)
     BlzFrameSetScale(text, 1)
     BlzFrameSetPoint(text, FRAMEPOINT_BOTTOMLEFT, GoldFrame, FRAMEPOINT_BOTTOMLEFT, 0.01, 0.0)
     BlzFrameSetEnable(text, false)
-    return text
+    return text, GoldFrame
+end
+
+function CloseShop()
+    if BlzFrameIsVisible(SHOP) then
+        BlzFrameSetVisible(SHOP, false)
+        normal_sound("Sound\\Interface\\HeroDropItem1")
+        for i = 1, #AllItemsInShop do
+            BlzDestroyFrame(AllItemsInShop[i])
+        end
+    end
 end
 
 function CreateCloseButton(BoxBorder, rama)
@@ -10078,7 +10323,7 @@ function CreateCloseButton(BoxBorder, rama)
         --print("Закрыть")
         BlzFrameSetEnable(BlzGetTriggerFrame(), false)
         BlzFrameSetEnable(BlzGetTriggerFrame(), true)
-        BlzFrameSetVisible(BoxBorder, false)
+        CloseShop()
     end)
     local TrigMOUSE_ENTER = CreateTrigger()
     BlzTriggerRegisterFrameEvent(TrigMOUSE_ENTER, SelfFrame, FRAMEEVENT_MOUSE_ENTER)
@@ -10096,23 +10341,103 @@ end
 NextPoint = 0.039
 function CreateGoldInterFace(data)
     local goldIco = "Textures\\GOLDCoin.blp"
-    local GoldFrame = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), '', 0)
-    BlzFrameSetParent(GoldFrame, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    local NextPoint = 0.039
+    --local SelfFrame = BlzCreateFrameByType('GLUEBUTTON', 'FaceButton', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 'ScoreScreenTabButtonTemplate', 0)
+    --local GoldFrame = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', SelfFrame, '', 0)
+
+    --BlzFrameSetParent(GoldFrame, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+
+    --[[
+    BlzFrameSetAllPoints(GoldFrame, SelfFrame)
     BlzFrameSetTexture(GoldFrame, goldIco, 0, true)
     BlzFrameSetSize(GoldFrame, NextPoint / 2, NextPoint / 2)
     BlzFrameSetAbsPoint(GoldFrame, FRAMEPOINT_CENTER, 0.85, 0.02)
-    BlzFrameSetVisible(GoldFrame, GetLocalPlayer() == Player(data.pid))
+    ]]
+    local SelfFrame = BlzCreateFrameByType('GLUEBUTTON', 'FaceButton', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 'ScoreScreenTabButtonTemplate', 0)
+    local buttonIconFrame = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', SelfFrame, '', 0)
+    BlzFrameSetAllPoints(buttonIconFrame, SelfFrame)
+    BlzFrameSetTexture(buttonIconFrame, goldIco, 0, true)
+    BlzFrameSetSize(SelfFrame, NextPoint / 2, NextPoint / 2)
+    BlzFrameSetAbsPoint(SelfFrame, FRAMEPOINT_CENTER, 0.85, 0.02)
+    BlzFrameSetParent(SelfFrame, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    BlzFrameSetParent(buttonIconFrame, BlzGetFrameByName("ConsoleUIBackdrop", 0))
 
-    local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", GoldFrame, "", 0)
+    local ClickTrig = CreateTrigger()
+    BlzTriggerRegisterFrameEvent(ClickTrig, SelfFrame, FRAMEEVENT_CONTROL_CLICK)
+    TriggerAddAction(ClickTrig, function()
+        --print("открыть магазин повторно")
+        BlzFrameSetEnable(BlzGetTriggerFrame(), false)
+        BlzFrameSetEnable(BlzGetTriggerFrame(), true)
+        --BlzFrameSetVisible(SHOP, true)
+        CreateShop()
+    end)
+
+    local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", SelfFrame, "", 0)
     BlzFrameSetParent(text, BlzGetFrameByName("ConsoleUIBackdrop", 0))
     BlzFrameSetText(text, "0")
     BlzFrameSetScale(text, 2)
-    BlzFrameSetPoint(text, FRAMEPOINT_RIGHT, GoldFrame, FRAMEPOINT_RIGHT, 0.02, 0.0)
+    BlzFrameSetPoint(text, FRAMEPOINT_LEFT, SelfFrame, FRAMEPOINT_LEFT, 0.011, 0.0)
     BlzFrameSetVisible(text, GetLocalPlayer() == Player(data.pid))
     BlzFrameSetText(text, data.gold)
     TimerStart(CreateTimer(), 0.1, true, function()
         BlzFrameSetText(text, R2I(data.gold))
     end)
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by Bergi.
+--- DateTime: 08.03.2021 19:36
+---
+function AddGold(data, amount)
+    if not data.gold then
+        data.gold = 0
+    end
+
+    data.gold = data.gold + amount
+    if data.gold <= 0 then
+        data.gold = 0
+    end
+    BlzFrameSetText(data.GoldTextFH, R2I(data.gold))
+end
+
+
+function RewardGoldForKill(data,amount)
+    local bonus = 0
+    if data.AdditionalGoldPerKill then
+        bonus = data.AdditionalGoldPerKill
+    end
+    UnitAddGold(data.UnitHero, 1+amount + bonus)
+end
+function UnitAddGold(hero, amount)
+    local data = HERO[GetPlayerId(GetOwningPlayer(hero))]
+    data.ShowGoldSec = 0.3
+    if not data.ShowGoldAmount then
+        data.ShowGoldAmount = 0
+    end
+    data.ShowGoldAmount = data.ShowGoldAmount + amount
+    if data.ShowGold then
+        data.ShowGold = false
+        TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
+            data.ShowGoldSec = data.ShowGoldSec - TIMER_PERIOD
+            if data.ShowGoldSec <= 0 then
+                data.ShowGold = true
+                if data.Investor then
+                    --print(data.Investor)
+                    data.ShowGoldAmount = R2I(data.ShowGoldAmount * data.Investor)
+                end
+                DestroyTimer(GetExpiredTimer())
+                FlyTextTagGoldBounty(hero, "+" .. I2S(data.ShowGoldAmount), GetOwningPlayer(hero))
+                data.StatGoldGained=data.StatGoldGained+data.ShowGoldAmount
+                normal_sound("SystemGeneric\\ReceiveGold", GetUnitXY(hero))
+                if data.ShowGoldAmount>5 then
+                    --
+                end
+                DestroyEffect(AddSpecialEffect("SystemGeneric\\ResourceEffectTarget.mdl", GetUnitXY(hero)))
+                AddGold(data, data.ShowGoldAmount)
+                data.ShowGoldAmount = 0
+            end
+        end)
+    end
 end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
@@ -10138,7 +10463,7 @@ function InitItemBDForShop()
             lvl          = 1
         },
         [3] = {
-            name         = "Имитация",
+            name         = "Имитация красной икры",
             descriptions = "Бутерброды с икрой из желатина, восстанавливают максимум отсутствующего здоровья",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNScrollOfHaste",
             cost         = 50,
@@ -10234,9 +10559,10 @@ function InitItemBDForShop()
         },
         [16] = {
             name         = "Горошек",
-            descriptions = "Какой салат без него?",
+            descriptions = "Срок изготовления - прошлый год, увеличивается скорость передвижения на DS",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNHealthStone.blp",
             cost         = 200,
+            DS           = {60},
             lvl          = 1,
         },
         [17] = {
@@ -10298,10 +10624,11 @@ function InitItemBDForShop()
         },
         [25] = {
             name         = "Время",
-            descriptions = "В этой игре можно купить даже время, отматывает игровой таймер на 5 минут назад",
+            descriptions = "В этой игре можно купить даже время, отматывает игровой таймер на DS минут назад, не влияет на часы или секунды",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNOrbofSlowness.blp",
-            cost         = 500,
+            cost         = 50,
             lvl          = 1,
+            DS           = {5,5,5,5,5}
         },
         [26] = {
             name         = "Очки",
@@ -10322,6 +10649,13 @@ function InitItemBDForShop()
             descriptions = "Меняет дурацкую шапочки, на стильную повязку шиноби",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNEntrapmentWard.blp",
             cost         = 1000,
+            lvl          = 1,
+        },
+        [29] = {
+            name         = "Звезда",
+            descriptions = "Идеальное украшение для верхушки ёлки, но по очень высокой цене",
+            texture      = "ReplaceableTextures\\CommandButtons\\BTNStarWand.blp",
+            cost         = 8000,
             lvl          = 1,
         },
 
@@ -10597,7 +10931,9 @@ CreateQuestBJ(bj_QUESTTYPE_REQ_DISCOVERED, "TRIGSTR_719", "TRIGSTR_720", "Replac
 CreateQuestBJ(bj_QUESTTYPE_REQ_DISCOVERED, "TRIGSTR_721", "TRIGSTR_722", "ReplaceableTextures\\CommandButtons\\BTNWendigo.blp")
 udg_QYetty = GetLastCreatedQuestBJ()
 CreateQuestBJ(bj_QUESTTYPE_REQ_DISCOVERED, "TRIGSTR_725", "TRIGSTR_726", "ReplaceableTextures\\CommandButtons\\BTNpurpleDragonSpawn.blp")
+udg_QDragon = GetLastCreatedQuestBJ()
 CreateQuestBJ(bj_QUESTTYPE_REQ_DISCOVERED, "TRIGSTR_727", "TRIGSTR_728", "ReplaceableTextures\\CommandButtons\\BTNStrongDrink.blp")
+udg_QDragon = udg_QWine
 CreateQuestBJ(bj_QUESTTYPE_REQ_DISCOVERED, "TRIGSTR_729", "TRIGSTR_730", "ReplaceableTextures\\CommandButtons\\BTNTimberWolf.blp")
 udg_QWolf = GetLastCreatedQuestBJ()
 CreateQuestBJ(bj_QUESTTYPE_REQ_DISCOVERED, "TRIGSTR_731", "TRIGSTR_732", "ReplaceableTextures\\CommandButtons\\BTNStarWand.blp")
@@ -10605,6 +10941,7 @@ udg_QStarAnime = GetLastCreatedQuestBJ()
 CreateQuestBJ(bj_QUESTTYPE_OPT_DISCOVERED, "TRIGSTR_733", "TRIGSTR_734", "ReplaceableTextures\\CommandButtons\\BTNPeon.blp")
 CreateQuestBJ(bj_QUESTTYPE_OPT_DISCOVERED, "TRIGSTR_735", "TRIGSTR_736", "ReplaceableTextures\\CommandButtons\\BTNForestTrollShadowPriest.blp")
 CreateQuestBJ(bj_QUESTTYPE_OPT_DISCOVERED, "TRIGSTR_737", "TRIGSTR_738", "CandyCane.blp")
+udg_QCHKPoint = GetLastCreatedQuestBJ()
 CreateQuestBJ(bj_QUESTTYPE_OPT_DISCOVERED, "TRIGSTR_752", "TRIGSTR_753", "ReplaceableTextures\\CommandButtons\\BTNGrunt.blp")
 udg_QNudeFriend = GetLastCreatedQuestBJ()
 end
@@ -10615,8 +10952,58 @@ TriggerRegisterTimerEventSingle(gg_trg_Task, 1.00)
 TriggerAddAction(gg_trg_Task, Trig_Task_Actions)
 end
 
+function Trig_InitMerchantQuest_Actions()
+UnitAddAbilityBJ(FourCC("A604"), gg_unit_h007_0171)
+end
+
+function InitTrig_InitMerchantQuest()
+gg_trg_InitMerchantQuest = CreateTrigger()
+TriggerAddAction(gg_trg_InitMerchantQuest, Trig_InitMerchantQuest_Actions)
+end
+
+function Trig_MerchQuestCinematic_Actions()
+    CustomCinematicMode(true)
+CinematicModeBJ(true, GetPlayersAll())
+SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_h007_0171, 0)
+CameraSetupApplyForPlayer(true, gg_cam_TalkMerch, Player(0), 0.00)
+SetCameraTargetControllerNoZForPlayer(Player(0), udg_HERO, 0, 0, false)
+RotateCameraAroundLocBJ(30.00, GetUnitLoc(udg_HERO), Player(0), 20.00)
+ResetUnitAnimation(udg_HERO)
+IssuePointOrderLocBJ(udg_HERO, "move", GetRectCenter(gg_rct_Region_020))
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_h007_0171, "TRIGSTR_781", gg_snd_fyyachtoetozazvyki, "TRIGSTR_782", bj_TIMETYPE_ADD, 0.00, true)
+SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_h007_0171, 0)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_783", gg_snd_animepeon2, "TRIGSTR_784", bj_TIMETYPE_ADD, 0.00, true)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_h007_0171, "TRIGSTR_785", gg_snd_fyyachtoetozazvyki, "TRIGSTR_786", bj_TIMETYPE_ADD, 0.00, true)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_787", gg_snd_animepeon2, "TRIGSTR_788", bj_TIMETYPE_ADD, 0.00, true)
+IssuePointOrderLocBJ(udg_HERO, "move", GetRectCenter(gg_rct_Region_021))
+RotateCameraAroundLocBJ(-15.00, GetUnitLoc(udg_HERO), Player(0), 10.00)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_h007_0171, "TRIGSTR_789", gg_snd_fyyachtoetozazvyki, "TRIGSTR_790", bj_TIMETYPE_ADD, 0.00, true)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_791", gg_snd_animepeon2, "TRIGSTR_792", bj_TIMETYPE_ADD, 0.00, true)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_h007_0171, "TRIGSTR_795", gg_snd_fyyachtoetozazvyki, "TRIGSTR_796", bj_TIMETYPE_ADD, 0.00, true)
+SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_h007_0171, 0)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_797", gg_snd_animepeon2, "TRIGSTR_798", bj_TIMETYPE_ADD, 0.00, true)
+ConditionalTriggerExecute(gg_trg_MerchEndCinematic1)
+end
+
+function InitTrig_MerchQuestCinematic()
+gg_trg_MerchQuestCinematic = CreateTrigger()
+TriggerAddAction(gg_trg_MerchQuestCinematic, Trig_MerchQuestCinematic_Actions)
+end
+
+function Trig_MerchEndCinematic1_Actions()
+CameraSetupApplyForPlayer(true, gg_cam_ResetCam, Player(0), 1.00)
+CinematicModeBJ(false, GetPlayersAll())
+    CustomCinematicMode(false)
+end
+
+function InitTrig_MerchEndCinematic1()
+gg_trg_MerchEndCinematic1 = CreateTrigger()
+TriggerAddAction(gg_trg_MerchEndCinematic1, Trig_MerchEndCinematic1_Actions)
+end
+
 function Trig_EndBoss_Actions()
 KillDestructable(gg_dest_B007_5312)
+QuestSetCompletedBJ(udg_QDragon, true)
 end
 
 function InitTrig_EndBoss()
@@ -11265,6 +11652,9 @@ InitTrig_StartYettyCinematic()
 InitTrig_SkipYetty()
 InitTrig_InitEggs()
 InitTrig_Task()
+InitTrig_InitMerchantQuest()
+InitTrig_MerchQuestCinematic()
+InitTrig_MerchEndCinematic1()
 InitTrig_EndBoss()
 InitTrig_StartDragonCinematic()
 InitTrig_SkipDragon()
@@ -11285,6 +11675,7 @@ end
 
 function RunInitializationTriggers()
 ConditionalTriggerExecute(gg_trg_InitAnimeArena)
+ConditionalTriggerExecute(gg_trg_InitMerchantQuest)
 ConditionalTriggerExecute(gg_trg_InitGUI)
 end
 
@@ -11329,7 +11720,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, 4608.0, 6336.0)
+DefineStartLocation(0, -448.0, -768.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()

@@ -5,36 +5,72 @@
 ---
 function CreateShop()
     if SHOP then
-        BlzFrameSetVisible(SHOP, true)
+        if not BlzFrameIsVisible(SHOP) then
+            BlzFrameSetVisible(SHOP, true)
+            normal_sound("Sound\\Interface\\ItemReceived")
+            CreateItemsForSell()
+        end
         return
     end
+
+    normal_sound("Sound\\Interface\\ItemReceived")
     SHOP = BlzCreateFrameByType("BACKDROP", "Face", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
     InitItemBDForShop()
     --print(#SHOP_BD,SHOP_BD[1].descriptions)
     local rama = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', SHOP, '', 0)
-    local NextPoint = 0.039 + 0.011
     BlzFrameSetTexture(rama, "Textures\\Black32", 0, true) --HPElement
     BlzFrameSetSize(rama, 0.4, 0.3)
     BlzFrameSetAbsPoint(rama, FRAMEPOINT_CENTER, 0.4, 0.3)
-    local x, y = 0.25, 0.4 - NextPoint
-    local max = #SHOP_BD -- число предметов в БД магазина
-    local k = 1
-    for j = 1, 4 do
-        for i = 1, 7 do
-            if k <= max then
-                CreateItemForShop(x + NextPoint * (i - 1), y - NextPoint * (j - 1), SHOP, SHOP_BD[k])
-                k = k + 1
-            end
-        end
-    end
+    CreateItemsForSell()
     CreateCloseButton(SHOP, rama)
     CurrentGoldInShop(rama)
     CreateToolTipBox(rama)
 end
 
+function ClearShop(originalBD)
+    local newBD = {}
+    for i = 1, #originalBD do
+        if not originalBD[i].isSold then
+            table.insert(newBD, originalBD[i])
+        end
+    end
+    return newBD
+end
+
+function CreateItemsForSell()
+    local NextPoint = 0.039 + 0.011
+    local x, y = 0.25, 0.4 - NextPoint
+    local currentSHOP = ClearShop(SHOP_BD)
+    local max = #currentSHOP
+    local w=7
+    local h=4
+    local limit=h*w
+    if max>limit then
+        max=limit-- число предметов в БД магазина ограничено h на w
+    end
+    local k = 1
+    --print(max)
+    AllItemsInShop = {}
+    for j = 1, h do
+        for i = 1, w do
+            if k <= max then
+                local SelfFrame = CreateItemForShop(x + NextPoint * (i - 1), y - NextPoint * (j - 1), SHOP, currentSHOP[k])
+                table.insert(AllItemsInShop, SelfFrame)
+                k = k + 1
+            end
+        end
+    end
+end
+
 function CreateItemForShop(posX, PosY, parent, item)
+    local data=HERO[0]
     local NextPoint = 0.039
-    local cost = item.cost
+
+    if data.SteamSale then
+        --print("скидка пременена")
+        data.SteamSale=false
+        item.cost=item.cost*data.SteamSale//100
+    end
     local name = item.name
     local descriptions = item.descriptions
     local texture = item.texture
@@ -46,7 +82,7 @@ function CreateItemForShop(posX, PosY, parent, item)
     --BlzFrameSetVisible(SelfFrame, false)
     -- BlzFrameSetVisible(SelfFrame, GetLocalPlayer() == player)
 
-    item.FHcost=ItemAddCostFromShop(buttonIconFrame, cost)
+    item.FHcost, item.FHgold = ItemAddCostFromShop(buttonIconFrame, item.cost)
     BlzFrameSetAllPoints(buttonIconFrame, SelfFrame)
     BlzFrameSetTexture(buttonIconFrame, texture, 0, true)
     BlzFrameSetSize(SelfFrame, NextPoint, NextPoint)
@@ -59,7 +95,8 @@ function CreateItemForShop(posX, PosY, parent, item)
         BlzFrameSetEnable(BlzGetTriggerFrame(), false)
         BlzFrameSetEnable(BlzGetTriggerFrame(), true)
         if not item.isSold then
-            ByItemByName(item)
+            data = HERO[GetPlayerId(GetTriggerPlayer())]
+            ByItemByName(item, data)
         end
     end)
 
@@ -110,10 +147,11 @@ function CurrentGoldInShop(parent)
     BlzFrameSetParent(text, BlzGetFrameByName("ConsoleUIBackdrop", 0))
     BlzFrameSetText(text, 9999)
     BlzFrameSetScale(text, 2)
-    BlzFrameSetPoint(text, FRAMEPOINT_RIGHT, GoldFrame, FRAMEPOINT_RIGHT, 0.02, 0.0)
+    BlzFrameSetPoint(text, FRAMEPOINT_LEFT, GoldFrame, FRAMEPOINT_LEFT, 0.011, 0.0)
     TimerStart(CreateTimer(), 0.1, true, function()
         BlzFrameSetText(text, R2I(data.gold))
     end)
+    table.insert(BugsFH,GoldFrame)
 end
 
 function ItemAddCostFromShop(FHItem, cost)
@@ -130,7 +168,17 @@ function ItemAddCostFromShop(FHItem, cost)
     BlzFrameSetScale(text, 1)
     BlzFrameSetPoint(text, FRAMEPOINT_BOTTOMLEFT, GoldFrame, FRAMEPOINT_BOTTOMLEFT, 0.01, 0.0)
     BlzFrameSetEnable(text, false)
-    return text
+    return text, GoldFrame
+end
+
+function CloseShop()
+    if BlzFrameIsVisible(SHOP) then
+        BlzFrameSetVisible(SHOP, false)
+        normal_sound("Sound\\Interface\\HeroDropItem1")
+        for i = 1, #AllItemsInShop do
+            BlzDestroyFrame(AllItemsInShop[i])
+        end
+    end
 end
 
 function CreateCloseButton(BoxBorder, rama)
@@ -147,7 +195,7 @@ function CreateCloseButton(BoxBorder, rama)
         --print("Закрыть")
         BlzFrameSetEnable(BlzGetTriggerFrame(), false)
         BlzFrameSetEnable(BlzGetTriggerFrame(), true)
-        BlzFrameSetVisible(BoxBorder, false)
+        CloseShop()
     end)
     local TrigMOUSE_ENTER = CreateTrigger()
     BlzTriggerRegisterFrameEvent(TrigMOUSE_ENTER, SelfFrame, FRAMEEVENT_MOUSE_ENTER)
@@ -165,18 +213,42 @@ end
 NextPoint = 0.039
 function CreateGoldInterFace(data)
     local goldIco = "Textures\\GOLDCoin.blp"
-    local GoldFrame = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), '', 0)
-    BlzFrameSetParent(GoldFrame, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    local NextPoint = 0.039
+    --local SelfFrame = BlzCreateFrameByType('GLUEBUTTON', 'FaceButton', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 'ScoreScreenTabButtonTemplate', 0)
+    --local GoldFrame = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', SelfFrame, '', 0)
+
+    --BlzFrameSetParent(GoldFrame, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+
+    --[[
+    BlzFrameSetAllPoints(GoldFrame, SelfFrame)
     BlzFrameSetTexture(GoldFrame, goldIco, 0, true)
     BlzFrameSetSize(GoldFrame, NextPoint / 2, NextPoint / 2)
     BlzFrameSetAbsPoint(GoldFrame, FRAMEPOINT_CENTER, 0.85, 0.02)
-    BlzFrameSetVisible(GoldFrame, GetLocalPlayer() == Player(data.pid))
+    ]]
+    local SelfFrame = BlzCreateFrameByType('GLUEBUTTON', 'FaceButton', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 'ScoreScreenTabButtonTemplate', 0)
+    local buttonIconFrame = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', SelfFrame, '', 0)
+    BlzFrameSetAllPoints(buttonIconFrame, SelfFrame)
+    BlzFrameSetTexture(buttonIconFrame, goldIco, 0, true)
+    BlzFrameSetSize(SelfFrame, NextPoint / 2, NextPoint / 2)
+    BlzFrameSetAbsPoint(SelfFrame, FRAMEPOINT_CENTER, 0.85, 0.02)
+    BlzFrameSetParent(SelfFrame, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    BlzFrameSetParent(buttonIconFrame, BlzGetFrameByName("ConsoleUIBackdrop", 0))
 
-    local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", GoldFrame, "", 0)
+    local ClickTrig = CreateTrigger()
+    BlzTriggerRegisterFrameEvent(ClickTrig, SelfFrame, FRAMEEVENT_CONTROL_CLICK)
+    TriggerAddAction(ClickTrig, function()
+        --print("открыть магазин повторно")
+        BlzFrameSetEnable(BlzGetTriggerFrame(), false)
+        BlzFrameSetEnable(BlzGetTriggerFrame(), true)
+        --BlzFrameSetVisible(SHOP, true)
+        CreateShop()
+    end)
+
+    local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", SelfFrame, "", 0)
     BlzFrameSetParent(text, BlzGetFrameByName("ConsoleUIBackdrop", 0))
     BlzFrameSetText(text, "0")
     BlzFrameSetScale(text, 2)
-    BlzFrameSetPoint(text, FRAMEPOINT_RIGHT, GoldFrame, FRAMEPOINT_RIGHT, 0.02, 0.0)
+    BlzFrameSetPoint(text, FRAMEPOINT_LEFT, SelfFrame, FRAMEPOINT_LEFT, 0.011, 0.0)
     BlzFrameSetVisible(text, GetLocalPlayer() == Player(data.pid))
     BlzFrameSetText(text, data.gold)
     TimerStart(CreateTimer(), 0.1, true, function()

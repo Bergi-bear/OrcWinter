@@ -19,21 +19,21 @@ function CreateQTEFrame()
 end
 
 function CreateJumpArrow(parent)
-    local x=0.02
-    local speed=0.1
+    local x = 0.02
+    local speed = 0.1
     local arrow = BlzCreateFrameByType("BACKDROP", "Face", parent, "", 0)
     BlzFrameSetParent(arrow, BlzGetFrameByName("ConsoleUIBackdrop", 0))
     BlzFrameSetTexture(arrow, "ArrowDown", 0, true)
     BlzFrameSetSize(arrow, 0.05, 0.05)
-    local i=0
-    local duration=5
+    local i = 0
+    local duration = 5
     TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
-        local y=math.sin(i)*x
-        duration=duration-TIMER_PERIOD
-       -- print(y)
-        i=i+speed
-        BlzFrameSetPoint(arrow,FRAMEPOINT_TOP,parent,FRAMEPOINT_TOP,0,y+0.04)
-        if duration<=0 then
+        local y = math.sin(i) * x
+        duration = duration - TIMER_PERIOD
+        -- print(y)
+        i = i + speed
+        BlzFrameSetPoint(arrow, FRAMEPOINT_TOP, parent, FRAMEPOINT_TOP, 0, y + 0.04)
+        if duration <= 0 then
             DestroyTimer(GetExpiredTimer())
         end
     end)
@@ -53,27 +53,28 @@ function CreateEActions()
             --StartEatingApple(data.UnitHero) -- УДАЛИТЬ!!
             --print("нажал Е")
             if QTEReadyToPress then
-                QTEReadyToPress=false
+                QTEReadyToPress = false
                 --print("нажал Е во время QTE")
             end
-            if data.ShowE then-- нажать можно только тогда когда активен Е
-                if data.CurrentQuest=="AllyPeonOnAnime" then
-                    UnitRemoveAbility(data.QuestUnit,FourCC("A604"))
+            if data.ShowE then
+                -- нажать можно только тогда когда активен Е
+                if data.CurrentQuest == "AllyPeonOnAnime" then
+                    UnitRemoveAbility(data.QuestUnit, FourCC("A604"))
                     --print("запускает ролик про помощника пеона")
                     CustomCinematicMode(true)
                     Trig_NudeCinematic_Actions() -- код из гуи
                 elseif data.CurrentQuest == "MagnetIsClosed" then
-                    local r=GetRandomInt(1,5)
-                    if r==1 then
-                        PlayMonoSpeech("","Работает до 23:00")
-                    elseif r==2 then
-                        PlayMonoSpeech("","Я кажись не успел")
-                    elseif r==3 then
-                        PlayMonoSpeech("","Заперто")
-                    elseif r==4 then
-                        PlayMonoSpeech("","Не получается открыть")
-                    elseif r==5 then
-                        PlayMonoSpeech("","Нужно поискать, другое место для покупки")
+                    local r = GetRandomInt(1, 5)
+                    if r == 1 then
+                        PlayMonoSpeech("", "Работает до 23:00")
+                    elseif r == 2 then
+                        PlayMonoSpeech("", "Я кажись не успел")
+                    elseif r == 3 then
+                        PlayMonoSpeech("", "Заперто")
+                    elseif r == 4 then
+                        PlayMonoSpeech("", "Не получается открыть")
+                    elseif r == 5 then
+                        PlayMonoSpeech("", "Нужно поискать, другое место для покупки")
                     end
                 elseif data.CurrentQuest == "Shop" then
                     --UnitRemoveAbility(data.QuestUnit,FourCC("A604"))
@@ -83,6 +84,9 @@ function CreateEActions()
                     TimerStart(CreateTimer(), 1, false, function()
                         EnableTrigger(gg_trg_EventUpE)
                     end)
+                elseif data.CurrentQuest == "KillWyvern" then
+                    UnitRemoveAbility(data.QuestUnit, FourCC("A604"))
+                    Trig_MerchQuestCinematic_Actions()
                 end
             end
         end
@@ -96,5 +100,32 @@ function CreateEActions()
         local pid = GetPlayerId(GetTriggerPlayer())
         local data = HERO[pid]
         data.ReleaseE = false
+    end)
+end
+
+function CreateESCActions()
+    -----------------------------------------------------------------OSKEY_ESC
+    local gg_trg_EventUpESCAPE = CreateTrigger()
+    for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
+        BlzTriggerRegisterPlayerKeyEvent(gg_trg_EventUpESCAPE, Player(i), OSKEY_ESCAPE, 0, true)
+    end
+    TriggerAddAction(gg_trg_EventUpESCAPE, function()
+        local pid = GetPlayerId(GetTriggerPlayer())
+        local data = HERO[pid]
+        if not data.ReleaseESCAPE then
+            data.ReleaseESCAPE = true
+            --print("нажал ESCAPE")
+            CloseShop()
+        end
+    end)
+
+    local TrigDepressESCAPE = CreateTrigger()
+    for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
+        BlzTriggerRegisterPlayerKeyEvent(TrigDepressESCAPE, Player(i), OSKEY_ESCAPE, 0, false)
+    end
+    TriggerAddAction(TrigDepressESCAPE, function()
+        local pid = GetPlayerId(GetTriggerPlayer())
+        local data = HERO[pid]
+        data.ReleaseESCAPE = false
     end)
 end

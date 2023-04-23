@@ -23,7 +23,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
         delay=CollisionRange
     end
 
-
+    local currentDistance=0
     local bullet = AddSpecialEffect(effectmodel, xs, ys)
     BlzSetSpecialEffectYaw(bullet, math.rad(angle))
     local CollisionEnemy = false
@@ -43,10 +43,11 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
     TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
         dist = dist + speed
         delay = delay - speed
+        currentDistance=currentDistance+speed
         local x, y, z = BlzGetLocalSpecialEffectX(bullet), BlzGetLocalSpecialEffectY(bullet), BlzGetLocalSpecialEffectZ(bullet)
         local zGround = GetTerrainZ(MoveX(x, speed * 2, angleCurrent), MoveY(y, speed * 2, angleCurrent))
 
-        if effectmodel=="Firebrand Shot Silver"  then -- самонаводка
+        if effectmodel=="Firebrand Shot Silver"  and currentDistance>=300 then -- самонаводка
 
             if enemy then
                 newAngle=AngleBetweenXY(x,y,GetUnitXY(enemy))/ bj_DEGTORAD

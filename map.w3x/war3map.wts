@@ -1952,7 +1952,7 @@ STRING 762
 
 STRING 763
 {
-Волк
+Пеон
 }
 
 STRING 764
@@ -2037,5 +2037,93 @@ STRING 778
 // Units: h00A (Вход в магнит), Name (Name)
 {
 Вход в магнит
+}
+
+STRING 781
+{
+Повар
+}
+
+STRING 782
+// Speech/Peon/Dragon/fyyachtoetozazvyki.mp3
+{
+А я погляжу ты не из робкого десятка, раз вырубил всю очередь ко мне, чтож у меня для тебя есть работа!
+}
+
+STRING 783
+{
+Пеон
+}
+
+STRING 784
+// Speech/Anime/Peon/animepeon2.mp3
+{
+Опять работать?
+}
+
+STRING 785
+{
+Повар
+}
+
+STRING 786
+// Speech/Peon/Dragon/fyyachtoetozazvyki.mp3
+{
+У меня для тебя квест на убийство 10 волков за 5 золотых
+}
+
+STRING 787
+{
+Пеон
+}
+
+STRING 788
+// Speech/Anime/Peon/animepeon2.mp3
+{
+Неее, мне это не интересно, тут ещё Тралл озадачил, а я один, кто тут шевелюсь, в общем мне некогда!
+}
+
+STRING 789
+{
+Повар
+}
+
+STRING 790
+// Speech/Peon/Dragon/fyyachtoetozazvyki.mp3
+{
+Стой, стой! Я же пошутил, есть работа для настоящего пеона: нужно построить ЛОГОВО...
+}
+
+STRING 791
+{
+Пеон
+}
+
+STRING 792
+// Speech/Anime/Peon/animepeon2.mp3
+{
+Мне пора....
+}
+
+STRING 795
+{
+Повар
+}
+
+STRING 796
+// Speech/Peon/Dragon/fyyachtoetozazvyki.mp3
+{
+Даю 2000 золота за голову виверны с вершины горы!
+}
+
+STRING 797
+{
+Пеон
+}
+
+STRING 798
+// Speech/Anime/Peon/animepeon2.mp3
+{
+Дело будет сделано! (жадные звуки)
 }
 

@@ -22,7 +22,7 @@ function CreatePeonForPlayer(data)
         InitWASD(data.UnitHero)
         --CreatePeonHPBAR(data)
         InitRegistryEvent(data.UnitHero)
-        AddPeonMAXHP(data, 7)
+        AddPeonMAXHP(data, 2)
         AddPeonMAXHP(data, 3)
         IssuePointOrder(data.UnitHero, "smart", GetUnitXY(data.UnitHero))
         --InitInventory(data)
@@ -43,7 +43,8 @@ ShowESystem = {
 }
 function InitRegistryEvent(hero)
     local enterTrig = CreateTrigger()
-    TriggerRegisterUnitInRange(enterTrig, hero, 120, nil)
+    local range=200
+    TriggerRegisterUnitInRange(enterTrig, hero, range, nil)
     TriggerAddAction(enterTrig, function()
         local entering = GetTriggerUnit()
         --print(GetUnitName(entering))
@@ -69,11 +70,13 @@ function InitRegistryEvent(hero)
                     data.CurrentQuest = "Shop"
                 elseif GetUnitTypeId(entering) == FourCC("h00A") then
                     data.CurrentQuest = "MagnetIsClosed"
+                elseif GetUnitTypeId(entering) == FourCC("h007") then
+                    data.CurrentQuest = "KillWyvern" -- орк дающий квест на виверну
                 end
                 data.QuestUnit = entering
                 local eff = AddSpecialEffect("ActionsE", GetUnitXY(entering))
                 TimerStart(CreateTimer(), 0.1, true, function()
-                    if not IsUnitInRange(hero, entering, 140) or GetUnitAbilityLevel(entering, FourCC("A604")) == 0 then
+                    if not IsUnitInRange(hero, entering, range*1.2) or GetUnitAbilityLevel(entering, FourCC("A604")) == 0 then
                         --print("покинул радиус или квест уже завершен")
                         data.CurrentQuest = ""
                         data.QuestUnit = nil
@@ -100,7 +103,20 @@ function InitRegistryEvent(hero)
             if data.ResPointX == x then
 
             else
-                print("Контрольная точка изменена")
+                --print("Контрольная точка изменена")
+                QuestSetCompletedBJ(udg_QCHKPoint, true)
+                local r=GetRandomInt(1,8)
+                if r==1 then
+                    PlayMonoSpeech("Speech\\Peon\\CHKPoint\\1", "Новая зона воскрешения")
+                elseif r==2 then
+                    PlayMonoSpeech("Speech\\Peon\\CHKPoint\\2", "Сюда меня отнесут гробовщики пеоны после смерти")
+                elseif r==3 then
+                    PlayMonoSpeech("Speech\\Peon\\CHKPoint\\3", "Очень странно, почему я воскрешаюсь возле 3х леденцов...")
+                elseif r==4 then
+                    PlayMonoSpeech("Speech\\Peon\\CHKPoint\\4", "Контрольная точка")
+                elseif r==5 then
+                    PlayMonoSpeech("Speech\\Peon\\CHKPoint\\5", "Местное городское кладбище или камень воскрешения?")
+                end
             end
             data.ResPointX, data.ResPointY = x, y
 

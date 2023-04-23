@@ -32,6 +32,7 @@ do
 
             --PlayList()
             CreateEActions()
+            CreateESCActions()
             --CreateTabActions()
             --wGeometry = wGeometryInit()
             --ShapeInit()

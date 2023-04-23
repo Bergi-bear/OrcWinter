@@ -22,7 +22,7 @@ function InitItemBDForShop()
             lvl          = 1
         },
         [3] = {
-            name         = "Имитация",
+            name         = "Имитация красной икры",
             descriptions = "Бутерброды с икрой из желатина, восстанавливают максимум отсутствующего здоровья",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNScrollOfHaste",
             cost         = 50,
@@ -118,9 +118,10 @@ function InitItemBDForShop()
         },
         [16] = {
             name         = "Горошек",
-            descriptions = "Какой салат без него?",
+            descriptions = "Срок изготовления - прошлый год, увеличивается скорость передвижения на DS",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNHealthStone.blp",
             cost         = 200,
+            DS           = {60},
             lvl          = 1,
         },
         [17] = {
@@ -182,10 +183,11 @@ function InitItemBDForShop()
         },
         [25] = {
             name         = "Время",
-            descriptions = "В этой игре можно купить даже время, отматывает игровой таймер на 5 минут назад",
+            descriptions = "В этой игре можно купить даже время, отматывает игровой таймер на DS минут назад, не влияет на часы или секунды",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNOrbofSlowness.blp",
-            cost         = 500,
+            cost         = 50,
             lvl          = 1,
+            DS           = {5,5,5,5,5}
         },
         [26] = {
             name         = "Очки",
@@ -206,6 +208,13 @@ function InitItemBDForShop()
             descriptions = "Меняет дурацкую шапочки, на стильную повязку шиноби",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNEntrapmentWard.blp",
             cost         = 1000,
+            lvl          = 1,
+        },
+        [29] = {
+            name         = "Звезда",
+            descriptions = "Идеальное украшение для верхушки ёлки, но по очень высокой цене",
+            texture      = "ReplaceableTextures\\CommandButtons\\BTNStarWand.blp",
+            cost         = 8000,
             lvl          = 1,
         },
 
