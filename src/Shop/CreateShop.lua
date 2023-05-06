@@ -50,6 +50,12 @@ function CreateItemsForSell()
     end
     local k = 1
     --print(max)
+    if AllItemsInShop then
+        for i = 1, #AllItemsInShop do
+            --print("уничтожение фреймов",i)
+            BlzDestroyFrame(AllItemsInShop[i])
+        end
+    end
     AllItemsInShop = {}
     for j = 1, h do
         for i = 1, w do
@@ -152,6 +158,7 @@ function CurrentGoldInShop(parent)
         BlzFrameSetText(text, R2I(data.gold))
     end)
     table.insert(BugsFH,GoldFrame)
+    table.insert(BugsFH,text)
 end
 
 function ItemAddCostFromShop(FHItem, cost)
@@ -168,6 +175,9 @@ function ItemAddCostFromShop(FHItem, cost)
     BlzFrameSetScale(text, 1)
     BlzFrameSetPoint(text, FRAMEPOINT_BOTTOMLEFT, GoldFrame, FRAMEPOINT_BOTTOMLEFT, 0.01, 0.0)
     BlzFrameSetEnable(text, false)
+
+    table.insert(BugsFH,GoldFrame)
+    table.insert(BugsFH,text)
     return text, GoldFrame
 end
 
@@ -175,9 +185,6 @@ function CloseShop()
     if BlzFrameIsVisible(SHOP) then
         BlzFrameSetVisible(SHOP, false)
         normal_sound("Sound\\Interface\\HeroDropItem1")
-        for i = 1, #AllItemsInShop do
-            BlzDestroyFrame(AllItemsInShop[i])
-        end
     end
 end
 
@@ -211,20 +218,10 @@ function CreateCloseButton(BoxBorder, rama)
     end)
 end
 NextPoint = 0.039
+ShopTipFH=nil
 function CreateGoldInterFace(data)
     local goldIco = "Textures\\GOLDCoin.blp"
     local NextPoint = 0.039
-    --local SelfFrame = BlzCreateFrameByType('GLUEBUTTON', 'FaceButton', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 'ScoreScreenTabButtonTemplate', 0)
-    --local GoldFrame = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', SelfFrame, '', 0)
-
-    --BlzFrameSetParent(GoldFrame, BlzGetFrameByName("ConsoleUIBackdrop", 0))
-
-    --[[
-    BlzFrameSetAllPoints(GoldFrame, SelfFrame)
-    BlzFrameSetTexture(GoldFrame, goldIco, 0, true)
-    BlzFrameSetSize(GoldFrame, NextPoint / 2, NextPoint / 2)
-    BlzFrameSetAbsPoint(GoldFrame, FRAMEPOINT_CENTER, 0.85, 0.02)
-    ]]
     local SelfFrame = BlzCreateFrameByType('GLUEBUTTON', 'FaceButton', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 'ScoreScreenTabButtonTemplate', 0)
     local buttonIconFrame = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', SelfFrame, '', 0)
     BlzFrameSetAllPoints(buttonIconFrame, SelfFrame)
@@ -254,4 +251,6 @@ function CreateGoldInterFace(data)
     TimerStart(CreateTimer(), 0.1, true, function()
         BlzFrameSetText(text, R2I(data.gold))
     end)
+    ShopTipFH=CreateJumpArrow(SelfFrame)
+    BlzFrameSetVisible(ShopTipFH,false)
 end

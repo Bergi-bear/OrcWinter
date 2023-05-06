@@ -63,7 +63,7 @@ function InitHEROTable()
             DamageThrow            = 150, -- урон от кирки
             InvulPreDeathCurrentCD = 1, --кулдаун бессмертия от трала
             LifeFHTable            = {},
-            gold                   = 50,
+            gold                   = 5000,
             ShowGold               = true, -- показ накопления золота
             ShowHeal               = true,
             ShowGoldAmount         = 0,
@@ -96,6 +96,11 @@ function InitHEROTable()
             --- От снежной карты
             AttackIsReady=true, -- флаг готовности атаки
             MHoldSec=0, -- по факту число выстрелов
+            BaseDamage             = 200, -- урон снежка
+            AttackInterval         = 0.35, -- скорость атаки
+            MoveSpeed              = 5, -- скорость передвижения
+            ShieldCount            = 0, -- количество щитов
+            UnitScale              = 1, --размер юнита
 
 
         }

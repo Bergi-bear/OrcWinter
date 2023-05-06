@@ -34,9 +34,11 @@ function CreateJumpArrow(parent)
         i = i + speed
         BlzFrameSetPoint(arrow, FRAMEPOINT_TOP, parent, FRAMEPOINT_TOP, 0, y + 0.04)
         if duration <= 0 then
-            DestroyTimer(GetExpiredTimer())
+           -- DestroyTimer(GetExpiredTimer())-- не забыть вернуть
+            --BlzDestroyFrame(arrow)
         end
     end)
+    return arrow
 end
 
 function CreateEActions()
@@ -86,7 +88,13 @@ function CreateEActions()
                     end)
                 elseif data.CurrentQuest == "KillWyvern" then
                     UnitRemoveAbility(data.QuestUnit, FourCC("A604"))
-                    Trig_MerchQuestCinematic_Actions()
+                    if not udg_WisDead then
+                        Trig_MerchQuestCinematic_Actions()
+                    else
+                        print("За работу и оплата")
+                        normal_sound("Speech\\CookQuest\\cook5")
+                        UnitAddGold(data.UnitHero,2000)
+                    end
                 end
             end
         end
@@ -115,7 +123,8 @@ function CreateESCActions()
         if not data.ReleaseESCAPE then
             data.ReleaseESCAPE = true
             --print("нажал ESCAPE")
-            CloseShop()
+            CloseShop() --TODO фаталит, если закрывать магазин через ESCAPE, вроде починил
+
         end
     end)
 

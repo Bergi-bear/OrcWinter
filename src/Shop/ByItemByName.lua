@@ -8,26 +8,34 @@ function UnitGetItemByName(item, data)
         QuestSetCompletedBJ(udg_QWolf, true)
     elseif item.name == "Носочки" then
         if not data.BlockDamageSocks then
-            data.BlockDamageSocks=10
+            data.BlockDamageSocks = 10
         else
-            data.BlockDamageSocks=data.BlockDamageSocks+10
+            data.BlockDamageSocks = data.BlockDamageSocks + 10
         end
     elseif item.name == "Имитация красной икры" then
-        HeroCandyHeal(data,99)
+        HeroCandyHeal(data, 99)
     elseif item.name == "Набор для оливье" then
-        data.haveOlivier=true
+        data.haveOlivier = true
         if data.haveMayonnaise then
             QuestSetCompletedBJ(udg_QYetty, true)
         end
     elseif item.name == "Майонез" then
-        data.haveMayonnaise=true
+        data.haveMayonnaise = true
+        data.UnitScale = data.UnitScale + 0.1
+        SetUnitScale(data.UnitHero, data.UnitScale, data.UnitScale1)
         if data.haveOlivier then
             QuestSetCompletedBJ(udg_QYetty, true)
         end
     elseif item.name == "Розовый майонез" then
     elseif item.name == "Подштанники" then
+        HeroCandyHeal(data,10)
+        AddPeonMAXHP(data, 1)
     elseif item.name == "Колбаса" then
+        HeroCandyHeal(data,10)
+        AddPeonMAXHP(data, 1)
     elseif item.name == "Фигурка морозко" then
+        data.MorozkoCD = item.DS[item.lvl]
+        data.MorozkoCDCurrent = 0
     elseif item.name == "Яйца" then
     elseif item.name == "Уголь" then
     elseif item.name == "Звезда" then
@@ -37,20 +45,21 @@ function UnitGetItemByName(item, data)
     elseif item.name == "Вино" then
         QuestSetCompletedBJ(udg_QWine, true)
     elseif item.name == "Горошек" then
-        UnitAddAbility(data.UnitHero,FourCC("AIms"))
+        UnitAddAbility(data.UnitHero, FourCC("AIms"))
     elseif item.name == "Подарочная упаковка" then
     elseif item.name == "Фейерве́рк" then
     elseif item.name == "Соленья" then
     elseif item.name == "Мандарины" then
     elseif item.name == "Бананы" then
     elseif item.name == "Скидочный купон" then
-        data.SteamSale=item.DS[item.lvl]
-        print("Скидка",item.DS[item.lvl],item.lvl)
+        data.SteamSale = item.DS[item.lvl]
+        print("Скидка", item.DS[item.lvl], item.lvl)
     elseif item.name == "Открытка с дурацкой музыкой" then
 
     elseif item.name == "Приглашение" then
     elseif item.name == "Время" then
-        AddTimeToTimer(GTimer,0,-5 ,0)
+        AddTimeToTimer(GTimer, 0, -5, 0)
+        CreateFlyFrame(GTimer, "Минус 5 минут")
     elseif item.name == "Очки" then
     elseif item.name == "Утяжелите Рока Ли" then
     elseif item.name == "Повязка Хокаге" then

@@ -15,6 +15,7 @@ function InitMenu()
     --CreateVictoryElderBorder() -- тестовый показ
     --CreateShop() --для теста опять таки
     CreateGoldInterFace(HERO[0])
+    CreateStatSidePanel(HERO[0])
     --CreateCustomPortrait()
     --CreateMenu()
     --CreateQTEFrame() -- Тест QTE

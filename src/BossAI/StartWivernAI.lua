@@ -117,6 +117,7 @@ function StartWivernAI(xs, ys)
             DestroyTimer(GetExpiredTimer())
             phase = 0
             --print("Даём нарграду, победа")
+            QuestSetCompletedBJ(udg_QWiverna, true)
             CreateVictoryElderBorder()
             ClearMapMusicBJ()
             PlayMusicBJ("Salve Springs")

@@ -19,6 +19,7 @@ do
 
             perebor = CreateGroup()
             InitHEROTable()
+            CHKVictory()
             InitCamControl()
 
             --InitMenu()

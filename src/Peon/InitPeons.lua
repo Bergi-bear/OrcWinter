@@ -24,6 +24,7 @@ function CreatePeonForPlayer(data)
         InitRegistryEvent(data.UnitHero)
         AddPeonMAXHP(data, 2)
         AddPeonMAXHP(data, 3)
+        AddSpecialEffectTarget("HeroGlow",data.UnitHero,"origin")
         IssuePointOrder(data.UnitHero, "smart", GetUnitXY(data.UnitHero))
         --InitInventory(data)
 
@@ -72,6 +73,8 @@ function InitRegistryEvent(hero)
                     data.CurrentQuest = "MagnetIsClosed"
                 elseif GetUnitTypeId(entering) == FourCC("h007") then
                     data.CurrentQuest = "KillWyvern" -- орк дающий квест на виверну
+                elseif GetUnitTypeId(entering) == FourCC("Oths") then
+                    data.CurrentQuest = "EndGameCinematic" -- Тралл конец игры
                 end
                 data.QuestUnit = entering
                 local eff = AddSpecialEffect("ActionsE", GetUnitXY(entering))
@@ -217,6 +220,7 @@ end
 function BlinkUnit(hero, timed)
     local period = 0.05
     local flag = false
+    local data = GetUnitData(hero)
     SetUnitScale(hero, 0, 0, 0)
     TimerStart(CreateTimer(), period, true, function()
         timed = timed - period
@@ -226,15 +230,15 @@ function BlinkUnit(hero, timed)
                 SetUnitScale(hero, 0, 0, 0)
             else
                 flag = true
-                SetUnitScale(hero, 1, 1, 1)
+                SetUnitScale(hero, data.UnitScale, data.UnitScale, 1)
             end
         else
             DestroyTimer(GetExpiredTimer())
-            SetUnitScale(hero, 1, 1, 1)
+            SetUnitScale(hero, data.UnitScale, data.UnitScale, 1)
         end
         if timed <= 0 then
             DestroyTimer(GetExpiredTimer())
-            SetUnitScale(hero, 1, 1, 1)
+            SetUnitScale(hero, data.UnitScale, data.UnitScale, 1)
         end
     end)
 end

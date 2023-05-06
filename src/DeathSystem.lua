@@ -23,7 +23,7 @@ function InitDeathEvent()
         if GetPlayerController(GetOwningPlayer(killer)) == MAP_CONTROL_USER then
             local data = HERO[GetPlayerId(GetOwningPlayer(killer))]
             killer = data.UnitHero
-            local amount=BlzGetUnitMaxHP(u)//100
+            local amount=GetRandomInt(1,3)+BlzGetUnitMaxHP(u)//100
             RewardGoldForKill(data,amount)
 
         end

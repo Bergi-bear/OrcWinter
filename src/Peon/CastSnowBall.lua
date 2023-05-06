@@ -19,13 +19,22 @@ function CastSnowBall(data, directionAngle)
             --CreateBeemLighting(hero)
             TimerStart(CreateTimer(), 0.15, false, function()
                 -- задержка замаха
-                CreateAndForceBullet(hero, directionAngle, 40, effModel)
+                CreateAndForceBullet(hero, directionAngle, 40, effModel,nil,nil,data.BaseDamage)
+                if data.MorozkoCD then
+                    if data.MorozkoCDCurrent<=0 then
+                        local x,y=MoveXY(GetUnitX(hero),GetUnitY(hero),20,directionAngle-90)
+                        CreateAndForceBullet(hero, directionAngle, 40, effModel,x,y,data.BaseDamage)
+                        data.MorozkoCDCurrent=data.MorozkoCD
+                        TimerStart(CreateTimer(), data.MorozkoCD, false, function()
+                            data.MorozkoCDCurrent=0
+                        end)
+                    end
+                end
                 data.MHoldSec = data.MHoldSec + 1
                 data.UnitInAttack = false
             end)
-            TimerStart(CreateTimer(), 0.35, false, function()
+            TimerStart(CreateTimer(), data.AttackInterval, false, function() --0.35
                 data.AttackIsReady = true
-
                 if UnitAlive(hero) and not data.IsMoving and not LockAnimAnimation(data) then
                     ResetUnitAnimation(hero)
                 end

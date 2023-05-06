@@ -1761,13 +1761,13 @@ STRING 726
 
 STRING 727
 {
-Купить спиртные напитки
+Cпиртные напитки
 }
 
 STRING 728
 {
 Тралл сказал, значит надо добыть!
-|cff808080Пророчество: Магнит работает до полуночи, но нужны деньги|r
+|cff808080Пророчество: Магнит работает до 23:00, но это не факт, да и нужны деньги|r
 }
 
 STRING 729
@@ -2002,7 +2002,7 @@ STRING 771
 STRING 772
 // Speech/Wolf/Peon/PenFromWolf3.mp3
 {
-Мне всё равно, как ты себя называешь,я пришел сюда за гирляндой, и я уйду от сюда, с ней и ВЕРХОМ на тебе, ездовой пёсик
+Мне всё равно, как ты себя называешь, я пришел сюда за гирляндой, и я уйду от сюда, с ней и ВЕРХОМ на тебе, ездовой пёсик
 }
 
 STRING 773
@@ -2013,7 +2013,7 @@ STRING 773
 STRING 774
 // Speech/Wolf/Wolf/WolfCinematic2.mp3
 {
-Я буду драться с тобой, до последнего вздоха если волк дышит - он жим, если не дышит - мёртв
+Я буду драться с тобой, до последнего вздоха. Если волк дышит - он жим, если не дышит - мёртв
 }
 
 STRING 775
@@ -2045,9 +2045,9 @@ STRING 781
 }
 
 STRING 782
-// Speech/Peon/Dragon/fyyachtoetozazvyki.mp3
+// Speech/CookQuest/cook1.mp3
 {
-А я погляжу ты не из робкого десятка, раз вырубил всю очередь ко мне, чтож у меня для тебя есть работа!
+А я погляжу ты не из робкого десятка, раз вырубил всю очередь ко мне, что ж, у меня для тебя есть работа!
 }
 
 STRING 783
@@ -2056,7 +2056,7 @@ STRING 783
 }
 
 STRING 784
-// Speech/Anime/Peon/animepeon2.mp3
+// Speech/CookQuest/CookQuestPeon1.mp3
 {
 Опять работать?
 }
@@ -2067,7 +2067,7 @@ STRING 785
 }
 
 STRING 786
-// Speech/Peon/Dragon/fyyachtoetozazvyki.mp3
+// Speech/CookQuest/cook2.mp3
 {
 У меня для тебя квест на убийство 10 волков за 5 золотых
 }
@@ -2078,7 +2078,7 @@ STRING 787
 }
 
 STRING 788
-// Speech/Anime/Peon/animepeon2.mp3
+// Speech/CookQuest/CookQuestPeon4.mp3
 {
 Неее, мне это не интересно, тут ещё Тралл озадачил, а я один, кто тут шевелюсь, в общем мне некогда!
 }
@@ -2089,7 +2089,7 @@ STRING 789
 }
 
 STRING 790
-// Speech/Peon/Dragon/fyyachtoetozazvyki.mp3
+// Speech/CookQuest/cook3.mp3
 {
 Стой, стой! Я же пошутил, есть работа для настоящего пеона: нужно построить ЛОГОВО...
 }
@@ -2100,7 +2100,7 @@ STRING 791
 }
 
 STRING 792
-// Speech/Anime/Peon/animepeon2.mp3
+// Speech/CookQuest/CookQuestPeon2.mp3
 {
 Мне пора....
 }
@@ -2111,7 +2111,7 @@ STRING 795
 }
 
 STRING 796
-// Speech/Peon/Dragon/fyyachtoetozazvyki.mp3
+// Speech/CookQuest/cook4.mp3
 {
 Даю 2000 золота за голову виверны с вершины горы!
 }
@@ -2122,8 +2122,18 @@ STRING 797
 }
 
 STRING 798
-// Speech/Anime/Peon/animepeon2.mp3
+// Speech/CookQuest/CookQuestPeon3.mp3
 {
 Дело будет сделано! (жадные звуки)
+}
+
+STRING 799
+{
+Мать драконов
+}
+
+STRING 800
+{
+|cff808080Пророчество: Однажды, герой пеон победит, ледяную виверну, и получит много денег от Повара|r
 }
 

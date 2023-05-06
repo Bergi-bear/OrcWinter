@@ -122,6 +122,7 @@ function InitWASD(hero)
     local distance = DistanceBetweenXY(GetUnitX(hero), GetUnitY(hero), GetPlayerMouseX[data.pid], GetPlayerMouseY[data.pid])
     local cutDistance = distance
     local speed = GetUnitMoveSpeed(hero) / 38
+
     local curSpeed=0
     TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
         -- основной таймер для обработки всего
@@ -335,6 +336,7 @@ function InitWASD(hero)
                     data.DirectionMove = angle
 
                     speed = GetUnitMoveSpeed(hero) / 38 -- примерно 5 стартовая
+                    data.MoveSpeed=speed
                     curSpeed = math.lerp(curSpeed, speed, TIMER_PERIOD64 * 8) --плавное ускорение
                     --print(curSpeed)
                     if data.UnitInAttack then
@@ -736,7 +738,7 @@ function CreateWASDActions()
                         -- print("проверка проходимости конечной точки")
                         --DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt", nx, ny))
                         if not Chk2Way(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), nx, ny) then
-                            print("ошибка, такой функции нет")
+                            --print("ошибка, такой функции нет")
                             Blink2Point(data.UnitHero, nx, ny)
                         else
                             --print("прыжок вниз?")

@@ -50,8 +50,8 @@ function StartYettyAI(xs, ys)
     local FW = CreateFogModifierRectBJ(false, Player(0), FOG_OF_WAR_VISIBLE, GlobalRect)
     FogModifierStart(FW)
 
-    local phase = 1 --стартовая фаза
-    local sec = 3
+    local phase = 0 --стартовая фаза
+    local sec = 5
     local PhaseOn = true
     local OnAttack = true
     TimerStart(CreateTimer(), 1, true, function()
@@ -66,8 +66,8 @@ function StartYettyAI(xs, ys)
             phase = 0
             --print("Даём нарграду, победа")
             CreateVictoryElderBorder()
-            PlayMonoSpeech("Speech\\Peon\\nyizachemyaegoybil", "Ну и зачем я его убил")
-
+            PlayMonoSpeech("Speech\\Peon\\nyizachemyaegoybil", "Ну и зачем я его убил...")
+            QuestSetCompletedBJ(udg_QYetty, true)
             CreateUnit(Player(0), FourCC("h003"), GetUnitX(boss), GetUnitY(boss), 0)
             ClearMapMusicBJ()
             PlayMusicBJ("Endless Snowbanks")

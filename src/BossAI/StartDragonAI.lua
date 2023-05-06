@@ -19,7 +19,7 @@ end
 
 function InitTrig_EnterInRectBDragon()
 
-   -- print("Инициализация босса дракона")
+    -- print("Инициализация босса дракона")
     local gg_trg_EnterInRect = CreateTrigger()
     TriggerRegisterEnterRectSimple(gg_trg_EnterInRect, gg_rct_InitStartDragon)
     TriggerAddAction(gg_trg_EnterInRect, function()
@@ -27,7 +27,7 @@ function InitTrig_EnterInRectBDragon()
             local boss = FindUnitOfType(FourCC('n001'))
             --StartDragonAI(GetUnitXY(boss))
             CustomCinematicMode(true)
-            local s=normal_sound("Hlop",GetUnitXY(boss))
+            local s = normal_sound("Hlop", GetUnitXY(boss))
             TimerStart(CreateTimer(), 8, false, function()
                 SetSoundVolume(s, 0)
             end)
@@ -35,8 +35,8 @@ function InitTrig_EnterInRectBDragon()
         end
     end)
 end
-dragonFrazeCount=1
-tFraze={
+dragonFrazeCount = 1
+tFraze = {
     "",
     "Зачем же вы пришли сюда??",
     "Да не брал я ваши подарки, это мне бабушка передала",
@@ -74,7 +74,7 @@ function StartDragonAI(xs, ys)
     local OnAttack = true
     TimerStart(CreateTimer(), 1, true, function()
         --каждую секунду
-        GBoss=boss
+        GBoss = boss
         local bx, by = GetUnitXY(boss)
 
         if not UnitAlive(boss) then
@@ -83,7 +83,9 @@ function StartDragonAI(xs, ys)
             DestroyTimer(GetExpiredTimer())
             phase = 0
             --print("Даём нарграду, победа")
-            PlayMonoSpeech("Speech\\Peon\\Dragon\\vpeshereuavidelportal", "В пещере я видел портал, интересно, куда он ведёт?")
+            TimerStart(CreateTimer(), 3, false, function()
+                PlayMonoSpeech("Speech\\Peon\\Dragon\\vpeshereuavidelportal", "В пещере я видел портал, интересно, куда он ведёт?")
+            end)
             CreateVictoryElderBorder()
             ClearMapMusicBJ()
             PlayMusicBJ("Endless Snowbanks")
@@ -145,14 +147,14 @@ function StartDragonAI(xs, ys)
             -- если идёт бой
             sec = sec + 1
 
-            local max=#tFraze[dragonFrazeCount]//8
-            if dragonFrazeCount>=#tFraze then
+            local max = #tFraze[dragonFrazeCount] // 10
+            if dragonFrazeCount >= #tFraze then
                 --print("последняя фраза")
-                max=5
+                max = 5
             end
 
-            if max<5 then
-                max=5
+            if max < 5 then
+                max = 5
             end
             --print(max)
             if sec >= max then
@@ -161,36 +163,40 @@ function StartDragonAI(xs, ys)
                 PhaseOn = true
                 --print("phase " .. phase)
                 --print(#tFraze,dragonFrazeCount)
-                if dragonFrazeCount+1<=#tFraze then
-                    --print(tFraze[dragonFrazeCount+1])
+                if dragonFrazeCount + 1 <= #tFraze then
+                    --print(tFraze[dragonFrazeCount+1], "сама фраза",dragonFrazeCount+1)
                     --normal_sound("Speech\\Dragon\\"..dragonFrazeCount+1,GetUnitXY(boss))
-                    if dragonFrazeCount==3 then
+                    if dragonFrazeCount == 1 then
+                        --print("фраза с задержкой?", dragonFrazeCount)
+                        PlayMonoSpeech("Speech\\Peon\\Dragon\\tiykral", "Ты украл наши подарки!, и делал что-то непристойное рядом с ними")
                         TimerStart(CreateTimer(), 5, false, function()
-                            PlayBossSpeech("Speech\\Dragon\\"..dragonFrazeCount+1,tFraze[dragonFrazeCount+1])
+                            PlayBossSpeech("Speech\\Dragon\\" .. dragonFrazeCount+1, tFraze[dragonFrazeCount+1])
                         end)
                     else
-                        PlayBossSpeech("Speech\\Dragon\\"..dragonFrazeCount+1,tFraze[dragonFrazeCount+1])
+                        --print("нормальная фраза",dragonFrazeCount)
+                        PlayBossSpeech("Speech\\Dragon\\" .. dragonFrazeCount + 1, tFraze[dragonFrazeCount + 1])
                     end
-                    dragonFrazeCount=dragonFrazeCount+1
-                    TimerStart(CreateTimer(), GBossSoundDuration+2, false, function()
-                        if dragonFrazeCount==2 then
-                            PlayMonoSpeech("Speech\\Peon\\Dragon\\tiykral", "Ты украл наши подарки!, и делал что-то непристойное рядом с ними")
-                        elseif dragonFrazeCount==5 then
+                    dragonFrazeCount = dragonFrazeCount + 1
+                    TimerStart(CreateTimer(), 7, false, function()
+                        --print("фраза пеона",dragonFrazeCount,GBossSoundDuration+3)
+                        if dragonFrazeCount == 3 then
+                            --PlayMonoSpeech("Speech\\Peon\\Dragon\\tiykral", "Ты украл наши подарки!, и делал что-то непристойное рядом с ними")
+                        elseif dragonFrazeCount == 5 then
                             PlayMonoSpeech("Speech\\Peon\\Dragon\\tochemtizanimalsa", "То, чем ты занимался, было отвратительно")
-                        elseif dragonFrazeCount==6 then
+                        elseif dragonFrazeCount == 6 then
                             PlayMonoSpeech("Speech\\Peon\\Dragon\\ksozhaleniy", "К сожалению, я всё видел")
-                        elseif dragonFrazeCount==9 then
+                        elseif dragonFrazeCount == 9 then
                             PlayMonoSpeech("Speech\\Peon\\Dragon\\yztebetydasnezhkov", "Я тебе туда сейчас снежков натромбую")
-                        elseif dragonFrazeCount==11 then
+                        elseif dragonFrazeCount == 11 then
                             PlayMonoSpeech("Speech\\Peon\\Dragon\\nesmeytrogat", "Не смей трогать наши подарки!")
                         end
 
                     end)
                 else
                     --print("этому супер удару научила меня моя бабушка")
-                    local r=GetRandomInt(1,5)
-                    if r==1 then
-                        PlayBossSpeech("Speech\\Dragon\\Super","Этому супер удару научила меня моя бабушка")
+                    local r = GetRandomInt(1, 5)
+                    if r == 1 then
+                        PlayBossSpeech("Speech\\Dragon\\Super", "Этому супер удару научила меня моя бабушка")
                     end
                     --print("Зачем, зачем ты каждый раз возвращаешься?")
                 end
@@ -227,12 +233,12 @@ function StartDragonAI(xs, ys)
             if phase == 4 and PhaseOn then
                 PhaseOn = false
                 --print("фаза", phase)
-                DragonTripleShot(boss,hero)
+                DragonTripleShot(boss, hero)
 
             end
             if phase == 5 and PhaseOn then
                 PhaseOn = false
-                print("фаза", phase)
+                --print("фаза", phase)
 
             end
             if phase == 2 and PhaseOn then
@@ -255,6 +261,7 @@ function StartDragonAI(xs, ys)
                 --print("Лечим босса, и бой возобновляется")
                 ClearMapMusicBJ()
                 PlayMusicBJ("A Wizard's Worst Nightmare")
+                SetUnitPositionSmooth(boss, xs, ys)
                 SetMusicVolumeBJ(100)
                 BlzFrameSetVisible(into, true)
                 HealUnit(boss, 99999)
@@ -348,7 +355,7 @@ function IceImpale(boss, angle, notMove)
     local step = 50
     local max = 26
     local range = 80
-    local rangeAuto=100 --радиус поворота шипа на героя
+    local rangeAuto = 100 --радиус поворота шипа на героя
     if notMove then
         step = 180
         max = 6
@@ -363,13 +370,13 @@ function IceImpale(boss, angle, notMove)
                 angle = AngleBetweenXY(x, y, GetUnitXY(hero)) / bj_DEGTORAD
             end
             x, y = MoveXY(x, y, step, angle)
-            local _,enemy=UnitDamageArea(boss, 10, x, y, range)
+            local _, enemy = UnitDamageArea(boss, 10, x, y, range)
             CreateSpikeFromDeep(x, y, notMove)
             if k > max or enemy then
                 CreateDestructableZ(FourCC("B006"), x, y, 900, GetRandomInt(0, 360), 2.5, 1)
                 DestroyTimer(GetExpiredTimer())
                 if not notMove then
-                   -- IssuePointOrder(boss, "move", GetUnitXY(hero))
+                    -- IssuePointOrder(boss, "move", GetUnitXY(hero))
                 end
             end
         end)
@@ -377,33 +384,33 @@ function IceImpale(boss, angle, notMove)
     end)
 end
 
-function DragonTripleShot(boss,hero)
-    local angle=AngleBetweenUnits(boss,hero)
-    SetUnitFacing(boss,angle)
-    local max=3
-    BlzPauseUnitEx(boss,true)
-    local effModel="FrostWyrmMissileNoOmni"
+function DragonTripleShot(boss, hero)
+    local angle = AngleBetweenUnits(boss, hero)
+    SetUnitFacing(boss, angle)
+    local max = 3
+    BlzPauseUnitEx(boss, true)
+    local effModel = "FrostWyrmMissileNoOmni"
     TimerStart(CreateTimer(), 0.5, true, function()
-        max=max-1
-        SetUnitTimeScale(boss,4)
-        SetUnitAnimation(boss,"attack")
-        CreateAndForceBullet(boss,GetUnitFacing(boss)-30,20,effModel)
-        CreateAndForceBullet(boss,GetUnitFacing(boss),20,effModel)
-        CreateAndForceBullet(boss,GetUnitFacing(boss)+30,20,effModel)
+        max = max - 1
+        SetUnitTimeScale(boss, 4)
+        SetUnitAnimation(boss, "attack")
+        CreateAndForceBullet(boss, GetUnitFacing(boss) - 30, 20, effModel)
+        CreateAndForceBullet(boss, GetUnitFacing(boss), 20, effModel)
+        CreateAndForceBullet(boss, GetUnitFacing(boss) + 30, 20, effModel)
 
         if max <= 0 then
-            SetUnitTimeScale(boss,1)
+            SetUnitTimeScale(boss, 1)
             DestroyTimer(GetExpiredTimer())
-            angle=AngleBetweenUnits(boss,hero)
-            SetUnitFacing(boss,angle)
+            angle = AngleBetweenUnits(boss, hero)
+            SetUnitFacing(boss, angle)
 
             TimerStart(CreateTimer(), 0.3, false, function()
-                CreateAndForceBullet(boss,GetUnitFacing(boss)-30,15,effModel)
-                CreateAndForceBullet(boss,GetUnitFacing(boss)-15,15,effModel)
-                CreateAndForceBullet(boss,GetUnitFacing(boss),15,effModel)
-                CreateAndForceBullet(boss,GetUnitFacing(boss)+30,15,effModel)
-                CreateAndForceBullet(boss,GetUnitFacing(boss)+15,15,effModel)
-                BlzPauseUnitEx(boss,false)
+                CreateAndForceBullet(boss, GetUnitFacing(boss) - 30, 15, effModel)
+                CreateAndForceBullet(boss, GetUnitFacing(boss) - 15, 15, effModel)
+                CreateAndForceBullet(boss, GetUnitFacing(boss), 15, effModel)
+                CreateAndForceBullet(boss, GetUnitFacing(boss) + 30, 15, effModel)
+                CreateAndForceBullet(boss, GetUnitFacing(boss) + 15, 15, effModel)
+                BlzPauseUnitEx(boss, false)
                 --IceImpale(boss, AngleBetweenUnits(boss,hero), true)
             end)
         end
@@ -412,10 +419,10 @@ end
 
 function CreateSpikeFromDeep(x, y, notMove)
     --print(GetTerrainZ(x, y))
-    local size = GetRandomReal(0.8,1.1)
+    local size = GetRandomReal(0.8, 1.1)
     local id = FourCC('B001')
     if notMove then
-        size = GetRandomReal(2.5,3.1)
+        size = GetRandomReal(2.5, 3.1)
         id = FourCC("B006")
     end
     if not IsTerrainPathable(x, y, PATHING_TYPE_WALKABILITY) then

@@ -53,7 +53,7 @@ function InitItemBDForShop()
         },
         [7] = {
             name         = "Подштанники",
-            descriptions = "Прекрасно защитят ваш зад от мороза, даёт + DS к максимальному здоровью",
+            descriptions = "Прекрасно защитят ваш зад от мороза, даёт + DS к максимальному здоровью и защитят от мороза",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNLeatherUpgradeOne",
             cost         = 1000,
             lvl          = 1,
@@ -69,10 +69,11 @@ function InitItemBDForShop()
         },
         [9] = {
             name         = "Фигурка морозко",
-            descriptions = "Позволяет вам иногда стрелять двойным снежком",
+            descriptions = "Позволяет вам иногда стрелять двойным снежком, перезарядка DS секунд",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNClayFigurine.blp",
             cost         = 600,
             lvl          = 1,
+            DS           = {3}
         },
         [10] = {
             name         = "Яйца",
@@ -89,8 +90,8 @@ function InitItemBDForShop()
             lvl          = 1,
         },
         [12] = {
-            name         = "Звезда",
-            descriptions = "Прекрасное украшение для вашей ёлки",
+            name         = "Медовые звёздочки",
+            descriptions = "Насыщенный медовый вкус и хрустящая текстура. Готовый завтрак содержит дополнительный кальций и железо, необходимые организму, клетчатку, которая регулирует пищеварение и помогает очищению организма",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNStarWand.blp",
             cost         = 500,
             lvl          = 1,
@@ -104,7 +105,7 @@ function InitItemBDForShop()
         },
         [14] = {
             name         = "Шампанское",
-            descriptions = "Идеальный напиток для создания новогоднего настроения",
+            descriptions = "Идеальный напиток для создания новогоднего настроения. |cff808080Автоматически завершает задание СПИРТНЫЕ НАПАИТКИ|r",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNStrongDrink.blp",
             cost         = 3000,
             lvl          = 1,
@@ -121,7 +122,7 @@ function InitItemBDForShop()
             descriptions = "Срок изготовления - прошлый год, увеличивается скорость передвижения на DS",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNHealthStone.blp",
             cost         = 200,
-            DS           = {60},
+            DS           = {1.6},
             lvl          = 1,
         },
         [17] = {
@@ -198,14 +199,14 @@ function InitItemBDForShop()
         },
         [27] = {
             name         = "Утяжелите Рока Ли",
-            descriptions = "Замедляют скорость передвижения на 10 минут, но когда их снять дальность и переката увеличится",
+            descriptions = "Замедляют скорость передвижения на 10 минут, но когда их снять дальность и скорость переката увеличится",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNHumanArmorUpThree.blp",
             cost         = 1000,
             lvl          = 1,
         },
         [28] = {
             name         = "Повязка Хокаге",
-            descriptions = "Меняет дурацкую шапочки, на стильную повязку шиноби",
+            descriptions = "Меняет дурацкую шапочку, на стильную повязку шиноби",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNEntrapmentWard.blp",
             cost         = 1000,
             lvl          = 1,

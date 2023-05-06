@@ -431,7 +431,7 @@ function WolfJump2Point(boss, HasMarker, x, y)
         SetUnitAnimationByIndex(boss, 8)
         --print(r)
         --r=r+1
-        UnitAddJumpForce(boss, angle, 60, dist, 500, HasMarker)
+        UnitAddJumpForce(boss, angle, 60, dist, 500, HasMarker,"ThunderclapCasterClassic")
     end)
 end
 

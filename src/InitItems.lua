@@ -48,6 +48,18 @@ function RegistryNewItem(unit)
             if GetUnitTypeId(unit)==FourCC("h002") then -- леденец
                 --print("скушай леденец")
                 HeroCandyHeal(GetUnitData(entering),1)
+                local r=GetRandomInt(1,6)
+                if r==1 then
+                    PlayMonoSpeech("","Исцеление")
+                elseif r==2 then
+                    PlayMonoSpeech("","Вкусно!")
+                elseif r==3 then
+                    PlayMonoSpeech("","Конфетка!")
+                elseif r==4 then
+                    PlayMonoSpeech("","О, ещё конфетка!")
+                elseif r==5 then
+                    PlayMonoSpeech("","Это меня не много исцелит!")
+                end
             end
             --KillUnit(unit)
             ShowUnit(unit,false)
