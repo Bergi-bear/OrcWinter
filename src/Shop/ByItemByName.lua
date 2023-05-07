@@ -22,21 +22,24 @@ function UnitGetItemByName(item, data)
     elseif item.name == "Майонез" then
         data.haveMayonnaise = true
         data.UnitScale = data.UnitScale + 0.1
-        SetUnitScale(data.UnitHero, data.UnitScale, data.UnitScale1)
+        SetUnitScale(data.UnitHero, data.UnitScale, data.UnitScale,1)
         if data.haveOlivier then
             QuestSetCompletedBJ(udg_QYetty, true)
         end
     elseif item.name == "Розовый майонез" then
+        data.BaseDamage = data.BaseDamage + item.DS[item.lvl-1]
     elseif item.name == "Подштанники" then
-        HeroCandyHeal(data,10)
+        HeroCandyHeal(data, 10)
         AddPeonMAXHP(data, 1)
     elseif item.name == "Колбаса" then
-        HeroCandyHeal(data,10)
+        HeroCandyHeal(data, 10)
         AddPeonMAXHP(data, 1)
     elseif item.name == "Фигурка морозко" then
         data.MorozkoCD = item.DS[item.lvl]
         data.MorozkoCDCurrent = 0
     elseif item.name == "Яйца" then
+        data.BonusDamage=data.BonusDamage+item.DS[item.lvl]
+        data.EggCount=data.EggCount+100
     elseif item.name == "Уголь" then
     elseif item.name == "Звезда" then
     elseif item.name == "Штопор" then
@@ -53,7 +56,7 @@ function UnitGetItemByName(item, data)
     elseif item.name == "Бананы" then
     elseif item.name == "Скидочный купон" then
         data.SteamSale = item.DS[item.lvl]
-        print("Скидка", item.DS[item.lvl], item.lvl)
+        --print("Скидка", item.DS[item.lvl], item.lvl)
     elseif item.name == "Открытка с дурацкой музыкой" then
 
     elseif item.name == "Приглашение" then

@@ -22,6 +22,14 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
         CollisionRange=180
         delay=CollisionRange
     end
+    if effectmodel=="Firebrand Shot Silver" then
+        local data=GetUnitData(hero)
+        if data.EggCount>0 then
+            damage=damage+data.BonusDamage
+        else
+            data.BonusDamage=0
+        end
+    end
 
     local currentDistance=0
     local bullet = AddSpecialEffect(effectmodel, xs, ys)

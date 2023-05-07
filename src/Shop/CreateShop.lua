@@ -66,6 +66,7 @@ function CreateItemsForSell()
             end
         end
     end
+    HERO[0].SteamSale=false
 end
 
 function CreateItemForShop(posX, PosY, parent, item)
@@ -74,8 +75,9 @@ function CreateItemForShop(posX, PosY, parent, item)
 
     if data.SteamSale then
         --print("скидка пременена")
-        data.SteamSale=false
+
         item.cost=item.cost*data.SteamSale//100
+        --data.SteamSale=false
     end
     local name = item.name
     local descriptions = item.descriptions

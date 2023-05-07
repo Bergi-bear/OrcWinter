@@ -28,11 +28,16 @@ function CreAteStatPanelElement(data, texture, parent, x, y)
     local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", infoFrame, "", 0)
     BlzFrameSetParent(text, BlzGetFrameByName("ConsoleUIBackdrop", 0))
     BlzFrameSetText(text, 9999)
-    BlzFrameSetScale(text, 1.2)
+    BlzFrameSetScale(text, 0.9)
     BlzFrameSetPoint(text, FRAMEPOINT_LEFT, infoFrame, FRAMEPOINT_RIGHT, 0.0, 0.0)
     TimerStart(CreateTimer(), 0.1, true, function()
         if texture == "ReplaceableTextures\\CommandButtons\\BTNThoriumMelee.blp" then
             BlzFrameSetText(text, R2I(data.BaseDamage))
+            if data.BonusDamage>0 then
+                local res=ColorText2Green("+"..R2I(data.BonusDamage))
+                --print(res)
+                BlzFrameSetText(text, R2I(data.BaseDamage)..res)
+            end
         elseif texture == "ReplaceableTextures\\CommandButtons\\BTNGlove.blp" then
             BlzFrameSetText(text, data.AttackInterval)
         elseif texture == "ReplaceableTextures\\CommandButtons\\BTNBootsOfSpeed.blp" then

@@ -96,13 +96,13 @@ function InitHEROTable()
             --- От снежной карты
             AttackIsReady=true, -- флаг готовности атаки
             MHoldSec=0, -- по факту число выстрелов
-            BaseDamage             = 200, -- урон снежка
-            AttackInterval         = 0.35, -- скорость атаки
-            MoveSpeed              = 5, -- скорость передвижения
-            ShieldCount            = 0, -- количество щитов
-            UnitScale              = 1, --размер юнита
-
-
+            BaseDamage              = 200, -- урон снежка
+            AttackInterval          = 0.35, -- скорость атаки
+            MoveSpeed               = 5, -- скорость передвижения
+            ShieldCount             = 0, -- количество щитов
+            UnitScale               = 1, --размер юнита
+            BonusDamage             = 0, -- урон от бонусов
+            EggCount                = 0, -- число яиц
         }
         --InitInputHandler(HERO[i])
         CreatePeonForPlayer(HERO[i])

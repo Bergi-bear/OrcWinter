@@ -8,14 +8,14 @@ function InitItemBDForShop()
     SHOP_BD = {
         [1] = {
             name         = "Гирлянда",
-            descriptions = "Отличное украшение для новогодней ёлки",
+            descriptions = "Отличное украшение для новогодней ёлки. |cff808080Автоматически завершает задание Гирлянда|r",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNScatterRockets",
             cost         = 5000,
             lvl          = 1,
         },
         [2] = {
             name         = "Носочки",
-            descriptions = "Тёплые шерстяные носки,где каждая петелька, связана с любовью, DS%% шанс уклонится от атак холода",
+            descriptions = "Тёплые шерстяные носки,где каждая петелька, связана с любовью, DS%% шанс уклонится от атаки",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNSlippersOfAgility",
             cost         = 900,
             DS           = {10,20,30},
@@ -31,25 +31,26 @@ function InitItemBDForShop()
         },
         [4] = {
             name         = "Набор для оливье",
-            descriptions = "Готовый набор продуктов, позволяющий сделать идеальный новогодний салат",
+            descriptions = "Готовый набор продуктов, позволяющий сделать идеальный новогодний салат. |cff808080Автоматически завершает задание САЛАТЫ|r",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNHealingWard",
             cost         = 6000,
             lvl          = 1
         },
         [5] = {
             name         = "Майонез",
-            descriptions = "Белая субстанция, без неё салата не приготовить, делает вас толще",
+            descriptions = "Белая субстанция, без неё салата не приготовить, делает вас толще на DS%%, при каждом поглощении",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNHealingSalve",
             cost         = 49,
-            DS           = {1,1,1},
+            DS           = {10,10,10},
             lvl          = 1
         },
         [6] = {
             name         = "Розовый майонез",
-            descriptions = "Тот самый ингредиент, для приготовления селедки под шубой",
+            descriptions = "Тот самый ингредиент, для приготовления селедки под шубой, можно употребить во внутрь и увеличить силу атаки на DS",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNLesserInvisibility",
             cost         = 200,
             lvl          = 1,
+            DS           = {10,20,30,40,50},
         },
         [7] = {
             name         = "Подштанники",
@@ -77,10 +78,11 @@ function InitItemBDForShop()
         },
         [10] = {
             name         = "Яйца",
-            descriptions = "Можно в салат, можно и бросить в кого-нибудь",
+            descriptions = "Можно в салат, можно и бросить в кого-нибудь, увеличивает урон на DS на следующие 100 выстрелов",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNOrbOfLightning.blp",
             cost         = 5,
             lvl          = 1,
+            DS           = {50}
         },
         [11] = {
             name         = "Уголь",
@@ -112,9 +114,9 @@ function InitItemBDForShop()
         },
         [15] = {
             name         = "Вино",
-            descriptions = "Прекрасно защитят ваш зад от мороза",
+            descriptions = "Ещё один новогодний напиток. |cff808080Так же автоматически завершает задание СПИРТНЫЕ НАПАИТКИ|r",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNJanggo.blp",
-            cost         = 3000,
+            cost         = 3500,
             lvl          = 1,
         },
         [16] = {

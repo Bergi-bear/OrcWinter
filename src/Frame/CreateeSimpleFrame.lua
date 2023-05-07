@@ -79,6 +79,11 @@ function ColorText2Black(s)
     s = "|cff000000" .. s .. "|r"
     return s
 end
+function ColorText2Green(s)
+    s = "|cFF00FF00" .. s .. "|r"
+    return s
+end
+
 
 function DSColorDescription(talon)
     if talon.DS then
