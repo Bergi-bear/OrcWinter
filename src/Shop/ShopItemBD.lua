@@ -8,7 +8,7 @@ function InitItemBDForShop()
     SHOP_BD = {
         [1] = {
             name         = "Гирлянда",
-            descriptions = "Отличное украшение для новогодней ёлки. |cff808080Автоматически завершает задание Гирлянда|r",
+            descriptions = "Отличное украшение для новогодней ёлки. |cff808080Автоматически завершает задание ГИРЛЯНДА|r",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNScatterRockets",
             cost         = 5000,
             lvl          = 1,
@@ -31,7 +31,7 @@ function InitItemBDForShop()
         },
         [4] = {
             name         = "Набор для оливье",
-            descriptions = "Готовый набор продуктов, позволяющий сделать идеальный новогодний салат. |cff808080Автоматически завершает задание САЛАТЫ|r",
+            descriptions = "Готовый набор продуктов, позволяющий сделать идеальный новогодний салат. |cff808080Автоматически завершает задание САЛАТЫ, если добавить майонез|r",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNHealingWard",
             cost         = 6000,
             lvl          = 1
@@ -129,9 +129,9 @@ function InitItemBDForShop()
         },
         [17] = {
             name         = "Подарочная упаковка",
-            descriptions = "Позволяет украсить даже самый обычный подарок",
+            descriptions = "Позволяет украсить даже самый обычный подарок. |cff808080Автоматически завершает задание ПОДАРКИ|r",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNSnazzyScroll.blp",
-            cost         = 200,
+            cost         = 7000,
             lvl          = 1,
         },
         [18] = {
@@ -143,10 +143,11 @@ function InitItemBDForShop()
         },
         [19] = {
             name         = "Соленья",
-            descriptions = "Зомби огурцы",
+            descriptions = "Призывает DS, сражающегося на вашей стороне",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNCrystalBall.blp",
             cost         = 200,
             lvl          = 1,
+            DS           = {"зомби"},
         },
         [20] = {
             name         = "Мандарины",
@@ -157,10 +158,11 @@ function InitItemBDForShop()
         },
         [21] = {
             name         = "Бананы",
-            descriptions = "Хорошо закрепляют",
+            descriptions = "Хорошо закрепляют, позволяют возродится DS раз в том же самом месте где вы и умерли, не прерывая битву с боссом",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNPotionOfRestoration.blp",
             cost         = 200,
             lvl          = 1,
+            DS           = {1,1,1,1,1},
         },
         [22] = {
             name         = "Скидочный купон",
@@ -215,7 +217,7 @@ function InitItemBDForShop()
         },
         [29] = {
             name         = "Звезда",
-            descriptions = "Идеальное украшение для верхушки ёлки, но по очень высокой цене",
+            descriptions = "Идеальное украшение для верхушки ёлки, но по очень высокой цене. |cff808080Автоматически завершает задание ЗВЕЗДА|r",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNStarWand.blp",
             cost         = 8000,
             lvl          = 1,

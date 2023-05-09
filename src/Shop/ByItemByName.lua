@@ -22,12 +22,12 @@ function UnitGetItemByName(item, data)
     elseif item.name == "Майонез" then
         data.haveMayonnaise = true
         data.UnitScale = data.UnitScale + 0.1
-        SetUnitScale(data.UnitHero, data.UnitScale, data.UnitScale,1)
+        SetUnitScale(data.UnitHero, data.UnitScale, data.UnitScale, 1)
         if data.haveOlivier then
             QuestSetCompletedBJ(udg_QYetty, true)
         end
     elseif item.name == "Розовый майонез" then
-        data.BaseDamage = data.BaseDamage + item.DS[item.lvl-1]
+        data.BaseDamage = data.BaseDamage + item.DS[item.lvl - 1]
     elseif item.name == "Подштанники" then
         HeroCandyHeal(data, 10)
         AddPeonMAXHP(data, 1)
@@ -38,10 +38,11 @@ function UnitGetItemByName(item, data)
         data.MorozkoCD = item.DS[item.lvl]
         data.MorozkoCDCurrent = 0
     elseif item.name == "Яйца" then
-        data.BonusDamage=data.BonusDamage+item.DS[item.lvl]
-        data.EggCount=data.EggCount+100
+        data.BonusDamage = data.BonusDamage + item.DS[item.lvl]
+        data.EggCount = data.EggCount + 100
     elseif item.name == "Уголь" then
     elseif item.name == "Звезда" then
+        QuestSetCompletedBJ(udg_QStarAnime, true)
     elseif item.name == "Штопор" then
     elseif item.name == "Шампанское" then
         QuestSetCompletedBJ(udg_QWine, true)
@@ -50,10 +51,12 @@ function UnitGetItemByName(item, data)
     elseif item.name == "Горошек" then
         UnitAddAbility(data.UnitHero, FourCC("AIms"))
     elseif item.name == "Подарочная упаковка" then
+        QuestSetCompletedBJ(udg_QDragon, true)
     elseif item.name == "Фейерве́рк" then
     elseif item.name == "Соленья" then
     elseif item.name == "Мандарины" then
     elseif item.name == "Бананы" then
+        data.ResBanana = data.ResBanana + item.DS[item.lvl - 1]
     elseif item.name == "Скидочный купон" then
         data.SteamSale = item.DS[item.lvl]
         --print("Скидка", item.DS[item.lvl], item.lvl)

@@ -63,7 +63,7 @@ function InitHEROTable()
             DamageThrow            = 150, -- урон от кирки
             InvulPreDeathCurrentCD = 1, --кулдаун бессмертия от трала
             LifeFHTable            = {},
-            gold                   = 5000,
+            gold                   = 50000,
             ShowGold               = true, -- показ накопления золота
             ShowHeal               = true,
             ShowGoldAmount         = 0,
@@ -103,6 +103,7 @@ function InitHEROTable()
             UnitScale               = 1, --размер юнита
             BonusDamage             = 0, -- урон от бонусов
             EggCount                = 0, -- число яиц
+            ResBanana               = 0, -- возрождение в точке смерти
         }
         --InitInputHandler(HERO[i])
         CreatePeonForPlayer(HERO[i])

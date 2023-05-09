@@ -95,6 +95,10 @@ function CreateEActions()
                         normal_sound("Speech\\CookQuest\\cook5")
                         UnitAddGold(data.UnitHero,2000)
                     end
+                elseif data.CurrentQuest == "EndGameCinematic" then
+                    UnitRemoveAbility(data.QuestUnit, FourCC("A604"))
+                    Trig_EndSinematicStart_Actions()
+                    --print("Запускаем ролик")
                 end
             end
         end

@@ -13,7 +13,6 @@ udg_QCHKPoint = nil
 udg_WisDead = false
 udg_SkipDragon = false
 udg_QSnowMan = nil
-gg_rct________________037 = nil
 gg_rct_Region_038 = nil
 gg_rct_Region_024 = nil
 gg_rct_TrapZone = nil
@@ -54,6 +53,7 @@ gg_cam_LookAnime = nil
 gg_cam_WolfEnd = nil
 gg_cam_SeeOnWolf = nil
 gg_cam_TalkMerch = nil
+gg_cam_InPeonHome = nil
 gg_snd_Intro1 = nil
 gg_snd_Intro2 = nil
 gg_snd_Intro3 = nil
@@ -96,6 +96,7 @@ gg_snd_CookQuestPeon2 = nil
 gg_snd_CookQuestPeon3 = nil
 gg_snd_cook5 = nil
 gg_snd_CookQuestPeon4 = nil
+gg_trg_EndSinematicStart = nil
 gg_trg_EnterAnimeArena = nil
 gg_trg_ExitAnimeArena = nil
 gg_trg_InitAnimeArena = nil
@@ -142,7 +143,11 @@ gg_unit_h006_0173 = nil
 gg_unit_h007_0171 = nil
 gg_unit_o002_0203 = nil
 gg_unit_h009_0197 = nil
+gg_dest_B004_2162 = nil
 gg_dest_B007_5312 = nil
+gg_rct_Region_022 = nil
+gg_cam_TavernaEnd = nil
+gg_rct_Region_023 = nil
 function InitGlobals()
 udg_PressESC = false
 udg_PressESCYETTY = false
@@ -368,6 +373,7 @@ local d
 local t
 local life
 
+gg_dest_B004_2162 = BlzCreateDestructableWithSkin(FourCC("B004"), -128.0, -192.0, 325.000, 3.000, 0, FourCC("B004"))
 gg_dest_B007_5312 = BlzCreateDestructableWithSkin(FourCC("B007"), -7552.0, 4224.0, 211.000, 3.000, 0, FourCC("B007"))
 end
 
@@ -379,6 +385,7 @@ local t
 local life
 
 gg_unit_Oths_0011 = BlzCreateUnitWithSkin(p, FourCC("Oths"), 63.2, -581.0, 211.080, FourCC("Oths"))
+SetUnitColor(gg_unit_Oths_0011, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1652.2, -1430.7, 121.800, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("o001"), -1180.6, 1453.0, 262.550, FourCC("o001"))
@@ -413,6 +420,7 @@ u = BlzCreateUnitWithSkin(p, FourCC("H60Z"), 6543.3, 6651.6, 223.130, FourCC("H6
 SetUnitAcquireRange(u, 200.0)
 gg_unit_o002_0203 = BlzCreateUnitWithSkin(p, FourCC("o002"), -13047.3, 8357.1, 308.530, FourCC("o002"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00A"), 5159.2, 6586.8, 281.200, FourCC("h00A"))
+u = BlzCreateUnitWithSkin(p, FourCC("h002"), -1503.4, 1375.2, 5.812, FourCC("h002"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), -10937.8, 8908.1, 5.812, FourCC("h002"))
 end
 
@@ -667,6 +675,7 @@ u = BlzCreateUnitWithSkin(p, FourCC("n003"), -11096.5, -4005.4, 116.844, FourCC(
 u = BlzCreateUnitWithSkin(p, FourCC("n003"), -8393.8, -8947.7, 35.720, FourCC("n003"))
 gg_unit_h006_0172 = BlzCreateUnitWithSkin(p, FourCC("h006"), -6759.5, 7717.5, 186.040, FourCC("h006"))
 gg_unit_h006_0173 = BlzCreateUnitWithSkin(p, FourCC("h006"), -6127.4, 6115.0, 31.803, FourCC("h006"))
+u = BlzCreateUnitWithSkin(p, FourCC("nwwf"), 1865.5, -2060.0, 220.762, FourCC("nwwf"))
 u = BlzCreateUnitWithSkin(p, FourCC("nwwf"), -1108.8, -5904.3, 97.265, FourCC("nwwf"))
 u = BlzCreateUnitWithSkin(p, FourCC("nwwf"), 81.8, -5636.3, 122.945, FourCC("nwwf"))
 u = BlzCreateUnitWithSkin(p, FourCC("nwwf"), 1372.4, -4183.3, 141.980, FourCC("nwwf"))
@@ -796,7 +805,7 @@ u = BlzCreateUnitWithSkin(p, FourCC("n00A"), 3830.3, 2974.2, 320.768, FourCC("n0
 u = BlzCreateUnitWithSkin(p, FourCC("n00A"), 3897.6, 2377.1, 61.057, FourCC("n00A"))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 5084.7, 6588.1, 172.683, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 1002.6, -1770.7, 233.399, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 983.6, -1755.0, 233.399, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -11509.9, 9591.8, 23.954, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
@@ -805,6 +814,75 @@ SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -11338.5, 9298.9, 69.005, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -11153.9, 9318.8, 91.867, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2002.5, -2307.7, -89.319, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1921.2, -2310.4, -82.965, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2056.0, -2376.5, 13.303, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1778.6, -2381.2, 181.860, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1967.4, -2446.3, 87.234, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1869.8, -2452.6, 100.278, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2004.3, -1854.9, 8.268, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1954.0, -1790.8, -79.046, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1876.9, -1784.8, -87.575, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1950.6, -1928.7, 100.278, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1876.4, -1929.2, 100.278, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("Oths"), -1749.7, -1852.9, 242.813, FourCC("Oths"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2251.8, -1879.0, 8.268, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2261.6, -1790.3, 8.268, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2271.8, -1647.6, 8.268, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2180.9, -1943.6, 91.332, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2109.9, -1858.4, 186.494, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2111.0, -1709.7, 171.928, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2196.5, -1606.3, -75.969, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2067.1, -1508.4, 249.784, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1975.1, -1518.1, 242.178, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2340.5, -1902.4, 8.268, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2094.7, -2235.7, 8.268, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2089.5, -2172.3, 8.268, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1933.2, -2172.9, 189.104, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2003.4, -2126.1, 265.872, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1893.2, -2175.3, 8.268, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1761.7, -2225.9, 170.997, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1756.4, -2172.9, 187.148, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1829.5, -2127.1, -71.051, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("n00A"), -2302.6, -1958.3, 208.427, FourCC("n00A"))
+u = BlzCreateUnitWithSkin(p, FourCC("n00A"), -2236.8, -2022.7, 3.934, FourCC("n00A"))
+u = BlzCreateUnitWithSkin(p, FourCC("n00A"), -1810.1, -1991.2, 239.706, FourCC("n00A"))
+u = BlzCreateUnitWithSkin(p, FourCC("n00B"), -1572.0, -1966.7, 50.162, FourCC("n00B"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("n00B"), -1623.2, -1785.0, -36.712, FourCC("n00B"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("n00B"), -1429.4, -2052.7, 124.917, FourCC("n00B"))
 SetUnitColor(u, ConvertPlayerColor(0))
 end
 
@@ -827,7 +905,6 @@ end
 function CreateRegions()
 local we
 
-gg_rct________________037 = Rect(128.0, -384.0, 160.0, -352.0)
 gg_rct_Region_038 = Rect(-4224.0, -6208.0, -1568.0, -4480.0)
 gg_rct_Region_024 = Rect(-192.0, -352.0, -96.0, -256.0)
 gg_rct_TrapZone = Rect(-12896.0, -9408.0, -5664.0, 4608.0)
@@ -852,6 +929,8 @@ gg_rct_AIStartBoss = Rect(-12256.0, 8576.0, -10304.0, 10240.0)
 gg_rct_Region_019 = Rect(-12128.0, 2720.0, -11904.0, 2912.0)
 gg_rct_Region_020 = Rect(800.0, -2496.0, 896.0, -2400.0)
 gg_rct_Region_021 = Rect(672.0, -2400.0, 800.0, -2272.0)
+gg_rct_Region_022 = Rect(-256.0, -704.0, -160.0, -608.0)
+gg_rct_Region_023 = Rect(-448.0, -448.0, 256.0, 224.0)
 end
 
 function CreateCameras()
@@ -1063,6 +1142,32 @@ CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
 CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
 CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
 CameraSetupSetDestPosition(gg_cam_TalkMerch, 982.6, -2286.1, 0.0)
+gg_cam_InPeonHome = CreateCameraSetup()
+CameraSetupSetField(gg_cam_InPeonHome, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+CameraSetupSetField(gg_cam_InPeonHome, CAMERA_FIELD_ROTATION, 30.2, 0.0)
+CameraSetupSetField(gg_cam_InPeonHome, CAMERA_FIELD_ANGLE_OF_ATTACK, 320.4, 0.0)
+CameraSetupSetField(gg_cam_InPeonHome, CAMERA_FIELD_TARGET_DISTANCE, 460.9, 0.0)
+CameraSetupSetField(gg_cam_InPeonHome, CAMERA_FIELD_ROLL, 0.0, 0.0)
+CameraSetupSetField(gg_cam_InPeonHome, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+CameraSetupSetField(gg_cam_InPeonHome, CAMERA_FIELD_FARZ, 6050.0, 0.0)
+CameraSetupSetField(gg_cam_InPeonHome, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+CameraSetupSetField(gg_cam_InPeonHome, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+CameraSetupSetField(gg_cam_InPeonHome, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+CameraSetupSetField(gg_cam_InPeonHome, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_InPeonHome, 858.1, -1843.9, 0.0)
+gg_cam_TavernaEnd = CreateCameraSetup()
+CameraSetupSetField(gg_cam_TavernaEnd, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+CameraSetupSetField(gg_cam_TavernaEnd, CAMERA_FIELD_ROTATION, 128.9, 0.0)
+CameraSetupSetField(gg_cam_TavernaEnd, CAMERA_FIELD_ANGLE_OF_ATTACK, 324.7, 0.0)
+CameraSetupSetField(gg_cam_TavernaEnd, CAMERA_FIELD_TARGET_DISTANCE, 955.9, 0.0)
+CameraSetupSetField(gg_cam_TavernaEnd, CAMERA_FIELD_ROLL, 0.0, 0.0)
+CameraSetupSetField(gg_cam_TavernaEnd, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+CameraSetupSetField(gg_cam_TavernaEnd, CAMERA_FIELD_FARZ, 5000.0, 0.0)
+CameraSetupSetField(gg_cam_TavernaEnd, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+CameraSetupSetField(gg_cam_TavernaEnd, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+CameraSetupSetField(gg_cam_TavernaEnd, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+CameraSetupSetField(gg_cam_TavernaEnd, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_TavernaEnd, -1884.6, -1877.4, 0.0)
 end
 
 --CUSTOM_CODE
@@ -2421,7 +2526,7 @@ function InitHEROTable()
             DamageThrow            = 150, -- урон от кирки
             InvulPreDeathCurrentCD = 1, --кулдаун бессмертия от трала
             LifeFHTable            = {},
-            gold                   = 5000,
+            gold                   = 50000,
             ShowGold               = true, -- показ накопления золота
             ShowHeal               = true,
             ShowGoldAmount         = 0,
@@ -2461,6 +2566,7 @@ function InitHEROTable()
             UnitScale               = 1, --размер юнита
             BonusDamage             = 0, -- урон от бонусов
             EggCount                = 0, -- число яиц
+            ResBanana               = 0, -- возрождение в точке смерти
         }
         --InitInputHandler(HERO[i])
         CreatePeonForPlayer(HERO[i])
@@ -8563,6 +8669,10 @@ function CreateEActions()
                         normal_sound("Speech\\CookQuest\\cook5")
                         UnitAddGold(data.UnitHero,2000)
                     end
+                elseif data.CurrentQuest == "EndGameCinematic" then
+                    UnitRemoveAbility(data.QuestUnit, FourCC("A604"))
+                    Trig_EndSinematicStart_Actions()
+                    --print("Запускаем ролик")
                 end
             end
         end
@@ -9273,8 +9383,7 @@ TIMER_PERIOD64 = 1 / 64
 HERO = {}
 HeroID = FourCC("O000")
 
-
-Acceleration=true --скорение при клике
+Acceleration = true --скорение при клике
 
 function InitAnimations(hero, data)
     PlayUnitAnimationFromChat()
@@ -9392,7 +9501,7 @@ function InitWASD(hero)
     local cutDistance = distance
     local speed = GetUnitMoveSpeed(hero) / 38
 
-    local curSpeed=0
+    local curSpeed = 0
     TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
         -- основной таймер для обработки всего
         hero = data.UnitHero -- костыль для смены героя
@@ -9440,13 +9549,23 @@ function InitWASD(hero)
                 --print("death")
                 SetUnitAnimation(data.UnitHero, "death")
                 if not data.ResPointX then
-                    data.ResPointX,data.ResPointY=GetPlayerStartLocationX(Player(data.pid)), GetPlayerStartLocationY(Player(data.pid))
+                    data.ResPointX, data.ResPointY = GetPlayerStartLocationX(Player(data.pid)), GetPlayerStartLocationY(Player(data.pid))
                 end
-                FallCoffinMeme(data.UnitHero)
+
+                if data.ResBanana <= 0 then
+                    FallCoffinMeme(data.UnitHero)
+                end
+
                 TimerStart(CreateTimer(), 3, false, function()
                     DestroyTimer(GetExpiredTimer())
 
-                    x, y = data.ResPointX,data.ResPointY
+                    x, y = data.ResPointX, data.ResPointY
+
+                    if data.ResBanana > 0 then
+                        x, y = GetUnitXY(hero)
+                        data.ResBanana = data.ResBanana - 1
+                    end
+
                     ReviveHero(hero, x, y, true)
                     TimerStart(CreateTimer(), 0.5, false, function()
                         if GetRandomInt(1, 2) == 1 then
@@ -9480,7 +9599,7 @@ function InitWASD(hero)
                 --GetPlayerMouseX[0],GetPlayerMouseY[0]
                 --print(xcam,ycam)
 
-                SetCameraTargetControllerNoZForPlayer(GetOwningPlayer(hero), hero, 0,200, false) -- не дергается
+                SetCameraTargetControllerNoZForPlayer(GetOwningPlayer(hero), hero, 0, 200, false) -- не дергается
                 --print(GetCameraField(CAMERA_FIELD_ANGLE_OF_ATTACK))
                 --print(GetCameraField(CAMERA_FIELD_TARGET_DISTANCE))
                 local z = GetUnitZ(hero)
@@ -9575,7 +9694,7 @@ function InitWASD(hero)
             --data.IsMoving = false
             --print("слишком много кнопок нажато")
             --DestroyEffect(AddSpecialEffect("Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl", GetUnitXY(data.UnitHero)))
-            DestroyEffect(AddSpecialEffectTarget("Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl", data.UnitHero,"origin"))
+            DestroyEffect(AddSpecialEffectTarget("Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl", data.UnitHero, "origin"))
         end
 
         if not data.ReleaseW and not data.ReleaseS and data.ReleaseA and data.ReleaseD then
@@ -9583,7 +9702,7 @@ function InitWASD(hero)
             --data.ReleaseD = false
             --data.IsMoving = false
             --DestroyEffect(AddSpecialEffect("Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl", GetUnitXY(data.UnitHero)))
-            DestroyEffect(AddSpecialEffectTarget("Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl", data.UnitHero,"origin"))
+            DestroyEffect(AddSpecialEffectTarget("Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl", data.UnitHero, "origin"))
             --print("слишком много кнопок нажато")
         end
         if not UnitAlive(hero) then
@@ -9597,7 +9716,7 @@ function InitWASD(hero)
         end
         if StunSystem[GetHandleId(data.UnitHero)].Time == 0 and onForces[GetHandleId(hero)] then
             --and
-            if UnitAlive(hero) and not data.isShield and not data.isAttacking and not data.ReleaseRMB  and not FREE_CAMERA then
+            if UnitAlive(hero) and not data.isShield and not data.isAttacking and not data.ReleaseRMB and not FREE_CAMERA then
 
 
                 if data.IsMoving and not UnitHasBow(hero) then
@@ -9605,7 +9724,7 @@ function InitWASD(hero)
                     data.DirectionMove = angle
 
                     speed = GetUnitMoveSpeed(hero) / 38 -- примерно 5 стартовая
-                    data.MoveSpeed=speed
+                    data.MoveSpeed = speed
                     curSpeed = math.lerp(curSpeed, speed, TIMER_PERIOD64 * 8) --плавное ускорение
                     --print(curSpeed)
                     if data.UnitInAttack then
@@ -9618,7 +9737,6 @@ function InitWASD(hero)
                         curSpeed = 0.5
                     end
 
-
                     if data.ReleaseQ and data.CurrentWeaponType ~= "bow" then
                         --нормализация скорости
                         SetUnitTimeScale(hero, 1)
@@ -9630,12 +9748,13 @@ function InitWASD(hero)
                     local vector = Vector:new(GetUnitX(hero), GetUnitY(hero), GetUnitZ(hero))
                     local newVector = vector
                     newVector = VectorSum(newVector, vector:yawPitchOffset(curSpeed, angle * (math.pi / 180), 0.0))
-                    local nx,ny=newVector.x, newVector.y
+                    local nx, ny = newVector.x, newVector.y
                     if not data.isAttacking then
                         if data.CurrentWeaponType == "pickaxe" or not data.PressSpin then
                             --
 
-                            if not data.LMBIsPressed then -- UnitInAttack
+                            if not data.LMBIsPressed then
+                                -- UnitInAttack
                                 SetUnitFacing(hero, angle)
                                 --print("место для поворота в движении"..angle)
                             end
@@ -9670,7 +9789,7 @@ function InitWASD(hero)
                         data.animStand = 3
                     end
                 else
-                    curSpeed=0
+                    curSpeed = 0
                     -- стоит на месте
                     --if animWalk==0 then
                     data.DirectionMove = GetUnitFacing(hero)
@@ -9942,7 +10061,7 @@ function CreateWASDActions()
 
                 local dist = 400
                 local delay = 0.5
-                local dashSpeed=10
+                local dashSpeed = 10
 
                 if data.ReleaseQ and not data.QJump2Pointer then
                     -- print("сплеш в рывке, пробуем прыгнуть прыжок")
@@ -10015,9 +10134,9 @@ function CreateWASDActions()
                         end
                     else
                         --print("перекат тут?")
-                        if GetUnitTypeId(data.UnitHero)==FourCC("n002") then
-                            dist=700
-                            dashSpeed=40
+                        if GetUnitTypeId(data.UnitHero) == FourCC("n002") then
+                            dist = 700
+                            dashSpeed = 40
                             --print("Волк делает рывок дальше")
                             data.chargeEff = AddSpecialEffectTarget("IceCharge", data.UnitHero, "origin")
 
@@ -10339,12 +10458,12 @@ function UnitGetItemByName(item, data)
     elseif item.name == "Майонез" then
         data.haveMayonnaise = true
         data.UnitScale = data.UnitScale + 0.1
-        SetUnitScale(data.UnitHero, data.UnitScale, data.UnitScale,1)
+        SetUnitScale(data.UnitHero, data.UnitScale, data.UnitScale, 1)
         if data.haveOlivier then
             QuestSetCompletedBJ(udg_QYetty, true)
         end
     elseif item.name == "Розовый майонез" then
-        data.BaseDamage = data.BaseDamage + item.DS[item.lvl-1]
+        data.BaseDamage = data.BaseDamage + item.DS[item.lvl - 1]
     elseif item.name == "Подштанники" then
         HeroCandyHeal(data, 10)
         AddPeonMAXHP(data, 1)
@@ -10355,10 +10474,11 @@ function UnitGetItemByName(item, data)
         data.MorozkoCD = item.DS[item.lvl]
         data.MorozkoCDCurrent = 0
     elseif item.name == "Яйца" then
-        data.BonusDamage=data.BonusDamage+item.DS[item.lvl]
-        data.EggCount=data.EggCount+100
+        data.BonusDamage = data.BonusDamage + item.DS[item.lvl]
+        data.EggCount = data.EggCount + 100
     elseif item.name == "Уголь" then
     elseif item.name == "Звезда" then
+        QuestSetCompletedBJ(udg_QStarAnime, true)
     elseif item.name == "Штопор" then
     elseif item.name == "Шампанское" then
         QuestSetCompletedBJ(udg_QWine, true)
@@ -10367,13 +10487,15 @@ function UnitGetItemByName(item, data)
     elseif item.name == "Горошек" then
         UnitAddAbility(data.UnitHero, FourCC("AIms"))
     elseif item.name == "Подарочная упаковка" then
+        QuestSetCompletedBJ(udg_QDragon, true)
     elseif item.name == "Фейерве́рк" then
     elseif item.name == "Соленья" then
     elseif item.name == "Мандарины" then
     elseif item.name == "Бананы" then
+        data.ResBanana = data.ResBanana + item.DS[item.lvl - 1]
     elseif item.name == "Скидочный купон" then
         data.SteamSale = item.DS[item.lvl]
-        print("Скидка", item.DS[item.lvl], item.lvl)
+        --print("Скидка", item.DS[item.lvl], item.lvl)
     elseif item.name == "Открытка с дурацкой музыкой" then
 
     elseif item.name == "Приглашение" then
@@ -10745,7 +10867,7 @@ function InitItemBDForShop()
     SHOP_BD = {
         [1] = {
             name         = "Гирлянда",
-            descriptions = "Отличное украшение для новогодней ёлки. |cff808080Автоматически завершает задание Гирлянда|r",
+            descriptions = "Отличное украшение для новогодней ёлки. |cff808080Автоматически завершает задание ГИРЛЯНДА|r",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNScatterRockets",
             cost         = 5000,
             lvl          = 1,
@@ -10768,7 +10890,7 @@ function InitItemBDForShop()
         },
         [4] = {
             name         = "Набор для оливье",
-            descriptions = "Готовый набор продуктов, позволяющий сделать идеальный новогодний салат. |cff808080Автоматически завершает задание САЛАТЫ|r",
+            descriptions = "Готовый набор продуктов, позволяющий сделать идеальный новогодний салат. |cff808080Автоматически завершает задание САЛАТЫ, если добавить майонез|r",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNHealingWard",
             cost         = 6000,
             lvl          = 1
@@ -10866,9 +10988,9 @@ function InitItemBDForShop()
         },
         [17] = {
             name         = "Подарочная упаковка",
-            descriptions = "Позволяет украсить даже самый обычный подарок",
+            descriptions = "Позволяет украсить даже самый обычный подарок. |cff808080Автоматически завершает задание ПОДАРКИ|r",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNSnazzyScroll.blp",
-            cost         = 200,
+            cost         = 7000,
             lvl          = 1,
         },
         [18] = {
@@ -10880,10 +11002,11 @@ function InitItemBDForShop()
         },
         [19] = {
             name         = "Соленья",
-            descriptions = "Зомби огурцы",
+            descriptions = "Призывает DS, сражающегося на вашей стороне",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNCrystalBall.blp",
             cost         = 200,
             lvl          = 1,
+            DS           = {"зомби"},
         },
         [20] = {
             name         = "Мандарины",
@@ -10894,10 +11017,11 @@ function InitItemBDForShop()
         },
         [21] = {
             name         = "Бананы",
-            descriptions = "Хорошо закрепляют",
+            descriptions = "Хорошо закрепляют, позволяют возродится DS раз в том же самом месте где вы и умерли, не прерывая битву с боссом",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNPotionOfRestoration.blp",
             cost         = 200,
             lvl          = 1,
+            DS           = {1,1,1,1,1},
         },
         [22] = {
             name         = "Скидочный купон",
@@ -10952,7 +11076,7 @@ function InitItemBDForShop()
         },
         [29] = {
             name         = "Звезда",
-            descriptions = "Идеальное украшение для верхушки ёлки, но по очень высокой цене",
+            descriptions = "Идеальное украшение для верхушки ёлки, но по очень высокой цене. |cff808080Автоматически завершает задание ЗВЕЗДА|r",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNStarWand.blp",
             cost         = 8000,
             lvl          = 1,
@@ -10963,6 +11087,54 @@ function InitItemBDForShop()
 end
 
 --CUSTOM_CODE
+function Trig_EndSinematicStart_Actions()
+DisableTrigger(GetTriggeringTrigger())
+    CustomCinematicMode(true)
+CinematicModeBJ(true, GetPlayersAll())
+IssuePointOrderLocBJ(udg_HERO, "move", GetRectCenter(gg_rct_Region_022))
+CinematicFadeBJ(bj_CINEFADETYPE_FADEOUT, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
+CinematicFadeBJ(bj_CINEFADETYPE_FADEIN, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
+IssuePointOrderLocBJ(udg_HERO, "move", GetRectCenter(gg_rct_Region_022))
+SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_Oths_0011, 0)
+CameraSetupApplyForPlayer(true, gg_cam_OnPeonsandTrall, Player(0), 0.00)
+SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_Oths_0011, 0)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_801", gg_snd_PenFromWolf4, "TRIGSTR_802", bj_TIMETYPE_ADD, 0.00, true)
+CameraSetupApplyForPlayer(true, gg_cam_TrallSteal, Player(0), 0.00)
+SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_Oths_0011, 0)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_803", gg_snd_Intro1, "TRIGSTR_804", bj_TIMETYPE_ADD, 0.00, true)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_805", gg_snd_Intro1, "TRIGSTR_806", bj_TIMETYPE_ADD, 0.00, true)
+CinematicFadeBJ(bj_CINEFADETYPE_FADEOUT, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
+TriggerSleepAction(1.00)
+CreateDestructableLoc(FourCC("B00A"), GetDestructableLoc(gg_dest_B004_2162), GetRandomDirectionDeg(), 3.00, 0)
+RemoveDestructable(gg_dest_B004_2162)
+bj_forLoopAIndex = 1
+bj_forLoopAIndexEnd = 100
+while (true) do
+if (bj_forLoopAIndex > bj_forLoopAIndexEnd) then break end
+CreateDestructableLoc(FourCC("B003"), GetRandomLocInRect(gg_rct_Region_023), GetRandomDirectionDeg(), GetRandomReal(0.80, 1.20), GetRandomInt(0, 2))
+bj_forLoopAIndex = bj_forLoopAIndex + 1
+end
+CinematicFadeBJ(bj_CINEFADETYPE_FADEIN, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
+CameraSetupApplyForPlayer(true, gg_cam_OnPineRound, Player(0), 0.00)
+RotateCameraAroundLocBJ(360.00, GetDestructableLoc(GetLastCreatedDestructable()), Player(0), 20.00)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_809", gg_snd_Intro1, "TRIGSTR_810", bj_TIMETYPE_ADD, 0.00, true)
+CameraSetupApplyForPlayer(true, gg_cam_OnPineRound, Player(0), 0.00)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_811", gg_snd_Intro1, "TRIGSTR_812", bj_TIMETYPE_ADD, 0.00, true)
+CinematicFadeBJ(bj_CINEFADETYPE_FADEOUT, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_813", gg_snd_PenFromWolf4, "TRIGSTR_814", bj_TIMETYPE_ADD, 0.00, true)
+TriggerSleepAction(1.00)
+CameraSetupApplyForPlayer(true, gg_cam_TavernaEnd, Player(0), 0.00)
+CinematicFadeBJ(bj_CINEFADETYPE_FADEIN, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_815", gg_snd_PenFromWolf4, "TRIGSTR_816", bj_TIMETYPE_ADD, 0.00, true)
+TriggerSleepAction(10.00)
+CustomVictoryBJ(Player(0), true, true)
+end
+
+function InitTrig_EndSinematicStart()
+gg_trg_EndSinematicStart = CreateTrigger()
+TriggerAddAction(gg_trg_EndSinematicStart, Trig_EndSinematicStart_Actions)
+end
+
 function Trig_EnterAnimeArena_Conditions()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
@@ -10972,7 +11144,7 @@ end
 
 function Trig_EnterAnimeArena_Actions()
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_AnimBossStart))
-    reateEnteringFrame(nil, "Звёздная арена")
+    CreateEnteringFrame(nil, "Звёздная арена")
 end
 
 function InitTrig_EnterAnimeArena()
@@ -10991,7 +11163,7 @@ end
 
 function Trig_ExitAnimeArena_Actions()
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_ExitArena))
-    reateEnteringFrame(nil, "Деревня пеонов")
+    CreateEnteringFrame(nil, "Деревня пеонов")
 end
 
 function InitTrig_ExitAnimeArena()
@@ -11619,11 +11791,11 @@ return true
 end
 
 function Trig_BoundEnter_Actions()
-    reateEnteringFrame(nil, "Волчье логово")
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_EnterTrap))
 SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_TrapZone)
     ClearMapMusicBJ()
     PlayMusicBJ("Salve Springs")
+    CreateEnteringFrame(nil, "Волчье логово")
 end
 
 function InitTrig_BoundEnter()
@@ -11642,10 +11814,10 @@ end
 
 function Trig_Exit_Actions()
 SetCameraBoundsToRectForPlayerBJ(Player(0), GetPlayableMapRect())
-    reateEnteringFrame(nil, "Деревня пеонов")
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_ExitTrapZone))
     ClearMapMusicBJ()
     PlayMusicBJ("Endless Snowbanks")
+    CreateEnteringFrame(nil, "Деревня пеонов")
 end
 
 function InitTrig_Exit()
@@ -11661,6 +11833,7 @@ end
 
 function InitTrig_InitGUI()
 gg_trg_InitGUI = CreateTrigger()
+TriggerRegisterTimerEventSingle(gg_trg_InitGUI, 0.10)
 TriggerAddAction(gg_trg_InitGUI, Trig_InitGUI_Actions)
 end
 
@@ -11972,7 +12145,7 @@ end
 
 function InitTrig_StartIntro()
 gg_trg_StartIntro = CreateTrigger()
-TriggerRegisterTimerEventSingle(gg_trg_StartIntro, 0.00)
+TriggerRegisterTimerEventSingle(gg_trg_StartIntro, 0.01)
 TriggerAddAction(gg_trg_StartIntro, Trig_StartIntro_Actions)
 end
 
@@ -12007,6 +12180,7 @@ TriggerAddAction(gg_trg_ESCTEST, Trig_ESCTEST_Actions)
 end
 
 function InitCustomTriggers()
+InitTrig_EndSinematicStart()
 InitTrig_EnterAnimeArena()
 InitTrig_ExitAnimeArena()
 InitTrig_InitAnimeArena()
@@ -12043,7 +12217,6 @@ end
 function RunInitializationTriggers()
 ConditionalTriggerExecute(gg_trg_InitAnimeArena)
 ConditionalTriggerExecute(gg_trg_InitMerchantQuest)
-ConditionalTriggerExecute(gg_trg_InitGUI)
 end
 
 function InitCustomPlayerSlots()
@@ -12087,7 +12260,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, -4672.0, 4288.0)
+DefineStartLocation(0, -448.0, -704.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()
