@@ -7,9 +7,9 @@ do
     local InitGlobalsOrigin = InitGlobals
     function InitGlobals()
         InitGlobalsOrigin()
-        TimerStart(CreateTimer(), .01, false, function()
-            InitTrapByID(FourCC("h000"))
-            InitTrapByID(FourCC("h001"))
+        TimerStart(CreateTimer(), 10, false, function() --инициализация ловушек
+            --InitTrapByID(FourCC("h000"))
+            --InitTrapByID(FourCC("h001"))
             --InitAllButton()
         end)
     end
@@ -27,7 +27,7 @@ function InitTrapByID(id)
     local _, k, rg = FindUnitOfType(id)
     local radiusActivate = 500
     local distanceSee = 1200
-    --print(k)
+    print(k, " стреляющих ловушек активировано")
     for i = 1, #rg do
         local u = rg[i]
         UnitAddAbility(u, FourCC("Aloc"))

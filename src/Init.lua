@@ -7,6 +7,8 @@ do
     local InitGlobalsOrigin = InitGlobals
     function InitGlobals()
         InitGlobalsOrigin()
+        --GetUnitX = GetUnitRealX
+        --GetUnitY = GetUnitRealY
         TimerStart(CreateTimer(), .01, false, function()
             DestroyTimer(GetExpiredTimer())
             print("<<<")
@@ -39,7 +41,7 @@ do
             --ShapeInit()
             --SetDayNightModels("Environment\\DNC\\DNCAshenvale\\DNCAshenvaleTerrain\\DNCAshenvaleTerrain.mdl", "Environment\\DNC\\DNCAshenvale\\DNCAshenvaleUnit\\DNCAshenvaleUnit.mdl")
             --SetDayNightModels("", "")
-
+            InitRicoshet()
             ClearMapMusicBJ()
             PlayMusicBJ("Endless Snowbanks")
             SetMusicVolumeBJ(100)

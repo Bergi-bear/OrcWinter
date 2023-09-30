@@ -1,4 +1,5 @@
 function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, maxDistance, delay)
+
     local CollisionRange = 90
     if not damage then
         damage = 200
@@ -14,24 +15,25 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
     end
     local zhero = GetUnitZ(hero) + 60
 
-    if IsUnitTrap(hero) then --отдельные настройки для ловушек
-        CollisionRange=60
+    if IsUnitTrap(hero) then
+        --отдельные настройки для ловушек
+        CollisionRange = 60
         zhero = GetUnitZ(hero) + 95
     end
-    if effectmodel=="BlastMissile" then
-        CollisionRange=180
-        delay=CollisionRange
+    if effectmodel == "BlastMissile" then
+        CollisionRange = 180
+        delay = CollisionRange
     end
-    if effectmodel=="Firebrand Shot Silver" then
-        local data=GetUnitData(hero)
-        if data.EggCount>0 then
-            damage=damage+data.BonusDamage
+    if effectmodel == "Firebrand Shot Silver" then
+        local data = GetUnitData(hero)
+        if data.EggCount > 0 then
+            damage = damage + data.BonusDamage
         else
-            data.BonusDamage=0
+            data.BonusDamage = 0
         end
     end
 
-    local currentDistance=0
+    local currentDistance = 0
     local bullet = AddSpecialEffect(effectmodel, xs, ys)
     BlzSetSpecialEffectYaw(bullet, math.rad(angle))
     local CollisionEnemy = false
@@ -46,28 +48,42 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
     local heroCurrent = hero
     local dist = 0
     local rotationShieldAngle = 0
-    local newAngle=angle
-    local enemy=nil
+    local newAngle = angle
+    local enemy = nil
+    local bounceCount = 0
+    local bounceMax=1
     TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
         dist = dist + speed
         delay = delay - speed
-        currentDistance=currentDistance+speed
+        currentDistance = currentDistance + speed
         local x, y, z = BlzGetLocalSpecialEffectX(bullet), BlzGetLocalSpecialEffectY(bullet), BlzGetLocalSpecialEffectZ(bullet)
         local zGround = GetTerrainZ(MoveX(x, speed * 2, angleCurrent), MoveY(y, speed * 2, angleCurrent))
 
-        if effectmodel=="Firebrand Shot Silver"  and currentDistance>=300 then -- самонаводка
+        if effectmodel == "Firebrand Shot Silver" and currentDistance >= 300 then
+            -- самонаводка
 
             if enemy then
-                newAngle=AngleBetweenXY(x,y,GetUnitXY(enemy))/ bj_DEGTORAD
-                angleCurrent = lerpTheta(angleCurrent, newAngle, TIMER_PERIOD * 2) -- хороший магнетизм уже при 8
+                newAngle = AngleBetweenXY(x, y, GetUnitXY(enemy)) / bj_DEGTORAD
+                angleCurrent = lerpTheta(angleCurrent, newAngle, TIMER_PERIOD * 0) -- хороший магнетизм уже при 8
             else
-                _,enemy=UnitDamageArea(hero, 0, x, y, 300)
+                _, enemy = UnitDamageArea(hero, 0, x, y, 300)
             end
         end
 
         BlzSetSpecialEffectYaw(bullet, math.rad(angleCurrent))
         local nx, ny = MoveXY(x, y, speed, angleCurrent)
         BlzSetSpecialEffectPosition(bullet, nx, ny, z) -- было z-2
+        if bounceCount<=bounceMax then
+            local bounceFact=false
+            angleCurrent,bounceFact = CHKBouncing(x, y, nx, ny, speed) ---------------- баунсинг
+            nx, ny = MoveXY(x, y, speed, angleCurrent)
+            if bounceFact then
+                bounceCount=bounceCount+1
+                --print(bounceCount)
+            end
+        else
+            --print('превышено число отскоков')
+        end
 
         SetFogStateRadius(GetOwningPlayer(heroCurrent), FOG_OF_WAR_VISIBLE, x, y, 400, true)-- Небольгая подсветка
         if effectmodel == "Abilities\\Weapons\\SentinelMissile\\SentinelMissile.mdl" then
@@ -85,7 +101,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
                 if IsUnitInRangeXY(hero, x, y, 80) and data.ReversShield then
                     data.EffInRightHand = AddSpecialEffectTarget("stoneshild", data.UnitHero, "hand, right")
                     -- data.ShieldThrow = false
-                    DestroyEffect(bullet)
+                    DestroyBullet(bullet)
                     DestroyTimer(GetExpiredTimer())
                     data.ReversShield = false
                     data.ShieldThrow = false
@@ -147,7 +163,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
                         else
                             FlyTextTagShieldXY(xe, ye, L("Разрушен", "Destroyed"), GetOwningPlayer(data.UnitHero))
                             reverse = true
-                            DestroyEffect(bullet)
+                            DestroyBullet(bullet)
                             DestroyTimer(GetExpiredTimer())
                         end
 
@@ -176,7 +192,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
                         reverse = true
                         --print("снаряд уничтожен будет")
                         FlyTextTagShieldXY(nx, ny, L("Разрушен", "Destroyed"), GetOwningPlayer(data.UnitHero))
-                        DestroyEffect(bullet)
+                        DestroyBullet(bullet)
                         DestroyTimer(GetExpiredTimer())
                     end
                 end
@@ -184,11 +200,14 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
         end
         CollisisonDestr = PointContentDestructable(x, y, CollisionRange, false, 0, hero)
         local PerepadZ = zGround - z
-        if not reverse and delay <= 0 and (dist > maxDistance or CollisionEnemy or CollisisonDestr or IsUnitType(DamagingUnit, UNIT_TYPE_STRUCTURE) or PerepadZ > 20) then
+
+        if not reverse and delay <= 0 and (dist > maxDistance or CollisionEnemy or IsUnitType(DamagingUnit, UNIT_TYPE_STRUCTURE) or PerepadZ > 20) then
+            --or CollisisonDestr
+            --
+            --or IsTerrainPathable(nx, ny, PATHING_TYPE_WALKABILITY)
+            --print("попал?",CollisionEnemy,reverse,delay)
             if CollisisonDestr then
-                if GetUnitTypeId(hero)==HeroID then
-                    --print("попал в стену")
-                end
+
                 if effectmodel == "Abilities\\Weapons\\GryphonRiderMissile\\GryphonRiderMissile.mdl" then
                     -- print("в стену молот")
                     if IsUnitType(hero, UNIT_TYPE_HERO) then
@@ -213,44 +232,73 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
                 flag = "all"
             end
             UnitDamageArea(heroCurrent, damage, x, y, CollisionRange, flag) -- УРОН ПРИ ПОПАДАНИИ
-            --print("попал в существо или в стену или макс дальность")
-            if effectmodel=="snowball" then
-                local tempEff=AddSpecialEffect("Abilities\\Weapons\\LichMissile\\LichMissile",x,y)
-                BlzSetSpecialEffectZ(tempEff,z)
+
+
+
+            if effectmodel == "snowball" then
+                local tempEff = AddSpecialEffect("Abilities\\Weapons\\LichMissile\\LichMissile", x, y)
+                BlzSetSpecialEffectZ(tempEff, z)
                 DestroyEffect(tempEff)
             end
-            if GetUnitTypeId(DamagingUnit)==FourCC("h009") and GetUnitUserData(DamagingUnit)==100 then -- аниме девочка
-                SetUnitFacingToFaceUnitTimed(DamagingUnit,heroCurrent,0)
-                SetUnitAnimation(DamagingUnit,"attack")
+            if GetUnitTypeId(DamagingUnit) == FourCC("h009") and GetUnitUserData(DamagingUnit) == 100 then
+                -- аниме девочка
+                SetUnitFacingToFaceUnitTimed(DamagingUnit, heroCurrent, 0)
+                SetUnitAnimation(DamagingUnit, "attack")
                 --HealUnit(DamagingUnit,damage*0.7)
                 --print("обнулённый урон?")
                 FlyTextTagShieldXY(GetUnitX(DamagingUnit), GetUnitY(DamagingUnit), "Отбила", GetOwningPlayer(heroCurrent))
-                CreateAndForceBullet(DamagingUnit,GetUnitFacing(DamagingUnit)+GetRandomInt(-15,15),60,effectmodel)
+                CreateAndForceBullet(DamagingUnit, GetUnitFacing(DamagingUnit) + GetRandomInt(-15, 15), 60, effectmodel)
 
                 local eff = AddSpecialEffect("DefendCaster", GetUnitXY(DamagingUnit))
                 local AngleSource = AngleBetweenUnits(heroCurrent, DamagingUnit)
                 BlzSetSpecialEffectYaw(eff, math.rad(AngleSource - 180))
                 DestroyEffect(eff)
-                QueueUnitAnimation(DamagingUnit,"stand")
+                QueueUnitAnimation(DamagingUnit, "stand")
             end
 
             if DamagingUnit and IsUnitType(heroCurrent, UNIT_TYPE_HERO) then
                 local data = GetUnitData(heroCurrent)
                 --print("Мы в ког-то попали")
-                if GetUnitTypeId(DamagingUnit)==FourCC("opeo") then
-                    SetUnitAnimation(DamagingUnit,"death")
-                    UnitAddAbility(DamagingUnit,FourCC("Aloc"))
-                    peonRescue=peonRescue+1
-                    normal_sound("Speech\\Rofl\\disconnect_"..GetRandomInt(1,4),GetUnitXY(DamagingUnit))
+                if GetUnitTypeId(DamagingUnit) == FourCC("opeo") then
+                    SetUnitAnimation(DamagingUnit, "death")
+                    UnitAddAbility(DamagingUnit, FourCC("Aloc"))
+                    peonRescue = peonRescue + 1
+                    normal_sound("Speech\\Rofl\\disconnect_" .. GetRandomInt(1, 4), GetUnitXY(DamagingUnit))
 
+                end
+                if GetUnitTypeId(DamagingUnit) == FourCC("e006") and false then
+                    --Отключил
+                    HealUnit(DamagingUnit)
+                    SetUnitOwner(DamagingUnit, Player(10), true)
+                    local refAngle = 90
+                    local normal = 0
+                    local v1 = Vector:new(x + 2, y + 2, z)
+                    local v2 = Vector:new(x + 2, y, z)
+                    local v3 = Vector:new(x, y + 2, z)
+                    normal = GetNormal(v1, v2, v3)
+
+                    local vector = Vector:new(x, y, z)
+                    local newVector = vector
+                    newVector = VectorSum(newVector, vector:yawPitchOffset(speed, angle * (math.pi / 180), 0.0))
+                    local curVelocity = newVector
+                    --print(curVelocity.x,"curVelocity")
+                    --print(normal.x,"normal")
+                    local refVector = Reflect(curVelocity, normal);
+
+                    refAngle = AngleBetweenXY(x, y, refVector.x, refVector.y) / bj_DEGTORAD
+                    print("Рикошет", "нормальвектор=", normal, "угол=", refAngle)
+
+                    CreateAndForceBullet(heroCurrent, refAngle, speed, effectmodel, GetUnitX(DamagingUnit), GetUnitY(DamagingUnit), nil, nil, 200)
                 end
 
                 if data.KnockRMB then
                     UnitAddForceSimple(DamagingUnit, angleCurrent, speed / 4, 300, nil, heroCurrent)
                 end
             end
-            DestroyEffect(bullet)
+            DestroyBullet(bullet)
             DestroyTimer(GetExpiredTimer())
+            --print("уничтожен по причинам выше")
+
             if effectmodel == "Abilities\\Weapons\\FireBallMissile\\FireBallMissile.mdl" then
                 --print("взрыв")
                 --UnitDamageArea(heroCurrent, damage, x, y, CollisionRange*2)
@@ -283,7 +331,6 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
                 local data = GetUnitData(heroCurrent)
                 local xd, yd = GetUnitXY(DamagingUnit)
                 GoldenTouch(data, DamagingUnit)
-
 
                 if data.DashPerAttack then
                     UnitDamageArea(heroCurrent, 0, xd, yd, 100, "push")
@@ -351,10 +398,14 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
             end
 
             if not DamagingUnit then
-                DestroyEffect(bullet)
+                DestroyBullet(bullet)
                 DestroyTimer(GetExpiredTimer())
             end
         end
     end)
     return bullet
+end
+
+function DestroyBullet(bullet)
+    DestroyEffect(bullet)
 end

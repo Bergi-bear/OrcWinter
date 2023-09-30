@@ -3,7 +3,6 @@ TIMER_PERIOD = 1 / 32
 TIMER_PERIOD64 = 1 / 64
 HERO = {}
 HeroID = FourCC("O000")
-
 Acceleration = true --скорение при клике
 
 function InitAnimations(hero, data)

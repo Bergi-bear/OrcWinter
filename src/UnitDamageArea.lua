@@ -189,6 +189,13 @@ function UnitDamageArea(u, damage, x, y, range, flag, paramTable)
     end
     if PointContentDestructable(x, y, range, true, 1 + damage, u) then
         isdamage = true
+        if IsUnitType(u,UNIT_TYPE_HERO) then
+            local data=GetUnitData(u)
+            if data.damageIsBouncing then -- урон из отраженного источника
+                isdamage = false
+            end
+        end
+
     end
     return isdamage, hero, k, all
 end

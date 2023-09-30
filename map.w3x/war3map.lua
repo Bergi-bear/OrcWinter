@@ -37,6 +37,8 @@ gg_rct_AIStartBoss = nil
 gg_rct_Region_019 = nil
 gg_rct_Region_020 = nil
 gg_rct_Region_021 = nil
+gg_rct_Region_022 = nil
+gg_rct_Region_023 = nil
 gg_cam_OnPeonsandTrall = nil
 gg_cam_OnPineRound = nil
 gg_cam_OnPeons = nil
@@ -54,6 +56,7 @@ gg_cam_WolfEnd = nil
 gg_cam_SeeOnWolf = nil
 gg_cam_TalkMerch = nil
 gg_cam_InPeonHome = nil
+gg_cam_TavernaEnd = nil
 gg_snd_Intro1 = nil
 gg_snd_Intro2 = nil
 gg_snd_Intro3 = nil
@@ -143,11 +146,10 @@ gg_unit_h006_0173 = nil
 gg_unit_h007_0171 = nil
 gg_unit_o002_0203 = nil
 gg_unit_h009_0197 = nil
+gg_unit_e007_0258 = nil
+gg_unit_hrif_0259 = nil
 gg_dest_B004_2162 = nil
 gg_dest_B007_5312 = nil
-gg_rct_Region_022 = nil
-gg_cam_TavernaEnd = nil
-gg_rct_Region_023 = nil
 function InitGlobals()
 udg_PressESC = false
 udg_PressESCYETTY = false
@@ -422,6 +424,7 @@ gg_unit_o002_0203 = BlzCreateUnitWithSkin(p, FourCC("o002"), -13047.3, 8357.1, 3
 u = BlzCreateUnitWithSkin(p, FourCC("h00A"), 5159.2, 6586.8, 281.200, FourCC("h00A"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), -1503.4, 1375.2, 5.812, FourCC("h002"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), -10937.8, 8908.1, 5.812, FourCC("h002"))
+gg_unit_hrif_0259 = BlzCreateUnitWithSkin(p, FourCC("hrif"), 7201.0, -6085.0, 296.893, FourCC("hrif"))
 end
 
 function CreateUnitsForPlayer1()
@@ -690,6 +693,16 @@ u = BlzCreateUnitWithSkin(p, FourCC("nwwf"), -5398.1, 1103.5, 71.228, FourCC("nw
 u = BlzCreateUnitWithSkin(p, FourCC("nwwf"), -1350.5, 6051.8, 169.624, FourCC("nwwf"))
 end
 
+function CreateUnitsForPlayer22()
+local p = Player(22)
+local u
+local unitID
+local t
+local life
+
+gg_unit_e007_0258 = BlzCreateUnitWithSkin(p, FourCC("e007"), 7128.4, -5826.1, 334.650, FourCC("e007"))
+end
+
 function CreateNeutralHostile()
 local p = Player(PLAYER_NEUTRAL_AGGRESSIVE)
 local u
@@ -815,9 +828,9 @@ u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -11338.5, 9298.9, 69.005, FourCC("o
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -11153.9, 9318.8, 91.867, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2002.5, -2307.7, -89.319, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2002.5, -2307.7, 270.681, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1921.2, -2310.4, -82.965, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1921.2, -2310.4, 277.035, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2056.0, -2376.5, 13.303, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
@@ -829,9 +842,9 @@ u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1869.8, -2452.6, 100.278, FourCC("
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2004.3, -1854.9, 8.268, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1954.0, -1790.8, -79.046, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1954.0, -1790.8, 280.954, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1876.9, -1784.8, -87.575, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1876.9, -1784.8, 272.425, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1950.6, -1928.7, 100.278, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
@@ -851,7 +864,7 @@ u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2109.9, -1858.4, 186.494, FourCC("
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2111.0, -1709.7, 171.928, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2196.5, -1606.3, -75.969, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2196.5, -1606.3, 284.031, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2067.1, -1508.4, 249.784, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
@@ -873,17 +886,19 @@ u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1761.7, -2225.9, 170.997, FourCC("
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1756.4, -2172.9, 187.148, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1829.5, -2127.1, -71.051, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1829.5, -2127.1, 288.949, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("n00A"), -2302.6, -1958.3, 208.427, FourCC("n00A"))
 u = BlzCreateUnitWithSkin(p, FourCC("n00A"), -2236.8, -2022.7, 3.934, FourCC("n00A"))
 u = BlzCreateUnitWithSkin(p, FourCC("n00A"), -1810.1, -1991.2, 239.706, FourCC("n00A"))
 u = BlzCreateUnitWithSkin(p, FourCC("n00B"), -1572.0, -1966.7, 50.162, FourCC("n00B"))
 SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("n00B"), -1623.2, -1785.0, -36.712, FourCC("n00B"))
+u = BlzCreateUnitWithSkin(p, FourCC("n00B"), -1623.2, -1785.0, 323.288, FourCC("n00B"))
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("n00B"), -1429.4, -2052.7, 124.917, FourCC("n00B"))
 SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("e006"), -1189.8, 140.1, 85.270, FourCC("e006"))
+u = BlzCreateUnitWithSkin(p, FourCC("e006"), -1514.1, 538.8, 85.270, FourCC("e006"))
 end
 
 function CreatePlayerBuildings()
@@ -893,6 +908,7 @@ function CreatePlayerUnits()
 CreateUnitsForPlayer0()
 CreateUnitsForPlayer1()
 CreateUnitsForPlayer10()
+CreateUnitsForPlayer22()
 end
 
 function CreateAllUnits()
@@ -1530,6 +1546,7 @@ function MoveEffectTimedWSpeed(eff, speed, angle, timed)
     end)
 end
 function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, maxDistance, delay)
+
     local CollisionRange = 90
     if not damage then
         damage = 200
@@ -1545,24 +1562,25 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
     end
     local zhero = GetUnitZ(hero) + 60
 
-    if IsUnitTrap(hero) then --отдельные настройки для ловушек
-        CollisionRange=60
+    if IsUnitTrap(hero) then
+        --отдельные настройки для ловушек
+        CollisionRange = 60
         zhero = GetUnitZ(hero) + 95
     end
-    if effectmodel=="BlastMissile" then
-        CollisionRange=180
-        delay=CollisionRange
+    if effectmodel == "BlastMissile" then
+        CollisionRange = 180
+        delay = CollisionRange
     end
-    if effectmodel=="Firebrand Shot Silver" then
-        local data=GetUnitData(hero)
-        if data.EggCount>0 then
-            damage=damage+data.BonusDamage
+    if effectmodel == "Firebrand Shot Silver" then
+        local data = GetUnitData(hero)
+        if data.EggCount > 0 then
+            damage = damage + data.BonusDamage
         else
-            data.BonusDamage=0
+            data.BonusDamage = 0
         end
     end
 
-    local currentDistance=0
+    local currentDistance = 0
     local bullet = AddSpecialEffect(effectmodel, xs, ys)
     BlzSetSpecialEffectYaw(bullet, math.rad(angle))
     local CollisionEnemy = false
@@ -1577,28 +1595,42 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
     local heroCurrent = hero
     local dist = 0
     local rotationShieldAngle = 0
-    local newAngle=angle
-    local enemy=nil
+    local newAngle = angle
+    local enemy = nil
+    local bounceCount = 0
+    local bounceMax=1
     TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
         dist = dist + speed
         delay = delay - speed
-        currentDistance=currentDistance+speed
+        currentDistance = currentDistance + speed
         local x, y, z = BlzGetLocalSpecialEffectX(bullet), BlzGetLocalSpecialEffectY(bullet), BlzGetLocalSpecialEffectZ(bullet)
         local zGround = GetTerrainZ(MoveX(x, speed * 2, angleCurrent), MoveY(y, speed * 2, angleCurrent))
 
-        if effectmodel=="Firebrand Shot Silver"  and currentDistance>=300 then -- самонаводка
+        if effectmodel == "Firebrand Shot Silver" and currentDistance >= 300 then
+            -- самонаводка
 
             if enemy then
-                newAngle=AngleBetweenXY(x,y,GetUnitXY(enemy))/ bj_DEGTORAD
-                angleCurrent = lerpTheta(angleCurrent, newAngle, TIMER_PERIOD * 2) -- хороший магнетизм уже при 8
+                newAngle = AngleBetweenXY(x, y, GetUnitXY(enemy)) / bj_DEGTORAD
+                angleCurrent = lerpTheta(angleCurrent, newAngle, TIMER_PERIOD * 0) -- хороший магнетизм уже при 8
             else
-                _,enemy=UnitDamageArea(hero, 0, x, y, 300)
+                _, enemy = UnitDamageArea(hero, 0, x, y, 300)
             end
         end
 
         BlzSetSpecialEffectYaw(bullet, math.rad(angleCurrent))
         local nx, ny = MoveXY(x, y, speed, angleCurrent)
         BlzSetSpecialEffectPosition(bullet, nx, ny, z) -- было z-2
+        if bounceCount<=bounceMax then
+            local bounceFact=false
+            angleCurrent,bounceFact = CHKBouncing(x, y, nx, ny, speed) ---------------- баунсинг
+            nx, ny = MoveXY(x, y, speed, angleCurrent)
+            if bounceFact then
+                bounceCount=bounceCount+1
+                print(bounceCount)
+            end
+        else
+            print('превышено число отскоков')
+        end
 
         SetFogStateRadius(GetOwningPlayer(heroCurrent), FOG_OF_WAR_VISIBLE, x, y, 400, true)-- Небольгая подсветка
         if effectmodel == "Abilities\\Weapons\\SentinelMissile\\SentinelMissile.mdl" then
@@ -1616,7 +1648,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
                 if IsUnitInRangeXY(hero, x, y, 80) and data.ReversShield then
                     data.EffInRightHand = AddSpecialEffectTarget("stoneshild", data.UnitHero, "hand, right")
                     -- data.ShieldThrow = false
-                    DestroyEffect(bullet)
+                    DestroyBullet(bullet)
                     DestroyTimer(GetExpiredTimer())
                     data.ReversShield = false
                     data.ShieldThrow = false
@@ -1678,7 +1710,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
                         else
                             FlyTextTagShieldXY(xe, ye, L("Разрушен", "Destroyed"), GetOwningPlayer(data.UnitHero))
                             reverse = true
-                            DestroyEffect(bullet)
+                            DestroyBullet(bullet)
                             DestroyTimer(GetExpiredTimer())
                         end
 
@@ -1707,7 +1739,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
                         reverse = true
                         --print("снаряд уничтожен будет")
                         FlyTextTagShieldXY(nx, ny, L("Разрушен", "Destroyed"), GetOwningPlayer(data.UnitHero))
-                        DestroyEffect(bullet)
+                        DestroyBullet(bullet)
                         DestroyTimer(GetExpiredTimer())
                     end
                 end
@@ -1715,11 +1747,14 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
         end
         CollisisonDestr = PointContentDestructable(x, y, CollisionRange, false, 0, hero)
         local PerepadZ = zGround - z
-        if not reverse and delay <= 0 and (dist > maxDistance or CollisionEnemy or CollisisonDestr or IsUnitType(DamagingUnit, UNIT_TYPE_STRUCTURE) or PerepadZ > 20) then
+
+        if not reverse and delay <= 0 and (dist > maxDistance or CollisionEnemy or IsUnitType(DamagingUnit, UNIT_TYPE_STRUCTURE) or PerepadZ > 20) then
+            --or CollisisonDestr
+            --
+            --or IsTerrainPathable(nx, ny, PATHING_TYPE_WALKABILITY)
+            --print("попал?",CollisionEnemy,reverse,delay)
             if CollisisonDestr then
-                if GetUnitTypeId(hero)==HeroID then
-                    --print("попал в стену")
-                end
+
                 if effectmodel == "Abilities\\Weapons\\GryphonRiderMissile\\GryphonRiderMissile.mdl" then
                     -- print("в стену молот")
                     if IsUnitType(hero, UNIT_TYPE_HERO) then
@@ -1744,44 +1779,73 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
                 flag = "all"
             end
             UnitDamageArea(heroCurrent, damage, x, y, CollisionRange, flag) -- УРОН ПРИ ПОПАДАНИИ
-            --print("попал в существо или в стену или макс дальность")
-            if effectmodel=="snowball" then
-                local tempEff=AddSpecialEffect("Abilities\\Weapons\\LichMissile\\LichMissile",x,y)
-                BlzSetSpecialEffectZ(tempEff,z)
+
+
+
+            if effectmodel == "snowball" then
+                local tempEff = AddSpecialEffect("Abilities\\Weapons\\LichMissile\\LichMissile", x, y)
+                BlzSetSpecialEffectZ(tempEff, z)
                 DestroyEffect(tempEff)
             end
-            if GetUnitTypeId(DamagingUnit)==FourCC("h009") and GetUnitUserData(DamagingUnit)==100 then -- аниме девочка
-                SetUnitFacingToFaceUnitTimed(DamagingUnit,heroCurrent,0)
-                SetUnitAnimation(DamagingUnit,"attack")
+            if GetUnitTypeId(DamagingUnit) == FourCC("h009") and GetUnitUserData(DamagingUnit) == 100 then
+                -- аниме девочка
+                SetUnitFacingToFaceUnitTimed(DamagingUnit, heroCurrent, 0)
+                SetUnitAnimation(DamagingUnit, "attack")
                 --HealUnit(DamagingUnit,damage*0.7)
                 --print("обнулённый урон?")
                 FlyTextTagShieldXY(GetUnitX(DamagingUnit), GetUnitY(DamagingUnit), "Отбила", GetOwningPlayer(heroCurrent))
-                CreateAndForceBullet(DamagingUnit,GetUnitFacing(DamagingUnit)+GetRandomInt(-15,15),60,effectmodel)
+                CreateAndForceBullet(DamagingUnit, GetUnitFacing(DamagingUnit) + GetRandomInt(-15, 15), 60, effectmodel)
 
                 local eff = AddSpecialEffect("DefendCaster", GetUnitXY(DamagingUnit))
                 local AngleSource = AngleBetweenUnits(heroCurrent, DamagingUnit)
                 BlzSetSpecialEffectYaw(eff, math.rad(AngleSource - 180))
                 DestroyEffect(eff)
-                QueueUnitAnimation(DamagingUnit,"stand")
+                QueueUnitAnimation(DamagingUnit, "stand")
             end
 
             if DamagingUnit and IsUnitType(heroCurrent, UNIT_TYPE_HERO) then
                 local data = GetUnitData(heroCurrent)
                 --print("Мы в ког-то попали")
-                if GetUnitTypeId(DamagingUnit)==FourCC("opeo") then
-                    SetUnitAnimation(DamagingUnit,"death")
-                    UnitAddAbility(DamagingUnit,FourCC("Aloc"))
-                    peonRescue=peonRescue+1
-                    normal_sound("Speech\\Rofl\\disconnect_"..GetRandomInt(1,4),GetUnitXY(DamagingUnit))
+                if GetUnitTypeId(DamagingUnit) == FourCC("opeo") then
+                    SetUnitAnimation(DamagingUnit, "death")
+                    UnitAddAbility(DamagingUnit, FourCC("Aloc"))
+                    peonRescue = peonRescue + 1
+                    normal_sound("Speech\\Rofl\\disconnect_" .. GetRandomInt(1, 4), GetUnitXY(DamagingUnit))
 
+                end
+                if GetUnitTypeId(DamagingUnit) == FourCC("e006") and false then
+                    --Отключил
+                    HealUnit(DamagingUnit)
+                    SetUnitOwner(DamagingUnit, Player(10), true)
+                    local refAngle = 90
+                    local normal = 0
+                    local v1 = Vector:new(x + 2, y + 2, z)
+                    local v2 = Vector:new(x + 2, y, z)
+                    local v3 = Vector:new(x, y + 2, z)
+                    normal = GetNormal(v1, v2, v3)
+
+                    local vector = Vector:new(x, y, z)
+                    local newVector = vector
+                    newVector = VectorSum(newVector, vector:yawPitchOffset(speed, angle * (math.pi / 180), 0.0))
+                    local curVelocity = newVector
+                    --print(curVelocity.x,"curVelocity")
+                    --print(normal.x,"normal")
+                    local refVector = Reflect(curVelocity, normal);
+
+                    refAngle = AngleBetweenXY(x, y, refVector.x, refVector.y) / bj_DEGTORAD
+                    print("Рикошет", "нормальвектор=", normal, "угол=", refAngle)
+
+                    CreateAndForceBullet(heroCurrent, refAngle, speed, effectmodel, GetUnitX(DamagingUnit), GetUnitY(DamagingUnit), nil, nil, 200)
                 end
 
                 if data.KnockRMB then
                     UnitAddForceSimple(DamagingUnit, angleCurrent, speed / 4, 300, nil, heroCurrent)
                 end
             end
-            DestroyEffect(bullet)
+            DestroyBullet(bullet)
             DestroyTimer(GetExpiredTimer())
+            --print("уничтожен по причинам выше")
+
             if effectmodel == "Abilities\\Weapons\\FireBallMissile\\FireBallMissile.mdl" then
                 --print("взрыв")
                 --UnitDamageArea(heroCurrent, damage, x, y, CollisionRange*2)
@@ -1814,7 +1878,6 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
                 local data = GetUnitData(heroCurrent)
                 local xd, yd = GetUnitXY(DamagingUnit)
                 GoldenTouch(data, DamagingUnit)
-
 
                 if data.DashPerAttack then
                     UnitDamageArea(heroCurrent, 0, xd, yd, 100, "push")
@@ -1882,13 +1945,18 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
             end
 
             if not DamagingUnit then
-                DestroyEffect(bullet)
+                DestroyBullet(bullet)
                 DestroyTimer(GetExpiredTimer())
             end
         end
     end)
     return bullet
 end
+
+function DestroyBullet(bullet)
+    DestroyEffect(bullet)
+end
+
 do
     local InitGlobalsOrigin = InitGlobals
     function InitGlobals()
@@ -2265,6 +2333,62 @@ function InitDeathEvent()
 end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 30.09.2023 16:57
+---
+--[[ -- закомменченно тут
+RealGetUnitX = GetUnitX
+RealGetUnitY = GetUnitY
+
+
+function GetUnitRealX(unit)
+    local collision = math.floor(BlzGetUnitCollisionSize(unit) + 0.5)
+
+    if not IsUnitType(unit, UNIT_TYPE_STRUCTURE) then
+        if (collision < 32 and collision > 15) or collision > 47 then return RealGetUnitX(unit) - 16. end
+    end
+
+    return RealGetUnitX(unit)
+end
+
+function GetUnitRealY(unit)
+    local collision = math.floor(BlzGetUnitCollisionSize(unit) + 0.5)
+
+    if not IsUnitType(unit, UNIT_TYPE_STRUCTURE) then
+        if (collision < 32 and collision > 15) or collision > 47 then return RealGetUnitY(unit) - 16. end
+    end
+
+    return RealGetUnitY(unit)
+end
+--[[
+local GetUnitRealX = GetUnitX
+function GetUnitX(whichUnit)
+    local collision = math.floor(BlzGetUnitCollisionSize(whichUnit) + 0.5)
+
+    if not IsUnitType(whichUnit, UNIT_TYPE_STRUCTURE) then
+        if (collision < 32 and collision > 15) or collision > 47 then
+            return GetUnitRealX(whichUnit) - 16.
+        end
+    end
+end
+
+
+local GetUnitRealY = GetUnitY
+function GetUnitY(whichUnit)
+    local collision = math.floor(BlzGetUnitCollisionSize(whichUnit) + 0.5)
+
+    if not IsUnitType(whichUnit, UNIT_TYPE_STRUCTURE) then
+        if (collision < 32 and collision > 15) or collision > 47 then
+            return GetUnitRealY(whichUnit) - 16.
+        end
+    end
+    return GetUnitRealY(whichUnit)
+end
+]]
+
+
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
 --- Created by Bergi.
 --- DateTime: 15.02.2021 18:51
 ---
@@ -2346,6 +2470,8 @@ do
     local InitGlobalsOrigin = InitGlobals
     function InitGlobals()
         InitGlobalsOrigin()
+        --GetUnitX = GetUnitRealX
+        --GetUnitY = GetUnitRealY
         TimerStart(CreateTimer(), .01, false, function()
             DestroyTimer(GetExpiredTimer())
             print("<<<")
@@ -2378,7 +2504,7 @@ do
             --ShapeInit()
             --SetDayNightModels("Environment\\DNC\\DNCAshenvale\\DNCAshenvaleTerrain\\DNCAshenvaleTerrain.mdl", "Environment\\DNC\\DNCAshenvale\\DNCAshenvaleUnit\\DNCAshenvaleUnit.mdl")
             --SetDayNightModels("", "")
-
+            InitRicoshet()
             ClearMapMusicBJ()
             PlayMusicBJ("Endless Snowbanks")
             SetMusicVolumeBJ(100)
@@ -3011,6 +3137,82 @@ function InitMouseMoveTrigger()
 end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 30.09.2023 11:38
+---
+do
+    local RANGE             = 10 -- Расстояние, на котором проходит проверка
+    local DUMMY             = FourCC('wolg') -- Ид предмета для проверки проходимости
+
+    local rect---@type rect
+    local item ---@type item
+
+    local InitGlobalsOrigin = InitGlobals
+    function InitGlobals()
+        InitGlobalsOrigin()
+        rect = Rect(0, 0, 128, 128)
+        item = CreateItem(DUMMY, 0, 0)
+        SetItemVisible(item, true)
+    end
+
+    local items = {}
+    local function hide()
+        local target = GetEnumItem()
+        if not IsItemVisible(target) then return end
+        table.insert(items, target)
+        SetItemVisible(target, false)
+    end
+
+    ---@param x real
+    ---@param y real
+    ---@return boolean
+    function IsTerrainWalkable(x, y)
+        MoveRectTo(rect, x, y)
+        EnumItemsInRect(rect, nil, hide)
+
+        SetItemPosition(item, x, y)
+        local dx = GetItemX(item) - x
+        local dy = GetItemY(item) - y
+        SetItemVisible(item, false)
+
+        for i = 1, #items do
+            SetItemVisible(items[i], false)
+        end
+        items = {}
+
+        return dx * dx + dy * dy <= RANGE * RANGE and not IsTerrainPathable(x, y, PATHING_TYPE_WALKABILITY),GetItemX(item),GetItemY(item)
+    end
+end
+
+---@param x real
+---@param y real
+---@return boolean
+function IsTerrainDeepWater (x, y)
+    return not IsTerrainPathable(x, y, PATHING_TYPE_FLOATABILITY) and IsTerrainPathable(x, y, PATHING_TYPE_WALKABILITY)
+end
+
+---@param x real
+---@param y real
+---@return boolean
+function IsTerrainShallowWater (x, y)
+    return not IsTerrainPathable(x, y, PATHING_TYPE_FLOATABILITY) and not IsTerrainPathable(x, y, PATHING_TYPE_WALKABILITY) and IsTerrainPathable(x, y, PATHING_TYPE_BUILDABILITY)
+end
+
+---@param x real
+---@param y real
+---@return boolean
+function IsTerrainLand(x, y)
+    return IsTerrainPathable(x, y, PATHING_TYPE_FLOATABILITY)
+end
+
+---@param x real
+---@param y real
+---@return boolean
+function IsTerrainPlatform (x, y)
+    return not IsTerrainPathable(x, y, PATHING_TYPE_FLOATABILITY) and not IsTerrainPathable(x, y, PATHING_TYPE_WALKABILITY) and not IsTerrainPathable(x, y, PATHING_TYPE_BUILDABILITY)
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
 --- Created by Bergi.
 --- DateTime: 27.05.2020 23:15
 ---
@@ -3168,6 +3370,9 @@ end
 function Vector:__mul(num)
     return Vector:new(self.x * num, self.y * num, self.z * num)
 end
+function VectorMulNumber(vector, num)
+    return Vector:new(vector.x * num, vector.y * num, vector.z * num)
+end
 
 function Vector:__div(num)
     return Vector:new(self.x / num, self.y / num, self.z / num)
@@ -3227,6 +3432,9 @@ end
 function VectorSum(vector1, vector2)
     return Vector:new(vector1.x + vector2.x, vector1.y + vector2.y, vector1.z + vector2.z)
 end
+function VectorMulVector(vector1, vector2)
+    return Vector:new(vector1.x * vector2.x, vector1.y * vector2.y, vector1.z * vector2.z)
+end
 
 function Vector:angleBetween2Vectors(vector1, vector2)
     --возвращает угол - Bergi ебобо
@@ -3235,6 +3443,44 @@ end
 
 function GetVectorFromPoint2D(x1, y1, x2, y2)
     return Vector:new(x2 - x1, y2, -y1, 0)
+end
+--- для системы рикошета
+function DotProduct(v1, v2)
+    local dot = v1.x * v2.x + v1.y * v2.y + v1.z * v2.z
+    print("dot", dot)
+    return dot -- число
+end
+
+--
+function Reflect(ray, normal)
+    local dot = DotProduct(ray, normal)
+    local a = -2 * dot --числ
+    local b = VectorMulNumber(normal, a)
+    local c = VectorSum(b, ray)
+    local ref = c
+
+    --return -2 * DotProduct(ray, normal) * normal + ray
+    return ref
+end
+function GetNormal(a, b, c)
+    local v1 = Vector:new(0, 0, 0)
+    local v2 = Vector:new(0, 0, 0)
+    local normal = Vector:new(0, 0, 0)
+
+    v1.x = a.x - b.x
+    v1.y = a.y - b.y
+    v1.z = a.z - b.z
+
+    v2.x = b.x - c.x
+    v2.y = b.y - c.y
+    v2.z = b.z - c.z
+
+    local wrki = SquareRoot(math.sqrt(v1.y * v2.z - v1.z * v2.y) + math.sqrt(v1.z * v2.x - v1.x * v2.z) + math.sqrt(v1.x * v2.y - v1.y * v2.x))
+    normal.x = (v1.y * v2.z - v1.z * v2.y) / wrki
+    normal.y = (v1.z * v2.x - v1.x * v2.z) / wrki
+    normal.z = (v1.x * v2.y - v1.y * v2.x) / wrki
+    print("нормаль получена? ", normal.x, normal.y, normal.z)
+    return normal -- vector3
 end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
@@ -3781,6 +4027,13 @@ function UnitDamageArea(u, damage, x, y, range, flag, paramTable)
     end
     if PointContentDestructable(x, y, range, true, 1 + damage, u) then
         isdamage = true
+        if IsUnitType(u,UNIT_TYPE_HERO) then
+            local data=GetUnitData(u)
+            if data.damageIsBouncing then -- урон из отраженного источника
+                isdamage = false
+            end
+        end
+
     end
     return isdamage, hero, k, all
 end
@@ -3849,9 +4102,9 @@ do
     local InitGlobalsOrigin = InitGlobals
     function InitGlobals()
         InitGlobalsOrigin()
-        TimerStart(CreateTimer(), .01, false, function()
-            InitTrapByID(FourCC("h000"))
-            InitTrapByID(FourCC("h001"))
+        TimerStart(CreateTimer(), 10, false, function() --инициализация ловушек
+            --InitTrapByID(FourCC("h000"))
+            --InitTrapByID(FourCC("h001"))
             --InitAllButton()
         end)
     end
@@ -3869,7 +4122,7 @@ function InitTrapByID(id)
     local _, k, rg = FindUnitOfType(id)
     local radiusActivate = 500
     local distanceSee = 1200
-    --print(k)
+    print(k, " стреляющих ловушек активировано")
     for i = 1, #rg do
         local u = rg[i]
         UnitAddAbility(u, FourCC("Aloc"))
@@ -8828,10 +9081,12 @@ function CastSnowBall(data, directionAngle)
             TimerStart(CreateTimer(), 0.15, false, function()
                 -- задержка замаха
                 CreateAndForceBullet(hero, directionAngle, 40, effModel,nil,nil,data.BaseDamage)
+                data.damageIsBouncing=true
                 if data.MorozkoCD then
                     if data.MorozkoCDCurrent<=0 then
                         local x,y=MoveXY(GetUnitX(hero),GetUnitY(hero),20,directionAngle-90)
                         CreateAndForceBullet(hero, directionAngle, 40, effModel,x,y,data.BaseDamage)
+
                         data.MorozkoCDCurrent=data.MorozkoCD
                         TimerStart(CreateTimer(), data.MorozkoCD, false, function()
                             data.MorozkoCDCurrent=0
@@ -8840,6 +9095,10 @@ function CastSnowBall(data, directionAngle)
                 end
                 data.MHoldSec = data.MHoldSec + 1
                 data.UnitInAttack = false
+
+                local xEnd,yEnd=MoveXY(GetUnitX(hero),GetUnitY(hero),50,directionAngle)
+                --StartHFOO(hero,xEnd,yEnd)
+
             end)
             TimerStart(CreateTimer(), data.AttackInterval, false, function() --0.35
                 data.AttackIsReady = true
@@ -8854,6 +9113,111 @@ function CastSnowBall(data, directionAngle)
             WolfAttackPeon(hero, directionAngle)
         end
     end
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 29.09.2023 15:11
+---
+function CHKBouncing(x, y, nx, ny, speed)
+    local angle = AngleBetweenXY(x, y, nx, ny) / bj_DEGTORAD
+    local has=false
+    if not IsTerrainWalkable(nx, ny) then
+        angle = 0 - (AngleBetweenXY(nx, ny, x, y) / bj_DEGTORAD)
+        nx, ny = MoveXY(x, y, speed, angle)
+        has=true
+        if not IsTerrainWalkable(nx, ny) then
+            angle = angle - 180
+            has=true
+        end
+    end
+    return angle,has
+end
+
+function CHKBouncingOLD(x, y, nx, ny)
+    -- так и не заработало
+    local A = {}
+    A.x = x
+    A.y = y
+
+    A.v = Vector:new(nx - A.x, ny - A.y, 0.00)
+    local x1 = 0
+    local y1 = 0
+    local b = {}
+    local speed = 0.0000001
+    print("avx", A.v.x)
+    A.x = A.x + speed * A.v.x
+    A.y = A.y + speed * A.v.y
+
+    SetItemPosition(TempItem, A.x, A.y)
+    SetItemVisible(TempItem, true)
+
+    x = GetItemX(TempItem)
+    y = GetItemY(TempItem)
+
+    if (x - 1.00 > A.x or x + 1.00 < A.x) or (y - 1.00 > A.y or y + 1.00 < A.y) then
+        print("первое условие")
+        A.x = A.x - speed * A.v.x
+        A.y = A.y - speed * A.v.y
+        -- right
+        x = A.x + 5.00
+        y = A.y
+        SetItemPosition(TempItem, x, y)
+        SetItemVisible(TempItem, true)
+
+        x1 = GetItemX(TempItem)
+        y1 = GetItemY(TempItem)
+
+        b[0] = (x1 - 1.00 > x or x1 + 1.00 < x) or (y1 - 1.00 > y or y1 + 1.00 < y)
+
+        --left
+        x = A.x - 5.00
+        y = A.y
+        SetItemPosition(TempItem, x, y)
+        SetItemVisible(TempItem, true)
+
+        x1 = GetItemX(TempItem)
+        y1 = GetItemY(TempItem)
+        b[1] = (x1 - 1.00 > x or x1 + 1.00 < x) or (y1 - 1.00 > y or y1 + 1.00 < y)
+
+        -- up
+        x = A.x
+        y = A.y + 5.00
+        SetItemPosition(TempItem, x, y)
+        SetItemVisible(TempItem, true)
+
+        x1 = GetItemX(TempItem)
+        y1 = GetItemY(TempItem)
+        b[2] = (x1 - 1.00 > x or x1 + 1.00 < x) or (y1 - 1.00 > y or y1 + 1.00 < y)
+
+        -- down
+        x = A.x
+        y = A.y - 5.00
+        SetItemPosition(TempItem, x, y)
+        SetItemVisible(TempItem, true)
+
+        x1 = GetItemX(TempItem)
+        y1 = GetItemY(TempItem)
+        b[3] = (x1 - 1.00 > x or x1 + 1.00 < x) or (y1 - 1.00 > y or y1 + 1.00 < y)
+
+        if b[0] or b[1] or b[2] or b[3] then
+            print("отражение")
+            if b[0] or b[1] then
+                A.v.x = -A.v.x
+                print("b0b1")
+            else
+                A.v.y = -A.v.y
+                print("b0b1 else")
+            end
+        else
+            --print("b0b1b2b3 else")
+            A.v.x = -A.v.x
+            A.v.y = -A.v.y
+        end
+    end
+    local angle = AngleBetweenXY(x1, y1, A.v.x, A.v.y) / bj_DEGTORAD
+    print("угол отражения в итоге", angle)
+    return angle
 end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
@@ -9348,6 +9712,236 @@ end
 
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 28.09.2023 20:17
+---
+---
+
+
+
+
+function InitTrig_BallMove()
+    gg_trg_BallMove = CreateTrigger()
+    DisableTrigger(gg_trg_BallMove)
+    TriggerRegisterTimerEventPeriodic(gg_trg_BallMove, 0.03)
+    TriggerAddAction(gg_trg_BallMove, function()
+
+        local x, y = GetUnitXY(udg_Ball)
+        local nx, ny = MoveXY(x, y, udg_BallSpeed, udg_BallFacing)
+
+        udg_BallFacing = CHKBouncing(x, y, nx, ny, udg_BallSpeed)
+        nx, ny = MoveXY(x, y, udg_BallSpeed, udg_BallFacing)
+
+        SetUnitPositionSmooth(udg_Ball, nx, ny)
+        udg_BallSpeed = udg_BallSpeed - 0.50
+        --print(udg_BallSpeed)
+
+        if udg_BallSpeed <= 0.00 then
+            DisableTrigger(GetTriggeringTrigger())
+        else
+        end
+    end)
+end
+
+function InitTrig_Init ()
+    gg_trg_Init = CreateTrigger()
+    TriggerRegisterTimerEventSingle(gg_trg_Init, 2.00)
+    TriggerAddAction(gg_trg_Init, function()
+        SetUnitPathing(udg_Ball, false)
+        --udg_BallFacing = (0.00 - AngleBetweenPoints(udg_BallPoint, udg_BallTempPoint))
+        udg_BallFacing = AngleBetweenPoints(udg_BallTempPoint, udg_BallPoint)
+    end)
+end
+
+function InitTrig_BallInit ()
+    gg_trg_BallInit = CreateTrigger()
+    TriggerRegisterUnitEvent(gg_trg_BallInit, gg_unit_e007_0258, EVENT_UNIT_DAMAGED)
+    TriggerAddAction(gg_trg_BallInit, function()
+        udg_Ball = gg_unit_e007_0258 --глобалка
+        udg_BallPoint = GetUnitLoc(udg_Ball)
+        if GetEventDamage() > 5 then
+            udg_BallSpeed = 40.00
+            udg_BallFacing = AngleBetweenPoints(GetUnitLoc(GetEventDamageSource()), udg_BallPoint)
+            EnableTrigger(gg_trg_BallMove)
+
+        end
+        RemoveLocation(udg_BallPoint)
+    end)
+    --print("событие урона на месте")
+end
+
+function InitBounceOnGUI()
+    InitTrig_BallInit()
+    InitTrig_Init()
+    InitTrig_BallMove()
+end
+
+--------------------------------------------- ДРУГАЯ СИСТЕМА!!!!!!!
+function StartHFOO(u, x, y)
+    print("запуск рикошетного снаряда")
+    local A = {}
+    A.x = GetUnitX(u)
+    A.y = GetUnitY(u)
+    A.z = GetTerrainZ(A.x, A.y)
+    local time = 1
+    A.v = Vector:new(x - A.x, y - A.y, 0.00) --Vector:new(x, y, z)
+    local dummy = CreateUnit(GetOwningPlayer(u), FourCC('hfoo'), A.x, A.y, Atan2(y - A.y, x - A.x) * bj_RADTODEG)
+    UnitAddAbility(dummy, FourCC('Arav'))
+
+    A.g = CreateGroup()
+
+    --SaveInteger(H, GetHandleId(t), 0, A)
+    TimerStart(CreateTimer(), 0.01, true, function()
+        --local MyStruct A = LoadInteger( H, GetHandleId( GetExpiredTimer( ) ), 0 )
+        --local x
+        --local y
+        local x1
+        local y1
+        local a
+        local b = {} --был массив
+        --print("avx=", A.v.x)
+        local speed = 0.05
+        --print(GetUnitName(A.dummy)," юнит???")a
+        A.x = A.x + speed * A.v.x
+        A.y = A.y + speed * A.v.y
+        A.z = A.z + speed * A.v.z
+
+        SetItemPosition(TempItem, A.x, A.y)
+        SetItemVisible(TempItem, false)
+
+        x = GetItemX(TempItem)
+        y = GetItemY(TempItem)
+
+        if (x - 1.00 > A.x or x + 1.00 < A.x) or (y - 1.00 > A.y or y + 1.00 < A.y) then
+            --print("первое условие")
+            A.x = A.x - speed * A.v.x
+            A.y = A.y - speed * A.v.y
+            A.z = A.z - speed * A.v.z
+
+            -- right
+            x = A.x + 5.00
+            y = A.y
+            SetItemPosition(TempItem, x, y)
+            SetItemVisible(TempItem, false)
+
+            x1 = GetItemX(TempItem)
+            y1 = GetItemY(TempItem)
+
+            b[0] = (x1 - 1.00 > x or x1 + 1.00 < x) or (y1 - 1.00 > y or y1 + 1.00 < y)
+
+            --left
+            x = A.x - 5.00
+            y = A.y
+            SetItemPosition(TempItem, x, y)
+            SetItemVisible(TempItem, false)
+
+            x1 = GetItemX(TempItem)
+            y1 = GetItemY(TempItem)
+            b[1] = (x1 - 1.00 > x or x1 + 1.00 < x) or (y1 - 1.00 > y or y1 + 1.00 < y)
+
+            -- up
+            x = A.x
+            y = A.y + 5.00
+            SetItemPosition(TempItem, x, y)
+            SetItemVisible(TempItem, false)
+
+            x1 = GetItemX(TempItem)
+            y1 = GetItemY(TempItem)
+            b[2] = (x1 - 1.00 > x or x1 + 1.00 < x) or (y1 - 1.00 > y or y1 + 1.00 < y)
+
+            -- down
+            x = A.x
+            y = A.y - 5.00
+            SetItemPosition(TempItem, x, y)
+            SetItemVisible(TempItem, false)
+
+            x1 = GetItemX(TempItem)
+            y1 = GetItemY(TempItem)
+            b[3] = (x1 - 1.00 > x or x1 + 1.00 < x) or (y1 - 1.00 > y or y1 + 1.00 < y)
+
+            if b[0] or b[1] or b[2] or b[3] then
+                --print("отражение")
+                if b[0] or b[1] then
+                    A.v.x = -A.v.x
+                    --print("b0b1")
+                else
+                    A.v.y = -A.v.y
+                    --print("b0b1 else")
+                end
+            else
+                --print("b0b1b2b3 else")
+                A.v.x = -A.v.x
+                A.v.y = -A.v.y
+            end
+        else
+            --// units
+            --print("а перебор вообще есть?")
+            GroupEnumUnitsInRange(TempGroup, GetUnitX(dummy), GetUnitY(dummy), 64, nil)
+            GroupRemoveUnit(TempGroup, dummy)
+            local e = nil
+            while true do
+                e = FirstOfGroup(TempGroup)
+                --print("встретился с ", GetUnitName(e))
+                if e == nil then
+                    break
+                    print("остановка")
+                end
+                GroupRemoveUnit(TempGroup, e)
+
+                if not IsUnitInGroup(e, A.g) and UnitAlive(e) and e ~= dummy and time <= 0 then
+                    -- and GetUnitTypeId(e) == FourCC('hfoo')
+                    x1 = GetUnitX(e)
+                    y1 = GetUnitY(e)
+                    a = Atan2BJ(A.y - y1, A.x - x1)
+
+                    --bj_lastCreatedUnit = CreateUnit(Player(0x00), 'u000', x1 + 24.00 * Cos(a), y1 + 24.00 * Sin(a), a * bj_RADTODEG)
+                    --UnitApplyTimedLife(bj_lastCreatedUnit, 'BTLF', 2.00)
+                    --SetUnitX(bj_lastCreatedUnit, x1 + 32.00 * Cos(a))
+                    --SetUnitY(bj_lastCreatedUnit, y1 + 32.00 * Sin(a))
+                    --SetUnitTimeScale(bj_lastCreatedUnit, 2.00)
+
+
+                    --a = a + (a - (Atan2BJ(A.v.y, A.v.x) - 180.00)) --GetRandomReal(0,360)--
+                    --local ang = a - 180.00 + 2.00 * (Atan2(GetUnitY(dummy) - y1, GetUnitX(dummy) - x1) * bj_RADTODEG)
+                    --print("эффект отражения ", a, ang)
+                    --set x = A.v.x
+                    --A.v.x = (Cos(a) / A.v.x * Cos(a) - A.v.y * Sin(a)) * speed
+                    --A.v.y = (Sin(a) / A.v.y * Cos(a) + x * Sin(a)) * speed
+                    print("AVX до", A.v.x)
+                    A.v.x, A.v.x = MoveXY(A.v.x, A.v.x, 50, a)
+                    print("AVX после", A.v.x)
+                    GroupClear(A.g)
+                    GroupAddUnit(A.g, e)
+
+                    time = 0.25
+                end
+            end
+        end
+
+        time = time - 0.01
+        --print(A.time)
+        if time <= 0.00 then
+            GroupClear(A.g)
+            --print("clear")
+        end
+
+        SetUnitX(dummy, A.x)
+        SetUnitY(dummy, A.y)
+        --print("Смещение на", A.x, A.y)
+        --SetUnitFlyHeight(A.dummy, A.z - GetTerrainZ(A.x, A.y), 0.00)
+    end)
+end
+
+--A = {}
+function InitRicoshet()
+    TempItem = CreateItem(FourCC('spsh'), 0.00, 0.00)
+    TempGroup = CreateGroup()
+    SetItemVisible(TempItem, false)
+    print("конец инициализации рикошета")
+    InitBounceOnGUI()
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
 --- Created by Bergi.
 --- DateTime: 17.12.2021 20:58
 ---
@@ -9382,7 +9976,6 @@ TIMER_PERIOD = 1 / 32
 TIMER_PERIOD64 = 1 / 64
 HERO = {}
 HeroID = FourCC("O000")
-
 Acceleration = true --скорение при клике
 
 function InitAnimations(hero, data)
@@ -11829,6 +12422,8 @@ end
 
 function Trig_InitGUI_Actions()
 UseTimeOfDayBJ(false)
+SetUnitOwner(gg_unit_e007_0258, Player(22), true)
+IssueTargetOrderBJ(gg_unit_hrif_0259, "attack", gg_unit_e007_0258)
 end
 
 function InitTrig_InitGUI()
@@ -12260,7 +12855,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, -448.0, -704.0)
+DefineStartLocation(0, -512.0, -832.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()

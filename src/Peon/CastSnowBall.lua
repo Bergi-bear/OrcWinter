@@ -20,10 +20,12 @@ function CastSnowBall(data, directionAngle)
             TimerStart(CreateTimer(), 0.15, false, function()
                 -- задержка замаха
                 CreateAndForceBullet(hero, directionAngle, 40, effModel,nil,nil,data.BaseDamage)
+                data.damageIsBouncing=true
                 if data.MorozkoCD then
                     if data.MorozkoCDCurrent<=0 then
                         local x,y=MoveXY(GetUnitX(hero),GetUnitY(hero),20,directionAngle-90)
                         CreateAndForceBullet(hero, directionAngle, 40, effModel,x,y,data.BaseDamage)
+
                         data.MorozkoCDCurrent=data.MorozkoCD
                         TimerStart(CreateTimer(), data.MorozkoCD, false, function()
                             data.MorozkoCDCurrent=0
@@ -32,6 +34,10 @@ function CastSnowBall(data, directionAngle)
                 end
                 data.MHoldSec = data.MHoldSec + 1
                 data.UnitInAttack = false
+
+                local xEnd,yEnd=MoveXY(GetUnitX(hero),GetUnitY(hero),50,directionAngle)
+                --StartHFOO(hero,xEnd,yEnd)
+
             end)
             TimerStart(CreateTimer(), data.AttackInterval, false, function() --0.35
                 data.AttackIsReady = true

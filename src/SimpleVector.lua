@@ -33,6 +33,9 @@ end
 function Vector:__mul(num)
     return Vector:new(self.x * num, self.y * num, self.z * num)
 end
+function VectorMulNumber(vector, num)
+    return Vector:new(vector.x * num, vector.y * num, vector.z * num)
+end
 
 function Vector:__div(num)
     return Vector:new(self.x / num, self.y / num, self.z / num)
@@ -92,6 +95,9 @@ end
 function VectorSum(vector1, vector2)
     return Vector:new(vector1.x + vector2.x, vector1.y + vector2.y, vector1.z + vector2.z)
 end
+function VectorMulVector(vector1, vector2)
+    return Vector:new(vector1.x * vector2.x, vector1.y * vector2.y, vector1.z * vector2.z)
+end
 
 function Vector:angleBetween2Vectors(vector1, vector2)
     --возвращает угол - Bergi ебобо
@@ -100,4 +106,42 @@ end
 
 function GetVectorFromPoint2D(x1, y1, x2, y2)
     return Vector:new(x2 - x1, y2, -y1, 0)
+end
+--- для системы рикошета
+function DotProduct(v1, v2)
+    local dot = v1.x * v2.x + v1.y * v2.y + v1.z * v2.z
+    print("dot", dot)
+    return dot -- число
+end
+
+--
+function Reflect(ray, normal)
+    local dot = DotProduct(ray, normal)
+    local a = -2 * dot --числ
+    local b = VectorMulNumber(normal, a)
+    local c = VectorSum(b, ray)
+    local ref = c
+
+    --return -2 * DotProduct(ray, normal) * normal + ray
+    return ref
+end
+function GetNormal(a, b, c)
+    local v1 = Vector:new(0, 0, 0)
+    local v2 = Vector:new(0, 0, 0)
+    local normal = Vector:new(0, 0, 0)
+
+    v1.x = a.x - b.x
+    v1.y = a.y - b.y
+    v1.z = a.z - b.z
+
+    v2.x = b.x - c.x
+    v2.y = b.y - c.y
+    v2.z = b.z - c.z
+
+    local wrki = SquareRoot(math.sqrt(v1.y * v2.z - v1.z * v2.y) + math.sqrt(v1.z * v2.x - v1.x * v2.z) + math.sqrt(v1.x * v2.y - v1.y * v2.x))
+    normal.x = (v1.y * v2.z - v1.z * v2.y) / wrki
+    normal.y = (v1.z * v2.x - v1.x * v2.z) / wrki
+    normal.z = (v1.x * v2.y - v1.y * v2.x) / wrki
+    print("нормаль получена? ", normal.x, normal.y, normal.z)
+    return normal -- vector3
 end
