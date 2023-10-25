@@ -422,7 +422,7 @@ function InitWASD(hero)
                     data.AttackShieldCD = data.AttackShieldCD - TIMER_PERIOD64
 
                     -------------------------
-                    if data.animStand >= 2 and not data.ReleaseQ and not data.ReleaseRMB then
+                    if data.animStand >= 2 and not data.ReleaseQ and not data.ReleaseRMB and not data.sit then
                         --длительность анимации WALK
                         --print(animWalk)
                         if not LockAnimAnimation(data) then

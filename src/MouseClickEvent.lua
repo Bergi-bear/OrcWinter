@@ -59,7 +59,23 @@ function InitMouseClickEvent()
     TriggerAddAction(TrigPressRMB, function()
         if BlzGetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_RIGHT then
             --print("клик правой")
+            local x, y = BlzGetTriggerPlayerMouseX(), BlzGetTriggerPlayerMouseY()
             local data = HERO[GetPlayerId(GetTriggerPlayer())]
+            local angle=AngleBetweenXY(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), x, y) / bj_DEGTORAD
+
+            local dist=DistanceBetweenXY(x,y,GetUnitXY(data.UnitHero))
+            if dist >=600 then
+                dist=600
+                x,y=MoveXY(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero),dist,angle)
+            end
+
+            local mark = AddSpecialEffect("Spell Marker TC", x, y)
+            BlzSetSpecialEffectScale(mark, 2)
+            DestroyEffect(mark)
+            BlzSetSpecialEffectColorByPlayer(mark, Player(1)) -- синий
+            local speed=dist/120
+            UnitCreateArtMissle(data.UnitHero,angle,speed,dist,300,nil,"Firebrand Shot Silver")
+
             data.RMBIsPressed = true
             local id = GetPlayerId(GetTriggerPlayer())
             if not data.LastCastName == "wave" then

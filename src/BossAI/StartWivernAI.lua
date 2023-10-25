@@ -455,7 +455,7 @@ function FlyOverPlayerWMark(boss, hero)
         end
         x, y = GetUnitXY(boss)
         local mark = AddSpecialEffect("Spell Marker TC", x, y)
-        BlzSetSpecialEffectColorByPlayer(mark, Player(0)) -- синий
+        BlzSetSpecialEffectColorByPlayer(mark, Player(0)) -- красный
         BlzSetSpecialEffectScale(mark, 2)
 
         TimerStart(CreateTimer(), 0.4, false, function()

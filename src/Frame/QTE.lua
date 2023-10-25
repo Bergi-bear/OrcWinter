@@ -142,3 +142,40 @@ function CreateESCActions()
         data.ReleaseESCAPE = false
     end)
 end
+
+function CreateInsertActions() --событие для сидения
+    -----------------------------------------------------------------OSKEY_INSERT OSKEY_C
+    local gg_trg_EventUpINSERT = CreateTrigger()
+    for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
+        BlzTriggerRegisterPlayerKeyEvent(gg_trg_EventUpINSERT, Player(i), OSKEY_C, 0, true)
+    end
+    TriggerAddAction(gg_trg_EventUpINSERT, function()
+        local pid = GetPlayerId(GetTriggerPlayer())
+        local data = HERO[pid]
+        if not data.ReleaseINSERT then
+            data.ReleaseINSERT = true
+            --print("Insert")
+            if not data.IsMoving then
+                if not data.sit then
+                    SetUnitAnimationByIndex(data.UnitHero,26)
+                    data.sit=true
+                else
+                    ResetUnitAnimation(data.UnitHero)
+                    data.sit=false
+                end
+            end
+
+        end
+    end)
+
+    local TrigDepressINSERT = CreateTrigger()
+    for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
+        BlzTriggerRegisterPlayerKeyEvent(TrigDepressINSERT, Player(i), OSKEY_C, 0, false)
+    end
+    TriggerAddAction(TrigDepressINSERT, function()
+        local pid = GetPlayerId(GetTriggerPlayer())
+        local data = HERO[pid]
+        data.ReleaseINSERT = false
+
+    end)
+end

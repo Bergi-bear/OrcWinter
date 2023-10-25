@@ -22,6 +22,13 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
         local damageOnWall = false
         local effDash = nil
         local ignoreDest = false
+        if IsUnitType(hero,UNIT_TYPE_HERO) then
+            local data = HERO[GetPlayerId(GetOwningPlayer(hero))]
+            data.sit=false
+            --print("сброс сидения и пошел")
+        end
+
+
         if flag == "ignore" or flag == "shieldDash" then
             local data = HERO[GetPlayerId(GetOwningPlayer(hero))]
             if data.DashDamageON or flag == "shieldDash" then
