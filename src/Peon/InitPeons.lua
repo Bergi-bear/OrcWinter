@@ -108,6 +108,7 @@ function InitRegistryEvent(hero)
             else
                 --print("Контрольная точка изменена")
                 QuestSetCompletedBJ(udg_QCHKPoint, true)
+                DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Human\\Resurrect\\ResurrectCaster",GetUnitXY(entering)))
                 local r=GetRandomInt(1,8)
                 if r==1 then
                     PlayMonoSpeech("Speech\\Peon\\CHKPoint\\1", "Новая зона воскрешения")

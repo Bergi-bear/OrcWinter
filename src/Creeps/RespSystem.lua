@@ -58,7 +58,9 @@ end
 
 function UnitBlastArea(unit,effModel,count)
     if not UnitAlive(unit) then
-        unit=FindUnitOfType(FourCC("e005"))-- даммик наносящий урон
+        --unit=FindUnitOfType(FourCC("e005"))-- даммик наносящий урон
+    else
+        return
     end
     local angle=360/count
     for i=1,count do

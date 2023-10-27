@@ -2232,3 +2232,21 @@ STRING 818
 МЯЧЬ
 }
 
+STRING 819
+// Doodads: D02X (Ледяная арена), Name (Name)
+{
+Ледяная арена
+}
+
+STRING 820
+// Doodads: D034 (Дерево декор), Name (Name)
+{
+Дерево декор
+}
+
+STRING 821
+// Doodads: D035 (Гроза), Name (Name)
+{
+Гроза
+}
+

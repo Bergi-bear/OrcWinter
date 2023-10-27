@@ -167,8 +167,6 @@ function StartYettyAI(xs, ys)
                 EttiDashAttackPrepare(boss, hero)
                 --normal_sound("Speech\\Yetti\\rastopchy", GetUnitXY(HERO[0].UnitHero))
 
-
-
                 local r = GetRandomInt(1, 3)
                 if r == 1 then
                     PlayBossSpeech("Speech\\Yetti\\rastopchy", "Растопчу")
@@ -178,9 +176,14 @@ function StartYettyAI(xs, ys)
                 elseif r == 3 then
                     PlayBossSpeech("Speech\\Yetti\\zatopchybolshiminogami", "Затопчу большими ногами")
                 end
-                TimerStart(CreateTimer(), 2, true, function()
+                local time = 0
+                TimerStart(CreateTimer(), 0.1, true, function()
                     --по героям
-                    EttiDashAttackPrepare(boss, hero)
+                    time = time + 0.1
+                    if time >= 2 then
+                        EttiDashAttackPrepare(boss, hero)
+                        time = 0
+                    end
 
                     if phase ~= 1 then
                         DestroyTimer(GetExpiredTimer())
@@ -193,32 +196,60 @@ function StartYettyAI(xs, ys)
                 --print("Падающие сосульки")
                 local effmodel = "Icicle"
                 PlayBossSpeech("Speech\\Yetti\\polychisosulkojvglaz", "Получи сосулькой в глаз")
-                TimerStart(CreateTimer(), .5, true, function()
-                    -- случайные
+                local var = GetRandomInt(1, 2)
+                TimerStart(CreateTimer(), 1, false, function()
+                    if var == 1 then
+                        TimerStart(CreateTimer(), .5, true, function()
+                            -- случайные
 
-                    SetUnitAnimationByIndex(boss, 3)
-                    local rx, ry = GetRandomInt(-500, 500), GetRandomInt(-500, 500)
-                    MarkAndFall(bx + rx, by + ry, effmodel, boss)
-                    SetUnitFacing(boss, AngleBetweenXY(GetUnitX(boss), GetUnitY(boss), bx + rx, by + ry) / bj_DEGTORAD)
-                    if phase ~= 2 then
-                        DestroyTimer(GetExpiredTimer())
-                        ResetUnitAnimation(boss)
-                    end
-                end)
-                local k = GetUnitLifePercent(boss) / 100
-                k = 1 - k
-                --print(k)
-                TimerStart(CreateTimer(), 1.2 - k, true, function()
-                    --по героям
-                    for i = 0, 3 do
-                        local hero = HERO[i].UnitHero
-                        if IsUnitInRange(hero, boss, 1000) then
-                            MarkAndFall(GetUnitX(hero), GetUnitY(hero), "Icicle", boss)
-                        end
-                    end
+                            SetUnitAnimationByIndex(boss, 3)
+                            local rx, ry = GetRandomInt(-500, 500), GetRandomInt(-500, 500)
+                            MarkAndFall(bx + rx, by + ry, effmodel, boss)
+                            SetUnitFacing(boss, AngleBetweenXY(GetUnitX(boss), GetUnitY(boss), bx + rx, by + ry) / bj_DEGTORAD)
+                            if phase ~= 2 then
+                                DestroyTimer(GetExpiredTimer())
+                                ResetUnitAnimation(boss)
+                            end
+                        end)
+                        local k = GetUnitLifePercent(boss) / 100
+                        k = 1 - k
+                        --print(k)
+                        TimerStart(CreateTimer(), 1.2 - k, true, function()
+                            --по героям
+                            for i = 0, 3 do
+                                local hero = HERO[i].UnitHero
+                                if IsUnitInRange(hero, boss, 1000) then
+                                    MarkAndFall(GetUnitX(hero), GetUnitY(hero), "Icicle", boss)
+                                end
+                            end
 
-                    if phase ~= 2 then
-                        DestroyTimer(GetExpiredTimer())
+                            if phase ~= 2 then
+                                DestroyTimer(GetExpiredTimer())
+                                ResetUnitAnimation(boss)
+                            end
+                        end)
+                    elseif var == 2 then
+                        --print("падение по кругу и сближение")
+                        local hero = HERO[0].UnitHero
+
+                        local period = 0.6
+                        local count = 30
+                        TimerStart(CreateTimer(), period, true, function()
+                            local px, py = GetUnitXY(boss)
+                            local angle = 360 / count
+                            SetUnitAnimationByIndex(boss, 3)
+                            for i = 1, count do
+                                local nx, ny = MoveXY(px, py, 30 * count, angle * i)
+                                if IsUnitInRange(hero, boss, 1000) then
+                                    MarkAndFall(nx, ny, "Icicle", boss)
+                                end
+                            end
+                            count = count - 5
+                            if phase ~= 2 then
+                                DestroyTimer(GetExpiredTimer())
+                                ResetUnitAnimation(boss)
+                            end
+                        end)
                     end
                 end)
             end

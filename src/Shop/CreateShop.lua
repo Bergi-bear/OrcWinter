@@ -69,6 +69,7 @@ function CreateItemsForSell()
     HERO[0].SteamSale=false
 end
 
+GItemName=""
 function CreateItemForShop(posX, PosY, parent, item)
     local data=HERO[0]
     local NextPoint = 0.039
@@ -80,6 +81,7 @@ function CreateItemForShop(posX, PosY, parent, item)
         --data.SteamSale=false
     end
     local name = item.name
+
     local descriptions = item.descriptions
     local texture = item.texture
     if not texture then
@@ -112,7 +114,17 @@ function CreateItemForShop(posX, PosY, parent, item)
     BlzTriggerRegisterFrameEvent(TrigMOUSE_ENTER, SelfFrame, FRAMEEVENT_MOUSE_ENTER)
     TriggerAddAction(TrigMOUSE_ENTER, function()
         --print("показать подсказку ",flag)
+        --TODO из за сломанного события и дёргающего курса нет возможности сделать событие наведения
+        local tmptext=BlzFrameGetText(SHOP_TOOLTIP)
+        --print("get ",tmptext)
+        if tmptext==ColorText2(name) .. "\n" .. DSColorDescription(item) then
+            --print("повтор текста")
+        else
+           -- print("звук наведения на магазин")
+        end
         BlzFrameSetText(SHOP_TOOLTIP, ColorText2(name) .. "\n" .. DSColorDescription(item))
+
+
     end)
     local TrigMOUSE_LEAVE = CreateTrigger()
     BlzTriggerRegisterFrameEvent(TrigMOUSE_LEAVE, SelfFrame, FRAMEEVENT_MOUSE_LEAVE)

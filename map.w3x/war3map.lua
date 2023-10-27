@@ -146,8 +146,8 @@ gg_unit_h006_0173 = nil
 gg_unit_h007_0171 = nil
 gg_unit_o002_0203 = nil
 gg_unit_h009_0197 = nil
-gg_unit_hrif_0259 = nil
 gg_unit_e007_0258 = nil
+gg_unit_hrif_0259 = nil
 gg_dest_B004_2162 = nil
 gg_dest_B007_5312 = nil
 function InitGlobals()
@@ -424,7 +424,7 @@ gg_unit_o002_0203 = BlzCreateUnitWithSkin(p, FourCC("o002"), -13047.3, 8357.1, 3
 u = BlzCreateUnitWithSkin(p, FourCC("h00A"), 5159.2, 6586.8, 281.200, FourCC("h00A"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), -1503.4, 1375.2, 5.812, FourCC("h002"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), -10937.8, 8908.1, 5.812, FourCC("h002"))
-gg_unit_hrif_0259 = BlzCreateUnitWithSkin(p, FourCC("hrif"), 7201.0, -6085.0, 296.893, FourCC("hrif"))
+gg_unit_hrif_0259 = BlzCreateUnitWithSkin(p, FourCC("hrif"), 4882.3, -6256.2, 296.893, FourCC("hrif"))
 end
 
 function CreateUnitsForPlayer1()
@@ -700,7 +700,7 @@ local unitID
 local t
 local life
 
-gg_unit_e007_0258 = BlzCreateUnitWithSkin(p, FourCC("e007"), 7128.4, -5826.1, 334.650, FourCC("e007"))
+gg_unit_e007_0258 = BlzCreateUnitWithSkin(p, FourCC("e007"), 4809.7, -5997.2, 334.650, FourCC("e007"))
 end
 
 function CreateNeutralHostile()
@@ -896,6 +896,8 @@ SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("n00B"), -1623.2, -1785.0, 323.288, FourCC("n00B"))
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("n00B"), -1429.4, -2052.7, 124.917, FourCC("n00B"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 6787.5, -4804.8, 335.316, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 end
 
@@ -4162,8 +4164,8 @@ do
     function InitGlobals()
         InitGlobalsOrigin()
         TimerStart(CreateTimer(), 10, false, function() --инициализация ловушек
-            --InitTrapByID(FourCC("h000"))
-            --InitTrapByID(FourCC("h001"))
+            InitTrapByID(FourCC("h000"))
+            InitTrapByID(FourCC("h001"))
             --InitAllButton()
         end)
     end
@@ -4181,7 +4183,7 @@ function InitTrapByID(id)
     local _, k, rg = FindUnitOfType(id)
     local radiusActivate = 500
     local distanceSee = 1200
-    print(k, " стреляющих ловушек активировано")
+    --print(k, " стреляющих ловушек активировано")
     for i = 1, #rg do
         local u = rg[i]
         UnitAddAbility(u, FourCC("Aloc"))
@@ -7336,8 +7338,6 @@ function StartYettyAI(xs, ys)
                 EttiDashAttackPrepare(boss, hero)
                 --normal_sound("Speech\\Yetti\\rastopchy", GetUnitXY(HERO[0].UnitHero))
 
-
-
                 local r = GetRandomInt(1, 3)
                 if r == 1 then
                     PlayBossSpeech("Speech\\Yetti\\rastopchy", "Растопчу")
@@ -7347,9 +7347,14 @@ function StartYettyAI(xs, ys)
                 elseif r == 3 then
                     PlayBossSpeech("Speech\\Yetti\\zatopchybolshiminogami", "Затопчу большими ногами")
                 end
-                TimerStart(CreateTimer(), 2, true, function()
+                local time = 0
+                TimerStart(CreateTimer(), 0.1, true, function()
                     --по героям
-                    EttiDashAttackPrepare(boss, hero)
+                    time = time + 0.1
+                    if time >= 2 then
+                        EttiDashAttackPrepare(boss, hero)
+                        time = 0
+                    end
 
                     if phase ~= 1 then
                         DestroyTimer(GetExpiredTimer())
@@ -7362,32 +7367,60 @@ function StartYettyAI(xs, ys)
                 --print("Падающие сосульки")
                 local effmodel = "Icicle"
                 PlayBossSpeech("Speech\\Yetti\\polychisosulkojvglaz", "Получи сосулькой в глаз")
-                TimerStart(CreateTimer(), .5, true, function()
-                    -- случайные
+                local var = GetRandomInt(1, 2)
+                TimerStart(CreateTimer(), 1, false, function()
+                    if var == 1 then
+                        TimerStart(CreateTimer(), .5, true, function()
+                            -- случайные
 
-                    SetUnitAnimationByIndex(boss, 3)
-                    local rx, ry = GetRandomInt(-500, 500), GetRandomInt(-500, 500)
-                    MarkAndFall(bx + rx, by + ry, effmodel, boss)
-                    SetUnitFacing(boss, AngleBetweenXY(GetUnitX(boss), GetUnitY(boss), bx + rx, by + ry) / bj_DEGTORAD)
-                    if phase ~= 2 then
-                        DestroyTimer(GetExpiredTimer())
-                        ResetUnitAnimation(boss)
-                    end
-                end)
-                local k = GetUnitLifePercent(boss) / 100
-                k = 1 - k
-                --print(k)
-                TimerStart(CreateTimer(), 1.2 - k, true, function()
-                    --по героям
-                    for i = 0, 3 do
-                        local hero = HERO[i].UnitHero
-                        if IsUnitInRange(hero, boss, 1000) then
-                            MarkAndFall(GetUnitX(hero), GetUnitY(hero), "Icicle", boss)
-                        end
-                    end
+                            SetUnitAnimationByIndex(boss, 3)
+                            local rx, ry = GetRandomInt(-500, 500), GetRandomInt(-500, 500)
+                            MarkAndFall(bx + rx, by + ry, effmodel, boss)
+                            SetUnitFacing(boss, AngleBetweenXY(GetUnitX(boss), GetUnitY(boss), bx + rx, by + ry) / bj_DEGTORAD)
+                            if phase ~= 2 then
+                                DestroyTimer(GetExpiredTimer())
+                                ResetUnitAnimation(boss)
+                            end
+                        end)
+                        local k = GetUnitLifePercent(boss) / 100
+                        k = 1 - k
+                        --print(k)
+                        TimerStart(CreateTimer(), 1.2 - k, true, function()
+                            --по героям
+                            for i = 0, 3 do
+                                local hero = HERO[i].UnitHero
+                                if IsUnitInRange(hero, boss, 1000) then
+                                    MarkAndFall(GetUnitX(hero), GetUnitY(hero), "Icicle", boss)
+                                end
+                            end
 
-                    if phase ~= 2 then
-                        DestroyTimer(GetExpiredTimer())
+                            if phase ~= 2 then
+                                DestroyTimer(GetExpiredTimer())
+                                ResetUnitAnimation(boss)
+                            end
+                        end)
+                    elseif var == 2 then
+                        --print("падение по кругу и сближение")
+                        local hero = HERO[0].UnitHero
+
+                        local period = 0.6
+                        local count = 30
+                        TimerStart(CreateTimer(), period, true, function()
+                            local px, py = GetUnitXY(boss)
+                            local angle = 360 / count
+                            SetUnitAnimationByIndex(boss, 3)
+                            for i = 1, count do
+                                local nx, ny = MoveXY(px, py, 30 * count, angle * i)
+                                if IsUnitInRange(hero, boss, 1000) then
+                                    MarkAndFall(nx, ny, "Icicle", boss)
+                                end
+                            end
+                            count = count - 5
+                            if phase ~= 2 then
+                                DestroyTimer(GetExpiredTimer())
+                                ResetUnitAnimation(boss)
+                            end
+                        end)
                     end
                 end)
             end
@@ -7633,7 +7666,9 @@ end
 
 function UnitBlastArea(unit,effModel,count)
     if not UnitAlive(unit) then
-        unit=FindUnitOfType(FourCC("e005"))-- даммик наносящий урон
+        --unit=FindUnitOfType(FourCC("e005"))-- даммик наносящий урон
+    else
+        return
     end
     local angle=360/count
     for i=1,count do
@@ -9671,6 +9706,7 @@ function InitRegistryEvent(hero)
             else
                 --print("Контрольная точка изменена")
                 QuestSetCompletedBJ(udg_QCHKPoint, true)
+                DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Human\\Resurrect\\ResurrectCaster",GetUnitXY(entering)))
                 local r=GetRandomInt(1,8)
                 if r==1 then
                     PlayMonoSpeech("Speech\\Peon\\CHKPoint\\1", "Новая зона воскрешения")
@@ -11303,6 +11339,7 @@ function CreateItemsForSell()
     HERO[0].SteamSale=false
 end
 
+GItemName=""
 function CreateItemForShop(posX, PosY, parent, item)
     local data=HERO[0]
     local NextPoint = 0.039
@@ -11314,6 +11351,7 @@ function CreateItemForShop(posX, PosY, parent, item)
         --data.SteamSale=false
     end
     local name = item.name
+
     local descriptions = item.descriptions
     local texture = item.texture
     if not texture then
@@ -11346,7 +11384,17 @@ function CreateItemForShop(posX, PosY, parent, item)
     BlzTriggerRegisterFrameEvent(TrigMOUSE_ENTER, SelfFrame, FRAMEEVENT_MOUSE_ENTER)
     TriggerAddAction(TrigMOUSE_ENTER, function()
         --print("показать подсказку ",flag)
+        --TODO из за сломанного события и дёргающего курса нет возможности сделать событие наведения
+        local tmptext=BlzFrameGetText(SHOP_TOOLTIP)
+        --print("get ",tmptext)
+        if tmptext==ColorText2(name) .. "\n" .. DSColorDescription(item) then
+            --print("повтор текста")
+        else
+           -- print("звук наведения на магазин")
+        end
         BlzFrameSetText(SHOP_TOOLTIP, ColorText2(name) .. "\n" .. DSColorDescription(item))
+
+
     end)
     local TrigMOUSE_LEAVE = CreateTrigger()
     BlzTriggerRegisterFrameEvent(TrigMOUSE_LEAVE, SelfFrame, FRAMEEVENT_MOUSE_LEAVE)
@@ -12951,7 +12999,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, -512.0, -832.0)
+DefineStartLocation(0, -2432.0, -3904.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()
