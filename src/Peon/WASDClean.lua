@@ -680,9 +680,9 @@ function CreateWASDActions()
                 end
 
                 local dist = 400
-                local delay = 0.5
+                local delay = 0.7 -- это кд рывка?
                 local dashSpeed = 10
-
+--[[
                 if data.ReleaseQ and not data.QJump2Pointer then
                     -- print("сплеш в рывке, пробуем прыгнуть прыжок")
                     dist = 400
@@ -696,6 +696,7 @@ function CreateWASDActions()
                         --print("Первый раз сделал краш")
                     end
                 end
+                ]]
 
                 data.DashCharges = data.DashCharges - 1
                 if data.DashCharges == 0 then
@@ -706,6 +707,7 @@ function CreateWASDActions()
                     data.DashCharges = data.DashCharges + 1
                     --BlzFrameSetText(data.DashChargesFH, data.DashCharges)
                     DestroyTimer(GetExpiredTimer())
+                    --print("заряд восстановлен",data.DashCharges)
                 end)
 
                 --UnitAddItemById(data.UnitHero, FourCC("I000")) -- предмет виндволк
@@ -792,6 +794,7 @@ function CreateWASDActions()
                     data.AttackInForce = false
                     SetUnitTimeScale(data.UnitHero, 1)
                     DestroyTimer(GetExpiredTimer())
+                    --print("рывок окончен?")
                 end)
                 if not data.ReleaseQ then
                     -- анимация в обычном рывке

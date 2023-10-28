@@ -3,7 +3,7 @@
 --- Created by User.
 --- DateTime: 25.10.2023 20:17
 ---
-function UnitCreateArtMissle(hero, angle, speed, distance, MaxHeight, HasMarker, effModel)
+function UnitCreateArtMissile(hero, angle, speed, distance, MaxHeight, HasMarker, effModel)
     local currentdistance = 0
     local i = 0
     local ZStart = GetUnitZ(hero)+40
@@ -21,7 +21,7 @@ function UnitCreateArtMissle(hero, angle, speed, distance, MaxHeight, HasMarker,
         BlzSetSpecialEffectX(eff,x)
         BlzSetSpecialEffectY(eff,y)
         BlzSetSpecialEffectZ(eff,f)
-
+        --BlzSetSpecialEffectScale(eff,5)
         if i > 3 and f <= GetTerrainZ(x, y) then
             DestroyTimer(GetExpiredTimer())
             UnitDamageArea(hero, 150, x, y, 235)

@@ -62,21 +62,50 @@ function InitMouseClickEvent()
             local x, y = BlzGetTriggerPlayerMouseX(), BlzGetTriggerPlayerMouseY()
             local data = HERO[GetPlayerId(GetTriggerPlayer())]
             local angle=AngleBetweenXY(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), x, y) / bj_DEGTORAD
-
-            local dist=DistanceBetweenXY(x,y,GetUnitXY(data.UnitHero))
-            if dist >=600 then
-                dist=600
-                x,y=MoveXY(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero),dist,angle)
+            local delay=0.3 -- задержка между бросками
+            local ChargesReloadSec = 5
+            if not data.MissileCharges then
+                data.MissileCharges=3
             end
 
-            local mark = AddSpecialEffect("Spell Marker TC", x, y)
-            BlzSetSpecialEffectScale(mark, 2)
-            DestroyEffect(mark)
-            BlzSetSpecialEffectColorByPlayer(mark, Player(1)) -- синий
-            local speed=dist/120
-            UnitCreateArtMissle(data.UnitHero,angle,speed,dist,300,nil,"Firebrand Shot Silver")
+            if data.MissileCharges > 0 and not data.RMBAttack and UnitAlive(data.UnitHero) and not data.Sit and not IsUnitStunned(data.UnitHero) and not FREE_CAMERA then
+                data.MissileCharges = data.MissileCharges - 1
+                data.RMBAttack=true
+                --BlzFrameSetText(data.DashChargesFH, data.DashCharges)
+                TimerStart(CreateTimer(), ChargesReloadSec, false, function()
+                    data.MissileCharges = data.MissileCharges + 1
+                    DestroyTimer(GetExpiredTimer())
+                    --print("заряд восстановлен",data.DashCharges)
+                end)
 
-            data.RMBIsPressed = true
+
+
+                local dist=DistanceBetweenXY(x,y,GetUnitXY(data.UnitHero))
+                if dist >=600 then
+                    dist=600
+                    x,y=MoveXY(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero),dist,angle)
+                end
+
+                local mark = AddSpecialEffect("Spell Marker TC", x, y)
+                BlzSetSpecialEffectScale(mark, 2)
+                DestroyEffect(mark)
+                BlzSetSpecialEffectColorByPlayer(mark, Player(1)) -- синий
+                local speed=dist/80
+                --QueueUnitAnimation(data.UnitHero,"Attack")
+                SetUnitAnimationByIndex(data.UnitHero,25)
+                BlzSetUnitFacingEx(data.UnitHero,angle)
+                UnitCreateArtMissile(data.UnitHero,angle,speed,dist,300,nil,"Effect\\whiteball")
+                data.RMBIsPressed = true
+
+                TimerStart(CreateTimer(), delay, false, function()
+
+                    data.RMBAttack = false
+                    DestroyTimer(GetExpiredTimer())
+                    --print("рывок окончен?")
+                end)
+
+
+            end
             local id = GetPlayerId(GetTriggerPlayer())
             if not data.LastCastName == "wave" then
                 GetPlayerMouseX[id] = BlzGetTriggerPlayerMouseX()

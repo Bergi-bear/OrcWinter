@@ -150,6 +150,7 @@ gg_unit_e007_0258 = nil
 gg_unit_hrif_0259 = nil
 gg_dest_B004_2162 = nil
 gg_dest_B007_5312 = nil
+gg_trg_BoundEnterOnce = nil
 function InitGlobals()
 udg_PressESC = false
 udg_PressESCYETTY = false
@@ -414,7 +415,7 @@ u = BlzCreateUnitWithSkin(p, FourCC("h004"), -3852.9, 4153.2, 159.380, FourCC("h
 u = BlzCreateUnitWithSkin(p, FourCC("h004"), 3605.6, 3360.4, 159.380, FourCC("h004"))
 u = BlzCreateUnitWithSkin(p, FourCC("h004"), -476.6, -4225.4, 159.380, FourCC("h004"))
 gg_unit_h007_0171 = BlzCreateUnitWithSkin(p, FourCC("h007"), 1056.8, -2436.1, 182.046, FourCC("h007"))
-u = BlzCreateUnitWithSkin(p, FourCC("h007"), 608.9, -879.9, 182.046, FourCC("h007"))
+u = BlzCreateUnitWithSkin(p, FourCC("h007"), 607.5, -857.6, 182.046, FourCC("h007"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), 601.4, -1416.6, 5.812, FourCC("h002"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), -6012.7, 7349.6, 5.812, FourCC("h002"))
 gg_unit_h009_0197 = BlzCreateUnitWithSkin(p, FourCC("h009"), -11217.1, 9574.6, 232.970, FourCC("h009"))
@@ -424,7 +425,9 @@ gg_unit_o002_0203 = BlzCreateUnitWithSkin(p, FourCC("o002"), -13047.3, 8357.1, 3
 u = BlzCreateUnitWithSkin(p, FourCC("h00A"), 5159.2, 6586.8, 281.200, FourCC("h00A"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), -1503.4, 1375.2, 5.812, FourCC("h002"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), -10937.8, 8908.1, 5.812, FourCC("h002"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00B"), 6732.7, -4684.0, 0.000, FourCC("h00B"))
 gg_unit_hrif_0259 = BlzCreateUnitWithSkin(p, FourCC("hrif"), 4882.3, -6256.2, 296.893, FourCC("hrif"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00B"), 6626.5, -4744.9, 270.000, FourCC("h00B"))
 end
 
 function CreateUnitsForPlayer1()
@@ -1557,7 +1560,7 @@ end
 --- Created by User.
 --- DateTime: 25.10.2023 20:17
 ---
-function UnitCreateArtMissle(hero, angle, speed, distance, MaxHeight, HasMarker, effModel)
+function UnitCreateArtMissile(hero, angle, speed, distance, MaxHeight, HasMarker, effModel)
     local currentdistance = 0
     local i = 0
     local ZStart = GetUnitZ(hero)+40
@@ -1575,7 +1578,7 @@ function UnitCreateArtMissle(hero, angle, speed, distance, MaxHeight, HasMarker,
         BlzSetSpecialEffectX(eff,x)
         BlzSetSpecialEffectY(eff,y)
         BlzSetSpecialEffectZ(eff,f)
-
+        --BlzSetSpecialEffectScale(eff,5)
         if i > 3 and f <= GetTerrainZ(x, y) then
             DestroyTimer(GetExpiredTimer())
             UnitDamageArea(hero, 150, x, y, 235)
@@ -2685,10 +2688,10 @@ function InitHEROTable()
             ThrowChargesCDFH       = nil,
             ThrowChargesReloadSec  = 5,
             --способность рывок
-            DashCharges            = 1,-- число зарядов рывка
+            DashCharges            = 3,-- число зарядов рывка
             DashChargesFH          = nil,
             DashChargesCDFH        = nil,
-            DashChargesReloadSec   = 1.5, -- кд рывка
+            DashChargesReloadSec   = 5, -- кд восстановления заряда рывка
             Time2HealDash          = 0, --лечение доступно только при нуле
             countFrame             = 0,
             BaseDashDamage         = 100,
@@ -3110,21 +3113,50 @@ function InitMouseClickEvent()
             local x, y = BlzGetTriggerPlayerMouseX(), BlzGetTriggerPlayerMouseY()
             local data = HERO[GetPlayerId(GetTriggerPlayer())]
             local angle=AngleBetweenXY(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), x, y) / bj_DEGTORAD
-
-            local dist=DistanceBetweenXY(x,y,GetUnitXY(data.UnitHero))
-            if dist >=600 then
-                dist=600
-                x,y=MoveXY(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero),dist,angle)
+            local delay=0.3 -- задержка между бросками
+            local ChargesReloadSec = 5
+            if not data.MissileCharges then
+                data.MissileCharges=3
             end
 
-            local mark = AddSpecialEffect("Spell Marker TC", x, y)
-            BlzSetSpecialEffectScale(mark, 2)
-            DestroyEffect(mark)
-            BlzSetSpecialEffectColorByPlayer(mark, Player(1)) -- синий
-            local speed=dist/120
-            UnitCreateArtMissle(data.UnitHero,angle,speed,dist,300,nil,"Firebrand Shot Silver")
+            if data.MissileCharges > 0 and not data.RMBAttack and UnitAlive(data.UnitHero) and not data.Sit and not IsUnitStunned(data.UnitHero) and not FREE_CAMERA then
+                data.MissileCharges = data.MissileCharges - 1
+                data.RMBAttack=true
+                --BlzFrameSetText(data.DashChargesFH, data.DashCharges)
+                TimerStart(CreateTimer(), ChargesReloadSec, false, function()
+                    data.MissileCharges = data.MissileCharges + 1
+                    DestroyTimer(GetExpiredTimer())
+                    --print("заряд восстановлен",data.DashCharges)
+                end)
 
-            data.RMBIsPressed = true
+
+
+                local dist=DistanceBetweenXY(x,y,GetUnitXY(data.UnitHero))
+                if dist >=600 then
+                    dist=600
+                    x,y=MoveXY(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero),dist,angle)
+                end
+
+                local mark = AddSpecialEffect("Spell Marker TC", x, y)
+                BlzSetSpecialEffectScale(mark, 2)
+                DestroyEffect(mark)
+                BlzSetSpecialEffectColorByPlayer(mark, Player(1)) -- синий
+                local speed=dist/80
+                --QueueUnitAnimation(data.UnitHero,"Attack")
+                SetUnitAnimationByIndex(data.UnitHero,25)
+                BlzSetUnitFacingEx(data.UnitHero,angle)
+                UnitCreateArtMissile(data.UnitHero,angle,speed,dist,300,nil,"Firebrand Shot Silver")
+                data.RMBIsPressed = true
+
+                TimerStart(CreateTimer(), delay, false, function()
+
+                    data.RMBAttack = false
+                    DestroyTimer(GetExpiredTimer())
+                    --print("рывок окончен?")
+                end)
+
+
+            end
             local id = GetPlayerId(GetTriggerPlayer())
             if not data.LastCastName == "wave" then
                 GetPlayerMouseX[id] = BlzGetTriggerPlayerMouseX()
@@ -4164,11 +4196,15 @@ do
     function InitGlobals()
         InitGlobalsOrigin()
         TimerStart(CreateTimer(), 10, false, function() --инициализация ловушек
-            InitTrapByID(FourCC("h000"))
-            InitTrapByID(FourCC("h001"))
+            --InitAllTraps()
             --InitAllButton()
         end)
     end
+end
+
+function InitAllTraps()
+    InitTrapByID(FourCC("h000"))
+    InitTrapByID(FourCC("h001"))
 end
 
 function TrapShotByID(id, u, range)
@@ -10785,9 +10821,9 @@ function CreateWASDActions()
                 end
 
                 local dist = 400
-                local delay = 0.5
+                local delay = 0.7 -- это кд рывка?
                 local dashSpeed = 10
-
+--[[
                 if data.ReleaseQ and not data.QJump2Pointer then
                     -- print("сплеш в рывке, пробуем прыгнуть прыжок")
                     dist = 400
@@ -10801,6 +10837,7 @@ function CreateWASDActions()
                         --print("Первый раз сделал краш")
                     end
                 end
+                ]]
 
                 data.DashCharges = data.DashCharges - 1
                 if data.DashCharges == 0 then
@@ -10811,6 +10848,7 @@ function CreateWASDActions()
                     data.DashCharges = data.DashCharges + 1
                     --BlzFrameSetText(data.DashChargesFH, data.DashCharges)
                     DestroyTimer(GetExpiredTimer())
+                    --print("заряд восстановлен",data.DashCharges)
                 end)
 
                 --UnitAddItemById(data.UnitHero, FourCC("I000")) -- предмет виндволк
@@ -10897,6 +10935,7 @@ function CreateWASDActions()
                     data.AttackInForce = false
                     SetUnitTimeScale(data.UnitHero, 1)
                     DestroyTimer(GetExpiredTimer())
+                    --print("рывок окончен?")
                 end)
                 if not data.ReleaseQ then
                     -- анимация в обычном рывке
@@ -12542,6 +12581,25 @@ TriggerAddCondition(gg_trg_BoundEnter, Condition(Trig_BoundEnter_Conditions))
 TriggerAddAction(gg_trg_BoundEnter, Trig_BoundEnter_Actions)
 end
 
+function Trig_BoundEnterOnce_Conditions()
+if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+return false
+end
+return true
+end
+
+function Trig_BoundEnterOnce_Actions()
+    InitAllTraps()
+DisableTrigger(GetTriggeringTrigger())
+end
+
+function InitTrig_BoundEnterOnce()
+gg_trg_BoundEnterOnce = CreateTrigger()
+TriggerRegisterEnterRectSimple(gg_trg_BoundEnterOnce, gg_rct_Region_004)
+TriggerAddCondition(gg_trg_BoundEnterOnce, Condition(Trig_BoundEnterOnce_Conditions))
+TriggerAddAction(gg_trg_BoundEnterOnce, Trig_BoundEnterOnce_Actions)
+end
+
 function Trig_Exit_Conditions()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
@@ -12946,6 +13004,7 @@ InitTrig_DeathWolf()
 InitTrig_WolfCinematic()
 InitTrig_SkipWolf()
 InitTrig_BoundEnter()
+InitTrig_BoundEnterOnce()
 InitTrig_Exit()
 InitTrig_InitGUI()
 InitTrig_StartIntro()
@@ -12999,7 +13058,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, -2432.0, -3904.0)
+DefineStartLocation(0, 7040.0, -5248.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()

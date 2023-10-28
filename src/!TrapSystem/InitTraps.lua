@@ -7,12 +7,51 @@ do
     local InitGlobalsOrigin = InitGlobals
     function InitGlobals()
         InitGlobalsOrigin()
-        TimerStart(CreateTimer(), 10, false, function() --инициализация ловушек
-            InitTrapByID(FourCC("h000"))
-            InitTrapByID(FourCC("h001"))
+        TimerStart(CreateTimer(), 0.1, false, function() --инициализация ловушек
+            --InitAllTraps()
             --InitAllButton()
+            InitLaserTrap()
         end)
     end
+end
+
+function InitLaserTrap()
+    local _, k, rg = FindUnitOfType(FourCC("h00B"))
+    print(k, " стреляющих лазерных трапов")
+    for i = 1, #rg do
+        local u = rg[i]
+        UnitAddAbility(u, FourCC("Aloc"))
+
+        TimerStart(CreateTimer(), 3, true, function()
+            local x,y=GetUnitXY(u)
+            local angle=GetUnitFacing(u)
+            local eff=AddSpecialEffect("Effect\\BeamZero",0,0)
+            x,y=MoveXY(x,y,40,angle-180)
+            SetUnitAnimation(u,"attack")
+            BlzSetSpecialEffectX(eff,x-16)
+            BlzSetSpecialEffectY(eff,y)
+            BlzSetSpecialEffectZ(eff,GetUnitZ(u)+10)
+            BlzSetSpecialEffectYaw(eff, math.rad(angle))
+            --BlzSetSpecialEffectColor(eff, 255, 0, 0)
+            TimerStart(CreateTimer(), 0.2, false, function()
+                --BlzSetSpecialEffectTimeScale(eff,0)
+            end)
+            TimerStart(CreateTimer(), 1.1, false, function()
+                BlzSetSpecialEffectTimeScale(eff,1)
+                TimerStart(CreateTimer(), 0.1, false, function()
+                    BlzSetSpecialEffectX(eff,0)
+                    BlzSetSpecialEffectY(eff,0)
+                    DestroyEffect(eff)
+                end)
+
+            end)
+        end)
+    end
+end
+
+function InitAllTraps()
+    InitTrapByID(FourCC("h000"))
+    InitTrapByID(FourCC("h001"))
 end
 
 function TrapShotByID(id, u, range)
