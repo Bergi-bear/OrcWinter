@@ -460,7 +460,7 @@ function FlyOverPlayerWMark(boss, hero)
 
         TimerStart(CreateTimer(), 0.4, false, function()
             DestroyEffect(mark)
-            DestroyEffect(AddSpecialEffect("CrystalNova", x, y))
+            --DestroyEffect(AddSpecialEffect("CrystalNova", x, y))
             UnitDamageArea(boss, 50, x, y, 220)
         end)
     end)

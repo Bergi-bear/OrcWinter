@@ -1102,20 +1102,8 @@ STRING 301
 +[Misc] Lights 3
 }
 
-STRING 381
-// Units: H60H (Kel9290), Name (Name)
-{
-Kel9290
-}
-
-STRING 382
-// Units: H60H (Kel9290), Propernames (Proper Names)
-{
-Kel9290
-}
-
 STRING 484
-// Units: H60Z (Пеон Тускарец), Propernames (Proper Names)
+// Units: h00D (Пеон Тускарец Продавец), Propernames (Proper Names)
 {
 НТС
 }
@@ -2021,12 +2009,6 @@ STRING 776
 Плохой пёс!
 }
 
-STRING 777
-// Units: H60Z (Пеон Тускарец), Name (Name)
-{
-Пеон Тускарец
-}
-
 STRING 778
 // Units: h00A (Вход в магнит), Name (Name)
 {
@@ -2254,5 +2236,23 @@ STRING 822
 // Units: h00B (Красная статуя), Name (Name)
 {
 Красная статуя
+}
+
+STRING 823
+// Units: h00C (Бочка, можно толкать), Name (Name)
+{
+Бочка, можно толкать
+}
+
+STRING 824
+// Units: h00D (Пеон Тускарец Продавец), Name (Name)
+{
+Пеон Тускарец Продавец
+}
+
+STRING 825
+// Units: u001 (Пудж с хуком), Name (Name)
+{
+Пудж с хуком
 }
 

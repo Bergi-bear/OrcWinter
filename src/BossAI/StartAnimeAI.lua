@@ -665,8 +665,10 @@ function CreateBeemInRange(boss, count)
 
 end
 
-function DamageInLine(x, y, angle, distance, boss, eff)
-    local step = 80
+function DamageInLine(x, y, angle, distance, boss, step)
+    if not step then
+        step=80
+    end
     local max = distance / step
     --print(max,"max")
     if not x then
@@ -678,6 +680,7 @@ function DamageInLine(x, y, angle, distance, boss, eff)
         local nx, ny = MoveXY(x, y, step * i, angle - 180)
         --DestroyEffect(AddSpecialEffect("BlinkCasterNoOmni", nx, ny))
         local is, enemy = UnitDamageArea(boss, 50, nx, ny, step,nil,{"low"})
+        --DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt", nx, ny))
         if is then
             DestroyEffect(AddSpecialEffect("AncestralGuardianMissileNoOmni", GetUnitXY(enemy)))
             isDamage = i * step

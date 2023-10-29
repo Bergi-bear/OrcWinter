@@ -997,6 +997,7 @@ function PlayUnitAnimationFromChat()
             --print("лечение")
             HeroCandyHeal(data, 1)
         end
+
         SetUnitAnimationByIndex(data.UnitHero, s)
         print(GetUnitName(data.UnitHero) .. " " .. s)
     end)

@@ -51,7 +51,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
     local newAngle = angle
     local enemy = nil
     local bounceCount = 0
-    local bounceMax=1
+    local bounceMax = 1
     TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
         dist = dist + speed
         delay = delay - speed
@@ -69,20 +69,29 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
                 _, enemy = UnitDamageArea(hero, 0, x, y, 300)
             end
         end
+        if IsUnitType(hero, UNIT_TYPE_HERO) then
+            BlzSetSpecialEffectYaw(bullet, math.rad(angleCurrent))
+            local nx, ny = MoveXY(x, y, speed, angleCurrent)
+            BlzSetSpecialEffectPosition(bullet, nx, ny, z) -- было z-2
+            if bounceCount <= bounceMax then
+                local bounceFact = false
+                local b, d = PointContentDestructable(nx, ny, CollisionRange , false, 0, hero)
 
-        BlzSetSpecialEffectYaw(bullet, math.rad(angleCurrent))
-        local nx, ny = MoveXY(x, y, speed, angleCurrent)
-        BlzSetSpecialEffectPosition(bullet, nx, ny, z) -- было z-2
-        if bounceCount<=bounceMax then
-            local bounceFact=false
-            angleCurrent,bounceFact = CHKBouncing(x, y, nx, ny, speed) ---------------- баунсинг
-            nx, ny = MoveXY(x, y, speed, angleCurrent)
-            if bounceFact then
-                bounceCount=bounceCount+1
-                --print(bounceCount)
+                if GetDestructableTypeId(d)==FourCC("B005") then
+                    --print("встретил блокиратор")
+                else
+                    angleCurrent, bounceFact = CHKBouncing(x, y, nx, ny, speed) ---------------- баунсинг
+                    nx, ny = MoveXY(x, y, speed, angleCurrent)
+                    if bounceFact then
+                        bounceCount = bounceCount + 1
+                        --print(bounceCount)
+                    end
+                end
+
+
+            else
+                --print('превышено число отскоков')
             end
-        else
-            --print('превышено число отскоков')
         end
 
         SetFogStateRadius(GetOwningPlayer(heroCurrent), FOG_OF_WAR_VISIBLE, x, y, 400, true)-- Небольгая подсветка

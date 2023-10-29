@@ -12,6 +12,12 @@ function UnitCreateArtMissile(hero, angle, speed, distance, MaxHeight, HasMarker
     end
     local x, y = GetUnitXY(hero)
     local eff=AddSpecialEffect(effModel,x,y)
+    local damage=50
+
+    if IsUnitType(hero, UNIT_TYPE_HERO) then
+        local data=GetUnitData(hero)
+        damage=data.BaseDamage*2
+    end
 
     TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
         currentdistance = currentdistance + speed
@@ -24,7 +30,7 @@ function UnitCreateArtMissile(hero, angle, speed, distance, MaxHeight, HasMarker
         --BlzSetSpecialEffectScale(eff,5)
         if i > 3 and f <= GetTerrainZ(x, y) then
             DestroyTimer(GetExpiredTimer())
-            UnitDamageArea(hero, 150, x, y, 235)
+            UnitDamageArea(hero, damage, x, y, 200)
             if not effModel then
                 --DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", newX, newY))
             else
@@ -33,5 +39,4 @@ function UnitCreateArtMissile(hero, angle, speed, distance, MaxHeight, HasMarker
             end
         end
     end)
-
 end

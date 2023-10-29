@@ -94,7 +94,7 @@ function InitMouseClickEvent()
                 --QueueUnitAnimation(data.UnitHero,"Attack")
                 SetUnitAnimationByIndex(data.UnitHero,25)
                 BlzSetUnitFacingEx(data.UnitHero,angle)
-                UnitCreateArtMissile(data.UnitHero,angle,speed,dist,300,nil,"Effect\\whiteball")
+                UnitCreateArtMissile(data.UnitHero,angle,speed,dist,300,nil,"ChainFrost")
                 data.RMBIsPressed = true
 
                 TimerStart(CreateTimer(), delay, false, function()

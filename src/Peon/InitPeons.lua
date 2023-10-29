@@ -67,7 +67,7 @@ function InitRegistryEvent(hero)
                 if GetUnitTypeId(entering) == FourCC("o002") then
                     --голый пеон и его квест
                     data.CurrentQuest = "AllyPeonOnAnime"
-                elseif GetUnitTypeId(entering) == FourCC("H60Z") then
+                elseif GetUnitTypeId(entering) == FourCC("h00D") then
                     data.CurrentQuest = "Shop"
                 elseif GetUnitTypeId(entering) == FourCC("h00A") then
                     data.CurrentQuest = "MagnetIsClosed"

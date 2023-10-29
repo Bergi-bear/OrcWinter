@@ -12,6 +12,7 @@ do
             InitSnowMan(FourCC("n003")) -- арахнид
             InitDeathEventCreep()
             InitScorpionAI(FourCC("n003"))
+            InitHookUnits(FourCC("u001"))
         end)
     end
 end
