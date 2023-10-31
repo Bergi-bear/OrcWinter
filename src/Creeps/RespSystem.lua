@@ -11,8 +11,9 @@ do
             InitSnowMan(FourCC("h005")) --снеговик
             InitSnowMan(FourCC("n003")) -- арахнид
             InitDeathEventCreep()
-            InitScorpionAI(FourCC("n003"))
-            InitHookUnits(FourCC("u001"))
+            InitScorpionAI(FourCC("n003")) -- скорпионы
+            InitHookUnits(FourCC("u001")) -- пуджи с хуком
+            InitPendulum(FourCC("h00E")) -- маятники
         end)
     end
 end
