@@ -80,6 +80,7 @@ function InitWASD(hero)
     TimerStart(CreateTimer(), 0.005, true, function()
         -- устранение бага залипания
         if UnitAlive(hero) then
+            KillDestructableByTypeInPoint(ButtonsIDTable,80,GetUnitXY(hero))
             if not IsUnitSelected(hero, GetOwningPlayer(hero)) then
                 SelectUnitForPlayerSingle(hero, GetOwningPlayer(hero))
             end
@@ -895,7 +896,7 @@ function CreateWASDActions()
                             DestroyTimer(GetExpiredTimer())
                             --StartFrameCD(data.SpellQCDTime * balance, data.cdFrameHandleQ)
                             SpellSlashQ(data)
-                            --print("активация Q")
+
                             if data.DoubleClap then
                                 TimerStart(CreateTimer(), 0.35, false, function()
                                     SpellSlashQ(data)
@@ -996,6 +997,11 @@ function PlayUnitAnimationFromChat()
         if GetEventPlayerChatString() == "h" then
             --print("лечение")
             HeroCandyHeal(data, 1)
+        end
+
+        if GetEventPlayerChatString() == "z" then
+            --print("лечение")
+            UnitStartFallAnim(udg_HERO,1000)
         end
 
         SetUnitAnimationByIndex(data.UnitHero, s)

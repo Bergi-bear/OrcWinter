@@ -243,11 +243,12 @@ function PointContentDestructable (x, y, range, iskill, damage, hero)
     EnumDestructablesInRect(GlobalRect, nil, function()
         local d = GetEnumDestructable()
         --print(GetDestructableName(d))
-        if GetDestructableLife(d) > 0 and GetDestructableTypeId(d)~=FourCC("B005") and GetDestructableTypeId(d)~=FourCC("OTip")then --игнор специальных блокираторов
+        if GetDestructableLife(d) > 0 and GetDestructableTypeId(d)~=FourCC("B005") and GetDestructableTypeId(d)~=FourCC("OTip") then --игнор специальных блокираторов
             --and unitZ<=GetTerrainZ(x,y)+50
             content = true
             contentedDest = d
             --print("эх")
+            --print(GetDestructableName(d))
             if iskill then
                 if not IsDestructableInvulnerable(d) then
                     SetDestructableLife(d, GetDestructableLife(d) - damage)
@@ -338,7 +339,7 @@ function PointContentDestructable (x, y, range, iskill, damage, hero)
             end
         else
 
-            if GetDestructableTypeId(d)==FourCC("B005") then
+            if GetDestructableTypeId(d)==FourCC("B005") then --B00C
                 --print("специальный блокиратор")
                 --DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt", GetDestructableX(d), GetDestructableY(d)))
                 contentedDest=d

@@ -2262,3 +2262,69 @@ STRING 826
 Маятник
 }
 
+STRING 827
+// Destructibles: B00B (ПРОХОД), Name (Name)
+{
+ПРОХОД
+}
+
+STRING 828
+// Doodads: D039 (NEW FLOOR), Name (Name)
+{
+NEW FLOOR
+}
+
+STRING 829
+// Doodads: D03W (TrapDOOR), Name (Name)
+{
+TrapDOOR
+}
+
+STRING 830
+// Destructibles: DTfx (Плита), EditorSuffix (Editor Suffix)
+{
+ (Умирает, не возраждается)
+}
+
+STRING 831
+// Doodads: D03Y (NEW FLOOR Center), Name (Name)
+{
+NEW FLOOR Center
+}
+
+STRING 832
+// Doodads: D042 (Каменая стена), Name (Name)
+{
+Каменая стена
+}
+
+STRING 833
+// Doodads: D049 (Каменая стена БОК), Name (Name)
+{
+Каменая стена БОК
+}
+
+STRING 834
+// Destructibles: B00C (Низкая пропасть), Name (Name)
+{
+Низкая пропасть
+}
+
+STRING 835
+// Destructibles: B00E (Настенная плита), Name (Name)
+{
+Настенная плита
+}
+
+STRING 836
+// Destructibles: B00E (Настенная плита), EditorSuffix (Editor Suffix)
+{
+ (возрождается)
+}
+
+STRING 839
+// Destructibles: B00D (Плита), EditorSuffix (Editor Suffix)
+{
+ (Возрождается!)
+}
+

@@ -4,6 +4,7 @@
 --- DateTime: 25.10.2023 20:17
 ---
 function UnitCreateArtMissile(hero, angle, speed, distance, MaxHeight, HasMarker, effModel)
+    local range=200
     local currentdistance = 0
     local i = 0
     local ZStart = GetUnitZ(hero)+40
@@ -30,12 +31,30 @@ function UnitCreateArtMissile(hero, angle, speed, distance, MaxHeight, HasMarker
         --BlzSetSpecialEffectScale(eff,5)
         if i > 3 and f <= GetTerrainZ(x, y) then
             DestroyTimer(GetExpiredTimer())
-            UnitDamageArea(hero, damage, x, y, 200)
+            UnitDamageArea(hero, damage, x, y, range)
+            --local _,d= PointContentDestructable(x,y,60,true,1)
+
+            KillDestructableByTypeInPoint(ButtonsIDTable,range,x,y)
             if not effModel then
                 --DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", newX, newY))
             else
                 DestroyEffect(eff)
                 DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", x, y))
+            end
+        end
+    end)
+end
+ButtonsIDTable={FourCC('DTfx'),FourCC('B00E'),FourCC('B00D')}
+function KillDestructableByTypeInPoint(idTable,range,x,y)
+    SetRect(GlobalRect, x - range, y - range, x + range, y + range)
+    EnumDestructablesInRect(GlobalRect, nil, function()
+        local d = GetEnumDestructable()
+        if GetDestructableLife(d) > 0 then
+            for i=1,#idTable do
+                if GetDestructableTypeId(d)==idTable[i] then
+                    --print(GetDestructableName(d),idTable[i])
+                    KillDestructable(d)
+                end
             end
         end
     end)

@@ -24,31 +24,49 @@ function StartPendulumAI(unit)
     SetUnitTimeScale(unit,0)
     TimerStart(CreateTimer(), 1, true, function()
         sec = sec - 1
-        print(sec)
+        --print(sec)
         if sec <= 0 then
-            sec = 16
+            sec = 13
             --if IsUnitInRange(unit, hero, 1000) and UnitAlive(unit)  then
-            print("запускаем маятник")
+            --print("запускаем маятник")
             SetUnitAnimation(unit,"Attack")
             SetUnitTimeScale(unit,1)
-            TimerStart(CreateTimer(), 3, false, function()
-                print("время начинать наносить урон")
-                local xs,ys=MoveXY(x,y,750,angle)
-                local speed=16
+            TimerStart(CreateTimer(), 3.2, false, function()
+                --print("время начинать наносить урон")
+                local xs,ys=MoveXY(x,y,900,angle)
+                local speed=25
                 local dist=0
                 local damageTimer=CreateTimer()
-                DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt", xs,ys))
+                --DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt", xs,ys))
                 TimerStart(damageTimer, TIMER_PERIOD, true, function()
                     dist=dist+speed
                     local nx,ny=MoveXY(xs,ys,dist,angle-180)
-                    DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt", nx,ny))
+                    --DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt", nx,ny))
+                    AttackMiniLine(unit,nx,ny)
                     --SetUnitAnimation(unit,"Attack")
                 end)
-                TimerStart(CreateTimer(), 3, false, function()
+                TimerStart(CreateTimer(), 1.8, false, function()
                    DestroyTimer(damageTimer)
-                    print("урон больше не наносим, ждём движения назад")
+                    --print("урон больше не наносим, ждём движения назад")
                     --SetUnitAnimation(unit,"Attack")
                     --SetUnitTimeScale(unit,0)
+                end)
+                TimerStart(CreateTimer(), 3.9, false, function()
+                    --print("наносим урон при возвращении назад")
+
+                    local nx,ny=MoveXY(xs,ys,dist,angle-180)
+                    --DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt", nx,ny))
+                    local damageTimerReverse=CreateTimer()
+                    TimerStart(damageTimerReverse, TIMER_PERIOD, true, function()
+                        dist=dist-speed
+                        nx,ny=MoveXY(xs,ys,dist,angle-180)
+                        AttackMiniLine(unit,nx,ny)
+                    end)
+                    TimerStart(CreateTimer(), 1.8, false, function()
+                        DestroyTimer(damageTimerReverse)
+                       -- print("урон больше не наносится, конец цикла")
+
+                    end)
                 end)
             end)
             --end
@@ -57,4 +75,21 @@ function StartPendulumAI(unit)
             DestroyTimer(GetExpiredTimer())
         end
     end)
+end
+
+function AttackMiniLine(unit,x,y)
+    local angle=GetUnitFacing(unit)
+    local range=60
+    local x2,y2=MoveXY(x,y,range/2,angle)
+    local x3,y3=MoveXY(x,y,range/2,angle-180)
+    DestroyEffect(AddSpecialEffect("AncestralGuardianMissileNoOmni", x,y))
+    DestroyEffect(AddSpecialEffect("AncestralGuardianMissileNoOmni", x2,y2))
+    DestroyEffect(AddSpecialEffect("AncestralGuardianMissileNoOmni", x3,y3))
+    --UnitDamageArea(unit,50,x,y,range)
+    --UnitDamageArea(unit,50,x2,y2,range)
+    --UnitDamageArea(unit,50,x3,y3,range)
+    DamageInLine(x, y, angle - 180, range*2.5, unit,range/2)
+    DamageInLine(x, y, angle, range*2.5, unit,range/2)
+    DamageInLine(x, y, angle-90, range*2, unit,range/2)
+    DamageInLine(x, y, angle+90, range*2, unit,range/2)
 end

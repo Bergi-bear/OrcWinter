@@ -8,7 +8,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
         xs, ys = GetUnitXY(hero)
     end
     if not maxDistance then
-        maxDistance = 1000
+        maxDistance = 2500
     end
     if not delay then
         delay = 0
@@ -51,7 +51,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
     local newAngle = angle
     local enemy = nil
     local bounceCount = 0
-    local bounceMax = 1
+    local bounceMax = 5
     TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
         dist = dist + speed
         delay = delay - speed
@@ -77,7 +77,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
                 local bounceFact = false
                 local b, d = PointContentDestructable(nx, ny, CollisionRange , false, 0, hero)
 
-                if GetDestructableTypeId(d)==FourCC("B005") then
+                if GetDestructableTypeId(d)==FourCC("B005") or GetDestructableTypeId(d)==FourCC("B00C") then
                     --print("встретил блокиратор")
                 else
                     angleCurrent, bounceFact = CHKBouncing(x, y, nx, ny, speed) ---------------- баунсинг
@@ -90,7 +90,9 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
 
 
             else
-                --print('превышено число отскоков')
+                --print('превышено число отскоков',bounceMax)
+                DestroyBullet(bullet)
+                DestroyTimer(GetExpiredTimer())
             end
         end
 

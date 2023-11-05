@@ -14,7 +14,7 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
         --print("первый раз")
     end
     --TODO тут удалено and not IsUnitType(hero, UNIT_TYPE_FLYING)
-    if not IsUnitType(hero, UNIT_TYPE_STRUCTURE) and GetUnitTypeId(hero) ~= FourCC("nglm")  and (onForces[GetHandleId(hero)] or flag == "ignore") and GetUnitAbilityLevel(hero, FourCC("Beng")) == 0 and not UnitHasBow(hero) then
+    if not IsUnitType(hero, UNIT_TYPE_STRUCTURE) and GetUnitTypeId(hero) ~= FourCC("nglm") and (onForces[GetHandleId(hero)] or flag == "ignore") and GetUnitAbilityLevel(hero, FourCC("Beng")) == 0 and not UnitHasBow(hero) then
         onForces[GetHandleId(hero)] = false
         local m = 0
         --print("1")
@@ -22,12 +22,11 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
         local damageOnWall = false
         local effDash = nil
         local ignoreDest = false
-        if IsUnitType(hero,UNIT_TYPE_HERO) then
+        if IsUnitType(hero, UNIT_TYPE_HERO) then
             local data = HERO[GetPlayerId(GetOwningPlayer(hero))]
-            data.sit=false
+            data.sit = false
             --print("сброс сидения и пошел")
         end
-
 
         if flag == "ignore" or flag == "shieldDash" then
             local data = HERO[GetPlayerId(GetOwningPlayer(hero))]
@@ -62,23 +61,27 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
                 --end
             end
 
-            if (flag == "ignore" and GetUnitData(hero).IframesOnDash) or makeJump then
-                -- print("попытка")
-                local is, d = PointContentDestructable(newVector.x, newVector.y, 120, false)
+            if flag == "ignore" or makeJump then
+                --print("попытка")
+                local fx,fy=newVector.x, newVector.y--MoveXY(newVector.x, newVector.y,120,angle)
+                --DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt", fx,fy))
+                local is, d = PointContentDestructable(fx,fy, 120, true)
                 if is then
-                    -- print("есть какой-то декор")
+                    --print("есть какой-то декор")
                 end
-                if GetDestructableTypeId(d) == FourCC("B00A") then
-                    SetUnitX(hero, newX)
-                    SetUnitY(hero, newY)
+                if GetDestructableTypeId(d) == FourCC("B00C") then
+                    SetUnitX(hero, newVector.x)
+                    SetUnitY(hero, newVector.y)
                     --print("пройти на сквозь")
                 else
                     --SetUnitPositionSmooth(hero, newX, newY)
                     SetUnitPositionSmooth(hero, newVector.x, newVector.y)
+                    --print(flag)
                 end
             else
                 --SetUnitPositionSmooth(hero, newX, newY) -- момент толкания для любого персонажа
                 SetUnitPositionSmooth(hero, newVector.x, newVector.y)
+                --print(flag)
             end
 
             if GetUnitTypeId(hero) ~= HeroID and GetUnitTypeId(pushing) == HeroID then
@@ -208,7 +211,7 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
                     --print("перезарядка атаки в рывке")
                     --HERO[GetPlayerId(GetOwningPlayer(hero))].AttackInForce=false --
                     local data = HERO[GetPlayerId(GetOwningPlayer(hero))]
-
+                    IssueImmediateOrder(hero,"stop")
                     if data.IsMoving then
                         --print("закончил рывок")
 
