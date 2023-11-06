@@ -2328,3 +2328,39 @@ STRING 839
  (Возрождается!)
 }
 
+STRING 840
+// Doodads: D04H (Решетка Векртикальная), Name (Name)
+{
+Решетка Векртикальная
+}
+
+STRING 841
+// Doodads: D04J (Решетка), Name (Name)
+{
+Решетка
+}
+
+STRING 842
+// Doodads: D04K (Балка), Name (Name)
+{
+Балка
+}
+
+STRING 843
+// Doodads: D04O (Поток Света), Name (Name)
+{
+Поток Света
+}
+
+STRING 844
+// Doodads: D056 (Поток Света (Сверху вниз)), Name (Name)
+{
+Поток Света (Сверху вниз)
+}
+
+STRING 845
+// Units: h00F (Кнопка невидимка), Name (Name)
+{
+Кнопка невидимка
+}
+
