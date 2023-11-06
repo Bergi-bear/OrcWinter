@@ -5,7 +5,7 @@
 ---
 function InitHookUnits(id)
     local _, k, rg = FindUnitOfType(id)
-    print(k, "пуджей")
+    --print(k, "пуджей")
     for i = 1, #rg do
         --local unit = rg[i]
         StartHookAI(rg[i])
@@ -82,8 +82,12 @@ function UnitCreateHook(unit,angle)
                 --print("хук вернулся")
                 UnitRemoveStun(hero)
 
-                local enemy=FindFirstEnemy(unit,1000)
-                IssueTargetOrder(unit, "move", enemy)
+                --local enemy=FindFirstEnemy(unit,1200)
+                local enemy=HERO[0].UnitHero
+                --IssueTargetOrder(unit, "move", enemy)
+                if IsUnitInRange(unit, enemy, 1000) then
+                    IssuePointOrder(unit,"move",GetUnitXY(enemy))
+                end
                 hero=nil
                 DestroyTimer(GetExpiredTimer())
                 DestroyEffect(hook)
@@ -99,11 +103,11 @@ end
 
 function StartHookAI(unit)
     local hero = HERO[0].UnitHero
-    local sec=7
+    local sec=3
     TimerStart(CreateTimer(), 1, true, function()
         sec = sec - 1
         if sec <= 0 then
-            sec = 6
+            sec = 7
             if IsUnitInRange(unit, hero, 1000) and UnitAlive(unit)  then
                 --print("герой в радиусе активируем прицеливание")
                 local mark=AddSpecialEffect("BossArrowHook",GetUnitXY(unit))
@@ -124,6 +128,7 @@ function StartHookAI(unit)
                     BlzSetSpecialEffectPosition(mark,5000,5000,5000)
                     IssueImmediateOrder(unit,"stop")
                     SetUnitAnimation(unit,"Attack")
+                    BlzSetUnitFacingEx(unit,angle)
 
                     TimerStart(CreateTimer(), 0.2, false, function()
                         --print("Активируем сам хук")

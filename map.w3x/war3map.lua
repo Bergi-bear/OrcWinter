@@ -56,6 +56,9 @@ gg_rct_Exit03 = nil
 gg_rct_Boind04 = nil
 gg_rct_Enter04 = nil
 gg_rct_Exit04 = nil
+gg_rct_Bound05 = nil
+gg_rct_Enter05 = nil
+gg_rct_Exit05 = nil
 gg_cam_OnPeonsandTrall = nil
 gg_cam_OnPineRound = nil
 gg_cam_OnPeons = nil
@@ -116,6 +119,8 @@ gg_snd_CookQuestPeon2 = nil
 gg_snd_CookQuestPeon3 = nil
 gg_snd_cook5 = nil
 gg_snd_CookQuestPeon4 = nil
+gg_trg_ExitFrom05 = nil
+gg_trg_Victory05 = nil
 gg_trg_ExitFrom04 = nil
 gg_trg_Victory04 = nil
 gg_trg_ExitFrom03 = nil
@@ -202,16 +207,33 @@ gg_dest_B00D_15711 = nil
 gg_dest_B00D_15712 = nil
 gg_dest_B00B_15713 = nil
 gg_dest_B00D_15709 = nil
-gg_rct_Bound05 = nil
-gg_rct_Enter05 = nil
-gg_rct_Exit05 = nil
-gg_trg_Victory05 = nil
-gg_trg_ExitFrom05 = nil
-gg_dest_B00B_16153 = nil
-gg_dest_B00D_16256 = nil
-gg_dest_B00D_16254 = nil
 gg_dest_B00D_16257 = nil
+gg_dest_B00B_16153 = nil
+gg_dest_B00D_16254 = nil
 gg_dest_B00D_16255 = nil
+gg_dest_B00D_16256 = nil
+gg_unit_h00B_0276 = nil
+gg_unit_h00B_0003 = nil
+gg_unit_h00B_0271 = nil
+gg_unit_h00E_0217 = nil
+gg_unit_h00E_0216 = nil
+gg_rct_Bound06 = nil
+gg_rct_Enter06 = nil
+gg_rct_Exit06 = nil
+gg_trg_Victory06 = nil
+gg_trg_ExitFrom06 = nil
+gg_dest_B00B_16430 = nil
+gg_dest_B00D_16427 = nil
+gg_dest_B00D_16426 = nil
+gg_dest_B00D_16416 = nil
+gg_dest_B00D_16421 = nil
+gg_trg_InvulPudges = nil
+gg_unit_u001_0396 = nil
+gg_unit_u001_0395 = nil
+gg_dest_B00D_16599 = nil
+gg_dest_B00D_16598 = nil
+gg_dest_B00D_16596 = nil
+gg_dest_B00D_16597 = nil
 function InitGlobals()
 udg_PressESC = false
 udg_PressESCYETTY = false
@@ -440,25 +462,34 @@ local life
 
 gg_dest_B004_2162 = BlzCreateDestructableWithSkin(FourCC("B004"), -128.0, -192.0, 325.000, 3.000, 0, FourCC("B004"))
 gg_dest_B007_5312 = BlzCreateDestructableWithSkin(FourCC("B007"), -7552.0, 4224.0, 211.000, 3.000, 0, FourCC("B007"))
-gg_dest_B00B_15274 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 10618.1, 6012.7, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
-gg_dest_B00B_14732 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 13812.6, 8326.6, 838.4, 90.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_16153 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15215.2, 5364.9, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
-gg_dest_B00B_15713 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11516.0, 4100.8, 844.8, 90.000, 1.450, 0, FourCC("B00B"))
-gg_dest_B00B_14785 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11344.6, 8373.0, 851.2, 270.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_15515 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15227.5, 6283.1, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
-gg_dest_B00D_16254 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12864.0, 4160.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_15712 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12096.0, 3264.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_15711 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10752.0, 3328.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_15710 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12224.0, 5184.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00B_15274 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 10618.1, 6012.7, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
+gg_dest_B00B_16430 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11128.9, 2440.7, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
+gg_dest_B00B_14785 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11344.6, 8373.0, 851.2, 270.000, 1.650, 0, FourCC("B00B"))
+gg_dest_B00B_15713 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11516.0, 4100.8, 844.8, 90.000, 1.450, 0, FourCC("B00B"))
+gg_dest_B00B_14732 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 13812.6, 8326.6, 838.4, 90.000, 1.650, 0, FourCC("B00B"))
+gg_dest_B00D_16421 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11968.0, 1408.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_16416 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11968.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_16427 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10304.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_16426 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10304.0, 1408.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_16596 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10048.0, 1792.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_16597 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12288.0, 1792.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16255 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15296.0, 4160.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_15709 = BlzCreateDestructableWithSkin(FourCC("B00D"), 9984.0, 5376.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_16254 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12864.0, 4160.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_16598 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11136.0, 1216.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16257 = BlzCreateDestructableWithSkin(FourCC("B00D"), 14080.0, 4608.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_16256 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12992.0, 5312.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_15532 = BlzCreateDestructableWithSkin(FourCC("B00D"), 14016.0, 6080.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_15710 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12224.0, 5184.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_15711 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10752.0, 3328.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_15712 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12096.0, 3264.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_16256 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12992.0, 5312.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_15709 = BlzCreateDestructableWithSkin(FourCC("B00D"), 9984.0, 5376.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_16599 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11136.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00E_15516 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 14600.6, 6946.5, 979.2, 270.000, 1.000, 0, FourCC("B00E"))
-gg_dest_B00E_15514 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 14998.0, 6473.7, 972.8, 270.000, 1.000, 0, FourCC("B00E"))
 gg_dest_B00E_15513 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 13441.1, 6941.4, 1004.8, 90.000, 1.000, 0, FourCC("B00E"))
 gg_dest_B00E_15517 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 12948.1, 6482.3, 979.2, 90.000, 1.000, 0, FourCC("B00E"))
+gg_dest_B00E_15514 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 14998.0, 6473.7, 972.8, 270.000, 1.000, 0, FourCC("B00E"))
 gg_dest_DTfx_15314 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10176.0, 7232.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_15068 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10048.0, 6208.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_15071 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 12352.0, 5952.0, 270.000, 1.000, 0, FourCC("DTfx"))
@@ -839,8 +870,8 @@ SetUnitState(u, UNIT_STATE_LIFE, 0.07 * life)
 u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10299.4, -2007.8, 270.000, FourCC("h000"))
 life = GetUnitState(u, UNIT_STATE_LIFE)
 SetUnitState(u, UNIT_STATE_LIFE, 0.10 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h00E"), 11003.5, 6845.6, 180.000, FourCC("h00E"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00E"), 11383.8, 6704.5, 0.000, FourCC("h00E"))
+gg_unit_h00E_0216 = BlzCreateUnitWithSkin(p, FourCC("h00E"), 11003.5, 6845.6, 180.000, FourCC("h00E"))
+gg_unit_h00E_0217 = BlzCreateUnitWithSkin(p, FourCC("h00E"), 11383.8, 6704.5, 0.000, FourCC("h00E"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00B"), 6717.2, -4657.6, 0.000, FourCC("h00B"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), -2011.8, -3206.3, 351.690, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00B"), 6594.1, -4717.7, 270.000, FourCC("h00B"))
@@ -856,6 +887,12 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 10936.1, 4027.6, 45.687, FourCC("h0
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12967.5, 4144.6, 34.162, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15188.1, 4143.0, 34.162, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12892.6, 5400.3, 34.162, FourCC("h00C"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 10744.7, 2186.1, 242.987, FourCC("h00C"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 10751.4, 1800.7, 242.987, FourCC("h00C"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 10740.6, 1412.7, 242.987, FourCC("h00C"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11522.5, 2183.7, 242.987, FourCC("h00C"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11520.9, 1800.1, 242.987, FourCC("h00C"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11519.3, 1411.6, 242.987, FourCC("h00C"))
 end
 
 function CreateUnitsForPlayer2()
@@ -865,9 +902,11 @@ local unitID
 local t
 local life
 
-u = BlzCreateUnitWithSkin(p, FourCC("h00B"), 9929.0, 4935.3, 0.000, FourCC("h00B"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00B"), 11757.0, 5325.0, 180.000, FourCC("h00B"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00B"), 10309.8, 3140.1, 90.000, FourCC("h00B"))
+gg_unit_h00B_0003 = BlzCreateUnitWithSkin(p, FourCC("h00B"), 9929.0, 4935.3, 0.000, FourCC("h00B"))
+gg_unit_h00B_0271 = BlzCreateUnitWithSkin(p, FourCC("h00B"), 11757.0, 5325.0, 180.000, FourCC("h00B"))
+gg_unit_h00B_0276 = BlzCreateUnitWithSkin(p, FourCC("h00B"), 10309.8, 3140.1, 90.000, FourCC("h00B"))
+gg_unit_u001_0395 = BlzCreateUnitWithSkin(p, FourCC("u001"), 10128.1, 1823.9, -24.746, FourCC("u001"))
+gg_unit_u001_0396 = BlzCreateUnitWithSkin(p, FourCC("u001"), 12135.5, 1820.4, 165.617, FourCC("u001"))
 end
 
 function CreateUnitsForPlayer10()
@@ -1207,9 +1246,12 @@ gg_rct_Exit03 = Rect(15104.0, 6144.0, 15392.0, 6432.0)
 gg_rct_Boind04 = Rect(11040.0, 3648.0, 11328.0, 4640.0)
 gg_rct_Enter04 = Rect(11072.0, 3872.0, 11200.0, 4000.0)
 gg_rct_Exit04 = Rect(11360.0, 3968.0, 11648.0, 4256.0)
-gg_rct_Bound05 = Rect(13856.0, 4768.0, 14144.0, 4992.0)
+gg_rct_Bound05 = Rect(13920.0, 4672.0, 14208.0, 4896.0)
 gg_rct_Enter05 = Rect(12928.0, 5376.0, 13056.0, 5504.0)
 gg_rct_Exit05 = Rect(15072.0, 5216.0, 15360.0, 5504.0)
+gg_rct_Bound06 = Rect(10976.0, 1632.0, 11264.0, 1856.0)
+gg_rct_Enter06 = Rect(11072.0, 2080.0, 11200.0, 2208.0)
+gg_rct_Exit06 = Rect(10976.0, 2304.0, 11264.0, 2592.0)
 end
 
 function CreateCameras()
@@ -8010,7 +8052,7 @@ end
 ---
 function InitHookUnits(id)
     local _, k, rg = FindUnitOfType(id)
-    print(k, "пуджей")
+    --print(k, "пуджей")
     for i = 1, #rg do
         --local unit = rg[i]
         StartHookAI(rg[i])
@@ -8087,8 +8129,12 @@ function UnitCreateHook(unit,angle)
                 --print("хук вернулся")
                 UnitRemoveStun(hero)
 
-                local enemy=FindFirstEnemy(unit,1000)
-                IssueTargetOrder(unit, "move", enemy)
+                --local enemy=FindFirstEnemy(unit,1200)
+                local enemy=HERO[0].UnitHero
+                --IssueTargetOrder(unit, "move", enemy)
+                if IsUnitInRange(unit, enemy, 1000) then
+                    IssuePointOrder(unit,"move",GetUnitXY(enemy))
+                end
                 hero=nil
                 DestroyTimer(GetExpiredTimer())
                 DestroyEffect(hook)
@@ -8104,11 +8150,11 @@ end
 
 function StartHookAI(unit)
     local hero = HERO[0].UnitHero
-    local sec=7
+    local sec=3
     TimerStart(CreateTimer(), 1, true, function()
         sec = sec - 1
         if sec <= 0 then
-            sec = 6
+            sec = 7
             if IsUnitInRange(unit, hero, 1000) and UnitAlive(unit)  then
                 --print("герой в радиусе активируем прицеливание")
                 local mark=AddSpecialEffect("BossArrowHook",GetUnitXY(unit))
@@ -8129,6 +8175,7 @@ function StartHookAI(unit)
                     BlzSetSpecialEffectPosition(mark,5000,5000,5000)
                     IssueImmediateOrder(unit,"stop")
                     SetUnitAnimation(unit,"Attack")
+                    BlzSetUnitFacingEx(unit,angle)
 
                     TimerStart(CreateTimer(), 0.2, false, function()
                         --print("Активируем сам хук")
@@ -8194,7 +8241,11 @@ function CreateInvPlatform(hero)
         free=false
         if not free then
             local eff = AddSpecialEffect("footswitchWhite", x, y)
-            BlzSetSpecialEffectColorByPlayer(eff, Player(1)) -- синий
+            --BlzSetSpecialEffectColorByPlayer(eff, Player(1)) -- синий
+            local r=GetRandomInt(0,255)
+            local r2=GetRandomInt(0,255)
+            local r3=GetRandomInt(0,255)
+            BlzSetSpecialEffectColor(eff,r,r2,r3)
             CreateEffectDown2Up(eff, x, y)
             TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
                 if not IsUnitInRange(hero, enemy, 110) or not UnitAlive(enemy) then
@@ -12624,6 +12675,106 @@ function InitItemBDForShop()
 end
 
 --CUSTOM_CODE
+function Trig_ExitFrom06_Conditions()
+if (not (IsDestructableDeadBJ(gg_dest_B00B_16430) == true)) then
+return false
+end
+return true
+end
+
+function Trig_ExitFrom06_Actions()
+TriggerSleepAction(0.10)
+SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter06))
+    UnitStartFallAnim(udg_HERO,1000)
+SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound06)
+end
+
+function InitTrig_ExitFrom06()
+gg_trg_ExitFrom06 = CreateTrigger()
+TriggerRegisterEnterRectSimple(gg_trg_ExitFrom06, gg_rct_Exit06)
+TriggerAddCondition(gg_trg_ExitFrom06, Condition(Trig_ExitFrom06_Conditions))
+TriggerAddAction(gg_trg_ExitFrom06, Trig_ExitFrom06_Actions)
+end
+
+function Trig_Victory06_Func001Func002C()
+if (not (IsDestructableDeadBJ(gg_dest_B00B_16430) == true)) then
+return false
+end
+return true
+end
+
+function Trig_Victory06_Func001Func006C()
+if (not (IsDestructableDeadBJ(gg_dest_B00D_16421) == true)) then
+return false
+end
+if (not (IsDestructableDeadBJ(gg_dest_B00D_16416) == true)) then
+return false
+end
+if (not (IsDestructableDeadBJ(gg_dest_B00D_16427) == true)) then
+return false
+end
+if (not (IsDestructableDeadBJ(gg_dest_B00D_16426) == true)) then
+return false
+end
+if (not (IsDestructableDeadBJ(gg_dest_B00D_16599) == true)) then
+return false
+end
+if (not (IsDestructableDeadBJ(gg_dest_B00D_16598) == true)) then
+return false
+end
+if (not (IsDestructableDeadBJ(gg_dest_B00D_16596) == true)) then
+return false
+end
+if (not (IsDestructableDeadBJ(gg_dest_B00D_16597) == true)) then
+return false
+end
+return true
+end
+
+function Trig_Victory06_Func001C()
+if (not Trig_Victory06_Func001Func006C()) then
+return false
+end
+return true
+end
+
+function Trig_Victory06_Actions()
+if (Trig_Victory06_Func001C()) then
+KillDestructable(gg_dest_B00B_16430)
+KillUnit(gg_unit_u001_0395)
+KillUnit(gg_unit_u001_0396)
+else
+TriggerSleepAction(2.00)
+if (Trig_Victory06_Func001Func002C()) then
+else
+DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
+end
+end
+end
+
+function InitTrig_Victory06()
+gg_trg_Victory06 = CreateTrigger()
+TriggerRegisterDeathEvent(gg_trg_Victory06, gg_dest_B00D_16427)
+TriggerRegisterDeathEvent(gg_trg_Victory06, gg_dest_B00D_16426)
+TriggerRegisterDeathEvent(gg_trg_Victory06, gg_dest_B00D_16416)
+TriggerRegisterDeathEvent(gg_trg_Victory06, gg_dest_B00D_16421)
+TriggerRegisterDeathEvent(gg_trg_Victory06, gg_dest_B00D_16599)
+TriggerRegisterDeathEvent(gg_trg_Victory06, gg_dest_B00D_16598)
+TriggerRegisterDeathEvent(gg_trg_Victory06, gg_dest_B00D_16596)
+TriggerRegisterDeathEvent(gg_trg_Victory06, gg_dest_B00D_16597)
+TriggerAddAction(gg_trg_Victory06, Trig_Victory06_Actions)
+end
+
+function Trig_InvulPudges_Actions()
+SetUnitInvulnerable(gg_unit_u001_0396, true)
+SetUnitInvulnerable(gg_unit_u001_0395, true)
+end
+
+function InitTrig_InvulPudges()
+gg_trg_InvulPudges = CreateTrigger()
+TriggerAddAction(gg_trg_InvulPudges, Trig_InvulPudges_Actions)
+end
+
 function Trig_ExitFrom05_Conditions()
 if (not (IsDestructableDeadBJ(gg_dest_B00B_16153) == true)) then
 return false
@@ -12633,9 +12784,9 @@ end
 
 function Trig_ExitFrom05_Actions()
 TriggerSleepAction(0.10)
-SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter05))
+SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter06))
     UnitStartFallAnim(udg_HERO,1000)
-SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound05)
+SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound06)
 end
 
 function InitTrig_ExitFrom05()
@@ -12708,6 +12859,9 @@ TriggerSleepAction(0.10)
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter05))
     UnitStartFallAnim(udg_HERO,1000)
 SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound05)
+KillUnit(gg_unit_h00B_0276)
+KillUnit(gg_unit_h00B_0003)
+KillUnit(gg_unit_h00B_0271)
 end
 
 function InitTrig_ExitFrom04()
@@ -12856,6 +13010,8 @@ TriggerSleepAction(0.10)
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter03))
     UnitStartFallAnim(udg_HERO,1000)
 SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Boind03)
+KillUnit(gg_unit_h00E_0217)
+KillUnit(gg_unit_h00E_0216)
 end
 
 function InitTrig_ExitFrom02()
@@ -14247,6 +14403,9 @@ TriggerAddAction(gg_trg_ESCTEST, Trig_ESCTEST_Actions)
 end
 
 function InitCustomTriggers()
+InitTrig_ExitFrom06()
+InitTrig_Victory06()
+InitTrig_InvulPudges()
 InitTrig_ExitFrom05()
 InitTrig_Victory05()
 InitTrig_ExitFrom04()
@@ -14297,6 +14456,7 @@ InitTrig_ESCTEST()
 end
 
 function RunInitializationTriggers()
+ConditionalTriggerExecute(gg_trg_InvulPudges)
 ConditionalTriggerExecute(gg_trg_InitAnimeArena)
 ConditionalTriggerExecute(gg_trg_InitMerchantQuest)
 end
@@ -14342,7 +14502,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, 13056.0, 5248.0)
+DefineStartLocation(0, 11136.0, 2112.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()
