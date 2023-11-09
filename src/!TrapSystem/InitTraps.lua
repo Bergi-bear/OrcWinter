@@ -11,6 +11,7 @@ do
             --InitAllTraps()
             --InitAllButton()
             InitLaserTrap()
+            ReplaceIdToSpikeTraps(FourCC("h00G"))
         end)
     end
 end
