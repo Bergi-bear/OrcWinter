@@ -69,7 +69,7 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
                 if is then
                     --print("есть какой-то декор")
                 end
-                if GetDestructableTypeId(d) == FourCC("B00C") then
+                if GetDestructableTypeId(d) == FourCC("B00C") then -- низкая пропасть
                     SetUnitX(hero, newVector.x)
                     SetUnitY(hero, newVector.y)
                     --print("пройти на сквозь")

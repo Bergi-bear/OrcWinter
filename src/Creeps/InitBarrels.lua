@@ -5,7 +5,7 @@
 ---
 function InitBarrels(id)
     local _, k, rg = FindUnitOfType(id)
-    print(k, "бочек")
+    --print(k, "бочек")
     for i = 1, #rg do
         local new = rg[i]
         --StartHookAI(rg[i])

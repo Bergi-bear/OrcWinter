@@ -36,11 +36,15 @@ function CreateSpikeTrap(unit)
                 BlzPlaySpecialEffect(eff, ANIM_TYPE_BIRTH)
                 TimerStart(CreateTimer(), 0.15, false, function()
                     --print("время урона?")
-                    --UnitDamageArea(unit, 50, GetUnitX(unit), GetUnitY(unit), 80)
+                    UnitDamageArea(unit, 50, GetUnitX(unit), GetUnitY(unit), 80)
                 end)
             end
             if sec >= 4 then
                 sec = 0
+            end
+            if not UnitAlive(unit) then
+                DestroyTimer(GetExpiredTimer())
+                DestroyEffect(eff)
             end
         end)
     end)

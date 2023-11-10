@@ -38,7 +38,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
     BlzSetSpecialEffectYaw(bullet, math.rad(angle))
     local CollisionEnemy = false
     local CollisisonDestr = false
-    local DamagingUnit = nil
+    local DamagingUnit = nil -- тот кто первый получил урон
     if effectmodel == "Abilities\\Spells\\Orc\\Shockwave\\ShockwaveMissile.mdl" then
         BlzSetSpecialEffectScale(bullet, 0.7)
     end
@@ -51,7 +51,11 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
     local newAngle = angle
     local enemy = nil
     local bounceCount = 0
-    local bounceMax = 5
+    local bounceMax = 0
+    if IsUnitType(hero, UNIT_TYPE_HERO) then
+        bounceMax = 5
+    end
+
     TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
         dist = dist + speed
         delay = delay - speed
@@ -69,30 +73,33 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
                 _, enemy = UnitDamageArea(hero, 0, x, y, 300)
             end
         end
-        if IsUnitType(hero, UNIT_TYPE_HERO) then
-            BlzSetSpecialEffectYaw(bullet, math.rad(angleCurrent))
-            local nx, ny = MoveXY(x, y, speed, angleCurrent)
-            BlzSetSpecialEffectPosition(bullet, nx, ny, z) -- было z-2
-            if bounceCount <= bounceMax then
-                local bounceFact = false
-                local b, d = PointContentDestructable(nx, ny, CollisionRange , false, 0, hero)
 
-                if GetDestructableTypeId(d)==FourCC("B005") or GetDestructableTypeId(d)==FourCC("B00C") then
-                    --print("встретил блокиратор")
-                else
+        BlzSetSpecialEffectYaw(bullet, math.rad(angleCurrent))
+        local nx, ny = MoveXY(x, y, speed, angleCurrent)
+        BlzSetSpecialEffectPosition(bullet, nx, ny, z) -- было z-2
+
+
+        local bounceFact = false
+        local b, d = PointContentDestructable(nx, ny, CollisionRange, false, 0, hero)
+
+        if GetDestructableTypeId(d) == FourCC("B005") or GetDestructableTypeId(d) == FourCC("B00C") then
+            --нет рикошета от этих блокираторов
+            --print("встретил блокиратор")
+        else
+            if IsUnitType(hero, UNIT_TYPE_HERO) then
+                if bounceCount <= bounceMax then
                     angleCurrent, bounceFact = CHKBouncing(x, y, nx, ny, speed) ---------------- баунсинг
                     nx, ny = MoveXY(x, y, speed, angleCurrent)
                     if bounceFact then
                         bounceCount = bounceCount + 1
                         --print(bounceCount)
                     end
+                else
+                    --print('превышено число отскоков',bounceMax)
+
+                    DestroyBullet(bullet)
+                    DestroyTimer(GetExpiredTimer())
                 end
-
-
-            else
-                --print('превышено число отскоков',bounceMax)
-                DestroyBullet(bullet)
-                DestroyTimer(GetExpiredTimer())
             end
         end
 
@@ -116,7 +123,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
                     DestroyTimer(GetExpiredTimer())
                     data.ReversShield = false
                     data.ShieldThrow = false
-                    --print("щит вернулся к пеону")
+                    print("щит вернулся к пеону")
                 end
             end
         end
@@ -211,12 +218,13 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
         end
         CollisisonDestr = PointContentDestructable(x, y, CollisionRange, false, 0, hero)
         local PerepadZ = zGround - z
-
-        if not reverse and delay <= 0 and (dist > maxDistance or CollisionEnemy or IsUnitType(DamagingUnit, UNIT_TYPE_STRUCTURE) or PerepadZ > 20) then
+        --print(CollisisonDestr)
+        --if not reverse and delay <= 0 and (dist > maxDistance or CollisionEnemy or IsUnitType(DamagingUnit, UNIT_TYPE_STRUCTURE) or PerepadZ > 20) then --оригинальная строчка
+        if not reverse and delay <= 0 and (dist > maxDistance or CollisionEnemy or PerepadZ > 20) then
             --or CollisisonDestr
             --
             --or IsTerrainPathable(nx, ny, PATHING_TYPE_WALKABILITY)
-            --print("попал?",CollisionEnemy,reverse,delay)
+            --print("попал в", CollisionEnemy, reverse, delay, maxDistance, PerepadZ, dist)
             if CollisisonDestr then
 
                 if effectmodel == "Abilities\\Weapons\\GryphonRiderMissile\\GryphonRiderMissile.mdl" then
@@ -409,6 +417,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
             end
 
             if not DamagingUnit then
+                --print("NOT DAMAGING")
                 DestroyBullet(bullet)
                 DestroyTimer(GetExpiredTimer())
             end

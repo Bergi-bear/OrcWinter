@@ -7,7 +7,8 @@ do
     local InitGlobalsOrigin = InitGlobals
     function InitGlobals()
         InitGlobalsOrigin()
-        TimerStart(CreateTimer(), 0.1, false, function() --инициализация ловушек
+        TimerStart(CreateTimer(), 0.1, false, function()
+            --инициализация ловушек
             --InitAllTraps()
             --InitAllButton()
             InitLaserTrap()
@@ -22,54 +23,57 @@ function InitLaserTrap()
     for i = 1, #rg do
         local u = rg[i]
         UnitAddAbility(u, FourCC("Aloc"))
-        local lengthDef=2000
-        local dist=800 -- это настощая длина брима
-        local length=dist/lengthDef -- визуальная длина брима
-        local step=55
+        local lengthDef = 2000
+        local dist = 800 -- это настощая длина брима
+        local length = dist / lengthDef -- визуальная длина брима
+        local step = 55
         TimerStart(CreateTimer(), 3, true, function()
-            local x,y=GetUnitXY(u)
-            local angle=GetUnitFacing(u)
-            local eff=AddSpecialEffect("Effect\\BeamZero",0,0)
-            x,y=MoveXY(x,y,25,angle-180)
-            SetUnitAnimation(u,"attack")
-            BlzSetSpecialEffectX(eff,x-16)
-            BlzSetSpecialEffectY(eff,y)
-            BlzSetSpecialEffectZ(eff,GetUnitZ(u)+10)
+            local x, y = GetUnitXY(u)
+            local angle = GetUnitFacing(u)
+            local eff = AddSpecialEffect("Effect\\BeamZero", 0, 0)
+            x, y = MoveXY(x, y, 25, angle - 180)
+            SetUnitAnimation(u, "attack")
+            BlzSetSpecialEffectX(eff, x - 16)
+            BlzSetSpecialEffectY(eff, y)
+            BlzSetSpecialEffectZ(eff, GetUnitZ(u) + 10)
             BlzSetSpecialEffectYaw(eff, math.rad(angle))
-            BlzSetSpecialEffectMatrixScale(eff,length,1,1)
+            BlzSetSpecialEffectMatrixScale(eff, length, 1, 1)
             --BlzSetSpecialEffectColor(eff, 255, 0, 0)
-            local damageTimer=CreateTimer()
+            local damageTimer = CreateTimer()
             TimerStart(CreateTimer(), 0.2, false, function()
-                local s=normal_sound("Effect\\AngelBeam.mp3", x, y)
-                local grow=GetRandomReal(0.5,2)
+                local s = normal_sound("Effect\\AngelBeam.mp3", x, y)
+                local grow = GetRandomReal(0.5, 2)
                 --print(grow)
-                SetSoundPitch(s,grow)
+                SetSoundPitch(s, grow)
                 TimerStart(damageTimer, 0.07, true, function()
-                    DamageInLine(x,y,angle-180,dist-step,u,step)
+                    DamageInLine(x, y, angle - 180, dist - step, u, step)
                 end)
             end)
             TimerStart(CreateTimer(), 1.1, false, function()
-                BlzSetSpecialEffectTimeScale(eff,1)
+                BlzSetSpecialEffectTimeScale(eff, 1)
                 TimerStart(CreateTimer(), 0.1, false, function()
-                    BlzSetSpecialEffectX(eff,5000)
-                    BlzSetSpecialEffectY(eff,5000)
+                    BlzSetSpecialEffectX(eff, 5000)
+                    BlzSetSpecialEffectY(eff, 5000)
                     DestroyEffect(eff)
                     DestroyTimer(damageTimer)
                 end)
 
             end)
+            if not UnitAlive(u) then
+                DestroyTimer(GetExpiredTimer())
+            end
         end)
     end
 end
-ITSATRAP=false
+ITSATRAP = false
 function InitAllTraps()
     InitTrapByID(FourCC("h000"))
     InitTrapByID(FourCC("h001"))
-    ITSATRAP=true
+    ITSATRAP = true
 end
 
-function TrapShotByID(id, u, range)
-    if ITSATRAP then
+function TrapShotByID(id, u, range, force)
+    if ITSATRAP or force then
         if id == FourCC("h000") then
             ActivateBulletTrap(u, "Abilities\\Weapons\\LichMissile\\LichMissile.mdl", range)
         elseif id == FourCC("h001") then
@@ -80,78 +84,105 @@ end
 
 function InitTrapByID(id)
     local _, k, rg = FindUnitOfType(id)
-    local radiusActivate = 500
-    local distanceSee = 1200
+
     --print(k, " стреляющих ловушек активировано")
     for i = 1, #rg do
         local u = rg[i]
-        UnitAddAbility(u, FourCC("Aloc"))
-        local enterTrig = CreateTrigger()
+        InitUnitBulletTrap(u)
+    end
+end
 
-        local hp = R2I(GetUnitLifePercent(u)) --тип ловушки определяется её процентом HP только НЕЧЕТНЫЕ, НЕТ лучше проверить дебагом
-        --print(hp.."%%".." от "..R2S(BlzGetUnitMaxHP(u)))
-        if hp == 100 then
-            -- ловушка работающая в радиусе
+--InitUnitBulletTrap(GetEnumUnit(), true)
 
-            TriggerRegisterUnitInRange(enterTrig, u, radiusActivate, nil)
-            TriggerAddAction(enterTrig, function()
-                local entering = GetTriggerUnit()
-                if IsUnitType(entering,UNIT_TYPE_HERO) then
-                    TimerStart(CreateTimer(), 0.5, true, function()
-                        if not IsUnitInRange(entering, u, radiusActivate + 500) then
-                            --print("вышел из радиуса")
-                            DestroyTimer(GetExpiredTimer())
-                            --DestroyTrigger(enterTrig)
-                        else
-                            if IsUnitInLine(entering, distanceSee, GetUnitFacing(u), GetUnitXY(u)) and IsUnitEnemy(u, GetOwningPlayer(entering)) then
-                                TrapShotByID(id, u)
-                            end
-                        end
-                    end)
-                end
-            end)
-        elseif hp == 1 then
-            --print("первая вариация ловушки")
-            TimerStart(CreateTimer(), 2, true, function()
-                TrapShotByID(id, u)
-            end)
-        elseif hp == 3 then
-            --print("вторая вариация")
-            TimerStart(CreateTimer(), 4, true, function()
-                local count = 3
+function InitUnitBulletTrap(u, force)
+    local radiusActivate = 500
+    local distanceSee = 1200
+    local id = GetUnitTypeId(u)
+    UnitAddAbility(u, FourCC("Aloc"))
+    local enterTrig = CreateTrigger()
+    local hp = R2I(GetUnitLifePercent(u)) --тип ловушки определяется её процентом HP только НЕЧЕТНЫЕ, НЕТ лучше проверить дебагом
+    --print(hp.."%%".." от "..R2S(BlzGetUnitMaxHP(u)))
+    if hp == 100 then
+        -- ловушка работающая в радиусе
+
+        TriggerRegisterUnitInRange(enterTrig, u, radiusActivate, nil)
+        TriggerAddAction(enterTrig, function()
+            local entering = GetTriggerUnit()
+            if IsUnitType(entering, UNIT_TYPE_HERO) then
                 TimerStart(CreateTimer(), 0.5, true, function()
-                    count = count - 1
-                    TrapShotByID(id, u)
-                    if count <= 0 then
+                    if not IsUnitInRange(entering, u, radiusActivate + 500) then
+                        --print("вышел из радиуса")
+                        DestroyTimer(GetExpiredTimer())
+                        --DestroyTrigger(enterTrig)
+                    else
+                        if IsUnitInLine(entering, distanceSee, GetUnitFacing(u), GetUnitXY(u)) and IsUnitEnemy(u, GetOwningPlayer(entering)) then
+                            TrapShotByID(id, u, nil, force)
+                        end
+                    end
+                    if not UnitAlive(u) then
                         DestroyTimer(GetExpiredTimer())
                     end
                 end)
+            end
+        end)
+    elseif hp == 1 then
+        --print("первая вариация ловушки")
+        TimerStart(CreateTimer(), 2, true, function()
+            TrapShotByID(id, u, nil, force)
+            if not UnitAlive(u) then
+                DestroyTimer(GetExpiredTimer())
+            end
+        end)
+    elseif hp == 3 then
+        --print("вторая вариация")
+        TimerStart(CreateTimer(), 4, true, function()
+            local count = 3
+            TimerStart(CreateTimer(), 0.5, true, function()
+                count = count - 1
+                TrapShotByID(id, u, nil, force)
+                if count <= 0 then
+                    DestroyTimer(GetExpiredTimer())
+                end
+                if not UnitAlive(u) then
+                    DestroyTimer(GetExpiredTimer())
+                end
             end)
-        elseif hp == 5 then
-            --5-11 с разно задержкой
-            -- стреляет очень далеко
+        end)
+    elseif hp == 5 then
+        --5-11 с разно задержкой
+        -- стреляет очень далеко
+        TimerStart(CreateTimer(), 2, true, function()
+            TrapShotByID(id, u, 2400, force)
+            if not UnitAlive(u) then
+                DestroyTimer(GetExpiredTimer())
+            end
+        end)
+    elseif hp == 7 then
+        TimerStart(CreateTimer(), 0.5, false, function()
             TimerStart(CreateTimer(), 2, true, function()
-                TrapShotByID(id, u, 2400)
+                TrapShotByID(id, u, 2400, force)
+                if not UnitAlive(u) then
+                    DestroyTimer(GetExpiredTimer())
+                end
             end)
-        elseif hp == 7 then
-            TimerStart(CreateTimer(), 0.5, false, function()
-                TimerStart(CreateTimer(), 2, true, function()
-                    TrapShotByID(id, u, 2400)
-                end)
+        end)
+    elseif hp == 9 then
+        TimerStart(CreateTimer(), 1, false, function()
+            TimerStart(CreateTimer(), 2, true, function()
+                TrapShotByID(id, u, 2400, force)
+                if not UnitAlive(u) then
+                    DestroyTimer(GetExpiredTimer())
+                end
             end)
-        elseif hp == 9 then
-            TimerStart(CreateTimer(), 1, false, function()
-                TimerStart(CreateTimer(), 2, true, function()
-                    TrapShotByID(id, u, 2400)
-                end)
+        end)
+    elseif hp == 10 then
+        TimerStart(CreateTimer(), 1.5, false, function()
+            TimerStart(CreateTimer(), 2, true, function()
+                TrapShotByID(id, u, 2400, force)
+                if not UnitAlive(u) then
+                    DestroyTimer(GetExpiredTimer())
+                end
             end)
-        elseif hp == 10 then
-            TimerStart(CreateTimer(), 1.5, false, function()
-                TimerStart(CreateTimer(), 2, true, function()
-                    TrapShotByID(id, u, 2400)
-                end)
-            end)
-        end
-
+        end)
     end
 end

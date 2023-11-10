@@ -5,7 +5,7 @@
 ---
 function InitPendulum(id)
     local _, k, rg = FindUnitOfType(id)
-    print(k, "Маятников запущено")
+    --print(k, "Маятников запущено")
     for i = 1, #rg do
         --local unit = rg[i]
         StartPendulumAI(rg[i])
