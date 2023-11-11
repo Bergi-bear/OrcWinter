@@ -44,7 +44,7 @@ function UnitCreateArtMissile(hero, angle, speed, distance, MaxHeight, HasMarker
         end
     end)
 end
-ButtonsIDTable={FourCC('DTfx'),FourCC('B00E'),FourCC('B00D')}
+ButtonsIDTable={FourCC('DTfx'),FourCC('B00E'),FourCC('B00D'),FourCC('B00F')}
 function KillDestructableByTypeInPoint(idTable,range,x,y)
     SetRect(GlobalRect, x - range, y - range, x + range, y + range)
     EnumDestructablesInRect(GlobalRect, nil, function()

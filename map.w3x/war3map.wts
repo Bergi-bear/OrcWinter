@@ -730,12 +730,6 @@ STRING 202
 +[floor]_2
 }
 
-STRING 203
-// Doodads: D048 (равшан), Name (Name)
-{
-равшан
-}
-
 STRING 205
 // Doodads: D04A (+[Log] Cart), Name (Name)
 {
@@ -2368,5 +2362,89 @@ STRING 846
 // Units: h00G (Шип из пола), Name (Name)
 {
 Шип из пола
+}
+
+STRING 847
+// Units: h00H (PRESS), Name (Name)
+{
+PRESS
+}
+
+STRING 848
+// Units: h00H (PRESS), EditorSuffix (Name - Editor Suffix)
+{
+ (подсказка)
+}
+
+STRING 849
+// Units: h00I (ENTER), Name (Name)
+{
+ENTER
+}
+
+STRING 850
+// Units: h00I (ENTER), EditorSuffix (Name - Editor Suffix)
+{
+ (подсказка)
+}
+
+STRING 851
+// Units: h00J (DASH), Name (Name)
+{
+DASH
+}
+
+STRING 852
+// Units: h00J (DASH), EditorSuffix (Name - Editor Suffix)
+{
+ (подсказка)
+}
+
+STRING 853
+// Units: h00K (PUSH), Name (Name)
+{
+PUSH
+}
+
+STRING 854
+// Units: h00K (PUSH), EditorSuffix (Name - Editor Suffix)
+{
+ (подсказка)
+}
+
+STRING 855
+// Units: h00L (RMB), Name (Name)
+{
+RMB
+}
+
+STRING 856
+// Units: h00L (RMB), EditorSuffix (Name - Editor Suffix)
+{
+ (подсказка)
+}
+
+STRING 857
+// Units: h00M (Черная дыра ЮНИТ), Name (Name)
+{
+Черная дыра ЮНИТ
+}
+
+STRING 858
+// Doodads: D048 (Черная дыра), Name (Name)
+{
+Черная дыра
+}
+
+STRING 859
+// Destructibles: B00F (Красная кнопка), EditorSuffix (Editor Suffix)
+{
+ (Возрождается!)
+}
+
+STRING 860
+// Destructibles: B00F (Красная кнопка), Name (Name)
+{
+Красная кнопка
 }
 

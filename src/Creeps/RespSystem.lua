@@ -59,24 +59,26 @@ function InitDeathEventCreep()
         if GetUnitTypeId(u) == FourCC("h00C") then
             local nx,ny=GetUnitXY(u)
             local range=300
-            UnitDamageArea(u,50,nx,ny,range,"All")
-            KillDestructableByTypeInPoint(ButtonsIDTable,range,nx,ny)
-            local delay = 2
-            local x, y = CreepsX[GetHandleId(u)], CreepsY[GetHandleId(u)]
-            local id = GetUnitTypeId(u)
-            local p = GetOwningPlayer(u)
-            TimerStart(CreateTimer(), delay, false, function()
-                local new = CreateUnit(p, id, x, y, GetRandomInt(0, 360))
-                CreepsX[GetHandleId(new)], CreepsY[GetHandleId(new)] = GetUnitXY(new)
-                TimerStart(CreateTimer(), 0.2, true, function()
-                    if not UnitAlive(new) then
-                        DestroyTimer(GetExpiredTimer())
-                    else
-                        KillDestructableByTypeInPoint(ButtonsIDTable,range/3,GetUnitXY(new))
-                    end
+            TimerStart(CreateTimer(), 0.2, false, function() -- задержка урона
+                UnitDamageArea(u,50,nx,ny,range,"All")
+                KillDestructableByTypeInPoint(ButtonsIDTable,range,nx,ny)
+                local delay = 2
+                local x, y = CreepsX[GetHandleId(u)], CreepsY[GetHandleId(u)]
+                local id = GetUnitTypeId(u)
+                local p = GetOwningPlayer(u)
+                TimerStart(CreateTimer(), delay, false, function()
+                    local new = CreateUnit(p, id, x, y, GetRandomInt(0, 360))
+                    CreepsX[GetHandleId(new)], CreepsY[GetHandleId(new)] = GetUnitXY(new)
+                    TimerStart(CreateTimer(), 0.2, true, function()
+                        if not UnitAlive(new) then
+                            DestroyTimer(GetExpiredTimer())
+                        else
+                            KillDestructableByTypeInPoint(ButtonsIDTable,range/3,GetUnitXY(new))
+                        end
+                    end)
+                    UnitStartFallAnim(new,1000)
+                    --InitBarrels(new)
                 end)
-                UnitStartFallAnim(new,1000)
-                --InitBarrels(new)
             end)
         end
     end)

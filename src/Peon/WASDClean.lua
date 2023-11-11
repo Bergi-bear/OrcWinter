@@ -157,7 +157,17 @@ function InitWASD(hero)
             data.AngleMouse = AngleBetweenXY(hx, hy, GetPlayerMouseX[data.pid], GetPlayerMouseY[data.pid]) / bj_DEGTORAD
             --print("пошевелил " .. data.DistMouse)
         end
-
+        ------------ ВЕКТОРА
+        local vector = Vector:new(GetUnitX(hero), GetUnitY(hero), GetUnitZ(hero))
+        local newVector = vector
+        if data.BH then
+            if not data.BHSpeed then
+                data.BHSpeed=3
+            end
+            local angleBH = AngleBetweenUnits(hero, data.BH)
+            newVector = VectorSum(newVector, vector:yawPitchOffset(data.BHSpeed, angleBH * (math.pi / 180), 0.0))
+        end
+        -------------- Всасывание от черной дыры
         if not UnitAlive(hero) then
             local x, y = GetUnitXY(hero)
 
@@ -188,6 +198,7 @@ function InitWASD(hero)
                     end
 
                     ReviveHero(hero, x, y, true)
+                    --SetCameraBoundsToRectForPlayerBJ(Player(0), bj_mapInitialPlayableArea) --TODO возможно может что-то начать ломаться, например зоны требующие BOUND при в ходе
                     TimerStart(CreateTimer(), 0.5, false, function()
                         if GetRandomInt(1, 2) == 1 then
                             PlayMonoSpeech("Speech\\Peon\\etobilobolno", "Это было больно")
@@ -335,12 +346,13 @@ function InitWASD(hero)
         if not StunSystem[GetHandleId(hero)] then
             StunUnit(hero, 0.2)
         end
+
         if StunSystem[GetHandleId(data.UnitHero)].Time == 0 and onForces[GetHandleId(hero)] then
             --and
             if UnitAlive(hero) and not data.isShield and not data.isAttacking and not data.ReleaseRMB and not FREE_CAMERA then
 
 
-                if data.IsMoving and not UnitHasBow(hero) then
+                if data.IsMoving then
                     -- двигается
                     data.DirectionMove = angle
 
@@ -366,9 +378,11 @@ function InitWASD(hero)
                     --local nx, ny = MoveXY(x, y, speed, angle)
                     --local dx, dy = nx - x, ny - y
 
-                    local vector = Vector:new(GetUnitX(hero), GetUnitY(hero), GetUnitZ(hero))
-                    local newVector = vector
+
                     newVector = VectorSum(newVector, vector:yawPitchOffset(curSpeed, angle * (math.pi / 180), 0.0))
+
+
+
                     local nx, ny = newVector.x, newVector.y
                     if not data.isAttacking then
                         if data.CurrentWeaponType == "pickaxe" or not data.PressSpin then
@@ -421,6 +435,9 @@ function InitWASD(hero)
                         data.animStand = 3
                     end
                 else
+                    if data.BH then
+                        SetUnitPositionSmooth(hero, newVector.x, newVector.y)-- блок движения
+                    end
                     curSpeed = 0
                     -- стоит на месте
                     --if animWalk==0 then

@@ -11,7 +11,7 @@ do
             --инициализация ловушек
             --InitAllTraps()
             --InitAllButton()
-            InitLaserTrap()
+            --InitLaserTrap()
             ReplaceIdToSpikeTraps(FourCC("h00G"))
         end)
     end
@@ -22,49 +22,55 @@ function InitLaserTrap()
     --print(k, " стреляющих лазерных трапов")
     for i = 1, #rg do
         local u = rg[i]
-        UnitAddAbility(u, FourCC("Aloc"))
-        local lengthDef = 2000
-        local dist = 800 -- это настощая длина брима
-        local length = dist / lengthDef -- визуальная длина брима
-        local step = 55
-        TimerStart(CreateTimer(), 3, true, function()
-            local x, y = GetUnitXY(u)
-            local angle = GetUnitFacing(u)
-            local eff = AddSpecialEffect("Effect\\BeamZero", 0, 0)
-            x, y = MoveXY(x, y, 25, angle - 180)
-            SetUnitAnimation(u, "attack")
-            BlzSetSpecialEffectX(eff, x - 16)
-            BlzSetSpecialEffectY(eff, y)
-            BlzSetSpecialEffectZ(eff, GetUnitZ(u) + 10)
-            BlzSetSpecialEffectYaw(eff, math.rad(angle))
-            BlzSetSpecialEffectMatrixScale(eff, length, 1, 1)
-            --BlzSetSpecialEffectColor(eff, 255, 0, 0)
-            local damageTimer = CreateTimer()
-            TimerStart(CreateTimer(), 0.2, false, function()
-                local s = normal_sound("Effect\\AngelBeam.mp3", x, y)
-                local grow = GetRandomReal(0.5, 2)
-                --print(grow)
-                SetSoundPitch(s, grow)
-                TimerStart(damageTimer, 0.07, true, function()
-                    DamageInLine(x, y, angle - 180, dist - step, u, step)
-                end)
-            end)
-            TimerStart(CreateTimer(), 1.1, false, function()
-                BlzSetSpecialEffectTimeScale(eff, 1)
-                TimerStart(CreateTimer(), 0.1, false, function()
-                    BlzSetSpecialEffectX(eff, 5000)
-                    BlzSetSpecialEffectY(eff, 5000)
-                    DestroyEffect(eff)
-                    DestroyTimer(damageTimer)
-                end)
-
-            end)
-            if not UnitAlive(u) then
-                DestroyTimer(GetExpiredTimer())
-            end
-        end)
+        InitUnitLaserTrap(u)
     end
 end
+
+--InitUnitLaserTrap(GetEnumUnit())
+function InitUnitLaserTrap(u)
+    UnitAddAbility(u, FourCC("Aloc"))
+    local lengthDef = 2000
+    local dist = 800 -- это настощая длина брима
+    local length = dist / lengthDef -- визуальная длина брима
+    local step = 55
+    TimerStart(CreateTimer(), 3, true, function()
+        local x, y = GetUnitXY(u)
+        local angle = GetUnitFacing(u)
+        local eff = AddSpecialEffect("Effect\\BeamZero", 0, 0)
+        x, y = MoveXY(x, y, 25, angle - 180)
+        SetUnitAnimation(u, "attack")
+        BlzSetSpecialEffectX(eff, x - 16)
+        BlzSetSpecialEffectY(eff, y)
+        BlzSetSpecialEffectZ(eff, GetUnitZ(u) + 10)
+        BlzSetSpecialEffectYaw(eff, math.rad(angle))
+        BlzSetSpecialEffectMatrixScale(eff, length, 1, 1)
+        --BlzSetSpecialEffectColor(eff, 255, 0, 0)
+        local damageTimer = CreateTimer()
+        TimerStart(CreateTimer(), 0.2, false, function()
+            local s = normal_sound("Effect\\AngelBeam.mp3", x, y)
+            local grow = GetRandomReal(0.5, 2)
+            --print(grow)
+            SetSoundPitch(s, grow)
+            TimerStart(damageTimer, 0.07, true, function()
+                DamageInLine(x, y, angle - 180, dist - step, u, step)
+            end)
+        end)
+        TimerStart(CreateTimer(), 1.1, false, function()
+            BlzSetSpecialEffectTimeScale(eff, 1)
+            TimerStart(CreateTimer(), 0.1, false, function()
+                BlzSetSpecialEffectX(eff, 5000)
+                BlzSetSpecialEffectY(eff, 5000)
+                DestroyEffect(eff)
+                DestroyTimer(damageTimer)
+            end)
+
+        end)
+        if not UnitAlive(u) then
+            DestroyTimer(GetExpiredTimer())
+        end
+    end)
+end
+
 ITSATRAP = false
 function InitAllTraps()
     InitTrapByID(FourCC("h000"))

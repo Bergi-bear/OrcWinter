@@ -53,7 +53,7 @@ function UnitDamageArea(u, damage, x, y, range, flag, paramTable)
                     FlyTextTagCriticalStrike(u, L("Камикадзе", "Kamikaze"), GetOwningPlayer(u))
                     AddLife(data)
                     damage = damage * m
-                    ReviveHero(u, GetUnitX(u), GetUnitY(u), true)
+                    --ReviveHero(u, GetUnitX(u), GetUnitY(u), true)
                     SetUnitState(u, UNIT_STATE_LIFE, 1)
                     ------
                     TimerStart(CreateTimer(), cd, false, function()
