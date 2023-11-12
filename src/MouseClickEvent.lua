@@ -71,13 +71,39 @@ function InitMouseClickEvent()
             end
             data.RMBIsPressed = true
             if not data.CatchUnit then
-                local tmpCatch = FindFirstEnemy(data.UnitHero, 120)
-                if not GetUnitTypeId(tmpCatch) == FourCC("h00C") then -- бочка, можно хватать
-                    data.CatchUnit=false
+                local dist = DistanceBetweenXY(x, y, GetUnitXY(data.UnitHero))
+                local tmpCatch = FindNearEnemyXY(data.UnitHero, 120, GetUnitXY(data.UnitHero))
+                if not GetUnitTypeId(tmpCatch) == FourCC("h00C") then
+                    -- бочка, можно хватать
+                    data.CatchUnit = false
                 else
-                    data.CatchUnit=tmpCatch
-                    data.CatchUnitEffect=AddSpecialEffectTarget("diwo1",data.CatchUnit,"origin")
+                    data.CatchUnit = tmpCatch
+                    data.CatchUnitEffect = AddSpecialEffectTarget("diwo1", data.CatchUnit, "origin")
+                    local angleMagnet = AngleBetweenUnits(data.CatchUnit, data.UnitHero)
+                    local distMagnet = DistanceBetweenXY(GetUnitX(data.CatchUnit), GetUnitY(data.CatchUnit), GetUnitXY(data.UnitHero))
+                    SetUnitFacing(data.CatchUnit,angleMagnet)
+                    UnitAddForceSimple(data.CatchUnit, angleMagnet, 5, distMagnet)
                 end
+                if not data.CatchUnit then
+                    --print("ищем юнита под курсором")
+
+                    if dist <= 400 then
+                        tmpCatch = FindNearEnemyXY(data.UnitHero, 400, x, y)
+                        --print(dist)
+                        if not GetUnitTypeId(tmpCatch) == FourCC("h00C") then
+                            -- бочка, можно хватать
+                            data.CatchUnit = false
+                        else
+                            data.CatchUnit = tmpCatch
+                            data.CatchUnitEffect = AddSpecialEffectTarget("diwo1", data.CatchUnit, "origin")
+                            local angleMagnet = AngleBetweenUnits(data.CatchUnit, data.UnitHero)
+                            local distMagnet = DistanceBetweenXY(GetUnitX(data.CatchUnit), GetUnitY(data.CatchUnit), GetUnitXY(data.UnitHero))
+                            SetUnitFacing(data.CatchUnit,angleMagnet)
+                            UnitAddForceSimple(data.CatchUnit, angleMagnet, 5, distMagnet)
+                        end
+                    end
+                end
+
             end
             if not data.CatchUnit then
                 if data.MissileCharges > 0 and not data.RMBAttack and UnitAlive(data.UnitHero) and not data.Sit and not IsUnitStunned(data.UnitHero) and not FREE_CAMERA then

@@ -27,14 +27,8 @@ function UnitCreateHook(unit,angle)
     local scale=3
     local k2=0
     local hero=nil
-
-    TimerStart(CreateTimer(), 0.2, true, function()
-        if not UnitAlive(unit) then
-            DestroyTimer(GetExpiredTimer())
-        else
-            KillDestructableByTypeInPoint(ButtonsIDTable,100,GetUnitXY(unit))
-        end
-    end)
+    local r=GetRandomInt(1,4)
+    normal_sound("Sound\\Units\\Undead\\AbominationYesAttack"..r,GetUnitXY(unit))
 
     TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
         local nx,ny=MoveXY(x,y,currentDist,angle)
@@ -113,6 +107,14 @@ end
 function StartHookAI(unit)
     local hero = HERO[0].UnitHero
     local sec=3
+    TimerStart(CreateTimer(), 0.2, true, function()
+        if not UnitAlive(unit) then
+            DestroyTimer(GetExpiredTimer())
+        else
+            KillDestructableByTypeInPoint(ButtonsIDTable,100,GetUnitXY(unit))
+        end
+    end)
+
     TimerStart(CreateTimer(), 1, true, function()
         sec = sec - 1
         if sec <= 0 then

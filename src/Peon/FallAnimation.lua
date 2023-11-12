@@ -3,33 +3,45 @@
 --- Created by User.
 --- DateTime: 05.11.2023 15:53
 ---
-function UnitStartFallAnim(hero,maxZ)
-    StunUnit(hero,5)
-    SetUnitTimeScale(hero,1)
+function UnitStartFallAnim(hero, maxZ)
+    StunUnit(hero, 5)
+    SetUnitTimeScale(hero, 1)
 
-    local z=GetUnitZ(hero)+maxZ
-    SetUnitZ(hero,z)
-    local speed=20
+    local z = GetUnitZ(hero) + maxZ
+    local zNormal = GetUnitZ(hero)
+    SetUnitZ(hero, z)
+    local speed = 20
     TimerStart(CreateTimer(), 0.1, false, function()
-        SetUnitAnimationByIndex(hero,15)
+        SetUnitAnimationByIndex(hero, 15)
     end)
+    local sb = false
     TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
-        z=z-speed
-        SetUnitZ(hero,z)
-        if z<=-200 then
+        z = z - speed
+        SetUnitZ(hero, z)
+        if z <= zNormal and not sb then
+            sb = true
+            local r = GetRandomInt(1, 3)
+            local s = normal_sound("Sound\\Units\\Combat\\MetalHeavyBashFlesh" .. r, GetUnitXY(hero))
+            local grow = GetRandomReal(0.5, 1)
+            --print(grow)
+            SetSoundPitch(s, grow)
+        end
+        if z <= -200 then
             DestroyTimer(GetExpiredTimer())
+
             UnitRemoveStun(hero)
-            KillDestructableByTypeInPoint(ButtonsIDTable,200,GetUnitXY(hero))
+            KillDestructableByTypeInPoint(ButtonsIDTable, 200, GetUnitXY(hero))
         end
     end)
 end
 
-function JumpToCenterRect(rect) --JumpToCenterRect(gg_rct_Exit00)
+function JumpToCenterRect(rect)
+    --JumpToCenterRect(gg_rct_Exit00)
     --gg_rct_Region_038
-    StunUnit(udg_HERO,2)
-    local x,y=GetRectCenterX(rect),GetRectCenterY(rect)
-    local dist=DistanceBetweenXY(x,y,GetUnitXY(udg_HERO))
-    local angle=-180+AngleBetweenXY(x, y, GetUnitXY(udg_HERO)) / bj_DEGTORAD
+    StunUnit(udg_HERO, 2)
+    local x, y = GetRectCenterX(rect), GetRectCenterY(rect)
+    local dist = DistanceBetweenXY(x, y, GetUnitXY(udg_HERO))
+    local angle = -180 + AngleBetweenXY(x, y, GetUnitXY(udg_HERO)) / bj_DEGTORAD
     UnitAddJumpForce(udg_HERO, angle, 40, dist, 400)
     ResetUnitCustomPause(boss)
 end

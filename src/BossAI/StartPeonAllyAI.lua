@@ -71,6 +71,30 @@ function AllyAttackBoss(unit, boss)
 
 end
 
+function FindNearEnemyXY(unit,range,x,y)
+    local e = nil
+    local result = nil
+    local min=1000
+    GroupEnumUnitsInRange(perebor, x, y, range, nil)
+    while true do
+        e = FirstOfGroup(perebor)
+        if e == nil then
+            break
+        end
+
+        if UnitAlive(e) and IsUnitEnemy(e, GetOwningPlayer(unit)) and not BlzIsUnitInvulnerable(e) then
+            local dist=DistanceBetweenXY(x,y,GetUnitXY(e))
+            if dist<=min then
+                min=dist
+                result = e
+            end
+            --print("найден для сетки",GetUnitName(e))
+        end
+        GroupRemoveUnit(perebor, e)
+    end
+    return result
+end
+
 function FindFirstEnemy(unit, range)
     local e = nil
     local result = nil

@@ -54,6 +54,7 @@ function KillDestructableByTypeInPoint(idTable,range,x,y)
                 if GetDestructableTypeId(d)==idTable[i] then
                     --print(GetDestructableName(d),idTable[i])
                     KillDestructable(d)
+                    normal_sound("Sound\\Interface\\BattlenetDeath1A",x,y)
                 end
             end
         end

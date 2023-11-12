@@ -594,8 +594,8 @@ gg_dest_B00E_15514 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 14990.0, 647
 gg_dest_B00E_15513 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 13441.1, 6941.4, 1004.8, 90.000, 1.000, 0, FourCC("B00E"))
 gg_dest_B00F_17534 = BlzCreateDestructableWithSkin(FourCC("B00F"), 10112.0, -384.0, 270.000, 1.000, 0, FourCC("B00F"))
 gg_dest_DTfx_15068 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10048.0, 6208.0, 270.000, 1.000, 0, FourCC("DTfx"))
-gg_dest_DTfx_5091 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 11840.0, 8960.0, 270.000, 1.000, 0, FourCC("DTfx"))
-gg_dest_DTfx_14832 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 11840.0, 8064.0, 270.000, 1.000, 0, FourCC("DTfx"))
+gg_dest_DTfx_5091 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 11584.0, 8896.0, 270.000, 1.000, 0, FourCC("DTfx"))
+gg_dest_DTfx_14832 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 11584.0, 8064.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_14834 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10560.0, 8064.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_14688 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 14912.0, 8256.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_14690 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 15040.0, 9024.0, 270.000, 1.000, 0, FourCC("DTfx"))
@@ -766,6 +766,7 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00J"), 10318.3, 7276.3, 133.576, FourCC("h
 u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 12330.3, 5971.7, 100.913, FourCC("h00L"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15172.7, 957.5, 0.000, FourCC("h00F"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15172.9, 1089.5, 0.000, FourCC("h00F"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14527.4, -68.9, 0.000, FourCC("h00F"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00O"), 11087.8, 4392.5, 332.456, FourCC("h00O"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 11212.2, 4392.7, 114.679, FourCC("h00L"))
 gg_unit_h00H_0569 = BlzCreateUnitWithSkin(p, FourCC("h00H"), 10561.1, 8065.8, 158.230, FourCC("h00H"))
@@ -788,8 +789,8 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14023.0, -834.0, 0.000, FourCC("h00
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14656.5, -702.9, 0.000, FourCC("h00F"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14791.8, -829.6, 0.000, FourCC("h00F"))
 gg_unit_h00H_0588 = BlzCreateUnitWithSkin(p, FourCC("h00H"), 10709.0, 8891.7, 158.230, FourCC("h00H"))
-gg_unit_h00H_0589 = BlzCreateUnitWithSkin(p, FourCC("h00H"), 11812.1, 8784.7, 158.230, FourCC("h00H"))
-gg_unit_h00H_0590 = BlzCreateUnitWithSkin(p, FourCC("h00H"), 11793.5, 7927.7, 158.230, FourCC("h00H"))
+gg_unit_h00H_0589 = BlzCreateUnitWithSkin(p, FourCC("h00H"), 11588.1, 8904.7, 158.230, FourCC("h00H"))
+gg_unit_h00H_0590 = BlzCreateUnitWithSkin(p, FourCC("h00H"), 11585.5, 8103.7, 158.230, FourCC("h00H"))
 gg_unit_h00J_0591 = BlzCreateUnitWithSkin(p, FourCC("h00J"), 12990.4, 8087.1, 133.576, FourCC("h00J"))
 gg_unit_h00J_0592 = BlzCreateUnitWithSkin(p, FourCC("h00J"), 13374.5, 8087.5, 238.290, FourCC("h00J"))
 gg_unit_h00J_0593 = BlzCreateUnitWithSkin(p, FourCC("h00J"), 13128.7, 8563.0, 30.971, FourCC("h00J"))
@@ -798,6 +799,7 @@ gg_unit_h00J_0595 = BlzCreateUnitWithSkin(p, FourCC("h00J"), 14637.0, 8070.4, 35
 u = BlzCreateUnitWithSkin(p, FourCC("h00J"), 11340.9, 6229.2, 238.290, FourCC("h00J"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00N"), 11085.4, 4305.4, 58.460, FourCC("h00N"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00P"), 11206.2, 4294.0, 290.279, FourCC("h00P"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14658.0, -68.6, 0.000, FourCC("h00F"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00I"), 799.4, -2193.8, 0.000, FourCC("h00I"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 11068.8, -1018.3, 0.000, FourCC("h00F"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 11196.0, -1018.0, 0.000, FourCC("h00F"))
@@ -806,6 +808,11 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 11201.2, 258.3, 0.000, FourCC("h00F
 u = BlzCreateUnitWithSkin(p, FourCC("h00H"), 14037.1, 6128.8, 158.230, FourCC("h00H"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 11142.3, 2173.2, 100.913, FourCC("h00L"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 11146.8, 1210.6, 100.913, FourCC("h00L"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14786.7, -68.3, 0.000, FourCC("h00F"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14917.3, -67.9, 0.000, FourCC("h00F"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15045.0, -65.4, 0.000, FourCC("h00F"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15171.1, -64.2, 0.000, FourCC("h00F"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15169.4, 65.1, 0.000, FourCC("h00F"))
 end
 
 function CreateUnitsForPlayer1()
@@ -1694,7 +1701,7 @@ gg_rct_Exit07 = Rect(15104.0, 2272.0, 15392.0, 2560.0)
 gg_rct_SpikesZone = Rect(12768.0, 2048.0, 15360.0, 3584.0)
 gg_rct_Enter08 = Rect(12992.0, 64.0, 13120.0, 192.0)
 gg_rct_Exit08 = Rect(15104.0, -896.0, 15392.0, -608.0)
-gg_rct_Region08 = Rect(12736.0, -1120.0, 15360.0, 1408.0)
+gg_rct_Region08 = Rect(13504.0, -2048.0, 16128.0, 480.0)
 gg_rct_Bound08 = Rect(13952.0, -544.0, 14240.0, 704.0)
 gg_rct_Bound08Start = Rect(13984.0, 480.0, 14272.0, 704.0)
 gg_rct_ResizePlace08 = Rect(14080.0, -416.0, 14432.0, -256.0)
@@ -2369,6 +2376,7 @@ function KillDestructableByTypeInPoint(idTable,range,x,y)
                 if GetDestructableTypeId(d)==idTable[i] then
                     --print(GetDestructableName(d),idTable[i])
                     KillDestructable(d)
+                    normal_sound("Sound\\Interface\\BattlenetDeath1A",x,y)
                 end
             end
         end
@@ -3933,13 +3941,39 @@ function InitMouseClickEvent()
             end
             data.RMBIsPressed = true
             if not data.CatchUnit then
-                local tmpCatch = FindFirstEnemy(data.UnitHero, 120)
-                if not GetUnitTypeId(tmpCatch) == FourCC("h00C") then -- бочка, можно хватать
-                    data.CatchUnit=false
+                local dist = DistanceBetweenXY(x, y, GetUnitXY(data.UnitHero))
+                local tmpCatch = FindNearEnemyXY(data.UnitHero, 120, GetUnitXY(data.UnitHero))
+                if not GetUnitTypeId(tmpCatch) == FourCC("h00C") then
+                    -- бочка, можно хватать
+                    data.CatchUnit = false
                 else
-                    data.CatchUnit=tmpCatch
-                    data.CatchUnitEffect=AddSpecialEffectTarget("diwo1",data.CatchUnit,"origin")
+                    data.CatchUnit = tmpCatch
+                    data.CatchUnitEffect = AddSpecialEffectTarget("diwo1", data.CatchUnit, "origin")
+                    local angleMagnet = AngleBetweenUnits(data.CatchUnit, data.UnitHero)
+                    local distMagnet = DistanceBetweenXY(GetUnitX(data.CatchUnit), GetUnitY(data.CatchUnit), GetUnitXY(data.UnitHero))
+                    SetUnitFacing(data.CatchUnit,angleMagnet)
+                    UnitAddForceSimple(data.CatchUnit, angleMagnet, 5, distMagnet)
                 end
+                if not data.CatchUnit then
+                    --print("ищем юнита под курсором")
+
+                    if dist <= 400 then
+                        tmpCatch = FindNearEnemyXY(data.UnitHero, 400, x, y)
+                        --print(dist)
+                        if not GetUnitTypeId(tmpCatch) == FourCC("h00C") then
+                            -- бочка, можно хватать
+                            data.CatchUnit = false
+                        else
+                            data.CatchUnit = tmpCatch
+                            data.CatchUnitEffect = AddSpecialEffectTarget("diwo1", data.CatchUnit, "origin")
+                            local angleMagnet = AngleBetweenUnits(data.CatchUnit, data.UnitHero)
+                            local distMagnet = DistanceBetweenXY(GetUnitX(data.CatchUnit), GetUnitY(data.CatchUnit), GetUnitXY(data.UnitHero))
+                            SetUnitFacing(data.CatchUnit,angleMagnet)
+                            UnitAddForceSimple(data.CatchUnit, angleMagnet, 5, distMagnet)
+                        end
+                    end
+                end
+
             end
             if not data.CatchUnit then
                 if data.MissileCharges > 0 and not data.RMBAttack and UnitAlive(data.UnitHero) and not data.Sit and not IsUnitStunned(data.UnitHero) and not FREE_CAMERA then
@@ -7106,6 +7140,30 @@ function AllyAttackBoss(unit, boss)
 
 end
 
+function FindNearEnemyXY(unit,range,x,y)
+    local e = nil
+    local result = nil
+    local min=1000
+    GroupEnumUnitsInRange(perebor, x, y, range, nil)
+    while true do
+        e = FirstOfGroup(perebor)
+        if e == nil then
+            break
+        end
+
+        if UnitAlive(e) and IsUnitEnemy(e, GetOwningPlayer(unit)) and not BlzIsUnitInvulnerable(e) then
+            local dist=DistanceBetweenXY(x,y,GetUnitXY(e))
+            if dist<=min then
+                min=dist
+                result = e
+            end
+            --print("найден для сетки",GetUnitName(e))
+        end
+        GroupRemoveUnit(perebor, e)
+    end
+    return result
+end
+
 function FindFirstEnemy(unit, range)
     local e = nil
     local result = nil
@@ -8729,14 +8787,8 @@ function UnitCreateHook(unit,angle)
     local scale=3
     local k2=0
     local hero=nil
-
-    TimerStart(CreateTimer(), 0.2, true, function()
-        if not UnitAlive(unit) then
-            DestroyTimer(GetExpiredTimer())
-        else
-            KillDestructableByTypeInPoint(ButtonsIDTable,100,GetUnitXY(unit))
-        end
-    end)
+    local r=GetRandomInt(1,4)
+    normal_sound("Sound\\Units\\Undead\\AbominationYesAttack"..r,GetUnitXY(unit))
 
     TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
         local nx,ny=MoveXY(x,y,currentDist,angle)
@@ -8815,6 +8867,14 @@ end
 function StartHookAI(unit)
     local hero = HERO[0].UnitHero
     local sec=3
+    TimerStart(CreateTimer(), 0.2, true, function()
+        if not UnitAlive(unit) then
+            DestroyTimer(GetExpiredTimer())
+        else
+            KillDestructableByTypeInPoint(ButtonsIDTable,100,GetUnitXY(unit))
+        end
+    end)
+
     TimerStart(CreateTimer(), 1, true, function()
         sec = sec - 1
         if sec <= 0 then
@@ -11036,33 +11096,45 @@ end
 --- Created by User.
 --- DateTime: 05.11.2023 15:53
 ---
-function UnitStartFallAnim(hero,maxZ)
-    StunUnit(hero,5)
-    SetUnitTimeScale(hero,1)
+function UnitStartFallAnim(hero, maxZ)
+    StunUnit(hero, 5)
+    SetUnitTimeScale(hero, 1)
 
-    local z=GetUnitZ(hero)+maxZ
-    SetUnitZ(hero,z)
-    local speed=20
+    local z = GetUnitZ(hero) + maxZ
+    local zNormal = GetUnitZ(hero)
+    SetUnitZ(hero, z)
+    local speed = 20
     TimerStart(CreateTimer(), 0.1, false, function()
-        SetUnitAnimationByIndex(hero,15)
+        SetUnitAnimationByIndex(hero, 15)
     end)
+    local sb = false
     TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
-        z=z-speed
-        SetUnitZ(hero,z)
-        if z<=-200 then
+        z = z - speed
+        SetUnitZ(hero, z)
+        if z <= zNormal and not sb then
+            sb = true
+            local r = GetRandomInt(1, 3)
+            local s = normal_sound("Sound\\Units\\Combat\\MetalHeavyBashFlesh" .. r, GetUnitXY(hero))
+            local grow = GetRandomReal(0.5, 1)
+            --print(grow)
+            SetSoundPitch(s, grow)
+        end
+        if z <= -200 then
             DestroyTimer(GetExpiredTimer())
+
             UnitRemoveStun(hero)
-            KillDestructableByTypeInPoint(ButtonsIDTable,200,GetUnitXY(hero))
+            KillDestructableByTypeInPoint(ButtonsIDTable, 200, GetUnitXY(hero))
         end
     end)
 end
 
-function JumpToCenterRect(rect) --JumpToCenterRect(gg_rct_Exit00)
+function JumpToCenterRect(rect)
+    --JumpToCenterRect(gg_rct_Exit00)
     --gg_rct_Region_038
-    StunUnit(udg_HERO,2)
-    local x,y=GetRectCenterX(rect),GetRectCenterY(rect)
-    local dist=DistanceBetweenXY(x,y,GetUnitXY(udg_HERO))
-    local angle=-180+AngleBetweenXY(x, y, GetUnitXY(udg_HERO)) / bj_DEGTORAD
+    StunUnit(udg_HERO, 2)
+    local x, y = GetRectCenterX(rect), GetRectCenterY(rect)
+    local dist = DistanceBetweenXY(x, y, GetUnitXY(udg_HERO))
+    local angle = -180 + AngleBetweenXY(x, y, GetUnitXY(udg_HERO)) / bj_DEGTORAD
     UnitAddJumpForce(udg_HERO, angle, 40, dist, 400)
     ResetUnitCustomPause(boss)
 end
@@ -13397,6 +13469,7 @@ SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter10))
     UnitStartFallAnim(udg_HERO,1000)
 SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound10)
     HeroFixRespPos()
+    CreateEnteringFrame(nil, "Битва с боссом")
 end
 
 function InitTrig_ExitFrom10()
@@ -13475,6 +13548,7 @@ SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter10))
     UnitStartFallAnim(udg_HERO,1000)
 SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound10)
     HeroFixRespPos()
+    CreateEnteringFrame(nil, "Цепная реакция")
 end
 
 function InitTrig_ExitFrom09()
@@ -13583,8 +13657,8 @@ function Trig_OffHole_Actions()
 udg_HoleIsWork = false
 if (Trig_OffHole_Func002C()) then
 else
-        FlyTimer(20)
-TriggerSleepAction(20.00)
+        FlyTimer(25)
+TriggerSleepAction(25.00)
 if (Trig_OffHole_Func002Func004C()) then
 else
 DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
@@ -13646,6 +13720,7 @@ TriggerSleepAction(0.30)
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter09))
     UnitStartFallAnim(udg_HERO,1000)
 SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound09)
+    CreateEnteringFrame(nil, "Черная дыра")
     HeroFixRespPos()
 end
 
