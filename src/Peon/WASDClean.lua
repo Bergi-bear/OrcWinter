@@ -400,12 +400,16 @@ function InitWASD(hero)
 
                     SetUnitPositionSmooth(hero, nx, ny)-- блок движения
                     if data.CatchUnit then
+
                         local newAngle=-180+AngleBetweenUnits(hero,data.CatchUnit)
                         --print("новый угол")
                         if not IsUnitInRange(hero,data.CatchUnit,120) then
+                            DestroyEffect(data.CatchUnitEffect)
                             data.CatchUnit=false
                             --print("потерял цель захвата")
+
                         else
+                            SetUnitFacing(data.CatchUnit,newAngle)
                             UnitAddForceSimple(data.CatchUnit,newAngle,speed*1.1,70)
                         end
 

@@ -27,6 +27,15 @@ function UnitCreateHook(unit,angle)
     local scale=3
     local k2=0
     local hero=nil
+
+    TimerStart(CreateTimer(), 0.2, true, function()
+        if not UnitAlive(unit) then
+            DestroyTimer(GetExpiredTimer())
+        else
+            KillDestructableByTypeInPoint(ButtonsIDTable,100,GetUnitXY(unit))
+        end
+    end)
+
     TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
         local nx,ny=MoveXY(x,y,currentDist,angle)
         --local nx2,ny2=MoveXY(x,y,currentDist*0.5,angle)

@@ -2448,3 +2448,39 @@ STRING 860
 Красная кнопка
 }
 
+STRING 861
+// Units: h00N (AND), Name (Name)
+{
+AND
+}
+
+STRING 862
+// Units: h00N (AND), EditorSuffix (Name - Editor Suffix)
+{
+ (подсказка)
+}
+
+STRING 863
+// Units: h00O (HOLD), Name (Name)
+{
+HOLD
+}
+
+STRING 864
+// Units: h00O (HOLD), EditorSuffix (Name - Editor Suffix)
+{
+ (подсказка)
+}
+
+STRING 865
+// Units: h00P (MOVE), Name (Name)
+{
+MOVE
+}
+
+STRING 866
+// Units: h00P (MOVE), EditorSuffix (Name - Editor Suffix)
+{
+ (подсказка)
+}
+

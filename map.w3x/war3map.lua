@@ -549,7 +549,7 @@ gg_dest_B00B_17182 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15231.9, -76
 gg_dest_B00B_16680 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15221.9, 2433.2, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_16430 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11136.0, 2426.0, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_17533 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 12156.2, 3.1, 832.0, 270.000, 1.850, 0, FourCC("B00B"))
-gg_dest_B00B_14785 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11344.6, 8373.0, 851.2, 270.000, 1.650, 0, FourCC("B00B"))
+gg_dest_B00B_14785 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11344.6, 8373.0, 832.0, 270.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_17599 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 14969.5, -3076.2, 832.0, 180.000, 1.850, 0, FourCC("B00B"))
 gg_dest_B00B_16153 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15215.2, 5364.9, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_14732 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 13812.6, 8326.6, 838.4, 90.000, 1.650, 0, FourCC("B00B"))
@@ -766,6 +766,8 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00J"), 10318.3, 7276.3, 133.576, FourCC("h
 u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 12330.3, 5971.7, 100.913, FourCC("h00L"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15172.7, 957.5, 0.000, FourCC("h00F"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15172.9, 1089.5, 0.000, FourCC("h00F"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00O"), 11087.8, 4392.5, 332.456, FourCC("h00O"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 11212.2, 4392.7, 114.679, FourCC("h00L"))
 gg_unit_h00H_0569 = BlzCreateUnitWithSkin(p, FourCC("h00H"), 10561.1, 8065.8, 158.230, FourCC("h00H"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13505.6, -705.6, 0.000, FourCC("h00F"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13505.5, -837.5, 0.000, FourCC("h00F"))
@@ -786,18 +788,16 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14023.0, -834.0, 0.000, FourCC("h00
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14656.5, -702.9, 0.000, FourCC("h00F"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14791.8, -829.6, 0.000, FourCC("h00F"))
 gg_unit_h00H_0588 = BlzCreateUnitWithSkin(p, FourCC("h00H"), 10709.0, 8891.7, 158.230, FourCC("h00H"))
-gg_unit_h00H_0589 = BlzCreateUnitWithSkin(p, FourCC("h00H"), 11844.1, 8968.7, 158.230, FourCC("h00H"))
-gg_unit_h00H_0590 = BlzCreateUnitWithSkin(p, FourCC("h00H"), 11841.5, 8087.7, 158.230, FourCC("h00H"))
+gg_unit_h00H_0589 = BlzCreateUnitWithSkin(p, FourCC("h00H"), 11812.1, 8784.7, 158.230, FourCC("h00H"))
+gg_unit_h00H_0590 = BlzCreateUnitWithSkin(p, FourCC("h00H"), 11793.5, 7927.7, 158.230, FourCC("h00H"))
 gg_unit_h00J_0591 = BlzCreateUnitWithSkin(p, FourCC("h00J"), 12990.4, 8087.1, 133.576, FourCC("h00J"))
 gg_unit_h00J_0592 = BlzCreateUnitWithSkin(p, FourCC("h00J"), 13374.5, 8087.5, 238.290, FourCC("h00J"))
 gg_unit_h00J_0593 = BlzCreateUnitWithSkin(p, FourCC("h00J"), 13128.7, 8563.0, 30.971, FourCC("h00J"))
 gg_unit_h00J_0594 = BlzCreateUnitWithSkin(p, FourCC("h00J"), 14273.1, 8051.1, 16.546, FourCC("h00J"))
 gg_unit_h00J_0595 = BlzCreateUnitWithSkin(p, FourCC("h00J"), 14637.0, 8070.4, 359.176, FourCC("h00J"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00J"), 11340.9, 6229.2, 238.290, FourCC("h00J"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 10944.8, 4404.7, 7.284, FourCC("h00K"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 11329.4, 4368.8, 7.284, FourCC("h00K"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 10968.6, 4004.0, 7.284, FourCC("h00K"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 11338.0, 3994.3, 7.284, FourCC("h00K"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00N"), 11085.4, 4305.4, 58.460, FourCC("h00N"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00P"), 11206.2, 4294.0, 290.279, FourCC("h00P"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00I"), 799.4, -2193.8, 0.000, FourCC("h00I"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 11068.8, -1018.3, 0.000, FourCC("h00F"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 11196.0, -1018.0, 0.000, FourCC("h00F"))
@@ -1025,10 +1025,10 @@ u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 10652.4, -377.9, 190.871, FourCC("u
 u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 10876.1, -635.0, 73.721, FourCC("uaco"))
 u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 10821.5, -374.0, 134.905, FourCC("uaco"))
 u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 10623.2, -126.4, 111.723, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11325.3, 4420.3, 34.162, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 10937.0, 4417.5, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11334.5, 4022.5, 351.690, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 10936.1, 4027.6, 45.687, FourCC("h00C"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11191.5, 4303.2, 45.687, FourCC("h00C"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11192.8, 4434.4, 34.162, FourCC("h00C"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11089.5, 4305.8, 242.987, FourCC("h00C"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11091.9, 4435.2, 351.690, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12967.5, 4144.6, 34.162, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15188.1, 4143.0, 34.162, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12892.6, 5400.3, 34.162, FourCC("h00C"))
@@ -1079,22 +1079,14 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 13377.7, 830.1, 242.987, FourCC("h0
 u = BlzCreateUnitWithSkin(p, FourCC("h000"), 15275.5, -574.9, 180.000, FourCC("h000"))
 life = GetUnitState(u, UNIT_STATE_LIFE)
 SetUnitState(u, UNIT_STATE_LIFE, 0.09 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), 15279.0, -957.2, 180.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.11 * life)
 u = BlzCreateUnitWithSkin(p, FourCC("h000"), 12871.6, -693.2, 0.000, FourCC("h000"))
 life = GetUnitState(u, UNIT_STATE_LIFE)
 SetUnitState(u, UNIT_STATE_LIFE, 0.05 * life)
 u = BlzCreateUnitWithSkin(p, FourCC("h000"), 12871.2, -821.5, 0.000, FourCC("h000"))
 life = GetUnitState(u, UNIT_STATE_LIFE)
 SetUnitState(u, UNIT_STATE_LIFE, 0.07 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), 12865.6, -445.1, 0.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), 12868.9, -565.6, 0.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12966.8, -1038.1, 242.987, FourCC("h00C"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 10209.2, 8830.0, 34.162, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 10545.2, -533.6, 303.605, FourCC("uaco"))
 u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 10271.6, -718.4, 90.805, FourCC("uaco"))
 u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 10145.8, -46.3, 166.613, FourCC("uaco"))
@@ -1148,6 +1140,7 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12948.0, -2719.3, 242.987, FourCC("
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12931.5, -2402.6, 242.987, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12897.6, -2066.7, 242.987, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 14813.4, -1915.6, 242.987, FourCC("h00C"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 10365.8, 8822.6, 351.690, FourCC("h00C"))
 end
 
 function CreateUnitsForPlayer2()
@@ -1157,7 +1150,7 @@ local unitID
 local t
 local life
 
-gg_unit_h00B_0003 = BlzCreateUnitWithSkin(p, FourCC("h00B"), 9929.0, 4935.3, 0.000, FourCC("h00B"))
+gg_unit_h00B_0003 = BlzCreateUnitWithSkin(p, FourCC("h00B"), 9946.6, 4814.9, 0.000, FourCC("h00B"))
 gg_unit_h00M_0257 = BlzCreateUnitWithSkin(p, FourCC("h00M"), 11137.1, -370.8, 177.340, FourCC("h00M"))
 gg_unit_h00B_0271 = BlzCreateUnitWithSkin(p, FourCC("h00B"), 11757.0, 5325.0, 180.000, FourCC("h00B"))
 gg_unit_h00B_0276 = BlzCreateUnitWithSkin(p, FourCC("h00B"), 10309.8, 3140.1, 90.000, FourCC("h00B"))
@@ -1606,7 +1599,7 @@ u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 12326.3, 4808.5, 206.313, FourCC("o
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 10576.3, 1803.1, 270.344, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 13763.7, 3263.4, 301.062, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 14659.1, 2997.4, 203.283, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 14256.3, -109.4, 270.344, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
@@ -1677,7 +1670,7 @@ gg_rct_Boind00 = Rect(11104.0, 8256.0, 11296.0, 8608.0)
 gg_rct_Exit00 = Rect(11200.0, 8224.0, 11488.0, 8512.0)
 gg_rct_Enter00 = Rect(11072.0, 8928.0, 11264.0, 9056.0)
 gg_rct_StartBrainGame = Rect(736.0, -2176.0, 864.0, -2048.0)
-gg_rct_Boind01 = Rect(13600.0, 8320.0, 13888.0, 8544.0)
+gg_rct_Boind01 = Rect(13600.0, 8320.0, 13952.0, 8544.0)
 gg_rct_Enter01 = Rect(12896.0, 8896.0, 13088.0, 9024.0)
 gg_rct_Exit01 = Rect(13664.0, 8192.0, 13952.0, 8480.0)
 gg_rct_Boind02 = Rect(11104.0, 6560.0, 11392.0, 6816.0)
@@ -1686,7 +1679,7 @@ gg_rct_Exit02 = Rect(10464.0, 5856.0, 10752.0, 6144.0)
 gg_rct_Boind03 = Rect(13952.0, 6592.0, 14240.0, 6816.0)
 gg_rct_Enter03 = Rect(12928.0, 7168.0, 13056.0, 7296.0)
 gg_rct_Exit03 = Rect(15104.0, 6144.0, 15392.0, 6432.0)
-gg_rct_Boind04 = Rect(11040.0, 3648.0, 11328.0, 4640.0)
+gg_rct_Boind04 = Rect(11040.0, 3648.0, 11328.0, 4736.0)
 gg_rct_Enter04 = Rect(11072.0, 3872.0, 11200.0, 4000.0)
 gg_rct_Exit04 = Rect(11360.0, 3968.0, 11648.0, 4256.0)
 gg_rct_Bound05 = Rect(13920.0, 4672.0, 14208.0, 4896.0)
@@ -3940,9 +3933,12 @@ function InitMouseClickEvent()
             end
             data.RMBIsPressed = true
             if not data.CatchUnit then
-                data.CatchUnit = FindFirstEnemy(data.UnitHero, 120)
-                if not GetUnitTypeId(data.CatchUnit) == FourCC("h00C") then -- бочка, можно хватать
+                local tmpCatch = FindFirstEnemy(data.UnitHero, 120)
+                if not GetUnitTypeId(tmpCatch) == FourCC("h00C") then -- бочка, можно хватать
                     data.CatchUnit=false
+                else
+                    data.CatchUnit=tmpCatch
+                    data.CatchUnitEffect=AddSpecialEffectTarget("diwo1",data.CatchUnit,"origin")
                 end
             end
             if not data.CatchUnit then
@@ -4002,6 +3998,7 @@ function InitMouseClickEvent()
         if BlzGetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_RIGHT then
             local data = HERO[GetPlayerId(GetTriggerPlayer())]
             data.CatchUnit = false
+            DestroyEffect(data.CatchUnitEffect)
             data.RMBIsPressed = false
             local id = GetPlayerId(GetTriggerPlayer())
             if not data.LastCastName == "wave" then
@@ -4239,7 +4236,7 @@ function StartGCTracker()
     local track_gc
     local meta = {
         __gc = function(self)
-            print('Вызов сборщика мусора ' , TimerGetElapsed(t))
+            --print('Вызов сборщика мусора ' , TimerGetElapsed(t))
             track_gc()
         end
     }
@@ -8732,6 +8729,15 @@ function UnitCreateHook(unit,angle)
     local scale=3
     local k2=0
     local hero=nil
+
+    TimerStart(CreateTimer(), 0.2, true, function()
+        if not UnitAlive(unit) then
+            DestroyTimer(GetExpiredTimer())
+        else
+            KillDestructableByTypeInPoint(ButtonsIDTable,100,GetUnitXY(unit))
+        end
+    end)
+
     TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
         local nx,ny=MoveXY(x,y,currentDist,angle)
         --local nx2,ny2=MoveXY(x,y,currentDist*0.5,angle)
@@ -12006,12 +12012,16 @@ function InitWASD(hero)
 
                     SetUnitPositionSmooth(hero, nx, ny)-- блок движения
                     if data.CatchUnit then
+
                         local newAngle=-180+AngleBetweenUnits(hero,data.CatchUnit)
                         --print("новый угол")
                         if not IsUnitInRange(hero,data.CatchUnit,120) then
+                            DestroyEffect(data.CatchUnitEffect)
                             data.CatchUnit=false
                             --print("потерял цель захвата")
+
                         else
+                            SetUnitFacing(data.CatchUnit,newAngle)
                             UnitAddForceSimple(data.CatchUnit,newAngle,speed*1.1,70)
                         end
 
@@ -13363,7 +13373,7 @@ function InitItemBDForShop()
 end
 
 --CUSTOM_CODE
-function Trig_ExitFrom10_Func001C()
+function Trig_ExitFrom10_Func002C()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
 end
@@ -13374,14 +13384,15 @@ return true
 end
 
 function Trig_ExitFrom10_Conditions()
-if (not Trig_ExitFrom10_Func001C()) then
+if (not Trig_ExitFrom10_Func002C()) then
 return false
 end
 return true
 end
 
 function Trig_ExitFrom10_Actions()
-TriggerSleepAction(0.10)
+    SetUnitAnimationByIndex(udg_HERO, 25)
+TriggerSleepAction(0.30)
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter10))
     UnitStartFallAnim(udg_HERO,1000)
 SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound10)
@@ -13427,6 +13438,8 @@ TriggerSleepAction(0.50)
 if (Trig_Victory10_Func001Func002C()) then
 else
 DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
+AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
+DestroyEffectBJ(GetLastCreatedEffectBJ())
 end
 end
 end
@@ -13438,7 +13451,7 @@ TriggerRegisterDeathEvent(gg_trg_Victory10, gg_dest_B00D_17597)
 TriggerAddAction(gg_trg_Victory10, Trig_Victory10_Actions)
 end
 
-function Trig_ExitFrom09_Func001C()
+function Trig_ExitFrom09_Func003C()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
 end
@@ -13449,14 +13462,15 @@ return true
 end
 
 function Trig_ExitFrom09_Conditions()
-if (not Trig_ExitFrom09_Func001C()) then
+if (not Trig_ExitFrom09_Func003C()) then
 return false
 end
 return true
 end
 
 function Trig_ExitFrom09_Actions()
-TriggerSleepAction(0.10)
+    SetUnitAnimationByIndex(udg_HERO, 25)
+TriggerSleepAction(0.30)
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter10))
     UnitStartFallAnim(udg_HERO,1000)
 SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound10)
@@ -13536,6 +13550,8 @@ TriggerSleepAction(0.50)
 if (Trig_Victory09_Func001Func002C()) then
 else
 DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
+AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
+DestroyEffectBJ(GetLastCreatedEffectBJ())
 end
 end
 end
@@ -13607,7 +13623,7 @@ gg_trg_InitCustomTraps = CreateTrigger()
 TriggerAddAction(gg_trg_InitCustomTraps, Trig_InitCustomTraps_Actions)
 end
 
-function Trig_ExitFrom08_Func001C()
+function Trig_ExitFrom08_Func003C()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
 end
@@ -13618,14 +13634,15 @@ return true
 end
 
 function Trig_ExitFrom08_Conditions()
-if (not Trig_ExitFrom08_Func001C()) then
+if (not Trig_ExitFrom08_Func003C()) then
 return false
 end
 return true
 end
 
 function Trig_ExitFrom08_Actions()
-TriggerSleepAction(0.10)
+    SetUnitAnimationByIndex(udg_HERO, 25)
+TriggerSleepAction(0.30)
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter09))
     UnitStartFallAnim(udg_HERO,1000)
 SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound09)
@@ -13698,6 +13715,8 @@ TriggerSleepAction(2.00)
 if (Trig_Victory08_Func001Func002C()) then
 else
 DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
+AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
+DestroyEffectBJ(GetLastCreatedEffectBJ())
 end
 end
 end
@@ -13710,7 +13729,7 @@ TriggerRegisterDeathEvent(gg_trg_Victory08, gg_dest_B00D_17276)
 TriggerAddAction(gg_trg_Victory08, Trig_Victory08_Actions)
 end
 
-function Trig_ExitFrom07_Func001C()
+function Trig_ExitFrom07_Func003C()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
 end
@@ -13721,14 +13740,15 @@ return true
 end
 
 function Trig_ExitFrom07_Conditions()
-if (not Trig_ExitFrom07_Func001C()) then
+if (not Trig_ExitFrom07_Func003C()) then
 return false
 end
 return true
 end
 
 function Trig_ExitFrom07_Actions()
-TriggerSleepAction(0.10)
+    SetUnitAnimationByIndex(udg_HERO, 25)
+TriggerSleepAction(0.30)
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter08))
     UnitStartFallAnim(udg_HERO,1000)
 SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound08Start)
@@ -13763,11 +13783,11 @@ gg_trg_InitOrders = CreateTrigger()
 TriggerAddAction(gg_trg_InitOrders, Trig_InitOrders_Actions)
 end
 
-function Trig_DieCHK_Func001Func006Func002A()
+function Trig_DieCHK_Func001Func008Func002A()
 KillUnit(GetEnumUnit())
 end
 
-function Trig_DieCHK_Func001Func006C()
+function Trig_DieCHK_Func001Func008C()
 if (not (udg_CurrentOrder > 6)) then
 return false
 end
@@ -13785,9 +13805,9 @@ function Trig_DieCHK_Actions()
 if (Trig_DieCHK_Func001C()) then
 udg_CurrentOrder = (udg_CurrentOrder + 1)
 PlaySoundBJ(gg_snd_BattlenetDeath1A)
-if (Trig_DieCHK_Func001Func006C()) then
+if (Trig_DieCHK_Func001Func008C()) then
 KillDestructable(gg_dest_B00B_16680)
-ForGroupBJ(udg_SpikeUnitsForRemove, Trig_DieCHK_Func001Func006Func002A)
+ForGroupBJ(udg_SpikeUnitsForRemove, Trig_DieCHK_Func001Func008Func002A)
 DisableTrigger(GetTriggeringTrigger())
 return 
 else
@@ -13795,6 +13815,8 @@ end
 else
 TriggerSleepAction(0.10)
 udg_CurrentOrder = 1
+AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
+DestroyEffectBJ(GetLastCreatedEffectBJ())
 TriggerExecute(gg_trg_ErrorClear)
 end
 end
@@ -13825,7 +13847,7 @@ gg_trg_ErrorClear = CreateTrigger()
 TriggerAddAction(gg_trg_ErrorClear, Trig_ErrorClear_Actions)
 end
 
-function Trig_ExitFrom06_Func001C()
+function Trig_ExitFrom06_Func003C()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
 end
@@ -13836,14 +13858,15 @@ return true
 end
 
 function Trig_ExitFrom06_Conditions()
-if (not Trig_ExitFrom06_Func001C()) then
+if (not Trig_ExitFrom06_Func003C()) then
 return false
 end
 return true
 end
 
 function Trig_ExitFrom06_Actions()
-TriggerSleepAction(0.10)
+    SetUnitAnimationByIndex(udg_HERO, 25)
+TriggerSleepAction(0.30)
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter07))
     UnitStartFallAnim(udg_HERO,1000)
 SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound07)
@@ -13910,6 +13933,8 @@ TriggerSleepAction(2.00)
 if (Trig_Victory06_Func001Func002C()) then
 else
 DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
+AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
+DestroyEffectBJ(GetLastCreatedEffectBJ())
 end
 end
 end
@@ -13937,7 +13962,7 @@ gg_trg_InvulPudges = CreateTrigger()
 TriggerAddAction(gg_trg_InvulPudges, Trig_InvulPudges_Actions)
 end
 
-function Trig_ExitFrom05_Func001C()
+function Trig_ExitFrom05_Func003C()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
 end
@@ -13948,14 +13973,15 @@ return true
 end
 
 function Trig_ExitFrom05_Conditions()
-if (not Trig_ExitFrom05_Func001C()) then
+if (not Trig_ExitFrom05_Func003C()) then
 return false
 end
 return true
 end
 
 function Trig_ExitFrom05_Actions()
-TriggerSleepAction(0.10)
+    SetUnitAnimationByIndex(udg_HERO, 25)
+TriggerSleepAction(0.30)
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter06))
     UnitStartFallAnim(udg_HERO,1000)
 SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound06)
@@ -14008,6 +14034,8 @@ TriggerSleepAction(5.00)
 if (Trig_Victory05_Func001Func002C()) then
 else
 DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
+AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
+DestroyEffectBJ(GetLastCreatedEffectBJ())
 end
 end
 end
@@ -14046,7 +14074,7 @@ TriggerRegisterEnterRectSimple(gg_trg_Init04, gg_rct_Enter04)
 TriggerAddAction(gg_trg_Init04, Trig_Init04_Actions)
 end
 
-function Trig_ExitFrom04_Func001C()
+function Trig_ExitFrom04_Func003C()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
 end
@@ -14057,14 +14085,15 @@ return true
 end
 
 function Trig_ExitFrom04_Conditions()
-if (not Trig_ExitFrom04_Func001C()) then
+if (not Trig_ExitFrom04_Func003C()) then
 return false
 end
 return true
 end
 
 function Trig_ExitFrom04_Actions()
-TriggerSleepAction(0.10)
+    SetUnitAnimationByIndex(udg_HERO, 25)
+TriggerSleepAction(0.30)
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter05))
     UnitStartFallAnim(udg_HERO,1000)
 SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound05)
@@ -14120,6 +14149,8 @@ TriggerSleepAction(5.00)
 if (Trig_Victory04_Func001Func002C()) then
 else
 DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
+AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
+DestroyEffectBJ(GetLastCreatedEffectBJ())
 end
 end
 end
@@ -14133,7 +14164,7 @@ TriggerRegisterDeathEvent(gg_trg_Victory04, gg_dest_B00D_15712)
 TriggerAddAction(gg_trg_Victory04, Trig_Victory04_Actions)
 end
 
-function Trig_ExitFrom03_Func001C()
+function Trig_ExitFrom03_Func003C()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
 end
@@ -14144,14 +14175,15 @@ return true
 end
 
 function Trig_ExitFrom03_Conditions()
-if (not Trig_ExitFrom03_Func001C()) then
+if (not Trig_ExitFrom03_Func003C()) then
 return false
 end
 return true
 end
 
 function Trig_ExitFrom03_Actions()
-TriggerSleepAction(0.10)
+    SetUnitAnimationByIndex(udg_HERO, 25)
+TriggerSleepAction(0.30)
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter04))
     UnitStartFallAnim(udg_HERO,1000)
 SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Boind04)
@@ -14206,6 +14238,8 @@ else
 TriggerSleepAction(5.00)
 if (Trig_Victory03_Func001Func002C()) then
 else
+AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
+DestroyEffectBJ(GetLastCreatedEffectBJ())
 DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
 end
 end
@@ -14221,7 +14255,7 @@ TriggerRegisterDeathEvent(gg_trg_Victory03, gg_dest_B00D_15532)
 TriggerAddAction(gg_trg_Victory03, Trig_Victory03_Actions)
 end
 
-function Trig_ExitFrom02_Func001C()
+function Trig_ExitFrom02_Func003C()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
 end
@@ -14232,14 +14266,15 @@ return true
 end
 
 function Trig_ExitFrom02_Conditions()
-if (not Trig_ExitFrom02_Func001C()) then
+if (not Trig_ExitFrom02_Func003C()) then
 return false
 end
 return true
 end
 
 function Trig_ExitFrom02_Actions()
-TriggerSleepAction(0.10)
+    SetUnitAnimationByIndex(udg_HERO, 25)
+TriggerSleepAction(0.30)
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter03))
     UnitStartFallAnim(udg_HERO,1000)
 SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Boind03)
@@ -14289,7 +14324,7 @@ TriggerAddCondition(gg_trg_Victory02, Condition(Trig_Victory02_Conditions))
 TriggerAddAction(gg_trg_Victory02, Trig_Victory02_Actions)
 end
 
-function Trig_ExitFrom01_Func002C()
+function Trig_ExitFrom01_Func001C()
 if (not (IsDestructableDeadBJ(gg_dest_B00B_14732) == true)) then
 return false
 end
@@ -14300,7 +14335,7 @@ return true
 end
 
 function Trig_ExitFrom01_Conditions()
-if (not Trig_ExitFrom01_Func002C()) then
+if (not Trig_ExitFrom01_Func001C()) then
 return false
 end
 return true
@@ -14308,7 +14343,7 @@ end
 
 function Trig_ExitFrom01_Actions()
     SetUnitAnimationByIndex(udg_HERO, 25)
-TriggerSleepAction(0.20)
+TriggerSleepAction(0.30)
     UnitStartFallAnim(udg_HERO,1000)
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter02))
 SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Boind02)
@@ -15087,18 +15122,15 @@ TriggerRegisterTimerEventPeriodic(gg_trg_Cum, 0.05)
 TriggerAddAction(gg_trg_Cum, Trig_Cum_Actions)
 end
 
-function Trig_FromWolfCave_Func001C()
-if (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true) then
-return true
-end
-if (IsUnitAlly(GetTriggerUnit(), Player(0)) == true) then
-return true
-end
+function Trig_FromWolfCave_Func002C()
 return false
 end
 
 function Trig_FromWolfCave_Conditions()
-if (not Trig_FromWolfCave_Func001C()) then
+if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+return false
+end
+if (not Trig_FromWolfCave_Func002C()) then
 return false
 end
 return true
@@ -15211,6 +15243,13 @@ TriggerRegisterUnitEvent(gg_trg_DeathWolf, gg_unit_n002_0045, EVENT_UNIT_DEATH)
 TriggerAddAction(gg_trg_DeathWolf, Trig_DeathWolf_Actions)
 end
 
+function Trig_WolfCinematic_Conditions()
+if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+return false
+end
+return true
+end
+
 function Trig_WolfCinematic_Actions()
 DisableTrigger(GetTriggeringTrigger())
     CustomCinematicMode(true)
@@ -15245,6 +15284,7 @@ end
 function InitTrig_WolfCinematic()
 gg_trg_WolfCinematic = CreateTrigger()
 TriggerRegisterEnterRectSimple(gg_trg_WolfCinematic, gg_rct_EnterWolf)
+TriggerAddCondition(gg_trg_WolfCinematic, Condition(Trig_WolfCinematic_Conditions))
 TriggerAddAction(gg_trg_WolfCinematic, Trig_WolfCinematic_Actions)
 end
 
@@ -15787,7 +15827,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, 13632.0, -3136.0)
+DefineStartLocation(0, 256.0, -2368.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()

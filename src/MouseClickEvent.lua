@@ -71,9 +71,12 @@ function InitMouseClickEvent()
             end
             data.RMBIsPressed = true
             if not data.CatchUnit then
-                data.CatchUnit = FindFirstEnemy(data.UnitHero, 120)
-                if not GetUnitTypeId(data.CatchUnit) == FourCC("h00C") then -- бочка, можно хватать
+                local tmpCatch = FindFirstEnemy(data.UnitHero, 120)
+                if not GetUnitTypeId(tmpCatch) == FourCC("h00C") then -- бочка, можно хватать
                     data.CatchUnit=false
+                else
+                    data.CatchUnit=tmpCatch
+                    data.CatchUnitEffect=AddSpecialEffectTarget("diwo1",data.CatchUnit,"origin")
                 end
             end
             if not data.CatchUnit then
@@ -133,6 +136,7 @@ function InitMouseClickEvent()
         if BlzGetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_RIGHT then
             local data = HERO[GetPlayerId(GetTriggerPlayer())]
             data.CatchUnit = false
+            DestroyEffect(data.CatchUnitEffect)
             data.RMBIsPressed = false
             local id = GetPlayerId(GetTriggerPlayer())
             if not data.LastCastName == "wave" then
