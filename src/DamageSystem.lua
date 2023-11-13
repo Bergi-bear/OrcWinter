@@ -232,6 +232,7 @@ function PointContentDestructable (x, y, range, iskill, damage, hero)
     local content = false
     local contentedDest = nil
     local unitZ = GetUnitZ(hero)
+    local all={}
     if range == nil then
         range = 80
     end
@@ -245,6 +246,7 @@ function PointContentDestructable (x, y, range, iskill, damage, hero)
         --print(GetDestructableName(d))
         if GetDestructableLife(d) > 0 and GetDestructableTypeId(d)~=FourCC("B005")  and GetDestructableTypeId(d)~=FourCC("OTip") then --игнор специальных блокираторов and GetDestructableTypeId(d)~=FourCC("B00C")
             --and unitZ<=GetTerrainZ(x,y)+50
+            table.insert(all,d)
             content = true
             contentedDest = d
             --print("эх")
@@ -346,5 +348,18 @@ function PointContentDestructable (x, y, range, iskill, damage, hero)
             end
         end
     end)
-    return content, contentedDest
+    return content, contentedDest, all
+end
+
+function CheckTableDestructableForCurrentID(table,id)
+    local k=#table
+    local result=false
+    --print("всего объектов",k)
+    for i=1,k do
+        if GetDestructableTypeId(table[i])==id then
+            --print("есть блокиратор")
+            result=true
+        end
+    end
+    return result
 end

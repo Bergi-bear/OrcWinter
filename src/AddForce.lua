@@ -63,15 +63,27 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
 
             if flag == "ignore" or makeJump then
                 --print("попытка")
-                local fx,fy=newVector.x, newVector.y--MoveXY(newVector.x, newVector.y,120,angle)
+                local fx, fy = newVector.x, newVector.y--MoveXY(newVector.x, newVector.y,80,angle) --
                 --DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt", fx,fy))
-                local is, d = PointContentDestructable(fx,fy, 120, true)
+                local is, d, allD = PointContentDestructable(fx, fy, 110, true)
                 if is then
                     --print("есть какой-то декор")
                 end
-                if GetDestructableTypeId(d) == FourCC("B00C") then -- низкая пропасть
+                if IsUnitType(hero,UNIT_TYPE_HERO) then
+
+                end
+                local data=GetUnitData(hero)
+
+
+                if CheckTableDestructableForCurrentID(allD, FourCC("B00C")) or data.OnDeep then
+                    -- низкая пропасть
+                    data.OnDeep=true
                     SetUnitX(hero, newVector.x)
                     SetUnitY(hero, newVector.y)
+                    if currentdistance>=200 then
+                        data.OnDeep=false
+                        --print("сброс")
+                    end
                     --print("пройти на сквозь")
                 else
                     --SetUnitPositionSmooth(hero, newX, newY)
@@ -211,7 +223,8 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
                     --print("перезарядка атаки в рывке")
                     --HERO[GetPlayerId(GetOwningPlayer(hero))].AttackInForce=false --
                     local data = HERO[GetPlayerId(GetOwningPlayer(hero))]
-                    IssueImmediateOrder(hero,"stop")
+                    data.OnDeep=false
+                    IssueImmediateOrder(hero, "stop")
                     if data.IsMoving then
                         --print("закончил рывок")
 
