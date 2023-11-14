@@ -34,7 +34,7 @@ function CreateJumpArrow(parent)
         i = i + speed
         BlzFrameSetPoint(arrow, FRAMEPOINT_TOP, parent, FRAMEPOINT_TOP, 0, y + 0.04)
         if duration <= 0 then
-           -- DestroyTimer(GetExpiredTimer())-- не забыть вернуть
+            -- DestroyTimer(GetExpiredTimer())-- не забыть вернуть
             --BlzDestroyFrame(arrow)
         end
     end)
@@ -93,7 +93,7 @@ function CreateEActions()
                     else
                         print("За работу и оплата")
                         normal_sound("Speech\\CookQuest\\cook5")
-                        UnitAddGold(data.UnitHero,2000)
+                        UnitAddGold(data.UnitHero, 2000)
                     end
                 elseif data.CurrentQuest == "EndGameCinematic" then
                     UnitRemoveAbility(data.QuestUnit, FourCC("A604"))
@@ -143,7 +143,8 @@ function CreateESCActions()
     end)
 end
 
-function CreateInsertActions() --событие для сидения
+function CreateInsertActions()
+    --событие для сидения
     -----------------------------------------------------------------OSKEY_INSERT OSKEY_C
     local gg_trg_EventUpINSERT = CreateTrigger()
     for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
@@ -157,17 +158,16 @@ function CreateInsertActions() --событие для сидения
             --print("Insert")
             if not data.IsMoving then
                 if not data.sit then
-                    SetUnitAnimationByIndex(data.UnitHero,26)
-                    data.sit=true
+                    SetUnitAnimationByIndex(data.UnitHero, 26)
+                    data.sit = true
                 else
                     ResetUnitAnimation(data.UnitHero)
-                    data.sit=false
+                    data.sit = false
                 end
             end
 
         end
     end)
-
     local TrigDepressINSERT = CreateTrigger()
     for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
         BlzTriggerRegisterPlayerKeyEvent(TrigDepressINSERT, Player(i), OSKEY_C, 0, false)
@@ -176,6 +176,5 @@ function CreateInsertActions() --событие для сидения
         local pid = GetPlayerId(GetTriggerPlayer())
         local data = HERO[pid]
         data.ReleaseINSERT = false
-
     end)
 end

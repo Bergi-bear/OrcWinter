@@ -38,6 +38,7 @@ do
             CreateEActions()
             CreateESCActions()
             CreateInsertActions()
+            InitRestartLevel()
             --CreateTabActions()
             --wGeometry = wGeometryInit()
             --ShapeInit()
