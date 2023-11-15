@@ -24,8 +24,8 @@ function InitRestartLevel()
             BlzSetSpecialEffectPosition(eff, x, y, z+200)
             TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
                 duration = duration - TIMER_PERIOD64
-                z,x,y=GetUnitZ(data.UnitHero),GetUnitXY(data.UnitHero)
-                BlzSetSpecialEffectPosition(eff, x, y, z+200)
+               -- z,x,y=GetUnitZ(data.UnitHero),GetUnitXY(data.UnitHero)
+                --BlzSetSpecialEffectPosition(eff, x, y, z+200)
                 if duration <= 0 then
                     --print("перезапуск")
                     if not data.ResPointX then

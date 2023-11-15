@@ -24,8 +24,9 @@ function CreatePeonForPlayer(data)
         InitRegistryEvent(data.UnitHero)
         AddPeonMAXHP(data, 2)
         AddPeonMAXHP(data, 3)
-        AddSpecialEffectTarget("HeroGlow",data.UnitHero,"origin")
+        AddSpecialEffectTarget("HeroGlow", data.UnitHero, "origin")
         IssuePointOrder(data.UnitHero, "smart", GetUnitXY(data.UnitHero))
+        InitDashVisualCharges(data)
         --InitInventory(data)
 
         --CreateHPBar(data)
@@ -44,7 +45,7 @@ ShowESystem = {
 }
 function InitRegistryEvent(hero)
     local enterTrig = CreateTrigger()
-    local range=200
+    local range = 200
     TriggerRegisterUnitInRange(enterTrig, hero, range, nil)
     TriggerAddAction(enterTrig, function()
         local entering = GetTriggerUnit()
@@ -79,7 +80,7 @@ function InitRegistryEvent(hero)
                 data.QuestUnit = entering
                 local eff = AddSpecialEffect("ActionsE", GetUnitXY(entering))
                 TimerStart(CreateTimer(), 0.1, true, function()
-                    if not IsUnitInRange(hero, entering, range*1.2) or GetUnitAbilityLevel(entering, FourCC("A604")) == 0 then
+                    if not IsUnitInRange(hero, entering, range * 1.2) or GetUnitAbilityLevel(entering, FourCC("A604")) == 0 then
                         --print("покинул радиус или квест уже завершен")
                         data.CurrentQuest = ""
                         data.QuestUnit = nil
@@ -108,17 +109,17 @@ function InitRegistryEvent(hero)
             else
                 --print("Контрольная точка изменена")
                 QuestSetCompletedBJ(udg_QCHKPoint, true)
-                DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Human\\Resurrect\\ResurrectCaster",GetUnitXY(entering)))
-                local r=GetRandomInt(1,8)
-                if r==1 then
+                DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Human\\Resurrect\\ResurrectCaster", GetUnitXY(entering)))
+                local r = GetRandomInt(1, 8)
+                if r == 1 then
                     PlayMonoSpeech("Speech\\Peon\\CHKPoint\\1", "Новая зона воскрешения")
-                elseif r==2 then
+                elseif r == 2 then
                     PlayMonoSpeech("Speech\\Peon\\CHKPoint\\2", "Сюда меня отнесут гробовщики пеоны после смерти")
-                elseif r==3 then
+                elseif r == 3 then
                     PlayMonoSpeech("Speech\\Peon\\CHKPoint\\3", "Очень странно, почему я воскрешаюсь возле 3х леденцов...")
-                elseif r==4 then
+                elseif r == 4 then
                     PlayMonoSpeech("Speech\\Peon\\CHKPoint\\4", "Контрольная точка")
-                elseif r==5 then
+                elseif r == 5 then
                     PlayMonoSpeech("Speech\\Peon\\CHKPoint\\5", "Местное городское кладбище или камень воскрешения?")
                 end
             end

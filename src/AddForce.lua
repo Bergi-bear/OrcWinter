@@ -62,6 +62,7 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
             end
 
             if flag == "ignore" or makeJump then
+
                 --print("попытка")
                 local fx, fy = newVector.x, newVector.y--MoveXY(newVector.x, newVector.y,80,angle) --
                 --DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt", fx,fy))
@@ -69,19 +70,22 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
                 if is then
                     --print("есть какой-то декор")
                 end
-                if IsUnitType(hero,UNIT_TYPE_HERO) then
+                if IsUnitType(hero, UNIT_TYPE_HERO) then
 
                 end
-                local data=GetUnitData(hero)
-
+                local data = GetUnitData(hero)
+                if data.REffect then
+                    BlzSetSpecialEffectPosition(data.REffect, newVector.x, newVector.y, GetTerrainZ(newVector.x, newVector.y) + 200)
+                end
+                RepositionCharges(data)
 
                 if CheckTableDestructableForCurrentID(allD, FourCC("B00C")) or data.OnDeep then
                     -- низкая пропасть
-                    data.OnDeep=true
+                    data.OnDeep = true
                     SetUnitX(hero, newVector.x)
                     SetUnitY(hero, newVector.y)
-                    if currentdistance>=200 then
-                        data.OnDeep=false
+                    if currentdistance >= 200 then
+                        data.OnDeep = false
                         --print("сброс")
                     end
                     --print("пройти на сквозь")
@@ -223,7 +227,7 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
                     --print("перезарядка атаки в рывке")
                     --HERO[GetPlayerId(GetOwningPlayer(hero))].AttackInForce=false --
                     local data = HERO[GetPlayerId(GetOwningPlayer(hero))]
-                    data.OnDeep=false
+                    data.OnDeep = false
                     IssueImmediateOrder(hero, "stop")
                     if data.IsMoving then
                         --print("закончил рывок")
@@ -378,4 +382,22 @@ function MoveEffectTimedWSpeed(eff, speed, angle, timed)
             DestroyTimer(GetExpiredTimer())
         end
     end)
+end
+
+function ChkEndpoint(x, y, xEnd, yEnd)
+    --local wayClean = true
+    local step = 40
+    local d = DistanceBetweenXY(x, y, xEnd, yEnd)
+    local angle = AngleBetweenXY(x, y, xEnd, yEnd) / bj_DEGTORAD
+    local k = d // step
+    for i = 1, k do
+        local nx, ny = MoveXY(x, y, step * (i - 1), angle)
+        --
+        local is, destructable,all = PointContentDestructable(nx, ny, step*2, true)
+        if GetDestructableTypeId(destructable)==FourCC("B00C") then -- блокиратор переката
+            DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt", nx, ny))
+        end
+        print(#all)
+    end
+    --return wayClean
 end

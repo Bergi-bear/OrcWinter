@@ -127,7 +127,7 @@ function InitWASD(hero)
         -- основной таймер для обработки всего
         hero = data.UnitHero -- костыль для смены героя
         local hx, hy = GetUnitXY(hero)
-
+        --RepositionCharges(data)
         if data.preX ~= GetPlayerMouseX[data.pid] or data.preY ~= GetPlayerMouseY[data.pid] then
             --print("курсор движется "..GetPlayerMouseX[data.pid])
             data.MouseMove = true
@@ -399,6 +399,13 @@ function InitWASD(hero)
                     end
 
                     SetUnitPositionSmooth(hero, nx, ny)-- блок движения
+
+
+                    if data.REffect then
+                        BlzSetSpecialEffectPosition(data.REffect, hx, hy, GetTerrainZ(hx, hy)+200)
+                    end
+                    RepositionCharges(data)
+
                     if data.CatchUnit then
 
                         local newAngle=-180+AngleBetweenUnits(hero,data.CatchUnit)
@@ -439,7 +446,7 @@ function InitWASD(hero)
                         data.animStand = 3
                     end
                 else
-                    if data.BH then
+                    if data.BH then --черная дыра
                         SetUnitPositionSmooth(hero, newVector.x, newVector.y)-- блок движения
                     end
                     curSpeed = 0
@@ -784,7 +791,7 @@ function CreateWASDActions()
                             --print("ошибка, такой функции нет")
                             Blink2Point(data.UnitHero, nx, ny)
                         else
-                            --print("прыжок вниз?")
+                            print("прыжок вниз?, сообщите об этом баге!")
                             UnitAddForceSimple(data.UnitHero, data.DirectionMove, 10, dist, "ignore") --САМ рывок при нажатии пробела
                         end
                     else
@@ -798,6 +805,9 @@ function CreateWASDActions()
                         end
                         UnitAddForceSimple(data.UnitHero, data.DirectionMove, dashSpeed, dist, "ignore") --САМ рывок при нажатии пробела
 
+                        --local x,y=GetUnitXY(data.UnitHero)
+                        --local xEnd, yEnd=MoveXY(x,y,dist,data.DirectionMove)
+                        --ChkEndpoint(x, y, xEnd, yEnd)
                     end
                 end
                 if data.ArrowDamageAfterCharge then
