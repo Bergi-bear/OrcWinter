@@ -404,7 +404,7 @@ function InitWASD(hero)
                     if data.REffect then
                         BlzSetSpecialEffectPosition(data.REffect, hx, hy, GetTerrainZ(hx, hy)+200)
                     end
-                    RepositionCharges(data)
+                    --RepositionCharges(data)
 
                     if data.CatchUnit then
 
@@ -739,12 +739,14 @@ function CreateWASDActions()
                 ]]
 
                 data.DashCharges = data.DashCharges - 1
+                RepositionCharges(data)
                 if data.DashCharges == 0 then
                     --StartFrameCD(data.DashChargesReloadSec, data.DashChargesCDFH)
                 end
                 --BlzFrameSetText(data.DashChargesFH, data.DashCharges)
                 TimerStart(CreateTimer(), data.DashChargesReloadSec, false, function()
                     data.DashCharges = data.DashCharges + 1
+                    RepositionCharges(data)
                     --BlzFrameSetText(data.DashChargesFH, data.DashCharges)
                     DestroyTimer(GetExpiredTimer())
                     --print("заряд восстановлен",data.DashCharges)

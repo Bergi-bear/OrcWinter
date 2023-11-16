@@ -77,7 +77,7 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
                 if data.REffect then
                     BlzSetSpecialEffectPosition(data.REffect, newVector.x, newVector.y, GetTerrainZ(newVector.x, newVector.y) + 200)
                 end
-                RepositionCharges(data)
+
 
                 if CheckTableDestructableForCurrentID(allD, FourCC("B00C")) or data.OnDeep then
                     -- низкая пропасть

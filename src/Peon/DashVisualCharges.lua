@@ -7,31 +7,29 @@ function InitDashVisualCharges(data)
     print(data.DashCharges, "максимум зарядов")
     data.TableDashEffect = {}
     for i = 1, data.DashCharges do
-        local eff = AddSpecialEffect("1star", GetUnitXY(data.UnitHero))
+        local eff = AddSpecialEffectTarget("1starAttach"..i, data.UnitHero,"origin")
         table.insert(data.TableDashEffect, eff)
     end
 end
+
+
 function RepositionCharges(data)
-    for i = 1, #data.TableDashEffect do
-        local z, x, y = GetUnitZ(data.UnitHero) + 110, GetUnitXY(data.UnitHero)
-        if i == 1 then
-            if data.DashCharges >= 1 then
-                BlzSetSpecialEffectPosition(data.TableDashEffect[i], x - 20, y, z)
-            else
-                BlzSetSpecialEffectPosition(data.TableDashEffect[i], OutPoint, OutPoint, z)
-            end
-        elseif i == 2 then
-            if data.DashCharges >= 2 then
-                BlzSetSpecialEffectPosition(data.TableDashEffect[i], x, y, z)
-            else
-                BlzSetSpecialEffectPosition(data.TableDashEffect[i], OutPoint, OutPoint, z)
-            end
-        elseif i == 3 then
-            if data.DashCharges >= 3 then
-                BlzSetSpecialEffectPosition(data.TableDashEffect[i], x + 20, y, z)
-            else
-                BlzSetSpecialEffectPosition(data.TableDashEffect[i], OutPoint, OutPoint, z)
-            end
-        end
+    if data.DashCharges >= 3 then
+        BlzPlaySpecialEffect(data.TableDashEffect[3],ANIM_TYPE_STAND)
+
+    else
+        BlzPlaySpecialEffect(data.TableDashEffect[3],ANIM_TYPE_DEATH)
+    end
+    if data.DashCharges >= 2 then
+        BlzPlaySpecialEffect(data.TableDashEffect[2],ANIM_TYPE_STAND)
+
+    else
+        BlzPlaySpecialEffect(data.TableDashEffect[2],ANIM_TYPE_DEATH)
+    end
+    if data.DashCharges >= 1 then
+        BlzPlaySpecialEffect(data.TableDashEffect[1],ANIM_TYPE_STAND)
+
+    else
+        BlzPlaySpecialEffect(data.TableDashEffect[1],ANIM_TYPE_DEATH)
     end
 end
