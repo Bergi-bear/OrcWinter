@@ -20,6 +20,10 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
         CollisionRange = 60
         zhero = GetUnitZ(hero) + 95
     end
+
+    if effectmodel =="Butcher\\Axe Missile" then
+        --print(effectmodel)
+    end
     if effectmodel == "BlastMissile" then
         CollisionRange = 180
         delay = CollisionRange
@@ -144,7 +148,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
         local ZBullet = BlzGetLocalSpecialEffectZ(bullet)
 
         CollisionEnemy, DamagingUnit = UnitDamageArea(heroCurrent, 0, x, y, CollisionRange)
-
+        --print(CollisionEnemy, DamagingUnit)
         local reverse = false
 
         if HERO[GetPlayerId(GetOwningPlayer(DamagingUnit))] then
@@ -224,7 +228,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
             --or CollisisonDestr
             --
             --or IsTerrainPathable(nx, ny, PATHING_TYPE_WALKABILITY)
-            --print("попал в", CollisionEnemy, reverse, delay, maxDistance, PerepadZ, dist)
+            --print("попал в", DamagingUnit,CollisionEnemy, reverse, delay, maxDistance, PerepadZ, dist)
             if CollisisonDestr then
 
                 if effectmodel == "Abilities\\Weapons\\GryphonRiderMissile\\GryphonRiderMissile.mdl" then
@@ -305,7 +309,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
                     local refVector = Reflect(curVelocity, normal);
 
                     refAngle = AngleBetweenXY(x, y, refVector.x, refVector.y) / bj_DEGTORAD
-                    print("Рикошет", "нормальвектор=", normal, "угол=", refAngle)
+                    --print("Рикошет", "нормальвектор=", normal, "угол=", refAngle)
 
                     CreateAndForceBullet(heroCurrent, refAngle, speed, effectmodel, GetUnitX(DamagingUnit), GetUnitY(DamagingUnit), nil, nil, 200)
                 end

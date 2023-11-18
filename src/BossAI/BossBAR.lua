@@ -10,7 +10,7 @@ function GetPortraitFromBD(id)
         [FourCC("n002")]="TexturePortraits\\Wolf", -- волк
         [FourCC("u000")]="TexturePortraits\\WivernPortrait",
         [FourCC("h009")]="TexturePortraits\\Anime",
-        [FourCC("h007")]="TexturePortraits\\Butcher",
+        [FourCC("n007")]="TexturePortraits\\Butcher",
     }
     if TexturePortraits[id] then
         return TexturePortraits[id]

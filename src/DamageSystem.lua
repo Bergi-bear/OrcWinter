@@ -244,7 +244,7 @@ function PointContentDestructable (x, y, range, iskill, damage, hero)
     EnumDestructablesInRect(GlobalRect, nil, function()
         local d = GetEnumDestructable()
         --print(GetDestructableName(d))
-        if GetDestructableLife(d) > 0 and GetDestructableTypeId(d)~=FourCC("B005")  and GetDestructableTypeId(d)~=FourCC("OTip") then --игнор специальных блокираторов and GetDestructableTypeId(d)~=FourCC("B00C")
+        if GetDestructableLife(d) > 0 and GetDestructableTypeId(d)~=FourCC("B005")  and GetDestructableTypeId(d)~=FourCC("OTip")  and GetDestructableTypeId(d)~=FourCC("B00G") then --игнор специальных блокираторов and GetDestructableTypeId(d)~=FourCC("B00C")
             --and unitZ<=GetTerrainZ(x,y)+50
             table.insert(all,d)
             content = true

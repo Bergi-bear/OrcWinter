@@ -340,6 +340,7 @@ gg_dest_DTfx_17980 = nil
 gg_dest_DTfx_16046 = nil
 gg_dest_DTfx_16051 = nil
 gg_dest_B00B_16092 = nil
+gg_dest_DTfx_18124 = nil
 function InitGlobals()
 local i = 0
 
@@ -582,19 +583,19 @@ local life
 
 gg_dest_B004_2162 = BlzCreateDestructableWithSkin(FourCC("B004"), -128.0, -192.0, 325.000, 3.000, 0, FourCC("B004"))
 gg_dest_B007_5312 = BlzCreateDestructableWithSkin(FourCC("B007"), -7552.0, 4224.0, 211.000, 3.000, 0, FourCC("B007"))
+gg_dest_B00B_16092 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 18043.0, 7294.2, 838.4, 270.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_17599 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 14969.5, -3076.2, 832.0, 180.000, 1.850, 0, FourCC("B00B"))
 gg_dest_B00B_17182 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15231.9, -760.3, 844.8, 270.000, 1.450, 0, FourCC("B00B"))
 gg_dest_B00B_16680 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15221.9, 2433.2, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
-gg_dest_B00B_16430 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11136.0, 2426.0, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_14785 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11344.6, 8373.0, 832.0, 270.000, 1.650, 0, FourCC("B00B"))
+gg_dest_B00B_16430 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11136.0, 2426.0, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_17533 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 12156.2, 3.1, 832.0, 270.000, 1.850, 0, FourCC("B00B"))
-gg_dest_B00B_16092 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 18043.0, 7294.2, 838.4, 270.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_14732 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 13812.6, 8326.6, 838.4, 90.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_16153 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15215.2, 5364.9, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_15713 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11516.0, 4100.8, 844.8, 90.000, 1.450, 0, FourCC("B00B"))
 gg_dest_B00B_15515 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15227.5, 6283.1, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_15274 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 10618.1, 6012.7, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
-gg_dest_B00D_16426 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10304.0, 1408.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_16596 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10048.0, 1792.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_17596 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, -1920.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_17531 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11584.0, -704.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_17530 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10112.0, 256.0, 270.000, 1.000, 0, FourCC("B00D"))
@@ -616,33 +617,34 @@ gg_dest_B00D_16702 = BlzCreateDestructableWithSkin(FourCC("B00D"), 13056.0, 3456
 gg_dest_B00D_17532 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11584.0, -64.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16416 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11968.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16421 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11968.0, 1408.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_17597 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, -3200.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_16426 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10304.0, 1408.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16685 = BlzCreateDestructableWithSkin(FourCC("B00D"), 13696.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16701 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 14016.0, 2816.0, 1088.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_16596 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10048.0, 1792.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_16699 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16597 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12288.0, 1792.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16598 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11136.0, 1216.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16599 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11136.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16686 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, 3456.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16684 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 13056.0, 2304.0, 901.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_16699 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_17597 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, -3200.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00E_15513 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 13441.1, 6941.4, 1004.8, 90.000, 1.000, 0, FourCC("B00E"))
 gg_dest_B00E_15516 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 14600.6, 6946.5, 979.2, 270.000, 1.000, 0, FourCC("B00E"))
 gg_dest_B00E_15514 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 14990.0, 6473.7, 972.8, 270.000, 1.000, 0, FourCC("B00E"))
 gg_dest_B00E_15517 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 12948.1, 6482.3, 979.2, 90.000, 1.000, 0, FourCC("B00E"))
 gg_dest_B00F_17534 = BlzCreateDestructableWithSkin(FourCC("B00F"), 10112.0, -384.0, 270.000, 1.000, 0, FourCC("B00F"))
-gg_dest_DTfx_14833 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10688.0, 8896.0, 270.000, 1.000, 0, FourCC("DTfx"))
+gg_dest_DTfx_14834 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10560.0, 8064.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_14688 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 14912.0, 8256.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_14690 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 15040.0, 9024.0, 270.000, 1.000, 0, FourCC("DTfx"))
-gg_dest_DTfx_14832 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 11584.0, 8064.0, 270.000, 1.000, 0, FourCC("DTfx"))
+gg_dest_DTfx_15071 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 12352.0, 5952.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_15314 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10176.0, 7232.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_15068 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10048.0, 6208.0, 270.000, 1.000, 0, FourCC("DTfx"))
-gg_dest_DTfx_14834 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10560.0, 8064.0, 270.000, 1.000, 0, FourCC("DTfx"))
-gg_dest_DTfx_5091 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 11584.0, 8896.0, 270.000, 1.000, 0, FourCC("DTfx"))
+gg_dest_DTfx_14832 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 11584.0, 8064.0, 270.000, 1.000, 0, FourCC("DTfx"))
+gg_dest_DTfx_14833 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10688.0, 8896.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_17980 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 15744.0, 7296.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_16046 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 16512.0, 6272.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_16051 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 17536.0, 6272.0, 270.000, 1.000, 0, FourCC("DTfx"))
-gg_dest_DTfx_15071 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 12352.0, 5952.0, 270.000, 1.000, 0, FourCC("DTfx"))
+gg_dest_DTfx_5091 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 11584.0, 8896.0, 270.000, 1.000, 0, FourCC("DTfx"))
+gg_dest_DTfx_18124 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 12928.0, -3968.0, 270.000, 1.000, 0, FourCC("DTfx"))
 end
 
 function CreateUnitsForPlayer0()
@@ -1190,6 +1192,14 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12897.6, -2066.7, 242.987, FourCC("
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 14813.4, -1915.6, 242.987, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 10365.8, 8822.6, 351.690, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 17790.2, 6274.9, 242.987, FourCC("h00C"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 17028.2, -4731.9, 34.162, FourCC("h00C"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 13692.5, -4720.4, 34.162, FourCC("h00C"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 17022.8, -8049.5, 34.162, FourCC("h00C"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 13703.3, -8059.1, 34.162, FourCC("h00C"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 14720.7, -7032.1, 34.162, FourCC("h00C"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 14723.7, -5758.1, 34.162, FourCC("h00C"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 16003.9, -5751.1, 34.162, FourCC("h00C"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15999.7, -7037.0, 34.162, FourCC("h00C"))
 end
 
 function CreateUnitsForPlayer2()
@@ -1370,6 +1380,8 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 11327.6, -571.0, 0.000, FourCC("h00
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 11327.1, -436.6, 0.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 11327.5, -309.6, 0.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 11327.8, -182.3, 0.000, FourCC("h00G"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00E"), 15350.3, -5985.9, 180.000, FourCC("h00E"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00E"), 15355.4, -6821.1, 180.000, FourCC("h00E"))
 end
 
 function CreateUnitsForPlayer10()
@@ -1444,6 +1456,7 @@ gg_unit_n000_0001 = BlzCreateUnitWithSkin(p, FourCC("n000"), -2863.2, -5340.3, 3
 gg_unit_u000_0005 = BlzCreateUnitWithSkin(p, FourCC("u000"), -5777.8, 8019.1, 276.770, FourCC("u000"))
 gg_unit_n001_0009 = BlzCreateUnitWithSkin(p, FourCC("n001"), -7570.0, 3830.9, 88.177, FourCC("n001"))
 u = BlzCreateUnitWithSkin(p, FourCC("e005"), -14253.5, -14208.2, 23.250, FourCC("e005"))
+u = BlzCreateUnitWithSkin(p, FourCC("n007"), 14559.0, -4646.7, 227.085, FourCC("n007"))
 end
 
 function CreateNeutralPassive()
@@ -1668,6 +1681,8 @@ u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 11970.7, -20.1, 270.344, FourCC("op
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 14690.6, -3149.5, 270.344, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 15357.5, -4231.4, 270.344, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
 end
 
 function CreatePlayerBuildings()
@@ -1775,7 +1790,7 @@ gg_rct_R11B1_4 = Rect(15872.0, 6400.0, 16128.0, 6656.0)
 gg_rct_R11B1_3 = Rect(15616.0, 5888.0, 15872.0, 6144.0)
 gg_rct_Start11_4 = Rect(15872.0, 6144.0, 16128.0, 6400.0)
 gg_rct_Start11_5 = Rect(15872.0, 6912.0, 16128.0, 7168.0)
-gg_rct_BoundBoss = Rect(14432.0, -7616.0, 16192.0, -4640.0)
+gg_rct_BoundBoss = Rect(13792.0, -8512.0, 16736.0, -4640.0)
 gg_rct_EnterBoss = Rect(12864.0, -4192.0, 12992.0, -4064.0)
 gg_rct_ExitBoss = Rect(17440.0, -4352.0, 17728.0, -4064.0)
 end
@@ -2505,6 +2520,10 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
         CollisionRange = 60
         zhero = GetUnitZ(hero) + 95
     end
+
+    if effectmodel =="Butcher\\Axe Missile" then
+        --print(effectmodel)
+    end
     if effectmodel == "BlastMissile" then
         CollisionRange = 180
         delay = CollisionRange
@@ -2629,7 +2648,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
         local ZBullet = BlzGetLocalSpecialEffectZ(bullet)
 
         CollisionEnemy, DamagingUnit = UnitDamageArea(heroCurrent, 0, x, y, CollisionRange)
-
+        --print(CollisionEnemy, DamagingUnit)
         local reverse = false
 
         if HERO[GetPlayerId(GetOwningPlayer(DamagingUnit))] then
@@ -2709,7 +2728,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
             --or CollisisonDestr
             --
             --or IsTerrainPathable(nx, ny, PATHING_TYPE_WALKABILITY)
-            --print("попал в", CollisionEnemy, reverse, delay, maxDistance, PerepadZ, dist)
+            --print("попал в", DamagingUnit,CollisionEnemy, reverse, delay, maxDistance, PerepadZ, dist)
             if CollisisonDestr then
 
                 if effectmodel == "Abilities\\Weapons\\GryphonRiderMissile\\GryphonRiderMissile.mdl" then
@@ -2790,7 +2809,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
                     local refVector = Reflect(curVelocity, normal);
 
                     refAngle = AngleBetweenXY(x, y, refVector.x, refVector.y) / bj_DEGTORAD
-                    print("Рикошет", "нормальвектор=", normal, "угол=", refAngle)
+                    --print("Рикошет", "нормальвектор=", normal, "угол=", refAngle)
 
                     CreateAndForceBullet(heroCurrent, refAngle, speed, effectmodel, GetUnitX(DamagingUnit), GetUnitY(DamagingUnit), nil, nil, 200)
                 end
@@ -3161,7 +3180,7 @@ function PointContentDestructable (x, y, range, iskill, damage, hero)
     EnumDestructablesInRect(GlobalRect, nil, function()
         local d = GetEnumDestructable()
         --print(GetDestructableName(d))
-        if GetDestructableLife(d) > 0 and GetDestructableTypeId(d)~=FourCC("B005")  and GetDestructableTypeId(d)~=FourCC("OTip") then --игнор специальных блокираторов and GetDestructableTypeId(d)~=FourCC("B00C")
+        if GetDestructableLife(d) > 0 and GetDestructableTypeId(d)~=FourCC("B005")  and GetDestructableTypeId(d)~=FourCC("OTip")  and GetDestructableTypeId(d)~=FourCC("B00G") then --игнор специальных блокираторов and GetDestructableTypeId(d)~=FourCC("B00C")
             --and unitZ<=GetTerrainZ(x,y)+50
             table.insert(all,d)
             content = true
@@ -4060,33 +4079,30 @@ function InitMouseClickEvent()
             if not data.CatchUnit then
                 local dist = DistanceBetweenXY(x, y, GetUnitXY(data.UnitHero))
                 local tmpCatch = FindNearEnemyXY(data.UnitHero, 120, GetUnitXY(data.UnitHero))
-                if not GetUnitTypeId(tmpCatch) == FourCC("h00C") then
-                    -- бочка, можно хватать
-                    data.CatchUnit = false
-                else
+                if  GetUnitTypeId(tmpCatch) == FourCC("h00C") then
                     data.CatchUnit = tmpCatch
                     data.CatchUnitEffect = AddSpecialEffectTarget("diwo1", data.CatchUnit, "origin")
                     local angleMagnet = AngleBetweenUnits(data.CatchUnit, data.UnitHero)
                     local distMagnet = DistanceBetweenXY(GetUnitX(data.CatchUnit), GetUnitY(data.CatchUnit), GetUnitXY(data.UnitHero))
                     SetUnitFacing(data.CatchUnit,angleMagnet)
                     UnitAddForceSimple(data.CatchUnit, angleMagnet, 5, distMagnet)
+                else
+                    data.CatchUnit = false
                 end
                 if not data.CatchUnit then
                     --print("ищем юнита под курсором")
-
                     if dist <= 400 then
                         tmpCatch = FindNearEnemyXY(data.UnitHero, 400, x, y)
                         --print(dist)
-                        if not GetUnitTypeId(tmpCatch) == FourCC("h00C") then
-                            -- бочка, можно хватать
-                            data.CatchUnit = false
-                        else
+                        if  GetUnitTypeId(tmpCatch) == FourCC("h00C") then
                             data.CatchUnit = tmpCatch
                             data.CatchUnitEffect = AddSpecialEffectTarget("diwo1", data.CatchUnit, "origin")
                             local angleMagnet = AngleBetweenUnits(data.CatchUnit, data.UnitHero)
                             local distMagnet = DistanceBetweenXY(GetUnitX(data.CatchUnit), GetUnitY(data.CatchUnit), GetUnitXY(data.UnitHero))
                             SetUnitFacing(data.CatchUnit,angleMagnet)
                             UnitAddForceSimple(data.CatchUnit, angleMagnet, 5, distMagnet)
+                        else
+                            data.CatchUnit = false
                         end
                     end
                 end
@@ -5097,6 +5113,7 @@ function UnitDamageArea(u, damage, x, y, range, flag, paramTable)
     end
     if PointContentDestructable(x, y, range, true, 1 + damage, u) then
         isdamage = true
+        --print("тут ошибка?")
         if IsUnitType(u,UNIT_TYPE_HERO) or GetUnitTypeId(u)==FourCC("h000") then
             local data=GetUnitData(u)
             if data.damageIsBouncing then -- урон из отраженного источника
@@ -5169,15 +5186,20 @@ end
 --- DateTime: 11.11.2023 17:34
 ---
 ---
-function StartBlackHole(unit)
+function StartBlackHole(unit,timed)
     local x, y = GetUnitXY(unit)
-    UnitAddAbility(unit, FourCC("Aloc"))
     local range = 1200
+    if not timed then
+        UnitAddAbility(unit, FourCC("Aloc"))
+    else
+        range = 2400
+    end
+
     local data = HERO[0]
-    local maxSpeed = 5
-    local minSpeed = 0.1
+    local maxSpeed = 6
+    local minSpeed = 0.2
     local realSpeed = 1
-    local imp=2400
+    local imp=range*2
     TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
         if udg_HoleIsWork then
             UnitDamageArea(unit, 30, x, y, 150)
@@ -5229,6 +5251,18 @@ function StartBlackHole(unit)
         else
             data.BH=nil
         end
+        if timed then
+            timed=timed-TIMER_PERIOD64
+            if timed<=0 then
+                DestroyTimer(GetExpiredTimer())
+                data.BH=nil
+                --print("временный БХ окончен")
+            end
+        end
+        if not UnitAlive(unit) then
+            DestroyTimer(GetExpiredTimer())
+            data.BH=nil
+        end
     end)
 end
 ---
@@ -5265,13 +5299,17 @@ function ReplaceIdToSpikeTraps(id)
     --print("найденно "..k.." а в таблице "..#all)
     for i = 1, #all do
         --print("заменён ", GetUnitName(all[i]), i,GetUnitFacing(all[i]))
-        ShowUnit(all[i], false)
-        SetUnitInvulnerable(all[i], true)
-        UnitAddAbility(all[i], FourCC("Aloc"))
+
         CreateSpikeTrap(all[i])
     end
 end
-function CreateSpikeTrap(unit)
+
+
+
+function CreateSpikeTrap(unit,timed)
+    ShowUnit(unit, false)
+    SetUnitInvulnerable(unit, true)
+    UnitAddAbility(unit, FourCC("Aloc"))
     local x, y = GetUnitXY(unit)
     local z = GetUnitZ(unit)
     local eff = AddSpecialEffect("MechaImpale", x, y)
@@ -5281,6 +5319,9 @@ function CreateSpikeTrap(unit)
     --BlzSetSpecialEffectScale(eff,1)
     --BlzSetSpecialEffectTimeScale(eff,0.3)
     --BlzPlaySpecialEffect(eff, ANIM_TYPE_STAND)
+    if timed then
+        UnitApplyTimedLife(unit, FourCC('BTLF'), timed)
+    end
     local ta=2
     if GetUnitFacing(unit)>89 and GetUnitFacing(unit)<91 then
         delay=2
@@ -5668,9 +5709,10 @@ function GetPortraitFromBD(id)
         [FourCC("e003")]="TexturePortraits\\SnowManPortrait",
         [FourCC("n000")]="TexturePortraits\\Yetty", -- етти
         [FourCC("n001")]="TexturePortraits\\DragonPortrait", -- дракон
-        --[FourCC("n002")]="TexturePortraits\\SnowManPortrait", -- волк
+        [FourCC("n002")]="TexturePortraits\\Wolf", -- волк
         [FourCC("u000")]="TexturePortraits\\WivernPortrait",
         [FourCC("h009")]="TexturePortraits\\Anime",
+        [FourCC("n007")]="TexturePortraits\\Butcher",
     }
     if TexturePortraits[id] then
         return TexturePortraits[id]
@@ -5738,22 +5780,6 @@ function CreateMarkOnBossBar(into,marcPercent)
     BlzFrameSetPoint(mark, FRAMEPOINT_CENTER, into, FRAMEPOINT_LEFT,0.77*marcPercent/100 , 0.02)
     table.insert(BugsFH,mark)
     return mark
-end
----
---- Generated by EmmyLua(https://github.com/EmmyLua)
---- Created by User.
---- DateTime: 26.03.2023 14:27
----
-function CreateBeemLighting(hero,x,y,xEnd,yEnd,timed)
-    x,y=GetUnitXY(hero)
-    local angle=GetUnitFacing(hero)
-    local eff=AddSpecialEffect("LightOnly",x,y)
-    local z=GetTerrainZ(x,y)+80
-    BlzSetSpecialEffectZ(eff,z)
-    BlzSetSpecialEffectPitch(eff, math.rad(-90))
-    BlzSetSpecialEffectYaw(eff, math.rad(-180+angle))
-    BlzPlaySpecialEffect(eff,ANIM_TYPE_STAND)
-    BlzSetSpecialEffectMatrixScale(eff,1.5,1.5,5)
 end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
@@ -6898,6 +6924,617 @@ function AnimeRangeAttack(boss, hero, max)
         SetUnitFacing(boss, AngleBetweenUnits(boss, hero))
     end)
 end
+do
+    local InitGlobalsOrigin = InitGlobals
+    function InitGlobals()
+        InitGlobalsOrigin()
+        TimerStart(CreateTimer(), .01, false, function()
+            DestroyTimer(GetExpiredTimer())
+
+            InitTrig_EnterInRectButcher()
+        end)
+    end
+end
+
+function InitTrig_EnterInRectButcher()
+
+    print("Инициализация босса мясника")
+    local gg_trg_EnterInRect = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_EnterInRect, gg_rct_EnterBoss)
+    TriggerAddAction(gg_trg_EnterInRect, function()
+        if IsUnitType(GetEnteringUnit(), UNIT_TYPE_HERO) then
+            local boss = FindUnitOfType(FourCC('n007'))
+            StartButcherAI(GetUnitXY(boss))
+            DisableTrigger(gg_trg_EnterInRect)
+
+        end
+    end)
+end
+
+function StartButcherAI(xs, ys)
+    --xs, ys = -12079, 8680 -- центр арены
+    local boss = FindUnitOfType(FourCC('n007'))
+    local BossFight = true
+    local into = CreateBOSSHPBar(boss, "Мясник из подвала")
+
+    local hpMark = { 100, 90, 80, 70, 60, 50, 40, 30, 20, 10 }
+    local phaseCHK = {
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+    }
+    local HPMarkFH = {}
+    for i = 1, #hpMark do
+        --table.insert(phaseCHK, true)
+        if i >= 2 then
+            table.insert(HPMarkFH, CreateMarkOnBossBar(into, hpMark[i]))
+            --table.insert(phaseCHK, false)
+        end
+    end
+
+    UnitAddAbility(boss, FourCC('Abun'))
+    SetUnitOwner(boss, Player(10), true)
+    local range = 8000
+    ClearMapMusicBJ()
+    PlayMusicBJ("The Chimerical Corridor")
+    SetMusicVolumeBJ(100)
+    --local FW = CreateFogModifierRectBJ(false, Player(0), FOG_OF_WAR_VISIBLE, GlobalRect)
+    --FogModifierStart(FW)
+
+    local phase = 1--GetRandomInt(1, 1) --стартовая фаза
+    local sec = 0
+    local PhaseOn = true
+    local OnAttack = true
+    local OnSecondPhaseMove = 0
+    local bulletCounter = 0
+    local r = GetRandomInt(1, 3)
+
+    TimerStart(CreateTimer(), 1, true, function()
+        --каждую секунду
+        --local bx, by = GetUnitXY(boss)
+        GBoss = boss
+        if not UnitAlive(boss) then
+            -- Место где босс умер
+            StartSound(bj_questCompletedSound)
+            DestroyTimer(GetExpiredTimer())
+            phase = 0
+            --print("Даём нарграду, победа")
+            CreateVictoryElderBorder()
+            ClearMapMusicBJ()
+            PlayMusicBJ("Salve Springs")
+            SetMusicVolumeBJ(100)
+            BlzFrameSetVisible(into, false)
+
+        else
+            --Проверяем есть ли живые герои, когда тиник жив
+            if BossFight then
+                local k = 0
+                for i = 0, 3 do
+                    local hero = HERO[i].UnitHero
+                    if IsUnitInRange(hero, boss, range) then
+                        -- поиск героя в радиусе ранге
+                        k = k + 1
+                    end
+
+                    --print("Отталкивание для особо умных")
+                    if OnAttack then
+                        if IsUnitInRange(hero, boss, 250) then
+                            if phase == 1 then
+                                --print("подошел слишком близко")
+
+                            end
+                            --SetUnitTimeScale(boss,-1)
+                            OnAttack = false
+                            TimerStart(CreateTimer(), 5, false, function()
+                                OnAttack = true
+                            end)
+
+                            --SetUnitAnimation(boss,"Attack")
+                            if phase ~= 1 then
+                                --PlaySound("Speech\\Yetti\\tineproidesh")
+                                --EttiDashAttackPrepare(boss, hero)
+                            end
+
+                        end
+
+                    end
+                end
+
+                if k == 0 then
+                    BossFight = false
+                    phase = 0
+                    --print("Нет ни 1 игрока рядов, босс файт прерван")
+                    --print(BlzFrameIsVisible(into))
+                    BlzFrameSetVisible(into, false)
+                    --print(BlzFrameIsVisible(into))
+                    HealUnit(boss)
+                    SetUnitPositionSmooth(boss, xs, ys)
+                    ClearMapMusicBJ()
+                    PlayMusicBJ("Salve Springs")
+                    SetMusicVolumeBJ(100)
+
+                end
+            end
+        end
+        local xb, yb = GetUnitXY(boss)
+        if BossFight then
+            local hero = HERO[0].UnitHero
+            -- если идёт бой
+            sec = sec + 1
+            if sec >= 5 then
+                sec = 0
+                phase = GetRandomInt(1, 1) -- переключатель, рандомизатор фаз
+                PhaseOn = true
+                --print("phase " .. phase)
+            end
+            -- print("хп босса",GetUnitLifePercent(boss))
+            if GetUnitLifePercent(boss) <= hpMark[2] then
+                phase = 2
+                --print("отработало 1")
+                if not phaseCHK[phase] then
+                    --print("отработало 2")
+                    AnitAddArmorTimed(boss, 50, 30)
+                    BlzFrameSetVisible(HPMarkFH[phase - 1], false)
+                    phaseCHK[phase] = true
+                    OnSecondPhaseMove = 0
+                    --Blink2Point(boss, xs, ys)
+                    --CreateBeemInRange(boss, 7)
+
+                    --print("смена фазы на ", phase, "Текущая секунда", sec)
+                    sec = 0
+                end
+            end
+
+            if GetUnitLifePercent(boss) <= hpMark[3] then
+                phase = 3
+                if not phaseCHK[phase] then
+                    AnitAddArmorTimed(boss, 50, 30)
+                    BlzFrameSetVisible(HPMarkFH[phase - 1], false)
+                    --print("смена фазы на ", phase, "Текущая секунда", sec)
+                    sec = 0
+                    --AnimeJumpToPoint(boss, true, GetUnitXY(hero))
+                    phaseCHK[phase] = true
+                end
+            end
+
+            if GetUnitLifePercent(boss) <= hpMark[4] then
+                phase = 4
+                if not phaseCHK[phase] then
+                    AnitAddArmorTimed(boss, 50, 30)
+                    BlzFrameSetVisible(HPMarkFH[phase - 1], false)
+                    --print("смена фазы на ", phase)
+                    --CreateAndMoveChakram(boss, hero, bulletCounter)
+                    phaseCHK[phase] = true
+                end
+            end
+            if GetUnitLifePercent(boss) <= hpMark[5] then
+                phase = 5
+                if not phaseCHK[phase] then
+                    AnitAddArmorTimed(boss, 50, 30)
+                    BlzFrameSetVisible(HPMarkFH[phase - 1], false)
+                    --print("смена фазы на ", phase)
+                    --FlyAroundHero(boss, hero)
+
+                    phaseCHK[phase] = true
+                end
+            end
+            if GetUnitLifePercent(boss) <= hpMark[6] then
+                phase = 6
+                if not phaseCHK[phase] then
+                    AnitAddArmorTimed(boss, 50, 30)
+                    BlzFrameSetVisible(HPMarkFH[phase - 1], false)
+                    --print("смена фазы на ", phase)
+                    --CreateAnimeLineDelay(boss, hero, 10)
+                    phaseCHK[phase] = true
+                end
+            end
+            if GetUnitLifePercent(boss) <= hpMark[7] then
+                phase = 7
+                if not phaseCHK[phase] then
+                    AnitAddArmorTimed(boss, 50, 30)
+                    BlzFrameSetVisible(HPMarkFH[phase - 1], false)
+                    --print("смена фазы на ", phase)
+                    --SunStrikeArea(boss, hero, xs, ys)
+                    phaseCHK[phase] = true
+                end
+            end
+            if GetUnitLifePercent(boss) <= hpMark[8] then
+                phase = 8
+                if not phaseCHK[phase] then
+                    AnitAddArmorTimed(boss, 50, 30)
+                    BlzFrameSetVisible(HPMarkFH[phase - 1], false)
+                    phaseCHK[phase] = true
+                end
+            end
+            if GetUnitLifePercent(boss) <= hpMark[9] then
+                phase = 9
+                if not phaseCHK[phase] then
+                    AnitAddArmorTimed(boss, 50, 30)
+                    BlzFrameSetVisible(HPMarkFH[phase - 1], false)
+                    phaseCHK[phase] = true
+                end
+            end
+            if GetUnitLifePercent(boss) <= hpMark[10] then
+                phase = 10
+                if not phaseCHK[phase] then
+                    AnitAddArmorTimed(boss, 50, 30)
+                    BlzFrameSetVisible(HPMarkFH[phase - 1], false)
+                    phaseCHK[phase] = true
+                end
+            end
+
+            --фазы
+            if phase == 1 and PhaseOn then
+                PhaseOn = false
+                --print("Атака 1, первая проверочная")
+                --BossHooked(boss, 5)
+                BossBlackHoleTimed(boss, 3)
+
+            end
+
+            if phase == 2 and PhaseOn then
+                PhaseOn = false
+                --print("фаза", phase)
+                local rph = GetRandomInt(1, phase)
+                if rph == 1 then
+                    BossHooked(boss, 5)
+                elseif rph == 2 then
+                    ButcherThrowGround(boss, hero)
+                end
+            end
+            if phase == 3 and PhaseOn then
+                PhaseOn = false
+                --print("фаза", phase)
+                local rph = GetRandomInt(1, phase)
+                if rph == 1 then
+                    BossHooked(boss, 5)
+                elseif rph == 2 then
+                    ButcherThrowGround(boss, hero)
+                elseif rph == 3 then
+                    StrongWalk(boss, hero)
+                end
+
+            end
+            if phase == 4 and PhaseOn then
+                PhaseOn = false
+                local rph = GetRandomInt(1, phase)
+                if rph == 1 then
+                    BossHooked(boss, 5)
+                elseif rph == 2 then
+                    ButcherThrowGround(boss, hero)
+                elseif rph == 3 then
+                    StrongWalk(boss, hero)
+                elseif rph == 4 then
+                    BossSpikeWave(boss, hero)
+                end
+
+
+            end
+            if phase == 5 and PhaseOn then
+                PhaseOn = false
+
+                local rph = GetRandomInt(1, phase)
+                if rph == 1 then
+                    BossHooked(boss, 5)
+                elseif rph == 2 then
+                    ButcherThrowGround(boss, hero)
+                elseif rph == 3 then
+                    StrongWalk(boss, hero)
+                elseif rph == 4 then
+                    BossSpikeWave(boss, hero)
+                elseif rph == 5 then
+                    BossAxeThrow(boss, hero)
+                end
+
+
+            end
+            if phase == 6 and PhaseOn then
+                PhaseOn = false
+                --print("фаза", phase)
+
+                local rph = GetRandomInt(1, phase)
+                if rph == 1 then
+                    BossHooked(boss, 5)
+                elseif rph == 2 then
+                    ButcherThrowGround(boss, hero)
+                elseif rph == 3 then
+                    StrongWalk(boss, hero)
+                elseif rph == 4 then
+                    BossSpikeWave(boss, hero)
+                elseif rph == 5 then
+                    BossAxeThrow(boss, hero)
+                elseif rph == 6 then
+                    BulletHellButcher(boss, GetRandomInt(1, 2))
+                end
+
+            end
+            if phase == 7 and PhaseOn then
+                PhaseOn = false
+                local rph = GetRandomInt(1, phase)
+                if rph == 1 then
+                    BossHooked(boss, 5)
+                elseif rph == 2 then
+                    ButcherThrowGround(boss, hero)
+                elseif rph == 3 then
+                    StrongWalk(boss, hero)
+                elseif rph == 4 then
+                    BossSpikeWave(boss, hero)
+                elseif rph == 5 then
+                    BossAxeThrow(boss, hero)
+                elseif rph == 6 then
+                    BulletHellButcher(boss, GetRandomInt(1, 2))
+                elseif rph == 7 then
+                    BossBlackHoleTimed(boss, 4)
+                end
+            end
+            if phase == 8 and PhaseOn then
+                PhaseOn = false
+                local rph = GetRandomInt(1, phase)
+                if rph == 1 then
+                    BossHooked(boss, 5)
+                elseif rph == 2 then
+                    ButcherThrowGround(boss, hero)
+                elseif rph == 3 then
+                    StrongWalk(boss, hero)
+                elseif rph == 4 then
+                    BossSpikeWave(boss, hero)
+                elseif rph == 5 then
+                    BossAxeThrow(boss, hero)
+                elseif rph == 6 then
+                    BulletHellButcher(boss, GetRandomInt(1, 2))
+                elseif rph == 7 then
+                    BossBlackHoleTimed(boss, 4)
+                elseif rph == 8 then
+                end
+            end
+            if phase == 9 and PhaseOn then
+                PhaseOn = false
+                local rph = GetRandomInt(1, phase)
+                if rph == 1 then
+                    BossHooked(boss, 5)
+                elseif rph == 2 then
+                    ButcherThrowGround(boss, hero)
+                elseif rph == 3 then
+                    StrongWalk(boss, hero)
+                elseif rph == 4 then
+                    BossSpikeWave(boss, hero)
+                elseif rph == 5 then
+                    BossAxeThrow(boss, hero)
+                elseif rph == 6 then
+                    BulletHellButcher(boss, GetRandomInt(1, 2))
+                elseif rph == 7 then
+                    BossBlackHoleTimed(boss, 4)
+                elseif rph == 8 then
+                elseif rph == 9 then
+                end
+            end
+            if phase == 10 and PhaseOn then
+                PhaseOn = false
+                local rph = GetRandomInt(1, phase)
+                if rph == 1 then
+                    BossHooked(boss, 5)
+                elseif rph == 2 then
+                    ButcherThrowGround(boss, hero)
+                elseif rph == 3 then
+                    StrongWalk(boss, hero)
+                elseif rph == 4 then
+                    BossSpikeWave(boss, hero)
+                elseif rph == 5 then
+                    BossAxeThrow(boss, hero)
+                elseif rph == 6 then
+                    BulletHellButcher(boss, GetRandomInt(1, 2))
+                elseif rph == 7 then
+                    BossBlackHoleTimed(boss, 4)
+                elseif rph == 8 then
+                elseif rph == 9 then
+                elseif rph == 10 then
+                end
+            end
+
+
+        else
+            -- перезапуск боссфайта
+            local k = 0
+            for i = 0, 3 do
+                local hero = HERO[i].UnitHero
+                if IsUnitInRange(hero, boss, 1500) then
+                    k = k + 1
+                end
+            end
+            if k >= 1 then
+                --print("Лечим босса, и бой возобновляется")
+                ClearMapMusicBJ()
+                PlayMusicBJ("The Hollow Reef")
+                SetUnitPositionSmooth(boss, xs, ys) --возвращаем нарграду место
+                SetMusicVolumeBJ(100)
+                BlzFrameSetVisible(into, true)
+                HealUnit(boss, 99999)
+                BossFight = true
+                phaseCHK = {
+                    true,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                }
+            end
+        end--конец
+    end)
+end
+
+function BossBlackHoleTimed(boss, timed)
+    StartBlackHole(boss, timed)
+    udg_HoleIsWork = true
+    SetUnitAnimationByIndex(boss, 12)
+    QueueUnitAnimation(boss, "Stand")
+    TimerStart(CreateTimer(), 1, true, function()
+        SetUnitAnimationByIndex(boss, 12)
+        QueueUnitAnimation(boss, "Stand")
+        timed = timed - 1
+        if timed < 1 then
+            DestroyTimer(GetExpiredTimer())
+        end
+    end)
+end
+
+function BulletHellButcher(boss, r)
+    local k = 3
+    local x, y = GetUnitXY(boss)
+    local r2Timer = CreateTimer()
+    TimerStart(CreateTimer(), 1, true, function()
+        SetUnitAnimationByIndex(boss, 12)
+        QueueUnitAnimation(boss, "Stand")
+        k = k - 1
+        if k < 1 then
+            DestroyTimer(GetExpiredTimer())
+            DestroyTimer(r2Timer)
+        end
+        if r == 1 then
+            local count = 24
+            local angle = 360 / count
+            local ra = k * 25
+            for i = 1, count do
+                local eff = CreateAndForceBullet(boss, ra + (angle * i), 15, "Butcher\\Axe Missile")
+                BlzSetSpecialEffectZ(eff, GetTerrainZ(x, y) + 100)
+                BlzSetSpecialEffectScale(eff, 2)
+            end
+        elseif r == 2 then
+            TimerStart(r2Timer, TIMER_PERIOD * 2, true, function()
+                local eff = CreateAndForceBullet(boss, GetRandomInt(1, 360), 15, "Butcher\\Axe Missile")
+                BlzSetSpecialEffectZ(eff, GetTerrainZ(x, y) + 100)
+                BlzSetSpecialEffectScale(eff, 2)
+            end)
+
+        end
+    end)
+end
+
+function BossAxeThrow(boss, hero)
+    local k = 3
+    TimerStart(CreateTimer(), 1, true, function()
+        k = k - 1
+        if k < 1 then
+            DestroyTimer(GetExpiredTimer())
+        end
+        IssueImmediateOrder(boss, "stop")
+        SetUnitAnimationByIndex(boss, 13)
+        QueueUnitAnimation(boss, "Stand")
+        local angle = AngleBetweenUnits(boss, hero)
+        SetUnitFacing(boss, angle)
+        TimerStart(CreateTimer(), 0.4, false, function()
+            angle = AngleBetweenUnits(boss, hero)
+            local x, y = GetUnitXY(boss)
+            BlzSetUnitFacingEx(boss, angle)
+            local eff = CreateAndForceBullet(boss, angle, 40, "Butcher\\Axe Missile", x, y, 50, 1800, 15)
+            BlzSetSpecialEffectZ(eff, GetTerrainZ(x, y) + 120)
+            BlzSetSpecialEffectScale(eff, 3)
+        end)
+    end)
+end
+
+function BossSpikeWave(boss, hero)
+    local eff = AddSpecialEffect("BossArrow", GetUnitXY(boss))
+    local angle = AngleBetweenUnits(boss, hero)
+    BlzSetSpecialEffectScale(eff, 2)
+    BlzSetSpecialEffectYaw(eff, math.rad(angle))
+    IssueImmediateOrder(boss, "stop")
+    SetUnitAnimation(boss, "Attack Slam")
+    QueueUnitAnimation(boss, "Stand")
+    TimerStart(CreateTimer(), 1.5, false, function()
+        DestroyEffect(eff)
+        local x, y = GetUnitXY(boss)
+        local maxDist = 1800
+        CreateSpikeInLine(angle, maxDist, x, y)
+        local nx, ny = MoveXY(x, y, 128, 90)
+        CreateSpikeInLine(angle, maxDist, nx, ny)
+        nx, ny = MoveXY(x, y, 128, -90)
+        CreateSpikeInLine(angle, maxDist, nx, ny)
+    end)
+end
+
+function CreateSpikeInLine(angle, dist, x, y)
+    local currentDist = 0
+    local speed = 128
+    TimerStart(CreateTimer(), TIMER_PERIOD * 2, true, function()
+        local nx, ny = MoveXY(x, y, currentDist, angle)
+        local id = FourCC("h00G")
+        local tmp = CreateUnit(Player(2), id, nx, ny, angle)
+        CreateSpikeTrap(tmp, 20)
+        currentDist = currentDist + speed
+        if currentDist >= dist then
+            DestroyTimer(GetExpiredTimer())
+        end
+    end)
+end
+
+function ButcherThrowGround(boss, hero)
+    IssuePointOrder(boss, "move", GetUnitXY(hero))
+    TimerStart(CreateTimer(), 1, false, function()
+        IssueImmediateOrder(boss, "stop")
+        --SetUnitAnimation(boss,"Attack Slam")
+        SetUnitAnimationByIndex(boss, 4)
+        QueueUnitAnimation(boss, "Stand")
+        local x, y = GetUnitXY(boss)
+        local nx, ny = MoveXY(x, y, 500, GetUnitFacing(boss) - 15)
+        local mark = AddSpecialEffect("Spell Marker TC", nx, ny)
+        BlzSetSpecialEffectScale(mark, 2)
+        DestroyEffect(mark)
+        TimerStart(CreateTimer(), 0.45, false, function()
+            nx, ny = MoveXY(x, y, 500, GetUnitFacing(boss) - 15)
+            DestroyEffect(AddSpecialEffect("Earthshock", nx, ny))
+            UnitDamageArea(boss, 50, nx, ny, 250)
+            local d = FindFloorInPoint(nx, ny)
+
+            MoveDestructableDown(d, -500, 15)
+            TimerStart(CreateTimer(), 120, false, function()
+                d = FindFloorInPoint(nx, ny)
+                MoveDestructableUp(d, 500, 5)
+            end)
+        end)
+    end)
+end
+
+function FindFloorInPoint(x, y)
+    local range = 128
+    SetRect(GlobalRect, x - range, y - range, x + range, y + range)
+    local res = nil
+    EnumDestructablesInRect(GlobalRect, nil, function()
+        local d = GetEnumDestructable()
+        if GetDestructableTypeId(d) == FourCC("B00G") then
+            res = d
+        end
+    end)
+    return res
+end
+
+function StrongWalk(boss, hero)
+    IssuePointOrder(boss, "move", GetUnitXY(hero))
+    if IsUnitInRange(boss, hero, 1500) then
+        TimerStart(CreateTimer(), 1, true, function()
+            --Earthshock
+            local x, y = GetUnitXY(boss)
+            DestroyEffect(AddSpecialEffect("Earthshock", x, y))
+            UnitDamageArea(boss, 50, x, y, 300)
+        end)
+    end
+end
+
+function BossHooked(boss, timed)
+    StartHookAI(boss, timed)
+end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
 --- Created by Bergi.
@@ -7434,7 +8071,7 @@ function FindNearEnemyXY(unit,range,x,y)
                 min=dist
                 result = e
             end
-            --print("найден для сетки",GetUnitName(e))
+            --print("Близжайший",GetUnitName(e))
         end
         GroupRemoveUnit(perebor, e)
     end
@@ -9049,140 +9686,148 @@ function InitHookUnits(id)
     end
 end
 
-function UnitCreateHook(unit,angle)
-    local x,y=GetUnitXY(unit)
-    local chainEff="Chain"
-    local hookEff="abilities\\weapons\\wyvernspear\\wyvernspearmissile"
-    local chains={}
-    local maxDist=1000
-    local hook=AddSpecialEffect(hookEff,x,y)
-    local currentDist=0
-    local speed=40
-    local revers=false
-    local k=0
-    local forward=true
-    local scale=3
-    local k2=0
-    local hero=nil
-    local r=GetRandomInt(1,4)
-    normal_sound("Sound\\Units\\Undead\\AbominationYesAttack"..r,GetUnitXY(unit))
+function UnitCreateHook(unit, angle)
+    local x, y = GetUnitXY(unit)
+    local chainEff = "Chain"
+    local hookEff = "abilities\\weapons\\wyvernspear\\wyvernspearmissile"
+    local chains = {}
+    local maxDist = 1000
+    local hook = AddSpecialEffect(hookEff, x, y)
+    local currentDist = 0
+    local speed = 40
+    local revers = false
+    local k = 0
+    local forward = true
+    local scale = 3
+    local k2 = 0
+    local hero = nil
+    local r = GetRandomInt(1, 4)
+    normal_sound("Sound\\Units\\Undead\\AbominationYesAttack" .. r, GetUnitXY(unit))
 
     TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
-        local nx,ny=MoveXY(x,y,currentDist,angle)
+        local nx, ny = MoveXY(x, y, currentDist, angle)
         --local nx2,ny2=MoveXY(x,y,currentDist*0.5,angle)
-        local z=GetTerrainZ(nx,ny)+80
-        if currentDist<maxDist and not revers then
-            currentDist=currentDist+speed
-            k2=k2+1
-            if k2>=1 then
-                local eff=AddSpecialEffect(chainEff,nx,ny)
-                table.insert(chains,eff)
+        local z = GetTerrainZ(nx, ny) + 80
+        if currentDist < maxDist and not revers then
+            currentDist = currentDist + speed
+            k2 = k2 + 1
+            if k2 >= 1 then
+                local eff = AddSpecialEffect(chainEff, nx, ny)
+                table.insert(chains, eff)
                 BlzSetSpecialEffectYaw(eff, math.rad(angle))
-                BlzSetSpecialEffectPosition(eff,nx,ny,z)
-                BlzSetSpecialEffectMatrixScale(eff,scale,scale,scale)
+                BlzSetSpecialEffectPosition(eff, nx, ny, z)
+                BlzSetSpecialEffectMatrixScale(eff, scale, scale, scale)
             end
 
-            BlzSetSpecialEffectPosition(hook,nx,ny,z)
+            BlzSetSpecialEffectPosition(hook, nx, ny, z)
             BlzSetSpecialEffectYaw(hook, math.rad(angle))
-            BlzSetSpecialEffectMatrixScale(hook,2,2,2)
-            _,hero=UnitDamageArea(unit, 1, nx,ny, 80)
+            BlzSetSpecialEffectMatrixScale(hook, 2, 2, 2)
+            _, hero = UnitDamageArea(unit, 1, nx, ny, 80)
             if hero then
                 if forward then
-                    revers=true
+                    revers = true
                     --print("Элементов всего",#chains)
-                    k=#chains
-                    forward=false
+                    k = #chains
+                    forward = false
                 end
             end
         else
             if forward then
-                revers=true
+                revers = true
                 --print("Элементов всего",#chains)
-                k=#chains
-                forward=false
+                k = #chains
+                forward = false
             end
         end
         if revers then
 
-            currentDist=currentDist-speed
+            currentDist = currentDist - speed
             --print("Возвращаемся назад",currentDist)
-            BlzSetSpecialEffectPosition(hook,nx,ny,z)
+            BlzSetSpecialEffectPosition(hook, nx, ny, z)
             --BlzSetSpecialEffectMatrixScale(hook,2,2,2)
             --BlzSetSpecialEffectYaw(hook, math.rad(angle))
             DestroyEffect(chains[k])
-            BlzSetSpecialEffectPosition(chains[k],5000,5000,5000)
-            k=k-1
+            BlzSetSpecialEffectPosition(chains[k], 5000, 5000, 5000)
+            k = k - 1
             if hero then
-                SetUnitX(hero,nx)
-                SetUnitY(hero,ny)
-                StunUnit(hero,0.5)
+                SetUnitX(hero, nx)
+                SetUnitY(hero, ny)
+                StunUnit(hero, 0.5)
             end
 
-            if currentDist<=speed then
+            if currentDist <= speed then
                 --print("хук вернулся")
                 UnitRemoveStun(hero)
 
                 --local enemy=FindFirstEnemy(unit,1200)
-                local enemy=HERO[0].UnitHero
+                local enemy = HERO[0].UnitHero
                 --IssueTargetOrder(unit, "move", enemy)
                 if IsUnitInRange(unit, enemy, 1000) then
-                    IssuePointOrder(unit,"move",GetUnitXY(enemy))
+                    IssuePointOrder(unit, "move", GetUnitXY(enemy))
                 end
-                hero=nil
+                hero = nil
                 DestroyTimer(GetExpiredTimer())
                 DestroyEffect(hook)
-                for i=1,#chains do
+                for i = 1, #chains do
                     DestroyEffect(chains[i])
-                    BlzSetSpecialEffectPosition(chains[i],5000,5000,5000)
+                    BlzSetSpecialEffectPosition(chains[i], 5000, 5000, 5000)
                 end
             end
         end
     end)
 end
 
-
-function StartHookAI(unit)
+function StartHookAI(unit, timed)
     local hero = HERO[0].UnitHero
-    local sec=3
-    TimerStart(CreateTimer(), 0.2, true, function()
-        if not UnitAlive(unit) then
-            DestroyTimer(GetExpiredTimer())
-        else
-            KillDestructableByTypeInPoint(ButtonsIDTable,100,GetUnitXY(unit))
-        end
-    end)
+    local sec = 2
+    local TimerFinder = CreateTimer()
+    if not timed then
+        TimerStart(CreateTimer(), 0.2, true, function()
+            if not UnitAlive(unit) then
+                DestroyTimer(GetExpiredTimer())
+            else
+                KillDestructableByTypeInPoint(ButtonsIDTable, 100, GetUnitXY(unit))
+            end
+        end)
+    else
+        TimerStart(CreateTimer(), timed, false, function()
+            DestroyTimer(TimerFinder)
+        end)
+    end
 
-    TimerStart(CreateTimer(), 1, true, function()
+
+
+    TimerStart(TimerFinder, 1, true, function()
         sec = sec - 1
         if sec <= 0 then
             sec = 7
-            if IsUnitInRange(unit, hero, 1000) and UnitAlive(unit)  then
+            if IsUnitInRange(unit, hero, 1000) and UnitAlive(unit) then
                 --print("герой в радиусе активируем прицеливание")
-                local mark=AddSpecialEffect("BossArrowHook",GetUnitXY(unit))
-                local markTimer=CreateTimer()
-                local angle=AngleBetweenUnits(unit, hero)
+                local mark = AddSpecialEffect("BossArrowHook", GetUnitXY(unit))
+                local markTimer = CreateTimer()
+                local angle = AngleBetweenUnits(unit, hero)
                 BlzSetSpecialEffectYaw(mark, math.rad(angle))
                 TimerStart(markTimer, TIMER_PERIOD64, true, function()
-                    angle=AngleBetweenUnits(unit, hero)
-                    BlzSetSpecialEffectX(mark,GetUnitX(unit))
-                    BlzSetSpecialEffectY(mark,GetUnitY(unit))
-                    BlzSetSpecialEffectZ(mark,GetUnitZ(unit)+50)
+                    angle = AngleBetweenUnits(unit, hero)
+                    BlzSetSpecialEffectX(mark, GetUnitX(unit))
+                    BlzSetSpecialEffectY(mark, GetUnitY(unit))
+                    BlzSetSpecialEffectZ(mark, GetUnitZ(unit) + 50)
                     BlzSetSpecialEffectYaw(mark, math.rad(angle))
-                    SetUnitFacing(unit,angle)
+                    SetUnitFacing(unit, angle)
                 end)
                 TimerStart(CreateTimer(), 3, false, function()
                     DestroyEffect(mark)
                     DestroyTimer(markTimer)
-                    BlzSetSpecialEffectPosition(mark,5000,5000,5000)
-                    IssueImmediateOrder(unit,"stop")
-                    SetUnitAnimation(unit,"Attack")
-                    BlzSetUnitFacingEx(unit,angle)
+                    BlzSetSpecialEffectPosition(mark, 5000, 5000, 5000)
+                    IssueImmediateOrder(unit, "stop")
+                    SetUnitAnimation(unit, "Attack")
+                    BlzSetUnitFacingEx(unit, angle)
 
                     TimerStart(CreateTimer(), 0.2, false, function()
                         --print("Активируем сам хук")
-                        QueueUnitAnimation(unit,"Stand")
+                        QueueUnitAnimation(unit, "Stand")
                         if UnitAlive(unit) then
-                            UnitCreateHook(unit,angle)
+                            UnitCreateHook(unit, angle)
                         end
                     end)
                 end)
@@ -11512,7 +12157,7 @@ function CreatePeonForPlayer(data)
         --CreatePeonHPBAR(data)
         InitRegistryEvent(data.UnitHero)
         AddPeonMAXHP(data, 2)
-        AddPeonMAXHP(data, 3)
+        --AddPeonMAXHP(data, 3)
         AddSpecialEffectTarget("HeroGlow", data.UnitHero, "origin")
         IssuePointOrder(data.UnitHero, "smart", GetUnitXY(data.UnitHero))
         InitDashVisualCharges(data)
@@ -13778,15 +14423,17 @@ return true
 end
 
 function Trig_InitBossRoom_Actions()
+SetDestructableOccluderHeight(gg_dest_DTfx_18124, 128)
+    CreateFloorInRoom(GetDestructableX(gg_dest_DTfx_18124), GetDestructableY(gg_dest_DTfx_18124),20,20)
 DisableTrigger(GetTriggeringTrigger())
-SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound11)
+SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_BoundBoss)
     HeroFixRespPos()
     CreateEnteringFrame(nil, "Вся карта это Босс")
 end
 
 function InitTrig_InitBossRoom()
 gg_trg_InitBossRoom = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_InitBossRoom, gg_rct_Enter11)
+TriggerRegisterEnterRectSimple(gg_trg_InitBossRoom, gg_rct_EnterBoss)
 TriggerAddCondition(gg_trg_InitBossRoom, Condition(Trig_InitBossRoom_Conditions))
 TriggerAddAction(gg_trg_InitBossRoom, Trig_InitBossRoom_Actions)
 end
@@ -15420,6 +16067,7 @@ return true
 end
 
 function Trig_StartBrainGame_Actions()
+    PlayMusicBJ("The Astral Academy Gardensr")
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter00))
     UnitStartFallAnim(udg_HERO,1000)
 SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Boind00)

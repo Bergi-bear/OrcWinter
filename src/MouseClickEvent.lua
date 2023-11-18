@@ -73,33 +73,30 @@ function InitMouseClickEvent()
             if not data.CatchUnit then
                 local dist = DistanceBetweenXY(x, y, GetUnitXY(data.UnitHero))
                 local tmpCatch = FindNearEnemyXY(data.UnitHero, 120, GetUnitXY(data.UnitHero))
-                if not GetUnitTypeId(tmpCatch) == FourCC("h00C") then
-                    -- бочка, можно хватать
-                    data.CatchUnit = false
-                else
+                if  GetUnitTypeId(tmpCatch) == FourCC("h00C") then
                     data.CatchUnit = tmpCatch
                     data.CatchUnitEffect = AddSpecialEffectTarget("diwo1", data.CatchUnit, "origin")
                     local angleMagnet = AngleBetweenUnits(data.CatchUnit, data.UnitHero)
                     local distMagnet = DistanceBetweenXY(GetUnitX(data.CatchUnit), GetUnitY(data.CatchUnit), GetUnitXY(data.UnitHero))
                     SetUnitFacing(data.CatchUnit,angleMagnet)
                     UnitAddForceSimple(data.CatchUnit, angleMagnet, 5, distMagnet)
+                else
+                    data.CatchUnit = false
                 end
                 if not data.CatchUnit then
                     --print("ищем юнита под курсором")
-
                     if dist <= 400 then
                         tmpCatch = FindNearEnemyXY(data.UnitHero, 400, x, y)
                         --print(dist)
-                        if not GetUnitTypeId(tmpCatch) == FourCC("h00C") then
-                            -- бочка, можно хватать
-                            data.CatchUnit = false
-                        else
+                        if  GetUnitTypeId(tmpCatch) == FourCC("h00C") then
                             data.CatchUnit = tmpCatch
                             data.CatchUnitEffect = AddSpecialEffectTarget("diwo1", data.CatchUnit, "origin")
                             local angleMagnet = AngleBetweenUnits(data.CatchUnit, data.UnitHero)
                             local distMagnet = DistanceBetweenXY(GetUnitX(data.CatchUnit), GetUnitY(data.CatchUnit), GetUnitXY(data.UnitHero))
                             SetUnitFacing(data.CatchUnit,angleMagnet)
                             UnitAddForceSimple(data.CatchUnit, angleMagnet, 5, distMagnet)
+                        else
+                            data.CatchUnit = false
                         end
                     end
                 end

@@ -9,13 +9,17 @@ function ReplaceIdToSpikeTraps(id)
     --print("найденно "..k.." а в таблице "..#all)
     for i = 1, #all do
         --print("заменён ", GetUnitName(all[i]), i,GetUnitFacing(all[i]))
-        ShowUnit(all[i], false)
-        SetUnitInvulnerable(all[i], true)
-        UnitAddAbility(all[i], FourCC("Aloc"))
+
         CreateSpikeTrap(all[i])
     end
 end
-function CreateSpikeTrap(unit)
+
+
+
+function CreateSpikeTrap(unit,timed)
+    ShowUnit(unit, false)
+    SetUnitInvulnerable(unit, true)
+    UnitAddAbility(unit, FourCC("Aloc"))
     local x, y = GetUnitXY(unit)
     local z = GetUnitZ(unit)
     local eff = AddSpecialEffect("MechaImpale", x, y)
@@ -25,6 +29,9 @@ function CreateSpikeTrap(unit)
     --BlzSetSpecialEffectScale(eff,1)
     --BlzSetSpecialEffectTimeScale(eff,0.3)
     --BlzPlaySpecialEffect(eff, ANIM_TYPE_STAND)
+    if timed then
+        UnitApplyTimedLife(unit, FourCC('BTLF'), timed)
+    end
     local ta=2
     if GetUnitFacing(unit)>89 and GetUnitFacing(unit)<91 then
         delay=2

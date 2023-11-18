@@ -88,7 +88,7 @@ function FindNearEnemyXY(unit,range,x,y)
                 min=dist
                 result = e
             end
-            --print("найден для сетки",GetUnitName(e))
+            --print("Близжайший",GetUnitName(e))
         end
         GroupRemoveUnit(perebor, e)
     end

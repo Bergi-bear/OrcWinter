@@ -4,15 +4,20 @@
 --- DateTime: 11.11.2023 17:34
 ---
 ---
-function StartBlackHole(unit)
+function StartBlackHole(unit,timed)
     local x, y = GetUnitXY(unit)
-    UnitAddAbility(unit, FourCC("Aloc"))
     local range = 1200
+    if not timed then
+        UnitAddAbility(unit, FourCC("Aloc"))
+    else
+        range = 2400
+    end
+
     local data = HERO[0]
-    local maxSpeed = 5
-    local minSpeed = 0.1
+    local maxSpeed = 6
+    local minSpeed = 0.2
     local realSpeed = 1
-    local imp=2400
+    local imp=range*2
     TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
         if udg_HoleIsWork then
             UnitDamageArea(unit, 30, x, y, 150)
@@ -62,6 +67,18 @@ function StartBlackHole(unit)
                 GroupRemoveUnit(perebor, e)
             end
         else
+            data.BH=nil
+        end
+        if timed then
+            timed=timed-TIMER_PERIOD64
+            if timed<=0 then
+                DestroyTimer(GetExpiredTimer())
+                data.BH=nil
+                --print("временный БХ окончен")
+            end
+        end
+        if not UnitAlive(unit) then
+            DestroyTimer(GetExpiredTimer())
             data.BH=nil
         end
     end)
