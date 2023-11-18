@@ -84,6 +84,28 @@ gg_rct_Exit09 = nil
 gg_rct_Bound10 = nil
 gg_rct_Enter10 = nil
 gg_rct_Exit10 = nil
+gg_rct_Bound11 = nil
+gg_rct_Enter11 = nil
+gg_rct_Exit11 = nil
+gg_rct_Region11 = nil
+gg_rct_R11B1_0 = nil
+gg_rct_Start11_0 = nil
+gg_rct_Start11_1 = nil
+gg_rct_Start11_2 = nil
+gg_rct_Start11_3 = nil
+gg_rct_R11B1_1 = nil
+gg_rct_R11B1_2 = nil
+gg_rct_R11B2_0 = nil
+gg_rct_R11B2_1 = nil
+gg_rct_R11B3_0 = nil
+gg_rct_R11B3_1 = nil
+gg_rct_R11B1_4 = nil
+gg_rct_R11B1_3 = nil
+gg_rct_Start11_4 = nil
+gg_rct_Start11_5 = nil
+gg_rct_BoundBoss = nil
+gg_rct_EnterBoss = nil
+gg_rct_ExitBoss = nil
 gg_cam_OnPeonsandTrall = nil
 gg_cam_OnPineRound = nil
 gg_cam_OnPeons = nil
@@ -146,6 +168,17 @@ gg_snd_cook5 = nil
 gg_snd_CookQuestPeon4 = nil
 gg_snd_Warning = nil
 gg_snd_BattlenetDeath1A = nil
+gg_trg_InitBossRoom = nil
+gg_trg_Button1101 = nil
+gg_trg_Button1102 = nil
+gg_trg_Button1103 = nil
+gg_trg_Button1101Restore = nil
+gg_trg_Button1102Restore = nil
+gg_trg_Button1103Restore = nil
+gg_trg_CreateFoorInRoom11 = nil
+gg_trg_InitRoom11DownForRegion = nil
+gg_trg_ExitFrom11 = nil
+gg_trg_Out11 = nil
 gg_trg_ExitFrom10 = nil
 gg_trg_Victory10 = nil
 gg_trg_ExitFrom09 = nil
@@ -303,6 +336,10 @@ gg_dest_B00D_17531 = nil
 gg_dest_B00D_17596 = nil
 gg_dest_B00D_17597 = nil
 gg_dest_B00B_17599 = nil
+gg_dest_DTfx_17980 = nil
+gg_dest_DTfx_16046 = nil
+gg_dest_DTfx_16051 = nil
+gg_dest_B00B_16092 = nil
 function InitGlobals()
 local i = 0
 
@@ -545,19 +582,19 @@ local life
 
 gg_dest_B004_2162 = BlzCreateDestructableWithSkin(FourCC("B004"), -128.0, -192.0, 325.000, 3.000, 0, FourCC("B004"))
 gg_dest_B007_5312 = BlzCreateDestructableWithSkin(FourCC("B007"), -7552.0, 4224.0, 211.000, 3.000, 0, FourCC("B007"))
+gg_dest_B00B_17599 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 14969.5, -3076.2, 832.0, 180.000, 1.850, 0, FourCC("B00B"))
 gg_dest_B00B_17182 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15231.9, -760.3, 844.8, 270.000, 1.450, 0, FourCC("B00B"))
 gg_dest_B00B_16680 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15221.9, 2433.2, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_16430 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11136.0, 2426.0, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
-gg_dest_B00B_17533 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 12156.2, 3.1, 832.0, 270.000, 1.850, 0, FourCC("B00B"))
 gg_dest_B00B_14785 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11344.6, 8373.0, 832.0, 270.000, 1.650, 0, FourCC("B00B"))
-gg_dest_B00B_17599 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 14969.5, -3076.2, 832.0, 180.000, 1.850, 0, FourCC("B00B"))
-gg_dest_B00B_16153 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15215.2, 5364.9, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
+gg_dest_B00B_17533 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 12156.2, 3.1, 832.0, 270.000, 1.850, 0, FourCC("B00B"))
+gg_dest_B00B_16092 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 18043.0, 7294.2, 838.4, 270.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_14732 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 13812.6, 8326.6, 838.4, 90.000, 1.650, 0, FourCC("B00B"))
+gg_dest_B00B_16153 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15215.2, 5364.9, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_15713 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11516.0, 4100.8, 844.8, 90.000, 1.450, 0, FourCC("B00B"))
 gg_dest_B00B_15515 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15227.5, 6283.1, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_15274 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 10618.1, 6012.7, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00D_16426 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10304.0, 1408.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_17597 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, -3200.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_17596 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, -1920.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_17531 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11584.0, -704.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_17530 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10112.0, 256.0, 270.000, 1.000, 0, FourCC("B00D"))
@@ -572,35 +609,39 @@ gg_dest_B00D_16257 = BlzCreateDestructableWithSkin(FourCC("B00D"), 14080.0, 4608
 gg_dest_B00D_17276 = BlzCreateDestructableWithSkin(FourCC("B00D"), 14272.0, -1024.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16254 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12864.0, 4160.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16255 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15296.0, 4160.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_17155 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, 1280.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_16256 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12992.0, 5312.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16427 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10304.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_17155 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, 1280.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16702 = BlzCreateDestructableWithSkin(FourCC("B00D"), 13056.0, 3456.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_16701 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 14016.0, 2816.0, 1088.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_17532 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11584.0, -64.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16416 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11968.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16421 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11968.0, 1408.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_16256 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12992.0, 5312.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_17597 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, -3200.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16685 = BlzCreateDestructableWithSkin(FourCC("B00D"), 13696.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_16699 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_16701 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 14016.0, 2816.0, 1088.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16596 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10048.0, 1792.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16597 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12288.0, 1792.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16598 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11136.0, 1216.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16599 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11136.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16686 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, 3456.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16684 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 13056.0, 2304.0, 901.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00E_15517 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 12948.1, 6482.3, 979.2, 90.000, 1.000, 0, FourCC("B00E"))
+gg_dest_B00D_16699 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00E_15513 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 13441.1, 6941.4, 1004.8, 90.000, 1.000, 0, FourCC("B00E"))
 gg_dest_B00E_15516 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 14600.6, 6946.5, 979.2, 270.000, 1.000, 0, FourCC("B00E"))
 gg_dest_B00E_15514 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 14990.0, 6473.7, 972.8, 270.000, 1.000, 0, FourCC("B00E"))
-gg_dest_B00E_15513 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 13441.1, 6941.4, 1004.8, 90.000, 1.000, 0, FourCC("B00E"))
+gg_dest_B00E_15517 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 12948.1, 6482.3, 979.2, 90.000, 1.000, 0, FourCC("B00E"))
 gg_dest_B00F_17534 = BlzCreateDestructableWithSkin(FourCC("B00F"), 10112.0, -384.0, 270.000, 1.000, 0, FourCC("B00F"))
-gg_dest_DTfx_15068 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10048.0, 6208.0, 270.000, 1.000, 0, FourCC("DTfx"))
-gg_dest_DTfx_5091 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 11584.0, 8896.0, 270.000, 1.000, 0, FourCC("DTfx"))
-gg_dest_DTfx_14832 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 11584.0, 8064.0, 270.000, 1.000, 0, FourCC("DTfx"))
-gg_dest_DTfx_14834 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10560.0, 8064.0, 270.000, 1.000, 0, FourCC("DTfx"))
+gg_dest_DTfx_14833 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10688.0, 8896.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_14688 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 14912.0, 8256.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_14690 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 15040.0, 9024.0, 270.000, 1.000, 0, FourCC("DTfx"))
-gg_dest_DTfx_14833 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10688.0, 8896.0, 270.000, 1.000, 0, FourCC("DTfx"))
+gg_dest_DTfx_14832 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 11584.0, 8064.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_15314 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10176.0, 7232.0, 270.000, 1.000, 0, FourCC("DTfx"))
+gg_dest_DTfx_15068 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10048.0, 6208.0, 270.000, 1.000, 0, FourCC("DTfx"))
+gg_dest_DTfx_14834 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10560.0, 8064.0, 270.000, 1.000, 0, FourCC("DTfx"))
+gg_dest_DTfx_5091 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 11584.0, 8896.0, 270.000, 1.000, 0, FourCC("DTfx"))
+gg_dest_DTfx_17980 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 15744.0, 7296.0, 270.000, 1.000, 0, FourCC("DTfx"))
+gg_dest_DTfx_16046 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 16512.0, 6272.0, 270.000, 1.000, 0, FourCC("DTfx"))
+gg_dest_DTfx_16051 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 17536.0, 6272.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_15071 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 12352.0, 5952.0, 270.000, 1.000, 0, FourCC("DTfx"))
 end
 
@@ -1148,6 +1189,7 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12931.5, -2402.6, 242.987, FourCC("
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12897.6, -2066.7, 242.987, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 14813.4, -1915.6, 242.987, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 10365.8, 8822.6, 351.690, FourCC("h00C"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 17790.2, 6274.9, 242.987, FourCC("h00C"))
 end
 
 function CreateUnitsForPlayer2()
@@ -1593,6 +1635,8 @@ u = BlzCreateUnitWithSkin(p, FourCC("n00B"), -1429.4, -2052.7, 124.917, FourCC("
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 6787.5, -4804.8, 335.316, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 17749.1, 7116.1, 218.170, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("n00D"), 8574.0, -4760.7, 202.020, FourCC("n00D"))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 13631.0, 7085.6, 270.344, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
@@ -1701,7 +1745,7 @@ gg_rct_Exit07 = Rect(15104.0, 2272.0, 15392.0, 2560.0)
 gg_rct_SpikesZone = Rect(12768.0, 2048.0, 15360.0, 3584.0)
 gg_rct_Enter08 = Rect(12992.0, 64.0, 13120.0, 192.0)
 gg_rct_Exit08 = Rect(15104.0, -896.0, 15392.0, -608.0)
-gg_rct_Region08 = Rect(13504.0, -2048.0, 16128.0, 480.0)
+gg_rct_Region08 = Rect(12768.0, -1120.0, 15392.0, 1408.0)
 gg_rct_Bound08 = Rect(13952.0, -544.0, 14240.0, 704.0)
 gg_rct_Bound08Start = Rect(13984.0, 480.0, 14272.0, 704.0)
 gg_rct_ResizePlace08 = Rect(14080.0, -416.0, 14432.0, -256.0)
@@ -1712,6 +1756,28 @@ gg_rct_Exit09 = Rect(12032.0, -160.0, 12320.0, 128.0)
 gg_rct_Bound10 = Rect(13920.0, -2688.0, 14208.0, -2464.0)
 gg_rct_Enter10 = Rect(13568.0, -3264.0, 13696.0, -3136.0)
 gg_rct_Exit10 = Rect(14816.0, -3200.0, 15104.0, -2912.0)
+gg_rct_Bound11 = Rect(16768.0, 6560.0, 17056.0, 6848.0)
+gg_rct_Enter11 = Rect(15680.0, 7104.0, 15808.0, 7232.0)
+gg_rct_Exit11 = Rect(17920.0, 7168.0, 18208.0, 7456.0)
+gg_rct_Region11 = Rect(15488.0, 5760.0, 18304.0, 7552.0)
+gg_rct_R11B1_0 = Rect(15616.0, 6656.0, 16128.0, 7424.0)
+gg_rct_Start11_0 = Rect(15616.0, 6912.0, 15872.0, 7424.0)
+gg_rct_Start11_1 = Rect(16384.0, 6144.0, 16640.0, 6400.0)
+gg_rct_Start11_2 = Rect(17408.0, 6144.0, 17920.0, 6400.0)
+gg_rct_Start11_3 = Rect(17664.0, 6912.0, 18208.0, 7456.0)
+gg_rct_R11B1_1 = Rect(16384.0, 6400.0, 16640.0, 7424.0)
+gg_rct_R11B1_2 = Rect(16640.0, 6400.0, 17920.0, 6656.0)
+gg_rct_R11B2_0 = Rect(16128.0, 5920.0, 16384.0, 7424.0)
+gg_rct_R11B2_1 = Rect(16640.0, 6144.0, 17408.0, 6400.0)
+gg_rct_R11B3_0 = Rect(16640.0, 6656.0, 17664.0, 7168.0)
+gg_rct_R11B3_1 = Rect(16384.0, 5920.0, 18176.0, 6144.0)
+gg_rct_R11B1_4 = Rect(15872.0, 6400.0, 16128.0, 6656.0)
+gg_rct_R11B1_3 = Rect(15616.0, 5888.0, 15872.0, 6144.0)
+gg_rct_Start11_4 = Rect(15872.0, 6144.0, 16128.0, 6400.0)
+gg_rct_Start11_5 = Rect(15872.0, 6912.0, 16128.0, 7168.0)
+gg_rct_BoundBoss = Rect(14432.0, -7616.0, 16192.0, -4640.0)
+gg_rct_EnterBoss = Rect(12864.0, -4192.0, 12992.0, -4064.0)
+gg_rct_ExitBoss = Rect(17440.0, -4352.0, 17728.0, -4064.0)
 end
 
 function CreateCameras()
@@ -3422,6 +3488,7 @@ do
             --SetDayNightModels("Environment\\DNC\\DNCAshenvale\\DNCAshenvaleTerrain\\DNCAshenvaleTerrain.mdl", "Environment\\DNC\\DNCAshenvale\\DNCAshenvaleUnit\\DNCAshenvaleUnit.mdl")
             --SetDayNightModels("", "")
             InitRicoshet()
+
             ClearMapMusicBJ()
             PlayMusicBJ("Endless Snowbanks")
             SetMusicVolumeBJ(100)
@@ -5430,6 +5497,108 @@ function InitUnitBulletTrap(u, force)
                 end
             end)
         end)
+    end
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 18.11.2023 9:13
+---
+---
+---MoveDestructableDown(gg_dest_B00G_16112, -500, 5)
+--MoveDestructableDown(GetEnumDestructable(), -500, 5)
+
+
+
+function CreateFloorInRoom(x, y,h,w)
+    if not x then
+        x, y = GetDestructableX(gg_dest_DTfx_17980), GetDestructableY(gg_dest_DTfx_17980)
+    end
+    local step = 256
+    local id = FourCC("B00G")
+    local z = 896--GetTerrainZ(x,y)
+    for i = 1, h do
+        for k = 1, w do
+            local r = GetRandomInt(1, 4)
+            CreateDestructableZ(id, x + ((i - 1) * step), y - ((k - 1) * step), z, 90 * r, 2, 1)
+        end
+    end
+end
+
+function MoveDestructableDown(d, maxZ, speed)
+    local x, y = GetDestructableX(d), GetDestructableY(d)
+    local id = GetDestructableTypeId(d)
+    local currentZ = GetTerrainZ(x, y)
+    maxZ = currentZ + maxZ
+    CreateSquareDestrutables(x, y)
+    local lastD = nil
+    local tmdD = d
+    PlayerSeeNoiseInRangeTimed(0.5, x, y)
+    TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
+        currentZ = currentZ - speed
+
+        if currentZ <= maxZ then
+            DestroyTimer(GetExpiredTimer())
+            lastD = tmdD
+            PlayerSeeNoiseInRangeTimed(0.5, x, y)
+        else
+            RemoveDestructable(d)
+            d = CreateDestructableZ(id, x, y, currentZ, 0, 2, 1)
+            tmdD = d
+        end
+    end)
+end
+
+function MoveDestructableUp(d, maxZ, speed)
+    local x, y = GetDestructableX(d), GetDestructableY(d)
+    local id = GetDestructableTypeId(d)
+    local currentZ = GetTerrainZ(x, y) - maxZ
+    maxZ = 896
+    PlayerSeeNoiseInRangeTimed(0.5, x, y)
+    TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
+        currentZ = currentZ + speed
+        if currentZ >= maxZ then
+            --print("верх!")
+            DestroyTimer(GetExpiredTimer())
+            RemoveTableDestructable(x, y)
+            PlayerSeeNoiseInRangeTimed(0.5, x, y)
+        else
+            RemoveDestructable(d)
+            d = CreateDestructableZ(id, x, y, currentZ, 0, 2, 1)
+        end
+    end)
+end
+
+function RemoveTableDestructable(x, y)
+    local range = 128
+    SetRect(GlobalRect, x - range, y - range, x + range, y + range)
+    EnumDestructablesInRect(GlobalRect, nil, function()
+        local d = GetEnumDestructable()
+        if GetDestructableTypeId(d) == FourCC("B00H") or GetDestructableTypeId(d) == FourCC("B005") then
+            RemoveDestructable(d)
+        end
+    end)
+end
+
+function CreateSquareDestrutables(x, y)
+    local id = FourCC("B005") -- B005 - невидимый,  B00H - видимый
+    local t = {}
+    local step = 64
+    local nx, ny = x - step, y - step
+    local d = CreateDestructableZ(id, nx, ny, GetTerrainZ(x, y), 0, 1, 1)
+    table.insert(t, d)
+    nx, ny = x + step, y + step
+    d = CreateDestructableZ(id, nx, ny, GetTerrainZ(x, y), 0, 1, 1)
+    table.insert(t, d)
+    nx, ny = x - step, y + step
+    d = CreateDestructableZ(id, nx, ny, GetTerrainZ(x, y), 0, 1, 1)
+    table.insert(t, d)
+    nx, ny = x + step, y - step
+    d = CreateDestructableZ(id, nx, ny, GetTerrainZ(x, y), 0, 1, 1)
+    table.insert(t, d)
+    for i=1,#t do
+        local dx,dy=GetDestructableX(t[i]),GetDestructableY(t[i])
+        UnitDamageArea(udg_HERO,60,dx,dy,60,"All")
     end
 end
 ---
@@ -11212,9 +11381,6 @@ function InitDashVisualCharges(data)
     end
 end
 
-function RemoveChargesEffect(data)
-
-end
 
 function RepositionCharges(data)
     if data.DashCharges >= 3 then
@@ -12624,7 +12790,7 @@ function CreateWASDActions()
                             --print("ошибка, такой функции нет")
                             Blink2Point(data.UnitHero, nx, ny)
                         else
-                            print("прыжок вниз?, сообщите об этом баге!")
+                           -- print("прыжок вниз?, сообщите об этом баге!")
                             UnitAddForceSimple(data.UnitHero, data.DirectionMove, 10, dist, "ignore") --САМ рывок при нажатии пробела
                         end
                     else
@@ -13604,6 +13770,549 @@ function InitItemBDForShop()
 end
 
 --CUSTOM_CODE
+function Trig_InitBossRoom_Conditions()
+if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+return false
+end
+return true
+end
+
+function Trig_InitBossRoom_Actions()
+DisableTrigger(GetTriggeringTrigger())
+SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound11)
+    HeroFixRespPos()
+    CreateEnteringFrame(nil, "Вся карта это Босс")
+end
+
+function InitTrig_InitBossRoom()
+gg_trg_InitBossRoom = CreateTrigger()
+TriggerRegisterEnterRectSimple(gg_trg_InitBossRoom, gg_rct_Enter11)
+TriggerAddCondition(gg_trg_InitBossRoom, Condition(Trig_InitBossRoom_Conditions))
+TriggerAddAction(gg_trg_InitBossRoom, Trig_InitBossRoom_Actions)
+end
+
+function Trig_Button1101_Func001Func001C()
+if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+return false
+end
+return true
+end
+
+function Trig_Button1101_Func001A()
+if (Trig_Button1101_Func001Func001C()) then
+        MoveDestructableUp(GetEnumDestructable(), 500, 5)
+else
+end
+end
+
+function Trig_Button1101_Func002Func001C()
+if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+return false
+end
+return true
+end
+
+function Trig_Button1101_Func002A()
+if (Trig_Button1101_Func002Func001C()) then
+        MoveDestructableUp(GetEnumDestructable(), 500, 5)
+else
+end
+end
+
+function Trig_Button1101_Func003Func001C()
+if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+return false
+end
+return true
+end
+
+function Trig_Button1101_Func003A()
+if (Trig_Button1101_Func003Func001C()) then
+        MoveDestructableUp(GetEnumDestructable(), 500, 5)
+else
+end
+end
+
+function Trig_Button1101_Func004Func001C()
+if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+return false
+end
+return true
+end
+
+function Trig_Button1101_Func004A()
+if (Trig_Button1101_Func004Func001C()) then
+        MoveDestructableUp(GetEnumDestructable(), 500, 5)
+else
+end
+end
+
+function Trig_Button1101_Func005Func001C()
+if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+return false
+end
+return true
+end
+
+function Trig_Button1101_Func005A()
+if (Trig_Button1101_Func005Func001C()) then
+        MoveDestructableUp(GetEnumDestructable(), 500, 5)
+else
+end
+end
+
+function Trig_Button1101_Func007Func001C()
+if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+return false
+end
+return true
+end
+
+function Trig_Button1101_Func007A()
+if (Trig_Button1101_Func007Func001C()) then
+        MoveDestructableDown(GetEnumDestructable(), -500, 5)
+else
+end
+end
+
+function Trig_Button1101_Func008Func001C()
+if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+return false
+end
+return true
+end
+
+function Trig_Button1101_Func008A()
+if (Trig_Button1101_Func008Func001C()) then
+        MoveDestructableDown(GetEnumDestructable(), -500, 5)
+else
+end
+end
+
+function Trig_Button1101_Func009Func001C()
+if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+return false
+end
+return true
+end
+
+function Trig_Button1101_Func009A()
+if (Trig_Button1101_Func009Func001C()) then
+        MoveDestructableDown(GetEnumDestructable(), -500, 5)
+else
+end
+end
+
+function Trig_Button1101_Func010Func001C()
+if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+return false
+end
+return true
+end
+
+function Trig_Button1101_Func010A()
+if (Trig_Button1101_Func010Func001C()) then
+        MoveDestructableDown(GetEnumDestructable(), -500, 5)
+else
+end
+end
+
+function Trig_Button1101_Func011Func001C()
+if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+return false
+end
+return true
+end
+
+function Trig_Button1101_Func011A()
+if (Trig_Button1101_Func011Func001C()) then
+        MoveDestructableDown(GetEnumDestructable(), -500, 5)
+else
+end
+end
+
+function Trig_Button1101_Actions()
+EnumDestructablesInRectAll(gg_rct_R11B1_0, Trig_Button1101_Func001A)
+EnumDestructablesInRectAll(gg_rct_R11B1_1, Trig_Button1101_Func002A)
+EnumDestructablesInRectAll(gg_rct_R11B1_2, Trig_Button1101_Func003A)
+EnumDestructablesInRectAll(gg_rct_R11B1_3, Trig_Button1101_Func004A)
+EnumDestructablesInRectAll(gg_rct_R11B1_4, Trig_Button1101_Func005A)
+TriggerSleepAction(5.00)
+EnumDestructablesInRectAll(gg_rct_R11B1_0, Trig_Button1101_Func007A)
+EnumDestructablesInRectAll(gg_rct_R11B1_1, Trig_Button1101_Func008A)
+EnumDestructablesInRectAll(gg_rct_R11B1_2, Trig_Button1101_Func009A)
+EnumDestructablesInRectAll(gg_rct_R11B1_3, Trig_Button1101_Func010A)
+EnumDestructablesInRectAll(gg_rct_R11B1_4, Trig_Button1101_Func011A)
+end
+
+function InitTrig_Button1101()
+gg_trg_Button1101 = CreateTrigger()
+DisableTrigger(gg_trg_Button1101)
+TriggerRegisterDeathEvent(gg_trg_Button1101, gg_dest_DTfx_17980)
+TriggerAddAction(gg_trg_Button1101, Trig_Button1101_Actions)
+end
+
+function Trig_Button1102_Func001Func001C()
+if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+return false
+end
+return true
+end
+
+function Trig_Button1102_Func001A()
+if (Trig_Button1102_Func001Func001C()) then
+        MoveDestructableUp(GetEnumDestructable(), 500, 5)
+else
+end
+end
+
+function Trig_Button1102_Func002Func001C()
+if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+return false
+end
+return true
+end
+
+function Trig_Button1102_Func002A()
+if (Trig_Button1102_Func002Func001C()) then
+        MoveDestructableUp(GetEnumDestructable(), 500, 5)
+else
+end
+end
+
+function Trig_Button1102_Func004Func001C()
+if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+return false
+end
+return true
+end
+
+function Trig_Button1102_Func004A()
+if (Trig_Button1102_Func004Func001C()) then
+        MoveDestructableDown(GetEnumDestructable(), -500, 5)
+else
+end
+end
+
+function Trig_Button1102_Func005Func001C()
+if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+return false
+end
+return true
+end
+
+function Trig_Button1102_Func005A()
+if (Trig_Button1102_Func005Func001C()) then
+        MoveDestructableDown(GetEnumDestructable(), -500, 5)
+else
+end
+end
+
+function Trig_Button1102_Actions()
+EnumDestructablesInRectAll(gg_rct_R11B2_0, Trig_Button1102_Func001A)
+EnumDestructablesInRectAll(gg_rct_R11B2_1, Trig_Button1102_Func002A)
+TriggerSleepAction(5.00)
+EnumDestructablesInRectAll(gg_rct_R11B2_0, Trig_Button1102_Func004A)
+EnumDestructablesInRectAll(gg_rct_R11B2_1, Trig_Button1102_Func005A)
+end
+
+function InitTrig_Button1102()
+gg_trg_Button1102 = CreateTrigger()
+TriggerRegisterDeathEvent(gg_trg_Button1102, gg_dest_DTfx_16046)
+TriggerAddAction(gg_trg_Button1102, Trig_Button1102_Actions)
+end
+
+function Trig_Button1103_Func001Func001C()
+if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+return false
+end
+return true
+end
+
+function Trig_Button1103_Func001A()
+if (Trig_Button1103_Func001Func001C()) then
+        MoveDestructableUp(GetEnumDestructable(), 500, 5)
+else
+end
+end
+
+function Trig_Button1103_Func002Func001C()
+if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+return false
+end
+return true
+end
+
+function Trig_Button1103_Func002A()
+if (Trig_Button1103_Func002Func001C()) then
+        MoveDestructableUp(GetEnumDestructable(), 500, 5)
+else
+end
+end
+
+function Trig_Button1103_Func004Func001C()
+if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+return false
+end
+return true
+end
+
+function Trig_Button1103_Func004A()
+if (Trig_Button1103_Func004Func001C()) then
+        MoveDestructableDown(GetEnumDestructable(), -500, 5)
+else
+end
+end
+
+function Trig_Button1103_Func005Func001C()
+if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+return false
+end
+return true
+end
+
+function Trig_Button1103_Func005A()
+if (Trig_Button1103_Func005Func001C()) then
+        MoveDestructableDown(GetEnumDestructable(), -500, 5)
+else
+end
+end
+
+function Trig_Button1103_Actions()
+EnumDestructablesInRectAll(gg_rct_R11B3_0, Trig_Button1103_Func001A)
+EnumDestructablesInRectAll(gg_rct_R11B3_1, Trig_Button1103_Func002A)
+TriggerSleepAction(5.00)
+EnumDestructablesInRectAll(gg_rct_R11B3_0, Trig_Button1103_Func004A)
+EnumDestructablesInRectAll(gg_rct_R11B3_1, Trig_Button1103_Func005A)
+end
+
+function InitTrig_Button1103()
+gg_trg_Button1103 = CreateTrigger()
+TriggerRegisterDeathEvent(gg_trg_Button1103, gg_dest_DTfx_16051)
+TriggerAddAction(gg_trg_Button1103, Trig_Button1103_Actions)
+end
+
+function Trig_Button1101Restore_Actions()
+TriggerSleepAction(8.00)
+DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
+AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
+DestroyEffectBJ(GetLastCreatedEffectBJ())
+end
+
+function InitTrig_Button1101Restore()
+gg_trg_Button1101Restore = CreateTrigger()
+TriggerRegisterDeathEvent(gg_trg_Button1101Restore, gg_dest_DTfx_17980)
+TriggerAddAction(gg_trg_Button1101Restore, Trig_Button1101Restore_Actions)
+end
+
+function Trig_Button1102Restore_Actions()
+TriggerSleepAction(8.00)
+DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
+AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
+DestroyEffectBJ(GetLastCreatedEffectBJ())
+end
+
+function InitTrig_Button1102Restore()
+gg_trg_Button1102Restore = CreateTrigger()
+TriggerRegisterDeathEvent(gg_trg_Button1102Restore, gg_dest_DTfx_16046)
+TriggerAddAction(gg_trg_Button1102Restore, Trig_Button1102Restore_Actions)
+end
+
+function Trig_Button1103Restore_Actions()
+TriggerSleepAction(8.00)
+DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
+AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
+DestroyEffectBJ(GetLastCreatedEffectBJ())
+end
+
+function InitTrig_Button1103Restore()
+gg_trg_Button1103Restore = CreateTrigger()
+TriggerRegisterDeathEvent(gg_trg_Button1103Restore, gg_dest_DTfx_16051)
+TriggerAddAction(gg_trg_Button1103Restore, Trig_Button1103Restore_Actions)
+end
+
+function Trig_CreateFoorInRoom11_Func003Func001C()
+if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+return false
+end
+return true
+end
+
+function Trig_CreateFoorInRoom11_Func003A()
+if (Trig_CreateFoorInRoom11_Func003Func001C()) then
+RemoveDestructable(GetEnumDestructable())
+else
+end
+end
+
+function Trig_CreateFoorInRoom11_Func004Func001C()
+if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+return false
+end
+return true
+end
+
+function Trig_CreateFoorInRoom11_Func004A()
+if (Trig_CreateFoorInRoom11_Func004Func001C()) then
+RemoveDestructable(GetEnumDestructable())
+else
+end
+end
+
+function Trig_CreateFoorInRoom11_Func005Func001C()
+if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+return false
+end
+return true
+end
+
+function Trig_CreateFoorInRoom11_Func005A()
+if (Trig_CreateFoorInRoom11_Func005Func001C()) then
+RemoveDestructable(GetEnumDestructable())
+else
+end
+end
+
+function Trig_CreateFoorInRoom11_Func006Func001C()
+if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+return false
+end
+return true
+end
+
+function Trig_CreateFoorInRoom11_Func006A()
+if (Trig_CreateFoorInRoom11_Func006Func001C()) then
+RemoveDestructable(GetEnumDestructable())
+else
+end
+end
+
+function Trig_CreateFoorInRoom11_Func007Func001C()
+if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+return false
+end
+return true
+end
+
+function Trig_CreateFoorInRoom11_Func007A()
+if (Trig_CreateFoorInRoom11_Func007Func001C()) then
+RemoveDestructable(GetEnumDestructable())
+else
+end
+end
+
+function Trig_CreateFoorInRoom11_Func008Func001C()
+if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+return false
+end
+return true
+end
+
+function Trig_CreateFoorInRoom11_Func008A()
+if (Trig_CreateFoorInRoom11_Func008Func001C()) then
+RemoveDestructable(GetEnumDestructable())
+else
+end
+end
+
+function Trig_CreateFoorInRoom11_Actions()
+SetDestructableOccluderHeight(gg_dest_DTfx_17980, 128)
+    CreateFloorInRoom(GetDestructableX(gg_dest_DTfx_17980), GetDestructableY(gg_dest_DTfx_17980),10,6)
+EnumDestructablesInRectAll(gg_rct_Start11_0, Trig_CreateFoorInRoom11_Func003A)
+EnumDestructablesInRectAll(gg_rct_Start11_1, Trig_CreateFoorInRoom11_Func004A)
+EnumDestructablesInRectAll(gg_rct_Start11_2, Trig_CreateFoorInRoom11_Func005A)
+EnumDestructablesInRectAll(gg_rct_Start11_3, Trig_CreateFoorInRoom11_Func006A)
+EnumDestructablesInRectAll(gg_rct_Start11_4, Trig_CreateFoorInRoom11_Func007A)
+EnumDestructablesInRectAll(gg_rct_Start11_5, Trig_CreateFoorInRoom11_Func008A)
+end
+
+function InitTrig_CreateFoorInRoom11()
+gg_trg_CreateFoorInRoom11 = CreateTrigger()
+TriggerRegisterTimerEventSingle(gg_trg_CreateFoorInRoom11, 1.00)
+TriggerAddAction(gg_trg_CreateFoorInRoom11, Trig_CreateFoorInRoom11_Actions)
+end
+
+function Trig_InitRoom11DownForRegion_Conditions()
+if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+return false
+end
+return true
+end
+
+function Trig_InitRoom11DownForRegion_Func007Func001C()
+if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+return false
+end
+return true
+end
+
+function Trig_InitRoom11DownForRegion_Func007A()
+if (Trig_InitRoom11DownForRegion_Func007Func001C()) then
+        MoveDestructableDown(GetEnumDestructable(), -500, 5)
+else
+end
+end
+
+function Trig_InitRoom11DownForRegion_Actions()
+KillDestructable(gg_dest_B00B_16092)
+DisableTrigger(GetTriggeringTrigger())
+SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound11)
+    HeroFixRespPos()
+    CreateEnteringFrame(nil, "Вся карта это пол")
+EnumDestructablesInRectAll(gg_rct_Region11, Trig_InitRoom11DownForRegion_Func007A)
+TriggerSleepAction(5.00)
+EnableTrigger(gg_trg_Button1101)
+end
+
+function InitTrig_InitRoom11DownForRegion()
+gg_trg_InitRoom11DownForRegion = CreateTrigger()
+TriggerRegisterEnterRectSimple(gg_trg_InitRoom11DownForRegion, gg_rct_Enter11)
+TriggerAddCondition(gg_trg_InitRoom11DownForRegion, Condition(Trig_InitRoom11DownForRegion_Conditions))
+TriggerAddAction(gg_trg_InitRoom11DownForRegion, Trig_InitRoom11DownForRegion_Actions)
+end
+
+function Trig_ExitFrom11_Func003C()
+if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+return false
+end
+return true
+end
+
+function Trig_ExitFrom11_Conditions()
+if (not Trig_ExitFrom11_Func003C()) then
+return false
+end
+return true
+end
+
+function Trig_ExitFrom11_Actions()
+DisableTrigger(gg_trg_Out11)
+    SetUnitAnimationByIndex(udg_HERO, 25)
+TriggerSleepAction(0.30)
+SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter11))
+    UnitStartFallAnim(udg_HERO,1000)
+SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound11)
+    HeroFixRespPos()
+    CreateEnteringFrame(nil, "Битва с боссом")
+end
+
+function InitTrig_ExitFrom11()
+gg_trg_ExitFrom11 = CreateTrigger()
+TriggerRegisterEnterRectSimple(gg_trg_ExitFrom11, gg_rct_Exit11)
+TriggerAddCondition(gg_trg_ExitFrom11, Condition(Trig_ExitFrom11_Conditions))
+TriggerAddAction(gg_trg_ExitFrom11, Trig_ExitFrom11_Actions)
+end
+
+function Trig_Out11_Actions()
+KillUnit(GetTriggerUnit())
+end
+
+function InitTrig_Out11()
+gg_trg_Out11 = CreateTrigger()
+TriggerRegisterLeaveRectSimple(gg_trg_Out11, gg_rct_Region11)
+TriggerAddAction(gg_trg_Out11, Trig_Out11_Actions)
+end
+
 function Trig_ExitFrom10_Func002C()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
@@ -13624,11 +14333,11 @@ end
 function Trig_ExitFrom10_Actions()
     SetUnitAnimationByIndex(udg_HERO, 25)
 TriggerSleepAction(0.30)
-SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter10))
+SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter11))
     UnitStartFallAnim(udg_HERO,1000)
-SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound10)
+SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound11)
     HeroFixRespPos()
-    CreateEnteringFrame(nil, "Битва с боссом")
+    CreateEnteringFrame(nil, "Вся карта это пол")
 end
 
 function InitTrig_ExitFrom10()
@@ -15950,6 +16659,17 @@ TriggerAddAction(gg_trg_ESCTEST, Trig_ESCTEST_Actions)
 end
 
 function InitCustomTriggers()
+InitTrig_InitBossRoom()
+InitTrig_Button1101()
+InitTrig_Button1102()
+InitTrig_Button1103()
+InitTrig_Button1101Restore()
+InitTrig_Button1102Restore()
+InitTrig_Button1103Restore()
+InitTrig_CreateFoorInRoom11()
+InitTrig_InitRoom11DownForRegion()
+InitTrig_ExitFrom11()
+InitTrig_Out11()
 InitTrig_ExitFrom10()
 InitTrig_Victory10()
 InitTrig_ExitFrom09()
@@ -16061,7 +16781,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, 13376.0, 8640.0)
+DefineStartLocation(0, 12992.0, -4352.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()

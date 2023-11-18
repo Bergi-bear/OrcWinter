@@ -793,7 +793,7 @@ function CreateWASDActions()
                             --print("ошибка, такой функции нет")
                             Blink2Point(data.UnitHero, nx, ny)
                         else
-                            print("прыжок вниз?, сообщите об этом баге!")
+                           -- print("прыжок вниз?, сообщите об этом баге!")
                             UnitAddForceSimple(data.UnitHero, data.DirectionMove, 10, dist, "ignore") --САМ рывок при нажатии пробела
                         end
                     else
