@@ -95,7 +95,7 @@ function StartYettyAI(xs, ys)
                             local angle = AngleBetweenUnits(boss, hero)
                             SetUnitFacing(boss, angle)
                             --SetUnitAnimation(boss,"Attack")
-                            StunUnit(hero, 3)
+                            --StunUnit(hero, 3)
                             YettyCouchHero(boss, hero, 3)
 
                             local r = GetRandomInt(1, 5)
@@ -327,52 +327,65 @@ function StartYettyAI(xs, ys)
 end
 QTEReadyToPress = false
 function YettyCouchHero(boss, hero, duration)
-    local eff = AddSpecialEffect("CircleCastBarCannibalize", GetUnitXY(boss))
-    BlzSetSpecialEffectScale(eff, 2)
-    BlzSetSpecialEffectTimeScale(eff, duration)
-    local qteFH = CreateQTEFrame()
-    QTEReadyToPress = true
-    local x, y = GetUnitXY(boss)
-    TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
-        duration = duration - TIMER_PERIOD
-        if duration <= 0 then
-            UnitDamageArea(boss, 50)
-            --print("наносим урон")
-            normal_sound("spine-bone-break-1", GetUnitXY(hero))
-            BlzDestroyFrame(qteFH)
-            QTEReadyToPress = false
-            local effb = AddSpecialEffect("D9_blood_effect1", GetUnitXY(hero))
-            BlzSetSpecialEffectScale(effb, 0.1)
-            DestroyEffect(effb)
-        end
-        if duration <= 0 or not QTEReadyToPress or not UnitAlive(hero) then
-            DestroyTimer(GetExpiredTimer())
-            UnitAddForceSimple(hero, GetUnitFacing(boss), 40, 400)
-            --print("отпустил")
-            UnitRemoveStun(hero)
-            DestroyEffect(eff)
-            ResetUnitAnimation(boss)
-            BlzDestroyFrame(qteFH)
-            QTEReadyToPress = false
-        else
-            QueueUnitAnimation(boss, "spell")
-            x, y = GetUnitXY(boss)
-            local nx, ny = MoveXY(x, y, 100, GetUnitFacing(boss))
-            SetUnitPositionSmooth(hero, nx, ny)
-            local z = GetTerrainZ(nx, ny) + 200
-            BlzSetSpecialEffectPosition(eff, nx, ny, z)
-        end
-    end)
+    if UnitAlive(hero) and not BlzIsUnitInvulnerable(hero) then
+        StunUnit(hero, 3)
+        local eff = AddSpecialEffect("CircleCastBarCannibalize", GetUnitXY(boss))
+        BlzSetSpecialEffectScale(eff, 2)
+        BlzSetSpecialEffectTimeScale(eff, duration)
+        local qteFH = CreateQTEFrame()
+        QTEReadyToPress = true
+        local x, y = GetUnitXY(boss)
+        TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
+            duration = duration - TIMER_PERIOD
+            if duration <= 0 then
+                UnitDamageArea(boss, 50)
+                --print("наносим урон")
+                normal_sound("spine-bone-break-1", GetUnitXY(hero))
+                BlzDestroyFrame(qteFH)
+                QTEReadyToPress = false
+                local effb = AddSpecialEffect("D9_blood_effect1", GetUnitXY(hero))
+                BlzSetSpecialEffectScale(effb, 0.1)
+                DestroyEffect(effb)
+            end
+            if duration <= 0 or not QTEReadyToPress or not UnitAlive(hero) then
+                DestroyTimer(GetExpiredTimer())
+                UnitAddForceSimple(hero, GetUnitFacing(boss), 40, 400)
+                --print("отпустил")
+                UnitRemoveStun(hero)
+                DestroyEffect(eff)
+                ResetUnitAnimation(boss)
+                BlzDestroyFrame(qteFH)
+                QTEReadyToPress = false
+            else
+                QueueUnitAnimation(boss, "spell")
+                x, y = GetUnitXY(boss)
+                local nx, ny = MoveXY(x, y, 100, GetUnitFacing(boss))
+                SetUnitPositionSmooth(hero, nx, ny)
+                local z = GetTerrainZ(nx, ny) + 200
+                BlzSetSpecialEffectPosition(eff, nx, ny, z)
+            end
+        end)
+    end
 end
 
 function MarkAndFall(x, y, effModel, hero, delay)
-    local mark = AddSpecialEffect("Snipe Target", x, y)
-    BlzSetSpecialEffectScale(mark, 5)
+    local markModel = "Snipe Target"
+    local scale = 5
+    local angleCreations=GetRandomReal(0, 360)
+    local damageRange=140
+    if effModel == "ConcreteCliffFloorCenter" then
+        markModel = "Spell Marker TC"
+        scale = 2
+        angleCreations=GetRandomInt(1,4)*90
+        damageRange=250
+    end
+    local mark = AddSpecialEffect(markModel, x, y)
+    BlzSetSpecialEffectScale(mark, scale)
     if not delay then
         delay = 2
     end
 
-    local deep = 50
+    local deep = 20
     if effModel == "Icicle" then
         deep = GetRandomInt(200, 400)
     end
@@ -380,8 +393,8 @@ function MarkAndFall(x, y, effModel, hero, delay)
 
         local FallenEff = AddSpecialEffect(effModel, x, y)
         BlzSetSpecialEffectZ(FallenEff, GetTerrainZ(x, y) + 1000)
-        BlzSetSpecialEffectYaw(FallenEff, math.rad(GetRandomReal(0, 360)))
-        BlzSetSpecialEffectScale(FallenEff, 5)
+        BlzSetSpecialEffectYaw(FallenEff, math.rad(angleCreations))
+        BlzSetSpecialEffectScale(FallenEff, scale)
         TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
             local z = BlzGetLocalSpecialEffectZ(FallenEff)
             BlzSetSpecialEffectZ(FallenEff, z - 50)
@@ -394,13 +407,20 @@ function MarkAndFall(x, y, effModel, hero, delay)
                 --SetDestructableInvulnerable(nd,true)
                 DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", x, y))
                 PlayerSeeNoiseInRangeTimed(0.5, x, y)
-                UnitDamageArea(hero, 300, x, y, 140) --при падении камня
+                UnitDamageArea(hero, 300, x, y, damageRange) --при падении камня
                 local k = GetUnitLifePercent(hero) / 100
                 k = 1 - k
                 if effModel == "Abilities\\Weapons\\DemonHunterMissile\\DemonHunterMissile" then
                     DestroyEffect(FallenEff)
                 else
-                    nd = CreateDestructableZ(FourCC('B002'), x, y, 0, 0, 5, 1)
+                    if effModel == "ConcreteCliffFloorCenter" then
+                        DownFloorInTimedXY(10,x,y)
+                        DestroyEffect(FallenEff)
+                        BlzSetSpecialEffectPosition(FallenEff, OutPoint, OutPoint, 0)
+                    else
+                        nd = CreateDestructableZ(FourCC('B002'), x, y, 0, 0, 5, 1)
+                    end
+
                 end
                 local duration = 5-- + (k * 5)
                 TimerStart(CreateTimer(), duration, false, function()

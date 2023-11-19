@@ -100,3 +100,12 @@ function CreateSquareDestrutables(x, y)
         UnitDamageArea(udg_HERO,60,dx,dy,60,"All")
     end
 end
+
+function DownFloorInTimedXY(timed,nx,ny)
+    local d = FindFloorInPoint(nx, ny)
+    MoveDestructableDown(d, -500, 15)
+    TimerStart(CreateTimer(), timed, false, function()
+        d = FindFloorInPoint(nx, ny)
+        MoveDestructableUp(d, 500, 5)
+    end)
+end

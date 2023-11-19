@@ -12,19 +12,22 @@ function InitHookUnits(id)
     end
 end
 
-function UnitCreateHook(unit, angle)
+function UnitCreateHook(unit, angle,totalScale)
+    if not totalScale then
+        totalScale=1
+    end
     local x, y = GetUnitXY(unit)
     local chainEff = "Chain"
     local hookEff = "abilities\\weapons\\wyvernspear\\wyvernspearmissile"
     local chains = {}
-    local maxDist = 1000
+    local maxDist = 1000*totalScale
     local hook = AddSpecialEffect(hookEff, x, y)
     local currentDist = 0
-    local speed = 40
+    local speed = 40*totalScale
     local revers = false
     local k = 0
     local forward = true
-    local scale = 3
+    local scale = 3*totalScale
     local k2 = 0
     local hero = nil
     local r = GetRandomInt(1, 4)
@@ -47,7 +50,7 @@ function UnitCreateHook(unit, angle)
 
             BlzSetSpecialEffectPosition(hook, nx, ny, z)
             BlzSetSpecialEffectYaw(hook, math.rad(angle))
-            BlzSetSpecialEffectMatrixScale(hook, 2, 2, 2)
+            BlzSetSpecialEffectMatrixScale(hook, 2*totalScale, 2*totalScale, 2*totalScale)
             _, hero = UnitDamageArea(unit, 1, nx, ny, 80)
             if hero then
                 if forward then
@@ -103,10 +106,14 @@ function UnitCreateHook(unit, angle)
     end)
 end
 
-function StartHookAI(unit, timed)
+function StartHookAI(unit, timed,scale)
     local hero = HERO[0].UnitHero
     local sec = 2
     local TimerFinder = CreateTimer()
+    if not scale then
+        scale=1
+    end
+
     if not timed then
         TimerStart(CreateTimer(), 0.2, true, function()
             if not UnitAlive(unit) then
@@ -127,7 +134,7 @@ function StartHookAI(unit, timed)
         sec = sec - 1
         if sec <= 0 then
             sec = 7
-            if IsUnitInRange(unit, hero, 1000) and UnitAlive(unit) then
+            if IsUnitInRange(unit, hero, 1000*scale) and UnitAlive(unit) then
                 --print("герой в радиусе активируем прицеливание")
                 local mark = AddSpecialEffect("BossArrowHook", GetUnitXY(unit))
                 local markTimer = CreateTimer()
@@ -139,6 +146,7 @@ function StartHookAI(unit, timed)
                     BlzSetSpecialEffectY(mark, GetUnitY(unit))
                     BlzSetSpecialEffectZ(mark, GetUnitZ(unit) + 50)
                     BlzSetSpecialEffectYaw(mark, math.rad(angle))
+                    BlzSetSpecialEffectScale(mark,scale)
                     SetUnitFacing(unit, angle)
                 end)
                 TimerStart(CreateTimer(), 3, false, function()
@@ -153,7 +161,10 @@ function StartHookAI(unit, timed)
                         --print("Активируем сам хук")
                         QueueUnitAnimation(unit, "Stand")
                         if UnitAlive(unit) then
-                            UnitCreateHook(unit, angle)
+                            UnitCreateHook(unit, angle,scale)
+                            if unit==GBoss then
+                                PlayBossSpeech("", "Свежее мясо")
+                            end
                         end
                     end)
                 end)

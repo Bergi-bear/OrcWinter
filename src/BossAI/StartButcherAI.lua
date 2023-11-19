@@ -48,7 +48,7 @@ function StartButcherAI(xs, ys)
     for i = 1, #hpMark do
         --table.insert(phaseCHK, true)
         if i >= 2 then
-            table.insert(HPMarkFH, CreateMarkOnBossBar(into, hpMark[i]))
+            table.insert(HPMarkFH, CreateMarkOnBossBar(into, hpMark[i] - 1.5))
             --table.insert(phaseCHK, false)
         end
     end
@@ -85,6 +85,9 @@ function StartButcherAI(xs, ys)
             PlayMusicBJ("Salve Springs")
             SetMusicVolumeBJ(100)
             BlzFrameSetVisible(into, false)
+            TimerStart(CreateTimer(), 15, false, function()
+                CustomVictoryBJ(Player(0), true, true)
+            end)
 
         else
             --Проверяем есть ли живые герои, когда тиник жив
@@ -100,6 +103,13 @@ function StartButcherAI(xs, ys)
                     --print("Отталкивание для особо умных")
                     if OnAttack then
                         if IsUnitInRange(hero, boss, 250) then
+
+                            local angle = AngleBetweenUnits(boss, hero)
+                            SetUnitFacing(boss, angle)
+                            --SetUnitAnimation(boss,"Attack")
+
+                            YettyCouchHero(boss, hero, 3)
+                            PlayBossSpeech("", "Попался мелкий")
                             if phase == 1 then
                                 --print("подошел слишком близко")
 
@@ -154,7 +164,7 @@ function StartButcherAI(xs, ys)
                 --print("отработало 1")
                 if not phaseCHK[phase] then
                     --print("отработало 2")
-                    AnitAddArmorTimed(boss, 50, 30)
+                    AnitAddArmorTimed(boss, 50 * phase , 30 + phase * 2)
                     BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     phaseCHK[phase] = true
                     OnSecondPhaseMove = 0
@@ -169,7 +179,7 @@ function StartButcherAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[3] then
                 phase = 3
                 if not phaseCHK[phase] then
-                    AnitAddArmorTimed(boss, 50, 30)
+                    AnitAddArmorTimed(boss, 50 * phase , 30 + phase * 2)
                     BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     --print("смена фазы на ", phase, "Текущая секунда", sec)
                     sec = 0
@@ -181,7 +191,7 @@ function StartButcherAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[4] then
                 phase = 4
                 if not phaseCHK[phase] then
-                    AnitAddArmorTimed(boss, 50, 30)
+                    AnitAddArmorTimed(boss, 50 * phase , 30 + phase * 2)
                     BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     --print("смена фазы на ", phase)
                     --CreateAndMoveChakram(boss, hero, bulletCounter)
@@ -191,7 +201,7 @@ function StartButcherAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[5] then
                 phase = 5
                 if not phaseCHK[phase] then
-                    AnitAddArmorTimed(boss, 50, 30)
+                    AnitAddArmorTimed(boss, 50 * phase , 30 + phase * 2)
                     BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     --print("смена фазы на ", phase)
                     --FlyAroundHero(boss, hero)
@@ -202,7 +212,7 @@ function StartButcherAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[6] then
                 phase = 6
                 if not phaseCHK[phase] then
-                    AnitAddArmorTimed(boss, 50, 30)
+                    AnitAddArmorTimed(boss, 50 * phase , 30 + phase * 2)
                     BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     --print("смена фазы на ", phase)
                     --CreateAnimeLineDelay(boss, hero, 10)
@@ -212,7 +222,7 @@ function StartButcherAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[7] then
                 phase = 7
                 if not phaseCHK[phase] then
-                    AnitAddArmorTimed(boss, 50, 30)
+                    AnitAddArmorTimed(boss, 50 * phase , 30 + phase * 2)
                     BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     --print("смена фазы на ", phase)
                     --SunStrikeArea(boss, hero, xs, ys)
@@ -222,7 +232,7 @@ function StartButcherAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[8] then
                 phase = 8
                 if not phaseCHK[phase] then
-                    AnitAddArmorTimed(boss, 50, 30)
+                    AnitAddArmorTimed(boss, 50 * phase , 30 + phase * 2)
                     BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     phaseCHK[phase] = true
                 end
@@ -230,7 +240,7 @@ function StartButcherAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[9] then
                 phase = 9
                 if not phaseCHK[phase] then
-                    AnitAddArmorTimed(boss, 50, 30)
+                    AnitAddArmorTimed(boss, 50 * phase , 30 + phase * 2)
                     BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     phaseCHK[phase] = true
                 end
@@ -238,7 +248,7 @@ function StartButcherAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[10] then
                 phase = 10
                 if not phaseCHK[phase] then
-                    AnitAddArmorTimed(boss, 50, 30)
+                    AnitAddArmorTimed(boss, 50 * phase , 30 + phase * 2)
                     BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     phaseCHK[phase] = true
                 end
@@ -248,8 +258,7 @@ function StartButcherAI(xs, ys)
             if phase == 1 and PhaseOn then
                 PhaseOn = false
                 --print("Атака 1, первая проверочная")
-                --BossHooked(boss, 5)
-                BossBlackHoleTimed(boss, 3)
+                BossHooked(boss, 5)
 
             end
 
@@ -296,7 +305,7 @@ function StartButcherAI(xs, ys)
 
                 local rph = GetRandomInt(1, phase)
                 if rph == 1 then
-                    BossHooked(boss, 5)
+                    BossHooked(boss, 5,1.5)
                 elseif rph == 2 then
                     ButcherThrowGround(boss, hero)
                 elseif rph == 3 then
@@ -315,7 +324,7 @@ function StartButcherAI(xs, ys)
 
                 local rph = GetRandomInt(1, phase)
                 if rph == 1 then
-                    BossHooked(boss, 5)
+                    BossHooked(boss, 5,2)
                 elseif rph == 2 then
                     ButcherThrowGround(boss, hero)
                 elseif rph == 3 then
@@ -333,7 +342,7 @@ function StartButcherAI(xs, ys)
                 PhaseOn = false
                 local rph = GetRandomInt(1, phase)
                 if rph == 1 then
-                    BossHooked(boss, 5)
+                    BossHooked(boss, 5,2)
                 elseif rph == 2 then
                     ButcherThrowGround(boss, hero)
                 elseif rph == 3 then
@@ -352,7 +361,7 @@ function StartButcherAI(xs, ys)
                 PhaseOn = false
                 local rph = GetRandomInt(1, phase)
                 if rph == 1 then
-                    BossHooked(boss, 5)
+                    BossHooked(boss, 5,2)
                 elseif rph == 2 then
                     ButcherThrowGround(boss, hero)
                 elseif rph == 3 then
@@ -364,15 +373,16 @@ function StartButcherAI(xs, ys)
                 elseif rph == 6 then
                     BulletHellButcher(boss, GetRandomInt(1, 2))
                 elseif rph == 7 then
-                    BossBlackHoleTimed(boss, 4)
+                    BossBlackHoleTimed(boss, 5)
                 elseif rph == 8 then
+                    FallenRoof(boss, 6)
                 end
             end
             if phase == 9 and PhaseOn then
                 PhaseOn = false
                 local rph = GetRandomInt(1, phase)
                 if rph == 1 then
-                    BossHooked(boss, 5)
+                    BossHooked(boss, 5,2)
                 elseif rph == 2 then
                     ButcherThrowGround(boss, hero)
                 elseif rph == 3 then
@@ -384,9 +394,11 @@ function StartButcherAI(xs, ys)
                 elseif rph == 6 then
                     BulletHellButcher(boss, GetRandomInt(1, 2))
                 elseif rph == 7 then
-                    BossBlackHoleTimed(boss, 4)
+                    BossBlackHoleTimed(boss, 6)
                 elseif rph == 8 then
+                    FallenRoof(boss, 6)
                 elseif rph == 9 then
+                    ButcherRoundSpike(boss, 10)
                 end
             end
             if phase == 10 and PhaseOn then
@@ -405,10 +417,13 @@ function StartButcherAI(xs, ys)
                 elseif rph == 6 then
                     BulletHellButcher(boss, GetRandomInt(1, 2))
                 elseif rph == 7 then
-                    BossBlackHoleTimed(boss, 4)
+                    BossBlackHoleTimed(boss, 7)
                 elseif rph == 8 then
+                    FallenRoof(boss, 7)
                 elseif rph == 9 then
+                    ButcherRoundSpike(boss, 15)
                 elseif rph == 10 then
+                    BossHooked(boss, 5, 2)
                 end
             end
 
@@ -449,11 +464,68 @@ function StartButcherAI(xs, ys)
     end)
 end
 
+function ButcherRoundSpike(boss, k)
+    SetUnitAnimation(boss, "Spell Slam")
+    local x, y = GetUnitXY(boss)
+    local dist = 50
+    if not k then
+        k = 15
+        --normal_sound("howl", x, y)
+    end
+    local n = 0
+    TimerStart(CreateTimer(), 0.3, true, function()
+        local angle = 360 / (15 + n)
+        for i = 1, 15 + n do
+            local nx, ny = MoveXY(x, y, dist, angle * i)
+            --print("i",angle*i)
+            local eff = AddSpecialEffect("MechaImpale", nx, ny)
+            BlzSetSpecialEffectYaw(eff, math.rad(GetRandomInt(0, 360))) --angle
+            TimerStart(CreateTimer(), 0.3, false, function()
+                UnitDamageArea(boss, 50, nx, ny, 80)
+            end)
+            TimerStart(CreateTimer(), 0.7, false, function()
+                DestroyEffect(eff)
+            end)
+        end
+        dist = dist + 70
+        n = n + 3
+        k = k - 1
+        --print(k,"k")
+        if k <= 0 then
+            DestroyTimer(GetExpiredTimer())
+        end
+    end)
+
+end
+
+function FallenRoof(boss, timed)
+
+    SetUnitAnimation(boss, "Spell")
+    --QueueUnitAnimation(boss, "Stand")
+    local period = 0.08
+    PlayBossSpeech("", "Падающий потолок")
+    TimerStart(CreateTimer(), period, true, function()
+        timed = timed - period
+        if timed < 1 then
+            DestroyTimer(GetExpiredTimer())
+            QueueUnitAnimation(boss, "Stand")
+        else
+            QueueUnitAnimation(boss, "Spell")
+            local x, y = GetUnitXY(boss)
+            local range = GetRandomInt(300, 2500)
+            local angle = GetRandomInt(0, 360)
+            local nx, ny = MoveXY(x, y, range, angle)
+            MarkAndFall(nx, ny, "ConcreteCliffFloorCenter", boss, 0.5)
+        end
+    end)
+end
+
 function BossBlackHoleTimed(boss, timed)
     StartBlackHole(boss, timed)
     udg_HoleIsWork = true
     SetUnitAnimationByIndex(boss, 12)
     QueueUnitAnimation(boss, "Stand")
+    PlayBossSpeech("", "Пылесос")
     TimerStart(CreateTimer(), 1, true, function()
         SetUnitAnimationByIndex(boss, 12)
         QueueUnitAnimation(boss, "Stand")
@@ -468,6 +540,10 @@ function BulletHellButcher(boss, r)
     local k = 3
     local x, y = GetUnitXY(boss)
     local r2Timer = CreateTimer()
+    IssueImmediateOrder(boss, "stop")
+
+    PlayBossSpeech("", "Ад из пуль")
+
     TimerStart(CreateTimer(), 1, true, function()
         SetUnitAnimationByIndex(boss, 12)
         QueueUnitAnimation(boss, "Stand")
@@ -499,6 +575,15 @@ end
 function BossAxeThrow(boss, hero)
     local k = 3
     TimerStart(CreateTimer(), 1, true, function()
+        if k == 3 then
+            PlayBossSpeech("", "Раз")
+        end
+        if k == 2 then
+            PlayBossSpeech("", "Два")
+        end
+        if k == 1 then
+            PlayBossSpeech("", "Три")
+        end
         k = k - 1
         if k < 1 then
             DestroyTimer(GetExpiredTimer())
@@ -528,6 +613,7 @@ function BossSpikeWave(boss, hero)
     SetUnitAnimation(boss, "Attack Slam")
     QueueUnitAnimation(boss, "Stand")
     TimerStart(CreateTimer(), 1.5, false, function()
+        PlayBossSpeech("", "Пики точеные!")
         DestroyEffect(eff)
         local x, y = GetUnitXY(boss)
         local maxDist = 1800
@@ -569,14 +655,14 @@ function ButcherThrowGround(boss, hero)
         TimerStart(CreateTimer(), 0.45, false, function()
             nx, ny = MoveXY(x, y, 500, GetUnitFacing(boss) - 15)
             DestroyEffect(AddSpecialEffect("Earthshock", nx, ny))
-            UnitDamageArea(boss, 50, nx, ny, 250)
-            local d = FindFloorInPoint(nx, ny)
-
-            MoveDestructableDown(d, -500, 15)
-            TimerStart(CreateTimer(), 120, false, function()
-                d = FindFloorInPoint(nx, ny)
-                MoveDestructableUp(d, 500, 5)
-            end)
+            DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", nx, ny))
+            local is, du = UnitDamageArea(boss, 50, nx, ny, 220)
+            if du then
+                PlayBossSpeech("", "Попал")
+            else
+                PlayBossSpeech("", "Мимо")
+            end
+            DownFloorInTimedXY(120, nx, ny)
         end)
     end)
 end
@@ -596,8 +682,15 @@ end
 
 function StrongWalk(boss, hero)
     IssuePointOrder(boss, "move", GetUnitXY(hero))
+    local sec = 5
+    local period = GetRandomReal(0.8, 1.1)
+    PlayBossSpeech("", "Уже иду")
     if IsUnitInRange(boss, hero, 1500) then
-        TimerStart(CreateTimer(), 1, true, function()
+        TimerStart(CreateTimer(), period, true, function()
+            sec = sec - period
+            if sec <= 0 or not UnitAlive(boss) then
+                DestroyTimer(GetExpiredTimer())
+            end
             --Earthshock
             local x, y = GetUnitXY(boss)
             DestroyEffect(AddSpecialEffect("Earthshock", x, y))
@@ -606,6 +699,6 @@ function StrongWalk(boss, hero)
     end
 end
 
-function BossHooked(boss, timed)
-    StartHookAI(boss, timed)
+function BossHooked(boss, timed, scale)
+    StartHookAI(boss, timed, scale)
 end
