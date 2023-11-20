@@ -32,7 +32,7 @@ function CreateSpikeTrap(unit,timed)
     if timed then
         UnitApplyTimedLife(unit, FourCC('BTLF'), timed)
     end
-    local ta=2
+    local ta=2 -- time attack
     if GetUnitFacing(unit)>89 and GetUnitFacing(unit)<91 then
         delay=2
     end
@@ -41,10 +41,13 @@ function CreateSpikeTrap(unit,timed)
             sec = sec + 1
             if sec == ta then
                 BlzPlaySpecialEffect(eff, ANIM_TYPE_BIRTH)
+                --print("показ birth")
                 TimerStart(CreateTimer(), 0.15, false, function()
                     --print("время урона?")
                     UnitDamageArea(unit, 50, GetUnitX(unit), GetUnitY(unit), 80)
                 end)
+            else
+                BlzPlaySpecialEffect(eff, ANIM_TYPE_STAND)
             end
             if sec >= 4 then
                 sec = 0
