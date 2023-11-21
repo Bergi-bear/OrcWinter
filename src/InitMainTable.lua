@@ -104,6 +104,16 @@ function InitHEROTable()
             BonusDamage             = 0, -- урон от бонусов
             EggCount                = 0, -- число яиц
             ResBanana               = 0, -- возрождение в точке смерти
+            MaxAttackRange          = 2500, -- максимальная дальность атаки
+            --- Статистика для победы
+            StatDies      = 0,
+            StatKill      = 0,
+            StatDamage    = 0,
+            StatSnow      = 0,
+            StatDash      = 0,
+            StatCandyEat  = 0,
+            StatWay       = 0,
+            --StatPeon      = peonRescue,
         }
         --InitInputHandler(HERO[i])
         CreatePeonForPlayer(HERO[i])

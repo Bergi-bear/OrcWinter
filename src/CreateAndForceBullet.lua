@@ -8,7 +8,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
         xs, ys = GetUnitXY(hero)
     end
     if not maxDistance then
-        maxDistance = 2500
+        maxDistance = 1500
     end
     if not delay then
         delay = 0

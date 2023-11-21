@@ -198,6 +198,7 @@ function InitWASD(hero)
                     end
 
                     ReviveHero(hero, x, y, true)
+                    data.StatDies=data.StatDies+1
                     --SetCameraBoundsToRectForPlayerBJ(Player(0), bj_mapInitialPlayableArea) --TODO возможно может что-то начать ломаться, например зоны требующие BOUND при в ходе
                     TimerStart(CreateTimer(), 0.5, false, function()
                         if GetRandomInt(1, 2) == 1 then

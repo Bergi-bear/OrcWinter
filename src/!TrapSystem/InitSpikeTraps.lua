@@ -25,10 +25,6 @@ function CreateSpikeTrap(unit,timed)
     local eff = AddSpecialEffect("MechaImpale", x, y)
     local sec = 0
     local delay=0.01
-    --BlzSetSpecialEffectZ(eff, z - 80)
-    --BlzSetSpecialEffectScale(eff,1)
-    --BlzSetSpecialEffectTimeScale(eff,0.3)
-    --BlzPlaySpecialEffect(eff, ANIM_TYPE_STAND)
     if timed then
         UnitApplyTimedLife(unit, FourCC('BTLF'), timed)
     end
@@ -41,7 +37,6 @@ function CreateSpikeTrap(unit,timed)
             sec = sec + 1
             if sec == ta then
                 BlzPlaySpecialEffect(eff, ANIM_TYPE_BIRTH)
-                --print("показ birth")
                 TimerStart(CreateTimer(), 0.15, false, function()
                     --print("время урона?")
                     UnitDamageArea(unit, 50, GetUnitX(unit), GetUnitY(unit), 80)

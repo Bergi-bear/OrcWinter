@@ -16,6 +16,7 @@ function InitMenu()
     --CreateShop() --для теста опять таки
     CreateGoldInterFace(HERO[0])
     CreateStatSidePanel(HERO[0])
+    CreateGameStatWindow(HERO[0])
     --CreateCustomPortrait()
     --CreateMenu()
     --CreateQTEFrame() -- Тест QTE

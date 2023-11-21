@@ -11,7 +11,8 @@ function CreateStatSidePanel(data)
         "ReplaceableTextures\\CommandButtons\\BTNThoriumMelee.blp",
         "ReplaceableTextures\\CommandButtons\\BTNGlove.blp",
         "ReplaceableTextures\\CommandButtons\\BTNBootsOfSpeed.blp",
-        "ReplaceableTextures\\CommandButtons\\BTNHumanArmorUpOne.blp"
+        "ReplaceableTextures\\CommandButtons\\BTNHumanArmorUpOne.blp",
+        "ReplaceableTextures\\CommandButtons\\BTNDwarvenLongRifle.blp"
     }
     step = NextPoint / 2 * 1.1
     for i = 1, #texturesTable do
@@ -33,10 +34,10 @@ function CreAteStatPanelElement(data, texture, parent, x, y)
     TimerStart(CreateTimer(), 0.2, true, function()
         if texture == "ReplaceableTextures\\CommandButtons\\BTNThoriumMelee.blp" then
             BlzFrameSetText(text, R2I(data.BaseDamage))
-            if data.BonusDamage>0 then
-                local res=ColorText2Green("+"..R2I(data.BonusDamage))
+            if data.BonusDamage > 0 then
+                local res = ColorText2Green("+" .. R2I(data.BonusDamage))
                 --print(res)
-                BlzFrameSetText(text, R2I(data.BaseDamage)..res)
+                BlzFrameSetText(text, R2I(data.BaseDamage) .. res)
             end
         elseif texture == "ReplaceableTextures\\CommandButtons\\BTNGlove.blp" then
             BlzFrameSetText(text, data.AttackInterval)
@@ -44,6 +45,8 @@ function CreAteStatPanelElement(data, texture, parent, x, y)
             BlzFrameSetText(text, string.format("%%02.1f", data.MoveSpeed))
         elseif texture == "ReplaceableTextures\\CommandButtons\\BTNHumanArmorUpOne.blp" then
             BlzFrameSetText(text, R2I(data.ShieldCount))
+        elseif texture == "ReplaceableTextures\\CommandButtons\\BTNDwarvenLongRifle.blp" then
+            BlzFrameSetText(text, R2I(data.MaxAttackRange))
         end
     end)
     --table.insert(BugsFH, infoFrame)
