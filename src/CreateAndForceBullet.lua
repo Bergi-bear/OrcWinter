@@ -21,7 +21,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
         zhero = GetUnitZ(hero) + 95
     end
 
-    if effectmodel =="Butcher\\Axe Missile" then
+    if effectmodel == "Butcher\\Axe Missile" then
         --print(effectmodel)
     end
     if effectmodel == "BlastMissile" then
@@ -85,18 +85,28 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
 
         local bounceFact = false
         local b, d = PointContentDestructable(nx, ny, CollisionRange, false, 0, hero)
-
+        if b then
+            KillDestructableByTypeInPoint({ FourCC("B00E") }, 80, x, y)
+        end
         if GetDestructableTypeId(d) == FourCC("B005") or GetDestructableTypeId(d) == FourCC("B00C") then
             --нет рикошета от этих блокираторов
             --print("встретил блокиратор")
         else
             if IsUnitType(hero, UNIT_TYPE_HERO) then
+               -- print(GetDestructableName(d))
+                if not d then
+                    --print("ошибочный Bounce",GetDestructableName(d))
+                end
                 if bounceCount <= bounceMax then
+                    local angleOrig=angleCurrent
                     angleCurrent, bounceFact = CHKBouncing(x, y, nx, ny, speed) ---------------- баунсинг
-                    nx, ny = MoveXY(x, y, speed, angleCurrent)
+
                     if bounceFact then
                         bounceCount = bounceCount + 1
+                        nx, ny = MoveXY(x, y, speed, angleCurrent)
                         --print(bounceCount)
+                    else
+                        angleCurrent=angleOrig
                     end
                 else
                     --print('превышено число отскоков',bounceMax)

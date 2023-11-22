@@ -13,6 +13,7 @@ do
             --InitAllButton()
             --InitLaserTrap()
             ReplaceIdToSpikeTraps(FourCC("h00G"))
+            ReplaceIdToStaticTrap(FourCC("h00Q"))
         end)
     end
 end

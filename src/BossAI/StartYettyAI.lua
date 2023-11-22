@@ -98,20 +98,7 @@ function StartYettyAI(xs, ys)
                             --StunUnit(hero, 3)
                             YettyCouchHero(boss, hero, 3)
 
-                            local r = GetRandomInt(1, 5)
-                            if r == 1 then
-                                PlayMonoSpeech("Speech\\Peon\\Yetty\\peon4", "Отпусти меня!")
-                            elseif r == 2 then
-                                normal_sound("spine-bone-break-1", GetUnitXY(hero))
-                                PlayMonoSpeech("Speech\\Peon\\Yetty\\peon5", "Рёбра сломаешь!")
-                            elseif r == 3 then
-                                PlayMonoSpeech("Speech\\Peon\\Yetty\\peon6", "Я не нуждаюсь в твоих объятьях!")
-                            elseif r == 4 then
-                                normal_sound("spine-bone-break-1", GetUnitXY(hero))
-                                PlayMonoSpeech("Speech\\Peon\\Yetty\\peon7", "О, позвонок на место встал!")
-                            elseif r == 5 then
-                                PlayBossSpeech("Speech\\Yetti\\tineproidesh", "Ты не пройдёшь")
-                            end
+
 
                             if phase ~= 1 then
 
@@ -328,6 +315,22 @@ end
 QTEReadyToPress = false
 function YettyCouchHero(boss, hero, duration)
     if UnitAlive(hero) and not BlzIsUnitInvulnerable(hero) then
+
+        local r = GetRandomInt(1, 5)
+        if r == 1 then
+            PlayMonoSpeech("Speech\\Peon\\Yetty\\peon4", "Отпусти меня!")
+        elseif r == 2 then
+            normal_sound("spine-bone-break-1", GetUnitXY(hero))
+            PlayMonoSpeech("Speech\\Peon\\Yetty\\peon5", "Рёбра сломаешь!")
+        elseif r == 3 then
+            PlayMonoSpeech("Speech\\Peon\\Yetty\\peon6", "Я не нуждаюсь в твоих объятьях!")
+        elseif r == 4 then
+            normal_sound("spine-bone-break-1", GetUnitXY(hero))
+            PlayMonoSpeech("Speech\\Peon\\Yetty\\peon7", "О, позвонок на место встал!")
+        elseif r == 5 then
+            PlayBossSpeech("Speech\\Yetti\\tineproidesh", "Ты не пройдёшь")
+        end
+
         StunUnit(hero, 3)
         local eff = AddSpecialEffect("CircleCastBarCannibalize", GetUnitXY(boss))
         BlzSetSpecialEffectScale(eff, 2)

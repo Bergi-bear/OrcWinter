@@ -5,17 +5,30 @@
 ---
 function CHKBouncing(x, y, nx, ny, speed)
     local angle = AngleBetweenXY(x, y, nx, ny) / bj_DEGTORAD
-    local has=false
+    local has = false
     if not IsTerrainWalkable(nx, ny) then
-        angle = 0 - (AngleBetweenXY(nx, ny, x, y) / bj_DEGTORAD)
-        nx, ny = MoveXY(x, y, speed, angle)
-        has=true
+        local b, d = PointContentDestructable(nx, ny, 100, false)
+        if GetDestructableTypeId(d) == FourCC("B005") or GetDestructableTypeId(d) == FourCC("B00C") then
+            has = false
+        else
+            --print("doadName 1",GetDestructableName(d))
+            angle = 0 - (AngleBetweenXY(nx, ny, x, y) / bj_DEGTORAD)
+            nx, ny = MoveXY(x, y, speed, angle)
+            has = true
+        end
         if not IsTerrainWalkable(nx, ny) then
-            angle = angle - 180
-            has=true
+            b, d = PointContentDestructable(nx, ny, 100, false)
+            if GetDestructableTypeId(d) == FourCC("B005") or GetDestructableTypeId(d) == FourCC("B00C") then
+                has = false
+            else
+                --print("doadName 2",GetDestructableName(d))
+                angle = angle - 180
+                has = true
+            end
+
         end
     end
-    return angle,has
+    return angle, has
 end
 
 function CHKBouncingOLD(x, y, nx, ny)

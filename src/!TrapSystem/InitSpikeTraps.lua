@@ -14,9 +14,46 @@ function ReplaceIdToSpikeTraps(id)
     end
 end
 
+function ReplaceIdToStaticTrap(id)
+    local tmp, k, all = FindUnitOfType(id)
+    for i = 1, #all do
+        CreateSpikeTrapStatic(all[i])
+    end
+end
+function CreateSpikeTrapStatic(unit)
+    local enterTrig = CreateTrigger()
+    local range = 80
+    local x, y = GetUnitXY(unit)
+    local z = GetUnitZ(unit)
+    local eff = AddSpecialEffect("MechaImpale", x, y)
 
+    ShowUnit(unit, false)
+    SetUnitInvulnerable(unit, true)
+    UnitAddAbility(unit, FourCC("Aloc"))
 
-function CreateSpikeTrap(unit,timed)
+    BlzPlaySpecialEffect(eff, ANIM_TYPE_STAND)
+    TriggerRegisterUnitInRange(enterTrig, unit, range, nil)
+    local work=false
+    TriggerAddAction(enterTrig, function()
+        local entering = GetTriggerUnit()
+        if not work  and GetUnitTypeId(entering)~=FourCC("h00C") then -- бочка не триггерит кнопку с шипами
+            work=true
+            BlzPlaySpecialEffect(eff, ANIM_TYPE_BIRTH)
+
+            TimerStart(CreateTimer(), 0.15, false, function()
+                --print("время урона?")
+                UnitDamageArea(unit, 50, GetUnitX(unit), GetUnitY(unit), 60)
+            end)
+            TimerStart(CreateTimer(), 0.7, false, function()
+                BlzPlaySpecialEffect(eff, ANIM_TYPE_STAND)
+                work=false
+            end)
+        end
+
+    end)
+end
+
+function CreateSpikeTrap(unit, timed)
     ShowUnit(unit, false)
     SetUnitInvulnerable(unit, true)
     UnitAddAbility(unit, FourCC("Aloc"))
@@ -24,13 +61,13 @@ function CreateSpikeTrap(unit,timed)
     local z = GetUnitZ(unit)
     local eff = AddSpecialEffect("MechaImpale", x, y)
     local sec = 0
-    local delay=0.01
+    local delay = 0.01
     if timed then
         UnitApplyTimedLife(unit, FourCC('BTLF'), timed)
     end
-    local ta=2 -- time attack
-    if GetUnitFacing(unit)>89 and GetUnitFacing(unit)<91 then
-        delay=2
+    local ta = 2 -- time attack
+    if GetUnitFacing(unit) > 89 and GetUnitFacing(unit) < 91 then
+        delay = 2
     end
     TimerStart(CreateTimer(), delay, false, function()
         TimerStart(CreateTimer(), 1, true, function()

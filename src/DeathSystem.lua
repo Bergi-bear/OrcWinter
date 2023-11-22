@@ -25,7 +25,7 @@ function InitDeathEvent()
             killer = data.UnitHero
             local amount=GetRandomInt(1,3)+BlzGetUnitMaxHP(u)//100
             RewardGoldForKill(data,amount)
-
+            data.StatKill=data.StatKill+1
         end
     end)
 end

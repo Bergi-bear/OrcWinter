@@ -80,7 +80,7 @@ function InitWASD(hero)
     TimerStart(CreateTimer(), 0.005, true, function()
         -- устранение бага залипания
         if UnitAlive(hero) then
-            KillDestructableByTypeInPoint(ButtonsIDTable,80,GetUnitXY(hero))
+            KillDestructableByTypeInPoint(ButtonsIDTable, 80, GetUnitXY(hero))
             if not IsUnitSelected(hero, GetOwningPlayer(hero)) then
                 SelectUnitForPlayerSingle(hero, GetOwningPlayer(hero))
             end
@@ -162,7 +162,7 @@ function InitWASD(hero)
         local newVector = vector
         if data.BH then
             if not data.BHSpeed then
-                data.BHSpeed=3
+                data.BHSpeed = 3
             end
             local angleBH = AngleBetweenUnits(hero, data.BH)
             newVector = VectorSum(newVector, vector:yawPitchOffset(data.BHSpeed, angleBH * (math.pi / 180), 0.0))
@@ -198,7 +198,7 @@ function InitWASD(hero)
                     end
 
                     ReviveHero(hero, x, y, true)
-                    data.StatDies=data.StatDies+1
+                    data.StatDies = data.StatDies + 1
                     --SetCameraBoundsToRectForPlayerBJ(Player(0), bj_mapInitialPlayableArea) --TODO возможно может что-то начать ломаться, например зоны требующие BOUND при в ходе
                     TimerStart(CreateTimer(), 0.5, false, function()
                         if GetRandomInt(1, 2) == 1 then
@@ -382,8 +382,6 @@ function InitWASD(hero)
 
                     newVector = VectorSum(newVector, vector:yawPitchOffset(curSpeed, angle * (math.pi / 180), 0.0))
 
-
-
                     local nx, ny = newVector.x, newVector.y
                     if not data.isAttacking then
                         if data.CurrentWeaponType == "pickaxe" or not data.PressSpin then
@@ -403,28 +401,25 @@ function InitWASD(hero)
 
 
                     if data.REffect then
-                        BlzSetSpecialEffectPosition(data.REffect, hx, hy, GetTerrainZ(hx, hy)+200)
+                        BlzSetSpecialEffectPosition(data.REffect, hx, hy, GetTerrainZ(hx, hy) + 200)
                     end
                     --RepositionCharges(data)
 
                     if data.CatchUnit then
 
-                        local newAngle=-180+AngleBetweenUnits(hero,data.CatchUnit)
+                        local newAngle = -180 + AngleBetweenUnits(hero, data.CatchUnit)
                         --print("новый угол")
-                        if not IsUnitInRange(hero,data.CatchUnit,120) then
+                        if not IsUnitInRange(hero, data.CatchUnit, 120) then
                             DestroyEffect(data.CatchUnitEffect)
-                            data.CatchUnit=false
+                            data.CatchUnit = false
                             --print("потерял цель захвата")
 
                         else
-                            SetUnitFacing(data.CatchUnit,newAngle)
-                            UnitAddForceSimple(data.CatchUnit,newAngle,speed*1.1,70)
+                            SetUnitFacing(data.CatchUnit, newAngle)
+                            UnitAddForceSimple(data.CatchUnit, newAngle, speed * 1.1, 70)
                         end
 
                     end
-
-
-
 
                     local newX, newY = GetUnitXY(hero)
                     local stator = false
@@ -433,11 +428,16 @@ function InitWASD(hero)
 
                         if not MiniChargeOnArea(data) then
                             stator = true
-                            if true then
-                                ResetUnitAnimation(hero) -- сборс в положении стоя
-                            end
+                            --if true then
+                            ResetUnitAnimation(hero) -- сборс в положении стоя
+                            --if not data.UnitInAttack then
+                            --    SetUnitTimeScale(hero,0.2)
+                            --end
+                            --end
 
                         end -- Расталкиваем всех юнитов
+                    else
+                        SetUnitTimeScale(hero,1)
                     end
                     if animWalk == 0 and not stator then
                         -- and not data.ReleaseRMB
@@ -447,7 +447,8 @@ function InitWASD(hero)
                         data.animStand = 3
                     end
                 else
-                    if data.BH then --черная дыра
+                    if data.BH then
+                        --черная дыра
                         SetUnitPositionSmooth(hero, newVector.x, newVector.y)-- блок движения
                     end
                     curSpeed = 0
@@ -723,21 +724,21 @@ function CreateWASDActions()
                 local dist = 400
                 local delay = 0.7 -- это кд рывка?
                 local dashSpeed = 10
---[[
-                if data.ReleaseQ and not data.QJump2Pointer then
-                    -- print("сплеш в рывке, пробуем прыгнуть прыжок")
-                    dist = 400
-                    delay = 0.3
-                    data.GreatDamageDashQ = true
-                    --print("q+space")
-                    SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationQ) -- киркой в землю в рывке
+                --[[
+                                if data.ReleaseQ and not data.QJump2Pointer then
+                                    -- print("сплеш в рывке, пробуем прыгнуть прыжок")
+                                    dist = 400
+                                    delay = 0.3
+                                    data.GreatDamageDashQ = true
+                                    --print("q+space")
+                                    SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationQ) -- киркой в землю в рывке
 
-                    if not data.tasks[8] then
-                        data.tasks[8] = true
-                        --print("Первый раз сделал краш")
-                    end
-                end
-                ]]
+                                    if not data.tasks[8] then
+                                        data.tasks[8] = true
+                                        --print("Первый раз сделал краш")
+                                    end
+                                end
+                                ]]
 
                 data.DashCharges = data.DashCharges - 1
                 RepositionCharges(data)
@@ -794,8 +795,9 @@ function CreateWASDActions()
                             --print("ошибка, такой функции нет")
                             Blink2Point(data.UnitHero, nx, ny)
                         else
-                           -- print("прыжок вниз?, сообщите об этом баге!")
+                            -- print("прыжок вниз?, сообщите об этом баге!")
                             UnitAddForceSimple(data.UnitHero, data.DirectionMove, 10, dist, "ignore") --САМ рывок при нажатии пробела
+                            data.StatDash = data.StatDash + 1
                         end
                     else
                         --print("перекат тут?")
@@ -807,6 +809,7 @@ function CreateWASDActions()
 
                         end
                         UnitAddForceSimple(data.UnitHero, data.DirectionMove, dashSpeed, dist, "ignore") --САМ рывок при нажатии пробела
+                        data.StatDash = data.StatDash + 1
 
                         --local x,y=GetUnitXY(data.UnitHero)
                         --local xEnd, yEnd=MoveXY(x,y,dist,data.DirectionMove)
@@ -1046,7 +1049,7 @@ function PlayUnitAnimationFromChat()
 
         if GetEventPlayerChatString() == "z" then
             --print("лечение")
-            UnitStartFallAnim(udg_HERO,1000)
+            UnitStartFallAnim(udg_HERO, 1000)
         end
 
         SetUnitAnimationByIndex(data.UnitHero, s)

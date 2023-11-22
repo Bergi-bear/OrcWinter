@@ -35,6 +35,7 @@ function UnitDamageArea(u, damage, x, y, range, flag, paramTable)
         end
         if flag=="All" then
             UnitDamageTarget(u, e, damage, true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WHOKNOWS)
+            DamageDestructableInRangeXY(u,damage,range,x,y)
         end
         if UnitAlive(e) and not UnitAlive(u) and (IsUnitEnemy(e, GetOwningPlayer(u)) or GetOwningPlayer(e) == Player(PLAYER_NEUTRAL_PASSIVE)) and IsUnitType(u, UNIT_TYPE_HERO) then
             --print("Герой нанёс урон будучи мертвым "..GetUnitName(u))
@@ -201,4 +202,17 @@ function UnitDamageArea(u, damage, x, y, range, flag, paramTable)
 
     end
     return isdamage, hero, k, all
+end
+
+
+function DamageDestructableInRangeXY(unit,damage,range,x,y)
+    SetRect(GlobalRect, x - range, y - range, x + range, y + range)
+    EnumDestructablesInRect(GlobalRect, nil, function()
+        local d = GetEnumDestructable()
+        if GetDestructableLife(d) > 0 and GetDestructableTypeId(d)~=FourCC("B005")  and GetDestructableTypeId(d)~=FourCC("OTip")  and GetDestructableTypeId(d)~=FourCC("B00G") then --игнор специальных блокираторов and GetDestructableTypeId(d)~=FourCC("B00C")
+            if not IsDestructableInvulnerable(d) then
+                SetDestructableLife(d, GetDestructableLife(d) - damage)
+            end
+        end
+    end)
 end

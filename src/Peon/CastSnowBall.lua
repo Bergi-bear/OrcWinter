@@ -12,6 +12,7 @@ function CastSnowBall(data, directionAngle)
     if data.AttackIsReady and not data.SpaceForce and UnitAlive(hero) and not FREE_CAMERA and not IsUnitStunned(hero) and not BlzFrameIsVisible(SHOP) then
         if GetUnitTypeId(hero) == HeroID then
             --WolfSlashAttack(hero) --для проверки вставлял
+            SetUnitTimeScale(hero,1)
             BlzSetUnitFacingEx(hero, directionAngle)
             SetUnitAnimationByIndex(hero, 3)
             data.AttackIsReady = false
@@ -19,7 +20,8 @@ function CastSnowBall(data, directionAngle)
             --CreateBeemLighting(hero)
             TimerStart(CreateTimer(), 0.15, false, function()
                 -- задержка замаха
-                CreateAndForceBullet(hero, directionAngle, 40, effModel,nil,nil,data.BaseDamage,data.MaxAttackRange,50)
+                CreateAndForceBullet(hero, directionAngle, 40, effModel,nil,nil,data.BaseDamage,data.MaxAttackRange,80)
+                data.StatSnow=data.StatSnow+1
                 data.damageIsBouncing=true
                 if data.MorozkoCD then
                     if data.MorozkoCDCurrent<=0 then

@@ -25,12 +25,11 @@ function UnitStartFallAnim(hero, maxZ)
             local grow = GetRandomReal(0.5, 1)
             --print(grow)
             SetSoundPitch(s, grow)
+            KillDestructableByTypeInPoint(ButtonsIDTable, 200, GetUnitXY(hero))
         end
         if z <= -200 then
             DestroyTimer(GetExpiredTimer())
-
             UnitRemoveStun(hero)
-            KillDestructableByTypeInPoint(ButtonsIDTable, 200, GetUnitXY(hero))
         end
     end)
 end
@@ -43,5 +42,5 @@ function JumpToCenterRect(rect)
     local dist = DistanceBetweenXY(x, y, GetUnitXY(udg_HERO))
     local angle = -180 + AngleBetweenXY(x, y, GetUnitXY(udg_HERO)) / bj_DEGTORAD
     UnitAddJumpForce(udg_HERO, angle, 40, dist, 400)
-    ResetUnitCustomPause(boss)
+    --ResetUnitCustomPause(boss)
 end

@@ -143,7 +143,8 @@ function OnPostDamage()
         --Функция должна быть в самом низу
         AddDamage2Show(target, GetEventDamage())
         local data = GetUnitData(caster)
-        data.StatDamageDealing = data.StatDamageDealing + GetEventDamage()
+        --data.StatDamageDealing = data.StatDamageDealing + GetEventDamage()
+        data.StatDamage = data.StatDamage + GetEventDamage()
         local showData = ShowDamageTable[GetHandleId(target)]
         local matchShow = showData.damage
         if matchShow >= 1 then
@@ -253,7 +254,8 @@ function PointContentDestructable (x, y, range, iskill, damage, hero)
             --print(GetDestructableName(d))
             if iskill then
                 if not IsDestructableInvulnerable(d) then
-                    SetDestructableLife(d, GetDestructableLife(d) - damage)
+                    --SetDestructableLife(d, GetDestructableLife(d) - damage)
+                    --DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt", GetDestructableX(d), GetDestructableY(d)))
                     --print("урон по декору")
                     if GetDestructableLife(d) < 1 or GetDestructableLife(d) <= 0 then
                         --print("смерть декора")

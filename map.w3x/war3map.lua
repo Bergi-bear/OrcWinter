@@ -106,6 +106,10 @@ gg_rct_Start11_5 = nil
 gg_rct_BoundBoss = nil
 gg_rct_EnterBoss = nil
 gg_rct_ExitBoss = nil
+gg_rct_Bound12 = nil
+gg_rct_Enter12 = nil
+gg_rct_Exit12 = nil
+gg_rct_Start12 = nil
 gg_cam_OnPeonsandTrall = nil
 gg_cam_OnPineRound = nil
 gg_cam_OnPeons = nil
@@ -168,7 +172,14 @@ gg_snd_cook5 = nil
 gg_snd_CookQuestPeon4 = nil
 gg_snd_Warning = nil
 gg_snd_BattlenetDeath1A = nil
+gg_snd_The_Astral_Academy_Gardens = ""
 gg_trg_InitBossRoom = nil
+gg_trg_InitRoom12 = nil
+gg_trg_PlatformUp12 = nil
+gg_trg_TestButtons = nil
+gg_trg_Victory12 = nil
+gg_trg_Restore12 = nil
+gg_trg_ExitFrom12 = nil
 gg_trg_Button1101 = nil
 gg_trg_Button1102 = nil
 gg_trg_Button1103 = nil
@@ -322,6 +333,7 @@ gg_dest_B00D_16598 = nil
 gg_dest_B00D_16599 = nil
 gg_dest_B00D_16686 = nil
 gg_dest_B00D_16684 = nil
+gg_dest_B00E_19642 = nil
 gg_dest_B00B_16680 = nil
 gg_dest_B00D_16699 = nil
 gg_dest_B00D_16701 = nil
@@ -341,6 +353,11 @@ gg_dest_DTfx_16046 = nil
 gg_dest_DTfx_16051 = nil
 gg_dest_B00B_16092 = nil
 gg_dest_DTfx_18124 = nil
+gg_dest_B00D_19707 = nil
+gg_dest_B00E_19641 = nil
+gg_dest_B00B_19643 = nil
+gg_dest_B00D_19706 = nil
+gg_dest_B00E_19723 = nil
 function InitGlobals()
 local i = 0
 
@@ -574,6 +591,7 @@ gg_snd_BattlenetDeath1A = CreateSound("Sound/Interface/BattlenetDeath1A.flac", f
 SetSoundParamsFromLabel(gg_snd_BattlenetDeath1A, "GlueScreenBNetOpenA")
 SetSoundDuration(gg_snd_BattlenetDeath1A, 2953)
 SetSoundVolume(gg_snd_BattlenetDeath1A, 127)
+gg_snd_The_Astral_Academy_Gardens = "The Astral Academy Gardens.mp3"
 end
 
 function CreateAllDestructables()
@@ -583,68 +601,74 @@ local life
 
 gg_dest_B004_2162 = BlzCreateDestructableWithSkin(FourCC("B004"), -128.0, -192.0, 325.000, 3.000, 0, FourCC("B004"))
 gg_dest_B007_5312 = BlzCreateDestructableWithSkin(FourCC("B007"), -7552.0, 4224.0, 211.000, 3.000, 0, FourCC("B007"))
-gg_dest_B00B_16092 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 18043.0, 7294.2, 838.4, 270.000, 1.650, 0, FourCC("B00B"))
-gg_dest_B00B_17599 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 14969.5, -3076.2, 832.0, 180.000, 1.850, 0, FourCC("B00B"))
-gg_dest_B00B_17182 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15231.9, -760.3, 844.8, 270.000, 1.450, 0, FourCC("B00B"))
-gg_dest_B00B_16680 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15221.9, 2433.2, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
-gg_dest_B00B_14785 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11344.6, 8373.0, 832.0, 270.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_16430 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11136.0, 2426.0, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
+gg_dest_B00B_19643 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 17013.9, 4349.7, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_17533 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 12156.2, 3.1, 832.0, 270.000, 1.850, 0, FourCC("B00B"))
-gg_dest_B00B_14732 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 13812.6, 8326.6, 838.4, 90.000, 1.650, 0, FourCC("B00B"))
+gg_dest_B00B_16092 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 18043.0, 7294.2, 838.4, 270.000, 1.650, 0, FourCC("B00B"))
+gg_dest_B00B_14785 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11344.6, 8373.0, 832.0, 270.000, 1.650, 0, FourCC("B00B"))
+gg_dest_B00B_17599 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 14969.5, -3076.2, 832.0, 180.000, 1.850, 0, FourCC("B00B"))
 gg_dest_B00B_16153 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15215.2, 5364.9, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
+gg_dest_B00B_14732 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 13812.6, 8326.6, 838.4, 90.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_15713 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11516.0, 4100.8, 844.8, 90.000, 1.450, 0, FourCC("B00B"))
+gg_dest_B00B_17182 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15231.9, -760.3, 844.8, 270.000, 1.450, 0, FourCC("B00B"))
 gg_dest_B00B_15515 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15227.5, 6283.1, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_15274 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 10618.1, 6012.7, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
-gg_dest_B00D_16596 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10048.0, 1792.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_17596 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, -1920.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_17531 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11584.0, -704.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_17530 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10112.0, 256.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00B_16680 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15221.9, 2433.2, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00D_17529 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10112.0, -1024.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_17531 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11584.0, -704.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_17275 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12992.0, -768.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_17276 = BlzCreateDestructableWithSkin(FourCC("B00D"), 14272.0, -1024.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_15532 = BlzCreateDestructableWithSkin(FourCC("B00D"), 14016.0, 6080.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_15710 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12224.0, 5184.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_15711 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10752.0, 3328.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_15712 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12096.0, 3264.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_17275 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12992.0, -768.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_17596 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, -1920.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_15709 = BlzCreateDestructableWithSkin(FourCC("B00D"), 9984.0, 5376.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16257 = BlzCreateDestructableWithSkin(FourCC("B00D"), 14080.0, 4608.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_17276 = BlzCreateDestructableWithSkin(FourCC("B00D"), 14272.0, -1024.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_17597 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, -3200.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16254 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12864.0, 4160.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16255 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15296.0, 4160.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16256 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12992.0, 5312.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16427 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10304.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_17155 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, 1280.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_16702 = BlzCreateDestructableWithSkin(FourCC("B00D"), 13056.0, 3456.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_19707 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15744.0, 4352.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_17532 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11584.0, -64.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16416 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11968.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16421 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11968.0, 1408.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16426 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10304.0, 1408.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16685 = BlzCreateDestructableWithSkin(FourCC("B00D"), 13696.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_16701 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 14016.0, 2816.0, 1088.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_16699 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_19706 = BlzCreateDestructableWithSkin(FourCC("B00D"), 17536.0, 4352.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_16596 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10048.0, 1792.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16597 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12288.0, 1792.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16598 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11136.0, 1216.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16599 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11136.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16686 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, 3456.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16684 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 13056.0, 2304.0, 901.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_17597 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, -3200.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00E_15513 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 13441.1, 6941.4, 1004.8, 90.000, 1.000, 0, FourCC("B00E"))
-gg_dest_B00E_15516 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 14600.6, 6946.5, 979.2, 270.000, 1.000, 0, FourCC("B00E"))
+gg_dest_B00D_16702 = BlzCreateDestructableWithSkin(FourCC("B00D"), 13056.0, 3456.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_17530 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10112.0, 256.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_16699 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_16701 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 14016.0, 2816.0, 1088.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00E_19642 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 18167.5, 5189.9, 1030.4, 270.000, 1.000, 0, FourCC("B00E"))
+gg_dest_B00E_19641 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 17914.5, 5501.6, 1030.4, 0.000, 1.000, 0, FourCC("B00E"))
 gg_dest_B00E_15514 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 14990.0, 6473.7, 972.8, 270.000, 1.000, 0, FourCC("B00E"))
+gg_dest_B00E_15516 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 14600.6, 6946.5, 979.2, 270.000, 1.000, 0, FourCC("B00E"))
+gg_dest_B00E_15513 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 13441.1, 6941.4, 1004.8, 90.000, 1.000, 0, FourCC("B00E"))
 gg_dest_B00E_15517 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 12948.1, 6482.3, 979.2, 90.000, 1.000, 0, FourCC("B00E"))
+gg_dest_B00E_19723 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 16961.9, 5501.8, 1017.6, 0.000, 1.000, 0, FourCC("B00E"))
 gg_dest_B00F_17534 = BlzCreateDestructableWithSkin(FourCC("B00F"), 10112.0, -384.0, 270.000, 1.000, 0, FourCC("B00F"))
-gg_dest_DTfx_14834 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10560.0, 8064.0, 270.000, 1.000, 0, FourCC("DTfx"))
+gg_dest_DTfx_15068 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10112.0, 6272.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_14688 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 14912.0, 8256.0, 270.000, 1.000, 0, FourCC("DTfx"))
-gg_dest_DTfx_14690 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 15040.0, 9024.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_15071 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 12352.0, 5952.0, 270.000, 1.000, 0, FourCC("DTfx"))
-gg_dest_DTfx_15314 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10176.0, 7232.0, 270.000, 1.000, 0, FourCC("DTfx"))
-gg_dest_DTfx_15068 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10048.0, 6208.0, 270.000, 1.000, 0, FourCC("DTfx"))
-gg_dest_DTfx_14832 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 11584.0, 8064.0, 270.000, 1.000, 0, FourCC("DTfx"))
-gg_dest_DTfx_14833 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10688.0, 8896.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_17980 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 15744.0, 7296.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_16046 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 16512.0, 6272.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_16051 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 17536.0, 6272.0, 270.000, 1.000, 0, FourCC("DTfx"))
-gg_dest_DTfx_5091 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 11584.0, 8896.0, 270.000, 1.000, 0, FourCC("DTfx"))
+gg_dest_DTfx_14832 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 11584.0, 8064.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_18124 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 12928.0, -3968.0, 270.000, 1.000, 0, FourCC("DTfx"))
+gg_dest_DTfx_14834 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10560.0, 8064.0, 270.000, 1.000, 0, FourCC("DTfx"))
+gg_dest_DTfx_15314 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10112.0, 7296.0, 270.000, 1.000, 0, FourCC("DTfx"))
+gg_dest_DTfx_14833 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10688.0, 8896.0, 270.000, 1.000, 0, FourCC("DTfx"))
+gg_dest_DTfx_5091 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 11584.0, 8896.0, 270.000, 1.000, 0, FourCC("DTfx"))
+gg_dest_DTfx_14690 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 15040.0, 9024.0, 270.000, 1.000, 0, FourCC("DTfx"))
 end
 
 function CreateUnitsForPlayer0()
@@ -1194,7 +1218,7 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12948.0, -2719.3, 242.987, FourCC("
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12931.5, -2402.6, 242.987, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12897.6, -2066.7, 242.987, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 14813.4, -1915.6, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 10365.8, 8822.6, 351.690, FourCC("h00C"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11359.3, 8039.5, 351.690, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 17790.2, 6274.9, 242.987, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 17028.2, -4731.9, 34.162, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 13692.5, -4720.4, 34.162, FourCC("h00C"))
@@ -1204,6 +1228,9 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 14720.7, -7032.1, 34.162, FourCC("h
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 14723.7, -5758.1, 34.162, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 16003.9, -5751.1, 34.162, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15999.7, -7037.0, 34.162, FourCC("h00C"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15722.2, 5403.1, 242.987, FourCC("h00C"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15814.1, 5404.6, 242.987, FourCC("h00C"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 10912.0, 6233.6, 34.162, FourCC("h00C"))
 end
 
 function CreateUnitsForPlayer2()
@@ -1217,7 +1244,7 @@ gg_unit_h00B_0003 = BlzCreateUnitWithSkin(p, FourCC("h00B"), 9946.6, 4814.9, 0.0
 gg_unit_h00M_0257 = BlzCreateUnitWithSkin(p, FourCC("h00M"), 11137.1, -370.8, 177.340, FourCC("h00M"))
 gg_unit_h00B_0271 = BlzCreateUnitWithSkin(p, FourCC("h00B"), 11757.0, 5325.0, 180.000, FourCC("h00B"))
 gg_unit_h00B_0276 = BlzCreateUnitWithSkin(p, FourCC("h00B"), 10309.8, 3140.1, 90.000, FourCC("h00B"))
-gg_unit_u001_0395 = BlzCreateUnitWithSkin(p, FourCC("u001"), 10128.1, 1823.9, 335.254, FourCC("u001"))
+gg_unit_u001_0395 = BlzCreateUnitWithSkin(p, FourCC("u001"), 10224.5, 1812.8, 335.254, FourCC("u001"))
 gg_unit_u001_0396 = BlzCreateUnitWithSkin(p, FourCC("u001"), 11955.8, 1793.6, 165.617, FourCC("u001"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13373.7, 3267.1, 90.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13376.0, 3394.9, 90.000, FourCC("h00G"))
@@ -1244,7 +1271,6 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 12861.6, 2883.2, 0.000, FourCC("h00
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13631.2, 2754.7, 90.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13119.0, 2884.0, 0.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13247.5, 2884.4, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13503.6, 2883.9, 0.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13502.0, 3010.5, 0.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13502.4, 3137.4, 0.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13501.9, 3265.5, 0.000, FourCC("h00G"))
@@ -1297,7 +1323,6 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14021.7, 2242.0, 0.000, FourCC("h00
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14149.4, 2239.1, 90.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14016.3, 2113.1, 0.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14144.1, 2110.1, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14404.8, 2249.5, 0.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14532.6, 2246.5, 90.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14399.5, 2120.5, 0.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14527.2, 2117.6, 90.000, FourCC("h00G"))
@@ -1322,7 +1347,6 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13887.1, 3012.3, 90.000, FourCC("h0
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14015.3, 3011.7, 0.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14141.7, 3013.1, 90.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14270.0, 3009.5, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14268.1, 2881.7, 0.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14270.0, 2755.1, 90.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14270.3, 2624.9, 0.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14139.9, 2627.8, 90.000, FourCC("h00G"))
@@ -1386,6 +1410,34 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 11327.5, -309.6, 0.000, FourCC("h00
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 11327.8, -182.3, 0.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00E"), 15350.3, -5985.9, 180.000, FourCC("h00E"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00E"), 15355.4, -6821.1, 180.000, FourCC("h00E"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16318.2, 4672.5, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16319.2, 5056.5, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16318.3, 5184.4, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16318.5, 5312.7, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16318.9, 5439.1, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16318.5, 4289.9, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16317.6, 4417.8, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16317.8, 4546.1, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16318.4, 4032.5, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16317.5, 4160.4, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16447.2, 4672.2, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16447.5, 4289.6, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16446.6, 4417.5, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16446.8, 4545.8, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16447.4, 4032.2, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16446.5, 4160.0, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16577.5, 5440.3, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16577.8, 5057.7, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16576.9, 5185.6, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16577.1, 5313.9, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16830.4, 5439.1, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16830.7, 5056.5, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16829.8, 5184.4, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16830.0, 5312.7, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 17086.6, 5442.3, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 17086.9, 5059.7, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 17086.0, 5187.6, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 17086.2, 5315.9, 0.000, FourCC("h00Q"))
 end
 
 function CreateUnitsForPlayer10()
@@ -1736,7 +1788,7 @@ gg_rct_Region_020 = Rect(800.0, -2496.0, 896.0, -2400.0)
 gg_rct_Region_021 = Rect(672.0, -2400.0, 800.0, -2272.0)
 gg_rct_Region_022 = Rect(-256.0, -704.0, -160.0, -608.0)
 gg_rct_Region_023 = Rect(-448.0, -448.0, 256.0, 224.0)
-gg_rct_Boind00 = Rect(11104.0, 8256.0, 11296.0, 8608.0)
+gg_rct_Boind00 = Rect(11200.0, 8256.0, 11296.0, 8608.0)
 gg_rct_Exit00 = Rect(11200.0, 8224.0, 11488.0, 8512.0)
 gg_rct_Enter00 = Rect(11072.0, 8928.0, 11264.0, 9056.0)
 gg_rct_StartBrainGame = Rect(736.0, -2176.0, 864.0, -2048.0)
@@ -1744,7 +1796,7 @@ gg_rct_Boind01 = Rect(13600.0, 8320.0, 13952.0, 8544.0)
 gg_rct_Enter01 = Rect(12896.0, 8896.0, 13088.0, 9024.0)
 gg_rct_Exit01 = Rect(13664.0, 8192.0, 13952.0, 8480.0)
 gg_rct_Boind02 = Rect(11104.0, 6560.0, 11392.0, 6816.0)
-gg_rct_Enter02 = Rect(9984.0, 7296.0, 10112.0, 7424.0)
+gg_rct_Enter02 = Rect(10048.0, 7232.0, 10176.0, 7360.0)
 gg_rct_Exit02 = Rect(10464.0, 5856.0, 10752.0, 6144.0)
 gg_rct_Boind03 = Rect(13952.0, 6592.0, 14240.0, 6816.0)
 gg_rct_Enter03 = Rect(12928.0, 7168.0, 13056.0, 7296.0)
@@ -1766,7 +1818,7 @@ gg_rct_Enter08 = Rect(12992.0, 64.0, 13120.0, 192.0)
 gg_rct_Exit08 = Rect(15104.0, -896.0, 15392.0, -608.0)
 gg_rct_Region08 = Rect(12768.0, -1120.0, 15392.0, 1408.0)
 gg_rct_Bound08 = Rect(13952.0, -544.0, 14240.0, 704.0)
-gg_rct_Bound08Start = Rect(13984.0, 480.0, 14272.0, 704.0)
+gg_rct_Bound08Start = Rect(13984.0, 448.0, 14272.0, 704.0)
 gg_rct_ResizePlace08 = Rect(14080.0, -416.0, 14432.0, -256.0)
 gg_rct_Region04 = Rect(9824.0, 2944.0, 12448.0, 5504.0)
 gg_rct_Bound09 = Rect(11008.0, -512.0, 11296.0, -288.0)
@@ -1797,6 +1849,10 @@ gg_rct_Start11_5 = Rect(15872.0, 6912.0, 16128.0, 7168.0)
 gg_rct_BoundBoss = Rect(13792.0, -8384.0, 16736.0, -4640.0)
 gg_rct_EnterBoss = Rect(12864.0, -4032.0, 12992.0, -3904.0)
 gg_rct_ExitBoss = Rect(17440.0, -4352.0, 17728.0, -4064.0)
+gg_rct_Bound12 = Rect(16736.0, 4704.0, 17024.0, 4992.0)
+gg_rct_Enter12 = Rect(15680.0, 4512.0, 15808.0, 4640.0)
+gg_rct_Exit12 = Rect(16896.0, 4224.0, 17152.0, 4480.0)
+gg_rct_Start12 = Rect(16896.0, 4736.0, 17152.0, 4992.0)
 end
 
 function CreateCameras()
@@ -2098,6 +2154,8 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
                 --if GetUnitData(hero).QHighJump then
                 --    makeJump = true
                 --end
+                local data=GetUnitData(hero)
+                data.StatWay=data.StatWay+speed
             end
 
             if flag == "ignore" or makeJump then
@@ -2475,7 +2533,7 @@ function UnitCreateArtMissile(hero, angle, speed, distance, MaxHeight, HasMarker
             DestroyTimer(GetExpiredTimer())
             UnitDamageArea(hero, damage, x, y, range)
             --local _,d= PointContentDestructable(x,y,60,true,1)
-
+            DamageDestructableInRangeXY(hero,damage,range,x,y)
             KillDestructableByTypeInPoint(ButtonsIDTable,range,x,y)
             if not effModel then
                 --DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", newX, newY))
@@ -2525,7 +2583,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
         zhero = GetUnitZ(hero) + 95
     end
 
-    if effectmodel =="Butcher\\Axe Missile" then
+    if effectmodel == "Butcher\\Axe Missile" then
         --print(effectmodel)
     end
     if effectmodel == "BlastMissile" then
@@ -2589,18 +2647,28 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
 
         local bounceFact = false
         local b, d = PointContentDestructable(nx, ny, CollisionRange, false, 0, hero)
-
+        if b then
+            KillDestructableByTypeInPoint({ FourCC("B00E") }, 80, x, y)
+        end
         if GetDestructableTypeId(d) == FourCC("B005") or GetDestructableTypeId(d) == FourCC("B00C") then
             --нет рикошета от этих блокираторов
             --print("встретил блокиратор")
         else
             if IsUnitType(hero, UNIT_TYPE_HERO) then
+               -- print(GetDestructableName(d))
+                if not d then
+                    --print("ошибочный Bounce",GetDestructableName(d))
+                end
                 if bounceCount <= bounceMax then
+                    local angleOrig=angleCurrent
                     angleCurrent, bounceFact = CHKBouncing(x, y, nx, ny, speed) ---------------- баунсинг
-                    nx, ny = MoveXY(x, y, speed, angleCurrent)
+
                     if bounceFact then
                         bounceCount = bounceCount + 1
+                        nx, ny = MoveXY(x, y, speed, angleCurrent)
                         --print(bounceCount)
+                    else
+                        angleCurrent=angleOrig
                     end
                 else
                     --print('превышено число отскоков',bounceMax)
@@ -3083,7 +3151,8 @@ function OnPostDamage()
         --Функция должна быть в самом низу
         AddDamage2Show(target, GetEventDamage())
         local data = GetUnitData(caster)
-        data.StatDamageDealing = data.StatDamageDealing + GetEventDamage()
+        --data.StatDamageDealing = data.StatDamageDealing + GetEventDamage()
+        data.StatDamage = data.StatDamage + GetEventDamage()
         local showData = ShowDamageTable[GetHandleId(target)]
         local matchShow = showData.damage
         if matchShow >= 1 then
@@ -3193,7 +3262,8 @@ function PointContentDestructable (x, y, range, iskill, damage, hero)
             --print(GetDestructableName(d))
             if iskill then
                 if not IsDestructableInvulnerable(d) then
-                    SetDestructableLife(d, GetDestructableLife(d) - damage)
+                    --SetDestructableLife(d, GetDestructableLife(d) - damage)
+                    --DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt", GetDestructableX(d), GetDestructableY(d)))
                     --print("урон по декору")
                     if GetDestructableLife(d) < 1 or GetDestructableLife(d) <= 0 then
                         --print("смерть декора")
@@ -3330,7 +3400,7 @@ function InitDeathEvent()
             killer = data.UnitHero
             local amount=GetRandomInt(1,3)+BlzGetUnitMaxHP(u)//100
             RewardGoldForKill(data,amount)
-
+            data.StatKill=data.StatKill+1
         end
     end)
 end
@@ -3511,6 +3581,7 @@ do
             --SetDayNightModels("Environment\\DNC\\DNCAshenvale\\DNCAshenvaleTerrain\\DNCAshenvaleTerrain.mdl", "Environment\\DNC\\DNCAshenvale\\DNCAshenvaleUnit\\DNCAshenvaleUnit.mdl")
             --SetDayNightModels("", "")
             InitRicoshet()
+            InitLightFromFloor()
 
             ClearMapMusicBJ()
             PlayMusicBJ("Endless Snowbanks")
@@ -4971,6 +5042,7 @@ function UnitDamageArea(u, damage, x, y, range, flag, paramTable)
         end
         if flag=="All" then
             UnitDamageTarget(u, e, damage, true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WHOKNOWS)
+            DamageDestructableInRangeXY(u,damage,range,x,y)
         end
         if UnitAlive(e) and not UnitAlive(u) and (IsUnitEnemy(e, GetOwningPlayer(u)) or GetOwningPlayer(e) == Player(PLAYER_NEUTRAL_PASSIVE)) and IsUnitType(u, UNIT_TYPE_HERO) then
             --print("Герой нанёс урон будучи мертвым "..GetUnitName(u))
@@ -5137,6 +5209,19 @@ function UnitDamageArea(u, damage, x, y, range, flag, paramTable)
 
     end
     return isdamage, hero, k, all
+end
+
+
+function DamageDestructableInRangeXY(unit,damage,range,x,y)
+    SetRect(GlobalRect, x - range, y - range, x + range, y + range)
+    EnumDestructablesInRect(GlobalRect, nil, function()
+        local d = GetEnumDestructable()
+        if GetDestructableLife(d) > 0 and GetDestructableTypeId(d)~=FourCC("B005")  and GetDestructableTypeId(d)~=FourCC("OTip")  and GetDestructableTypeId(d)~=FourCC("B00G") then --игнор специальных блокираторов and GetDestructableTypeId(d)~=FourCC("B00C")
+            if not IsDestructableInvulnerable(d) then
+                SetDestructableLife(d, GetDestructableLife(d) - damage)
+            end
+        end
+    end)
 end
 
 ---
@@ -5318,9 +5403,46 @@ function ReplaceIdToSpikeTraps(id)
     end
 end
 
+function ReplaceIdToStaticTrap(id)
+    local tmp, k, all = FindUnitOfType(id)
+    for i = 1, #all do
+        CreateSpikeTrapStatic(all[i])
+    end
+end
+function CreateSpikeTrapStatic(unit)
+    local enterTrig = CreateTrigger()
+    local range = 80
+    local x, y = GetUnitXY(unit)
+    local z = GetUnitZ(unit)
+    local eff = AddSpecialEffect("MechaImpale", x, y)
 
+    ShowUnit(unit, false)
+    SetUnitInvulnerable(unit, true)
+    UnitAddAbility(unit, FourCC("Aloc"))
 
-function CreateSpikeTrap(unit,timed)
+    BlzPlaySpecialEffect(eff, ANIM_TYPE_STAND)
+    TriggerRegisterUnitInRange(enterTrig, unit, range, nil)
+    local work=false
+    TriggerAddAction(enterTrig, function()
+        local entering = GetTriggerUnit()
+        if not work  and GetUnitTypeId(entering)~=FourCC("h00C") then -- бочка не триггерит кнопку с шипами
+            work=true
+            BlzPlaySpecialEffect(eff, ANIM_TYPE_BIRTH)
+
+            TimerStart(CreateTimer(), 0.15, false, function()
+                --print("время урона?")
+                UnitDamageArea(unit, 50, GetUnitX(unit), GetUnitY(unit), 60)
+            end)
+            TimerStart(CreateTimer(), 0.7, false, function()
+                BlzPlaySpecialEffect(eff, ANIM_TYPE_STAND)
+                work=false
+            end)
+        end
+
+    end)
+end
+
+function CreateSpikeTrap(unit, timed)
     ShowUnit(unit, false)
     SetUnitInvulnerable(unit, true)
     UnitAddAbility(unit, FourCC("Aloc"))
@@ -5328,13 +5450,13 @@ function CreateSpikeTrap(unit,timed)
     local z = GetUnitZ(unit)
     local eff = AddSpecialEffect("MechaImpale", x, y)
     local sec = 0
-    local delay=0.01
+    local delay = 0.01
     if timed then
         UnitApplyTimedLife(unit, FourCC('BTLF'), timed)
     end
-    local ta=2 -- time attack
-    if GetUnitFacing(unit)>89 and GetUnitFacing(unit)<91 then
-        delay=2
+    local ta = 2 -- time attack
+    if GetUnitFacing(unit) > 89 and GetUnitFacing(unit) < 91 then
+        delay = 2
     end
     TimerStart(CreateTimer(), delay, false, function()
         TimerStart(CreateTimer(), 1, true, function()
@@ -5373,6 +5495,7 @@ do
             --InitAllButton()
             --InitLaserTrap()
             ReplaceIdToSpikeTraps(FourCC("h00G"))
+            ReplaceIdToStaticTrap(FourCC("h00Q"))
         end)
     end
 end
@@ -5551,6 +5674,34 @@ function InitUnitBulletTrap(u, force)
             end)
         end)
     end
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 22.11.2023 19:48
+---Culvert/Flash Light White.mdl
+function InitLightFromFloor()
+    local whichTrigger = CreateTrigger()
+    EnumDestructablesInRect(bj_mapInitialPlayableArea, nil, function()
+        local d = GetEnumDestructable()
+       -- print("Зарегистрирован на карте",GetDestructableName(d))
+        TriggerRegisterDeathEvent(whichTrigger, d)
+    end)
+
+    TriggerAddAction(whichTrigger, function()
+        --print(GetDestructableName(GetDyingDestructable()), "умер на карте")
+        local d=GetDyingDestructable()
+        if GetDestructableTypeId(d)==FourCC("B00B") then -- Люк в пол
+            --print("открыл люк в пол")
+            local dx,dy=GetDestructableX(d),GetDestructableY(d)
+            local z=GetTerrainZ(dx,dy)-500
+            TimerStart(CreateTimer(), 0.5, false, function()
+                local eff=AddSpecialEffect("Culvert\\Flash Light White",dx,dy)
+                BlzSetSpecialEffectZ(eff,z)
+                BlzSetSpecialEffectMatrixScale(eff,4,4,5)
+            end)
+        end
+    end)
 end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
@@ -7032,6 +7183,7 @@ function StartButcherAI(xs, ys)
             PlayMusicBJ("Salve Springs")
             SetMusicVolumeBJ(100)
             BlzFrameSetVisible(into, false)
+            BlzFrameSetVisible(STAT, true)
             TimerStart(CreateTimer(), 15, false, function()
                 CustomVictoryBJ(Player(0), true, true)
             end)
@@ -9449,20 +9601,7 @@ function StartYettyAI(xs, ys)
                             --StunUnit(hero, 3)
                             YettyCouchHero(boss, hero, 3)
 
-                            local r = GetRandomInt(1, 5)
-                            if r == 1 then
-                                PlayMonoSpeech("Speech\\Peon\\Yetty\\peon4", "Отпусти меня!")
-                            elseif r == 2 then
-                                normal_sound("spine-bone-break-1", GetUnitXY(hero))
-                                PlayMonoSpeech("Speech\\Peon\\Yetty\\peon5", "Рёбра сломаешь!")
-                            elseif r == 3 then
-                                PlayMonoSpeech("Speech\\Peon\\Yetty\\peon6", "Я не нуждаюсь в твоих объятьях!")
-                            elseif r == 4 then
-                                normal_sound("spine-bone-break-1", GetUnitXY(hero))
-                                PlayMonoSpeech("Speech\\Peon\\Yetty\\peon7", "О, позвонок на место встал!")
-                            elseif r == 5 then
-                                PlayBossSpeech("Speech\\Yetti\\tineproidesh", "Ты не пройдёшь")
-                            end
+
 
                             if phase ~= 1 then
 
@@ -9679,6 +9818,22 @@ end
 QTEReadyToPress = false
 function YettyCouchHero(boss, hero, duration)
     if UnitAlive(hero) and not BlzIsUnitInvulnerable(hero) then
+
+        local r = GetRandomInt(1, 5)
+        if r == 1 then
+            PlayMonoSpeech("Speech\\Peon\\Yetty\\peon4", "Отпусти меня!")
+        elseif r == 2 then
+            normal_sound("spine-bone-break-1", GetUnitXY(hero))
+            PlayMonoSpeech("Speech\\Peon\\Yetty\\peon5", "Рёбра сломаешь!")
+        elseif r == 3 then
+            PlayMonoSpeech("Speech\\Peon\\Yetty\\peon6", "Я не нуждаюсь в твоих объятьях!")
+        elseif r == 4 then
+            normal_sound("spine-bone-break-1", GetUnitXY(hero))
+            PlayMonoSpeech("Speech\\Peon\\Yetty\\peon7", "О, позвонок на место встал!")
+        elseif r == 5 then
+            PlayBossSpeech("Speech\\Yetti\\tineproidesh", "Ты не пройдёшь")
+        end
+
         StunUnit(hero, 3)
         local eff = AddSpecialEffect("CircleCastBarCannibalize", GetUnitXY(boss))
         BlzSetSpecialEffectScale(eff, 2)
@@ -11064,13 +11219,14 @@ function CreateGameStatWindow(data)
     BlzFrameSetTexture(rama, "Textures\\Black32", 0, true) --HPElement
     BlzFrameSetSize(rama, 0.4, 0.3)
     BlzFrameSetAbsPoint(rama, FRAMEPOINT_LEFT, -0.1, 0.25)
-    BlzFrameSetVisible(STAT, true)
+    BlzFrameSetVisible(STAT, false) -- стартовая видимость
+    BlzFrameSetAlpha(rama,120)
 
-    local h = BlzCreateFrameByType("TEXT", "ButtonChargesText", rama, "", 0)
-    BlzFrameSetParent(h, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    local h = BlzCreateFrameByType("TEXT", "ButtonChargesText", STAT, "", 0)
     BlzFrameSetText(h, ColorText2("Панель статистики"))
     BlzFrameSetScale(h, 2)
     BlzFrameSetPoint(h, FRAMEPOINT_CENTER, rama, FRAMEPOINT_TOP, 0, -0.01)
+
 
     local names = {
         "Смертей допущено",
@@ -11078,26 +11234,23 @@ function CreateGameStatWindow(data)
         "Урона нанесено",
         "Снежков выпущено",
         "Перекатов перекатано",
-        "Конфет съедено",
         "Пути пройдено",
         "Пеонов наказано"
     }
     local FHNames = {}
     local FHStat = {}
     for i = 1, #names do
-        local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", rama, "", 0)
-        BlzFrameSetParent(text, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+        local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", STAT, "", 0)
         BlzFrameSetText(text, names[i] .. ":")
         BlzFrameSetScale(text, 1.5)
-        BlzFrameSetPoint(text, FRAMEPOINT_TOPLEFT, rama, FRAMEPOINT_TOPLEFT, 0.011, 0 - (i) * 0.02)
+        BlzFrameSetPoint(text, FRAMEPOINT_TOPLEFT, rama, FRAMEPOINT_TOPLEFT, 0.011, -0.01 - (i) * 0.02)
         table.insert(FHNames, text)
     end
     for i = 1, #names do
-        local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", rama, "", 0)
-        BlzFrameSetParent(text, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+        local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", STAT, "", 0)
         BlzFrameSetText(text, "99999999")
         BlzFrameSetScale(text, 1.5)
-        BlzFrameSetPoint(text, FRAMEPOINT_TOPLEFT, rama, FRAMEPOINT_TOPLEFT, 0.011 + 0.12, 0 - (i) * 0.02)
+        BlzFrameSetPoint(text, FRAMEPOINT_TOPLEFT, rama, FRAMEPOINT_TOPLEFT, 0.011 + 0.12, -0.01 - (i) * 0.02)
         table.insert(FHStat, text)
     end
 
@@ -11107,13 +11260,12 @@ end
 function UpdateStatPanel(FHStat, data)
     TimerStart(CreateTimer(), 0.2, true, function()
         BlzFrameSetText(FHStat[1], R2I(data.StatDies))
-        BlzFrameSetText(FHStat[2], R2I(data.StatDies))
-        BlzFrameSetText(FHStat[3], R2I(data.StatDies))
-        BlzFrameSetText(FHStat[4], R2I(data.StatDies))
-        BlzFrameSetText(FHStat[5], R2I(data.StatDies))
-        BlzFrameSetText(FHStat[6], R2I(data.StatDies))
-        BlzFrameSetText(FHStat[7], R2I(data.StatDies))
-        BlzFrameSetText(FHStat[8], R2I(data.StatDies))
+        BlzFrameSetText(FHStat[2], R2I(data.StatKill))
+        BlzFrameSetText(FHStat[3], R2I(data.StatDamage))
+        BlzFrameSetText(FHStat[4], R2I(data.StatSnow))
+        BlzFrameSetText(FHStat[5], R2I(data.StatDash))
+        BlzFrameSetText(FHStat[6], R2I(data.StatWay))
+        BlzFrameSetText(FHStat[7], R2I(peonRescue))
     end)
 end
 ---
@@ -11870,6 +12022,7 @@ function CastSnowBall(data, directionAngle)
     if data.AttackIsReady and not data.SpaceForce and UnitAlive(hero) and not FREE_CAMERA and not IsUnitStunned(hero) and not BlzFrameIsVisible(SHOP) then
         if GetUnitTypeId(hero) == HeroID then
             --WolfSlashAttack(hero) --для проверки вставлял
+            SetUnitTimeScale(hero,1)
             BlzSetUnitFacingEx(hero, directionAngle)
             SetUnitAnimationByIndex(hero, 3)
             data.AttackIsReady = false
@@ -11877,7 +12030,8 @@ function CastSnowBall(data, directionAngle)
             --CreateBeemLighting(hero)
             TimerStart(CreateTimer(), 0.15, false, function()
                 -- задержка замаха
-                CreateAndForceBullet(hero, directionAngle, 40, effModel,nil,nil,data.BaseDamage,data.MaxAttackRange,50)
+                CreateAndForceBullet(hero, directionAngle, 40, effModel,nil,nil,data.BaseDamage,data.MaxAttackRange,80)
+                data.StatSnow=data.StatSnow+1
                 data.damageIsBouncing=true
                 if data.MorozkoCD then
                     if data.MorozkoCDCurrent<=0 then
@@ -11918,17 +12072,30 @@ end
 ---
 function CHKBouncing(x, y, nx, ny, speed)
     local angle = AngleBetweenXY(x, y, nx, ny) / bj_DEGTORAD
-    local has=false
+    local has = false
     if not IsTerrainWalkable(nx, ny) then
-        angle = 0 - (AngleBetweenXY(nx, ny, x, y) / bj_DEGTORAD)
-        nx, ny = MoveXY(x, y, speed, angle)
-        has=true
+        local b, d = PointContentDestructable(nx, ny, 100, false)
+        if GetDestructableTypeId(d) == FourCC("B005") or GetDestructableTypeId(d) == FourCC("B00C") then
+            has = false
+        else
+            --print("doadName 1",GetDestructableName(d))
+            angle = 0 - (AngleBetweenXY(nx, ny, x, y) / bj_DEGTORAD)
+            nx, ny = MoveXY(x, y, speed, angle)
+            has = true
+        end
         if not IsTerrainWalkable(nx, ny) then
-            angle = angle - 180
-            has=true
+            b, d = PointContentDestructable(nx, ny, 100, false)
+            if GetDestructableTypeId(d) == FourCC("B005") or GetDestructableTypeId(d) == FourCC("B00C") then
+                has = false
+            else
+                --print("doadName 2",GetDestructableName(d))
+                angle = angle - 180
+                has = true
+            end
+
         end
     end
-    return angle,has
+    return angle, has
 end
 
 function CHKBouncingOLD(x, y, nx, ny)
@@ -12288,12 +12455,11 @@ function UnitStartFallAnim(hero, maxZ)
             local grow = GetRandomReal(0.5, 1)
             --print(grow)
             SetSoundPitch(s, grow)
+            KillDestructableByTypeInPoint(ButtonsIDTable, 200, GetUnitXY(hero))
         end
         if z <= -200 then
             DestroyTimer(GetExpiredTimer())
-
             UnitRemoveStun(hero)
-            KillDestructableByTypeInPoint(ButtonsIDTable, 200, GetUnitXY(hero))
         end
     end)
 end
@@ -12306,7 +12472,7 @@ function JumpToCenterRect(rect)
     local dist = DistanceBetweenXY(x, y, GetUnitXY(udg_HERO))
     local angle = -180 + AngleBetweenXY(x, y, GetUnitXY(udg_HERO)) / bj_DEGTORAD
     UnitAddJumpForce(udg_HERO, angle, 40, dist, 400)
-    ResetUnitCustomPause(boss)
+    --ResetUnitCustomPause(boss)
 end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
@@ -12935,7 +13101,7 @@ function InitWASD(hero)
     TimerStart(CreateTimer(), 0.005, true, function()
         -- устранение бага залипания
         if UnitAlive(hero) then
-            KillDestructableByTypeInPoint(ButtonsIDTable,80,GetUnitXY(hero))
+            KillDestructableByTypeInPoint(ButtonsIDTable, 80, GetUnitXY(hero))
             if not IsUnitSelected(hero, GetOwningPlayer(hero)) then
                 SelectUnitForPlayerSingle(hero, GetOwningPlayer(hero))
             end
@@ -13017,7 +13183,7 @@ function InitWASD(hero)
         local newVector = vector
         if data.BH then
             if not data.BHSpeed then
-                data.BHSpeed=3
+                data.BHSpeed = 3
             end
             local angleBH = AngleBetweenUnits(hero, data.BH)
             newVector = VectorSum(newVector, vector:yawPitchOffset(data.BHSpeed, angleBH * (math.pi / 180), 0.0))
@@ -13053,7 +13219,7 @@ function InitWASD(hero)
                     end
 
                     ReviveHero(hero, x, y, true)
-                    data.StatDies=data.StatDies+1
+                    data.StatDies = data.StatDies + 1
                     --SetCameraBoundsToRectForPlayerBJ(Player(0), bj_mapInitialPlayableArea) --TODO возможно может что-то начать ломаться, например зоны требующие BOUND при в ходе
                     TimerStart(CreateTimer(), 0.5, false, function()
                         if GetRandomInt(1, 2) == 1 then
@@ -13237,8 +13403,6 @@ function InitWASD(hero)
 
                     newVector = VectorSum(newVector, vector:yawPitchOffset(curSpeed, angle * (math.pi / 180), 0.0))
 
-
-
                     local nx, ny = newVector.x, newVector.y
                     if not data.isAttacking then
                         if data.CurrentWeaponType == "pickaxe" or not data.PressSpin then
@@ -13258,28 +13422,25 @@ function InitWASD(hero)
 
 
                     if data.REffect then
-                        BlzSetSpecialEffectPosition(data.REffect, hx, hy, GetTerrainZ(hx, hy)+200)
+                        BlzSetSpecialEffectPosition(data.REffect, hx, hy, GetTerrainZ(hx, hy) + 200)
                     end
                     --RepositionCharges(data)
 
                     if data.CatchUnit then
 
-                        local newAngle=-180+AngleBetweenUnits(hero,data.CatchUnit)
+                        local newAngle = -180 + AngleBetweenUnits(hero, data.CatchUnit)
                         --print("новый угол")
-                        if not IsUnitInRange(hero,data.CatchUnit,120) then
+                        if not IsUnitInRange(hero, data.CatchUnit, 120) then
                             DestroyEffect(data.CatchUnitEffect)
-                            data.CatchUnit=false
+                            data.CatchUnit = false
                             --print("потерял цель захвата")
 
                         else
-                            SetUnitFacing(data.CatchUnit,newAngle)
-                            UnitAddForceSimple(data.CatchUnit,newAngle,speed*1.1,70)
+                            SetUnitFacing(data.CatchUnit, newAngle)
+                            UnitAddForceSimple(data.CatchUnit, newAngle, speed * 1.1, 70)
                         end
 
                     end
-
-
-
 
                     local newX, newY = GetUnitXY(hero)
                     local stator = false
@@ -13288,11 +13449,16 @@ function InitWASD(hero)
 
                         if not MiniChargeOnArea(data) then
                             stator = true
-                            if true then
-                                ResetUnitAnimation(hero) -- сборс в положении стоя
-                            end
+                            --if true then
+                            ResetUnitAnimation(hero) -- сборс в положении стоя
+                            --if not data.UnitInAttack then
+                            --    SetUnitTimeScale(hero,0.2)
+                            --end
+                            --end
 
                         end -- Расталкиваем всех юнитов
+                    else
+                        SetUnitTimeScale(hero,1)
                     end
                     if animWalk == 0 and not stator then
                         -- and not data.ReleaseRMB
@@ -13302,7 +13468,8 @@ function InitWASD(hero)
                         data.animStand = 3
                     end
                 else
-                    if data.BH then --черная дыра
+                    if data.BH then
+                        --черная дыра
                         SetUnitPositionSmooth(hero, newVector.x, newVector.y)-- блок движения
                     end
                     curSpeed = 0
@@ -13578,21 +13745,21 @@ function CreateWASDActions()
                 local dist = 400
                 local delay = 0.7 -- это кд рывка?
                 local dashSpeed = 10
---[[
-                if data.ReleaseQ and not data.QJump2Pointer then
-                    -- print("сплеш в рывке, пробуем прыгнуть прыжок")
-                    dist = 400
-                    delay = 0.3
-                    data.GreatDamageDashQ = true
-                    --print("q+space")
-                    SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationQ) -- киркой в землю в рывке
+                --[[
+                                if data.ReleaseQ and not data.QJump2Pointer then
+                                    -- print("сплеш в рывке, пробуем прыгнуть прыжок")
+                                    dist = 400
+                                    delay = 0.3
+                                    data.GreatDamageDashQ = true
+                                    --print("q+space")
+                                    SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationQ) -- киркой в землю в рывке
 
-                    if not data.tasks[8] then
-                        data.tasks[8] = true
-                        --print("Первый раз сделал краш")
-                    end
-                end
-                ]]
+                                    if not data.tasks[8] then
+                                        data.tasks[8] = true
+                                        --print("Первый раз сделал краш")
+                                    end
+                                end
+                                ]]
 
                 data.DashCharges = data.DashCharges - 1
                 RepositionCharges(data)
@@ -13649,8 +13816,9 @@ function CreateWASDActions()
                             --print("ошибка, такой функции нет")
                             Blink2Point(data.UnitHero, nx, ny)
                         else
-                           -- print("прыжок вниз?, сообщите об этом баге!")
+                            -- print("прыжок вниз?, сообщите об этом баге!")
                             UnitAddForceSimple(data.UnitHero, data.DirectionMove, 10, dist, "ignore") --САМ рывок при нажатии пробела
+                            data.StatDash = data.StatDash + 1
                         end
                     else
                         --print("перекат тут?")
@@ -13662,6 +13830,7 @@ function CreateWASDActions()
 
                         end
                         UnitAddForceSimple(data.UnitHero, data.DirectionMove, dashSpeed, dist, "ignore") --САМ рывок при нажатии пробела
+                        data.StatDash = data.StatDash + 1
 
                         --local x,y=GetUnitXY(data.UnitHero)
                         --local xEnd, yEnd=MoveXY(x,y,dist,data.DirectionMove)
@@ -13901,7 +14070,7 @@ function PlayUnitAnimationFromChat()
 
         if GetEventPlayerChatString() == "z" then
             --print("лечение")
-            UnitStartFallAnim(udg_HERO,1000)
+            UnitStartFallAnim(udg_HERO, 1000)
         end
 
         SetUnitAnimationByIndex(data.UnitHero, s)
@@ -14652,6 +14821,257 @@ TriggerAddCondition(gg_trg_InitBossRoom, Condition(Trig_InitBossRoom_Conditions)
 TriggerAddAction(gg_trg_InitBossRoom, Trig_InitBossRoom_Actions)
 end
 
+function Trig_InitRoom12_Func002C()
+if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+return false
+end
+return true
+end
+
+function Trig_InitRoom12_Conditions()
+if (not Trig_InitRoom12_Func002C()) then
+return false
+end
+return true
+end
+
+function Trig_InitRoom12_Func004Func001C()
+if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+return false
+end
+return true
+end
+
+function Trig_InitRoom12_Func004A()
+if (Trig_InitRoom12_Func004Func001C()) then
+        MoveDestructableDown(GetEnumDestructable(), -500, 5)
+else
+end
+end
+
+function Trig_InitRoom12_Actions()
+DisableTrigger(GetTriggeringTrigger())
+    HeroFixRespPos()
+EnumDestructablesInRectAll(gg_rct_Start12, Trig_InitRoom12_Func004A)
+end
+
+function InitTrig_InitRoom12()
+gg_trg_InitRoom12 = CreateTrigger()
+TriggerRegisterEnterRectSimple(gg_trg_InitRoom12, gg_rct_Enter12)
+TriggerAddCondition(gg_trg_InitRoom12, Condition(Trig_InitRoom12_Conditions))
+TriggerAddAction(gg_trg_InitRoom12, Trig_InitRoom12_Actions)
+end
+
+function Trig_PlatformUp12_Func001Func002Func001C()
+if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+return false
+end
+return true
+end
+
+function Trig_PlatformUp12_Func001Func002A()
+if (Trig_PlatformUp12_Func001Func002Func001C()) then
+        MoveDestructableUp(GetEnumDestructable(), 500, 5)
+else
+end
+end
+
+function Trig_PlatformUp12_Func001Func005Func001C()
+if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+return false
+end
+return true
+end
+
+function Trig_PlatformUp12_Func001Func005A()
+if (Trig_PlatformUp12_Func001Func005Func001C()) then
+        MoveDestructableDown(GetEnumDestructable(), -500, 5)
+EnableTrigger(GetTriggeringTrigger())
+DestructableRestoreLife(gg_dest_B00E_19641, 100.00, true)
+DestructableRestoreLife(gg_dest_B00E_19642, 100.00, true)
+else
+end
+end
+
+function Trig_PlatformUp12_Func001Func007C()
+return true
+end
+
+function Trig_PlatformUp12_Func001Func008C()
+if (not (IsDestructableDeadBJ(gg_dest_B00E_19641) == true)) then
+return false
+end
+if (not (IsDestructableDeadBJ(gg_dest_B00E_19642) == true)) then
+return false
+end
+return true
+end
+
+function Trig_PlatformUp12_Func001C()
+if (not Trig_PlatformUp12_Func001Func008C()) then
+return false
+end
+return true
+end
+
+function Trig_PlatformUp12_Actions()
+if (Trig_PlatformUp12_Func001C()) then
+EnumDestructablesInRectAll(gg_rct_Start12, Trig_PlatformUp12_Func001Func002A)
+DisableTrigger(GetTriggeringTrigger())
+TriggerSleepAction(5.00)
+EnumDestructablesInRectAll(gg_rct_Start12, Trig_PlatformUp12_Func001Func005A)
+else
+TriggerSleepAction(0.50)
+if (Trig_PlatformUp12_Func001Func007C()) then
+DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
+AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
+DestroyEffectBJ(GetLastCreatedEffectBJ())
+else
+end
+end
+end
+
+function InitTrig_PlatformUp12()
+gg_trg_PlatformUp12 = CreateTrigger()
+TriggerRegisterDeathEvent(gg_trg_PlatformUp12, gg_dest_B00E_19641)
+TriggerRegisterDeathEvent(gg_trg_PlatformUp12, gg_dest_B00E_19642)
+TriggerAddAction(gg_trg_PlatformUp12, Trig_PlatformUp12_Actions)
+end
+
+function Trig_TestButtons_Actions()
+TriggerSleepAction(0.50)
+DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
+AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
+DestroyEffectBJ(GetLastCreatedEffectBJ())
+end
+
+function InitTrig_TestButtons()
+gg_trg_TestButtons = CreateTrigger()
+TriggerRegisterDeathEvent(gg_trg_TestButtons, gg_dest_B00E_19723)
+TriggerAddAction(gg_trg_TestButtons, Trig_TestButtons_Actions)
+end
+
+function Trig_Victory12_Func001Func002C()
+if (not (IsDestructableDeadBJ(gg_dest_B00D_19707) == true)) then
+return false
+end
+if (not (IsDestructableDeadBJ(gg_dest_B00E_19723) == true)) then
+return false
+end
+if (not (IsDestructableDeadBJ(gg_dest_B00E_19641) == true)) then
+return false
+end
+if (not (IsDestructableDeadBJ(gg_dest_B00E_19642) == true)) then
+return false
+end
+if (not (IsDestructableDeadBJ(gg_dest_B00D_19706) == true)) then
+return false
+end
+return true
+end
+
+function Trig_Victory12_Func001C()
+if (not Trig_Victory12_Func001Func002C()) then
+return false
+end
+return true
+end
+
+function Trig_Victory12_Actions()
+if (Trig_Victory12_Func001C()) then
+KillDestructable(gg_dest_B00B_19643)
+else
+end
+end
+
+function InitTrig_Victory12()
+gg_trg_Victory12 = CreateTrigger()
+TriggerRegisterDeathEvent(gg_trg_Victory12, gg_dest_B00D_19707)
+TriggerRegisterDeathEvent(gg_trg_Victory12, gg_dest_B00E_19723)
+TriggerRegisterDeathEvent(gg_trg_Victory12, gg_dest_B00E_19641)
+TriggerRegisterDeathEvent(gg_trg_Victory12, gg_dest_B00E_19642)
+TriggerRegisterDeathEvent(gg_trg_Victory12, gg_dest_B00D_19706)
+TriggerAddAction(gg_trg_Victory12, Trig_Victory12_Actions)
+end
+
+function Trig_Restore12_Func003Func002C()
+if (not (IsDestructableDeadBJ(gg_dest_B00B_19643) == true)) then
+return false
+end
+return true
+end
+
+function Trig_Restore12_Func003Func003C()
+if (not (IsDestructableDeadBJ(gg_dest_B00D_19707) == true)) then
+return false
+end
+if (not (IsDestructableDeadBJ(gg_dest_B00D_19706) == true)) then
+return false
+end
+return true
+end
+
+function Trig_Restore12_Func003C()
+if (not Trig_Restore12_Func003Func003C()) then
+return false
+end
+return true
+end
+
+function Trig_Restore12_Actions()
+if (Trig_Restore12_Func003C()) then
+else
+TriggerSleepAction(5.00)
+if (Trig_Restore12_Func003Func002C()) then
+else
+DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
+AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
+DestroyEffectBJ(GetLastCreatedEffectBJ())
+end
+end
+end
+
+function InitTrig_Restore12()
+gg_trg_Restore12 = CreateTrigger()
+TriggerRegisterDeathEvent(gg_trg_Restore12, gg_dest_B00D_19707)
+TriggerRegisterDeathEvent(gg_trg_Restore12, gg_dest_B00D_19706)
+TriggerAddAction(gg_trg_Restore12, Trig_Restore12_Actions)
+end
+
+function Trig_ExitFrom12_Func002C()
+if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+return false
+end
+if (not (IsDestructableDeadBJ(gg_dest_B00B_19643) == true)) then
+return false
+end
+return true
+end
+
+function Trig_ExitFrom12_Conditions()
+if (not Trig_ExitFrom12_Func002C()) then
+return false
+end
+return true
+end
+
+function Trig_ExitFrom12_Actions()
+    SetUnitAnimationByIndex(udg_HERO, 25)
+TriggerSleepAction(0.30)
+SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_EnterBoss))
+    UnitStartFallAnim(udg_HERO,1000)
+SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_BoundBoss)
+    HeroFixRespPos()
+    CreateEnteringFrame(nil, "Откуда вода в подвале?")
+end
+
+function InitTrig_ExitFrom12()
+gg_trg_ExitFrom12 = CreateTrigger()
+TriggerRegisterEnterRectSimple(gg_trg_ExitFrom12, gg_rct_Exit12)
+TriggerAddCondition(gg_trg_ExitFrom12, Condition(Trig_ExitFrom12_Conditions))
+TriggerAddAction(gg_trg_ExitFrom12, Trig_ExitFrom12_Actions)
+end
+
 function Trig_Button1101_Func001Func001C()
 if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
 return false
@@ -15150,9 +15570,9 @@ function Trig_ExitFrom11_Actions()
 DisableTrigger(gg_trg_Out11)
     SetUnitAnimationByIndex(udg_HERO, 25)
 TriggerSleepAction(0.30)
-SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_EnterBoss))
+SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter12))
     UnitStartFallAnim(udg_HERO,1000)
-SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_BoundBoss)
+SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound12)
     HeroFixRespPos()
 end
 
@@ -16280,7 +16700,8 @@ return true
 end
 
 function Trig_StartBrainGame_Actions()
-    PlayMusicBJ("The Astral Academy Gardensr")
+ClearMapMusicBJ()
+PlayMusicBJ(gg_snd_The_Astral_Academy_Gardens)
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter00))
     UnitStartFallAnim(udg_HERO,1000)
 SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Boind00)
@@ -17521,6 +17942,12 @@ end
 
 function InitCustomTriggers()
 InitTrig_InitBossRoom()
+InitTrig_InitRoom12()
+InitTrig_PlatformUp12()
+InitTrig_TestButtons()
+InitTrig_Victory12()
+InitTrig_Restore12()
+InitTrig_ExitFrom12()
 InitTrig_Button1101()
 InitTrig_Button1102()
 InitTrig_Button1103()
@@ -17642,7 +18069,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, 12928.0, 3328.0)
+DefineStartLocation(0, 15808.0, 7040.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()

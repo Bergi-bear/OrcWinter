@@ -45,6 +45,7 @@ do
             --SetDayNightModels("Environment\\DNC\\DNCAshenvale\\DNCAshenvaleTerrain\\DNCAshenvaleTerrain.mdl", "Environment\\DNC\\DNCAshenvale\\DNCAshenvaleUnit\\DNCAshenvaleUnit.mdl")
             --SetDayNightModels("", "")
             InitRicoshet()
+            InitLightFromFloor()
 
             ClearMapMusicBJ()
             PlayMusicBJ("Endless Snowbanks")

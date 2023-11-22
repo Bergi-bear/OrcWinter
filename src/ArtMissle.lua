@@ -33,7 +33,7 @@ function UnitCreateArtMissile(hero, angle, speed, distance, MaxHeight, HasMarker
             DestroyTimer(GetExpiredTimer())
             UnitDamageArea(hero, damage, x, y, range)
             --local _,d= PointContentDestructable(x,y,60,true,1)
-
+            DamageDestructableInRangeXY(hero,damage,range,x,y)
             KillDestructableByTypeInPoint(ButtonsIDTable,range,x,y)
             if not effModel then
                 --DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", newX, newY))

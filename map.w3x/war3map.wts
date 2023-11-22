@@ -2508,3 +2508,15 @@ STRING 870
 Паутина
 }
 
+STRING 871
+// Units: h00Q (Шип приближения), Name (Name)
+{
+Шип приближения
+}
+
+STRING 872
+// Doodads: D05A (Вода), Name (Name)
+{
+Вода
+}
+

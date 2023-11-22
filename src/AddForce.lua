@@ -59,6 +59,8 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
                 --if GetUnitData(hero).QHighJump then
                 --    makeJump = true
                 --end
+                local data=GetUnitData(hero)
+                data.StatWay=data.StatWay+speed
             end
 
             if flag == "ignore" or makeJump then
