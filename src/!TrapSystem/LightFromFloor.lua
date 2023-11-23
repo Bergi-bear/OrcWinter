@@ -3,25 +3,29 @@
 --- Created by User.
 --- DateTime: 22.11.2023 19:48
 ---Culvert/Flash Light White.mdl
+Trapdoor = 1
 function InitLightFromFloor()
     local whichTrigger = CreateTrigger()
     EnumDestructablesInRect(bj_mapInitialPlayableArea, nil, function()
         local d = GetEnumDestructable()
-       -- print("Зарегистрирован на карте",GetDestructableName(d))
+        -- print("Зарегистрирован на карте",GetDestructableName(d))
         TriggerRegisterDeathEvent(whichTrigger, d)
     end)
 
     TriggerAddAction(whichTrigger, function()
         --print(GetDestructableName(GetDyingDestructable()), "умер на карте")
-        local d=GetDyingDestructable()
-        if GetDestructableTypeId(d)==FourCC("B00B") then -- Люк в пол
+        local d = GetDyingDestructable()
+        if GetDestructableTypeId(d) == FourCC("B00B") then
+            -- Люк в пол
             --print("открыл люк в пол")
-            local dx,dy=GetDestructableX(d),GetDestructableY(d)
-            local z=GetTerrainZ(dx,dy)-500
+            local dx, dy = GetDestructableX(d), GetDestructableY(d)
+            local z = GetTerrainZ(dx, dy) - 500
+            PlayPudgeSpeechNumber(Trapdoor)
+            Trapdoor=Trapdoor+1
             TimerStart(CreateTimer(), 0.5, false, function()
-                local eff=AddSpecialEffect("Culvert\\Flash Light White",dx,dy)
-                BlzSetSpecialEffectZ(eff,z)
-                BlzSetSpecialEffectMatrixScale(eff,4,4,5)
+                local eff = AddSpecialEffect("Culvert\\Flash Light White", dx, dy)
+                BlzSetSpecialEffectZ(eff, z)
+                BlzSetSpecialEffectMatrixScale(eff, 4, 4, 5)
             end)
         end
     end)

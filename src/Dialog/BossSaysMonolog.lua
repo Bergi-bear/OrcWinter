@@ -3,27 +3,28 @@
 --- Created by User.
 --- DateTime: 16.02.2023 22:32
 ---
-GBossSoundDuration=0
+GBossSoundDuration = 0
 function PlayBossSpeech(sound, text)
     if not TexBoxBoss then
         --print("первый диалог")
         CreteDialogBoxBoss()
     end
-    if not BlzFrameIsVisible(TexBoxBoss) and UnitAlive(GBoss)  then
-        local s = normal_sound(sound)
+    local s = nil
+    if not BlzFrameIsVisible(TexBoxBoss) and UnitAlive(GBoss) then
+        s = normal_sound(sound)
         local sd = GetSoundDuration(s)
         --SetCinematicScene(HeroID, 1, "peon", "text", 2, 2)
         if sd <= 10 then
             sd = 3000
         end
-        GV=20
+        GV = 20
         SetMusicVolumeBJ(GV)
         BlzFrameSetVisible(TexBoxBoss, true)
         BlzFrameSetText(TexBoxTextBoss, text)
         --TransmissionFromUnitWithNameBJ(GetPlayersAll(), HERO[0].UnitHero, "", nil, "", bj_TIMETYPE_SET, GetSoundDuration(s) / 700, false)
         --print(GetSoundDuration(s))
-        GBossSoundDuration=sd / 700
-        local chkTimer=CreateTimer()
+        GBossSoundDuration = sd / 700
+        local chkTimer = CreateTimer()
         TimerStart(CreateTimer(), 0.5, true, function()
             if not UnitAlive(GBoss) then
                 StopSound(s, false, 0.5)
@@ -35,13 +36,14 @@ function PlayBossSpeech(sound, text)
             DestroyTimer(chkTimer)
             TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
                 SetMusicVolumeBJ(GV)
-                GV=GV+1
-                if GV>= 100 then
+                GV = GV + 1
+                if GV >= 100 then
                     DestroyTimer(GetExpiredTimer())
                 end
             end)
         end)
     end
+    return s
 end
 
 function CreteDialogBoxBoss()
@@ -51,7 +53,6 @@ function CreteDialogBoxBoss()
     --local backdrop = BlzCreateFrame("QuestButtonDisabledBackdropTemplate", tooltip, 0, 0)
     local backdrop = BlzCreateFrameByType("BACKDROP", "Face", tooltip, "", 0)
     BlzFrameSetTexture(backdrop, "SpeechBoxBoss", 0, true)
-
 
     local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", tooltip, "", 0)
     BlzFrameSetAbsPoint(tooltip, FRAMEPOINT_LEFT, 0, 0.09)
