@@ -32,23 +32,22 @@ function UnitStartFallAnim(hero, maxZ)
                 r = GetRandomInt(1, 8)
                 if r == 1 then
                     normal_sound("spine-bone-break-1", GetUnitXY(hero))
-                    PlayMonoSpeech("Speech\\Peon\\Fall\\F"..r, "Коленям после такого не жить")
+                    PlayMonoSpeech("Speech\\Peon\\Fall\\F" .. r, "Коленям после такого не жить")
                 elseif r == 2 then
-                    PlayMonoSpeech("Speech\\Peon\\Fall\\F"..r, "Супер геройское приземление")
+                    PlayMonoSpeech("Speech\\Peon\\Fall\\F" .. r, "Супер геройское приземление")
                 elseif r == 3 then
-                    PlayMonoSpeech("Speech\\Peon\\Fall\\F"..r, "Опять приземлился на лицо")
+                    PlayMonoSpeech("Speech\\Peon\\Fall\\F" .. r, "Опять приземлился на лицо")
                 elseif r == 4 then
-                    PlayMonoSpeech("Speech\\Peon\\Fall\\F"..r, "Ещё пару таких падений я точно не переживу")
+                    PlayMonoSpeech("Speech\\Peon\\Fall\\F" .. r, "Ещё пару таких падений я точно не переживу")
                 elseif r == 5 then
                     normal_sound("spine-bone-break-1", GetUnitXY(hero))
                 elseif r == 6 then
-                        PlayMonoSpeech("Speech\\Peon\\Fall\\F"..r, "На этот раз вроде ничего не сломал")
+                    PlayMonoSpeech("Speech\\Peon\\Fall\\F" .. r, "На этот раз вроде ничего не сломал")
                 elseif r == 7 then
-                    PlayMonoSpeech("Speech\\Peon\\Fall\\F"..r "Тут высота не меньше 5 метров")
+                    PlayMonoSpeech("Speech\\Peon\\Fall\\F" .. r, "Тут высота не меньше 5 метров")
                 elseif r == 8 then
-                    PlayMonoSpeech("Speech\\Peon\\Fall\\F"..r, "В лепёшку.... а нет, я в норме")
+                    PlayMonoSpeech("Speech\\Peon\\Fall\\F" .. r, "В лепёшку.... а нет, я в норме")
                 end
-
             end
         end
         if z <= -200 then

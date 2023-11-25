@@ -38,3 +38,18 @@ function CreateMouseHelper()
         end
     end)
 end
+
+function CreateGirlandUI()
+    local g1 = BlzCreateFrameByType("BACKDROP", "Face", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
+    BlzFrameSetParent(g1, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    BlzFrameSetTexture(g1, "UIGirland", 0, true)
+    BlzFrameSetSize(g1, 0.10, 0.4)
+    BlzFrameSetAbsPoint(g1, FRAMEPOINT_CENTER, -0.12, 0.4)
+
+    local g2 = BlzCreateFrameByType("BACKDROP", "Face", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
+    BlzFrameSetParent(g2, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    BlzFrameSetTexture(g2, "UIGirland", 0, true)
+    BlzFrameSetSize(g2, 0.10, 0.4)
+    BlzFrameSetAbsPoint(g2, FRAMEPOINT_CENTER, 0.93, 0.4)
+
+end

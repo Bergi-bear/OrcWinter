@@ -1821,7 +1821,7 @@ gg_rct_Enter08 = Rect(12992.0, 64.0, 13120.0, 192.0)
 gg_rct_Exit08 = Rect(15104.0, -896.0, 15392.0, -608.0)
 gg_rct_Region08 = Rect(12768.0, -1120.0, 15392.0, 1408.0)
 gg_rct_Bound08 = Rect(13952.0, -544.0, 14240.0, 704.0)
-gg_rct_Bound08Start = Rect(13984.0, 448.0, 14272.0, 704.0)
+gg_rct_Bound08Start = Rect(13984.0, 416.0, 14272.0, 704.0)
 gg_rct_ResizePlace08 = Rect(14080.0, -416.0, 14432.0, -256.0)
 gg_rct_Region04 = Rect(9824.0, 2944.0, 12448.0, 5504.0)
 gg_rct_Bound09 = Rect(11008.0, -512.0, 11296.0, -288.0)
@@ -3646,15 +3646,15 @@ function RegistryNewItem(unit)
                 HeroCandyHeal(GetUnitData(entering),1)
                 local r=GetRandomInt(1,6)
                 if r==1 then
-                    PlayMonoSpeech("","Исцеление")
+                    PlayMonoSpeech("Speech\\Peon\\CandyHeal\\H"..r,"Исцеление")
                 elseif r==2 then
-                    PlayMonoSpeech("","Вкусно!")
+                    PlayMonoSpeech("Speech\\Peon\\CandyHeal\\H"..r,"Вкусно!")
                 elseif r==3 then
-                    PlayMonoSpeech("","Конфетка!")
+                    PlayMonoSpeech("Speech\\Peon\\CandyHeal\\H"..r,"Конфетка!")
                 elseif r==4 then
-                    PlayMonoSpeech("","О, ещё конфетка!")
+                    PlayMonoSpeech("Speech\\Peon\\CandyHeal\\H"..r,"О, ещё конфетка!")
                 elseif r==5 then
-                    PlayMonoSpeech("","Это меня не много исцелит!")
+                    PlayMonoSpeech("Speech\\Peon\\CandyHeal\\H"..r,"Это меня не много исцелит!")
                 end
             end
             --KillUnit(unit)
@@ -7246,7 +7246,7 @@ function StartButcherAI(xs, ys)
                             --SetUnitAnimation(boss,"Attack")
 
                             YettyCouchHero(boss, hero, 3)
-                            PlayBossSpeech("", "Попался мелкий")
+                            PlayBossSpeech("Speech\\Pudge\\InFight\\F1", "Попался, мелкий")
                             if phase == 1 then
                                 --print("подошел слишком близко")
 
@@ -7542,7 +7542,7 @@ function StartButcherAI(xs, ys)
                 PhaseOn = false
                 local rph = GetRandomInt(1, phase)
                 if rph == 1 then
-                    BossHooked(boss, 5)
+                    BossHooked(boss, 5,2)
                 elseif rph == 2 then
                     ButcherThrowGround(boss, hero)
                 elseif rph == 3 then
@@ -7640,7 +7640,7 @@ function FallenRoof(boss, timed)
     SetUnitAnimation(boss, "Spell")
     --QueueUnitAnimation(boss, "Stand")
     local period = 0.08
-    PlayBossSpeech("", "Падающий потолок")
+    PlayBossSpeech("Speech\\Pudge\\InFight\\F2", "Падающий потолок")
     TimerStart(CreateTimer(), period, true, function()
         timed = timed - period
         if timed < 1 then
@@ -7662,7 +7662,7 @@ function BossBlackHoleTimed(boss, timed)
     udg_HoleIsWork = true
     SetUnitAnimationByIndex(boss, 12)
     QueueUnitAnimation(boss, "Stand")
-    PlayBossSpeech("", "Пылесос")
+    PlayBossSpeech("Speech\\Pudge\\InFight\\F3", "Пылесос")
     TimerStart(CreateTimer(), 1, true, function()
         SetUnitAnimationByIndex(boss, 12)
         QueueUnitAnimation(boss, "Stand")
@@ -7679,7 +7679,7 @@ function BulletHellButcher(boss, r)
     local r2Timer = CreateTimer()
     IssueImmediateOrder(boss, "stop")
 
-    PlayBossSpeech("", "Ад из пуль")
+    PlayBossSpeech("Speech\\Pudge\\InFight\\F4", "Ад из пуль")
 
     TimerStart(CreateTimer(), 1, true, function()
         SetUnitAnimationByIndex(boss, 12)
@@ -7711,15 +7711,15 @@ end
 
 function BossAxeThrow(boss, hero)
     local k = 3
-    TimerStart(CreateTimer(), 1, true, function()
+    TimerStart(CreateTimer(), 1.1, true, function()
         if k == 3 then
-            PlayBossSpeech("", "Раз")
+            PlayBossSpeech("Speech\\Pudge\\InFight\\F5", "Раз")
         end
         if k == 2 then
-            PlayBossSpeech("", "Два")
+            PlayBossSpeech("Speech\\Pudge\\InFight\\F6", "Два")
         end
         if k == 1 then
-            PlayBossSpeech("", "Три")
+            PlayBossSpeech("Speech\\Pudge\\InFight\\F7", "Три")
         end
         k = k - 1
         if k < 1 then
@@ -7750,7 +7750,7 @@ function BossSpikeWave(boss, hero)
     SetUnitAnimation(boss, "Attack Slam")
     QueueUnitAnimation(boss, "Stand")
     TimerStart(CreateTimer(), 1.5, false, function()
-        PlayBossSpeech("", "Пики точеные!")
+        PlayBossSpeech("Speech\\Pudge\\InFight\\F8", "Пики точеные!")
         DestroyEffect(eff)
         local x, y = GetUnitXY(boss)
         local maxDist = 1800
@@ -7794,10 +7794,11 @@ function ButcherThrowGround(boss, hero)
             DestroyEffect(AddSpecialEffect("Earthshock", nx, ny))
             DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", nx, ny))
             local is, du = UnitDamageArea(boss, 50, nx, ny, 220)
+            DamageDestructableInRangeXY(boss,50,220,x,y)
             if du then
-                PlayBossSpeech("", "Попал")
+                PlayBossSpeech("Speech\\Pudge\\InFight\\F9", "Попал")
             else
-                PlayBossSpeech("", "Мимо")
+                PlayBossSpeech("Speech\\Pudge\\InFight\\F10", "Мимо")
             end
             DownFloorInTimedXY(120, nx, ny)
         end)
@@ -7821,7 +7822,7 @@ function StrongWalk(boss, hero)
     IssuePointOrder(boss, "move", GetUnitXY(hero))
     local sec = 5
     local period = GetRandomReal(0.8, 1.1)
-    PlayBossSpeech("", "Уже иду")
+    PlayBossSpeech("Speech\\Pudge\\InFight\\F11", "Уже иду")
     if IsUnitInRange(boss, hero, 1500) then
         TimerStart(CreateTimer(), period, true, function()
             sec = sec - period
@@ -7832,6 +7833,7 @@ function StrongWalk(boss, hero)
             local x, y = GetUnitXY(boss)
             DestroyEffect(AddSpecialEffect("Earthshock", x, y))
             UnitDamageArea(boss, 50, x, y, 300)
+            DamageDestructableInRangeXY(boss,50,300,x,y)
         end)
     end
 end
@@ -10164,7 +10166,7 @@ function StartHookAI(unit, timed,scale)
                         if UnitAlive(unit) then
                             UnitCreateHook(unit, angle,scale)
                             if unit==GBoss then
-                                PlayBossSpeech("", "Свежее мясо")
+                                PlayBossSpeech("Speech\\Pudge\\InFight\\F12", "Свежее мясо")
                             end
                         end
                     end)
@@ -11276,7 +11278,8 @@ function CreateGameStatWindow(data)
         "Снежков выпущено",
         "Перекатов перекатано",
         "Пути пройдено",
-        "Пеонов наказано"
+        "Пеонов наказано",
+        "Кринжей словлено"
     }
     local FHNames = {}
     local FHStat = {}
@@ -11307,6 +11310,7 @@ function UpdateStatPanel(FHStat, data)
         BlzFrameSetText(FHStat[5], R2I(data.StatDash))
         BlzFrameSetText(FHStat[6], R2I(data.StatWay))
         BlzFrameSetText(FHStat[7], R2I(peonRescue))
+        BlzFrameSetText(FHStat[8], R2I(999))
     end)
 end
 ---
@@ -11572,6 +11576,7 @@ function InitMenu()
     --CreateQTEFrame() -- Тест QTE
     CreateMouseHelper()
     --CreateBossIntro()
+    CreateGirlandUI()
 end
 function ReturnFPS()
     local fps = BlzGetFrameByName("ResourceBarFrame", 0)
@@ -11999,6 +12004,21 @@ function CreateMouseHelper()
             BlzFrameSetVisible(new_FrameChargesText3, false)
         end
     end)
+end
+
+function CreateGirlandUI()
+    local g1 = BlzCreateFrameByType("BACKDROP", "Face", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
+    BlzFrameSetParent(g1, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    BlzFrameSetTexture(g1, "UIGirland", 0, true)
+    BlzFrameSetSize(g1, 0.10, 0.4)
+    BlzFrameSetAbsPoint(g1, FRAMEPOINT_CENTER, -0.12, 0.4)
+
+    local g2 = BlzCreateFrameByType("BACKDROP", "Face", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
+    BlzFrameSetParent(g2, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    BlzFrameSetTexture(g2, "UIGirland", 0, true)
+    BlzFrameSetSize(g2, 0.10, 0.4)
+    BlzFrameSetAbsPoint(g2, FRAMEPOINT_CENTER, 0.93, 0.4)
+
 end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
@@ -12504,23 +12524,22 @@ function UnitStartFallAnim(hero, maxZ)
                 r = GetRandomInt(1, 8)
                 if r == 1 then
                     normal_sound("spine-bone-break-1", GetUnitXY(hero))
-                    PlayMonoSpeech("Speech\\Peon\\Fall\\F"..r, "Коленям после такого не жить")
+                    PlayMonoSpeech("Speech\\Peon\\Fall\\F" .. r, "Коленям после такого не жить")
                 elseif r == 2 then
-                    PlayMonoSpeech("Speech\\Peon\\Fall\\F"..r, "Супер геройское приземление")
+                    PlayMonoSpeech("Speech\\Peon\\Fall\\F" .. r, "Супер геройское приземление")
                 elseif r == 3 then
-                    PlayMonoSpeech("Speech\\Peon\\Fall\\F"..r, "Опять приземлился на лицо")
+                    PlayMonoSpeech("Speech\\Peon\\Fall\\F" .. r, "Опять приземлился на лицо")
                 elseif r == 4 then
-                    PlayMonoSpeech("Speech\\Peon\\Fall\\F"..r, "Ещё пару таких падений я точно не переживу")
+                    PlayMonoSpeech("Speech\\Peon\\Fall\\F" .. r, "Ещё пару таких падений я точно не переживу")
                 elseif r == 5 then
                     normal_sound("spine-bone-break-1", GetUnitXY(hero))
                 elseif r == 6 then
-                        PlayMonoSpeech("Speech\\Peon\\Fall\\F"..r, "На этот раз вроде ничего не сломал")
+                    PlayMonoSpeech("Speech\\Peon\\Fall\\F" .. r, "На этот раз вроде ничего не сломал")
                 elseif r == 7 then
-                    PlayMonoSpeech("Speech\\Peon\\Fall\\F"..r "Тут высота не меньше 5 метров")
+                    PlayMonoSpeech("Speech\\Peon\\Fall\\F" .. r, "Тут высота не меньше 5 метров")
                 elseif r == 8 then
-                    PlayMonoSpeech("Speech\\Peon\\Fall\\F"..r, "В лепёшку.... а нет, я в норме")
+                    PlayMonoSpeech("Speech\\Peon\\Fall\\F" .. r, "В лепёшку.... а нет, я в норме")
                 end
-
             end
         end
         if z <= -200 then
@@ -13897,7 +13916,7 @@ function CreateWASDActions()
                         end
                         UnitAddForceSimple(data.UnitHero, data.DirectionMove, dashSpeed, dist, "ignore") --САМ рывок при нажатии пробела
                         data.StatDash = data.StatDash + 1
-                        local r = GetRandomInt(1, 7)
+                        local r = GetRandomInt(1, 100)
                         if r == 1 then
                             PlayMonoSpeech("Speech\\Peon\\Dash\\D"..r, "Я не так молод, чтобы так кувыркаться")
                         elseif r == 2 then

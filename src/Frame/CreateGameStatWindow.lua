@@ -26,7 +26,8 @@ function CreateGameStatWindow(data)
         "Снежков выпущено",
         "Перекатов перекатано",
         "Пути пройдено",
-        "Пеонов наказано"
+        "Пеонов наказано",
+        "Кринжей словлено"
     }
     local FHNames = {}
     local FHStat = {}
@@ -57,5 +58,6 @@ function UpdateStatPanel(FHStat, data)
         BlzFrameSetText(FHStat[5], R2I(data.StatDash))
         BlzFrameSetText(FHStat[6], R2I(data.StatWay))
         BlzFrameSetText(FHStat[7], R2I(peonRescue))
+        BlzFrameSetText(FHStat[8], R2I(999))
     end)
 end

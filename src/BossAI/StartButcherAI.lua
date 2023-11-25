@@ -110,7 +110,7 @@ function StartButcherAI(xs, ys)
                             --SetUnitAnimation(boss,"Attack")
 
                             YettyCouchHero(boss, hero, 3)
-                            PlayBossSpeech("", "Попался мелкий")
+                            PlayBossSpeech("Speech\\Pudge\\InFight\\F1", "Попался, мелкий")
                             if phase == 1 then
                                 --print("подошел слишком близко")
 
@@ -406,7 +406,7 @@ function StartButcherAI(xs, ys)
                 PhaseOn = false
                 local rph = GetRandomInt(1, phase)
                 if rph == 1 then
-                    BossHooked(boss, 5)
+                    BossHooked(boss, 5,2)
                 elseif rph == 2 then
                     ButcherThrowGround(boss, hero)
                 elseif rph == 3 then
@@ -504,7 +504,7 @@ function FallenRoof(boss, timed)
     SetUnitAnimation(boss, "Spell")
     --QueueUnitAnimation(boss, "Stand")
     local period = 0.08
-    PlayBossSpeech("", "Падающий потолок")
+    PlayBossSpeech("Speech\\Pudge\\InFight\\F2", "Падающий потолок")
     TimerStart(CreateTimer(), period, true, function()
         timed = timed - period
         if timed < 1 then
@@ -526,7 +526,7 @@ function BossBlackHoleTimed(boss, timed)
     udg_HoleIsWork = true
     SetUnitAnimationByIndex(boss, 12)
     QueueUnitAnimation(boss, "Stand")
-    PlayBossSpeech("", "Пылесос")
+    PlayBossSpeech("Speech\\Pudge\\InFight\\F3", "Пылесос")
     TimerStart(CreateTimer(), 1, true, function()
         SetUnitAnimationByIndex(boss, 12)
         QueueUnitAnimation(boss, "Stand")
@@ -543,7 +543,7 @@ function BulletHellButcher(boss, r)
     local r2Timer = CreateTimer()
     IssueImmediateOrder(boss, "stop")
 
-    PlayBossSpeech("", "Ад из пуль")
+    PlayBossSpeech("Speech\\Pudge\\InFight\\F4", "Ад из пуль")
 
     TimerStart(CreateTimer(), 1, true, function()
         SetUnitAnimationByIndex(boss, 12)
@@ -575,15 +575,15 @@ end
 
 function BossAxeThrow(boss, hero)
     local k = 3
-    TimerStart(CreateTimer(), 1, true, function()
+    TimerStart(CreateTimer(), 1.1, true, function()
         if k == 3 then
-            PlayBossSpeech("", "Раз")
+            PlayBossSpeech("Speech\\Pudge\\InFight\\F5", "Раз")
         end
         if k == 2 then
-            PlayBossSpeech("", "Два")
+            PlayBossSpeech("Speech\\Pudge\\InFight\\F6", "Два")
         end
         if k == 1 then
-            PlayBossSpeech("", "Три")
+            PlayBossSpeech("Speech\\Pudge\\InFight\\F7", "Три")
         end
         k = k - 1
         if k < 1 then
@@ -614,7 +614,7 @@ function BossSpikeWave(boss, hero)
     SetUnitAnimation(boss, "Attack Slam")
     QueueUnitAnimation(boss, "Stand")
     TimerStart(CreateTimer(), 1.5, false, function()
-        PlayBossSpeech("", "Пики точеные!")
+        PlayBossSpeech("Speech\\Pudge\\InFight\\F8", "Пики точеные!")
         DestroyEffect(eff)
         local x, y = GetUnitXY(boss)
         local maxDist = 1800
@@ -658,10 +658,11 @@ function ButcherThrowGround(boss, hero)
             DestroyEffect(AddSpecialEffect("Earthshock", nx, ny))
             DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", nx, ny))
             local is, du = UnitDamageArea(boss, 50, nx, ny, 220)
+            DamageDestructableInRangeXY(boss,50,220,x,y)
             if du then
-                PlayBossSpeech("", "Попал")
+                PlayBossSpeech("Speech\\Pudge\\InFight\\F9", "Попал")
             else
-                PlayBossSpeech("", "Мимо")
+                PlayBossSpeech("Speech\\Pudge\\InFight\\F10", "Мимо")
             end
             DownFloorInTimedXY(120, nx, ny)
         end)
@@ -685,7 +686,7 @@ function StrongWalk(boss, hero)
     IssuePointOrder(boss, "move", GetUnitXY(hero))
     local sec = 5
     local period = GetRandomReal(0.8, 1.1)
-    PlayBossSpeech("", "Уже иду")
+    PlayBossSpeech("Speech\\Pudge\\InFight\\F11", "Уже иду")
     if IsUnitInRange(boss, hero, 1500) then
         TimerStart(CreateTimer(), period, true, function()
             sec = sec - period
@@ -696,6 +697,7 @@ function StrongWalk(boss, hero)
             local x, y = GetUnitXY(boss)
             DestroyEffect(AddSpecialEffect("Earthshock", x, y))
             UnitDamageArea(boss, 50, x, y, 300)
+            DamageDestructableInRangeXY(boss,50,300,x,y)
         end)
     end
 end

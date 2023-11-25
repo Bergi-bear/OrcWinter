@@ -50,15 +50,15 @@ function RegistryNewItem(unit)
                 HeroCandyHeal(GetUnitData(entering),1)
                 local r=GetRandomInt(1,6)
                 if r==1 then
-                    PlayMonoSpeech("","Исцеление")
+                    PlayMonoSpeech("Speech\\Peon\\CandyHeal\\H"..r,"Исцеление")
                 elseif r==2 then
-                    PlayMonoSpeech("","Вкусно!")
+                    PlayMonoSpeech("Speech\\Peon\\CandyHeal\\H"..r,"Вкусно!")
                 elseif r==3 then
-                    PlayMonoSpeech("","Конфетка!")
+                    PlayMonoSpeech("Speech\\Peon\\CandyHeal\\H"..r,"Конфетка!")
                 elseif r==4 then
-                    PlayMonoSpeech("","О, ещё конфетка!")
+                    PlayMonoSpeech("Speech\\Peon\\CandyHeal\\H"..r,"О, ещё конфетка!")
                 elseif r==5 then
-                    PlayMonoSpeech("","Это меня не много исцелит!")
+                    PlayMonoSpeech("Speech\\Peon\\CandyHeal\\H"..r,"Это меня не много исцелит!")
                 end
             end
             --KillUnit(unit)

@@ -163,7 +163,7 @@ function StartHookAI(unit, timed,scale)
                         if UnitAlive(unit) then
                             UnitCreateHook(unit, angle,scale)
                             if unit==GBoss then
-                                PlayBossSpeech("", "Свежее мясо")
+                                PlayBossSpeech("Speech\\Pudge\\InFight\\F12", "Свежее мясо")
                             end
                         end
                     end)
