@@ -16,16 +16,18 @@ function CreateEnteringFrame(data, name)
         BlzFrameSetVisible(text, GetLocalPlayer() == Player(data.pid))
         local sec = 5
         local a = 250
-        TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
-            sec = sec - TIMER_PERIOD
-            a = a - 1
-            BlzFrameSetAlpha(text, a)
+        TimerStart(CreateTimer(), 5, false, function()
+            TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
+                sec = sec - TIMER_PERIOD
+                a = a - 1
+                BlzFrameSetAlpha(text, a)
 
-            if sec <= 0 then
-                data.ShowEntering = false
-                BlzDestroyFrame(text)
-                DestroyTimer(GetExpiredTimer())
-            end
+                if sec <= 0 then
+                    data.ShowEntering = false
+                    BlzDestroyFrame(text)
+                    DestroyTimer(GetExpiredTimer())
+                end
+            end)
         end)
     end
 end

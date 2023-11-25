@@ -15,7 +15,7 @@ function CreateMouseHelper()
 
     local new_FrameChargesText2 = BlzCreateFrameByType("TEXT", "ButtonChargesText", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
     BlzFrameSetAbsPoint(new_FrameChargesText2, FRAMEPOINT_CENTER, 0.1, 0.17)
-    BlzFrameSetText(new_FrameChargesText2, "Нажимайте WASD, чтобы двигаться")
+    BlzFrameSetText(new_FrameChargesText2, "Нажимайте WASD, чтобы двигаться \nНажимайте RMB, чтобы стрелять по области \nУдерживайте R для перезапуска уровня ")
 
     local new_FrameChargesText3 = BlzCreateFrameByType("TEXT", "ButtonChargesText", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
     BlzFrameSetAbsPoint(new_FrameChargesText3, FRAMEPOINT_CENTER, 0.1, 0.29)

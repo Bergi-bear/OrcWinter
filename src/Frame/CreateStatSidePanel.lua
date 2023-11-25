@@ -30,7 +30,7 @@ function CreAteStatPanelElement(data, texture, parent, x, y)
     BlzFrameSetParent(text, BlzGetFrameByName("ConsoleUIBackdrop", 0))
     BlzFrameSetText(text, 9999)
     BlzFrameSetScale(text, 0.9)
-    BlzFrameSetPoint(text, FRAMEPOINT_LEFT, infoFrame, FRAMEPOINT_RIGHT, 0.0, 0.0)
+    BlzFrameSetPoint(text, FRAMEPOINT_LEFT, infoFrame, FRAMEPOINT_RIGHT, 0.002, 0.0) --Было 0
     TimerStart(CreateTimer(), 0.2, true, function()
         if texture == "ReplaceableTextures\\CommandButtons\\BTNThoriumMelee.blp" then
             BlzFrameSetText(text, R2I(data.BaseDamage))

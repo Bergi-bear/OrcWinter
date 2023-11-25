@@ -19,6 +19,7 @@ udg_CurrentOrder = 0
 udg_SpikeUnitsForRemove = nil
 udg_Remove08 = nil
 udg_HoleIsWork = false
+udg_IsBrainGame = false
 gg_rct_Region_038 = nil
 gg_rct_Region_024 = nil
 gg_rct_TrapZone = nil
@@ -279,6 +280,7 @@ gg_unit_h00B_0271 = nil
 gg_unit_h00B_0276 = nil
 gg_unit_u001_0395 = nil
 gg_unit_u001_0396 = nil
+gg_unit_h00I_0601 = nil
 gg_unit_h00M_0257 = nil
 gg_unit_h00H_0590 = nil
 gg_unit_h00H_0569 = nil
@@ -299,6 +301,7 @@ gg_dest_DTfx_14690 = nil
 gg_dest_DTfx_14688 = nil
 gg_dest_B00B_14732 = nil
 gg_dest_DTfx_15068 = nil
+gg_dest_B00E_19723 = nil
 gg_dest_DTfx_15314 = nil
 gg_dest_DTfx_15071 = nil
 gg_dest_B00B_15274 = nil
@@ -357,7 +360,6 @@ gg_dest_B00D_19707 = nil
 gg_dest_B00E_19641 = nil
 gg_dest_B00B_19643 = nil
 gg_dest_B00D_19706 = nil
-gg_dest_B00E_19723 = nil
 function InitGlobals()
 local i = 0
 
@@ -370,6 +372,7 @@ udg_CurrentOrder = 1
 udg_SpikeUnitsForRemove = CreateGroup()
 udg_Remove08 = CreateGroup()
 udg_HoleIsWork = true
+udg_IsBrainGame = false
 end
 
 function InitSounds()
@@ -601,72 +604,72 @@ local life
 
 gg_dest_B004_2162 = BlzCreateDestructableWithSkin(FourCC("B004"), -128.0, -192.0, 325.000, 3.000, 0, FourCC("B004"))
 gg_dest_B007_5312 = BlzCreateDestructableWithSkin(FourCC("B007"), -7552.0, 4224.0, 211.000, 3.000, 0, FourCC("B007"))
-gg_dest_B00B_16430 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11136.0, 2426.0, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_19643 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 17013.9, 4349.7, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
-gg_dest_B00B_17533 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 12156.2, 3.1, 832.0, 270.000, 1.850, 0, FourCC("B00B"))
+gg_dest_B00B_16430 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11136.0, 2426.0, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_16092 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 18043.0, 7294.2, 838.4, 270.000, 1.650, 0, FourCC("B00B"))
-gg_dest_B00B_14785 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11344.6, 8373.0, 832.0, 270.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_17599 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 14969.5, -3076.2, 832.0, 180.000, 1.850, 0, FourCC("B00B"))
+gg_dest_B00B_14785 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11344.6, 8373.0, 832.0, 270.000, 1.650, 0, FourCC("B00B"))
+gg_dest_B00B_17533 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 12156.2, 3.1, 832.0, 270.000, 1.850, 0, FourCC("B00B"))
 gg_dest_B00B_16153 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15215.2, 5364.9, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_14732 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 13812.6, 8326.6, 838.4, 90.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_15713 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11516.0, 4100.8, 844.8, 90.000, 1.450, 0, FourCC("B00B"))
-gg_dest_B00B_17182 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15231.9, -760.3, 844.8, 270.000, 1.450, 0, FourCC("B00B"))
 gg_dest_B00B_15515 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15227.5, 6283.1, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_15274 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 10618.1, 6012.7, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
+gg_dest_B00B_17182 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15231.9, -760.3, 844.8, 270.000, 1.450, 0, FourCC("B00B"))
 gg_dest_B00B_16680 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15221.9, 2433.2, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
-gg_dest_B00D_17529 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10112.0, -1024.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_17531 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11584.0, -704.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_17530 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10112.0, 256.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_17275 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12992.0, -768.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_17276 = BlzCreateDestructableWithSkin(FourCC("B00D"), 14272.0, -1024.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_17155 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, 1280.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_16702 = BlzCreateDestructableWithSkin(FourCC("B00D"), 13056.0, 3456.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_15532 = BlzCreateDestructableWithSkin(FourCC("B00D"), 14016.0, 6080.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_15710 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12224.0, 5184.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_15711 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10752.0, 3328.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_15712 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12096.0, 3264.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_17596 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, -1920.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_17531 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11584.0, -704.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_15709 = BlzCreateDestructableWithSkin(FourCC("B00D"), 9984.0, 5376.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16257 = BlzCreateDestructableWithSkin(FourCC("B00D"), 14080.0, 4608.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_17597 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, -3200.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_17596 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, -1920.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16254 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12864.0, 4160.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16255 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15296.0, 4160.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16256 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12992.0, 5312.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16427 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10304.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_17155 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, 1280.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_19707 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15744.0, 4352.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_16701 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 14016.0, 2816.0, 1088.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_17597 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, -3200.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_17532 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11584.0, -64.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16416 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11968.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16421 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11968.0, 1408.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16426 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10304.0, 1408.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16685 = BlzCreateDestructableWithSkin(FourCC("B00D"), 13696.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_19706 = BlzCreateDestructableWithSkin(FourCC("B00D"), 17536.0, 4352.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_19707 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15744.0, 4352.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16596 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10048.0, 1792.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16597 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12288.0, 1792.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16598 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11136.0, 1216.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16599 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11136.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16686 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, 3456.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16684 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 13056.0, 2304.0, 901.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_16702 = BlzCreateDestructableWithSkin(FourCC("B00D"), 13056.0, 3456.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_17530 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10112.0, 256.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16699 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_16701 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 14016.0, 2816.0, 1088.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00E_19642 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 18167.5, 5189.9, 1030.4, 270.000, 1.000, 0, FourCC("B00E"))
+gg_dest_B00D_17529 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10112.0, -1024.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_19706 = BlzCreateDestructableWithSkin(FourCC("B00D"), 17536.0, 4352.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00E_19641 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 17914.5, 5501.6, 1030.4, 0.000, 1.000, 0, FourCC("B00E"))
 gg_dest_B00E_15514 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 14990.0, 6473.7, 972.8, 270.000, 1.000, 0, FourCC("B00E"))
 gg_dest_B00E_15516 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 14600.6, 6946.5, 979.2, 270.000, 1.000, 0, FourCC("B00E"))
 gg_dest_B00E_15513 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 13441.1, 6941.4, 1004.8, 90.000, 1.000, 0, FourCC("B00E"))
 gg_dest_B00E_15517 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 12948.1, 6482.3, 979.2, 90.000, 1.000, 0, FourCC("B00E"))
+gg_dest_B00E_19642 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 18167.5, 5189.9, 1030.4, 270.000, 1.000, 0, FourCC("B00E"))
 gg_dest_B00E_19723 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 16961.9, 5501.8, 1017.6, 0.000, 1.000, 0, FourCC("B00E"))
 gg_dest_B00F_17534 = BlzCreateDestructableWithSkin(FourCC("B00F"), 10112.0, -384.0, 270.000, 1.000, 0, FourCC("B00F"))
 gg_dest_DTfx_15068 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10112.0, 6272.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_14688 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 14912.0, 8256.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_15071 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 12352.0, 5952.0, 270.000, 1.000, 0, FourCC("DTfx"))
+gg_dest_DTfx_14832 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 11584.0, 8064.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_17980 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 15744.0, 7296.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_16046 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 16512.0, 6272.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_16051 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 17536.0, 6272.0, 270.000, 1.000, 0, FourCC("DTfx"))
-gg_dest_DTfx_14832 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 11584.0, 8064.0, 270.000, 1.000, 0, FourCC("DTfx"))
-gg_dest_DTfx_18124 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 12928.0, -3968.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_14834 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10560.0, 8064.0, 270.000, 1.000, 0, FourCC("DTfx"))
-gg_dest_DTfx_15314 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10112.0, 7296.0, 270.000, 1.000, 0, FourCC("DTfx"))
+gg_dest_DTfx_18124 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 12928.0, -3968.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_14833 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10688.0, 8896.0, 270.000, 1.000, 0, FourCC("DTfx"))
+gg_dest_DTfx_15314 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10112.0, 7296.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_5091 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 11584.0, 8896.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_14690 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 15040.0, 9024.0, 270.000, 1.000, 0, FourCC("DTfx"))
 end
@@ -867,7 +870,7 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00J"), 11340.9, 6229.2, 238.290, FourCC("h
 u = BlzCreateUnitWithSkin(p, FourCC("h00N"), 11085.4, 4305.4, 58.460, FourCC("h00N"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00P"), 11206.2, 4294.0, 290.279, FourCC("h00P"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14658.0, -68.6, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00I"), 799.4, -2193.8, 0.000, FourCC("h00I"))
+gg_unit_h00I_0601 = BlzCreateUnitWithSkin(p, FourCC("h00I"), 799.4, -2193.8, 0.000, FourCC("h00I"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 11068.8, -1018.3, 0.000, FourCC("h00F"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 11196.0, -1018.0, 0.000, FourCC("h00F"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 11074.0, 258.1, 0.000, FourCC("h00F"))
@@ -1707,7 +1710,7 @@ SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 17749.1, 7116.1, 218.170, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("n00D"), 8574.0, -4760.7, 202.020, FourCC("n00D"))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 13631.0, 7085.6, 270.344, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 13630.4, 7140.9, 270.344, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 14803.5, 6246.3, 336.687, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
@@ -11126,16 +11129,18 @@ function CreateEnteringFrame(data, name)
         BlzFrameSetVisible(text, GetLocalPlayer() == Player(data.pid))
         local sec = 5
         local a = 250
-        TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
-            sec = sec - TIMER_PERIOD
-            a = a - 1
-            BlzFrameSetAlpha(text, a)
+        TimerStart(CreateTimer(), 5, false, function()
+            TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
+                sec = sec - TIMER_PERIOD
+                a = a - 1
+                BlzFrameSetAlpha(text, a)
 
-            if sec <= 0 then
-                data.ShowEntering = false
-                BlzDestroyFrame(text)
-                DestroyTimer(GetExpiredTimer())
-            end
+                if sec <= 0 then
+                    data.ShowEntering = false
+                    BlzDestroyFrame(text)
+                    DestroyTimer(GetExpiredTimer())
+                end
+            end)
         end)
     end
 end
@@ -11421,7 +11426,7 @@ function CreAteStatPanelElement(data, texture, parent, x, y)
     BlzFrameSetParent(text, BlzGetFrameByName("ConsoleUIBackdrop", 0))
     BlzFrameSetText(text, 9999)
     BlzFrameSetScale(text, 0.9)
-    BlzFrameSetPoint(text, FRAMEPOINT_LEFT, infoFrame, FRAMEPOINT_RIGHT, 0.0, 0.0)
+    BlzFrameSetPoint(text, FRAMEPOINT_LEFT, infoFrame, FRAMEPOINT_RIGHT, 0.002, 0.0) --Было 0
     TimerStart(CreateTimer(), 0.2, true, function()
         if texture == "ReplaceableTextures\\CommandButtons\\BTNThoriumMelee.blp" then
             BlzFrameSetText(text, R2I(data.BaseDamage))
@@ -11559,6 +11564,7 @@ function InitMenu()
     --CreateVictoryElderBorder() -- тестовый показ
     --CreateShop() --для теста опять таки
     CreateGoldInterFace(HERO[0])
+    CreateRTips()
     CreateStatSidePanel(HERO[0])
     CreateGameStatWindow(HERO[0])
     --CreateCustomPortrait()
@@ -11867,7 +11873,7 @@ function CreateEActions()
                     if not udg_WisDead then
                         Trig_MerchQuestCinematic_Actions()
                     else
-                        print("За работу и оплата")
+                        --print("За работу и оплата")
                         normal_sound("Speech\\CookQuest\\cook5")
                         UnitAddGold(data.UnitHero, 2000)
                     end
@@ -11971,7 +11977,7 @@ function CreateMouseHelper()
 
     local new_FrameChargesText2 = BlzCreateFrameByType("TEXT", "ButtonChargesText", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
     BlzFrameSetAbsPoint(new_FrameChargesText2, FRAMEPOINT_CENTER, 0.1, 0.17)
-    BlzFrameSetText(new_FrameChargesText2, "Нажимайте WASD, чтобы двигаться")
+    BlzFrameSetText(new_FrameChargesText2, "Нажимайте WASD, чтобы двигаться \nНажимайте RMB, чтобы стрелять по области \nУдерживайте R для перезапуска уровня ")
 
     local new_FrameChargesText3 = BlzCreateFrameByType("TEXT", "ButtonChargesText", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
     BlzFrameSetAbsPoint(new_FrameChargesText3, FRAMEPOINT_CENTER, 0.1, 0.29)
@@ -12478,7 +12484,9 @@ function UnitStartFallAnim(hero, maxZ)
     SetUnitZ(hero, z)
     local speed = 20
     TimerStart(CreateTimer(), 0.1, false, function()
-        SetUnitAnimationByIndex(hero, 15)
+        if GetUnitTypeId(hero) == FourCC("O000") then
+            SetUnitAnimationByIndex(hero, 15)
+        end
     end)
     local sb = false
     TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
@@ -12492,6 +12500,28 @@ function UnitStartFallAnim(hero, maxZ)
             --print(grow)
             SetSoundPitch(s, grow)
             KillDestructableByTypeInPoint(ButtonsIDTable, 200, GetUnitXY(hero))
+            if GetUnitTypeId(hero) == FourCC("O000") then
+                r = GetRandomInt(1, 8)
+                if r == 1 then
+                    normal_sound("spine-bone-break-1", GetUnitXY(hero))
+                    PlayMonoSpeech("Speech\\Peon\\Fall\\F"..r, "Коленям после такого не жить")
+                elseif r == 2 then
+                    PlayMonoSpeech("Speech\\Peon\\Fall\\F"..r, "Супер геройское приземление")
+                elseif r == 3 then
+                    PlayMonoSpeech("Speech\\Peon\\Fall\\F"..r, "Опять приземлился на лицо")
+                elseif r == 4 then
+                    PlayMonoSpeech("Speech\\Peon\\Fall\\F"..r, "Ещё пару таких падений я точно не переживу")
+                elseif r == 5 then
+                    normal_sound("spine-bone-break-1", GetUnitXY(hero))
+                elseif r == 6 then
+                        PlayMonoSpeech("Speech\\Peon\\Fall\\F"..r, "На этот раз вроде ничего не сломал")
+                elseif r == 7 then
+                    PlayMonoSpeech("Speech\\Peon\\Fall\\F"..r "Тут высота не меньше 5 метров")
+                elseif r == 8 then
+                    PlayMonoSpeech("Speech\\Peon\\Fall\\F"..r, "В лепёшку.... а нет, я в норме")
+                end
+
+            end
         end
         if z <= -200 then
             DestroyTimer(GetExpiredTimer())
@@ -13867,10 +13897,22 @@ function CreateWASDActions()
                         end
                         UnitAddForceSimple(data.UnitHero, data.DirectionMove, dashSpeed, dist, "ignore") --САМ рывок при нажатии пробела
                         data.StatDash = data.StatDash + 1
-
-                        --local x,y=GetUnitXY(data.UnitHero)
-                        --local xEnd, yEnd=MoveXY(x,y,dist,data.DirectionMove)
-                        --ChkEndpoint(x, y, xEnd, yEnd)
+                        local r = GetRandomInt(1, 7)
+                        if r == 1 then
+                            PlayMonoSpeech("Speech\\Peon\\Dash\\D"..r, "Я не так молод, чтобы так кувыркаться")
+                        elseif r == 2 then
+                            PlayMonoSpeech("Speech\\Peon\\Dash\\D"..r, "Ты слишком часто нажимаешь пробел")
+                        elseif r == 3 then
+                            PlayMonoSpeech("Speech\\Peon\\Dash\\D"..r, "Поворот в воздухе на 360")
+                        elseif r == 4 then
+                            PlayMonoSpeech("Speech\\Peon\\Dash\\D"..r, "Кувырок")
+                        elseif r == 5 then
+                            PlayMonoSpeech("Speech\\Peon\\Dash\\D"..r, "Переворот")
+                        elseif r == 6 then
+                            PlayMonoSpeech("Speech\\Peon\\Dash\\D"..r, "Перекат, перекат")
+                        elseif r == 7 then
+                            PlayMonoSpeech("Speech\\Peon\\Dash\\D"..r, "Так и голова закружится")
+                        end
                     end
                 end
                 if data.ArrowDamageAfterCharge then
@@ -14532,7 +14574,11 @@ function CreateGoldInterFace(data)
         BlzFrameSetEnable(BlzGetTriggerFrame(), false)
         BlzFrameSetEnable(BlzGetTriggerFrame(), true)
         --BlzFrameSetVisible(SHOP, true)
-        CreateShop()
+        if not udg_IsBrainGame then
+            CreateShop()
+        else
+            print("Недоступно в этом игровом режиме ")
+        end
     end)
 
     local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", SelfFrame, "", 0)
@@ -14547,6 +14593,26 @@ function CreateGoldInterFace(data)
     end)
     ShopTipFH=CreateJumpArrow(SelfFrame)
     BlzFrameSetVisible(ShopTipFH,false)
+end
+
+function CreateRTips()
+    local goldIco = "Rkey"
+    local NextPoint = 0.039
+    --local SelfFrame = BlzCreateFrameByType('GLUEBUTTON', 'FaceButton', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 'ScoreScreenTabButtonTemplate', 0)
+    local buttonIconFrame = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', SelfFrame, '', 0)
+    --BlzFrameSetAllPoints(buttonIconFrame, SelfFrame)
+    BlzFrameSetTexture(buttonIconFrame, goldIco, 0, true)
+    BlzFrameSetSize(buttonIconFrame, NextPoint / 2, NextPoint / 2)
+    BlzFrameSetAbsPoint(buttonIconFrame, FRAMEPOINT_CENTER, 0.80, 0.02)
+    BlzFrameSetParent(buttonIconFrame, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    --BlzFrameSetParent(buttonIconFrame, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+
+    local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", buttonIconFrame, "", 0)
+    BlzFrameSetParent(text, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    BlzFrameSetText(text, "-R")
+    BlzFrameSetScale(text, 2)
+    BlzFrameSetPoint(text, FRAMEPOINT_LEFT, buttonIconFrame, FRAMEPOINT_LEFT, 0.011, 0.0)
+
 end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
@@ -16738,6 +16804,9 @@ return true
 end
 
 function Trig_StartBrainGame_Actions()
+DisableTrigger(GetTriggeringTrigger())
+udg_IsBrainGame = true
+KillUnit(gg_unit_h00I_0601)
 ClearMapMusicBJ()
 PlayMusicBJ(gg_snd_The_Astral_Academy_Gardens)
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter00))

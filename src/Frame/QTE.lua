@@ -91,7 +91,7 @@ function CreateEActions()
                     if not udg_WisDead then
                         Trig_MerchQuestCinematic_Actions()
                     else
-                        print("За работу и оплата")
+                        --print("За работу и оплата")
                         normal_sound("Speech\\CookQuest\\cook5")
                         UnitAddGold(data.UnitHero, 2000)
                     end

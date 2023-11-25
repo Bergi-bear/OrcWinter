@@ -12,7 +12,9 @@ function UnitStartFallAnim(hero, maxZ)
     SetUnitZ(hero, z)
     local speed = 20
     TimerStart(CreateTimer(), 0.1, false, function()
-        SetUnitAnimationByIndex(hero, 15)
+        if GetUnitTypeId(hero) == FourCC("O000") then
+            SetUnitAnimationByIndex(hero, 15)
+        end
     end)
     local sb = false
     TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
@@ -26,6 +28,28 @@ function UnitStartFallAnim(hero, maxZ)
             --print(grow)
             SetSoundPitch(s, grow)
             KillDestructableByTypeInPoint(ButtonsIDTable, 200, GetUnitXY(hero))
+            if GetUnitTypeId(hero) == FourCC("O000") then
+                r = GetRandomInt(1, 8)
+                if r == 1 then
+                    normal_sound("spine-bone-break-1", GetUnitXY(hero))
+                    PlayMonoSpeech("Speech\\Peon\\Fall\\F"..r, "Коленям после такого не жить")
+                elseif r == 2 then
+                    PlayMonoSpeech("Speech\\Peon\\Fall\\F"..r, "Супер геройское приземление")
+                elseif r == 3 then
+                    PlayMonoSpeech("Speech\\Peon\\Fall\\F"..r, "Опять приземлился на лицо")
+                elseif r == 4 then
+                    PlayMonoSpeech("Speech\\Peon\\Fall\\F"..r, "Ещё пару таких падений я точно не переживу")
+                elseif r == 5 then
+                    normal_sound("spine-bone-break-1", GetUnitXY(hero))
+                elseif r == 6 then
+                        PlayMonoSpeech("Speech\\Peon\\Fall\\F"..r, "На этот раз вроде ничего не сломал")
+                elseif r == 7 then
+                    PlayMonoSpeech("Speech\\Peon\\Fall\\F"..r "Тут высота не меньше 5 метров")
+                elseif r == 8 then
+                    PlayMonoSpeech("Speech\\Peon\\Fall\\F"..r, "В лепёшку.... а нет, я в норме")
+                end
+
+            end
         end
         if z <= -200 then
             DestroyTimer(GetExpiredTimer())

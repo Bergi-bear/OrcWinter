@@ -15,6 +15,7 @@ function InitMenu()
     --CreateVictoryElderBorder() -- тестовый показ
     --CreateShop() --для теста опять таки
     CreateGoldInterFace(HERO[0])
+    CreateRTips()
     CreateStatSidePanel(HERO[0])
     CreateGameStatWindow(HERO[0])
     --CreateCustomPortrait()

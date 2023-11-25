@@ -252,7 +252,11 @@ function CreateGoldInterFace(data)
         BlzFrameSetEnable(BlzGetTriggerFrame(), false)
         BlzFrameSetEnable(BlzGetTriggerFrame(), true)
         --BlzFrameSetVisible(SHOP, true)
-        CreateShop()
+        if not udg_IsBrainGame then
+            CreateShop()
+        else
+            print("Недоступно в этом игровом режиме ")
+        end
     end)
 
     local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", SelfFrame, "", 0)
@@ -267,4 +271,24 @@ function CreateGoldInterFace(data)
     end)
     ShopTipFH=CreateJumpArrow(SelfFrame)
     BlzFrameSetVisible(ShopTipFH,false)
+end
+
+function CreateRTips()
+    local goldIco = "Rkey"
+    local NextPoint = 0.039
+    --local SelfFrame = BlzCreateFrameByType('GLUEBUTTON', 'FaceButton', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 'ScoreScreenTabButtonTemplate', 0)
+    local buttonIconFrame = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', SelfFrame, '', 0)
+    --BlzFrameSetAllPoints(buttonIconFrame, SelfFrame)
+    BlzFrameSetTexture(buttonIconFrame, goldIco, 0, true)
+    BlzFrameSetSize(buttonIconFrame, NextPoint / 2, NextPoint / 2)
+    BlzFrameSetAbsPoint(buttonIconFrame, FRAMEPOINT_CENTER, 0.80, 0.02)
+    BlzFrameSetParent(buttonIconFrame, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    --BlzFrameSetParent(buttonIconFrame, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+
+    local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", buttonIconFrame, "", 0)
+    BlzFrameSetParent(text, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    BlzFrameSetText(text, "-R")
+    BlzFrameSetScale(text, 2)
+    BlzFrameSetPoint(text, FRAMEPOINT_LEFT, buttonIconFrame, FRAMEPOINT_LEFT, 0.011, 0.0)
+
 end

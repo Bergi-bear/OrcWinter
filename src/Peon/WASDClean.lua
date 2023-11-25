@@ -810,10 +810,22 @@ function CreateWASDActions()
                         end
                         UnitAddForceSimple(data.UnitHero, data.DirectionMove, dashSpeed, dist, "ignore") --САМ рывок при нажатии пробела
                         data.StatDash = data.StatDash + 1
-
-                        --local x,y=GetUnitXY(data.UnitHero)
-                        --local xEnd, yEnd=MoveXY(x,y,dist,data.DirectionMove)
-                        --ChkEndpoint(x, y, xEnd, yEnd)
+                        local r = GetRandomInt(1, 20)
+                        if r == 1 then
+                            PlayMonoSpeech("Speech\\Peon\\Dash\\D"..r, "Я не так молод, чтобы так кувыркаться")
+                        elseif r == 2 then
+                            PlayMonoSpeech("Speech\\Peon\\Dash\\D"..r, "Ты слишком часто нажимаешь пробел")
+                        elseif r == 3 then
+                            PlayMonoSpeech("Speech\\Peon\\Dash\\D"..r, "Поворот в воздухе на 360")
+                        elseif r == 4 then
+                            PlayMonoSpeech("Speech\\Peon\\Dash\\D"..r, "Кувырок")
+                        elseif r == 5 then
+                            PlayMonoSpeech("Speech\\Peon\\Dash\\D"..r, "Переворот")
+                        elseif r == 6 then
+                            PlayMonoSpeech("Speech\\Peon\\Dash\\D"..r, "Перекат, перекат")
+                        elseif r == 7 then
+                            PlayMonoSpeech("Speech\\Peon\\Dash\\D"..r, "Так и голова закружится")
+                        end
                     end
                 end
                 if data.ArrowDamageAfterCharge then
