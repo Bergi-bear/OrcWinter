@@ -9,9 +9,15 @@ function PlayBossSpeech(sound, text)
         --print("первый диалог")
         CreteDialogBoxBoss()
     end
+    if not text then
+        text="У меня нет слов"
+    end
     local s = nil
     if not BlzFrameIsVisible(TexBoxBoss) and UnitAlive(GBoss) then
         s = normal_sound(sound)
+        if GetUnitTypeId(GBoss)==FourCC("n007") then -- мясник говорит ниже
+            SetSoundPitch(s, 0.8)
+        end
         local sd = GetSoundDuration(s)
         --SetCinematicScene(HeroID, 1, "peon", "text", 2, 2)
         if sd <= 10 then

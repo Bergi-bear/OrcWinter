@@ -810,7 +810,7 @@ function CreateWASDActions()
                         end
                         UnitAddForceSimple(data.UnitHero, data.DirectionMove, dashSpeed, dist, "ignore") --САМ рывок при нажатии пробела
                         data.StatDash = data.StatDash + 1
-                        local r = GetRandomInt(1, 100)
+                        local r = GetRandomInt(1, 120)
                         if r == 1 then
                             PlayMonoSpeech("Speech\\Peon\\Dash\\D"..r, "Я не так молод, чтобы так кувыркаться")
                         elseif r == 2 then

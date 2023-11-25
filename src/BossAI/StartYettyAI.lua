@@ -328,7 +328,9 @@ function YettyCouchHero(boss, hero, duration)
             normal_sound("spine-bone-break-1", GetUnitXY(hero))
             PlayMonoSpeech("Speech\\Peon\\Yetty\\peon7", "О, позвонок на место встал!")
         elseif r == 5 then
-            PlayBossSpeech("Speech\\Yetti\\tineproidesh", "Ты не пройдёшь")
+            if GetUnitTypeId(boss)~=FourCC("n007") then
+                PlayBossSpeech("Speech\\Yetti\\tineproidesh", "Ты не пройдёшь")
+            end
         end
 
         StunUnit(hero, 3)

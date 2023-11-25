@@ -268,7 +268,7 @@ function StartButcherAI(xs, ys)
                 --print("фаза", phase)
                 local rph = GetRandomInt(1, phase)
                 if rph == 1 then
-                    BossHooked(boss, 5)
+                    BossHooked(boss, 5,1.1)
                 elseif rph == 2 then
                     ButcherThrowGround(boss, hero)
                 end
@@ -278,7 +278,7 @@ function StartButcherAI(xs, ys)
                 --print("фаза", phase)
                 local rph = GetRandomInt(1, phase)
                 if rph == 1 then
-                    BossHooked(boss, 5)
+                    BossHooked(boss, 5,1.2)
                 elseif rph == 2 then
                     ButcherThrowGround(boss, hero)
                 elseif rph == 3 then
@@ -290,7 +290,7 @@ function StartButcherAI(xs, ys)
                 PhaseOn = false
                 local rph = GetRandomInt(1, phase)
                 if rph == 1 then
-                    BossHooked(boss, 5)
+                    BossHooked(boss, 5,1.3)
                 elseif rph == 2 then
                     ButcherThrowGround(boss, hero)
                 elseif rph == 3 then
@@ -306,7 +306,7 @@ function StartButcherAI(xs, ys)
 
                 local rph = GetRandomInt(1, phase)
                 if rph == 1 then
-                    BossHooked(boss, 5,1.5)
+                    BossHooked(boss, 5,1.4)
                 elseif rph == 2 then
                     ButcherThrowGround(boss, hero)
                 elseif rph == 3 then
@@ -325,7 +325,7 @@ function StartButcherAI(xs, ys)
 
                 local rph = GetRandomInt(1, phase)
                 if rph == 1 then
-                    BossHooked(boss, 5,2)
+                    BossHooked(boss, 5,1.5)
                 elseif rph == 2 then
                     ButcherThrowGround(boss, hero)
                 elseif rph == 3 then
@@ -343,7 +343,7 @@ function StartButcherAI(xs, ys)
                 PhaseOn = false
                 local rph = GetRandomInt(1, phase)
                 if rph == 1 then
-                    BossHooked(boss, 5,2)
+                    BossHooked(boss, 5,1.6)
                 elseif rph == 2 then
                     ButcherThrowGround(boss, hero)
                 elseif rph == 3 then
@@ -362,7 +362,7 @@ function StartButcherAI(xs, ys)
                 PhaseOn = false
                 local rph = GetRandomInt(1, phase)
                 if rph == 1 then
-                    BossHooked(boss, 5,2)
+                    BossHooked(boss, 5,1.7)
                 elseif rph == 2 then
                     ButcherThrowGround(boss, hero)
                 elseif rph == 3 then
@@ -383,7 +383,7 @@ function StartButcherAI(xs, ys)
                 PhaseOn = false
                 local rph = GetRandomInt(1, phase)
                 if rph == 1 then
-                    BossHooked(boss, 5,2)
+                    BossHooked(boss, 5,1.8)
                 elseif rph == 2 then
                     ButcherThrowGround(boss, hero)
                 elseif rph == 3 then
@@ -406,7 +406,7 @@ function StartButcherAI(xs, ys)
                 PhaseOn = false
                 local rph = GetRandomInt(1, phase)
                 if rph == 1 then
-                    BossHooked(boss, 5,2)
+                    BossHooked(boss, 5,1.9)
                 elseif rph == 2 then
                     ButcherThrowGround(boss, hero)
                 elseif rph == 3 then
@@ -479,7 +479,7 @@ function ButcherRoundSpike(boss, k)
         for i = 1, 15 + n do
             local nx, ny = MoveXY(x, y, dist, angle * i)
             --print("i",angle*i)
-            local eff = AddSpecialEffect("MechaImpale", nx, ny)
+            local eff = AddSpecialEffect("MechaImpaleNoDust", nx, ny)
             BlzSetSpecialEffectYaw(eff, math.rad(GetRandomInt(0, 360))) --angle
             TimerStart(CreateTimer(), 0.3, false, function()
                 UnitDamageArea(boss, 50, nx, ny, 80)

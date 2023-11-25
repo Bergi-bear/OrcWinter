@@ -15,7 +15,9 @@ function PlayPudgeSpeechNumber(n)
         "Там даже лестниц нет чтобы подниматься на верх",
         "Пришло время активировать самые сложные ловушки!",
         "Да сколько можно!?",
-        "Павел, а на тебе сейчас есть штаны?"
+        "Павел, а на тебе сейчас есть штаны?",
+        "Я уже готов принимать гостей, когда прейдёте, то пополню счетчик ваших смертей",
+        "Вот и открыли вы последний проход, угадайте, кто вас внизу сидит ждёт?"
     }
     if not GBoss then
         GBoss=FindUnitOfType(FourCC("n007"))
@@ -25,7 +27,5 @@ function PlayPudgeSpeechNumber(n)
     TimerStart(CreateTimer(), 2, false, function()
         CameraClearNoiseForPlayer(Player(0))
     end)
-    local s=PlayBossSpeech("Speech\\Pudge\\Q"..n,BD[n] )
-    SetSoundPitch(s, 0.8)
-
+    PlayBossSpeech("Speech\\Pudge\\Q"..n,BD[n] )
 end
