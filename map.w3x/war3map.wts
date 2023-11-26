@@ -2520,3 +2520,27 @@ STRING 872
 Вода
 }
 
+STRING 873
+// Buffs/Effects: B000 (Пузырь), EditorName (Name (Editor Only))
+{
+Пузырь
+}
+
+STRING 874
+// Units: h00R (Глыба льда), Name (Name)
+{
+Глыба льда
+}
+
+STRING 875
+// Units: h00R (Глыба льда), EditorSuffix (Name - Editor Suffix)
+{
+ (можно толкать)
+}
+
+STRING 876
+// Doodads: D05B (Стеллаж), Name (Name)
+{
+Стеллаж
+}
+

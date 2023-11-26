@@ -36,6 +36,9 @@ function UnitDamageArea(u, damage, x, y, range, flag, paramTable)
         if flag=="All" then
             UnitDamageTarget(u, e, damage, true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WHOKNOWS)
             DamageDestructableInRangeXY(u,damage,range,x,y)
+            --Досрочное удаление пузыря
+            UnitRemoveAbility(e, FourCC("A002"))
+            UnitRemoveAbility(e, FourCC("B000"))
         end
         if UnitAlive(e) and not UnitAlive(u) and (IsUnitEnemy(e, GetOwningPlayer(u)) or GetOwningPlayer(e) == Player(PLAYER_NEUTRAL_PASSIVE)) and IsUnitType(u, UNIT_TYPE_HERO) then
             --print("Герой нанёс урон будучи мертвым "..GetUnitName(u))

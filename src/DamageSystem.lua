@@ -133,13 +133,23 @@ function OnPostDamage()
 
         end
     end
+    if GetUnitTypeId(target)==FourCC("h00R") then
+        if udg_Ball then
+           -- print("Существует")
+        else
+            --print("не существует")
+            udg_Ball=target
+            InitBounceOnGUI()
+        end
+
+    end
 
     if GetOwningPlayer(caster)==Player(0) then
         --print("урон от союзника")
         caster=HERO[0].UnitHero
     end
 
-    if GetUnitTypeId(target) ~= HeroID and GetOwningPlayer(caster)==Player(0) then
+    if GetUnitTypeId(target) ~= HeroID and GetOwningPlayer(caster)==Player(0) and GetUnitTypeId(target)~=FourCC("h00R")then
         --Функция должна быть в самом низу
         AddDamage2Show(target, GetEventDamage())
         local data = GetUnitData(caster)

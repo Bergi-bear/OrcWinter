@@ -264,8 +264,13 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
             if GetUnitTypeId(heroCurrent) == FourCC("hsor") then
                 flag = "all"
             end
-            UnitDamageArea(heroCurrent, damage, x, y, CollisionRange, flag) -- УРОН ПРИ ПОПАДАНИИ
 
+            local ox,oy=GetUnitXY(hero)
+            SetUnitX(hero,x)
+            SetUnitY(hero,y)
+            UnitDamageArea(heroCurrent, damage, x, y, CollisionRange, flag) -- УРОН ПРИ ПОПАДАНИИ находится здесь
+            SetUnitX(hero,ox)
+            SetUnitY(hero,oy)
 
 
             if effectmodel == "snowball" then

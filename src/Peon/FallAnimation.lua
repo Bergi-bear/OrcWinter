@@ -3,17 +3,18 @@
 --- Created by User.
 --- DateTime: 05.11.2023 15:53
 ---
+IsUnitFall = {}
 function UnitStartFallAnim(hero, maxZ)
+    IsUnitFall[GetHandleId(hero)] = true
     StunUnit(hero, 5)
     SetUnitTimeScale(hero, 1)
-
     local z = GetUnitZ(hero) + maxZ
     local zNormal = GetUnitZ(hero)
     SetUnitZ(hero, z)
     local speed = 20
     TimerStart(CreateTimer(), 0.1, false, function()
         if GetUnitTypeId(hero) == FourCC("O000") then
-            SetUnitAnimationByIndex(hero, 15)
+            SetUnitAnimationByIndex(hero, 15)-- анимация смерти?
         end
     end)
     local sb = false
@@ -50,9 +51,10 @@ function UnitStartFallAnim(hero, maxZ)
                 end
             end
         end
-        if z <= -200 then
+        if z <= -10 then
             DestroyTimer(GetExpiredTimer())
             UnitRemoveStun(hero)
+            IsUnitFall[GetHandleId(hero)] = false
         end
     end)
 end

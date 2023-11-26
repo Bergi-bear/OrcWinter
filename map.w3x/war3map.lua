@@ -1120,6 +1120,7 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 10740.6, 1412.7, 242.987, FourCC("h
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11522.5, 2183.7, 242.987, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11520.9, 1800.1, 242.987, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11519.3, 1411.6, 242.987, FourCC("h00C"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00R"), 10971.2, 8610.7, 338.210, FourCC("h00R"))
 u = BlzCreateUnitWithSkin(p, FourCC("h000"), 13505.5, 1331.6, 270.000, FourCC("h000"))
 life = GetUnitState(u, UNIT_STATE_LIFE)
 SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
@@ -1502,7 +1503,7 @@ local unitID
 local t
 local life
 
-gg_unit_e007_0258 = BlzCreateUnitWithSkin(p, FourCC("e007"), 4809.7, -5997.2, 334.650, FourCC("e007"))
+u = BlzCreateUnitWithSkin(p, FourCC("e007"), 4809.7, -5997.2, 334.650, FourCC("e007"))
 end
 
 function CreateNeutralHostile()
@@ -2507,38 +2508,88 @@ end
 --- Created by User.
 --- DateTime: 25.10.2023 20:17
 ---
-function UnitCreateArtMissile(hero, angle, speed, distance, MaxHeight, HasMarker, effModel)
-    local range=200
+function MakeUnitArtMissile(hero, unit, angle, speed, distance, MaxHeight, HasMarker)
+    UnitAddAbility(unit, FourCC("Aloc"))
+    IsUnitFall[GetHandleId(unit)] = true
+    local range = 200
     local currentdistance = 0
     local i = 0
-    local ZStart = GetUnitZ(hero)+40
+    local ZStart = GetUnitZ(hero) + 40
     if not MaxHeight then
         MaxHeight = 0
     end
     local x, y = GetUnitXY(hero)
-    local eff=AddSpecialEffect(effModel,x,y)
-    local damage=50
+    local damage = 50
 
     if IsUnitType(hero, UNIT_TYPE_HERO) then
-        local data=GetUnitData(hero)
-        damage=data.BaseDamage*2
+        local data = GetUnitData(hero)
+        damage = data.BaseDamage * 2
     end
 
     TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
         currentdistance = currentdistance + speed
-        local f = ParabolaZ(MaxHeight , distance, i * speed) + ZStart
+        local f = ParabolaZ(MaxHeight, distance, i * speed) + ZStart
         i = i + 1
-        x,y=MoveXY(x,y,speed, angle)
-        BlzSetSpecialEffectX(eff,x)
-        BlzSetSpecialEffectY(eff,y)
-        BlzSetSpecialEffectZ(eff,f)
+        x, y = MoveXY(x, y, speed, angle)
+        SetUnitX(unit, x)
+        SetUnitY(unit, y)
+        SetUnitZ(unit, f)
         --BlzSetSpecialEffectScale(eff,5)
         if i > 3 and f <= GetTerrainZ(x, y) then
             DestroyTimer(GetExpiredTimer())
-            UnitDamageArea(hero, damage, x, y, range)
+
             --local _,d= PointContentDestructable(x,y,60,true,1)
-            DamageDestructableInRangeXY(hero,damage,range,x,y)
-            KillDestructableByTypeInPoint(ButtonsIDTable,range,x,y)
+            IsUnitFall[GetHandleId(unit)] = false
+            DamageDestructableInRangeXY(hero, damage, range, x, y)
+            KillDestructableByTypeInPoint(ButtonsIDTable, range, x, y)
+            --KillUnit(unit)
+            UnitRemoveAbility(unit,FourCC("Aloc"))
+            ShowUnit(unit,false)
+            ShowUnit(unit,true)
+            DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", x, y))
+            UnitDamageArea(hero, damage, x, y, range)
+
+        end
+    end)
+end
+
+function UnitCreateArtMissile(hero, angle, speed, distance, MaxHeight, HasMarker, effModel)
+    local range = 200
+    local currentdistance = 0
+    local i = 0
+    local ZStart = GetUnitZ(hero) + 40
+    if not MaxHeight then
+        MaxHeight = 0
+    end
+    local x, y = GetUnitXY(hero)
+    local eff = AddSpecialEffect(effModel, x, y)
+    local damage = 50
+
+    if IsUnitType(hero, UNIT_TYPE_HERO) then
+        local data = GetUnitData(hero)
+        damage = data.BaseDamage * 2
+    end
+
+    TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
+        currentdistance = currentdistance + speed
+        local f = ParabolaZ(MaxHeight, distance, i * speed) + ZStart
+        i = i + 1
+        x, y = MoveXY(x, y, speed, angle)
+        BlzSetSpecialEffectX(eff, x)
+        BlzSetSpecialEffectY(eff, y)
+        BlzSetSpecialEffectZ(eff, f)
+        --BlzSetSpecialEffectScale(eff,5)
+        if i > 3 and f <= GetTerrainZ(x, y) then
+            DestroyTimer(GetExpiredTimer())
+            local ox,oy=GetUnitXY(hero)
+            SetUnitX(hero,x)
+            SetUnitY(hero,y)
+            UnitDamageArea(hero, damage, x, y, range)
+            SetUnitX(hero,ox)
+            SetUnitY(hero,oy)
+            --local _,d= PointContentDestructable(x,y,60,true,1)
+            DamageDestructableInRangeXY(hero, damage, range, x, y)
+            KillDestructableByTypeInPoint(ButtonsIDTable, range, x, y)
             if not effModel then
                 --DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", newX, newY))
             else
@@ -2548,17 +2599,17 @@ function UnitCreateArtMissile(hero, angle, speed, distance, MaxHeight, HasMarker
         end
     end)
 end
-ButtonsIDTable={FourCC('DTfx'),FourCC('B00E'),FourCC('B00D'),FourCC('B00F')}
-function KillDestructableByTypeInPoint(idTable,range,x,y)
+ButtonsIDTable = { FourCC('DTfx'), FourCC('B00E'), FourCC('B00D'), FourCC('B00F') }
+function KillDestructableByTypeInPoint(idTable, range, x, y)
     SetRect(GlobalRect, x - range, y - range, x + range, y + range)
     EnumDestructablesInRect(GlobalRect, nil, function()
         local d = GetEnumDestructable()
         if GetDestructableLife(d) > 0 then
-            for i=1,#idTable do
-                if GetDestructableTypeId(d)==idTable[i] then
+            for i = 1, #idTable do
+                if GetDestructableTypeId(d) == idTable[i] then
                     --print(GetDestructableName(d),idTable[i])
                     KillDestructable(d)
-                    normal_sound("Sound\\Interface\\BattlenetDeath1A",x,y)
+                    normal_sound("Sound\\Interface\\BattlenetDeath1A", x, y)
                 end
             end
         end
@@ -2830,8 +2881,13 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
             if GetUnitTypeId(heroCurrent) == FourCC("hsor") then
                 flag = "all"
             end
-            UnitDamageArea(heroCurrent, damage, x, y, CollisionRange, flag) -- УРОН ПРИ ПОПАДАНИИ
 
+            local ox,oy=GetUnitXY(hero)
+            SetUnitX(hero,x)
+            SetUnitY(hero,y)
+            UnitDamageArea(heroCurrent, damage, x, y, CollisionRange, flag) -- УРОН ПРИ ПОПАДАНИИ находится здесь
+            SetUnitX(hero,ox)
+            SetUnitY(hero,oy)
 
 
             if effectmodel == "snowball" then
@@ -3145,13 +3201,23 @@ function OnPostDamage()
 
         end
     end
+    if GetUnitTypeId(target)==FourCC("h00R") then
+        if udg_Ball then
+           -- print("Существует")
+        else
+            --print("не существует")
+            udg_Ball=target
+            InitBounceOnGUI()
+        end
+
+    end
 
     if GetOwningPlayer(caster)==Player(0) then
         --print("урон от союзника")
         caster=HERO[0].UnitHero
     end
 
-    if GetUnitTypeId(target) ~= HeroID and GetOwningPlayer(caster)==Player(0) then
+    if GetUnitTypeId(target) ~= HeroID and GetOwningPlayer(caster)==Player(0) and GetUnitTypeId(target)~=FourCC("h00R")then
         --Функция должна быть в самом низу
         AddDamage2Show(target, GetEventDamage())
         local data = GetUnitData(caster)
@@ -4113,22 +4179,48 @@ function InitMouseClickEvent()
                 --print("по интерфейсу")
             else
                 local angle = AngleBetweenXY(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), x, y) / bj_DEGTORAD
-                CastSnowBall(data, angle)
-                if not data.StartRepeaterAttack then
-                    data.StartRepeaterAttack = true
-                    local period = 0.2
-                    TimerStart(CreateTimer(), period, true, function()
-                        if data.LMBIsPressed then
-                            x, y = data.fakeX, data.fakeY
-                            angle = AngleBetweenXY(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), x, y) / bj_DEGTORAD
-                            CastSnowBall(data, angle)
+                if not data.CatchUnit then
+                    CastSnowBall(data, angle)
+                    if not data.StartRepeaterAttack then
+                        data.StartRepeaterAttack = true
+                        local period = 0.2
+                        TimerStart(CreateTimer(), period, true, function()
+                            if data.LMBIsPressed then
+                                x, y = data.fakeX, data.fakeY
+                                angle = AngleBetweenXY(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), x, y) / bj_DEGTORAD
+                                CastSnowBall(data, angle)
+                            end
+                        end)
+                    end
+                else
+                    local differenceZ = GetUnitZ(data.CatchUnit)-GetUnitZ(data.UnitHero)
+                    data.UnitMissile = true
+
+                    --print("бросок захваченного", differenceZ)
+                    if differenceZ<=1 and not IsUnitFall[GetHandleId(data.CatchUnit)] then
+                        if IsUnitFall[GetHandleId(data.CatchUnit)] then
+                            print("Юнит ещё падает")
                         end
-                    end)
+                        --UnitCreateArtMissile()
+                        local dist = DistanceBetweenXY(x, y, GetUnitXY(data.UnitHero))
+                        if dist >= 600 then
+                            dist = 600
+                            x, y = MoveXY(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), dist, angle)
+                        end
+
+                        local mark = AddSpecialEffect("Spell Marker TC", x, y)
+                        BlzSetSpecialEffectScale(mark, 2)
+                        DestroyEffect(mark)
+                        BlzSetSpecialEffectColorByPlayer(mark, Player(1)) -- синий
+                        local speed = dist / 80
+                        SetUnitAnimationByIndex(data.UnitHero, 25)
+                        BlzSetUnitFacingEx(data.UnitHero, angle)
+                        MakeUnitArtMissile(data.UnitHero, data.CatchUnit, angle, speed, dist, 300)
+                        data.CatchUnit = nil
+                    end
+
                 end
-
-
             end
-
             data.LMBIsPressed = true
             data.inputEffectNumber = GetRandomInt(1, 8)
         end
@@ -4142,6 +4234,7 @@ function InitMouseClickEvent()
         if BlzGetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_LEFT then
             local data = HERO[GetPlayerId(GetTriggerPlayer())]
             data.LMBIsPressed = false
+            data.UnitMissile = false
             --ShapeDetectorClear(data)
             --ClearPoints(data)
         end
@@ -4168,12 +4261,12 @@ function InitMouseClickEvent()
             if not data.CatchUnit then
                 local dist = DistanceBetweenXY(x, y, GetUnitXY(data.UnitHero))
                 local tmpCatch = FindNearEnemyXY(data.UnitHero, 120, GetUnitXY(data.UnitHero))
-                if  GetUnitTypeId(tmpCatch) == FourCC("h00C") then
+                if GetUnitTypeId(tmpCatch) == FourCC("h00C") or GetUnitTypeId(tmpCatch) == FourCC("h00R")  then
                     data.CatchUnit = tmpCatch
                     data.CatchUnitEffect = AddSpecialEffectTarget("diwo1", data.CatchUnit, "origin")
                     local angleMagnet = AngleBetweenUnits(data.CatchUnit, data.UnitHero)
                     local distMagnet = DistanceBetweenXY(GetUnitX(data.CatchUnit), GetUnitY(data.CatchUnit), GetUnitXY(data.UnitHero))
-                    SetUnitFacing(data.CatchUnit,angleMagnet)
+                    SetUnitFacing(data.CatchUnit, angleMagnet)
                     UnitAddForceSimple(data.CatchUnit, angleMagnet, 5, distMagnet)
                 else
                     data.CatchUnit = false
@@ -4183,12 +4276,12 @@ function InitMouseClickEvent()
                     if dist <= 400 then
                         tmpCatch = FindNearEnemyXY(data.UnitHero, 400, x, y)
                         --print(dist)
-                        if  GetUnitTypeId(tmpCatch) == FourCC("h00C") then
+                        if GetUnitTypeId(tmpCatch) == FourCC("h00C") or GetUnitTypeId(tmpCatch) == FourCC("h00R") then
                             data.CatchUnit = tmpCatch
                             data.CatchUnitEffect = AddSpecialEffectTarget("diwo1", data.CatchUnit, "origin")
                             local angleMagnet = AngleBetweenUnits(data.CatchUnit, data.UnitHero)
                             local distMagnet = DistanceBetweenXY(GetUnitX(data.CatchUnit), GetUnitY(data.CatchUnit), GetUnitXY(data.UnitHero))
-                            SetUnitFacing(data.CatchUnit,angleMagnet)
+                            SetUnitFacing(data.CatchUnit, angleMagnet)
                             UnitAddForceSimple(data.CatchUnit, angleMagnet, 5, distMagnet)
                         else
                             data.CatchUnit = false
@@ -5047,6 +5140,9 @@ function UnitDamageArea(u, damage, x, y, range, flag, paramTable)
         if flag=="All" then
             UnitDamageTarget(u, e, damage, true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WHOKNOWS)
             DamageDestructableInRangeXY(u,damage,range,x,y)
+            --Досрочное удаление пузыря
+            UnitRemoveAbility(e, FourCC("A002"))
+            UnitRemoveAbility(e, FourCC("B000"))
         end
         if UnitAlive(e) and not UnitAlive(u) and (IsUnitEnemy(e, GetOwningPlayer(u)) or GetOwningPlayer(e) == Player(PLAYER_NEUTRAL_PASSIVE)) and IsUnitType(u, UNIT_TYPE_HERO) then
             --print("Герой нанёс урон будучи мертвым "..GetUnitName(u))
@@ -7307,7 +7403,7 @@ function StartButcherAI(xs, ys)
                 --print("отработало 1")
                 if not phaseCHK[phase] then
                     --print("отработало 2")
-                    AnitAddArmorTimed(boss, 50 * phase , 30 + phase * 2)
+                    ButcherAddArmorTimed(boss, phase, 30 + phase * 2)
                     BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     phaseCHK[phase] = true
                     OnSecondPhaseMove = 0
@@ -7322,7 +7418,7 @@ function StartButcherAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[3] then
                 phase = 3
                 if not phaseCHK[phase] then
-                    AnitAddArmorTimed(boss, 50 * phase , 30 + phase * 2)
+                    ButcherAddArmorTimed(boss, phase, 30 + phase * 2)
                     BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     --print("смена фазы на ", phase, "Текущая секунда", sec)
                     sec = 0
@@ -7334,7 +7430,7 @@ function StartButcherAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[4] then
                 phase = 4
                 if not phaseCHK[phase] then
-                    AnitAddArmorTimed(boss, 50 * phase , 30 + phase * 2)
+                    ButcherAddArmorTimed(boss, phase, 30 + phase * 2)
                     BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     --print("смена фазы на ", phase)
                     --CreateAndMoveChakram(boss, hero, bulletCounter)
@@ -7344,7 +7440,7 @@ function StartButcherAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[5] then
                 phase = 5
                 if not phaseCHK[phase] then
-                    AnitAddArmorTimed(boss, 50 * phase , 30 + phase * 2)
+                    ButcherAddArmorTimed(boss, phase, 30 + phase * 2)
                     BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     --print("смена фазы на ", phase)
                     --FlyAroundHero(boss, hero)
@@ -7355,7 +7451,7 @@ function StartButcherAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[6] then
                 phase = 6
                 if not phaseCHK[phase] then
-                    AnitAddArmorTimed(boss, 50 * phase , 30 + phase * 2)
+                    ButcherAddArmorTimed(boss, phase, 30 + phase * 2)
                     BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     --print("смена фазы на ", phase)
                     --CreateAnimeLineDelay(boss, hero, 10)
@@ -7365,7 +7461,7 @@ function StartButcherAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[7] then
                 phase = 7
                 if not phaseCHK[phase] then
-                    AnitAddArmorTimed(boss, 50 * phase , 30 + phase * 2)
+                    ButcherAddArmorTimed(boss, phase, 30 + phase * 2)
                     BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     --print("смена фазы на ", phase)
                     --SunStrikeArea(boss, hero, xs, ys)
@@ -7375,7 +7471,7 @@ function StartButcherAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[8] then
                 phase = 8
                 if not phaseCHK[phase] then
-                    AnitAddArmorTimed(boss, 50 * phase , 30 + phase * 2)
+                    ButcherAddArmorTimed(boss, phase, 30 + phase * 2)
                     BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     phaseCHK[phase] = true
                 end
@@ -7383,7 +7479,7 @@ function StartButcherAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[9] then
                 phase = 9
                 if not phaseCHK[phase] then
-                    AnitAddArmorTimed(boss, 50 * phase , 30 + phase * 2)
+                    ButcherAddArmorTimed(boss, phase, 30 + phase * 2)
                     BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     phaseCHK[phase] = true
                 end
@@ -7391,7 +7487,7 @@ function StartButcherAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[10] then
                 phase = 10
                 if not phaseCHK[phase] then
-                    AnitAddArmorTimed(boss, 50 * phase , 30 + phase * 2)
+                    ButcherAddArmorTimed(boss, phase, 30 + phase * 2)
                     BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     phaseCHK[phase] = true
                 end
@@ -7410,7 +7506,7 @@ function StartButcherAI(xs, ys)
                 --print("фаза", phase)
                 local rph = GetRandomInt(1, phase)
                 if rph == 1 then
-                    BossHooked(boss, 5,1.1)
+                    BossHooked(boss, 5, 1.1)
                 elseif rph == 2 then
                     ButcherThrowGround(boss, hero)
                 end
@@ -7420,7 +7516,7 @@ function StartButcherAI(xs, ys)
                 --print("фаза", phase)
                 local rph = GetRandomInt(1, phase)
                 if rph == 1 then
-                    BossHooked(boss, 5,1.2)
+                    BossHooked(boss, 5, 1.2)
                 elseif rph == 2 then
                     ButcherThrowGround(boss, hero)
                 elseif rph == 3 then
@@ -7432,7 +7528,7 @@ function StartButcherAI(xs, ys)
                 PhaseOn = false
                 local rph = GetRandomInt(1, phase)
                 if rph == 1 then
-                    BossHooked(boss, 5,1.3)
+                    BossHooked(boss, 5, 1.3)
                 elseif rph == 2 then
                     ButcherThrowGround(boss, hero)
                 elseif rph == 3 then
@@ -7448,7 +7544,7 @@ function StartButcherAI(xs, ys)
 
                 local rph = GetRandomInt(1, phase)
                 if rph == 1 then
-                    BossHooked(boss, 5,1.4)
+                    BossHooked(boss, 5, 1.4)
                 elseif rph == 2 then
                     ButcherThrowGround(boss, hero)
                 elseif rph == 3 then
@@ -7467,7 +7563,7 @@ function StartButcherAI(xs, ys)
 
                 local rph = GetRandomInt(1, phase)
                 if rph == 1 then
-                    BossHooked(boss, 5,1.5)
+                    BossHooked(boss, 5, 1.5)
                 elseif rph == 2 then
                     ButcherThrowGround(boss, hero)
                 elseif rph == 3 then
@@ -7485,7 +7581,7 @@ function StartButcherAI(xs, ys)
                 PhaseOn = false
                 local rph = GetRandomInt(1, phase)
                 if rph == 1 then
-                    BossHooked(boss, 5,1.6)
+                    BossHooked(boss, 5, 1.6)
                 elseif rph == 2 then
                     ButcherThrowGround(boss, hero)
                 elseif rph == 3 then
@@ -7504,7 +7600,7 @@ function StartButcherAI(xs, ys)
                 PhaseOn = false
                 local rph = GetRandomInt(1, phase)
                 if rph == 1 then
-                    BossHooked(boss, 5,1.7)
+                    BossHooked(boss, 5, 1.7)
                 elseif rph == 2 then
                     ButcherThrowGround(boss, hero)
                 elseif rph == 3 then
@@ -7525,7 +7621,7 @@ function StartButcherAI(xs, ys)
                 PhaseOn = false
                 local rph = GetRandomInt(1, phase)
                 if rph == 1 then
-                    BossHooked(boss, 5,1.8)
+                    BossHooked(boss, 5, 1.8)
                 elseif rph == 2 then
                     ButcherThrowGround(boss, hero)
                 elseif rph == 3 then
@@ -7548,7 +7644,7 @@ function StartButcherAI(xs, ys)
                 PhaseOn = false
                 local rph = GetRandomInt(1, phase)
                 if rph == 1 then
-                    BossHooked(boss, 5,1.9)
+                    BossHooked(boss, 5, 1.9)
                 elseif rph == 2 then
                     ButcherThrowGround(boss, hero)
                 elseif rph == 3 then
@@ -7604,6 +7700,16 @@ function StartButcherAI(xs, ys)
                 }
             end
         end--конец
+    end)
+end
+
+function ButcherAddArmorTimed(boss, lvl, timed)
+    --1 уровень 50 брони
+    UnitAddAbility(boss, FourCC("A002"))
+    SetUnitAbilityLevel(boss, FourCC("A002"), lvl)
+    TimerStart(CreateTimer(), timed, false, function()
+        UnitRemoveAbility(boss, FourCC("A002"))
+        UnitRemoveAbility(boss, FourCC("B000"))
     end)
 end
 
@@ -7800,7 +7906,7 @@ function ButcherThrowGround(boss, hero)
             DestroyEffect(AddSpecialEffect("Earthshock", nx, ny))
             DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", nx, ny))
             local is, du = UnitDamageArea(boss, 50, nx, ny, 220)
-            DamageDestructableInRangeXY(boss,50,220,x,y)
+            DamageDestructableInRangeXY(boss, 50, 220, x, y)
             if du then
                 PlayBossSpeech("Speech\\Pudge\\InFight\\F9", "Попал")
             else
@@ -7839,7 +7945,7 @@ function StrongWalk(boss, hero)
             local x, y = GetUnitXY(boss)
             DestroyEffect(AddSpecialEffect("Earthshock", x, y))
             UnitDamageArea(boss, 50, x, y, 300)
-            DamageDestructableInRangeXY(boss,50,300,x,y)
+            DamageDestructableInRangeXY(boss, 50, 300, x, y)
         end)
     end
 end
@@ -10437,7 +10543,7 @@ function InitDeathEventCreep()
         if GetUnitTypeId(u) == FourCC("h005") then
             UnitBlastArea(u, "FrostWyrmMissileNoOmni", 12)
         end
-        if GetUnitTypeId(u) == FourCC("h00C") then
+        if GetUnitTypeId(u) == FourCC("h00C") then --бочка умирает
             local nx,ny=GetUnitXY(u)
             local range=300
             TimerStart(CreateTimer(), 0.2, false, function() -- задержка урона
@@ -10454,7 +10560,9 @@ function InitDeathEventCreep()
                         if not UnitAlive(new) then
                             DestroyTimer(GetExpiredTimer())
                         else
-                            KillDestructableByTypeInPoint(ButtonsIDTable,range/3,GetUnitXY(new))
+                            if not IsUnitFall[GetHandleId(new)] then
+                                KillDestructableByTypeInPoint(ButtonsIDTable,range/3,GetUnitXY(new))
+                            end
                         end
                     end)
                     UnitStartFallAnim(new,1000)
@@ -12509,17 +12617,18 @@ end
 --- Created by User.
 --- DateTime: 05.11.2023 15:53
 ---
+IsUnitFall = {}
 function UnitStartFallAnim(hero, maxZ)
+    IsUnitFall[GetHandleId(hero)] = true
     StunUnit(hero, 5)
     SetUnitTimeScale(hero, 1)
-
     local z = GetUnitZ(hero) + maxZ
     local zNormal = GetUnitZ(hero)
     SetUnitZ(hero, z)
     local speed = 20
     TimerStart(CreateTimer(), 0.1, false, function()
         if GetUnitTypeId(hero) == FourCC("O000") then
-            SetUnitAnimationByIndex(hero, 15)
+            SetUnitAnimationByIndex(hero, 15)-- анимация смерти?
         end
     end)
     local sb = false
@@ -12556,9 +12665,10 @@ function UnitStartFallAnim(hero, maxZ)
                 end
             end
         end
-        if z <= -200 then
+        if z <= -10 then
             DestroyTimer(GetExpiredTimer())
             UnitRemoveStun(hero)
+            IsUnitFall[GetHandleId(hero)] = false
         end
     end)
 end
@@ -12882,6 +12992,7 @@ function InitTrig_BallMove()
         SetUnitPositionSmooth(udg_Ball, nx, ny)
         udg_BallSpeed = udg_BallSpeed - 0.50
         --print(udg_BallSpeed)
+        BlzSetUnitFacingEx(udg_Ball,GetUnitFacing(udg_Ball)+udg_BallSpeed)
 
         if udg_BallSpeed <= 0.00 then
             DisableTrigger(GetTriggeringTrigger())
@@ -12902,12 +13013,12 @@ end
 
 function InitTrig_BallInit ()
     gg_trg_BallInit = CreateTrigger()
-    TriggerRegisterUnitEvent(gg_trg_BallInit, gg_unit_e007_0258, EVENT_UNIT_DAMAGED)
+    TriggerRegisterUnitEvent(gg_trg_BallInit, udg_Ball, EVENT_UNIT_DAMAGED)
     TriggerAddAction(gg_trg_BallInit, function()
-        udg_Ball = gg_unit_e007_0258 --глобалка
+        --udg_Ball = gg_unit_e007_0258 --глобалка
         udg_BallPoint = GetUnitLoc(udg_Ball)
         if GetEventDamage() > 5 then
-            udg_BallSpeed = 40.00
+            udg_BallSpeed = udg_BallSpeed+20
             udg_BallFacing = AngleBetweenPoints(GetUnitLoc(GetEventDamageSource()), udg_BallPoint)
             EnableTrigger(gg_trg_BallMove)
 
@@ -12916,7 +13027,7 @@ function InitTrig_BallInit ()
     end)
     --print("событие урона на месте")
 end
-
+udg_BallSpeed=0
 function InitBounceOnGUI()
     InitTrig_BallInit()
     InitTrig_Init()
@@ -13085,7 +13196,7 @@ function InitRicoshet()
     TempGroup = CreateGroup()
     SetItemVisible(TempItem, false)
     print("конец инициализации рикошета")
-    InitBounceOnGUI()
+    --InitBounceOnGUI()
 end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
@@ -17739,7 +17850,6 @@ end
 
 function Trig_InitGUI_Actions()
 UseTimeOfDayBJ(false)
-SetUnitOwner(gg_unit_e007_0258, Player(22), true)
 end
 
 function InitTrig_InitGUI()
@@ -17860,63 +17970,63 @@ end
 return true
 end
 
-function Trig_StartIntro_Func036C()
+function Trig_StartIntro_Func035C()
 if (not (udg_PressESC == true)) then
 return false
 end
 return true
 end
 
-function Trig_StartIntro_Func038C()
+function Trig_StartIntro_Func037C()
 if (not (udg_PressESC == true)) then
 return false
 end
 return true
 end
 
-function Trig_StartIntro_Func040C()
+function Trig_StartIntro_Func039C()
 if (not (udg_PressESC == true)) then
 return false
 end
 return true
 end
 
-function Trig_StartIntro_Func042C()
+function Trig_StartIntro_Func041C()
 if (not (udg_PressESC == true)) then
 return false
 end
 return true
 end
 
-function Trig_StartIntro_Func044C()
+function Trig_StartIntro_Func043C()
 if (not (udg_PressESC == true)) then
 return false
 end
 return true
 end
 
-function Trig_StartIntro_Func047C()
+function Trig_StartIntro_Func046C()
 if (not (udg_PressESC == true)) then
 return false
 end
 return true
 end
 
-function Trig_StartIntro_Func049C()
+function Trig_StartIntro_Func048C()
 if (not (udg_PressESC == true)) then
 return false
 end
 return true
 end
 
-function Trig_StartIntro_Func051C()
+function Trig_StartIntro_Func050C()
 if (not (udg_PressESC == true)) then
 return false
 end
 return true
 end
 
-function Trig_StartIntro_Func053C()
+function Trig_StartIntro_Func052C()
 if (not (udg_PressESC == true)) then
 return false
 end
@@ -18006,48 +18116,48 @@ return
 else
 end
 SetUnitAnimation(gg_unit_opeo_0013, "Death")
-if (Trig_StartIntro_Func036C()) then
+if (Trig_StartIntro_Func035C()) then
 return 
 else
 end
 TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_643", gg_snd_Intro8, "TRIGSTR_644", bj_TIMETYPE_ADD, 0.00, true)
-if (Trig_StartIntro_Func038C()) then
+if (Trig_StartIntro_Func037C()) then
 return 
 else
 end
 SetUnitAnimation(gg_unit_opeo_0014, "Death")
-if (Trig_StartIntro_Func040C()) then
+if (Trig_StartIntro_Func039C()) then
 return 
 else
 end
 TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_645", gg_snd_Intro9, "TRIGSTR_646", bj_TIMETYPE_ADD, 0.00, true)
-if (Trig_StartIntro_Func042C()) then
+if (Trig_StartIntro_Func041C()) then
 return 
 else
 end
 CameraSetupApplyForPlayer(true, gg_cam_Vine, Player(0), 0.00)
-if (Trig_StartIntro_Func044C()) then
+if (Trig_StartIntro_Func043C()) then
 return 
 else
 end
 SetUnitAnimation(gg_unit_opeo_0015, "Death")
     BlzFrameSetVisible(CardBox,false)
-if (Trig_StartIntro_Func047C()) then
+if (Trig_StartIntro_Func046C()) then
 return 
 else
 end
 TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_647", gg_snd_Intro10, "TRIGSTR_648", bj_TIMETYPE_ADD, 0.00, true)
-if (Trig_StartIntro_Func049C()) then
+if (Trig_StartIntro_Func048C()) then
 return 
 else
 end
 CameraSetupApplyForPlayer(true, gg_cam_TrallSteal, Player(0), 0.00)
-if (Trig_StartIntro_Func051C()) then
+if (Trig_StartIntro_Func050C()) then
 return 
 else
 end
 TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_649", gg_snd_Intro11, "TRIGSTR_650", bj_TIMETYPE_ADD, 0.00, true)
-if (Trig_StartIntro_Func053C()) then
+if (Trig_StartIntro_Func052C()) then
 return 
 else
 end

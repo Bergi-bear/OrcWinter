@@ -56,7 +56,7 @@ function InitDeathEventCreep()
         if GetUnitTypeId(u) == FourCC("h005") then
             UnitBlastArea(u, "FrostWyrmMissileNoOmni", 12)
         end
-        if GetUnitTypeId(u) == FourCC("h00C") then
+        if GetUnitTypeId(u) == FourCC("h00C") then --бочка умирает
             local nx,ny=GetUnitXY(u)
             local range=300
             TimerStart(CreateTimer(), 0.2, false, function() -- задержка урона
@@ -73,7 +73,9 @@ function InitDeathEventCreep()
                         if not UnitAlive(new) then
                             DestroyTimer(GetExpiredTimer())
                         else
-                            KillDestructableByTypeInPoint(ButtonsIDTable,range/3,GetUnitXY(new))
+                            if not IsUnitFall[GetHandleId(new)] then
+                                KillDestructableByTypeInPoint(ButtonsIDTable,range/3,GetUnitXY(new))
+                            end
                         end
                     end)
                     UnitStartFallAnim(new,1000)

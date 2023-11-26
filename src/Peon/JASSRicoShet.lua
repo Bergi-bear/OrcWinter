@@ -23,6 +23,7 @@ function InitTrig_BallMove()
         SetUnitPositionSmooth(udg_Ball, nx, ny)
         udg_BallSpeed = udg_BallSpeed - 0.50
         --print(udg_BallSpeed)
+        BlzSetUnitFacingEx(udg_Ball,GetUnitFacing(udg_Ball)+udg_BallSpeed)
 
         if udg_BallSpeed <= 0.00 then
             DisableTrigger(GetTriggeringTrigger())
@@ -43,12 +44,12 @@ end
 
 function InitTrig_BallInit ()
     gg_trg_BallInit = CreateTrigger()
-    TriggerRegisterUnitEvent(gg_trg_BallInit, gg_unit_e007_0258, EVENT_UNIT_DAMAGED)
+    TriggerRegisterUnitEvent(gg_trg_BallInit, udg_Ball, EVENT_UNIT_DAMAGED)
     TriggerAddAction(gg_trg_BallInit, function()
-        udg_Ball = gg_unit_e007_0258 --глобалка
+        --udg_Ball = gg_unit_e007_0258 --глобалка
         udg_BallPoint = GetUnitLoc(udg_Ball)
         if GetEventDamage() > 5 then
-            udg_BallSpeed = 40.00
+            udg_BallSpeed = udg_BallSpeed+20
             udg_BallFacing = AngleBetweenPoints(GetUnitLoc(GetEventDamageSource()), udg_BallPoint)
             EnableTrigger(gg_trg_BallMove)
 
@@ -57,7 +58,7 @@ function InitTrig_BallInit ()
     end)
     --print("событие урона на месте")
 end
-
+udg_BallSpeed=0
 function InitBounceOnGUI()
     InitTrig_BallInit()
     InitTrig_Init()
@@ -226,5 +227,5 @@ function InitRicoshet()
     TempGroup = CreateGroup()
     SetItemVisible(TempItem, false)
     print("конец инициализации рикошета")
-    InitBounceOnGUI()
+    --InitBounceOnGUI()
 end

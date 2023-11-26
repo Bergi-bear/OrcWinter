@@ -165,7 +165,7 @@ function StartButcherAI(xs, ys)
                 --print("отработало 1")
                 if not phaseCHK[phase] then
                     --print("отработало 2")
-                    AnitAddArmorTimed(boss, 50 * phase , 30 + phase * 2)
+                    ButcherAddArmorTimed(boss, phase, 30 + phase * 2)
                     BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     phaseCHK[phase] = true
                     OnSecondPhaseMove = 0
@@ -180,7 +180,7 @@ function StartButcherAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[3] then
                 phase = 3
                 if not phaseCHK[phase] then
-                    AnitAddArmorTimed(boss, 50 * phase , 30 + phase * 2)
+                    ButcherAddArmorTimed(boss, phase, 30 + phase * 2)
                     BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     --print("смена фазы на ", phase, "Текущая секунда", sec)
                     sec = 0
@@ -192,7 +192,7 @@ function StartButcherAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[4] then
                 phase = 4
                 if not phaseCHK[phase] then
-                    AnitAddArmorTimed(boss, 50 * phase , 30 + phase * 2)
+                    ButcherAddArmorTimed(boss, phase, 30 + phase * 2)
                     BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     --print("смена фазы на ", phase)
                     --CreateAndMoveChakram(boss, hero, bulletCounter)
@@ -202,7 +202,7 @@ function StartButcherAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[5] then
                 phase = 5
                 if not phaseCHK[phase] then
-                    AnitAddArmorTimed(boss, 50 * phase , 30 + phase * 2)
+                    ButcherAddArmorTimed(boss, phase, 30 + phase * 2)
                     BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     --print("смена фазы на ", phase)
                     --FlyAroundHero(boss, hero)
@@ -213,7 +213,7 @@ function StartButcherAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[6] then
                 phase = 6
                 if not phaseCHK[phase] then
-                    AnitAddArmorTimed(boss, 50 * phase , 30 + phase * 2)
+                    ButcherAddArmorTimed(boss, phase, 30 + phase * 2)
                     BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     --print("смена фазы на ", phase)
                     --CreateAnimeLineDelay(boss, hero, 10)
@@ -223,7 +223,7 @@ function StartButcherAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[7] then
                 phase = 7
                 if not phaseCHK[phase] then
-                    AnitAddArmorTimed(boss, 50 * phase , 30 + phase * 2)
+                    ButcherAddArmorTimed(boss, phase, 30 + phase * 2)
                     BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     --print("смена фазы на ", phase)
                     --SunStrikeArea(boss, hero, xs, ys)
@@ -233,7 +233,7 @@ function StartButcherAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[8] then
                 phase = 8
                 if not phaseCHK[phase] then
-                    AnitAddArmorTimed(boss, 50 * phase , 30 + phase * 2)
+                    ButcherAddArmorTimed(boss, phase, 30 + phase * 2)
                     BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     phaseCHK[phase] = true
                 end
@@ -241,7 +241,7 @@ function StartButcherAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[9] then
                 phase = 9
                 if not phaseCHK[phase] then
-                    AnitAddArmorTimed(boss, 50 * phase , 30 + phase * 2)
+                    ButcherAddArmorTimed(boss, phase, 30 + phase * 2)
                     BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     phaseCHK[phase] = true
                 end
@@ -249,7 +249,7 @@ function StartButcherAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[10] then
                 phase = 10
                 if not phaseCHK[phase] then
-                    AnitAddArmorTimed(boss, 50 * phase , 30 + phase * 2)
+                    ButcherAddArmorTimed(boss, phase, 30 + phase * 2)
                     BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     phaseCHK[phase] = true
                 end
@@ -268,7 +268,7 @@ function StartButcherAI(xs, ys)
                 --print("фаза", phase)
                 local rph = GetRandomInt(1, phase)
                 if rph == 1 then
-                    BossHooked(boss, 5,1.1)
+                    BossHooked(boss, 5, 1.1)
                 elseif rph == 2 then
                     ButcherThrowGround(boss, hero)
                 end
@@ -278,7 +278,7 @@ function StartButcherAI(xs, ys)
                 --print("фаза", phase)
                 local rph = GetRandomInt(1, phase)
                 if rph == 1 then
-                    BossHooked(boss, 5,1.2)
+                    BossHooked(boss, 5, 1.2)
                 elseif rph == 2 then
                     ButcherThrowGround(boss, hero)
                 elseif rph == 3 then
@@ -290,7 +290,7 @@ function StartButcherAI(xs, ys)
                 PhaseOn = false
                 local rph = GetRandomInt(1, phase)
                 if rph == 1 then
-                    BossHooked(boss, 5,1.3)
+                    BossHooked(boss, 5, 1.3)
                 elseif rph == 2 then
                     ButcherThrowGround(boss, hero)
                 elseif rph == 3 then
@@ -306,7 +306,7 @@ function StartButcherAI(xs, ys)
 
                 local rph = GetRandomInt(1, phase)
                 if rph == 1 then
-                    BossHooked(boss, 5,1.4)
+                    BossHooked(boss, 5, 1.4)
                 elseif rph == 2 then
                     ButcherThrowGround(boss, hero)
                 elseif rph == 3 then
@@ -325,7 +325,7 @@ function StartButcherAI(xs, ys)
 
                 local rph = GetRandomInt(1, phase)
                 if rph == 1 then
-                    BossHooked(boss, 5,1.5)
+                    BossHooked(boss, 5, 1.5)
                 elseif rph == 2 then
                     ButcherThrowGround(boss, hero)
                 elseif rph == 3 then
@@ -343,7 +343,7 @@ function StartButcherAI(xs, ys)
                 PhaseOn = false
                 local rph = GetRandomInt(1, phase)
                 if rph == 1 then
-                    BossHooked(boss, 5,1.6)
+                    BossHooked(boss, 5, 1.6)
                 elseif rph == 2 then
                     ButcherThrowGround(boss, hero)
                 elseif rph == 3 then
@@ -362,7 +362,7 @@ function StartButcherAI(xs, ys)
                 PhaseOn = false
                 local rph = GetRandomInt(1, phase)
                 if rph == 1 then
-                    BossHooked(boss, 5,1.7)
+                    BossHooked(boss, 5, 1.7)
                 elseif rph == 2 then
                     ButcherThrowGround(boss, hero)
                 elseif rph == 3 then
@@ -383,7 +383,7 @@ function StartButcherAI(xs, ys)
                 PhaseOn = false
                 local rph = GetRandomInt(1, phase)
                 if rph == 1 then
-                    BossHooked(boss, 5,1.8)
+                    BossHooked(boss, 5, 1.8)
                 elseif rph == 2 then
                     ButcherThrowGround(boss, hero)
                 elseif rph == 3 then
@@ -406,7 +406,7 @@ function StartButcherAI(xs, ys)
                 PhaseOn = false
                 local rph = GetRandomInt(1, phase)
                 if rph == 1 then
-                    BossHooked(boss, 5,1.9)
+                    BossHooked(boss, 5, 1.9)
                 elseif rph == 2 then
                     ButcherThrowGround(boss, hero)
                 elseif rph == 3 then
@@ -462,6 +462,16 @@ function StartButcherAI(xs, ys)
                 }
             end
         end--конец
+    end)
+end
+
+function ButcherAddArmorTimed(boss, lvl, timed)
+    --1 уровень 50 брони
+    UnitAddAbility(boss, FourCC("A002"))
+    SetUnitAbilityLevel(boss, FourCC("A002"), lvl)
+    TimerStart(CreateTimer(), timed, false, function()
+        UnitRemoveAbility(boss, FourCC("A002"))
+        UnitRemoveAbility(boss, FourCC("B000"))
     end)
 end
 
@@ -658,7 +668,7 @@ function ButcherThrowGround(boss, hero)
             DestroyEffect(AddSpecialEffect("Earthshock", nx, ny))
             DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", nx, ny))
             local is, du = UnitDamageArea(boss, 50, nx, ny, 220)
-            DamageDestructableInRangeXY(boss,50,220,x,y)
+            DamageDestructableInRangeXY(boss, 50, 220, x, y)
             if du then
                 PlayBossSpeech("Speech\\Pudge\\InFight\\F9", "Попал")
             else
@@ -697,7 +707,7 @@ function StrongWalk(boss, hero)
             local x, y = GetUnitXY(boss)
             DestroyEffect(AddSpecialEffect("Earthshock", x, y))
             UnitDamageArea(boss, 50, x, y, 300)
-            DamageDestructableInRangeXY(boss,50,300,x,y)
+            DamageDestructableInRangeXY(boss, 50, 300, x, y)
         end)
     end
 end

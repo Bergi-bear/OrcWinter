@@ -18,22 +18,48 @@ function InitMouseClickEvent()
                 --print("по интерфейсу")
             else
                 local angle = AngleBetweenXY(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), x, y) / bj_DEGTORAD
-                CastSnowBall(data, angle)
-                if not data.StartRepeaterAttack then
-                    data.StartRepeaterAttack = true
-                    local period = 0.2
-                    TimerStart(CreateTimer(), period, true, function()
-                        if data.LMBIsPressed then
-                            x, y = data.fakeX, data.fakeY
-                            angle = AngleBetweenXY(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), x, y) / bj_DEGTORAD
-                            CastSnowBall(data, angle)
+                if not data.CatchUnit then
+                    CastSnowBall(data, angle)
+                    if not data.StartRepeaterAttack then
+                        data.StartRepeaterAttack = true
+                        local period = 0.2
+                        TimerStart(CreateTimer(), period, true, function()
+                            if data.LMBIsPressed then
+                                x, y = data.fakeX, data.fakeY
+                                angle = AngleBetweenXY(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), x, y) / bj_DEGTORAD
+                                CastSnowBall(data, angle)
+                            end
+                        end)
+                    end
+                else
+                    local differenceZ = GetUnitZ(data.CatchUnit)-GetUnitZ(data.UnitHero)
+                    data.UnitMissile = true
+
+                    --print("бросок захваченного", differenceZ)
+                    if differenceZ<=1 and not IsUnitFall[GetHandleId(data.CatchUnit)] then
+                        if IsUnitFall[GetHandleId(data.CatchUnit)] then
+                            print("Юнит ещё падает")
                         end
-                    end)
+                        --UnitCreateArtMissile()
+                        local dist = DistanceBetweenXY(x, y, GetUnitXY(data.UnitHero))
+                        if dist >= 600 then
+                            dist = 600
+                            x, y = MoveXY(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), dist, angle)
+                        end
+
+                        local mark = AddSpecialEffect("Spell Marker TC", x, y)
+                        BlzSetSpecialEffectScale(mark, 2)
+                        DestroyEffect(mark)
+                        BlzSetSpecialEffectColorByPlayer(mark, Player(1)) -- синий
+                        local speed = dist / 80
+                        SetUnitAnimationByIndex(data.UnitHero, 25)
+                        BlzSetUnitFacingEx(data.UnitHero, angle)
+                        MakeUnitArtMissile(data.UnitHero, data.CatchUnit, angle, speed, dist, 300)
+                        data.CatchUnit = nil
+                    end
+
                 end
-
-
             end
-
             data.LMBIsPressed = true
             data.inputEffectNumber = GetRandomInt(1, 8)
         end
@@ -47,6 +73,7 @@ function InitMouseClickEvent()
         if BlzGetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_LEFT then
             local data = HERO[GetPlayerId(GetTriggerPlayer())]
             data.LMBIsPressed = false
+            data.UnitMissile = false
             --ShapeDetectorClear(data)
             --ClearPoints(data)
         end
@@ -73,12 +100,12 @@ function InitMouseClickEvent()
             if not data.CatchUnit then
                 local dist = DistanceBetweenXY(x, y, GetUnitXY(data.UnitHero))
                 local tmpCatch = FindNearEnemyXY(data.UnitHero, 120, GetUnitXY(data.UnitHero))
-                if  GetUnitTypeId(tmpCatch) == FourCC("h00C") then
+                if GetUnitTypeId(tmpCatch) == FourCC("h00C") or GetUnitTypeId(tmpCatch) == FourCC("h00R")  then
                     data.CatchUnit = tmpCatch
                     data.CatchUnitEffect = AddSpecialEffectTarget("diwo1", data.CatchUnit, "origin")
                     local angleMagnet = AngleBetweenUnits(data.CatchUnit, data.UnitHero)
                     local distMagnet = DistanceBetweenXY(GetUnitX(data.CatchUnit), GetUnitY(data.CatchUnit), GetUnitXY(data.UnitHero))
-                    SetUnitFacing(data.CatchUnit,angleMagnet)
+                    SetUnitFacing(data.CatchUnit, angleMagnet)
                     UnitAddForceSimple(data.CatchUnit, angleMagnet, 5, distMagnet)
                 else
                     data.CatchUnit = false
@@ -88,12 +115,12 @@ function InitMouseClickEvent()
                     if dist <= 400 then
                         tmpCatch = FindNearEnemyXY(data.UnitHero, 400, x, y)
                         --print(dist)
-                        if  GetUnitTypeId(tmpCatch) == FourCC("h00C") then
+                        if GetUnitTypeId(tmpCatch) == FourCC("h00C") or GetUnitTypeId(tmpCatch) == FourCC("h00R") then
                             data.CatchUnit = tmpCatch
                             data.CatchUnitEffect = AddSpecialEffectTarget("diwo1", data.CatchUnit, "origin")
                             local angleMagnet = AngleBetweenUnits(data.CatchUnit, data.UnitHero)
                             local distMagnet = DistanceBetweenXY(GetUnitX(data.CatchUnit), GetUnitY(data.CatchUnit), GetUnitXY(data.UnitHero))
-                            SetUnitFacing(data.CatchUnit,angleMagnet)
+                            SetUnitFacing(data.CatchUnit, angleMagnet)
                             UnitAddForceSimple(data.CatchUnit, angleMagnet, 5, distMagnet)
                         else
                             data.CatchUnit = false
