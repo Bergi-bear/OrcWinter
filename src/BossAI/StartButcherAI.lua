@@ -11,8 +11,7 @@ do
 end
 
 function InitTrig_EnterInRectButcher()
-
-    print("Инициализация босса мясника")
+    --print("Инициализация босса мясника")
     local gg_trg_EnterInRect = CreateTrigger()
     TriggerRegisterEnterRectSimple(gg_trg_EnterInRect, gg_rct_EnterBoss)
     TriggerAddAction(gg_trg_EnterInRect, function()

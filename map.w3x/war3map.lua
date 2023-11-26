@@ -174,6 +174,13 @@ gg_snd_CookQuestPeon4 = nil
 gg_snd_Warning = nil
 gg_snd_BattlenetDeath1A = nil
 gg_snd_The_Astral_Academy_Gardens = ""
+gg_snd_OT1 = nil
+gg_snd_OT2 = nil
+gg_snd_OP1 = nil
+gg_snd_OP2 = nil
+gg_snd_OP3 = nil
+gg_snd_OT3 = nil
+gg_snd_OT4 = nil
 gg_trg_InitBossRoom = nil
 gg_trg_InitRoom12 = nil
 gg_trg_PlatformUp12 = nil
@@ -272,7 +279,6 @@ gg_unit_h006_0173 = nil
 gg_unit_h007_0171 = nil
 gg_unit_o002_0203 = nil
 gg_unit_h009_0197 = nil
-gg_unit_e007_0258 = nil
 gg_unit_h00J_0594 = nil
 gg_unit_h00E_0217 = nil
 gg_unit_h00E_0216 = nil
@@ -596,6 +602,41 @@ SetSoundParamsFromLabel(gg_snd_BattlenetDeath1A, "GlueScreenBNetOpenA")
 SetSoundDuration(gg_snd_BattlenetDeath1A, 2953)
 SetSoundVolume(gg_snd_BattlenetDeath1A, 127)
 gg_snd_The_Astral_Academy_Gardens = "The Astral Academy Gardens.mp3"
+gg_snd_OT1 = CreateSound("Speech/Outro/OT1.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_OT1, 3048)
+SetSoundChannel(gg_snd_OT1, 0)
+SetSoundVolume(gg_snd_OT1, 127)
+SetSoundPitch(gg_snd_OT1, 1.0)
+gg_snd_OT2 = CreateSound("Speech/Outro/OT2.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_OT2, 2760)
+SetSoundChannel(gg_snd_OT2, 0)
+SetSoundVolume(gg_snd_OT2, 127)
+SetSoundPitch(gg_snd_OT2, 1.0)
+gg_snd_OP1 = CreateSound("Speech/Outro/OP1.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_OP1, 3480)
+SetSoundChannel(gg_snd_OP1, 0)
+SetSoundVolume(gg_snd_OP1, 127)
+SetSoundPitch(gg_snd_OP1, 1.0)
+gg_snd_OP2 = CreateSound("Speech/Outro/OP2.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_OP2, 9576)
+SetSoundChannel(gg_snd_OP2, 0)
+SetSoundVolume(gg_snd_OP2, 127)
+SetSoundPitch(gg_snd_OP2, 1.0)
+gg_snd_OP3 = CreateSound("Speech/Outro/OP3.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_OP3, 4392)
+SetSoundChannel(gg_snd_OP3, 0)
+SetSoundVolume(gg_snd_OP3, 127)
+SetSoundPitch(gg_snd_OP3, 1.0)
+gg_snd_OT3 = CreateSound("Speech/Outro/OT3.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_OT3, 2160)
+SetSoundChannel(gg_snd_OT3, 0)
+SetSoundVolume(gg_snd_OT3, 127)
+SetSoundPitch(gg_snd_OT3, 1.0)
+gg_snd_OT4 = CreateSound("Speech/Outro/OT4.mp3", false, false, false, 0, 0, "DefaultEAXON")
+SetSoundDuration(gg_snd_OT4, 6408)
+SetSoundChannel(gg_snd_OT4, 0)
+SetSoundVolume(gg_snd_OT4, 127)
+SetSoundPitch(gg_snd_OT4, 1.0)
 end
 
 function CreateAllDestructables()
@@ -1120,7 +1161,7 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 10740.6, 1412.7, 242.987, FourCC("h
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11522.5, 2183.7, 242.987, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11520.9, 1800.1, 242.987, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11519.3, 1411.6, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00R"), 10971.2, 8610.7, 338.210, FourCC("h00R"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00R"), 16877.2, 2902.7, 338.210, FourCC("h00R"))
 u = BlzCreateUnitWithSkin(p, FourCC("h000"), 13505.5, 1331.6, 270.000, FourCC("h000"))
 life = GetUnitState(u, UNIT_STATE_LIFE)
 SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
@@ -1417,6 +1458,8 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00E"), 15350.3, -5985.9, 180.000, FourCC("
 u = BlzCreateUnitWithSkin(p, FourCC("h00E"), 15355.4, -6821.1, 180.000, FourCC("h00E"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16318.2, 4672.5, 0.000, FourCC("h00Q"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16319.2, 5056.5, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 17915.5, 2828.1, 192.980, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16318.3, 5184.4, 0.000, FourCC("h00Q"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16318.5, 5312.7, 0.000, FourCC("h00Q"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16318.9, 5439.1, 0.000, FourCC("h00Q"))
@@ -1721,6 +1764,8 @@ SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 11305.1, 2474.1, 270.344, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 12326.3, 4808.5, 206.313, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 17783.9, 4369.4, 218.170, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 10576.3, 1803.1, 270.344, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
@@ -2509,7 +2554,7 @@ end
 --- DateTime: 25.10.2023 20:17
 ---
 function MakeUnitArtMissile(hero, unit, angle, speed, distance, MaxHeight, HasMarker)
-    UnitAddAbility(unit, FourCC("Aloc"))
+    --UnitAddAbility(unit, FourCC("Aloc"))
     IsUnitFall[GetHandleId(unit)] = true
     local range = 200
     local currentdistance = 0
@@ -2537,17 +2582,18 @@ function MakeUnitArtMissile(hero, unit, angle, speed, distance, MaxHeight, HasMa
         --BlzSetSpecialEffectScale(eff,5)
         if i > 3 and f <= GetTerrainZ(x, y) then
             DestroyTimer(GetExpiredTimer())
-
-            --local _,d= PointContentDestructable(x,y,60,true,1)
             IsUnitFall[GetHandleId(unit)] = false
+            --local _,d= PointContentDestructable(x,y,60,true,1)
+
             DamageDestructableInRangeXY(hero, damage, range, x, y)
             KillDestructableByTypeInPoint(ButtonsIDTable, range, x, y)
             --KillUnit(unit)
-            UnitRemoveAbility(unit,FourCC("Aloc"))
-            ShowUnit(unit,false)
-            ShowUnit(unit,true)
+            --UnitRemoveAbility(unit,FourCC("Aloc"))
+            --ShowUnit(unit,false)
+            --ShowUnit(unit,true)
             DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", x, y))
             UnitDamageArea(hero, damage, x, y, range)
+
 
         end
     end)
@@ -2581,12 +2627,12 @@ function UnitCreateArtMissile(hero, angle, speed, distance, MaxHeight, HasMarker
         --BlzSetSpecialEffectScale(eff,5)
         if i > 3 and f <= GetTerrainZ(x, y) then
             DestroyTimer(GetExpiredTimer())
-            local ox,oy=GetUnitXY(hero)
-            SetUnitX(hero,x)
-            SetUnitY(hero,y)
+            local ox, oy = GetUnitXY(hero)
+            SetUnitX(hero, x)
+            SetUnitY(hero, y)
             UnitDamageArea(hero, damage, x, y, range)
-            SetUnitX(hero,ox)
-            SetUnitY(hero,oy)
+            SetUnitX(hero, ox)
+            SetUnitY(hero, oy)
             --local _,d= PointContentDestructable(x,y,60,true,1)
             DamageDestructableInRangeXY(hero, damage, range, x, y)
             KillDestructableByTypeInPoint(ButtonsIDTable, range, x, y)
@@ -5137,161 +5183,163 @@ function UnitDamageArea(u, damage, x, y, range, flag, paramTable)
         if e == nil then
             break
         end
-        if flag=="All" then
-            UnitDamageTarget(u, e, damage, true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WHOKNOWS)
-            DamageDestructableInRangeXY(u,damage,range,x,y)
-            --Досрочное удаление пузыря
-            UnitRemoveAbility(e, FourCC("A002"))
-            UnitRemoveAbility(e, FourCC("B000"))
-        end
-        if UnitAlive(e) and not UnitAlive(u) and (IsUnitEnemy(e, GetOwningPlayer(u)) or GetOwningPlayer(e) == Player(PLAYER_NEUTRAL_PASSIVE)) and IsUnitType(u, UNIT_TYPE_HERO) then
-            --print("Герой нанёс урон будучи мертвым "..GetUnitName(u))
-            local data = GetUnitData(u)
-            --local talon = GlobalTalons[GetPlayerId(GetOwningPlayer(u)) + 1]["HeroBlademaster"][8]
-            if data.KamikazeCDGH then
-                local m = data.KamikazeMDamage
-                --local data = HERO[GetPlayerId(GetOwningPlayer(u))]
-                --print(m)
-                if data.KamikazeCurrentCD <= 0 then
-                    local cd = 7
-                    data.KamikazeCurrentCD = cd
-                    StartFrameCD(cd, data.KamikazeCDGH)
-                    ---постоянный блок
-                    deadDamage = true
-                    FlyTextTagCriticalStrike(u, L("Камикадзе", "Kamikaze"), GetOwningPlayer(u))
-                    AddLife(data)
-                    damage = damage * m
-                    --ReviveHero(u, GetUnitX(u), GetUnitY(u), true)
-                    SetUnitState(u, UNIT_STATE_LIFE, 1)
-                    ------
-                    TimerStart(CreateTimer(), cd, false, function()
-                        DestroyTimer(GetExpiredTimer())
-                        data.KamikazeCurrentCD = 0
-                    end)
-                end
-
-
+        if not IsUnitFall[GetHandleId(e)] then -- юниты в полёте неуязвимы для урона
+            if flag=="All" then
+                UnitDamageTarget(u, e, damage, true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WHOKNOWS)
+                DamageDestructableInRangeXY(u,damage,range,x,y)
+                --Досрочное удаление пузыря
+                UnitRemoveAbility(e, FourCC("A002"))
+                UnitRemoveAbility(e, FourCC("B000"))
             end
-        end
-        --
-        if UnitAlive(e) and (UnitAlive(u) or deadDamage) and (IsUnitEnemy(e, GetOwningPlayer(u)) or GetOwningPlayer(e) == Player(PLAYER_NEUTRAL_PASSIVE) or flag == "all") then
+            if UnitAlive(e) and not UnitAlive(u) and (IsUnitEnemy(e, GetOwningPlayer(u)) or GetOwningPlayer(e) == Player(PLAYER_NEUTRAL_PASSIVE)) and IsUnitType(u, UNIT_TYPE_HERO) then
+                --print("Герой нанёс урон будучи мертвым "..GetUnitName(u))
+                local data = GetUnitData(u)
+                --local talon = GlobalTalons[GetPlayerId(GetOwningPlayer(u)) + 1]["HeroBlademaster"][8]
+                if data.KamikazeCDGH then
+                    local m = data.KamikazeMDamage
+                    --local data = HERO[GetPlayerId(GetOwningPlayer(u))]
+                    --print(m)
+                    if data.KamikazeCurrentCD <= 0 then
+                        local cd = 7
+                        data.KamikazeCurrentCD = cd
+                        StartFrameCD(cd, data.KamikazeCDGH)
+                        ---постоянный блок
+                        deadDamage = true
+                        FlyTextTagCriticalStrike(u, L("Камикадзе", "Kamikaze"), GetOwningPlayer(u))
+                        AddLife(data)
+                        damage = damage * m
+                        --ReviveHero(u, GetUnitX(u), GetUnitY(u), true)
+                        SetUnitState(u, UNIT_STATE_LIFE, 1)
+                        ------
+                        TimerStart(CreateTimer(), cd, false, function()
+                            DestroyTimer(GetExpiredTimer())
+                            data.KamikazeCurrentCD = 0
+                        end)
+                    end
+
+
+                end
+            end
             --
-            --print(damage,"где урон?")
-            if flag == "shotForce" then
-                --конусный урон при финальном ударе
-                -- x1, x2 - координаты проверяемой точки
-                -- x2, y2 - координаты вершины сектора
-                -- orientation - ориентация сектора в мировых координатах
-                -- width - уголовой размер сектора в градусах
-                -- radius - окружности которой принадлежит сектор
-                --print("толчек")
-                --local data = HERO[GetPlayerId(GetOwningPlayer(u))]
-                local xb, yb = MoveXY(GetUnitX(u), GetUnitY(u), 60, GetUnitFacing(u) - 180)
-                local speed = 20
-                local dist = 300
+            if UnitAlive(e) and (UnitAlive(u) or deadDamage) and (IsUnitEnemy(e, GetOwningPlayer(u)) or GetOwningPlayer(e) == Player(PLAYER_NEUTRAL_PASSIVE) or flag == "all") then
+                --
+                --print(damage,"где урон?")
+                if flag == "shotForce" then
+                    --конусный урон при финальном ударе
+                    -- x1, x2 - координаты проверяемой точки
+                    -- x2, y2 - координаты вершины сектора
+                    -- orientation - ориентация сектора в мировых координатах
+                    -- width - уголовой размер сектора в градусах
+                    -- radius - окружности которой принадлежит сектор
+                    --print("толчек")
+                    --local data = HERO[GetPlayerId(GetOwningPlayer(u))]
+                    local xb, yb = MoveXY(GetUnitX(u), GetUnitY(u), 60, GetUnitFacing(u) - 180)
+                    local speed = 20
+                    local dist = 300
 
-                if IsPointInSector(GetUnitX(e), GetUnitY(e), xb, yb, GetUnitFacing(u), 90, range) then
-                    UnitAddForceSimple(e, AngleBetweenUnits(u, e), speed, dist, nil, u)
+                    if IsPointInSector(GetUnitX(e), GetUnitY(e), xb, yb, GetUnitFacing(u), 90, range) then
+                        UnitAddForceSimple(e, AngleBetweenUnits(u, e), speed, dist, nil, u)
+                    end
                 end
-            end
-            if flag == "ForceTotem" then
-                --print("толкаем тотемом")
-                local tempA = AngleBetweenXY(x, y, GetUnitXY(e)) / bj_DEGTORAD
-                UnitAddForceSimple(e, tempA, 20, 300, nil, u)
-            end
-            if flag == "push" then
-                local distance = GetUnitData(u).DashPerAttack
-                local tempA = GetUnitFacing(u)
-                UnitAddForceSimple(e, tempA, 15, distance, nil, u)
-            end
-            if flag == "all" then
-                if GetPlayerController(GetOwningPlayer(u)) == MAP_CONTROL_USER then
+                if flag == "ForceTotem" then
+                    --print("толкаем тотемом")
+                    local tempA = AngleBetweenXY(x, y, GetUnitXY(e)) / bj_DEGTORAD
+                    UnitAddForceSimple(e, tempA, 20, 300, nil, u)
+                end
+                if flag == "push" then
+                    local distance = GetUnitData(u).DashPerAttack
+                    local tempA = GetUnitFacing(u)
+                    UnitAddForceSimple(e, tempA, 15, distance, nil, u)
+                end
+                if flag == "all" then
+                    if GetPlayerController(GetOwningPlayer(u)) == MAP_CONTROL_USER then
+                        local data = HERO[GetPlayerId(GetOwningPlayer(u))]
+                        if not data.AddDamageTrap then
+                            data.AddDamageTrap = 1
+                        end
+                        --damage = data.AddDamageTrap
+
+                        --print("урон от ловушки")
+                        damage = damage / data.AddDamageTrap
+                    else
+
+                    end
+                end
+                if flag == "blackHole" then
+                    if not IsUnitInRange(e, u, 15) then
+                        UnitAddForceSimple(e, AngleBetweenUnits(e, u), 5, 50)
+                    end
+                end
+                if flag == "longForce" then
+                    --конусный урон в рывке
+                    -- x1, x2 - координаты проверяемой точки
+                    -- x2, y2 - координаты вершины сектора
+                    -- orientation - ориентация сектора в мировых координатах
+                    -- width - уголовой размер сектора в градусах
+                    -- radius - окружности которой принадлежит сектор
+                    --print("толчек")
                     local data = HERO[GetPlayerId(GetOwningPlayer(u))]
-                    if not data.AddDamageTrap then
-                        data.AddDamageTrap = 1
+                    local xb, yb = MoveXY(GetUnitX(u), GetUnitY(u), 80, GetUnitFacing(u) - 180)
+                    local speed = 20
+                    local dist = 150
+                    if data.TaurenDash then
+                        speed = speed * 2
+                        dist = dist * 3
                     end
-                    --damage = data.AddDamageTrap
-
-                    --print("урон от ловушки")
-                    damage = damage / data.AddDamageTrap
-                else
-
-                end
-            end
-            if flag == "blackHole" then
-                if not IsUnitInRange(e, u, 15) then
-                    UnitAddForceSimple(e, AngleBetweenUnits(e, u), 5, 50)
-                end
-            end
-            if flag == "longForce" then
-                --конусный урон в рывке
-                -- x1, x2 - координаты проверяемой точки
-                -- x2, y2 - координаты вершины сектора
-                -- orientation - ориентация сектора в мировых координатах
-                -- width - уголовой размер сектора в градусах
-                -- radius - окружности которой принадлежит сектор
-                --print("толчек")
-                local data = HERO[GetPlayerId(GetOwningPlayer(u))]
-                local xb, yb = MoveXY(GetUnitX(u), GetUnitY(u), 80, GetUnitFacing(u) - 180)
-                local speed = 20
-                local dist = 150
-                if data.TaurenDash then
-                    speed = speed * 2
-                    dist = dist * 3
-                end
-                if IsPointInSector(GetUnitX(e), GetUnitY(e), xb, yb, GetUnitFacing(u), 70, range) then
-                    UnitAddForceSimple(e, AngleBetweenUnits(u, e), speed, dist, nil, u)
-                else
-                    damage = 0
-                end
-            end
-            if attackIsLow and IsUnitType(e,UNIT_TYPE_HERO) then
-                local data=GetUnitData(hero)
-                if data then
-                    if data.SpaceForce then
-                        missDamage=true
+                    if IsPointInSector(GetUnitX(e), GetUnitY(e), xb, yb, GetUnitFacing(u), 70, range) then
+                        UnitAddForceSimple(e, AngleBetweenUnits(u, e), speed, dist, nil, u)
+                    else
+                        damage = 0
                     end
                 end
-            end
-            if not missDamage then
-                if UnitDamageTarget(u, e, damage, true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WHOKNOWS) then
-                    if GetUnitTypeId(e) ~= FourCC("nglm") and GetUnitTypeId(e) ~= FourCC("hdhw") then
-                        --нет раекцтии на мину и точку входа
-                        isdamage = true
-                        hero = e
-                        k = k + 1
-                        all[k] = e
-                        --print(GetUnitName(e))
-
-                    end
-                end
-            else
-                FlyTextTagShieldXY(GetUnitX(e), GetUnitY(e), "Увернулся", GetOwningPlayer(e))
-            end
-            if (flag == "all" or IsUnitTrap(u)) and not UnitAlive(e) then
-                local ex, ey = GetUnitXY(e)
-                FlyTextTagShieldXY(ex, ey, "Смерть от ловушки", GetOwningPlayer(e), "SeeAll")
-                for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
-                    if PlayerIsPlaying[i] then
-                        local data = HERO[i]
-                        if UnitAlive(data.UnitHero) then
-                            if IsUnitInRange(data.UnitHero, e, 1000) then
-                                if data.EvilMaskHeal then
-                                    HealUnit(data.UnitHero, data.EvilMaskHeal)
-                                    local rm = {
-                                        L("Хех", "Heh"),
-                                        L("хах", "Hah"),
-                                        L("хахаха", "Yhha"),
-                                        L("Хихиг", "Hihig"),
-                                    }
-                                    CreateInfoBoxForAllPlayerTimed(data, rm[GetRandomInt(1, #rm)], 1)
-                                end
-                            else
-
-                            end
+                if attackIsLow and IsUnitType(e,UNIT_TYPE_HERO) then
+                    local data=GetUnitData(hero)
+                    if data then
+                        if data.SpaceForce then
+                            missDamage=true
                         end
                     end
+                end
+                if not missDamage then
+                    if UnitDamageTarget(u, e, damage, true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WHOKNOWS) then
+                        if GetUnitTypeId(e) ~= FourCC("nglm") and GetUnitTypeId(e) ~= FourCC("hdhw") then
+                            --нет раекцтии на мину и точку входа
+                            isdamage = true
+                            hero = e
+                            k = k + 1
+                            all[k] = e
+                            --print(GetUnitName(e))
 
+                        end
+                    end
+                else
+                    FlyTextTagShieldXY(GetUnitX(e), GetUnitY(e), "Увернулся", GetOwningPlayer(e))
+                end
+                if (flag == "all" or IsUnitTrap(u)) and not UnitAlive(e) then
+                    local ex, ey = GetUnitXY(e)
+                    FlyTextTagShieldXY(ex, ey, "Смерть от ловушки", GetOwningPlayer(e), "SeeAll")
+                    for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
+                        if PlayerIsPlaying[i] then
+                            local data = HERO[i]
+                            if UnitAlive(data.UnitHero) then
+                                if IsUnitInRange(data.UnitHero, e, 1000) then
+                                    if data.EvilMaskHeal then
+                                        HealUnit(data.UnitHero, data.EvilMaskHeal)
+                                        local rm = {
+                                            L("Хех", "Heh"),
+                                            L("хах", "Hah"),
+                                            L("хахаха", "Yhha"),
+                                            L("Хихиг", "Hihig"),
+                                        }
+                                        CreateInfoBoxForAllPlayerTimed(data, rm[GetRandomInt(1, #rm)], 1)
+                                    end
+                                else
+
+                                end
+                            end
+                        end
+
+                    end
                 end
             end
         end
@@ -12255,6 +12303,7 @@ end
 --- DateTime: 29.09.2023 15:11
 ---
 function CHKBouncing(x, y, nx, ny, speed)
+    --для снарядов, весьма багованный
     local angle = AngleBetweenXY(x, y, nx, ny) / bj_DEGTORAD
     local has = false
     if not IsTerrainWalkable(nx, ny) then
@@ -12277,6 +12326,22 @@ function CHKBouncing(x, y, nx, ny, speed)
                 has = true
             end
 
+        end
+    end
+    return angle, has
+end
+
+function CHKBouncing2(x, y, nx, ny, speed)
+    --Для юнитов, обычный по идее
+    local angle = AngleBetweenXY(x, y, nx, ny) / bj_DEGTORAD
+    local has = false
+    if not IsTerrainWalkable(nx, ny) then
+        angle = 0 - (AngleBetweenXY(nx, ny, x, y) / bj_DEGTORAD)
+        nx, ny = MoveXY(x, y, speed, angle)
+        has = true
+        if not IsTerrainWalkable(nx, ny) then
+            angle = angle - 180
+            has = true
         end
     end
     return angle, has
@@ -12985,14 +13050,20 @@ function InitTrig_BallMove()
 
         local x, y = GetUnitXY(udg_Ball)
         local nx, ny = MoveXY(x, y, udg_BallSpeed, udg_BallFacing)
+        local bounceFact = false
+        --udg_BallFacing = CHKBouncing2(x, y, nx, ny, udg_BallSpeed)
 
-        udg_BallFacing = CHKBouncing(x, y, nx, ny, udg_BallSpeed)
+
+        udg_BallFacing, bounceFact = CHKBouncing2(x, y, nx, ny, udg_BallSpeed) ---------------- баунсинг
         nx, ny = MoveXY(x, y, udg_BallSpeed, udg_BallFacing)
+        if bounceFact then
+            nx, ny = MoveXY(x, y, udg_BallSpeed, udg_BallFacing)
+        end
 
         SetUnitPositionSmooth(udg_Ball, nx, ny)
         udg_BallSpeed = udg_BallSpeed - 0.50
         --print(udg_BallSpeed)
-        BlzSetUnitFacingEx(udg_Ball,GetUnitFacing(udg_Ball)+udg_BallSpeed)
+        BlzSetUnitFacingEx(udg_Ball, GetUnitFacing(udg_Ball) + udg_BallSpeed)
 
         if udg_BallSpeed <= 0.00 then
             DisableTrigger(GetTriggeringTrigger())
@@ -13018,7 +13089,7 @@ function InitTrig_BallInit ()
         --udg_Ball = gg_unit_e007_0258 --глобалка
         udg_BallPoint = GetUnitLoc(udg_Ball)
         if GetEventDamage() > 5 then
-            udg_BallSpeed = udg_BallSpeed+20
+            udg_BallSpeed = udg_BallSpeed + 20
             udg_BallFacing = AngleBetweenPoints(GetUnitLoc(GetEventDamageSource()), udg_BallPoint)
             EnableTrigger(gg_trg_BallMove)
 
@@ -13027,7 +13098,7 @@ function InitTrig_BallInit ()
     end)
     --print("событие урона на месте")
 end
-udg_BallSpeed=0
+udg_BallSpeed = 0
 function InitBounceOnGUI()
     InitTrig_BallInit()
     InitTrig_Init()
@@ -16987,11 +17058,11 @@ IssuePointOrderLocBJ(udg_HERO, "move", GetRectCenter(gg_rct_Region_022))
 SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_Oths_0011, 0)
 CameraSetupApplyForPlayer(true, gg_cam_OnPeonsandTrall, Player(0), 0.00)
 SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_Oths_0011, 0)
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_801", gg_snd_PenFromWolf4, "TRIGSTR_802", bj_TIMETYPE_ADD, 0.00, true)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_801", gg_snd_OP3, "TRIGSTR_802", bj_TIMETYPE_ADD, 0.00, true)
 CameraSetupApplyForPlayer(true, gg_cam_TrallSteal, Player(0), 0.00)
 SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_Oths_0011, 0)
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_803", gg_snd_Intro1, "TRIGSTR_804", bj_TIMETYPE_ADD, 0.00, true)
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_805", gg_snd_Intro1, "TRIGSTR_806", bj_TIMETYPE_ADD, 0.00, true)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_803", gg_snd_OT3, "TRIGSTR_804", bj_TIMETYPE_ADD, 0.00, true)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_805", gg_snd_OT4, "TRIGSTR_806", bj_TIMETYPE_ADD, 0.00, true)
 CinematicFadeBJ(bj_CINEFADETYPE_FADEOUT, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
 TriggerSleepAction(1.00)
 CreateDestructableLoc(FourCC("B00A"), GetDestructableLoc(gg_dest_B004_2162), GetRandomDirectionDeg(), 3.00, 0)
@@ -17006,15 +17077,15 @@ end
 CinematicFadeBJ(bj_CINEFADETYPE_FADEIN, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
 CameraSetupApplyForPlayer(true, gg_cam_OnPineRound, Player(0), 0.00)
 RotateCameraAroundLocBJ(360.00, GetDestructableLoc(GetLastCreatedDestructable()), Player(0), 20.00)
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_809", gg_snd_Intro1, "TRIGSTR_810", bj_TIMETYPE_ADD, 0.00, true)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_809", gg_snd_OT1, "TRIGSTR_810", bj_TIMETYPE_ADD, 0.00, true)
 CameraSetupApplyForPlayer(true, gg_cam_OnPineRound, Player(0), 0.00)
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_811", gg_snd_Intro1, "TRIGSTR_812", bj_TIMETYPE_ADD, 0.00, true)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_811", gg_snd_OT2, "TRIGSTR_812", bj_TIMETYPE_ADD, 0.00, true)
 CinematicFadeBJ(bj_CINEFADETYPE_FADEOUT, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_813", gg_snd_PenFromWolf4, "TRIGSTR_814", bj_TIMETYPE_ADD, 0.00, true)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_813", gg_snd_OP1, "TRIGSTR_814", bj_TIMETYPE_ADD, 0.00, true)
 TriggerSleepAction(1.00)
 CameraSetupApplyForPlayer(true, gg_cam_TavernaEnd, Player(0), 0.00)
 CinematicFadeBJ(bj_CINEFADETYPE_FADEIN, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_815", gg_snd_PenFromWolf4, "TRIGSTR_816", bj_TIMETYPE_ADD, 0.00, true)
+TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_815", gg_snd_OP2, "TRIGSTR_816", bj_TIMETYPE_ADD, 0.00, true)
 TriggerSleepAction(10.00)
 CustomVictoryBJ(Player(0), true, true)
 end
@@ -18330,7 +18401,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, 10816.0, 8576.0)
+DefineStartLocation(0, 16896.0, 2368.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()

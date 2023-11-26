@@ -140,6 +140,15 @@ function OnPostDamage()
             --print("не существует")
             udg_Ball=target
             InitBounceOnGUI()
+            TimerStart(CreateTimer(), 0.2, true, function()
+                if not UnitAlive(target) then
+                    DestroyTimer(GetExpiredTimer())
+                else
+                    if not IsUnitFall[GetHandleId(target)] then
+                        KillDestructableByTypeInPoint(ButtonsIDTable,300/3,GetUnitXY(target))
+                    end
+                end
+            end)
         end
 
     end

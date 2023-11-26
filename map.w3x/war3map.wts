@@ -2113,7 +2113,7 @@ STRING 801
 }
 
 STRING 802
-// Speech/Wolf/Peon/PenFromWolf4.mp3
+// Speech/Outro/OP3.mp3
 {
 Тралл! Дело сделано, я добыл, всё что ты просил!
 }
@@ -2124,7 +2124,7 @@ STRING 803
 }
 
 STRING 804
-// Speech/Trall/Intro1.mp3
+// Speech/Outro/OT3.mp3
 {
 Показывайте, что там у вас...
 }
@@ -2135,9 +2135,9 @@ STRING 805
 }
 
 STRING 806
-// Speech/Trall/Intro1.mp3
+// Speech/Outro/OT4.mp3
 {
-Хмм... Ну и херню же вы притащили, ладно, давайте, создавайте новогоднюю амосферу...
+Хмм... Ну и херню же вы притащили, ладно, давайте, создавайте новогоднюю атмосферу...
 }
 
 STRING 807
@@ -2158,9 +2158,9 @@ STRING 809
 }
 
 STRING 810
-// Speech/Trall/Intro1.mp3
+// Speech/Outro/OT1.mp3
 {
-Это не так плохо как могло бы быть
+Это не так плохо, как могло бы быть
 }
 
 STRING 811
@@ -2169,7 +2169,7 @@ STRING 811
 }
 
 STRING 812
-// Speech/Trall/Intro1.mp3
+// Speech/Outro/OT2.mp3
 {
 Прошу всех за новогодний стол!
 }
@@ -2180,7 +2180,7 @@ STRING 813
 }
 
 STRING 814
-// Speech/Wolf/Peon/PenFromWolf4.mp3
+// Speech/Outro/OP1.mp3
 {
 Работал я один, а праздновать будут все....
 }
@@ -2191,7 +2191,7 @@ STRING 815
 }
 
 STRING 816
-// Speech/Wolf/Peon/PenFromWolf4.mp3
+// Speech/Outro/OP2.mp3
 {
 Но на этом эта история подходит к концу... Я слишком устал и хочу спать, а утром рано вставать и идти на завод строить ЛОГОВА....
 }
@@ -2542,5 +2542,11 @@ STRING 876
 // Doodads: D05B (Стеллаж), Name (Name)
 {
 Стеллаж
+}
+
+STRING 877
+// Doodads: D05C (Круглая дыра), Name (Name)
+{
+Круглая дыра
 }
 

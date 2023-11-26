@@ -16,14 +16,20 @@ function InitTrig_BallMove()
 
         local x, y = GetUnitXY(udg_Ball)
         local nx, ny = MoveXY(x, y, udg_BallSpeed, udg_BallFacing)
+        local bounceFact = false
+        --udg_BallFacing = CHKBouncing2(x, y, nx, ny, udg_BallSpeed)
 
-        udg_BallFacing = CHKBouncing(x, y, nx, ny, udg_BallSpeed)
+
+        udg_BallFacing, bounceFact = CHKBouncing2(x, y, nx, ny, udg_BallSpeed) ---------------- баунсинг
         nx, ny = MoveXY(x, y, udg_BallSpeed, udg_BallFacing)
+        if bounceFact then
+            nx, ny = MoveXY(x, y, udg_BallSpeed, udg_BallFacing)
+        end
 
         SetUnitPositionSmooth(udg_Ball, nx, ny)
         udg_BallSpeed = udg_BallSpeed - 0.50
         --print(udg_BallSpeed)
-        BlzSetUnitFacingEx(udg_Ball,GetUnitFacing(udg_Ball)+udg_BallSpeed)
+        BlzSetUnitFacingEx(udg_Ball, GetUnitFacing(udg_Ball) + udg_BallSpeed)
 
         if udg_BallSpeed <= 0.00 then
             DisableTrigger(GetTriggeringTrigger())
@@ -49,7 +55,7 @@ function InitTrig_BallInit ()
         --udg_Ball = gg_unit_e007_0258 --глобалка
         udg_BallPoint = GetUnitLoc(udg_Ball)
         if GetEventDamage() > 5 then
-            udg_BallSpeed = udg_BallSpeed+20
+            udg_BallSpeed = udg_BallSpeed + 20
             udg_BallFacing = AngleBetweenPoints(GetUnitLoc(GetEventDamageSource()), udg_BallPoint)
             EnableTrigger(gg_trg_BallMove)
 
@@ -58,7 +64,7 @@ function InitTrig_BallInit ()
     end)
     --print("событие урона на месте")
 end
-udg_BallSpeed=0
+udg_BallSpeed = 0
 function InitBounceOnGUI()
     InitTrig_BallInit()
     InitTrig_Init()

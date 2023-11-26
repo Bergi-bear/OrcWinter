@@ -4,6 +4,7 @@
 --- DateTime: 29.09.2023 15:11
 ---
 function CHKBouncing(x, y, nx, ny, speed)
+    --для снарядов, весьма багованный
     local angle = AngleBetweenXY(x, y, nx, ny) / bj_DEGTORAD
     local has = false
     if not IsTerrainWalkable(nx, ny) then
@@ -26,6 +27,22 @@ function CHKBouncing(x, y, nx, ny, speed)
                 has = true
             end
 
+        end
+    end
+    return angle, has
+end
+
+function CHKBouncing2(x, y, nx, ny, speed)
+    --Для юнитов, обычный по идее
+    local angle = AngleBetweenXY(x, y, nx, ny) / bj_DEGTORAD
+    local has = false
+    if not IsTerrainWalkable(nx, ny) then
+        angle = 0 - (AngleBetweenXY(nx, ny, x, y) / bj_DEGTORAD)
+        nx, ny = MoveXY(x, y, speed, angle)
+        has = true
+        if not IsTerrainWalkable(nx, ny) then
+            angle = angle - 180
+            has = true
         end
     end
     return angle, has
