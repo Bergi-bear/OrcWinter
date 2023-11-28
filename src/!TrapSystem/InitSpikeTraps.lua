@@ -86,6 +86,7 @@ function CreateSpikeTrap(unit, timed)
             end
             if not UnitAlive(unit) then
                 DestroyTimer(GetExpiredTimer())
+                BlzPlaySpecialEffect(eff, ANIM_TYPE_STAND)
                 DestroyEffect(eff)
             end
         end)

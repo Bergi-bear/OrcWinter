@@ -2555,3 +2555,15 @@ STRING 878
 Вылетел за пределы карты
 }
 
+STRING 879
+// Units: h00S (rsfghd), Name (Name)
+{
+rsfghd
+}
+
+STRING 880
+// Units: h00S (rsfghd), EditorSuffix (Name - Editor Suffix)
+{
+ (подсказка)
+}
+
