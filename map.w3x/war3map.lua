@@ -192,7 +192,7 @@ gg_trg_ExitFrom13 = nil
 gg_trg_Leave13Fix = nil
 gg_trg_InitRoom12 = nil
 gg_trg_PlatformUp12 = nil
-gg_trg_TestButtons = nil
+gg_trg_Single12 = nil
 gg_trg_Victory12 = nil
 gg_trg_Restore12 = nil
 gg_trg_ExitFrom12 = nil
@@ -7825,6 +7825,19 @@ end
 
 function ButcherAddArmorTimed(boss, lvl, timed)
     --1 уровень 50 брони
+
+
+    DestroyEffect(AddSpecialEffectTarget("Effect\\File00000341", boss, "chest"))
+    local x,y=GetUnitXY(boss)
+    local _, _, _, units = UnitDamageArea(unit, 1, x, y, 500)
+
+    for i = 1, #units do
+        local angle=AngleBetweenUnits(unit,units[i])
+        local dist=500-DistanceBetweenXY(x,y,GetUnitXY(units[i]))
+        BlzPauseUnitEx(units[i], true) -- починка бага
+        UnitAddJumpForce(units[i],angle,40,dist,250)
+    end
+
     UnitAddAbility(boss, FourCC("A002"))
     SetUnitAbilityLevel(boss, FourCC("A002"), lvl)
     TimerStart(CreateTimer(), timed, false, function()
@@ -15462,17 +15475,17 @@ TriggerRegisterDeathEvent(gg_trg_PlatformUp12, gg_dest_B00E_19642)
 TriggerAddAction(gg_trg_PlatformUp12, Trig_PlatformUp12_Actions)
 end
 
-function Trig_TestButtons_Actions()
-TriggerSleepAction(0.50)
+function Trig_Single12_Actions()
+TriggerSleepAction(2.00)
 DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
 AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
 DestroyEffectBJ(GetLastCreatedEffectBJ())
 end
 
-function InitTrig_TestButtons()
-gg_trg_TestButtons = CreateTrigger()
-TriggerRegisterDeathEvent(gg_trg_TestButtons, gg_dest_B00E_19723)
-TriggerAddAction(gg_trg_TestButtons, Trig_TestButtons_Actions)
+function InitTrig_Single12()
+gg_trg_Single12 = CreateTrigger()
+TriggerRegisterDeathEvent(gg_trg_Single12, gg_dest_B00E_19723)
+TriggerAddAction(gg_trg_Single12, Trig_Single12_Actions)
 end
 
 function Trig_Victory12_Func001Func002C()
@@ -18508,7 +18521,7 @@ InitTrig_ExitFrom13()
 InitTrig_Leave13Fix()
 InitTrig_InitRoom12()
 InitTrig_PlatformUp12()
-InitTrig_TestButtons()
+InitTrig_Single12()
 InitTrig_Victory12()
 InitTrig_Restore12()
 InitTrig_ExitFrom12()
@@ -18635,7 +18648,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, 12928.0, 3328.0)
+DefineStartLocation(0, 256.0, -2304.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()

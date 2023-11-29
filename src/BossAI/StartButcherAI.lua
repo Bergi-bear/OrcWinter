@@ -466,6 +466,19 @@ end
 
 function ButcherAddArmorTimed(boss, lvl, timed)
     --1 уровень 50 брони
+
+
+    DestroyEffect(AddSpecialEffectTarget("Effect\\File00000341", boss, "chest"))
+    local x,y=GetUnitXY(boss)
+    local _, _, _, units = UnitDamageArea(unit, 1, x, y, 500)
+
+    for i = 1, #units do
+        local angle=AngleBetweenUnits(unit,units[i])
+        local dist=500-DistanceBetweenXY(x,y,GetUnitXY(units[i]))
+        BlzPauseUnitEx(units[i], true) -- починка бага
+        UnitAddJumpForce(units[i],angle,40,dist,250)
+    end
+
     UnitAddAbility(boss, FourCC("A002"))
     SetUnitAbilityLevel(boss, FourCC("A002"), lvl)
     TimerStart(CreateTimer(), timed, false, function()
