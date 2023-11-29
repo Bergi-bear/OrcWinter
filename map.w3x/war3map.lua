@@ -2658,11 +2658,15 @@ function UnitCreateArtMissile(hero, angle, speed, distance, MaxHeight, HasMarker
         if i > 3 and f <= GetTerrainZ(x, y) then
             DestroyTimer(GetExpiredTimer())
             local ox, oy = GetUnitXY(hero)
+            SetUnitUserData(hero,0)
             SetUnitX(hero, x)
             SetUnitY(hero, y)
             UnitDamageArea(hero, damage, x, y, range)
             SetUnitX(hero, ox)
             SetUnitY(hero, oy)
+            TimerStart(CreateTimer(), TIMER_PERIOD64, false, function()
+                SetUnitUserData(hero,1)
+            end)
             --local _,d= PointContentDestructable(x,y,60,true,1)
             DamageDestructableInRangeXY(hero, damage, range, x, y)
             KillDestructableByTypeInPoint(ButtonsIDTable, range, x, y)
@@ -2786,12 +2790,12 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
             --print("встретил блокиратор")
         else
             if IsUnitType(hero, UNIT_TYPE_HERO) then
-               -- print(GetDestructableName(d))
+                -- print(GetDestructableName(d))
                 if not d then
                     --print("ошибочный Bounce",GetDestructableName(d))
                 end
                 if bounceCount <= bounceMax then
-                    local angleOrig=angleCurrent
+                    local angleOrig = angleCurrent
                     angleCurrent, bounceFact = CHKBouncing(x, y, nx, ny, speed) ---------------- баунсинг
 
                     if bounceFact then
@@ -2799,7 +2803,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
                         nx, ny = MoveXY(x, y, speed, angleCurrent)
                         --print(bounceCount)
                     else
-                        angleCurrent=angleOrig
+                        angleCurrent = angleOrig
                     end
                 else
                     --print('превышено число отскоков',bounceMax)
@@ -2957,14 +2961,16 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
             if GetUnitTypeId(heroCurrent) == FourCC("hsor") then
                 flag = "all"
             end
-
-            local ox,oy=GetUnitXY(hero)
-            SetUnitX(hero,x)
-            SetUnitY(hero,y)
+            SetUnitUserData(hero,0)
+            local ox, oy = GetUnitXY(hero)
+            SetUnitX(hero, x)
+            SetUnitY(hero, y)
             UnitDamageArea(heroCurrent, damage, x, y, CollisionRange, flag) -- УРОН ПРИ ПОПАДАНИИ находится здесь
-            SetUnitX(hero,ox)
-            SetUnitY(hero,oy)
-
+            SetUnitX(hero, ox)
+            SetUnitY(hero, oy)
+            TimerStart(CreateTimer(), TIMER_PERIOD64, false, function()
+                SetUnitUserData(hero,1)
+            end)
 
             if effectmodel == "snowball" then
                 local tempEff = AddSpecialEffect("Abilities\\Weapons\\LichMissile\\LichMissile", x, y)
@@ -15307,6 +15313,9 @@ function Trig_ExitFrom13_Func002C()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
 end
+if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
+return false
+end
 if (not (IsDestructableDeadBJ(gg_dest_B00B_20321) == true)) then
 return false
 end
@@ -15580,6 +15589,9 @@ if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
 end
 if (not (IsDestructableDeadBJ(gg_dest_B00B_19643) == true)) then
+return false
+end
+if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
 return false
 end
 return true
@@ -16103,6 +16115,9 @@ function Trig_ExitFrom11_Func003C()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
 end
+if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
+return false
+end
 return true
 end
 
@@ -16145,6 +16160,9 @@ if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
 end
 if (not (IsDestructableDeadBJ(gg_dest_B00B_17599) == true)) then
+return false
+end
+if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
 return false
 end
 return true
@@ -16224,6 +16242,9 @@ if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
 end
 if (not (IsDestructableDeadBJ(gg_dest_B00B_17533) == true)) then
+return false
+end
+if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
 return false
 end
 return true
@@ -16399,6 +16420,9 @@ end
 if (not (IsDestructableDeadBJ(gg_dest_B00B_17182) == true)) then
 return false
 end
+if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
+return false
+end
 return true
 end
 
@@ -16504,6 +16528,9 @@ if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
 end
 if (not (IsDestructableDeadBJ(gg_dest_B00B_16680) == true)) then
+return false
+end
+if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
 return false
 end
 return true
@@ -16624,6 +16651,9 @@ end
 if (not (IsDestructableDeadBJ(gg_dest_B00B_16430) == true)) then
 return false
 end
+if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
+return false
+end
 return true
 end
 
@@ -16739,6 +16769,9 @@ end
 if (not (IsDestructableDeadBJ(gg_dest_B00B_16153) == true)) then
 return false
 end
+if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
+return false
+end
 return true
 end
 
@@ -16851,6 +16884,9 @@ end
 if (not (IsDestructableDeadBJ(gg_dest_B00B_15713) == true)) then
 return false
 end
+if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
+return false
+end
 return true
 end
 
@@ -16939,6 +16975,9 @@ if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
 end
 if (not (IsDestructableDeadBJ(gg_dest_B00B_15515) == true)) then
+return false
+end
+if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
 return false
 end
 return true
@@ -17032,6 +17071,9 @@ end
 if (not (IsDestructableDeadBJ(gg_dest_B00B_15274) == true)) then
 return false
 end
+if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
+return false
+end
 return true
 end
 
@@ -17101,6 +17143,9 @@ end
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
 end
+if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
+return false
+end
 return true
 end
 
@@ -17168,6 +17213,9 @@ if (not (IsDestructableDeadBJ(gg_dest_B00B_14785) == true)) then
 return false
 end
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+return false
+end
+if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
 return false
 end
 return true

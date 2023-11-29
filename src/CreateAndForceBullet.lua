@@ -93,12 +93,12 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
             --print("встретил блокиратор")
         else
             if IsUnitType(hero, UNIT_TYPE_HERO) then
-               -- print(GetDestructableName(d))
+                -- print(GetDestructableName(d))
                 if not d then
                     --print("ошибочный Bounce",GetDestructableName(d))
                 end
                 if bounceCount <= bounceMax then
-                    local angleOrig=angleCurrent
+                    local angleOrig = angleCurrent
                     angleCurrent, bounceFact = CHKBouncing(x, y, nx, ny, speed) ---------------- баунсинг
 
                     if bounceFact then
@@ -106,7 +106,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
                         nx, ny = MoveXY(x, y, speed, angleCurrent)
                         --print(bounceCount)
                     else
-                        angleCurrent=angleOrig
+                        angleCurrent = angleOrig
                     end
                 else
                     --print('превышено число отскоков',bounceMax)
@@ -264,14 +264,16 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
             if GetUnitTypeId(heroCurrent) == FourCC("hsor") then
                 flag = "all"
             end
-
-            local ox,oy=GetUnitXY(hero)
-            SetUnitX(hero,x)
-            SetUnitY(hero,y)
+            SetUnitUserData(hero,0)
+            local ox, oy = GetUnitXY(hero)
+            SetUnitX(hero, x)
+            SetUnitY(hero, y)
             UnitDamageArea(heroCurrent, damage, x, y, CollisionRange, flag) -- УРОН ПРИ ПОПАДАНИИ находится здесь
-            SetUnitX(hero,ox)
-            SetUnitY(hero,oy)
-
+            SetUnitX(hero, ox)
+            SetUnitY(hero, oy)
+            TimerStart(CreateTimer(), TIMER_PERIOD64, false, function()
+                SetUnitUserData(hero,1)
+            end)
 
             if effectmodel == "snowball" then
                 local tempEff = AddSpecialEffect("Abilities\\Weapons\\LichMissile\\LichMissile", x, y)
