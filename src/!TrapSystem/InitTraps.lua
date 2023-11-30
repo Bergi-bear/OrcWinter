@@ -14,7 +14,7 @@ do
             --InitLaserTrap()
             ReplaceIdToSpikeTraps(FourCC("h00G"))
             ReplaceIdToStaticTrap(FourCC("h00Q"))
-            InitRSFGHD()-- для теста не забыть удалить
+
         end)
     end
 end

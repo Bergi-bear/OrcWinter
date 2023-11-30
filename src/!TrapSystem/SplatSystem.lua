@@ -4,11 +4,8 @@
 --- DateTime: 28.11.2023 19:01
 ---
 function CreateSplatXY(texture,x,y)
-    --x,y=13043,2317
-    --texture="imageR"
     local size=100
     local img = CreateImage(texture, size, size, size, 4000, 4000, 0, 0, 0, 1000, 3)
-    --SetImageColor(img, 255, 255, 0, 128)
     SetImageRenderAlways(img, true)
     SetImagePosition(img,x-size/2,y-size/2,1000)
     ShowImage(img, true)
@@ -29,4 +26,28 @@ function InitRSFGHD()
         CreateSplatXY(texture,x,y)
         --print(t[i])
     end
+end
+
+function AddCircleAreaForUnit(unit, radius, timed)
+    local path = "replaceabletextures\\selection\\rangeindicator" -- путь до дефолтной иконки
+    local CircleImage = CreateImage(path, radius, radius, radius, 5000, 5000, 0, 0, 0, 0, 1)
+
+    SetImageRenderAlways(CircleImage, true)
+    ShowImage(CircleImage, true)
+    --SetImagePosition(CircleImage, GetUnitX(unit), GetUnitY(unit), 0)
+    local alpha = 255
+    local str = timed
+    TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
+        alpha = alpha - str
+        --SetImageColor(CircleImage, 255, 0, 0, alpha)
+        timed = timed - TIMER_PERIOD
+        local xs, ys = GetUnitX(unit) - radius / 2 - 16, GetUnitY(unit) - radius / 2 - 16
+        SetImagePosition(CircleImage, xs, ys, 0)
+
+        if timed <= 0 then
+            DestroyTimer(GetExpiredTimer())
+            DestroyImage(CircleImage)
+            ShowImage(CircleImage, false)
+        end
+    end)
 end

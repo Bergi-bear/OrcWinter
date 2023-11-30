@@ -4,6 +4,30 @@
 --- DateTime: 28.04.2021 23:55
 ---
 ----- ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
+function UnitAddForceSimpleClean(hero, angle, speed, distance)
+    local currentdistance = 0
+    if onForces[GetHandleId(hero)] == nil then
+        onForces[GetHandleId(hero)] = true
+        --print("первый раз?")
+    end
+    if onForces[GetHandleId(hero)] then
+        onForces[GetHandleId(hero)] = false
+
+        TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
+            currentdistance = currentdistance + speed
+            local x, y = GetUnitXY(hero)
+            local vector = Vector:new(x, y, GetUnitZ(hero))
+            local newVector = vector
+            newVector = VectorSum(newVector, vector:yawPitchOffset(speed, angle * (math.pi / 180), 0.0))
+            SetUnitPositionSmooth(hero, newVector.x, newVector.y)
+            if currentdistance >= distance then
+                DestroyTimer(GetExpiredTimer())
+                onForces[GetHandleId(hero)] = true
+            end
+        end)
+    end
+end
+
 onForces = {}
 function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
     -- псевдо вектор использовать только для юнитов
@@ -59,8 +83,8 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
                 --if GetUnitData(hero).QHighJump then
                 --    makeJump = true
                 --end
-                local data=GetUnitData(hero)
-                data.StatWay=data.StatWay+speed
+                local data = GetUnitData(hero)
+                data.StatWay = data.StatWay + speed
             end
 
             if flag == "ignore" or makeJump then
@@ -79,7 +103,6 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
                 if data.REffect then
                     BlzSetSpecialEffectPosition(data.REffect, newVector.x, newVector.y, GetTerrainZ(newVector.x, newVector.y) + 200)
                 end
-
 
                 if CheckTableDestructableForCurrentID(allD, FourCC("B00C")) or data.OnDeep then
                     -- низкая пропасть
@@ -102,7 +125,8 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
                 --print(flag)
             end
 
-            if GetUnitTypeId(hero) ~= HeroID and GetUnitTypeId(pushing) == HeroID then
+            if GetUnitTypeId(hero) ~= HeroID and GetUnitTypeId(pushing) == HeroID and false then
+                -- отключено
 
                 local PerepadZ = GetTerrainZ(MoveXY(x, y, 120, angle)) - GetTerrainZ(x, y)
                 --print(PerepadZ)
@@ -395,8 +419,9 @@ function ChkEndpoint(x, y, xEnd, yEnd)
     for i = 1, k do
         local nx, ny = MoveXY(x, y, step * (i - 1), angle)
         --
-        local is, destructable,all = PointContentDestructable(nx, ny, step*2, true)
-        if GetDestructableTypeId(destructable)==FourCC("B00C") then -- блокиратор переката
+        local is, destructable, all = PointContentDestructable(nx, ny, step * 2, true)
+        if GetDestructableTypeId(destructable) == FourCC("B00C") then
+            -- блокиратор переката
             DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt", nx, ny))
         end
         print(#all)

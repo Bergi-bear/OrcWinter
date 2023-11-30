@@ -4,11 +4,12 @@
 --- DateTime: 11.11.2023 17:34
 ---
 ---
-function StartBlackHole(unit,timed)
+function StartBlackHole(unit, timed)
     local x, y = GetUnitXY(unit)
     local range = 1200
     if not timed then
         UnitAddAbility(unit, FourCC("Aloc"))
+        AddCircleAreaForUnit(unit, 2500, 9999)
     else
         range = 2400
     end
@@ -17,8 +18,8 @@ function StartBlackHole(unit,timed)
     local maxSpeed = 6
     local minSpeed = 0.2
     local realSpeed = 1
-    local imp=range*2
-    TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
+    local imp = range * 2
+    TimerStart(CreateTimer(), 0.1, true, function()
         if udg_HoleIsWork then
             UnitDamageArea(unit, 30, x, y, 150)
             if IsUnitInRange(data.UnitHero, unit, range) then
@@ -32,13 +33,14 @@ function StartBlackHole(unit,timed)
                 if realSpeed <= minSpeed then
                     realSpeed = minSpeed
                 end
-                data.BHSpeed=realSpeed
+                data.BHSpeed = realSpeed
                 --print(data.BHSpeed)
             else
                 data.BH = nil
             end
 
             local e = nil
+           -- local k=0
             GroupEnumUnitsInRange(perebor, x, y, range, nil)
             while true do
                 e = FirstOfGroup(perebor)
@@ -47,9 +49,10 @@ function StartBlackHole(unit,timed)
                     break
                 end
 
-                if UnitAlive(e) and e ~= unit and not IsUnitType(e, UNIT_TYPE_HERO)  then
+                if UnitAlive(e) and e ~= unit and not IsUnitType(e, UNIT_TYPE_HERO) then
+                    --k=k+1
                     local angle = AngleBetweenUnits(e, unit)
-                    if IsUnitInRange(e, unit, 50) then
+                    if IsUnitInRange(e, unit, 100) then
                     else
                         local dist = DistanceBetweenXY(x, y, GetUnitXY(e))
                         realSpeed = imp / dist
@@ -61,25 +64,26 @@ function StartBlackHole(unit,timed)
                             realSpeed = minSpeed
                         end
 
-                        UnitAddForceSimple(e, angle, realSpeed, 50)
+                        UnitAddForceSimpleClean(e, angle, realSpeed, 50) -- типа не лагает?
                     end
                 end
                 GroupRemoveUnit(perebor, e)
             end
+            --print("юнитов в переборе",k)
         else
-            data.BH=nil
+            data.BH = nil
         end
         if timed then
-            timed=timed-TIMER_PERIOD64
-            if timed<=0 then
+            timed = timed - TIMER_PERIOD64
+            if timed <= 0 then
                 DestroyTimer(GetExpiredTimer())
-                data.BH=nil
+                data.BH = nil
                 --print("временный БХ окончен")
             end
         end
         if not UnitAlive(unit) then
             DestroyTimer(GetExpiredTimer())
-            data.BH=nil
+            data.BH = nil
         end
     end)
 end

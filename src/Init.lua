@@ -46,6 +46,8 @@ do
             --SetDayNightModels("", "")
             InitRicoshet()
             InitLightFromFloor()
+            InitRSFGHD()
+            InitEventUnitUnderPointer()
 
             ClearMapMusicBJ()
             PlayMusicBJ("Endless Snowbanks")

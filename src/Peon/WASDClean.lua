@@ -407,7 +407,7 @@ function InitWASD(hero)
 
                     if data.CatchUnit then
 
-                        local newAngle = -180 + AngleBetweenUnits(hero, data.CatchUnit)
+                        local newAngle = angle-- -180 + AngleBetweenUnits(hero, data.CatchUnit)
                         --print("новый угол")
                         if not IsUnitInRange(hero, data.CatchUnit, 120) then
                             DestroyEffect(data.CatchUnitEffect)
@@ -416,7 +416,7 @@ function InitWASD(hero)
 
                         else
                             SetUnitFacing(data.CatchUnit, newAngle)
-                            UnitAddForceSimple(data.CatchUnit, newAngle, speed * 1.1, 70)
+                            UnitAddForceSimple(data.CatchUnit, newAngle, speed , 70)
                         end
 
                     end

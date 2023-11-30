@@ -116,6 +116,8 @@ gg_rct_Bound13 = nil
 gg_rct_Enter13 = nil
 gg_rct_Exit13 = nil
 gg_rct_Region13 = nil
+gg_rct_Error10 = nil
+gg_rct_Error10Out = nil
 gg_cam_OnPeonsandTrall = nil
 gg_cam_OnPineRound = nil
 gg_cam_OnPeons = nil
@@ -209,6 +211,8 @@ gg_trg_ExitFrom11 = nil
 gg_trg_Out11 = nil
 gg_trg_ExitFrom10 = nil
 gg_trg_Victory10 = nil
+gg_trg_Error10In = nil
+gg_trg_Error10Out = nil
 gg_trg_ExitFrom09 = nil
 gg_trg_InitRoom09 = nil
 gg_trg_Victory09 = nil
@@ -953,6 +957,13 @@ u = BlzCreateUnitWithSkin(p, FourCC("h002"), 13968.7, -5016.5, 5.812, FourCC("h0
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), 16768.6, -5028.5, 5.812, FourCC("h002"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), 16774.7, -7815.1, 5.812, FourCC("h002"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00S"), 13062.2, 3399.4, 183.104, FourCC("h00S"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14528.3, 6589.8, 0.000, FourCC("h00F"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14528.5, 6463.1, 0.000, FourCC("h00F"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14528.0, 6336.2, 0.000, FourCC("h00F"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14529.1, 6209.0, 0.000, FourCC("h00F"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14527.7, 6082.2, 0.000, FourCC("h00F"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14398.5, 6077.9, 0.000, FourCC("h00F"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14270.7, 6077.9, 0.000, FourCC("h00F"))
 end
 
 function CreateUnitsForPlayer1()
@@ -1933,6 +1944,8 @@ gg_rct_Bound13 = Rect(16736.0, 2592.0, 17024.0, 2880.0)
 gg_rct_Enter13 = Rect(16832.0, 2272.0, 16960.0, 2400.0)
 gg_rct_Exit13 = Rect(17920.0, 2688.0, 18176.0, 2944.0)
 gg_rct_Region13 = Rect(15584.0, 2016.0, 18208.0, 3616.0)
+gg_rct_Error10 = Rect(13120.0, -3008.0, 15296.0, -2112.0)
+gg_rct_Error10Out = Rect(12736.0, -3392.0, 15424.0, -1728.0)
 end
 
 function CreateCameras()
@@ -2179,6 +2192,30 @@ end
 --- DateTime: 28.04.2021 23:55
 ---
 ----- ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
+function UnitAddForceSimpleClean(hero, angle, speed, distance)
+    local currentdistance = 0
+    if onForces[GetHandleId(hero)] == nil then
+        onForces[GetHandleId(hero)] = true
+        --print("первый раз?")
+    end
+    if onForces[GetHandleId(hero)] then
+        onForces[GetHandleId(hero)] = false
+        
+        TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
+            currentdistance = currentdistance + speed
+            local x, y = GetUnitXY(hero)
+            local vector = Vector:new(x, y, GetUnitZ(hero))
+            local newVector = vector
+            newVector = VectorSum(newVector, vector:yawPitchOffset(speed, angle * (math.pi / 180), 0.0))
+            SetUnitPositionSmooth(hero, newVector.x, newVector.y)
+            if currentdistance >= distance then
+                DestroyTimer(GetExpiredTimer())
+                onForces[GetHandleId(hero)] = true
+            end
+        end)
+    end
+end
+
 onForces = {}
 function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
     -- псевдо вектор использовать только для юнитов
@@ -2234,8 +2271,8 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
                 --if GetUnitData(hero).QHighJump then
                 --    makeJump = true
                 --end
-                local data=GetUnitData(hero)
-                data.StatWay=data.StatWay+speed
+                local data = GetUnitData(hero)
+                data.StatWay = data.StatWay + speed
             end
 
             if flag == "ignore" or makeJump then
@@ -2254,7 +2291,6 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
                 if data.REffect then
                     BlzSetSpecialEffectPosition(data.REffect, newVector.x, newVector.y, GetTerrainZ(newVector.x, newVector.y) + 200)
                 end
-
 
                 if CheckTableDestructableForCurrentID(allD, FourCC("B00C")) or data.OnDeep then
                     -- низкая пропасть
@@ -2277,7 +2313,8 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
                 --print(flag)
             end
 
-            if GetUnitTypeId(hero) ~= HeroID and GetUnitTypeId(pushing) == HeroID then
+            if GetUnitTypeId(hero) ~= HeroID and GetUnitTypeId(pushing) == HeroID and false then
+                -- отключено
 
                 local PerepadZ = GetTerrainZ(MoveXY(x, y, 120, angle)) - GetTerrainZ(x, y)
                 --print(PerepadZ)
@@ -2570,8 +2607,9 @@ function ChkEndpoint(x, y, xEnd, yEnd)
     for i = 1, k do
         local nx, ny = MoveXY(x, y, step * (i - 1), angle)
         --
-        local is, destructable,all = PointContentDestructable(nx, ny, step*2, true)
-        if GetDestructableTypeId(destructable)==FourCC("B00C") then -- блокиратор переката
+        local is, destructable, all = PointContentDestructable(nx, ny, step * 2, true)
+        if GetDestructableTypeId(destructable) == FourCC("B00C") then
+            -- блокиратор переката
             DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt", nx, ny))
         end
         print(#all)
@@ -3743,6 +3781,8 @@ do
             --SetDayNightModels("", "")
             InitRicoshet()
             InitLightFromFloor()
+            InitRSFGHD()
+            InitEventUnitUnderPointer()
 
             ClearMapMusicBJ()
             PlayMusicBJ("Endless Snowbanks")
@@ -3751,6 +3791,33 @@ do
             print(">>>")
         end)
     end
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 30.11.2023 20:11
+---
+
+function InitEventUnitUnderPointer()
+    local MouseMoveTrigger = CreateTrigger()
+    for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
+        local player = Player(i)
+        TriggerRegisterPlayerEvent(MouseMoveTrigger, player, EVENT_PLAYER_MOUSE_MOVE)
+    end
+
+    local last=nil
+    TriggerAddAction(MouseMoveTrigger, function()
+        local FocusUnit=BlzGetMouseFocusUnit()
+        local pid = GetPlayerId(GetTriggerPlayer())
+        local data = HERO[pid]
+        if last~=FocusUnit and not data.CatchUnit  then
+            if GetUnitTypeId(FocusUnit)==FourCC("h00C") then
+               -- print(GetUnitName(FocusUnit))
+                AddCircleAreaForUnit(FocusUnit, 525, 2)
+            end
+        end
+        last=FocusUnit
+    end)
 end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
@@ -5478,11 +5545,12 @@ end
 --- DateTime: 11.11.2023 17:34
 ---
 ---
-function StartBlackHole(unit,timed)
+function StartBlackHole(unit, timed)
     local x, y = GetUnitXY(unit)
     local range = 1200
     if not timed then
         UnitAddAbility(unit, FourCC("Aloc"))
+        AddCircleAreaForUnit(unit, 2500, 9999)
     else
         range = 2400
     end
@@ -5491,8 +5559,8 @@ function StartBlackHole(unit,timed)
     local maxSpeed = 6
     local minSpeed = 0.2
     local realSpeed = 1
-    local imp=range*2
-    TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
+    local imp = range * 2
+    TimerStart(CreateTimer(), 0.1, true, function()
         if udg_HoleIsWork then
             UnitDamageArea(unit, 30, x, y, 150)
             if IsUnitInRange(data.UnitHero, unit, range) then
@@ -5506,13 +5574,14 @@ function StartBlackHole(unit,timed)
                 if realSpeed <= minSpeed then
                     realSpeed = minSpeed
                 end
-                data.BHSpeed=realSpeed
+                data.BHSpeed = realSpeed
                 --print(data.BHSpeed)
             else
                 data.BH = nil
             end
 
             local e = nil
+           -- local k=0
             GroupEnumUnitsInRange(perebor, x, y, range, nil)
             while true do
                 e = FirstOfGroup(perebor)
@@ -5521,9 +5590,10 @@ function StartBlackHole(unit,timed)
                     break
                 end
 
-                if UnitAlive(e) and e ~= unit and not IsUnitType(e, UNIT_TYPE_HERO)  then
+                if UnitAlive(e) and e ~= unit and not IsUnitType(e, UNIT_TYPE_HERO) then
+                    --k=k+1
                     local angle = AngleBetweenUnits(e, unit)
-                    if IsUnitInRange(e, unit, 50) then
+                    if IsUnitInRange(e, unit, 100) then
                     else
                         local dist = DistanceBetweenXY(x, y, GetUnitXY(e))
                         realSpeed = imp / dist
@@ -5535,25 +5605,26 @@ function StartBlackHole(unit,timed)
                             realSpeed = minSpeed
                         end
 
-                        UnitAddForceSimple(e, angle, realSpeed, 50)
+                        UnitAddForceSimpleClean(e, angle, realSpeed, 50) -- типа не лагает?
                     end
                 end
                 GroupRemoveUnit(perebor, e)
             end
+            --print("юнитов в переборе",k)
         else
-            data.BH=nil
+            data.BH = nil
         end
         if timed then
-            timed=timed-TIMER_PERIOD64
-            if timed<=0 then
+            timed = timed - TIMER_PERIOD64
+            if timed <= 0 then
                 DestroyTimer(GetExpiredTimer())
-                data.BH=nil
+                data.BH = nil
                 --print("временный БХ окончен")
             end
         end
         if not UnitAlive(unit) then
             DestroyTimer(GetExpiredTimer())
-            data.BH=nil
+            data.BH = nil
         end
     end)
 end
@@ -5690,7 +5761,7 @@ do
             --InitLaserTrap()
             ReplaceIdToSpikeTraps(FourCC("h00G"))
             ReplaceIdToStaticTrap(FourCC("h00Q"))
-            InitRSFGHD()-- для теста не забыть удалить
+
         end)
     end
 end
@@ -6082,11 +6153,8 @@ end
 --- DateTime: 28.11.2023 19:01
 ---
 function CreateSplatXY(texture,x,y)
-    --x,y=13043,2317
-    --texture="imageR"
     local size=100
     local img = CreateImage(texture, size, size, size, 4000, 4000, 0, 0, 0, 1000, 3)
-    --SetImageColor(img, 255, 255, 0, 128)
     SetImageRenderAlways(img, true)
     SetImagePosition(img,x-size/2,y-size/2,1000)
     ShowImage(img, true)
@@ -6108,6 +6176,31 @@ function InitRSFGHD()
         --print(t[i])
     end
 end
+
+function AddCircleAreaForUnit(unit, radius, timed)
+    local path = "replaceabletextures\\selection\\rangeindicator" -- путь до дефолтной иконки
+    local CircleImage = CreateImage(path, radius, radius, radius, 5000, 5000, 0, 0, 0, 0, 1)
+
+    SetImageRenderAlways(CircleImage, true)
+    ShowImage(CircleImage, true)
+    --SetImagePosition(CircleImage, GetUnitX(unit), GetUnitY(unit), 0)
+    local alpha = 255
+    local str = timed
+    TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
+        alpha = alpha - str
+        --SetImageColor(CircleImage, 255, 0, 0, alpha)
+        timed = timed - TIMER_PERIOD
+        local xs, ys = GetUnitX(unit) - radius / 2 - 16, GetUnitY(unit) - radius / 2 - 16
+        SetImagePosition(CircleImage, xs, ys, 0)
+
+        if timed <= 0 then
+            DestroyTimer(GetExpiredTimer())
+            DestroyImage(CircleImage)
+            ShowImage(CircleImage, false)
+        end
+    end)
+end
+
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
 --- Created by User.
@@ -13800,7 +13893,7 @@ function InitWASD(hero)
 
                     if data.CatchUnit then
 
-                        local newAngle = -180 + AngleBetweenUnits(hero, data.CatchUnit)
+                        local newAngle = angle-- -180 + AngleBetweenUnits(hero, data.CatchUnit)
                         --print("новый угол")
                         if not IsUnitInRange(hero, data.CatchUnit, 120) then
                             DestroyEffect(data.CatchUnitEffect)
@@ -13809,7 +13902,7 @@ function InitWASD(hero)
 
                         else
                             SetUnitFacing(data.CatchUnit, newAngle)
-                            UnitAddForceSimple(data.CatchUnit, newAngle, speed * 1.1, 70)
+                            UnitAddForceSimple(data.CatchUnit, newAngle, speed , 70)
                         end
 
                     end
@@ -16237,6 +16330,64 @@ TriggerRegisterDeathEvent(gg_trg_Victory10, gg_dest_B00D_17597)
 TriggerAddAction(gg_trg_Victory10, Trig_Victory10_Actions)
 end
 
+function Trig_Error10In_Func001C()
+if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+return false
+end
+if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
+return false
+end
+return true
+end
+
+function Trig_Error10In_Conditions()
+if (not Trig_Error10In_Func001C()) then
+return false
+end
+return true
+end
+
+function Trig_Error10In_Actions()
+TriggerSleepAction(1.00)
+KillUnit(GetTriggerUnit())
+end
+
+function InitTrig_Error10In()
+gg_trg_Error10In = CreateTrigger()
+TriggerRegisterEnterRectSimple(gg_trg_Error10In, gg_rct_Error10)
+TriggerAddCondition(gg_trg_Error10In, Condition(Trig_Error10In_Conditions))
+TriggerAddAction(gg_trg_Error10In, Trig_Error10In_Actions)
+end
+
+function Trig_Error10Out_Func001C()
+if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+return false
+end
+if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
+return false
+end
+return true
+end
+
+function Trig_Error10Out_Conditions()
+if (not Trig_Error10Out_Func001C()) then
+return false
+end
+return true
+end
+
+function Trig_Error10Out_Actions()
+TriggerSleepAction(1.00)
+KillUnit(GetTriggerUnit())
+end
+
+function InitTrig_Error10Out()
+gg_trg_Error10Out = CreateTrigger()
+TriggerRegisterLeaveRectSimple(gg_trg_Error10Out, gg_rct_Error10Out)
+TriggerAddCondition(gg_trg_Error10Out, Condition(Trig_Error10Out_Conditions))
+TriggerAddAction(gg_trg_Error10Out, Trig_Error10Out_Actions)
+end
+
 function Trig_ExitFrom09_Func003C()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
@@ -17303,6 +17454,7 @@ KillUnit(gg_unit_h00I_0601)
 ClearMapMusicBJ()
 PlayMusicBJ(gg_snd_The_Astral_Academy_Gardens)
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter00))
+    HeroFixRespPos()
     UnitStartFallAnim(udg_HERO,1000)
 SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Boind00)
     CreateEnteringFrame(nil, "Подвальчик")
@@ -18586,6 +18738,8 @@ InitTrig_ExitFrom11()
 InitTrig_Out11()
 InitTrig_ExitFrom10()
 InitTrig_Victory10()
+InitTrig_Error10In()
+InitTrig_Error10Out()
 InitTrig_ExitFrom09()
 InitTrig_InitRoom09()
 InitTrig_Victory09()
@@ -18696,7 +18850,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, 256.0, -2304.0)
+DefineStartLocation(0, 12288.0, -384.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()
