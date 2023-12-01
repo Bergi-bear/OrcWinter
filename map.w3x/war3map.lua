@@ -20,6 +20,7 @@ udg_SpikeUnitsForRemove = nil
 udg_Remove08 = nil
 udg_HoleIsWork = false
 udg_IsBrainGame = false
+udg_WolfIsDie = false
 gg_rct_Region_038 = nil
 gg_rct_Region_024 = nil
 gg_rct_TrapZone = nil
@@ -400,6 +401,7 @@ udg_SpikeUnitsForRemove = CreateGroup()
 udg_Remove08 = CreateGroup()
 udg_HoleIsWork = true
 udg_IsBrainGame = false
+udg_WolfIsDie = false
 end
 
 function InitSounds()
@@ -2200,7 +2202,7 @@ function UnitAddForceSimpleClean(hero, angle, speed, distance)
     end
     if onForces[GetHandleId(hero)] then
         onForces[GetHandleId(hero)] = false
-        
+
         TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
             currentdistance = currentdistance + speed
             local x, y = GetUnitXY(hero)
@@ -18122,15 +18124,18 @@ TriggerRegisterTimerEventPeriodic(gg_trg_Cum, 0.05)
 TriggerAddAction(gg_trg_Cum, Trig_Cum_Actions)
 end
 
-function Trig_FromWolfCave_Func002C()
-return false
-end
-
-function Trig_FromWolfCave_Conditions()
+function Trig_FromWolfCave_Func001C()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
 end
-if (not Trig_FromWolfCave_Func002C()) then
+if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
+return false
+end
+return true
+end
+
+function Trig_FromWolfCave_Conditions()
+if (not Trig_FromWolfCave_Func001C()) then
 return false
 end
 return true
@@ -18147,11 +18152,28 @@ TriggerAddCondition(gg_trg_FromWolfCave, Condition(Trig_FromWolfCave_Conditions)
 TriggerAddAction(gg_trg_FromWolfCave, Trig_FromWolfCave_Actions)
 end
 
-function Trig_ExitWolf_Func001C()
-if (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true) then
+function Trig_ExitWolf_Func001Func001C()
+if (not (udg_WolfIsDie == true)) then
+return false
+end
 return true
 end
-if (IsUnitAlly(GetTriggerUnit(), Player(0)) == true) then
+
+function Trig_ExitWolf_Func001Func002C()
+if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+return false
+end
+if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
+return false
+end
+return true
+end
+
+function Trig_ExitWolf_Func001C()
+if (Trig_ExitWolf_Func001Func001C()) then
+return true
+end
+if (Trig_ExitWolf_Func001Func002C()) then
 return true
 end
 return false
@@ -18235,6 +18257,7 @@ end
 
 function Trig_DeathWolf_Actions()
 EnableTrigger(gg_trg_ExitOnWolf)
+udg_WolfIsDie = true
 end
 
 function InitTrig_DeathWolf()
@@ -18850,7 +18873,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, 12288.0, -384.0)
+DefineStartLocation(0, 10880.0, 8640.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()
