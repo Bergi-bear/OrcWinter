@@ -4,11 +4,13 @@
 --- DateTime: 11.11.2023 21:09
 ---
 function FlyTimer(max)
+    local s=normal_sound("TikTok")
     TimerStart(CreateTimer(), 1, true, function()
         FlyTextTagManaBurn(udg_HERO,R2I(max),Player(0))
         max=max-1
         if max<1 then
             DestroyTimer(GetExpiredTimer())
+            KillSoundWhenDone(s)
         end
     end)
 end

@@ -4,7 +4,7 @@
 --- DateTime: 28.04.2021 23:55
 ---
 ----- ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
-function UnitAddForceSimpleClean(hero, angle, speed, distance)
+function UnitAddForceSimpleClean(hero, angle, speed, distance, flag)
     local currentdistance = 0
     if onForces[GetHandleId(hero)] == nil then
         onForces[GetHandleId(hero)] = true
@@ -20,6 +20,20 @@ function UnitAddForceSimpleClean(hero, angle, speed, distance)
             local newVector = vector
             newVector = VectorSum(newVector, vector:yawPitchOffset(speed, angle * (math.pi / 180), 0.0))
             SetUnitPositionSmooth(hero, newVector.x, newVector.y)
+
+            for i = 1, #flag do
+                if flag[i] == "MoveWMe" then
+                    local data = HERO[0]
+                    if IsUnitInRange(hero, data.UnitHero, 50) and not data.SpaceForce and not data.sit then
+                        SetUnitX(data.UnitHero, newVector.x)
+                        SetUnitY(data.UnitHero, newVector.y)
+                        SetUnitZ(data.UnitHero, GetUnitZ(hero) + 15)
+                    else
+
+                    end
+                end
+            end
+
             if currentdistance >= distance then
                 DestroyTimer(GetExpiredTimer())
                 onForces[GetHandleId(hero)] = true
@@ -252,9 +266,11 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
                 if flag == "ignore" then
                     --print("перезарядка атаки в рывке")
                     --HERO[GetPlayerId(GetOwningPlayer(hero))].AttackInForce=false --
+
                     local data = HERO[GetPlayerId(GetOwningPlayer(hero))]
                     data.OnDeep = false
                     IssueImmediateOrder(hero, "stop")
+                    SetUnitZ(data.UnitHero,0)
                     if data.IsMoving then
                         --print("закончил рывок")
 

@@ -48,6 +48,7 @@ do
             InitLightFromFloor()
             InitRSFGHD()
             InitEventUnitUnderPointer()
+            InitRailWagon()
 
             ClearMapMusicBJ()
             PlayMusicBJ("Endless Snowbanks")

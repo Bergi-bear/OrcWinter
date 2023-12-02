@@ -7,9 +7,13 @@
 function StartBlackHole(unit, timed)
     local x, y = GetUnitXY(unit)
     local range = 1200
+    local eff=nil
     if not timed then
         UnitAddAbility(unit, FourCC("Aloc"))
-        AddCircleAreaForUnit(unit, 2500, 9999)
+        --AddCircleAreaForUnit(unit, 2500, 9999)
+        eff=AddSpecialEffect("Shadow Ball",x,y)
+        BlzSetSpecialEffectZ(eff,GetTerrainZ(x,y)-200)
+        BlzSetSpecialEffectScale(eff,1.2)
     else
         range = 2400
     end
@@ -21,7 +25,12 @@ function StartBlackHole(unit, timed)
     local imp = range * 2
     TimerStart(CreateTimer(), 0.1, true, function()
         if udg_HoleIsWork then
+            BlzSetSpecialEffectTimeScale(eff,1)
             UnitDamageArea(unit, 30, x, y, 150)
+            if GetRandomInt(1,3)==1 then
+                CreateHoleEffect(unit, range)
+            end
+
             if IsUnitInRange(data.UnitHero, unit, range) then
                 data.BH = unit
                 local dist = DistanceBetweenXY(x, y, GetUnitXY(data.UnitHero))
@@ -40,7 +49,7 @@ function StartBlackHole(unit, timed)
             end
 
             local e = nil
-           -- local k=0
+            -- local k=0
             GroupEnumUnitsInRange(perebor, x, y, range, nil)
             while true do
                 e = FirstOfGroup(perebor)
@@ -72,6 +81,7 @@ function StartBlackHole(unit, timed)
             --print("юнитов в переборе",k)
         else
             data.BH = nil
+            BlzSetSpecialEffectTimeScale(eff,0)
         end
         if timed then
             timed = timed - TIMER_PERIOD64
@@ -86,4 +96,15 @@ function StartBlackHole(unit, timed)
             data.BH = nil
         end
     end)
+end
+
+function CreateHoleEffect(unit, range)
+    local x, y = GetUnitXY(unit)
+    local ra = GetRandomInt(0, 360)
+    local nx, ny = MoveXY(x, y, range, ra)
+    local angle = AngleBetweenXY(nx, ny, x, y) / bj_DEGTORAD
+    local eff = AddSpecialEffect("Windwalk", nx, ny)
+    local rs = 10
+    local timed=range/rs*1.5/100
+    MoveEffectTimedWSpeed(eff, rs, angle, timed)
 end

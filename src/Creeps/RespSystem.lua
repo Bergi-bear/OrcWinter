@@ -67,18 +67,22 @@ function InitDeathEventCreep()
                 local id = GetUnitTypeId(u)
                 local p = GetOwningPlayer(u)
                 TimerStart(CreateTimer(), delay, false, function()
-                    local new = CreateUnit(p, id, x, y, GetRandomInt(0, 360))
-                    CreepsX[GetHandleId(new)], CreepsY[GetHandleId(new)] = GetUnitXY(new)
-                    TimerStart(CreateTimer(), 0.2, true, function()
-                        if not UnitAlive(new) then
-                            DestroyTimer(GetExpiredTimer())
-                        else
-                            if not IsUnitFall[GetHandleId(new)] then
-                                KillDestructableByTypeInPoint(ButtonsIDTable,range/3,GetUnitXY(new))
+                    if x then
+                        local new = CreateUnit(p, id, x, y, GetRandomInt(0, 360))
+                        CreepsX[GetHandleId(new)], CreepsY[GetHandleId(new)] = GetUnitXY(new)
+                        TimerStart(CreateTimer(), 0.2, true, function()
+                            if not UnitAlive(new) then
+                                DestroyTimer(GetExpiredTimer())
+                            else
+                                if not IsUnitFall[GetHandleId(new)] then
+                                    KillDestructableByTypeInPoint(ButtonsIDTable,range/3,GetUnitXY(new))
+                                end
                             end
-                        end
-                    end)
-                    UnitStartFallAnim(new,1000)
+                        end)
+                        UnitStartFallAnim(new,1000)
+                    else
+                        --print("бочка на боссе не воскрешается")
+                    end
                     --InitBarrels(new)
                 end)
             end)

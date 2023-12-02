@@ -2573,3 +2573,45 @@ STRING 881
 Картины на стены
 }
 
+STRING 882
+// Abilities: A003 (Бонус к скорости передвижения), EditorSuffix (Editor Suffix)
+{
+ (отрицательный)
+}
+
+STRING 883
+// Abilities: A004 (Замедляющая аура), EditorSuffix (Editor Suffix)
+{
+(На себя)
+}
+
+STRING 884
+// Doodads: D05D (Рельс прямой), Name (Name)
+{
+Рельс прямой
+}
+
+STRING 885
+// Doodads: D05F (Рельс поворотный), Name (Name)
+{
+Рельс поворотный
+}
+
+STRING 886
+// Units: h00T (Вагонетка), Name (Name)
+{
+Вагонетка
+}
+
+STRING 887
+// Units: h00T (Вагонетка), EditorSuffix (Name - Editor Suffix)
+{
+ (можно толкать)
+}
+
+STRING 888
+// Units: h00U (Направление движения вагонетки), Name (Name)
+{
+Направление движения вагонетки
+}
+

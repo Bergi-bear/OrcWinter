@@ -158,7 +158,7 @@ function CreateInsertActions()
             --print("Insert")
             if not data.IsMoving then
                 if not data.sit then
-                    SetUnitAnimationByIndex(data.UnitHero, 26)
+                    SetUnitAnimationByIndex(data.UnitHero, 20) -- 26 сидение
                     data.sit = true
                 else
                     ResetUnitAnimation(data.UnitHero)

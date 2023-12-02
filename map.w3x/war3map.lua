@@ -119,6 +119,8 @@ gg_rct_Exit13 = nil
 gg_rct_Region13 = nil
 gg_rct_Error10 = nil
 gg_rct_Error10Out = nil
+gg_rct_Patrol12 = nil
+gg_rct_BossBarelSpawn = nil
 gg_cam_OnPeonsandTrall = nil
 gg_cam_OnPineRound = nil
 gg_cam_OnPeons = nil
@@ -199,6 +201,7 @@ gg_trg_Single12 = nil
 gg_trg_Victory12 = nil
 gg_trg_Restore12 = nil
 gg_trg_ExitFrom12 = nil
+gg_trg_Patrol12 = nil
 gg_trg_Button1101 = nil
 gg_trg_Button1102 = nil
 gg_trg_Button1103 = nil
@@ -311,6 +314,7 @@ gg_unit_h00J_0591 = nil
 gg_unit_h00J_0592 = nil
 gg_unit_h00J_0593 = nil
 gg_unit_h00J_0595 = nil
+gg_unit_opeo_0264 = nil
 gg_dest_B004_2162 = nil
 gg_dest_B007_5312 = nil
 gg_dest_DTfx_5091 = nil
@@ -388,6 +392,17 @@ gg_dest_B00D_20365 = nil
 gg_dest_B00D_20366 = nil
 gg_dest_B00D_20367 = nil
 gg_dest_B00D_20368 = nil
+gg_trg_SpawnBarrel = nil
+gg_dest_B00D_18148 = nil
+gg_dest_B00D_18193 = nil
+gg_dest_B00D_18157 = nil
+gg_dest_B00D_18184 = nil
+gg_rct_Region14 = nil
+gg_trg_InitRoom14 = nil
+gg_rct_Enter14 = nil
+gg_rct_Exit14 = nil
+gg_rct_Bound14 = nil
+gg_dest_B00D_20643 = nil
 function InitGlobals()
 local i = 0
 
@@ -678,27 +693,28 @@ gg_dest_B00B_20321 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 18040.2, 282
 gg_dest_B00B_14732 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 13812.6, 8326.6, 838.4, 90.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_17599 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 14969.5, -3076.2, 832.0, 180.000, 1.850, 0, FourCC("B00B"))
 gg_dest_B00B_19643 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 17013.9, 4349.7, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
-gg_dest_B00B_15515 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15227.5, 6283.1, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_16092 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 18043.0, 7294.2, 838.4, 270.000, 1.650, 0, FourCC("B00B"))
+gg_dest_B00B_15515 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15227.5, 6283.1, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_15274 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 10618.1, 6012.7, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_17182 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15231.9, -760.3, 844.8, 270.000, 1.450, 0, FourCC("B00B"))
+gg_dest_B00D_18157 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 14464.0, -7296.0, 1529.6, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_18148 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 14464.0, -5504.0, 1529.6, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_19707 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15744.0, 4352.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_19706 = BlzCreateDestructableWithSkin(FourCC("B00D"), 17536.0, 4352.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_17597 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, -3200.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_17596 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, -1920.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_17531 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11584.0, -704.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_15532 = BlzCreateDestructableWithSkin(FourCC("B00D"), 14016.0, 6080.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_15710 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12224.0, 5184.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_15711 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10752.0, 3328.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_15712 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12096.0, 3264.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_20363 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15808.0, 2240.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_15709 = BlzCreateDestructableWithSkin(FourCC("B00D"), 9984.0, 5376.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_20643 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15744.0, 1280.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16257 = BlzCreateDestructableWithSkin(FourCC("B00D"), 14080.0, 4608.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_20364 = BlzCreateDestructableWithSkin(FourCC("B00D"), 17984.0, 2240.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16254 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12864.0, 4160.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16255 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15296.0, 4160.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16256 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12992.0, 5312.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16427 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10304.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_17530 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10112.0, 256.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_17597 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, -3200.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_20365 = BlzCreateDestructableWithSkin(FourCC("B00D"), 17984.0, 3392.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_17532 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11584.0, -64.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16416 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11968.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
@@ -712,29 +728,33 @@ gg_dest_B00D_16598 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11136.0, 1216
 gg_dest_B00D_16599 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11136.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16686 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, 3456.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16684 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 13056.0, 2304.0, 901.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_17529 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10112.0, -1024.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_17596 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, -1920.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_20367 = BlzCreateDestructableWithSkin(FourCC("B00D"), 16192.0, 3392.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16699 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16701 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 14016.0, 2816.0, 896.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16702 = BlzCreateDestructableWithSkin(FourCC("B00D"), 13056.0, 3456.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_18193 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 16256.0, -5504.0, 1523.2, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_17155 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, 1280.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_17276 = BlzCreateDestructableWithSkin(FourCC("B00D"), 14272.0, -1024.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_17275 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12992.0, -768.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_19707 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15744.0, 4352.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_18184 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 16256.0, -7296.0, 1529.6, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_17529 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10112.0, -1024.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_17530 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10112.0, 256.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_17531 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11584.0, -704.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_20368 = BlzCreateDestructableWithSkin(FourCC("B00D"), 17600.0, 3392.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00E_19723 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 16961.9, 5501.8, 1017.6, 0.000, 1.000, 0, FourCC("B00E"))
 gg_dest_B00E_15514 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 14990.0, 6473.7, 972.8, 270.000, 1.000, 0, FourCC("B00E"))
+gg_dest_B00E_19641 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 17914.5, 5501.6, 1030.4, 0.000, 1.000, 0, FourCC("B00E"))
+gg_dest_B00E_19642 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 18167.5, 5237.9, 1030.4, 270.000, 1.000, 0, FourCC("B00E"))
+gg_dest_B00E_15517 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 12948.1, 6482.3, 979.2, 90.000, 1.000, 0, FourCC("B00E"))
 gg_dest_B00E_15516 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 14600.6, 6946.5, 979.2, 270.000, 1.000, 0, FourCC("B00E"))
 gg_dest_B00E_15513 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 13441.1, 6941.4, 1004.8, 90.000, 1.000, 0, FourCC("B00E"))
-gg_dest_B00E_15517 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 12948.1, 6482.3, 979.2, 90.000, 1.000, 0, FourCC("B00E"))
-gg_dest_B00E_19641 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 17914.5, 5501.6, 1030.4, 0.000, 1.000, 0, FourCC("B00E"))
-gg_dest_B00E_19642 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 18167.5, 5189.9, 1030.4, 270.000, 1.000, 0, FourCC("B00E"))
 gg_dest_B00F_17534 = BlzCreateDestructableWithSkin(FourCC("B00F"), 10112.0, -384.0, 270.000, 1.000, 0, FourCC("B00F"))
-gg_dest_DTfx_18124 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 12928.0, -3968.0, 270.000, 1.000, 0, FourCC("DTfx"))
+gg_dest_DTfx_15071 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 12352.0, 5952.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_16046 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 16512.0, 6272.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_17980 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 15744.0, 7296.0, 270.000, 1.000, 0, FourCC("DTfx"))
-gg_dest_DTfx_15071 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 12352.0, 5952.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_16051 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 17536.0, 6272.0, 270.000, 1.000, 0, FourCC("DTfx"))
+gg_dest_DTfx_18124 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 12928.0, -3968.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_15068 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10112.0, 6272.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_14688 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 14912.0, 8256.0, 270.000, 1.000, 0, FourCC("DTfx"))
 gg_dest_DTfx_14690 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 15040.0, 9024.0, 270.000, 1.000, 0, FourCC("DTfx"))
@@ -790,6 +810,8 @@ gg_unit_o002_0203 = BlzCreateUnitWithSkin(p, FourCC("o002"), -13047.3, 8357.1, 3
 u = BlzCreateUnitWithSkin(p, FourCC("h00A"), 5159.2, 6586.8, 281.200, FourCC("h00A"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), -1503.4, 1375.2, 5.812, FourCC("h002"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), -10937.8, 8908.1, 5.812, FourCC("h002"))
+gg_unit_opeo_0264 = BlzCreateUnitWithSkin(p, FourCC("opeo"), 16192.7, 5056.5, 353.240, FourCC("opeo"))
+SetUnitColor(gg_unit_opeo_0264, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13505.9, 4803.2, 0.000, FourCC("h00F"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13378.1, 4926.1, 0.000, FourCC("h00F"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13635.0, 4803.4, 0.000, FourCC("h00F"))
@@ -942,6 +964,30 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00N"), 11085.4, 4305.4, 58.460, FourCC("h0
 u = BlzCreateUnitWithSkin(p, FourCC("h00P"), 11206.2, 4294.0, 290.279, FourCC("h00P"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14658.0, -68.6, 0.000, FourCC("h00F"))
 gg_unit_h00I_0601 = BlzCreateUnitWithSkin(p, FourCC("h00I"), 799.4, -2193.8, 0.000, FourCC("h00I"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00T"), 16005.6, 513.3, 90.000, FourCC("h00T"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16012.7, 667.7, 88.807, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16014.1, 767.9, 88.807, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16034.5, 873.6, 88.807, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16080.1, 934.5, 88.807, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16136.3, 988.8, 88.807, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16204.3, 1043.5, 88.807, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16288.8, 1067.4, 88.807, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17482.7, 1060.3, 88.807, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17602.4, 1031.6, 88.807, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17680.5, 980.8, 88.807, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17743.5, 917.8, 88.807, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17783.1, 833.8, 88.807, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17793.0, 727.7, 88.807, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17778.3, -509.0, 88.807, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17737.5, -590.0, 88.807, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17695.9, -657.5, 88.807, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17637.7, -714.0, 88.807, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17567.1, -753.1, 88.807, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17479.4, -762.9, 88.807, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16296.4, -761.9, 88.807, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16203.1, -746.6, 88.807, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16137.4, -709.2, 88.807, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16063.5, -645.4, 88.807, FourCC("h00U"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 11068.8, -1018.3, 0.000, FourCC("h00F"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 11196.0, -1018.0, 0.000, FourCC("h00F"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 11074.0, 258.1, 0.000, FourCC("h00F"))
@@ -955,6 +1001,8 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15045.0, -65.4, 0.000, FourCC("h00F
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15171.1, -64.2, 0.000, FourCC("h00F"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15169.4, 65.1, 0.000, FourCC("h00F"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), 13952.3, -7796.8, 5.812, FourCC("h002"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16020.3, -571.3, 88.807, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 15999.5, -475.1, 88.807, FourCC("h00U"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), 13968.7, -5016.5, 5.812, FourCC("h002"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), 16768.6, -5028.5, 5.812, FourCC("h002"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), 16774.7, -7815.1, 5.812, FourCC("h002"))
@@ -1180,11 +1228,6 @@ gg_unit_h00E_0216 = BlzCreateUnitWithSkin(p, FourCC("h00E"), 11003.5, 6845.6, 18
 gg_unit_h00E_0217 = BlzCreateUnitWithSkin(p, FourCC("h00E"), 11383.8, 6704.5, 0.000, FourCC("h00E"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), -2011.8, -3206.3, 351.690, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), -2029.1, -3139.7, 246.368, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 10880.3, -110.6, 65.140, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 10652.4, -377.9, 190.871, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 10876.1, -635.0, 73.721, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 10821.5, -374.0, 134.905, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 10623.2, -126.4, 111.723, FourCC("uaco"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11191.5, 4303.2, 45.687, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11192.8, 4434.4, 34.162, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11089.5, 4305.8, 242.987, FourCC("h00C"))
@@ -1205,7 +1248,6 @@ SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
 u = BlzCreateUnitWithSkin(p, FourCC("h000"), 13266.8, 551.6, 270.000, FourCC("h000"))
 life = GetUnitState(u, UNIT_STATE_LIFE)
 SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 10366.4, -212.6, 20.007, FourCC("uaco"))
 u = BlzCreateUnitWithSkin(p, FourCC("h000"), 13630.8, 817.4, 270.000, FourCC("h000"))
 life = GetUnitState(u, UNIT_STATE_LIFE)
 SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
@@ -1248,38 +1290,6 @@ life = GetUnitState(u, UNIT_STATE_LIFE)
 SetUnitState(u, UNIT_STATE_LIFE, 0.07 * life)
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12966.8, -1038.1, 242.987, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 10209.2, 8830.0, 34.162, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 10545.2, -533.6, 303.605, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 10271.6, -718.4, 90.805, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 10145.8, -46.3, 166.613, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 10057.5, -430.1, 147.254, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 10385.1, -378.9, 93.760, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 10480.5, -935.1, 307.572, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 10848.6, -887.5, 74.325, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 10308.8, -957.5, 49.594, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 10696.9, -835.7, 277.205, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 10502.4, -150.6, 79.972, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 10220.7, 140.4, 36.465, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 10437.5, 286.0, 294.300, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 10828.5, 260.6, 16.106, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 11391.8, -990.8, 84.784, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 11517.4, -785.9, 20.095, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 11341.1, -413.3, 183.005, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 11454.2, -26.5, 249.562, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 11809.9, -104.4, 69.062, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 11705.4, -105.1, 271.546, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 11642.4, 210.9, 308.165, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 11463.9, 267.3, 332.358, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 12267.6, -175.4, 256.352, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 12290.8, -743.5, 270.074, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 12150.5, -844.7, 344.399, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 11745.1, -912.5, 301.298, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 11820.7, -1051.1, 235.741, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 11733.5, -598.5, 59.855, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 12029.6, -752.8, 341.268, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 11793.6, 95.1, 15.579, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 10125.7, -268.6, 110.482, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 10295.1, -101.6, 181.730, FourCC("uaco"))
-u = BlzCreateUnitWithSkin(p, FourCC("uaco"), 10081.3, -722.1, 302.133, FourCC("uaco"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12293.9, 268.1, 242.987, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12288.2, -1022.5, 242.987, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12925.0, -3195.7, 242.987, FourCC("h00C"))
@@ -1303,14 +1313,6 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12897.6, -2066.7, 242.987, FourCC("
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 14813.4, -1915.6, 242.987, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11359.3, 8039.5, 351.690, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 17790.2, 6274.9, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 17028.2, -4731.9, 34.162, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 13692.5, -4720.4, 34.162, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 17022.8, -8049.5, 34.162, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 13703.3, -8059.1, 34.162, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 14720.7, -7032.1, 34.162, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 14723.7, -5758.1, 34.162, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 16003.9, -5751.1, 34.162, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15999.7, -7037.0, 34.162, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15722.2, 5403.1, 242.987, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15814.1, 5404.6, 242.987, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 10912.0, 6233.6, 34.162, FourCC("h00C"))
@@ -1325,6 +1327,9 @@ local life
 
 gg_unit_h00B_0003 = BlzCreateUnitWithSkin(p, FourCC("h00B"), 9946.6, 4814.9, 0.000, FourCC("h00B"))
 gg_unit_h00M_0257 = BlzCreateUnitWithSkin(p, FourCC("h00M"), 11137.1, -370.8, 177.340, FourCC("h00M"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16062.7, 4031.3, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16062.1, 4544.9, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16062.8, 4288.7, 0.000, FourCC("h00Q"))
 gg_unit_h00B_0271 = BlzCreateUnitWithSkin(p, FourCC("h00B"), 11757.0, 5325.0, 180.000, FourCC("h00B"))
 gg_unit_h00B_0276 = BlzCreateUnitWithSkin(p, FourCC("h00B"), 10309.8, 3140.1, 90.000, FourCC("h00B"))
 gg_unit_u001_0395 = BlzCreateUnitWithSkin(p, FourCC("u001"), 10224.5, 1812.8, 335.254, FourCC("u001"))
@@ -1430,6 +1435,7 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13887.1, 3012.3, 90.000, FourCC("h0
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14015.3, 3011.7, 0.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14141.7, 3013.1, 90.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14270.0, 3009.5, 0.000, FourCC("h00G"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16061.9, 4416.6, 0.000, FourCC("h00Q"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14270.0, 2755.1, 90.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14270.3, 2624.9, 0.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14139.9, 2627.8, 90.000, FourCC("h00G"))
@@ -1455,6 +1461,7 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13245.8, 3271.8, 0.000, FourCC("h00
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13245.7, 3402.1, 0.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13247.4, 3529.8, 0.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13888.4, 2113.3, 90.000, FourCC("h00G"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16062.5, 4671.3, 0.000, FourCC("h00Q"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13506.8, 315.8, 0.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13634.5, 312.8, 90.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13505.8, 185.4, 0.000, FourCC("h00G"))
@@ -1463,6 +1470,13 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14787.6, 463.1, 0.000, FourCC("h00G
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14915.4, 460.2, 90.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14784.2, 336.1, 90.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14915.0, 334.1, 0.000, FourCC("h00G"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16061.8, 4159.1, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16061.9, 2368.4, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16061.8, 2240.1, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16063.7, 2496.4, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 17595.7, 3139.8, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 17724.2, 3140.8, 0.000, FourCC("h00Q"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 17855.2, 3138.8, 0.000, FourCC("h00Q"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10430.7, -831.1, 0.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10560.0, -837.9, 90.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10430.8, -959.0, 0.000, FourCC("h00G"))
@@ -1793,6 +1807,8 @@ SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 17749.1, 7116.1, 218.170, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("n00D"), 8574.0, -4760.7, 202.020, FourCC("n00D"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 15940.0, 1236.8, 270.344, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 13630.4, 7140.9, 270.344, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 14803.5, 6246.3, 336.687, FourCC("opeo"))
@@ -1904,9 +1920,9 @@ gg_rct_Exit07 = Rect(15104.0, 2272.0, 15392.0, 2560.0)
 gg_rct_SpikesZone = Rect(12768.0, 2048.0, 15360.0, 3584.0)
 gg_rct_Enter08 = Rect(12992.0, 64.0, 13120.0, 192.0)
 gg_rct_Exit08 = Rect(15104.0, -896.0, 15392.0, -608.0)
-gg_rct_Region08 = Rect(12768.0, -1120.0, 15392.0, 1408.0)
+gg_rct_Region08 = Rect(12800.0, -1152.0, 15360.0, 1408.0)
 gg_rct_Bound08 = Rect(13952.0, -544.0, 14240.0, 704.0)
-gg_rct_Bound08Start = Rect(13984.0, 416.0, 14272.0, 704.0)
+gg_rct_Bound08Start = Rect(13984.0, 288.0, 14272.0, 704.0)
 gg_rct_ResizePlace08 = Rect(14080.0, -416.0, 14432.0, -256.0)
 gg_rct_Region04 = Rect(9824.0, 2944.0, 12448.0, 5504.0)
 gg_rct_Bound09 = Rect(11008.0, -512.0, 11296.0, -288.0)
@@ -1948,6 +1964,12 @@ gg_rct_Exit13 = Rect(17920.0, 2688.0, 18176.0, 2944.0)
 gg_rct_Region13 = Rect(15584.0, 2016.0, 18208.0, 3616.0)
 gg_rct_Error10 = Rect(13120.0, -3008.0, 15296.0, -2112.0)
 gg_rct_Error10Out = Rect(12736.0, -3392.0, 15424.0, -1728.0)
+gg_rct_Patrol12 = Rect(16416.0, 4992.0, 16512.0, 5120.0)
+gg_rct_BossBarelSpawn = Rect(15136.0, -6656.0, 15552.0, -6144.0)
+gg_rct_Region14 = Rect(15616.0, -1152.0, 18176.0, 1408.0)
+gg_rct_Enter14 = Rect(15680.0, 1216.0, 15808.0, 1344.0)
+gg_rct_Exit14 = Rect(17888.0, -832.0, 18176.0, -544.0)
+gg_rct_Bound14 = Rect(16736.0, -480.0, 17024.0, 768.0)
 end
 
 function CreateCameras()
@@ -2194,7 +2216,7 @@ end
 --- DateTime: 28.04.2021 23:55
 ---
 ----- ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
-function UnitAddForceSimpleClean(hero, angle, speed, distance)
+function UnitAddForceSimpleClean(hero, angle, speed, distance, flag)
     local currentdistance = 0
     if onForces[GetHandleId(hero)] == nil then
         onForces[GetHandleId(hero)] = true
@@ -2210,6 +2232,20 @@ function UnitAddForceSimpleClean(hero, angle, speed, distance)
             local newVector = vector
             newVector = VectorSum(newVector, vector:yawPitchOffset(speed, angle * (math.pi / 180), 0.0))
             SetUnitPositionSmooth(hero, newVector.x, newVector.y)
+
+            for i = 1, #flag do
+                if flag[i] == "MoveWMe" then
+                    local data = HERO[0]
+                    if IsUnitInRange(hero, data.UnitHero, 50) and not data.SpaceForce and not data.sit then
+                        SetUnitX(data.UnitHero, newVector.x)
+                        SetUnitY(data.UnitHero, newVector.y)
+                        SetUnitZ(data.UnitHero, GetUnitZ(hero) + 15)
+                    else
+
+                    end
+                end
+            end
+
             if currentdistance >= distance then
                 DestroyTimer(GetExpiredTimer())
                 onForces[GetHandleId(hero)] = true
@@ -2442,9 +2478,11 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
                 if flag == "ignore" then
                     --print("перезарядка атаки в рывке")
                     --HERO[GetPlayerId(GetOwningPlayer(hero))].AttackInForce=false --
+
                     local data = HERO[GetPlayerId(GetOwningPlayer(hero))]
                     data.OnDeep = false
                     IssueImmediateOrder(hero, "stop")
+                    SetUnitZ(data.UnitHero,0)
                     if data.IsMoving then
                         --print("закончил рывок")
 
@@ -2638,7 +2676,7 @@ function MakeUnitArtMissile(hero, unit, angle, speed, distance, MaxHeight, HasMa
 
     if IsUnitType(hero, UNIT_TYPE_HERO) then
         local data = GetUnitData(hero)
-        damage = data.BaseDamage * 2
+        damage = data.BaseDamage * 0.5
     end
 
     TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
@@ -2683,7 +2721,7 @@ function UnitCreateArtMissile(hero, angle, speed, distance, MaxHeight, HasMarker
 
     if IsUnitType(hero, UNIT_TYPE_HERO) then
         local data = GetUnitData(hero)
-        damage = data.BaseDamage * 2
+        damage = data.BaseDamage * 0.5
     end
 
     TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
@@ -3785,6 +3823,7 @@ do
             InitLightFromFloor()
             InitRSFGHD()
             InitEventUnitUnderPointer()
+            InitRailWagon()
 
             ClearMapMusicBJ()
             PlayMusicBJ("Endless Snowbanks")
@@ -5431,7 +5470,7 @@ function UnitDamageArea(u, damage, x, y, range, flag, paramTable)
                 end
                 if (flag == "all" or IsUnitTrap(u)) and not UnitAlive(e) then
                     local ex, ey = GetUnitXY(e)
-                    FlyTextTagShieldXY(ex, ey, "Смерть от ловушки", GetOwningPlayer(e), "SeeAll")
+                    --FlyTextTagShieldXY(ex, ey, "Смерть от ловушки", GetOwningPlayer(e), "SeeAll")
                     for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
                         if PlayerIsPlaying[i] then
                             local data = HERO[i]
@@ -5550,9 +5589,13 @@ end
 function StartBlackHole(unit, timed)
     local x, y = GetUnitXY(unit)
     local range = 1200
+    local eff=nil
     if not timed then
         UnitAddAbility(unit, FourCC("Aloc"))
-        AddCircleAreaForUnit(unit, 2500, 9999)
+        --AddCircleAreaForUnit(unit, 2500, 9999)
+        eff=AddSpecialEffect("Shadow Ball",x,y)
+        BlzSetSpecialEffectZ(eff,GetTerrainZ(x,y)-200)
+        BlzSetSpecialEffectScale(eff,1.2)
     else
         range = 2400
     end
@@ -5564,7 +5607,12 @@ function StartBlackHole(unit, timed)
     local imp = range * 2
     TimerStart(CreateTimer(), 0.1, true, function()
         if udg_HoleIsWork then
+            BlzSetSpecialEffectTimeScale(eff,1)
             UnitDamageArea(unit, 30, x, y, 150)
+            if GetRandomInt(1,3)==1 then
+                CreateHoleEffect(unit, range)
+            end
+
             if IsUnitInRange(data.UnitHero, unit, range) then
                 data.BH = unit
                 local dist = DistanceBetweenXY(x, y, GetUnitXY(data.UnitHero))
@@ -5583,7 +5631,7 @@ function StartBlackHole(unit, timed)
             end
 
             local e = nil
-           -- local k=0
+            -- local k=0
             GroupEnumUnitsInRange(perebor, x, y, range, nil)
             while true do
                 e = FirstOfGroup(perebor)
@@ -5615,6 +5663,7 @@ function StartBlackHole(unit, timed)
             --print("юнитов в переборе",k)
         else
             data.BH = nil
+            BlzSetSpecialEffectTimeScale(eff,0)
         end
         if timed then
             timed = timed - TIMER_PERIOD64
@@ -5629,6 +5678,17 @@ function StartBlackHole(unit, timed)
             data.BH = nil
         end
     end)
+end
+
+function CreateHoleEffect(unit, range)
+    local x, y = GetUnitXY(unit)
+    local ra = GetRandomInt(0, 360)
+    local nx, ny = MoveXY(x, y, range, ra)
+    local angle = AngleBetweenXY(nx, ny, x, y) / bj_DEGTORAD
+    local eff = AddSpecialEffect("Windwalk", nx, ny)
+    local rs = 10
+    local timed=range/rs*1.5/100
+    MoveEffectTimedWSpeed(eff, rs, angle, timed)
 end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
@@ -5645,11 +5705,13 @@ end
 --- DateTime: 11.11.2023 21:09
 ---
 function FlyTimer(max)
+    local s=normal_sound("TikTok")
     TimerStart(CreateTimer(), 1, true, function()
         FlyTextTagManaBurn(udg_HERO,R2I(max),Player(0))
         max=max-1
         if max<1 then
             DestroyTimer(GetExpiredTimer())
+            KillSoundWhenDone(s)
         end
     end)
 end
@@ -6090,6 +6152,90 @@ function DownFloorInTimedXY(timed, nx, ny)
         d = FindFloorInPoint(nx, ny)
         MoveDestructableUp(d, 500, 5)
     end)
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 02.12.2023 20:26
+---
+function InitRailWagon()
+    local unit = FindUnitOfType(FourCC("h00T"))
+    --print("ищем вагонетку")
+    SetUnitZ(unit,GetUnitZ(unit)+20)
+    UnitAddAbility(unit, FourCC("Aloc"))
+    local unitsT = FindNearUnitByID(unit, FourCC("h00U"))
+    local speed = 4
+    local way = {
+        x = 0,
+        y = 0
+    }
+    for i = 1, #unitsT do
+        way[i] = {
+            x = GetUnitX(unitsT[i]),
+            y = GetUnitY(unitsT[i])
+        }
+    end
+    local currentPoint = 1
+    TimerStart(CreateTimer(), 0.1, true, function()
+        if currentPoint < #way then
+        else
+            currentPoint = 1
+            --print("полный круг")
+        end
+        --print("двигаюсь в точку",currentPoint)
+        local x, y = way[currentPoint].x, way[currentPoint].y
+        --IssuePointOrder(unit,"move",x,y)
+        local angle = -180 + AngleBetweenXY(x, y, GetUnitXY(unit)) / bj_DEGTORAD
+        UnitAddForceSimpleClean(unit, angle, speed, 70,{"MoveWMe"})
+        SetUnitFacing(unit,angle)
+        if IsUnitInRangeXY(unit, x, y, 50) then
+            currentPoint = currentPoint + 1
+            --print("меняю направление на ",currentPoint)
+        end
+    end)
+end
+
+function FindNearUnitByID(unit, id)
+    local e = nil
+    local result = nil
+    local min = 1000
+    local x, y = GetUnitXY(unit)
+    local range = 4000
+    local unitsT = {}
+    local distanceT = {}
+    GroupEnumUnitsInRange(perebor, x, y, range, nil)
+    while true do
+        e = FirstOfGroup(perebor)
+        --print("В переборе",GetUnitName(e))
+        if e == nil then
+            break
+        end
+
+        if GetUnitTypeId(e) == id then
+            local dist = DistanceBetweenXY(x, y, GetUnitXY(e))
+            if dist <= min then
+                min = dist
+                result = e
+            end
+            table.insert(unitsT, e)
+            table.insert(distanceT, dist)
+
+            --print("Близжайший",GetUnitName(e),dist)
+            UnitAddAbility(e, FourCC("Aloc"))
+            ShowUnit(e, false)
+            SetUnitInvulnerable(e, true)
+        end
+        GroupRemoveUnit(perebor, e)
+    end
+    return unitsT
+end
+
+function SortUnitInTableByRange(unitsT, distanceT)
+
+    table.sort(distanceT)
+    for i = 1, #distanceT do
+        print(i, tbl[i])
+    end
 end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
@@ -10788,18 +10934,22 @@ function InitDeathEventCreep()
                 local id = GetUnitTypeId(u)
                 local p = GetOwningPlayer(u)
                 TimerStart(CreateTimer(), delay, false, function()
-                    local new = CreateUnit(p, id, x, y, GetRandomInt(0, 360))
-                    CreepsX[GetHandleId(new)], CreepsY[GetHandleId(new)] = GetUnitXY(new)
-                    TimerStart(CreateTimer(), 0.2, true, function()
-                        if not UnitAlive(new) then
-                            DestroyTimer(GetExpiredTimer())
-                        else
-                            if not IsUnitFall[GetHandleId(new)] then
-                                KillDestructableByTypeInPoint(ButtonsIDTable,range/3,GetUnitXY(new))
+                    if x then
+                        local new = CreateUnit(p, id, x, y, GetRandomInt(0, 360))
+                        CreepsX[GetHandleId(new)], CreepsY[GetHandleId(new)] = GetUnitXY(new)
+                        TimerStart(CreateTimer(), 0.2, true, function()
+                            if not UnitAlive(new) then
+                                DestroyTimer(GetExpiredTimer())
+                            else
+                                if not IsUnitFall[GetHandleId(new)] then
+                                    KillDestructableByTypeInPoint(ButtonsIDTable,range/3,GetUnitXY(new))
+                                end
                             end
-                        end
-                    end)
-                    UnitStartFallAnim(new,1000)
+                        end)
+                        UnitStartFallAnim(new,1000)
+                    else
+                        --print("бочка на боссе не воскрешается")
+                    end
                     --InitBarrels(new)
                 end)
             end)
@@ -12301,7 +12451,7 @@ function CreateInsertActions()
             --print("Insert")
             if not data.IsMoving then
                 if not data.sit then
-                    SetUnitAnimationByIndex(data.UnitHero, 26)
+                    SetUnitAnimationByIndex(data.UnitHero, 20) -- 26 сидение
                     data.sit = true
                 else
                     ResetUnitAnimation(data.UnitHero)
@@ -15301,6 +15451,29 @@ function InitItemBDForShop()
 end
 
 --CUSTOM_CODE
+function Trig_InitRoom14_Conditions()
+if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+return false
+end
+return true
+end
+
+function Trig_InitRoom14_Actions()
+SetDestructableOccluderHeight(gg_dest_B00D_20643, 128)
+    CreateFloorInRoom(GetDestructableX(gg_dest_B00D_20643), GetDestructableY(gg_dest_B00D_20643),10,10)
+DisableTrigger(GetTriggeringTrigger())
+SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound14)
+    HeroFixRespPos()
+    CreateEnteringFrame(nil, "Вся карта это рельсы")
+end
+
+function InitTrig_InitRoom14()
+gg_trg_InitRoom14 = CreateTrigger()
+TriggerRegisterEnterRectSimple(gg_trg_InitRoom14, gg_rct_Enter14)
+TriggerAddCondition(gg_trg_InitRoom14, Condition(Trig_InitRoom14_Conditions))
+TriggerAddAction(gg_trg_InitRoom14, Trig_InitRoom14_Actions)
+end
+
 function Trig_InitRoom13_Func002C()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
@@ -15714,6 +15887,16 @@ gg_trg_ExitFrom12 = CreateTrigger()
 TriggerRegisterEnterRectSimple(gg_trg_ExitFrom12, gg_rct_Exit12)
 TriggerAddCondition(gg_trg_ExitFrom12, Condition(Trig_ExitFrom12_Conditions))
 TriggerAddAction(gg_trg_ExitFrom12, Trig_ExitFrom12_Actions)
+end
+
+function Trig_Patrol12_Actions()
+UnitAddAbilityBJ(FourCC("A004"), gg_unit_opeo_0264)
+IssuePointOrderLocBJ(gg_unit_opeo_0264, "patrol", GetRectCenter(gg_rct_Patrol12))
+end
+
+function InitTrig_Patrol12()
+gg_trg_Patrol12 = CreateTrigger()
+TriggerAddAction(gg_trg_Patrol12, Trig_Patrol12_Actions)
 end
 
 function Trig_Button1101_Func001Func001C()
@@ -17469,6 +17652,48 @@ TriggerAddCondition(gg_trg_StartBrainGame, Condition(Trig_StartBrainGame_Conditi
 TriggerAddAction(gg_trg_StartBrainGame, Trig_StartBrainGame_Actions)
 end
 
+function Trig_SpawnBarrel_Func007C()
+if (not (IsDestructableDeadBJ(gg_dest_B00D_18148) == true)) then
+return false
+end
+if (not (IsDestructableDeadBJ(gg_dest_B00D_18193) == true)) then
+return false
+end
+if (not (IsDestructableDeadBJ(gg_dest_B00D_18157) == true)) then
+return false
+end
+if (not (IsDestructableDeadBJ(gg_dest_B00D_18184) == true)) then
+return false
+end
+return true
+end
+
+function Trig_SpawnBarrel_Conditions()
+if (not Trig_SpawnBarrel_Func007C()) then
+return false
+end
+return true
+end
+
+function Trig_SpawnBarrel_Actions()
+CreateNUnitsAtLoc(1, FourCC("h00C"), Player(1), GetRectCenter(gg_rct_BossBarelSpawn), bj_UNIT_FACING)
+TriggerSleepAction(5.00)
+DestructableRestoreLife(gg_dest_B00D_18148, 100.00, true)
+DestructableRestoreLife(gg_dest_B00D_18193, 100.00, true)
+DestructableRestoreLife(gg_dest_B00D_18184, 100.00, true)
+DestructableRestoreLife(gg_dest_B00D_18157, 100.00, true)
+end
+
+function InitTrig_SpawnBarrel()
+gg_trg_SpawnBarrel = CreateTrigger()
+TriggerRegisterDeathEvent(gg_trg_SpawnBarrel, gg_dest_B00D_18148)
+TriggerRegisterDeathEvent(gg_trg_SpawnBarrel, gg_dest_B00D_18193)
+TriggerRegisterDeathEvent(gg_trg_SpawnBarrel, gg_dest_B00D_18157)
+TriggerRegisterDeathEvent(gg_trg_SpawnBarrel, gg_dest_B00D_18184)
+TriggerAddCondition(gg_trg_SpawnBarrel, Condition(Trig_SpawnBarrel_Conditions))
+TriggerAddAction(gg_trg_SpawnBarrel, Trig_SpawnBarrel_Actions)
+end
+
 function Trig_InitBossRoom_Conditions()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
@@ -18738,6 +18963,7 @@ TriggerAddAction(gg_trg_ESCTEST, Trig_ESCTEST_Actions)
 end
 
 function InitCustomTriggers()
+InitTrig_InitRoom14()
 InitTrig_InitRoom13()
 InitTrig_Victory13()
 InitTrig_ExitFrom13()
@@ -18748,6 +18974,7 @@ InitTrig_Single12()
 InitTrig_Victory12()
 InitTrig_Restore12()
 InitTrig_ExitFrom12()
+InitTrig_Patrol12()
 InitTrig_Button1101()
 InitTrig_Button1102()
 InitTrig_Button1103()
@@ -18792,6 +19019,7 @@ InitTrig_Victory01()
 InitTrig_ExitFrom00()
 InitTrig_Victory00()
 InitTrig_StartBrainGame()
+InitTrig_SpawnBarrel()
 InitTrig_InitBossRoom()
 InitTrig_EndSinematicStart()
 InitTrig_EnterAnimeArena()
@@ -18830,6 +19058,7 @@ InitTrig_ESCTEST()
 end
 
 function RunInitializationTriggers()
+ConditionalTriggerExecute(gg_trg_Patrol12)
 ConditionalTriggerExecute(gg_trg_InitOrders)
 ConditionalTriggerExecute(gg_trg_InvulPudges)
 ConditionalTriggerExecute(gg_trg_InitAnimeArena)
@@ -18873,7 +19102,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, 10880.0, 8640.0)
+DefineStartLocation(0, 15872.0, 960.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()
