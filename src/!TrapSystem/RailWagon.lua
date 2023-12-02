@@ -4,8 +4,15 @@
 --- DateTime: 02.12.2023 20:26
 ---
 function InitRailWagon()
-    local unit = FindUnitOfType(FourCC("h00T"))
     --print("ищем вагонетку")
+    local _, k, rg = FindUnitOfType(FourCC("h00T"))
+
+    for i = 1, #rg do
+        StartRailWagon(rg[i])
+    end
+end
+
+function StartRailWagon(unit)
     SetUnitZ(unit,GetUnitZ(unit)+20)
     UnitAddAbility(unit, FourCC("Aloc"))
     local unitsT = FindNearUnitByID(unit, FourCC("h00U"))
@@ -66,12 +73,18 @@ function FindNearUnitByID(unit, id)
             table.insert(distanceT, dist)
 
             --print("Близжайший",GetUnitName(e),dist)
-            UnitAddAbility(e, FourCC("Aloc"))
-            ShowUnit(e, false)
-            SetUnitInvulnerable(e, true)
+
         end
         GroupRemoveUnit(perebor, e)
     end
+
+    TimerStart(CreateTimer(), 1, false, function()
+        for i=1,#unitsT do
+            UnitAddAbility(unitsT[i], FourCC("Aloc"))
+            ShowUnit(unitsT[i], false)
+            SetUnitInvulnerable(unitsT[i], true)
+        end
+    end)
     return unitsT
 end
 

@@ -121,6 +121,13 @@ gg_rct_Error10 = nil
 gg_rct_Error10Out = nil
 gg_rct_Patrol12 = nil
 gg_rct_BossBarelSpawn = nil
+gg_rct_Region14 = nil
+gg_rct_Enter14 = nil
+gg_rct_Exit14 = nil
+gg_rct_Bound14 = nil
+gg_rct_R14B1 = nil
+gg_rct_R14B2 = nil
+gg_rct_R14B3 = nil
 gg_cam_OnPeonsandTrall = nil
 gg_cam_OnPineRound = nil
 gg_cam_OnPeons = nil
@@ -191,6 +198,7 @@ gg_snd_OP2 = nil
 gg_snd_OP3 = nil
 gg_snd_OT3 = nil
 gg_snd_OT4 = nil
+gg_trg_InitRoom14 = nil
 gg_trg_InitRoom13 = nil
 gg_trg_Victory13 = nil
 gg_trg_ExitFrom13 = nil
@@ -246,6 +254,7 @@ gg_trg_Victory01 = nil
 gg_trg_ExitFrom00 = nil
 gg_trg_Victory00 = nil
 gg_trg_StartBrainGame = nil
+gg_trg_SpawnBarrel = nil
 gg_trg_InitBossRoom = nil
 gg_trg_EndSinematicStart = nil
 gg_trg_EnterAnimeArena = nil
@@ -341,6 +350,7 @@ gg_dest_B00D_15711 = nil
 gg_dest_B00D_15712 = nil
 gg_dest_B00B_15713 = nil
 gg_dest_B00D_15709 = nil
+gg_dest_B00D_20643 = nil
 gg_dest_B00D_16257 = nil
 gg_dest_B00B_16153 = nil
 gg_dest_B00D_16254 = nil
@@ -366,6 +376,7 @@ gg_dest_B00B_16680 = nil
 gg_dest_B00D_16699 = nil
 gg_dest_B00D_16701 = nil
 gg_dest_B00D_16702 = nil
+gg_dest_B00D_18193 = nil
 gg_dest_B00D_17155 = nil
 gg_dest_B00D_17276 = nil
 gg_dest_B00D_17275 = nil
@@ -381,6 +392,9 @@ gg_dest_DTfx_16046 = nil
 gg_dest_DTfx_16051 = nil
 gg_dest_B00B_16092 = nil
 gg_dest_DTfx_18124 = nil
+gg_dest_B00D_18148 = nil
+gg_dest_B00D_18157 = nil
+gg_dest_B00D_18184 = nil
 gg_dest_B00D_19707 = nil
 gg_dest_B00E_19641 = nil
 gg_dest_B00B_19643 = nil
@@ -392,1821 +406,1811 @@ gg_dest_B00D_20365 = nil
 gg_dest_B00D_20366 = nil
 gg_dest_B00D_20367 = nil
 gg_dest_B00D_20368 = nil
-gg_trg_SpawnBarrel = nil
-gg_dest_B00D_18148 = nil
-gg_dest_B00D_18193 = nil
-gg_dest_B00D_18157 = nil
-gg_dest_B00D_18184 = nil
-gg_rct_Region14 = nil
-gg_trg_InitRoom14 = nil
-gg_rct_Enter14 = nil
-gg_rct_Exit14 = nil
-gg_rct_Bound14 = nil
-gg_dest_B00D_20643 = nil
+gg_trg_Leave14Fix = nil
+gg_rct_UP14 = nil
 function InitGlobals()
-local i = 0
-
-udg_PressESC = false
-udg_PressESCYETTY = false
-udg_WisDead = false
-udg_SkipDragon = false
-udg_SkipMerchCinematic = false
-udg_CurrentOrder = 1
-udg_SpikeUnitsForRemove = CreateGroup()
-udg_Remove08 = CreateGroup()
-udg_HoleIsWork = true
-udg_IsBrainGame = false
-udg_WolfIsDie = false
+    local i = 0
+    udg_PressESC = false
+    udg_PressESCYETTY = false
+    udg_WisDead = false
+    udg_SkipDragon = false
+    udg_SkipMerchCinematic = false
+    udg_CurrentOrder = 1
+    udg_SpikeUnitsForRemove = CreateGroup()
+    udg_Remove08 = CreateGroup()
+    udg_HoleIsWork = true
+    udg_IsBrainGame = false
+    udg_WolfIsDie = false
 end
 
 function InitSounds()
-gg_snd_Intro1 = CreateSound("Speech/Trall/Intro1.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_Intro1, 6624)
-SetSoundChannel(gg_snd_Intro1, 0)
-SetSoundVolume(gg_snd_Intro1, 127)
-SetSoundPitch(gg_snd_Intro1, 1.0)
-gg_snd_Intro2 = CreateSound("Speech/Trall/Intro2.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_Intro2, 3576)
-SetSoundChannel(gg_snd_Intro2, 0)
-SetSoundVolume(gg_snd_Intro2, 127)
-SetSoundPitch(gg_snd_Intro2, 1.0)
-gg_snd_Intro3 = CreateSound("Speech/Trall/Intro3.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_Intro3, 3648)
-SetSoundChannel(gg_snd_Intro3, 0)
-SetSoundVolume(gg_snd_Intro3, 127)
-SetSoundPitch(gg_snd_Intro3, 1.0)
-gg_snd_Intro4 = CreateSound("Speech/Trall/Intro4.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_Intro4, 2016)
-SetSoundChannel(gg_snd_Intro4, 0)
-SetSoundVolume(gg_snd_Intro4, 127)
-SetSoundPitch(gg_snd_Intro4, 1.0)
-gg_snd_Intro5 = CreateSound("Speech/Trall/Intro5.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_Intro5, 1176)
-SetSoundChannel(gg_snd_Intro5, 0)
-SetSoundVolume(gg_snd_Intro5, 127)
-SetSoundPitch(gg_snd_Intro5, 1.0)
-gg_snd_Intro6 = CreateSound("Speech/Trall/Intro6.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_Intro6, 960)
-SetSoundChannel(gg_snd_Intro6, 0)
-SetSoundVolume(gg_snd_Intro6, 127)
-SetSoundPitch(gg_snd_Intro6, 1.0)
-gg_snd_Intro7 = CreateSound("Speech/Trall/Intro7.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_Intro7, 936)
-SetSoundChannel(gg_snd_Intro7, 0)
-SetSoundVolume(gg_snd_Intro7, 127)
-SetSoundPitch(gg_snd_Intro7, 1.0)
-gg_snd_Intro8 = CreateSound("Speech/Trall/Intro8.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_Intro8, 1104)
-SetSoundChannel(gg_snd_Intro8, 0)
-SetSoundVolume(gg_snd_Intro8, 127)
-SetSoundPitch(gg_snd_Intro8, 1.0)
-gg_snd_Intro9 = CreateSound("Speech/Trall/Intro9.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_Intro9, 768)
-SetSoundChannel(gg_snd_Intro9, 0)
-SetSoundVolume(gg_snd_Intro9, 127)
-SetSoundPitch(gg_snd_Intro9, 1.0)
-gg_snd_Intro10 = CreateSound("Speech/Trall/Intro10.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_Intro10, 7152)
-SetSoundChannel(gg_snd_Intro10, 0)
-SetSoundVolume(gg_snd_Intro10, 127)
-SetSoundPitch(gg_snd_Intro10, 1.0)
-gg_snd_Intro11 = CreateSound("Speech/Trall/Intro11.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_Intro11, 5976)
-SetSoundChannel(gg_snd_Intro11, 0)
-SetSoundVolume(gg_snd_Intro11, 127)
-SetSoundPitch(gg_snd_Intro11, 1.0)
-gg_snd_peon1 = CreateSound("Speech/Peon/Yetty/peon1.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_peon1, 6840)
-SetSoundChannel(gg_snd_peon1, 0)
-SetSoundVolume(gg_snd_peon1, 127)
-SetSoundPitch(gg_snd_peon1, 1.0)
-gg_snd_peon2 = CreateSound("Speech/Peon/Yetty/peon2.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_peon2, 5568)
-SetSoundChannel(gg_snd_peon2, 0)
-SetSoundVolume(gg_snd_peon2, 127)
-SetSoundPitch(gg_snd_peon2, 1.0)
-gg_snd_peon3 = CreateSound("Speech/Peon/Yetty/peon3.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_peon3, 4752)
-SetSoundChannel(gg_snd_peon3, 0)
-SetSoundVolume(gg_snd_peon3, 127)
-SetSoundPitch(gg_snd_peon3, 1.0)
-gg_snd_Hlop = CreateSound("Hlop.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_Hlop, 10710)
-SetSoundChannel(gg_snd_Hlop, 0)
-SetSoundVolume(gg_snd_Hlop, 127)
-SetSoundPitch(gg_snd_Hlop, 1.0)
-gg_snd_fyyachtoetozazvyki = CreateSound("Speech/Peon/Dragon/fyyachtoetozazvyki.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_fyyachtoetozazvyki, 3600)
-SetSoundChannel(gg_snd_fyyachtoetozazvyki, 0)
-SetSoundVolume(gg_snd_fyyachtoetozazvyki, 127)
-SetSoundPitch(gg_snd_fyyachtoetozazvyki, 1.0)
-gg_snd_oanenashilietopodarki = CreateSound("Speech/Peon/Dragon/oanenashilietopodarki.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_oanenashilietopodarki, 3696)
-SetSoundChannel(gg_snd_oanenashilietopodarki, 0)
-SetSoundVolume(gg_snd_oanenashilietopodarki, 127)
-SetSoundPitch(gg_snd_oanenashilietopodarki, 1.0)
-gg_snd_15 = CreateSound("Speech/Dragon/15.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_15, 2064)
-SetSoundChannel(gg_snd_15, 0)
-SetSoundVolume(gg_snd_15, 127)
-SetSoundPitch(gg_snd_15, 1.0)
-gg_snd_16 = CreateSound("Speech/Dragon/16.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_16, 6720)
-SetSoundChannel(gg_snd_16, 0)
-SetSoundVolume(gg_snd_16, 127)
-SetSoundPitch(gg_snd_16, 1.0)
-gg_snd_animepeon1 = CreateSound("Speech/Anime/Peon/animepeon1.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_animepeon1, 1824)
-SetSoundChannel(gg_snd_animepeon1, 0)
-SetSoundVolume(gg_snd_animepeon1, 127)
-SetSoundPitch(gg_snd_animepeon1, 1.0)
-gg_snd_animepeon2 = CreateSound("Speech/Anime/Peon/animepeon2.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_animepeon2, 5712)
-SetSoundChannel(gg_snd_animepeon2, 0)
-SetSoundVolume(gg_snd_animepeon2, 127)
-SetSoundPitch(gg_snd_animepeon2, 1.0)
-gg_snd_animepeon3 = CreateSound("Speech/Anime/Peon/animepeon3.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_animepeon3, 5856)
-SetSoundChannel(gg_snd_animepeon3, 0)
-SetSoundVolume(gg_snd_animepeon3, 127)
-SetSoundPitch(gg_snd_animepeon3, 1.0)
-gg_snd_animeZurck1 = CreateSound("Speech/Anime/Peon/animeZurck1.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_animeZurck1, 18264)
-SetSoundChannel(gg_snd_animeZurck1, 0)
-SetSoundVolume(gg_snd_animeZurck1, 127)
-SetSoundPitch(gg_snd_animeZurck1, 1.0)
-gg_snd_animeZurck2 = CreateSound("Speech/Anime/Peon/animeZurck2.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_animeZurck2, 13320)
-SetSoundChannel(gg_snd_animeZurck2, 0)
-SetSoundVolume(gg_snd_animeZurck2, 127)
-SetSoundPitch(gg_snd_animeZurck2, 1.0)
-gg_snd_PenFromWolf1 = CreateSound("Speech/Wolf/Peon/PenFromWolf1.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_PenFromWolf1, 2472)
-SetSoundChannel(gg_snd_PenFromWolf1, 0)
-SetSoundVolume(gg_snd_PenFromWolf1, 127)
-SetSoundPitch(gg_snd_PenFromWolf1, 1.0)
-gg_snd_PenFromWolf2 = CreateSound("Speech/Wolf/Peon/PenFromWolf2.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_PenFromWolf2, 6840)
-SetSoundChannel(gg_snd_PenFromWolf2, 0)
-SetSoundVolume(gg_snd_PenFromWolf2, 127)
-SetSoundPitch(gg_snd_PenFromWolf2, 1.0)
-gg_snd_PenFromWolf3 = CreateSound("Speech/Wolf/Peon/PenFromWolf3.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_PenFromWolf3, 8040)
-SetSoundChannel(gg_snd_PenFromWolf3, 0)
-SetSoundVolume(gg_snd_PenFromWolf3, 127)
-SetSoundPitch(gg_snd_PenFromWolf3, 1.0)
-gg_snd_PenFromWolf4 = CreateSound("Speech/Wolf/Peon/PenFromWolf4.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_PenFromWolf4, 1440)
-SetSoundChannel(gg_snd_PenFromWolf4, 0)
-SetSoundVolume(gg_snd_PenFromWolf4, 127)
-SetSoundPitch(gg_snd_PenFromWolf4, 1.0)
-gg_snd_PenFromWolf5 = CreateSound("Speech/Wolf/Peon/PenFromWolf5.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_PenFromWolf5, 3768)
-SetSoundChannel(gg_snd_PenFromWolf5, 0)
-SetSoundVolume(gg_snd_PenFromWolf5, 127)
-SetSoundPitch(gg_snd_PenFromWolf5, 1.0)
-gg_snd_PenFromWolf6 = CreateSound("Speech/Wolf/Peon/PenFromWolf6.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_PenFromWolf6, 2952)
-SetSoundChannel(gg_snd_PenFromWolf6, 0)
-SetSoundVolume(gg_snd_PenFromWolf6, 127)
-SetSoundPitch(gg_snd_PenFromWolf6, 1.0)
-gg_snd_WolfCinematic1 = CreateSound("Speech/Wolf/Wolf/WolfCinematic1.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_WolfCinematic1, 9984)
-SetSoundChannel(gg_snd_WolfCinematic1, 0)
-SetSoundVolume(gg_snd_WolfCinematic1, 127)
-SetSoundPitch(gg_snd_WolfCinematic1, 1.0)
-gg_snd_WolfCinematic2 = CreateSound("Speech/Wolf/Wolf/WolfCinematic2.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_WolfCinematic2, 7824)
-SetSoundChannel(gg_snd_WolfCinematic2, 0)
-SetSoundVolume(gg_snd_WolfCinematic2, 127)
-SetSoundPitch(gg_snd_WolfCinematic2, 1.0)
-gg_snd_WolfCinematic3 = CreateSound("Speech/Wolf/Wolf/WolfCinematic3.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_WolfCinematic3, 1920)
-SetSoundChannel(gg_snd_WolfCinematic3, 0)
-SetSoundVolume(gg_snd_WolfCinematic3, 127)
-SetSoundPitch(gg_snd_WolfCinematic3, 1.0)
-gg_snd_cook1 = CreateSound("Speech/CookQuest/cook1.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_cook1, 8664)
-SetSoundChannel(gg_snd_cook1, 0)
-SetSoundVolume(gg_snd_cook1, 127)
-SetSoundPitch(gg_snd_cook1, 1.0)
-gg_snd_cook2 = CreateSound("Speech/CookQuest/cook2.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_cook2, 4848)
-SetSoundChannel(gg_snd_cook2, 0)
-SetSoundVolume(gg_snd_cook2, 127)
-SetSoundPitch(gg_snd_cook2, 1.0)
-gg_snd_cook3 = CreateSound("Speech/CookQuest/cook3.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_cook3, 7464)
-SetSoundChannel(gg_snd_cook3, 0)
-SetSoundVolume(gg_snd_cook3, 127)
-SetSoundPitch(gg_snd_cook3, 1.0)
-gg_snd_cook4 = CreateSound("Speech/CookQuest/cook4.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_cook4, 4488)
-SetSoundChannel(gg_snd_cook4, 0)
-SetSoundVolume(gg_snd_cook4, 127)
-SetSoundPitch(gg_snd_cook4, 1.0)
-gg_snd_CookQuestPeon1 = CreateSound("Speech/CookQuest/CookQuestPeon1.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_CookQuestPeon1, 1632)
-SetSoundChannel(gg_snd_CookQuestPeon1, 0)
-SetSoundVolume(gg_snd_CookQuestPeon1, 127)
-SetSoundPitch(gg_snd_CookQuestPeon1, 1.0)
-gg_snd_CookQuestPeon2 = CreateSound("Speech/CookQuest/CookQuestPeon2.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_CookQuestPeon2, 1440)
-SetSoundChannel(gg_snd_CookQuestPeon2, 0)
-SetSoundVolume(gg_snd_CookQuestPeon2, 127)
-SetSoundPitch(gg_snd_CookQuestPeon2, 1.0)
-gg_snd_CookQuestPeon3 = CreateSound("Speech/CookQuest/CookQuestPeon3.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_CookQuestPeon3, 1920)
-SetSoundChannel(gg_snd_CookQuestPeon3, 0)
-SetSoundVolume(gg_snd_CookQuestPeon3, 127)
-SetSoundPitch(gg_snd_CookQuestPeon3, 1.0)
-gg_snd_cook5 = CreateSound("Speech/CookQuest/cook5.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_cook5, 2760)
-SetSoundChannel(gg_snd_cook5, 0)
-SetSoundVolume(gg_snd_cook5, 127)
-SetSoundPitch(gg_snd_cook5, 1.0)
-gg_snd_CookQuestPeon4 = CreateSound("Speech/CookQuest/CookQuestPeon4.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_CookQuestPeon4, 8064)
-SetSoundChannel(gg_snd_CookQuestPeon4, 0)
-SetSoundVolume(gg_snd_CookQuestPeon4, 127)
-SetSoundPitch(gg_snd_CookQuestPeon4, 1.0)
-gg_snd_Warning = CreateSound("Sound/Interface/Warning.flac", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundParamsFromLabel(gg_snd_Warning, "Warning")
-SetSoundDuration(gg_snd_Warning, 1903)
-SetSoundVolume(gg_snd_Warning, 80)
-gg_snd_BattlenetDeath1A = CreateSound("Sound/Interface/BattlenetDeath1A.flac", false, false, false, 0, 0, "SpellsEAX")
-SetSoundParamsFromLabel(gg_snd_BattlenetDeath1A, "GlueScreenBNetOpenA")
-SetSoundDuration(gg_snd_BattlenetDeath1A, 2953)
-SetSoundVolume(gg_snd_BattlenetDeath1A, 127)
-gg_snd_The_Astral_Academy_Gardens = "The Astral Academy Gardens.mp3"
-gg_snd_OT1 = CreateSound("Speech/Outro/OT1.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_OT1, 3048)
-SetSoundChannel(gg_snd_OT1, 0)
-SetSoundVolume(gg_snd_OT1, 127)
-SetSoundPitch(gg_snd_OT1, 1.0)
-gg_snd_OT2 = CreateSound("Speech/Outro/OT2.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_OT2, 2760)
-SetSoundChannel(gg_snd_OT2, 0)
-SetSoundVolume(gg_snd_OT2, 127)
-SetSoundPitch(gg_snd_OT2, 1.0)
-gg_snd_OP1 = CreateSound("Speech/Outro/OP1.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_OP1, 3480)
-SetSoundChannel(gg_snd_OP1, 0)
-SetSoundVolume(gg_snd_OP1, 127)
-SetSoundPitch(gg_snd_OP1, 1.0)
-gg_snd_OP2 = CreateSound("Speech/Outro/OP2.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_OP2, 9576)
-SetSoundChannel(gg_snd_OP2, 0)
-SetSoundVolume(gg_snd_OP2, 127)
-SetSoundPitch(gg_snd_OP2, 1.0)
-gg_snd_OP3 = CreateSound("Speech/Outro/OP3.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_OP3, 4392)
-SetSoundChannel(gg_snd_OP3, 0)
-SetSoundVolume(gg_snd_OP3, 127)
-SetSoundPitch(gg_snd_OP3, 1.0)
-gg_snd_OT3 = CreateSound("Speech/Outro/OT3.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_OT3, 2160)
-SetSoundChannel(gg_snd_OT3, 0)
-SetSoundVolume(gg_snd_OT3, 127)
-SetSoundPitch(gg_snd_OT3, 1.0)
-gg_snd_OT4 = CreateSound("Speech/Outro/OT4.mp3", false, false, false, 0, 0, "DefaultEAXON")
-SetSoundDuration(gg_snd_OT4, 6408)
-SetSoundChannel(gg_snd_OT4, 0)
-SetSoundVolume(gg_snd_OT4, 127)
-SetSoundPitch(gg_snd_OT4, 1.0)
+    gg_snd_Intro1 = CreateSound("Speech/Trall/Intro1.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_Intro1, 6624)
+    SetSoundChannel(gg_snd_Intro1, 0)
+    SetSoundVolume(gg_snd_Intro1, 127)
+    SetSoundPitch(gg_snd_Intro1, 1.0)
+    gg_snd_Intro2 = CreateSound("Speech/Trall/Intro2.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_Intro2, 3576)
+    SetSoundChannel(gg_snd_Intro2, 0)
+    SetSoundVolume(gg_snd_Intro2, 127)
+    SetSoundPitch(gg_snd_Intro2, 1.0)
+    gg_snd_Intro3 = CreateSound("Speech/Trall/Intro3.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_Intro3, 3648)
+    SetSoundChannel(gg_snd_Intro3, 0)
+    SetSoundVolume(gg_snd_Intro3, 127)
+    SetSoundPitch(gg_snd_Intro3, 1.0)
+    gg_snd_Intro4 = CreateSound("Speech/Trall/Intro4.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_Intro4, 2016)
+    SetSoundChannel(gg_snd_Intro4, 0)
+    SetSoundVolume(gg_snd_Intro4, 127)
+    SetSoundPitch(gg_snd_Intro4, 1.0)
+    gg_snd_Intro5 = CreateSound("Speech/Trall/Intro5.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_Intro5, 1176)
+    SetSoundChannel(gg_snd_Intro5, 0)
+    SetSoundVolume(gg_snd_Intro5, 127)
+    SetSoundPitch(gg_snd_Intro5, 1.0)
+    gg_snd_Intro6 = CreateSound("Speech/Trall/Intro6.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_Intro6, 960)
+    SetSoundChannel(gg_snd_Intro6, 0)
+    SetSoundVolume(gg_snd_Intro6, 127)
+    SetSoundPitch(gg_snd_Intro6, 1.0)
+    gg_snd_Intro7 = CreateSound("Speech/Trall/Intro7.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_Intro7, 936)
+    SetSoundChannel(gg_snd_Intro7, 0)
+    SetSoundVolume(gg_snd_Intro7, 127)
+    SetSoundPitch(gg_snd_Intro7, 1.0)
+    gg_snd_Intro8 = CreateSound("Speech/Trall/Intro8.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_Intro8, 1104)
+    SetSoundChannel(gg_snd_Intro8, 0)
+    SetSoundVolume(gg_snd_Intro8, 127)
+    SetSoundPitch(gg_snd_Intro8, 1.0)
+    gg_snd_Intro9 = CreateSound("Speech/Trall/Intro9.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_Intro9, 768)
+    SetSoundChannel(gg_snd_Intro9, 0)
+    SetSoundVolume(gg_snd_Intro9, 127)
+    SetSoundPitch(gg_snd_Intro9, 1.0)
+    gg_snd_Intro10 = CreateSound("Speech/Trall/Intro10.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_Intro10, 7152)
+    SetSoundChannel(gg_snd_Intro10, 0)
+    SetSoundVolume(gg_snd_Intro10, 127)
+    SetSoundPitch(gg_snd_Intro10, 1.0)
+    gg_snd_Intro11 = CreateSound("Speech/Trall/Intro11.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_Intro11, 5976)
+    SetSoundChannel(gg_snd_Intro11, 0)
+    SetSoundVolume(gg_snd_Intro11, 127)
+    SetSoundPitch(gg_snd_Intro11, 1.0)
+    gg_snd_peon1 = CreateSound("Speech/Peon/Yetty/peon1.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_peon1, 6840)
+    SetSoundChannel(gg_snd_peon1, 0)
+    SetSoundVolume(gg_snd_peon1, 127)
+    SetSoundPitch(gg_snd_peon1, 1.0)
+    gg_snd_peon2 = CreateSound("Speech/Peon/Yetty/peon2.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_peon2, 5568)
+    SetSoundChannel(gg_snd_peon2, 0)
+    SetSoundVolume(gg_snd_peon2, 127)
+    SetSoundPitch(gg_snd_peon2, 1.0)
+    gg_snd_peon3 = CreateSound("Speech/Peon/Yetty/peon3.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_peon3, 4752)
+    SetSoundChannel(gg_snd_peon3, 0)
+    SetSoundVolume(gg_snd_peon3, 127)
+    SetSoundPitch(gg_snd_peon3, 1.0)
+    gg_snd_Hlop = CreateSound("Hlop.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_Hlop, 10710)
+    SetSoundChannel(gg_snd_Hlop, 0)
+    SetSoundVolume(gg_snd_Hlop, 127)
+    SetSoundPitch(gg_snd_Hlop, 1.0)
+    gg_snd_fyyachtoetozazvyki = CreateSound("Speech/Peon/Dragon/fyyachtoetozazvyki.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_fyyachtoetozazvyki, 3600)
+    SetSoundChannel(gg_snd_fyyachtoetozazvyki, 0)
+    SetSoundVolume(gg_snd_fyyachtoetozazvyki, 127)
+    SetSoundPitch(gg_snd_fyyachtoetozazvyki, 1.0)
+    gg_snd_oanenashilietopodarki = CreateSound("Speech/Peon/Dragon/oanenashilietopodarki.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_oanenashilietopodarki, 3696)
+    SetSoundChannel(gg_snd_oanenashilietopodarki, 0)
+    SetSoundVolume(gg_snd_oanenashilietopodarki, 127)
+    SetSoundPitch(gg_snd_oanenashilietopodarki, 1.0)
+    gg_snd_15 = CreateSound("Speech/Dragon/15.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_15, 2064)
+    SetSoundChannel(gg_snd_15, 0)
+    SetSoundVolume(gg_snd_15, 127)
+    SetSoundPitch(gg_snd_15, 1.0)
+    gg_snd_16 = CreateSound("Speech/Dragon/16.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_16, 6720)
+    SetSoundChannel(gg_snd_16, 0)
+    SetSoundVolume(gg_snd_16, 127)
+    SetSoundPitch(gg_snd_16, 1.0)
+    gg_snd_animepeon1 = CreateSound("Speech/Anime/Peon/animepeon1.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_animepeon1, 1824)
+    SetSoundChannel(gg_snd_animepeon1, 0)
+    SetSoundVolume(gg_snd_animepeon1, 127)
+    SetSoundPitch(gg_snd_animepeon1, 1.0)
+    gg_snd_animepeon2 = CreateSound("Speech/Anime/Peon/animepeon2.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_animepeon2, 5712)
+    SetSoundChannel(gg_snd_animepeon2, 0)
+    SetSoundVolume(gg_snd_animepeon2, 127)
+    SetSoundPitch(gg_snd_animepeon2, 1.0)
+    gg_snd_animepeon3 = CreateSound("Speech/Anime/Peon/animepeon3.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_animepeon3, 5856)
+    SetSoundChannel(gg_snd_animepeon3, 0)
+    SetSoundVolume(gg_snd_animepeon3, 127)
+    SetSoundPitch(gg_snd_animepeon3, 1.0)
+    gg_snd_animeZurck1 = CreateSound("Speech/Anime/Peon/animeZurck1.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_animeZurck1, 18264)
+    SetSoundChannel(gg_snd_animeZurck1, 0)
+    SetSoundVolume(gg_snd_animeZurck1, 127)
+    SetSoundPitch(gg_snd_animeZurck1, 1.0)
+    gg_snd_animeZurck2 = CreateSound("Speech/Anime/Peon/animeZurck2.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_animeZurck2, 13320)
+    SetSoundChannel(gg_snd_animeZurck2, 0)
+    SetSoundVolume(gg_snd_animeZurck2, 127)
+    SetSoundPitch(gg_snd_animeZurck2, 1.0)
+    gg_snd_PenFromWolf1 = CreateSound("Speech/Wolf/Peon/PenFromWolf1.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_PenFromWolf1, 2472)
+    SetSoundChannel(gg_snd_PenFromWolf1, 0)
+    SetSoundVolume(gg_snd_PenFromWolf1, 127)
+    SetSoundPitch(gg_snd_PenFromWolf1, 1.0)
+    gg_snd_PenFromWolf2 = CreateSound("Speech/Wolf/Peon/PenFromWolf2.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_PenFromWolf2, 6840)
+    SetSoundChannel(gg_snd_PenFromWolf2, 0)
+    SetSoundVolume(gg_snd_PenFromWolf2, 127)
+    SetSoundPitch(gg_snd_PenFromWolf2, 1.0)
+    gg_snd_PenFromWolf3 = CreateSound("Speech/Wolf/Peon/PenFromWolf3.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_PenFromWolf3, 8040)
+    SetSoundChannel(gg_snd_PenFromWolf3, 0)
+    SetSoundVolume(gg_snd_PenFromWolf3, 127)
+    SetSoundPitch(gg_snd_PenFromWolf3, 1.0)
+    gg_snd_PenFromWolf4 = CreateSound("Speech/Wolf/Peon/PenFromWolf4.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_PenFromWolf4, 1440)
+    SetSoundChannel(gg_snd_PenFromWolf4, 0)
+    SetSoundVolume(gg_snd_PenFromWolf4, 127)
+    SetSoundPitch(gg_snd_PenFromWolf4, 1.0)
+    gg_snd_PenFromWolf5 = CreateSound("Speech/Wolf/Peon/PenFromWolf5.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_PenFromWolf5, 3768)
+    SetSoundChannel(gg_snd_PenFromWolf5, 0)
+    SetSoundVolume(gg_snd_PenFromWolf5, 127)
+    SetSoundPitch(gg_snd_PenFromWolf5, 1.0)
+    gg_snd_PenFromWolf6 = CreateSound("Speech/Wolf/Peon/PenFromWolf6.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_PenFromWolf6, 2952)
+    SetSoundChannel(gg_snd_PenFromWolf6, 0)
+    SetSoundVolume(gg_snd_PenFromWolf6, 127)
+    SetSoundPitch(gg_snd_PenFromWolf6, 1.0)
+    gg_snd_WolfCinematic1 = CreateSound("Speech/Wolf/Wolf/WolfCinematic1.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_WolfCinematic1, 9984)
+    SetSoundChannel(gg_snd_WolfCinematic1, 0)
+    SetSoundVolume(gg_snd_WolfCinematic1, 127)
+    SetSoundPitch(gg_snd_WolfCinematic1, 1.0)
+    gg_snd_WolfCinematic2 = CreateSound("Speech/Wolf/Wolf/WolfCinematic2.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_WolfCinematic2, 7824)
+    SetSoundChannel(gg_snd_WolfCinematic2, 0)
+    SetSoundVolume(gg_snd_WolfCinematic2, 127)
+    SetSoundPitch(gg_snd_WolfCinematic2, 1.0)
+    gg_snd_WolfCinematic3 = CreateSound("Speech/Wolf/Wolf/WolfCinematic3.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_WolfCinematic3, 1920)
+    SetSoundChannel(gg_snd_WolfCinematic3, 0)
+    SetSoundVolume(gg_snd_WolfCinematic3, 127)
+    SetSoundPitch(gg_snd_WolfCinematic3, 1.0)
+    gg_snd_cook1 = CreateSound("Speech/CookQuest/cook1.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_cook1, 8664)
+    SetSoundChannel(gg_snd_cook1, 0)
+    SetSoundVolume(gg_snd_cook1, 127)
+    SetSoundPitch(gg_snd_cook1, 1.0)
+    gg_snd_cook2 = CreateSound("Speech/CookQuest/cook2.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_cook2, 4848)
+    SetSoundChannel(gg_snd_cook2, 0)
+    SetSoundVolume(gg_snd_cook2, 127)
+    SetSoundPitch(gg_snd_cook2, 1.0)
+    gg_snd_cook3 = CreateSound("Speech/CookQuest/cook3.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_cook3, 7464)
+    SetSoundChannel(gg_snd_cook3, 0)
+    SetSoundVolume(gg_snd_cook3, 127)
+    SetSoundPitch(gg_snd_cook3, 1.0)
+    gg_snd_cook4 = CreateSound("Speech/CookQuest/cook4.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_cook4, 4488)
+    SetSoundChannel(gg_snd_cook4, 0)
+    SetSoundVolume(gg_snd_cook4, 127)
+    SetSoundPitch(gg_snd_cook4, 1.0)
+    gg_snd_CookQuestPeon1 = CreateSound("Speech/CookQuest/CookQuestPeon1.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_CookQuestPeon1, 1632)
+    SetSoundChannel(gg_snd_CookQuestPeon1, 0)
+    SetSoundVolume(gg_snd_CookQuestPeon1, 127)
+    SetSoundPitch(gg_snd_CookQuestPeon1, 1.0)
+    gg_snd_CookQuestPeon2 = CreateSound("Speech/CookQuest/CookQuestPeon2.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_CookQuestPeon2, 1440)
+    SetSoundChannel(gg_snd_CookQuestPeon2, 0)
+    SetSoundVolume(gg_snd_CookQuestPeon2, 127)
+    SetSoundPitch(gg_snd_CookQuestPeon2, 1.0)
+    gg_snd_CookQuestPeon3 = CreateSound("Speech/CookQuest/CookQuestPeon3.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_CookQuestPeon3, 1920)
+    SetSoundChannel(gg_snd_CookQuestPeon3, 0)
+    SetSoundVolume(gg_snd_CookQuestPeon3, 127)
+    SetSoundPitch(gg_snd_CookQuestPeon3, 1.0)
+    gg_snd_cook5 = CreateSound("Speech/CookQuest/cook5.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_cook5, 2760)
+    SetSoundChannel(gg_snd_cook5, 0)
+    SetSoundVolume(gg_snd_cook5, 127)
+    SetSoundPitch(gg_snd_cook5, 1.0)
+    gg_snd_CookQuestPeon4 = CreateSound("Speech/CookQuest/CookQuestPeon4.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_CookQuestPeon4, 8064)
+    SetSoundChannel(gg_snd_CookQuestPeon4, 0)
+    SetSoundVolume(gg_snd_CookQuestPeon4, 127)
+    SetSoundPitch(gg_snd_CookQuestPeon4, 1.0)
+    gg_snd_Warning = CreateSound("Sound/Interface/Warning.flac", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundParamsFromLabel(gg_snd_Warning, "Warning")
+    SetSoundDuration(gg_snd_Warning, 1903)
+    SetSoundVolume(gg_snd_Warning, 80)
+    gg_snd_BattlenetDeath1A = CreateSound("Sound/Interface/BattlenetDeath1A.flac", false, false, false, 0, 0, "SpellsEAX")
+    SetSoundParamsFromLabel(gg_snd_BattlenetDeath1A, "GlueScreenBNetOpenA")
+    SetSoundDuration(gg_snd_BattlenetDeath1A, 2953)
+    SetSoundVolume(gg_snd_BattlenetDeath1A, 127)
+    gg_snd_The_Astral_Academy_Gardens = "The Astral Academy Gardens.mp3"
+    gg_snd_OT1 = CreateSound("Speech/Outro/OT1.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_OT1, 3048)
+    SetSoundChannel(gg_snd_OT1, 0)
+    SetSoundVolume(gg_snd_OT1, 127)
+    SetSoundPitch(gg_snd_OT1, 1.0)
+    gg_snd_OT2 = CreateSound("Speech/Outro/OT2.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_OT2, 2760)
+    SetSoundChannel(gg_snd_OT2, 0)
+    SetSoundVolume(gg_snd_OT2, 127)
+    SetSoundPitch(gg_snd_OT2, 1.0)
+    gg_snd_OP1 = CreateSound("Speech/Outro/OP1.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_OP1, 3480)
+    SetSoundChannel(gg_snd_OP1, 0)
+    SetSoundVolume(gg_snd_OP1, 127)
+    SetSoundPitch(gg_snd_OP1, 1.0)
+    gg_snd_OP2 = CreateSound("Speech/Outro/OP2.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_OP2, 9576)
+    SetSoundChannel(gg_snd_OP2, 0)
+    SetSoundVolume(gg_snd_OP2, 127)
+    SetSoundPitch(gg_snd_OP2, 1.0)
+    gg_snd_OP3 = CreateSound("Speech/Outro/OP3.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_OP3, 4392)
+    SetSoundChannel(gg_snd_OP3, 0)
+    SetSoundVolume(gg_snd_OP3, 127)
+    SetSoundPitch(gg_snd_OP3, 1.0)
+    gg_snd_OT3 = CreateSound("Speech/Outro/OT3.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_OT3, 2160)
+    SetSoundChannel(gg_snd_OT3, 0)
+    SetSoundVolume(gg_snd_OT3, 127)
+    SetSoundPitch(gg_snd_OT3, 1.0)
+    gg_snd_OT4 = CreateSound("Speech/Outro/OT4.mp3", false, false, false, 0, 0, "DefaultEAXON")
+    SetSoundDuration(gg_snd_OT4, 6408)
+    SetSoundChannel(gg_snd_OT4, 0)
+    SetSoundVolume(gg_snd_OT4, 127)
+    SetSoundPitch(gg_snd_OT4, 1.0)
 end
 
 function CreateAllDestructables()
-local d
-local t
-local life
-
-gg_dest_B004_2162 = BlzCreateDestructableWithSkin(FourCC("B004"), -128.0, -192.0, 325.000, 3.000, 0, FourCC("B004"))
-gg_dest_B007_5312 = BlzCreateDestructableWithSkin(FourCC("B007"), -7552.0, 4224.0, 211.000, 3.000, 0, FourCC("B007"))
-gg_dest_B00B_16680 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15221.9, 2433.2, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
-gg_dest_B00B_16430 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11136.0, 2426.0, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
-gg_dest_B00B_17533 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 12156.2, 3.1, 832.0, 270.000, 1.850, 0, FourCC("B00B"))
-gg_dest_B00B_16153 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15215.2, 5364.9, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
-gg_dest_B00B_14785 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11344.6, 8373.0, 832.0, 270.000, 1.650, 0, FourCC("B00B"))
-gg_dest_B00B_15713 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11516.0, 4100.8, 844.8, 90.000, 1.450, 0, FourCC("B00B"))
-gg_dest_B00B_20321 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 18040.2, 2828.5, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
-gg_dest_B00B_14732 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 13812.6, 8326.6, 838.4, 90.000, 1.650, 0, FourCC("B00B"))
-gg_dest_B00B_17599 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 14969.5, -3076.2, 832.0, 180.000, 1.850, 0, FourCC("B00B"))
-gg_dest_B00B_19643 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 17013.9, 4349.7, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
-gg_dest_B00B_16092 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 18043.0, 7294.2, 838.4, 270.000, 1.650, 0, FourCC("B00B"))
-gg_dest_B00B_15515 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15227.5, 6283.1, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
-gg_dest_B00B_15274 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 10618.1, 6012.7, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
-gg_dest_B00B_17182 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15231.9, -760.3, 844.8, 270.000, 1.450, 0, FourCC("B00B"))
-gg_dest_B00D_18157 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 14464.0, -7296.0, 1529.6, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_18148 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 14464.0, -5504.0, 1529.6, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_19707 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15744.0, 4352.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_19706 = BlzCreateDestructableWithSkin(FourCC("B00D"), 17536.0, 4352.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_15532 = BlzCreateDestructableWithSkin(FourCC("B00D"), 14016.0, 6080.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_15710 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12224.0, 5184.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_15711 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10752.0, 3328.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_15712 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12096.0, 3264.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_20363 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15808.0, 2240.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_15709 = BlzCreateDestructableWithSkin(FourCC("B00D"), 9984.0, 5376.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_20643 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15744.0, 1280.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_16257 = BlzCreateDestructableWithSkin(FourCC("B00D"), 14080.0, 4608.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_20364 = BlzCreateDestructableWithSkin(FourCC("B00D"), 17984.0, 2240.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_16254 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12864.0, 4160.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_16255 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15296.0, 4160.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_16256 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12992.0, 5312.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_16427 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10304.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_17597 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, -3200.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_20365 = BlzCreateDestructableWithSkin(FourCC("B00D"), 17984.0, 3392.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_17532 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11584.0, -64.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_16416 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11968.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_16421 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11968.0, 1408.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_16426 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10304.0, 1408.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_16685 = BlzCreateDestructableWithSkin(FourCC("B00D"), 13696.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_20366 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15808.0, 3392.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_16596 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10048.0, 1792.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_16597 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12288.0, 1792.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_16598 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11136.0, 1216.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_16599 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11136.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_16686 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, 3456.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_16684 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 13056.0, 2304.0, 901.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_17596 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, -1920.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_20367 = BlzCreateDestructableWithSkin(FourCC("B00D"), 16192.0, 3392.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_16699 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_16701 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 14016.0, 2816.0, 896.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_16702 = BlzCreateDestructableWithSkin(FourCC("B00D"), 13056.0, 3456.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_18193 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 16256.0, -5504.0, 1523.2, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_17155 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, 1280.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_17276 = BlzCreateDestructableWithSkin(FourCC("B00D"), 14272.0, -1024.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_17275 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12992.0, -768.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_18184 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 16256.0, -7296.0, 1529.6, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_17529 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10112.0, -1024.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_17530 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10112.0, 256.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_17531 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11584.0, -704.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_20368 = BlzCreateDestructableWithSkin(FourCC("B00D"), 17600.0, 3392.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00E_19723 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 16961.9, 5501.8, 1017.6, 0.000, 1.000, 0, FourCC("B00E"))
-gg_dest_B00E_15514 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 14990.0, 6473.7, 972.8, 270.000, 1.000, 0, FourCC("B00E"))
-gg_dest_B00E_19641 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 17914.5, 5501.6, 1030.4, 0.000, 1.000, 0, FourCC("B00E"))
-gg_dest_B00E_19642 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 18167.5, 5237.9, 1030.4, 270.000, 1.000, 0, FourCC("B00E"))
-gg_dest_B00E_15517 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 12948.1, 6482.3, 979.2, 90.000, 1.000, 0, FourCC("B00E"))
-gg_dest_B00E_15516 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 14600.6, 6946.5, 979.2, 270.000, 1.000, 0, FourCC("B00E"))
-gg_dest_B00E_15513 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 13441.1, 6941.4, 1004.8, 90.000, 1.000, 0, FourCC("B00E"))
-gg_dest_B00F_17534 = BlzCreateDestructableWithSkin(FourCC("B00F"), 10112.0, -384.0, 270.000, 1.000, 0, FourCC("B00F"))
-gg_dest_DTfx_15071 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 12352.0, 5952.0, 270.000, 1.000, 0, FourCC("DTfx"))
-gg_dest_DTfx_16046 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 16512.0, 6272.0, 270.000, 1.000, 0, FourCC("DTfx"))
-gg_dest_DTfx_17980 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 15744.0, 7296.0, 270.000, 1.000, 0, FourCC("DTfx"))
-gg_dest_DTfx_16051 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 17536.0, 6272.0, 270.000, 1.000, 0, FourCC("DTfx"))
-gg_dest_DTfx_18124 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 12928.0, -3968.0, 270.000, 1.000, 0, FourCC("DTfx"))
-gg_dest_DTfx_15068 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10112.0, 6272.0, 270.000, 1.000, 0, FourCC("DTfx"))
-gg_dest_DTfx_14688 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 14912.0, 8256.0, 270.000, 1.000, 0, FourCC("DTfx"))
-gg_dest_DTfx_14690 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 15040.0, 9024.0, 270.000, 1.000, 0, FourCC("DTfx"))
-gg_dest_DTfx_14832 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 11584.0, 8064.0, 270.000, 1.000, 0, FourCC("DTfx"))
-gg_dest_DTfx_14834 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10560.0, 8064.0, 270.000, 1.000, 0, FourCC("DTfx"))
-gg_dest_DTfx_14833 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10688.0, 8896.0, 270.000, 1.000, 0, FourCC("DTfx"))
-gg_dest_DTfx_5091 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 11584.0, 8896.0, 270.000, 1.000, 0, FourCC("DTfx"))
-gg_dest_DTfx_15314 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10112.0, 7296.0, 270.000, 1.000, 0, FourCC("DTfx"))
+    local d
+    local t
+    local life
+    gg_dest_B004_2162 = BlzCreateDestructableWithSkin(FourCC("B004"), -128.0, -192.0, 325.000, 3.000, 0, FourCC("B004"))
+    gg_dest_B007_5312 = BlzCreateDestructableWithSkin(FourCC("B007"), -7552.0, 4224.0, 211.000, 3.000, 0, FourCC("B007"))
+    gg_dest_B00B_16680 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15221.9, 2433.2, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
+    gg_dest_B00B_16430 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11136.0, 2426.0, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
+    gg_dest_B00B_17533 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 12156.2, 3.1, 832.0, 270.000, 1.850, 0, FourCC("B00B"))
+    gg_dest_B00B_16153 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15215.2, 5364.9, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
+    gg_dest_B00B_14785 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11344.6, 8373.0, 832.0, 270.000, 1.650, 0, FourCC("B00B"))
+    gg_dest_B00B_15713 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11516.0, 4100.8, 844.8, 90.000, 1.450, 0, FourCC("B00B"))
+    gg_dest_B00B_20321 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 18040.2, 2828.5, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
+    gg_dest_B00B_14732 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 13812.6, 8326.6, 838.4, 90.000, 1.650, 0, FourCC("B00B"))
+    gg_dest_B00B_17599 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 14969.5, -3076.2, 832.0, 180.000, 1.850, 0, FourCC("B00B"))
+    gg_dest_B00B_19643 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 17013.9, 4349.7, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
+    gg_dest_B00B_16092 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 18043.0, 7294.2, 838.4, 270.000, 1.650, 0, FourCC("B00B"))
+    gg_dest_B00B_15515 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15227.5, 6283.1, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
+    gg_dest_B00B_15274 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 10618.1, 6012.7, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
+    gg_dest_B00B_17182 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15231.9, -760.3, 844.8, 270.000, 1.450, 0, FourCC("B00B"))
+    gg_dest_B00D_18157 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 14464.0, -7296.0, 1529.6, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_18148 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 14464.0, -5504.0, 1529.6, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_19707 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15744.0, 4352.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_19706 = BlzCreateDestructableWithSkin(FourCC("B00D"), 17536.0, 4352.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_15532 = BlzCreateDestructableWithSkin(FourCC("B00D"), 14016.0, 6080.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_15710 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12224.0, 5184.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_15711 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10752.0, 3328.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_15712 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12096.0, 3264.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_20363 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15808.0, 2240.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_15709 = BlzCreateDestructableWithSkin(FourCC("B00D"), 9984.0, 5376.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_20643 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15744.0, 1280.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_16257 = BlzCreateDestructableWithSkin(FourCC("B00D"), 14080.0, 4608.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_20364 = BlzCreateDestructableWithSkin(FourCC("B00D"), 17984.0, 2240.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_16254 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12864.0, 4160.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_16255 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15296.0, 4160.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_16256 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12992.0, 5312.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_16427 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10304.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_17597 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, -3200.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_20365 = BlzCreateDestructableWithSkin(FourCC("B00D"), 17984.0, 3392.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_17532 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11584.0, -64.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_16416 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11968.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_16421 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11968.0, 1408.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_16426 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10304.0, 1408.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_16685 = BlzCreateDestructableWithSkin(FourCC("B00D"), 13696.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_20366 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15808.0, 3392.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_16596 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10048.0, 1792.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_16597 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12288.0, 1792.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_16598 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11136.0, 1216.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_16599 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11136.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_16686 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, 3456.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_16684 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 13056.0, 2304.0, 901.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_17596 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, -1920.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_20367 = BlzCreateDestructableWithSkin(FourCC("B00D"), 16192.0, 3392.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_16699 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_16701 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 14016.0, 2816.0, 896.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_16702 = BlzCreateDestructableWithSkin(FourCC("B00D"), 13056.0, 3456.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_18193 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 16256.0, -5504.0, 1523.2, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_17155 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, 1280.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_17276 = BlzCreateDestructableWithSkin(FourCC("B00D"), 14272.0, -1024.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_17275 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12992.0, -768.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_18184 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 16256.0, -7296.0, 1529.6, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_17529 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10112.0, -1024.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_17530 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10112.0, 256.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_17531 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11584.0, -704.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00D_20368 = BlzCreateDestructableWithSkin(FourCC("B00D"), 17600.0, 3392.0, 270.000, 1.000, 0, FourCC("B00D"))
+    gg_dest_B00E_19723 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 16961.9, 5501.8, 1017.6, 0.000, 1.000, 0, FourCC("B00E"))
+    gg_dest_B00E_15514 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 14990.0, 6473.7, 972.8, 270.000, 1.000, 0, FourCC("B00E"))
+    gg_dest_B00E_19641 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 17914.5, 5501.6, 1030.4, 0.000, 1.000, 0, FourCC("B00E"))
+    gg_dest_B00E_19642 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 18167.5, 5237.9, 1030.4, 270.000, 1.000, 0, FourCC("B00E"))
+    gg_dest_B00E_15517 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 12948.1, 6482.3, 979.2, 90.000, 1.000, 0, FourCC("B00E"))
+    gg_dest_B00E_15516 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 14600.6, 6946.5, 979.2, 270.000, 1.000, 0, FourCC("B00E"))
+    gg_dest_B00E_15513 = BlzCreateDestructableZWithSkin(FourCC("B00E"), 13441.1, 6941.4, 1004.8, 90.000, 1.000, 0, FourCC("B00E"))
+    gg_dest_B00F_17534 = BlzCreateDestructableWithSkin(FourCC("B00F"), 10112.0, -384.0, 270.000, 1.000, 0, FourCC("B00F"))
+    gg_dest_DTfx_15071 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 12352.0, 5952.0, 270.000, 1.000, 0, FourCC("DTfx"))
+    gg_dest_DTfx_16046 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 16512.0, 6272.0, 270.000, 1.000, 0, FourCC("DTfx"))
+    gg_dest_DTfx_17980 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 15744.0, 7296.0, 270.000, 1.000, 0, FourCC("DTfx"))
+    gg_dest_DTfx_16051 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 17536.0, 6272.0, 270.000, 1.000, 0, FourCC("DTfx"))
+    gg_dest_DTfx_18124 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 12928.0, -3968.0, 270.000, 1.000, 0, FourCC("DTfx"))
+    gg_dest_DTfx_15068 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10112.0, 6272.0, 270.000, 1.000, 0, FourCC("DTfx"))
+    gg_dest_DTfx_14688 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 14912.0, 8256.0, 270.000, 1.000, 0, FourCC("DTfx"))
+    gg_dest_DTfx_14690 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 15040.0, 9024.0, 270.000, 1.000, 0, FourCC("DTfx"))
+    gg_dest_DTfx_14832 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 11584.0, 8064.0, 270.000, 1.000, 0, FourCC("DTfx"))
+    gg_dest_DTfx_14834 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10560.0, 8064.0, 270.000, 1.000, 0, FourCC("DTfx"))
+    gg_dest_DTfx_14833 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10688.0, 8896.0, 270.000, 1.000, 0, FourCC("DTfx"))
+    gg_dest_DTfx_5091 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 11584.0, 8896.0, 270.000, 1.000, 0, FourCC("DTfx"))
+    gg_dest_DTfx_15314 = BlzCreateDestructableWithSkin(FourCC("DTfx"), 10112.0, 7296.0, 270.000, 1.000, 0, FourCC("DTfx"))
 end
 
 function CreateUnitsForPlayer0()
-local p = Player(0)
-local u
-local unitID
-local t
-local life
-
-gg_unit_Oths_0011 = BlzCreateUnitWithSkin(p, FourCC("Oths"), 63.2, -581.0, 211.080, FourCC("Oths"))
-SetUnitColor(gg_unit_Oths_0011, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1652.2, -1430.7, 121.800, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("o001"), -1180.6, 1453.0, 262.550, FourCC("o001"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("o001"), -536.6, -1082.7, 42.330, FourCC("o001"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("h002"), -7827.9, -9605.2, 5.812, FourCC("h002"))
-u = BlzCreateUnitWithSkin(p, FourCC("h002"), -9372.6, -9822.5, 5.812, FourCC("h002"))
-u = BlzCreateUnitWithSkin(p, FourCC("h002"), -11168.0, -8085.8, 5.812, FourCC("h002"))
-u = BlzCreateUnitWithSkin(p, FourCC("h002"), -3856.2, -4870.3, 5.812, FourCC("h002"))
-u = BlzCreateUnitWithSkin(p, FourCC("h002"), -5419.7, 3330.1, 5.812, FourCC("h002"))
-u = BlzCreateUnitWithSkin(p, FourCC("h004"), -11710.5, -1151.1, 159.380, FourCC("h004"))
-u = BlzCreateUnitWithSkin(p, FourCC("h002"), -12472.7, -2705.4, 5.812, FourCC("h002"))
-u = BlzCreateUnitWithSkin(p, FourCC("h002"), -6622.8, -8553.6, 5.812, FourCC("h002"))
-u = BlzCreateUnitWithSkin(p, FourCC("h002"), -5681.4, -8453.4, 5.812, FourCC("h002"))
-u = BlzCreateUnitWithSkin(p, FourCC("h002"), -10483.4, -6645.3, 5.812, FourCC("h002"))
-u = BlzCreateUnitWithSkin(p, FourCC("h004"), -11195.6, -8035.2, 159.380, FourCC("h004"))
-u = BlzCreateUnitWithSkin(p, FourCC("h002"), -13274.1, -1596.1, 5.810, FourCC("h002"))
-u = BlzCreateUnitWithSkin(p, FourCC("h002"), -12149.0, 4711.7, 5.810, FourCC("h002"))
-u = BlzCreateUnitWithSkin(p, FourCC("h004"), -5523.6, -8614.2, 159.380, FourCC("h004"))
-u = BlzCreateUnitWithSkin(p, FourCC("h002"), -9942.4, 872.0, 5.810, FourCC("h002"))
-u = BlzCreateUnitWithSkin(p, FourCC("h002"), -6551.2, -7066.3, 5.812, FourCC("h002"))
-u = BlzCreateUnitWithSkin(p, FourCC("h004"), -3852.9, 4153.2, 159.380, FourCC("h004"))
-u = BlzCreateUnitWithSkin(p, FourCC("h004"), 3605.6, 3360.4, 159.380, FourCC("h004"))
-u = BlzCreateUnitWithSkin(p, FourCC("h004"), -476.6, -4225.4, 159.380, FourCC("h004"))
-gg_unit_h007_0171 = BlzCreateUnitWithSkin(p, FourCC("h007"), 1056.8, -2436.1, 182.046, FourCC("h007"))
-u = BlzCreateUnitWithSkin(p, FourCC("h007"), 607.5, -857.6, 182.046, FourCC("h007"))
-u = BlzCreateUnitWithSkin(p, FourCC("h002"), 601.4, -1416.6, 5.812, FourCC("h002"))
-u = BlzCreateUnitWithSkin(p, FourCC("h002"), -6012.7, 7349.6, 5.812, FourCC("h002"))
-gg_unit_h009_0197 = BlzCreateUnitWithSkin(p, FourCC("h009"), -11217.1, 9574.6, 232.970, FourCC("h009"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00D"), 6540.7, 6651.8, 238.320, FourCC("h00D"))
-SetUnitAcquireRange(u, 200.0)
-gg_unit_o002_0203 = BlzCreateUnitWithSkin(p, FourCC("o002"), -13047.3, 8357.1, 308.530, FourCC("o002"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00A"), 5159.2, 6586.8, 281.200, FourCC("h00A"))
-u = BlzCreateUnitWithSkin(p, FourCC("h002"), -1503.4, 1375.2, 5.812, FourCC("h002"))
-u = BlzCreateUnitWithSkin(p, FourCC("h002"), -10937.8, 8908.1, 5.812, FourCC("h002"))
-gg_unit_opeo_0264 = BlzCreateUnitWithSkin(p, FourCC("opeo"), 16192.7, 5056.5, 353.240, FourCC("opeo"))
-SetUnitColor(gg_unit_opeo_0264, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13505.9, 4803.2, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13378.1, 4926.1, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13635.0, 4803.4, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13637.6, 4932.8, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13375.1, 4797.4, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13767.0, 4928.6, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13763.8, 5060.9, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13896.1, 5058.7, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14023.4, 5058.4, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14150.9, 5056.6, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14277.5, 5057.6, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14407.5, 5056.1, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14404.9, 5183.9, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14531.0, 5182.5, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14658.8, 5182.5, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14786.2, 5182.7, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14660.5, 5051.3, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14659.0, 5314.5, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14657.1, 5443.7, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14142.1, 5316.8, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13119.4, 5319.3, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13119.3, 5190.9, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 12989.2, 5191.3, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 12989.8, 5061.2, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 12992.7, 4929.8, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 12863.6, 4928.5, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 12862.8, 4801.6, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 12866.0, 4672.3, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 12863.8, 4544.2, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13124.1, 4794.3, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 12993.3, 4550.0, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 12986.4, 4420.3, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13117.8, 4418.3, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13245.2, 4543.9, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13250.7, 4416.3, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13377.5, 4417.6, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13504.8, 4415.8, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13633.6, 4416.3, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13762.7, 4411.8, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13889.3, 4413.1, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13497.7, 4541.8, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13634.4, 4288.0, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13250.7, 5443.1, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13378.1, 5442.8, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13505.6, 5441.0, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13632.2, 5442.1, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13758.9, 5439.4, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13885.5, 5440.4, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13887.3, 5313.1, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14013.9, 5314.2, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14145.4, 5442.9, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14272.0, 5443.9, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13504.8, 5313.0, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13631.4, 5314.0, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13374.8, 5185.6, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13501.4, 5186.7, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13377.3, 5056.4, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13503.8, 5057.4, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13248.1, 5315.6, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13247.1, 5184.8, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13249.9, 5055.1, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14400.0, 5442.5, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15306.9, 4675.5, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15308.6, 4544.3, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15307.1, 4807.5, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15044.1, 4675.3, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15045.8, 4544.1, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15044.2, 4807.3, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13886.2, 4151.1, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13887.9, 4019.9, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13886.3, 4283.1, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15041.0, 4159.7, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15042.7, 4028.4, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15041.2, 4291.6, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14145.2, 4289.0, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14146.9, 4157.8, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14145.4, 4421.0, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15040.0, 4936.4, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15166.5, 4937.4, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15296.5, 4935.9, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14659.4, 4032.2, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14786.0, 4033.2, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14915.9, 4031.7, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14658.2, 4291.8, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14784.7, 4292.8, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14914.7, 4291.4, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14660.1, 4547.6, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14786.7, 4548.6, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14916.7, 4547.1, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14277.3, 4549.9, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14403.8, 4550.9, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14533.8, 4549.4, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14525.7, 4806.0, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14652.3, 4807.0, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14782.3, 4805.5, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14141.0, 4807.3, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14267.6, 4808.3, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14397.5, 4806.8, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13118.2, 4160.0, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13244.8, 4161.0, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13374.7, 4159.5, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15170.0, 4289.4, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15296.6, 4290.4, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14400.3, 4291.6, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14526.9, 4292.6, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14276.7, 4157.8, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14403.3, 4158.8, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13505.8, 4158.2, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13632.4, 4159.2, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13633.5, 4031.0, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14012.2, 4801.7, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13888.5, 4674.0, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13889.0, 4542.5, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00J"), 10318.3, 7276.3, 133.576, FourCC("h00J"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 12330.3, 5971.7, 100.913, FourCC("h00L"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15172.7, 957.5, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15172.9, 1089.5, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14527.4, -68.9, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00O"), 11087.8, 4392.5, 332.456, FourCC("h00O"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 11212.2, 4392.7, 114.679, FourCC("h00L"))
-gg_unit_h00H_0569 = BlzCreateUnitWithSkin(p, FourCC("h00H"), 10561.1, 8065.8, 158.230, FourCC("h00H"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13505.6, -705.6, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13505.5, -837.5, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13378.6, -705.1, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13378.4, -837.1, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13249.1, -702.4, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13248.9, -834.3, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13121.6, -701.8, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13121.4, -833.7, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13636.2, -705.2, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13636.0, -837.2, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13764.9, -705.0, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13764.8, -836.9, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13895.5, -704.6, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13895.3, -836.6, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14023.2, -702.0, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14023.0, -834.0, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14656.5, -702.9, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14791.8, -829.6, 0.000, FourCC("h00F"))
-gg_unit_h00H_0588 = BlzCreateUnitWithSkin(p, FourCC("h00H"), 10709.0, 8891.7, 158.230, FourCC("h00H"))
-gg_unit_h00H_0589 = BlzCreateUnitWithSkin(p, FourCC("h00H"), 11588.1, 8904.7, 158.230, FourCC("h00H"))
-gg_unit_h00H_0590 = BlzCreateUnitWithSkin(p, FourCC("h00H"), 11585.5, 8103.7, 158.230, FourCC("h00H"))
-gg_unit_h00J_0591 = BlzCreateUnitWithSkin(p, FourCC("h00J"), 12990.4, 8087.1, 133.576, FourCC("h00J"))
-gg_unit_h00J_0592 = BlzCreateUnitWithSkin(p, FourCC("h00J"), 13374.5, 8087.5, 238.290, FourCC("h00J"))
-gg_unit_h00J_0593 = BlzCreateUnitWithSkin(p, FourCC("h00J"), 13128.7, 8563.0, 30.971, FourCC("h00J"))
-gg_unit_h00J_0594 = BlzCreateUnitWithSkin(p, FourCC("h00J"), 14273.1, 8051.1, 16.546, FourCC("h00J"))
-gg_unit_h00J_0595 = BlzCreateUnitWithSkin(p, FourCC("h00J"), 14637.0, 8070.4, 359.176, FourCC("h00J"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00J"), 11340.9, 6229.2, 238.290, FourCC("h00J"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00N"), 11085.4, 4305.4, 58.460, FourCC("h00N"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00P"), 11206.2, 4294.0, 290.279, FourCC("h00P"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14658.0, -68.6, 0.000, FourCC("h00F"))
-gg_unit_h00I_0601 = BlzCreateUnitWithSkin(p, FourCC("h00I"), 799.4, -2193.8, 0.000, FourCC("h00I"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00T"), 16005.6, 513.3, 90.000, FourCC("h00T"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16012.7, 667.7, 88.807, FourCC("h00U"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16014.1, 767.9, 88.807, FourCC("h00U"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16034.5, 873.6, 88.807, FourCC("h00U"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16080.1, 934.5, 88.807, FourCC("h00U"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16136.3, 988.8, 88.807, FourCC("h00U"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16204.3, 1043.5, 88.807, FourCC("h00U"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16288.8, 1067.4, 88.807, FourCC("h00U"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17482.7, 1060.3, 88.807, FourCC("h00U"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17602.4, 1031.6, 88.807, FourCC("h00U"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17680.5, 980.8, 88.807, FourCC("h00U"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17743.5, 917.8, 88.807, FourCC("h00U"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17783.1, 833.8, 88.807, FourCC("h00U"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17793.0, 727.7, 88.807, FourCC("h00U"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17778.3, -509.0, 88.807, FourCC("h00U"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17737.5, -590.0, 88.807, FourCC("h00U"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17695.9, -657.5, 88.807, FourCC("h00U"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17637.7, -714.0, 88.807, FourCC("h00U"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17567.1, -753.1, 88.807, FourCC("h00U"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17479.4, -762.9, 88.807, FourCC("h00U"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16296.4, -761.9, 88.807, FourCC("h00U"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16203.1, -746.6, 88.807, FourCC("h00U"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16137.4, -709.2, 88.807, FourCC("h00U"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16063.5, -645.4, 88.807, FourCC("h00U"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 11068.8, -1018.3, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 11196.0, -1018.0, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 11074.0, 258.1, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 11201.2, 258.3, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00H"), 14037.1, 6128.8, 158.230, FourCC("h00H"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 11142.3, 2173.2, 100.913, FourCC("h00L"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 11146.8, 1210.6, 100.913, FourCC("h00L"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14786.7, -68.3, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14917.3, -67.9, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15045.0, -65.4, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15171.1, -64.2, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15169.4, 65.1, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h002"), 13952.3, -7796.8, 5.812, FourCC("h002"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16020.3, -571.3, 88.807, FourCC("h00U"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 15999.5, -475.1, 88.807, FourCC("h00U"))
-u = BlzCreateUnitWithSkin(p, FourCC("h002"), 13968.7, -5016.5, 5.812, FourCC("h002"))
-u = BlzCreateUnitWithSkin(p, FourCC("h002"), 16768.6, -5028.5, 5.812, FourCC("h002"))
-u = BlzCreateUnitWithSkin(p, FourCC("h002"), 16774.7, -7815.1, 5.812, FourCC("h002"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00S"), 13062.2, 3399.4, 183.104, FourCC("h00S"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14528.3, 6589.8, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14528.5, 6463.1, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14528.0, 6336.2, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14529.1, 6209.0, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14527.7, 6082.2, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14398.5, 6077.9, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14270.7, 6077.9, 0.000, FourCC("h00F"))
+    local p = Player(0)
+    local u
+    local unitID
+    local t
+    local life
+    gg_unit_Oths_0011 = BlzCreateUnitWithSkin(p, FourCC("Oths"), 63.2, -581.0, 211.080, FourCC("Oths"))
+    SetUnitColor(gg_unit_Oths_0011, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1652.2, -1430.7, 121.800, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("o001"), -1180.6, 1453.0, 262.550, FourCC("o001"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("o001"), -536.6, -1082.7, 42.330, FourCC("o001"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("h002"), -7827.9, -9605.2, 5.812, FourCC("h002"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h002"), -9372.6, -9822.5, 5.812, FourCC("h002"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h002"), -11168.0, -8085.8, 5.812, FourCC("h002"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h002"), -3856.2, -4870.3, 5.812, FourCC("h002"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h002"), -5419.7, 3330.1, 5.812, FourCC("h002"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h004"), -11710.5, -1151.1, 159.380, FourCC("h004"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h002"), -12472.7, -2705.4, 5.812, FourCC("h002"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h002"), -6622.8, -8553.6, 5.812, FourCC("h002"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h002"), -5681.4, -8453.4, 5.812, FourCC("h002"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h002"), -10483.4, -6645.3, 5.812, FourCC("h002"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h004"), -11195.6, -8035.2, 159.380, FourCC("h004"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h002"), -13274.1, -1596.1, 5.810, FourCC("h002"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h002"), -12149.0, 4711.7, 5.810, FourCC("h002"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h004"), -5523.6, -8614.2, 159.380, FourCC("h004"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h002"), -9942.4, 872.0, 5.810, FourCC("h002"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h002"), -6551.2, -7066.3, 5.812, FourCC("h002"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h004"), -3852.9, 4153.2, 159.380, FourCC("h004"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h004"), 3605.6, 3360.4, 159.380, FourCC("h004"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h004"), -476.6, -4225.4, 159.380, FourCC("h004"))
+    gg_unit_h007_0171 = BlzCreateUnitWithSkin(p, FourCC("h007"), 1056.8, -2436.1, 182.046, FourCC("h007"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h007"), 607.5, -857.6, 182.046, FourCC("h007"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h002"), 601.4, -1416.6, 5.812, FourCC("h002"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h002"), -6012.7, 7349.6, 5.812, FourCC("h002"))
+    gg_unit_h009_0197 = BlzCreateUnitWithSkin(p, FourCC("h009"), -11217.1, 9574.6, 232.970, FourCC("h009"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00D"), 6540.7, 6651.8, 238.320, FourCC("h00D"))
+    SetUnitAcquireRange(u, 200.0)
+    gg_unit_o002_0203 = BlzCreateUnitWithSkin(p, FourCC("o002"), -13047.3, 8357.1, 308.530, FourCC("o002"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00A"), 5159.2, 6586.8, 281.200, FourCC("h00A"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h002"), -1503.4, 1375.2, 5.812, FourCC("h002"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h002"), -10937.8, 8908.1, 5.812, FourCC("h002"))
+    gg_unit_opeo_0264 = BlzCreateUnitWithSkin(p, FourCC("opeo"), 16192.7, 5056.5, 353.240, FourCC("opeo"))
+    SetUnitColor(gg_unit_opeo_0264, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13505.9, 4803.2, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13378.1, 4926.1, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13635.0, 4803.4, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13637.6, 4932.8, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13375.1, 4797.4, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13767.0, 4928.6, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13763.8, 5060.9, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13896.1, 5058.7, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14023.4, 5058.4, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14150.9, 5056.6, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14277.5, 5057.6, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14407.5, 5056.1, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14404.9, 5183.9, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14531.0, 5182.5, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14658.8, 5182.5, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14786.2, 5182.7, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14660.5, 5051.3, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14659.0, 5314.5, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14657.1, 5443.7, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14142.1, 5316.8, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13119.4, 5319.3, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13119.3, 5190.9, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 12989.2, 5191.3, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 12989.8, 5061.2, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 12992.7, 4929.8, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 12863.6, 4928.5, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 12862.8, 4801.6, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 12866.0, 4672.3, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 12863.8, 4544.2, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13124.1, 4794.3, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 12993.3, 4550.0, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 12986.4, 4420.3, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13117.8, 4418.3, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13245.2, 4543.9, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13250.7, 4416.3, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13377.5, 4417.6, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13504.8, 4415.8, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13633.6, 4416.3, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13762.7, 4411.8, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13889.3, 4413.1, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13497.7, 4541.8, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13634.4, 4288.0, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13250.7, 5443.1, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13378.1, 5442.8, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13505.6, 5441.0, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13632.2, 5442.1, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13758.9, 5439.4, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13885.5, 5440.4, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13887.3, 5313.1, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14013.9, 5314.2, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14145.4, 5442.9, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14272.0, 5443.9, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13504.8, 5313.0, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13631.4, 5314.0, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13374.8, 5185.6, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13501.4, 5186.7, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13377.3, 5056.4, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13503.8, 5057.4, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13248.1, 5315.6, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13247.1, 5184.8, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13249.9, 5055.1, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14400.0, 5442.5, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15306.9, 4675.5, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15308.6, 4544.3, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15307.1, 4807.5, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15044.1, 4675.3, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15045.8, 4544.1, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15044.2, 4807.3, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13886.2, 4151.1, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13887.9, 4019.9, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13886.3, 4283.1, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15041.0, 4159.7, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15042.7, 4028.4, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15041.2, 4291.6, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14145.2, 4289.0, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14146.9, 4157.8, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14145.4, 4421.0, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15040.0, 4936.4, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15166.5, 4937.4, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15296.5, 4935.9, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14659.4, 4032.2, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14786.0, 4033.2, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14915.9, 4031.7, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14658.2, 4291.8, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14784.7, 4292.8, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14914.7, 4291.4, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14660.1, 4547.6, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14786.7, 4548.6, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14916.7, 4547.1, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14277.3, 4549.9, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14403.8, 4550.9, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14533.8, 4549.4, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14525.7, 4806.0, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14652.3, 4807.0, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14782.3, 4805.5, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14141.0, 4807.3, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14267.6, 4808.3, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14397.5, 4806.8, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13118.2, 4160.0, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13244.8, 4161.0, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13374.7, 4159.5, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15170.0, 4289.4, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15296.6, 4290.4, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14400.3, 4291.6, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14526.9, 4292.6, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14276.7, 4157.8, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14403.3, 4158.8, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13505.8, 4158.2, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13632.4, 4159.2, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13633.5, 4031.0, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14012.2, 4801.7, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13888.5, 4674.0, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13889.0, 4542.5, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00J"), 10318.3, 7276.3, 133.576, FourCC("h00J"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 12330.3, 5971.7, 100.913, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15172.7, 957.5, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15172.9, 1089.5, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14527.4, -68.9, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00O"), 11087.8, 4392.5, 332.456, FourCC("h00O"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 11212.2, 4392.7, 114.679, FourCC("h00L"))
+    gg_unit_h00H_0569 = BlzCreateUnitWithSkin(p, FourCC("h00H"), 10561.1, 8065.8, 158.230, FourCC("h00H"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13505.6, -705.6, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13505.5, -837.5, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13378.6, -705.1, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13378.4, -837.1, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13249.1, -702.4, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13248.9, -834.3, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13121.6, -701.8, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13121.4, -833.7, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13636.2, -705.2, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13636.0, -837.2, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13764.9, -705.0, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13764.8, -836.9, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13895.5, -704.6, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13895.3, -836.6, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14023.2, -702.0, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14023.0, -834.0, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14656.5, -702.9, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14791.8, -829.6, 0.000, FourCC("h00F"))
+    gg_unit_h00H_0588 = BlzCreateUnitWithSkin(p, FourCC("h00H"), 10709.0, 8891.7, 158.230, FourCC("h00H"))
+    gg_unit_h00H_0589 = BlzCreateUnitWithSkin(p, FourCC("h00H"), 11588.1, 8904.7, 158.230, FourCC("h00H"))
+    gg_unit_h00H_0590 = BlzCreateUnitWithSkin(p, FourCC("h00H"), 11585.5, 8103.7, 158.230, FourCC("h00H"))
+    gg_unit_h00J_0591 = BlzCreateUnitWithSkin(p, FourCC("h00J"), 12990.4, 8087.1, 133.576, FourCC("h00J"))
+    gg_unit_h00J_0592 = BlzCreateUnitWithSkin(p, FourCC("h00J"), 13374.5, 8087.5, 238.290, FourCC("h00J"))
+    gg_unit_h00J_0593 = BlzCreateUnitWithSkin(p, FourCC("h00J"), 13128.7, 8563.0, 30.971, FourCC("h00J"))
+    gg_unit_h00J_0594 = BlzCreateUnitWithSkin(p, FourCC("h00J"), 14273.1, 8051.1, 16.546, FourCC("h00J"))
+    gg_unit_h00J_0595 = BlzCreateUnitWithSkin(p, FourCC("h00J"), 14637.0, 8070.4, 359.176, FourCC("h00J"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00J"), 11340.9, 6229.2, 238.290, FourCC("h00J"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00N"), 11085.4, 4305.4, 58.460, FourCC("h00N"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00P"), 11206.2, 4294.0, 290.279, FourCC("h00P"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14658.0, -68.6, 0.000, FourCC("h00F"))
+    gg_unit_h00I_0601 = BlzCreateUnitWithSkin(p, FourCC("h00I"), 799.4, -2193.8, 0.000, FourCC("h00I"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00T"), 16005.6, 513.3, 90.000, FourCC("h00T"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16012.7, 667.7, 88.807, FourCC("h00U"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16014.1, 767.9, 88.807, FourCC("h00U"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16034.5, 873.6, 88.807, FourCC("h00U"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16080.1, 934.5, 88.807, FourCC("h00U"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16136.3, 988.8, 88.807, FourCC("h00U"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16204.3, 1043.5, 88.807, FourCC("h00U"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16288.8, 1067.4, 88.807, FourCC("h00U"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17482.7, 1060.3, 88.807, FourCC("h00U"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17602.4, 1031.6, 88.807, FourCC("h00U"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17680.5, 980.8, 88.807, FourCC("h00U"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17743.5, 917.8, 88.807, FourCC("h00U"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17783.1, 833.8, 88.807, FourCC("h00U"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17793.0, 727.7, 88.807, FourCC("h00U"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17778.3, -509.0, 88.807, FourCC("h00U"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17737.5, -590.0, 88.807, FourCC("h00U"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17695.9, -657.5, 88.807, FourCC("h00U"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17637.7, -714.0, 88.807, FourCC("h00U"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17567.1, -753.1, 88.807, FourCC("h00U"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 17479.4, -762.9, 88.807, FourCC("h00U"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16296.4, -761.9, 88.807, FourCC("h00U"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16203.1, -746.6, 88.807, FourCC("h00U"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16137.4, -709.2, 88.807, FourCC("h00U"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16063.5, -645.4, 88.807, FourCC("h00U"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 11068.8, -1018.3, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 11196.0, -1018.0, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 11074.0, 258.1, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 11201.2, 258.3, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00H"), 14037.1, 6128.8, 158.230, FourCC("h00H"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 11142.3, 2173.2, 100.913, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 11146.8, 1210.6, 100.913, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14786.7, -68.3, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14917.3, -67.9, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15045.0, -65.4, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15171.1, -64.2, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15169.4, 65.1, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h002"), 13952.3, -7796.8, 5.812, FourCC("h002"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16020.3, -571.3, 88.807, FourCC("h00U"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 15999.5, -475.1, 88.807, FourCC("h00U"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00T"), 17761.7, -363.1, 90.000, FourCC("h00T"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h002"), 13968.7, -5016.5, 5.812, FourCC("h002"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h002"), 16768.6, -5028.5, 5.812, FourCC("h002"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h002"), 16774.7, -7815.1, 5.812, FourCC("h002"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00S"), 13062.2, 3399.4, 183.104, FourCC("h00S"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14528.3, 6589.8, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14528.5, 6463.1, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14528.0, 6336.2, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14529.1, 6209.0, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14527.7, 6082.2, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14398.5, 6077.9, 0.000, FourCC("h00F"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14270.7, 6077.9, 0.000, FourCC("h00F"))
 end
 
 function CreateUnitsForPlayer1()
-local p = Player(1)
-local u
-local unitID
-local t
-local life
-
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6471.0, -8160.1, 270.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6133.7, -8167.7, 270.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6037.7, -8688.0, 358.730, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6335.6, -8428.5, 90.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h001"), -6898.8, -8955.7, 269.197, FourCC("h001"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7188.2, -7265.4, 270.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h001"), -6410.7, -9091.2, 179.062, FourCC("h001"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h001"), -6902.9, -9203.4, 185.029, FourCC("h001"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h001"), -6898.1, -9295.2, 177.960, FourCC("h001"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7019.7, -7258.1, 270.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6881.3, -7708.2, 180.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7489.0, -6788.4, 225.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7942.8, -7368.2, 45.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7358.1, -6907.0, 225.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7808.0, -7493.3, 45.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8679.7, -7075.3, 225.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8558.9, -7160.7, 225.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -9008.4, -7783.9, 45.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8868.6, -7893.1, 45.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8759.8, -8506.6, 270.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8884.6, -8500.9, 270.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8644.4, -8506.6, 270.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8512.3, -8404.2, 270.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8195.2, -8342.2, 270.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7809.9, -9212.7, 181.432, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h001"), -8890.6, -9678.1, 173.695, FourCC("h001"))
-u = BlzCreateUnitWithSkin(p, FourCC("h001"), -9194.5, -8113.9, 180.000, FourCC("h001"))
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10558.1, -7979.8, 270.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10238.5, -7978.0, 270.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12806.5, -2941.5, 270.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.05 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12677.3, -2936.8, 270.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.07 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12542.8, -2937.9, 270.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.09 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12407.4, -2946.3, 270.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.11 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10229.2, -6393.9, 88.700, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.07 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -11564.6, -409.6, 0.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -11565.1, -509.3, 0.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -11566.1, -603.3, 0.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12105.4, -401.1, 180.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12105.9, -500.8, 180.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12107.0, -594.8, 180.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -11658.2, 162.7, 90.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -11567.4, 160.5, 90.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12107.5, 173.9, 90.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12016.6, 171.7, 90.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h001"), -11562.2, 54.7, 0.000, FourCC("h001"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h001"), -11559.4, -30.5, 0.000, FourCC("h001"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h001"), -11566.7, -100.1, 0.000, FourCC("h001"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h001"), -12118.8, 69.2, 180.000, FourCC("h001"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h001"), -12116.0, -16.0, 180.000, FourCC("h001"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h001"), -12123.3, -85.6, 180.000, FourCC("h001"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h001"), -10750.7, 1033.0, 225.000, FourCC("h001"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h001"), -10676.3, 964.2, 225.000, FourCC("h001"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h001"), -13120.1, 930.5, 315.000, FourCC("h001"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h001"), -13035.9, 999.6, 315.000, FourCC("h001"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12296.2, -8812.2, 270.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12159.5, -8829.7, 270.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12355.7, -9603.6, 90.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12214.1, -9469.8, 90.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h001"), -12998.0, -8052.5, 325.134, FourCC("h001"))
-u = BlzCreateUnitWithSkin(p, FourCC("h001"), -13035.6, -8214.4, 336.570, FourCC("h001"))
-u = BlzCreateUnitWithSkin(p, FourCC("h001"), -12448.1, -8360.0, 153.450, FourCC("h001"))
-u = BlzCreateUnitWithSkin(p, FourCC("h001"), -12501.4, -8480.1, 142.947, FourCC("h001"))
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12372.9, -6471.8, 0.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.05 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12377.1, -6339.6, 0.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.07 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -11790.7, -3586.8, 0.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -11767.9, -4341.4, 0.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10937.3, -2414.2, 229.221, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10111.5, -6397.4, 88.700, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.10 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10344.7, -5905.8, 88.700, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.07 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10432.8, -1987.4, 270.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.07 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10299.4, -2007.8, 270.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.10 * life)
-gg_unit_h00E_0216 = BlzCreateUnitWithSkin(p, FourCC("h00E"), 11003.5, 6845.6, 180.000, FourCC("h00E"))
-gg_unit_h00E_0217 = BlzCreateUnitWithSkin(p, FourCC("h00E"), 11383.8, 6704.5, 0.000, FourCC("h00E"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), -2011.8, -3206.3, 351.690, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), -2029.1, -3139.7, 246.368, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11191.5, 4303.2, 45.687, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11192.8, 4434.4, 34.162, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11089.5, 4305.8, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11091.9, 4435.2, 351.690, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12967.5, 4144.6, 34.162, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15188.1, 4143.0, 34.162, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12892.6, 5400.3, 34.162, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 10744.7, 2186.1, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 10751.4, 1800.7, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 10740.6, 1412.7, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11522.5, 2183.7, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11520.9, 1800.1, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11519.3, 1411.6, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00R"), 16877.2, 2902.7, 338.210, FourCC("h00R"))
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), 13505.5, 1331.6, 270.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), 13266.8, 551.6, 270.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), 13630.8, 817.4, 270.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), 14652.4, 1333.5, 270.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), 14907.1, 1332.7, 270.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), 15297.3, 830.3, 180.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.05 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), 15296.9, 702.1, 180.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.07 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), 15295.3, 579.6, 180.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.09 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), 15292.7, 446.0, 180.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.11 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), 12997.0, 589.6, 90.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), 12874.9, 589.8, 90.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), 14392.8, 60.3, 180.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 13377.7, 830.1, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), 15275.5, -574.9, 180.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.09 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), 12871.6, -693.2, 0.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.05 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h000"), 12871.2, -821.5, 0.000, FourCC("h000"))
-life = GetUnitState(u, UNIT_STATE_LIFE)
-SetUnitState(u, UNIT_STATE_LIFE, 0.07 * life)
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12966.8, -1038.1, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 10209.2, 8830.0, 34.162, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12293.9, 268.1, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12288.2, -1022.5, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12925.0, -3195.7, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12925.0, -2878.3, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12933.5, -2557.0, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12930.0, -2240.3, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12934.9, -1936.8, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 14980.3, -1823.8, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 13265.6, -1923.2, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15136.9, -1887.1, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 14581.3, -1918.5, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 13765.3, -1920.1, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 14205.7, -1912.3, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 13390.0, -3212.7, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 13301.4, -3167.5, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 13224.2, -3218.7, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 13103.2, -3207.8, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12948.0, -2719.3, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12931.5, -2402.6, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12897.6, -2066.7, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 14813.4, -1915.6, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11359.3, 8039.5, 351.690, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 17790.2, 6274.9, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15722.2, 5403.1, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15814.1, 5404.6, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 10912.0, 6233.6, 34.162, FourCC("h00C"))
+    local p = Player(1)
+    local u
+    local unitID
+    local t
+    local life
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6471.0, -8160.1, 270.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6133.7, -8167.7, 270.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6037.7, -8688.0, 358.730, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6335.6, -8428.5, 90.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -6898.8, -8955.7, 269.197, FourCC("h001"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7188.2, -7265.4, 270.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -6410.7, -9091.2, 179.062, FourCC("h001"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -6902.9, -9203.4, 185.029, FourCC("h001"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -6898.1, -9295.2, 177.960, FourCC("h001"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7019.7, -7258.1, 270.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -6881.3, -7708.2, 180.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7489.0, -6788.4, 225.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7942.8, -7368.2, 45.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7358.1, -6907.0, 225.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7808.0, -7493.3, 45.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8679.7, -7075.3, 225.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8558.9, -7160.7, 225.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -9008.4, -7783.9, 45.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8868.6, -7893.1, 45.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8759.8, -8506.6, 270.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8884.6, -8500.9, 270.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8644.4, -8506.6, 270.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8512.3, -8404.2, 270.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -8195.2, -8342.2, 270.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -7809.9, -9212.7, 181.432, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -8890.6, -9678.1, 173.695, FourCC("h001"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -9194.5, -8113.9, 180.000, FourCC("h001"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10558.1, -7979.8, 270.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10238.5, -7978.0, 270.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12806.5, -2941.5, 270.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.05 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12677.3, -2936.8, 270.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.07 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12542.8, -2937.9, 270.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.09 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12407.4, -2946.3, 270.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.11 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10229.2, -6393.9, 88.700, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.07 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -11564.6, -409.6, 0.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -11565.1, -509.3, 0.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -11566.1, -603.3, 0.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12105.4, -401.1, 180.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12105.9, -500.8, 180.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12107.0, -594.8, 180.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -11658.2, 162.7, 90.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -11567.4, 160.5, 90.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12107.5, 173.9, 90.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12016.6, 171.7, 90.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -11562.2, 54.7, 0.000, FourCC("h001"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -11559.4, -30.5, 0.000, FourCC("h001"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -11566.7, -100.1, 0.000, FourCC("h001"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -12118.8, 69.2, 180.000, FourCC("h001"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -12116.0, -16.0, 180.000, FourCC("h001"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -12123.3, -85.6, 180.000, FourCC("h001"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -10750.7, 1033.0, 225.000, FourCC("h001"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -10676.3, 964.2, 225.000, FourCC("h001"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -13120.1, 930.5, 315.000, FourCC("h001"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -13035.9, 999.6, 315.000, FourCC("h001"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12296.2, -8812.2, 270.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12159.5, -8829.7, 270.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12355.7, -9603.6, 90.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12214.1, -9469.8, 90.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -12998.0, -8052.5, 325.134, FourCC("h001"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -13035.6, -8214.4, 336.570, FourCC("h001"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -12448.1, -8360.0, 153.450, FourCC("h001"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h001"), -12501.4, -8480.1, 142.947, FourCC("h001"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12372.9, -6471.8, 0.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.05 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -12377.1, -6339.6, 0.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.07 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -11790.7, -3586.8, 0.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -11767.9, -4341.4, 0.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10937.3, -2414.2, 229.221, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.03 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10111.5, -6397.4, 88.700, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.10 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10344.7, -5905.8, 88.700, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.07 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10432.8, -1987.4, 270.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.07 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), -10299.4, -2007.8, 270.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.10 * life)
+    gg_unit_h00E_0216 = BlzCreateUnitWithSkin(p, FourCC("h00E"), 11003.5, 6845.6, 180.000, FourCC("h00E"))
+    gg_unit_h00E_0217 = BlzCreateUnitWithSkin(p, FourCC("h00E"), 11383.8, 6704.5, 0.000, FourCC("h00E"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), -2011.8, -3206.3, 351.690, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), -2029.1, -3139.7, 246.368, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11191.5, 4303.2, 45.687, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11192.8, 4434.4, 34.162, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11089.5, 4305.8, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11091.9, 4435.2, 351.690, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12967.5, 4144.6, 34.162, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15188.1, 4143.0, 34.162, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12892.6, 5400.3, 34.162, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 10744.7, 2186.1, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 10751.4, 1800.7, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 10740.6, 1412.7, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11522.5, 2183.7, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11520.9, 1800.1, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11519.3, 1411.6, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00R"), 16877.2, 2902.7, 338.210, FourCC("h00R"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), 13505.5, 1331.6, 270.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), 13266.8, 551.6, 270.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), 13630.8, 817.4, 270.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), 14652.4, 1333.5, 270.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), 14907.1, 1332.7, 270.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), 15297.3, 830.3, 180.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.05 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), 15296.9, 702.1, 180.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.07 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), 15295.3, 579.6, 180.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.09 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), 15292.7, 446.0, 180.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.11 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), 12997.0, 589.6, 90.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), 12874.9, 589.8, 90.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), 14392.8, 60.3, 180.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 13377.7, 830.1, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), 15275.5, -574.9, 180.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.09 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), 12871.6, -693.2, 0.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.05 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), 12871.2, -821.5, 0.000, FourCC("h000"))
+    life = GetUnitState(u, UNIT_STATE_LIFE)
+    SetUnitState(u, UNIT_STATE_LIFE, 0.07 * life)
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12966.8, -1038.1, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 10209.2, 8830.0, 34.162, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12293.9, 268.1, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12288.2, -1022.5, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12925.0, -3195.7, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12925.0, -2878.3, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12933.5, -2557.0, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12930.0, -2240.3, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12934.9, -1936.8, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 14980.3, -1823.8, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 13265.6, -1923.2, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15136.9, -1887.1, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 14581.3, -1918.5, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 13765.3, -1920.1, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 14205.7, -1912.3, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 13390.0, -3212.7, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 13301.4, -3167.5, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 13224.2, -3218.7, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 13103.2, -3207.8, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12948.0, -2719.3, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12931.5, -2402.6, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12897.6, -2066.7, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 14813.4, -1915.6, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11359.3, 8039.5, 351.690, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 17790.2, 6274.9, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15729.0, 1049.3, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15728.3, 924.0, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15729.0, 773.3, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00R"), 16181.0, 1259.5, 338.210, FourCC("h00R"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15722.2, 5403.1, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15814.1, 5404.6, 242.987, FourCC("h00C"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 10912.0, 6233.6, 34.162, FourCC("h00C"))
 end
 
 function CreateUnitsForPlayer2()
-local p = Player(2)
-local u
-local unitID
-local t
-local life
-
-gg_unit_h00B_0003 = BlzCreateUnitWithSkin(p, FourCC("h00B"), 9946.6, 4814.9, 0.000, FourCC("h00B"))
-gg_unit_h00M_0257 = BlzCreateUnitWithSkin(p, FourCC("h00M"), 11137.1, -370.8, 177.340, FourCC("h00M"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16062.7, 4031.3, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16062.1, 4544.9, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16062.8, 4288.7, 0.000, FourCC("h00Q"))
-gg_unit_h00B_0271 = BlzCreateUnitWithSkin(p, FourCC("h00B"), 11757.0, 5325.0, 180.000, FourCC("h00B"))
-gg_unit_h00B_0276 = BlzCreateUnitWithSkin(p, FourCC("h00B"), 10309.8, 3140.1, 90.000, FourCC("h00B"))
-gg_unit_u001_0395 = BlzCreateUnitWithSkin(p, FourCC("u001"), 10224.5, 1812.8, 335.254, FourCC("u001"))
-gg_unit_u001_0396 = BlzCreateUnitWithSkin(p, FourCC("u001"), 11955.8, 1793.6, 165.617, FourCC("u001"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13373.7, 3267.1, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13376.0, 3394.9, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13374.4, 3522.5, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13373.3, 3138.4, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 12863.2, 3009.7, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 12990.5, 3010.0, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13119.4, 3010.4, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13247.3, 3010.5, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13373.6, 3011.4, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 12863.1, 2757.2, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 12991.4, 2882.3, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13119.4, 2757.9, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13247.3, 2757.9, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13374.1, 2883.0, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13631.8, 3265.9, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13634.1, 3393.7, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13632.5, 3521.3, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13631.4, 3137.1, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13631.8, 3010.1, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13503.5, 2757.6, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13633.4, 2883.5, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 12861.6, 2883.2, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13631.2, 2754.7, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13119.0, 2884.0, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13247.5, 2884.4, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13502.0, 3010.5, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13502.4, 3137.4, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13501.9, 3265.5, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13504.6, 3394.6, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13504.3, 3521.9, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13376.4, 2756.6, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 12990.2, 2756.2, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13761.6, 3396.1, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13760.0, 3523.7, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14014.9, 3398.8, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14017.3, 3525.9, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13887.8, 3396.2, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13889.8, 3523.1, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14142.1, 3397.1, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14271.6, 3526.7, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14144.1, 3524.0, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14269.2, 3399.7, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14401.4, 3397.1, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14530.5, 3526.0, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14403.4, 3524.0, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14528.1, 3398.0, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14655.7, 3397.3, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14656.5, 3523.6, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14782.7, 3394.5, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14783.8, 3524.0, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14911.6, 3524.6, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14912.3, 3396.3, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 15040.0, 3396.0, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 15037.9, 3523.7, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 12857.8, 2628.2, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13114.1, 2629.0, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13241.9, 2629.0, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13498.1, 2628.7, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13625.9, 2625.8, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13371.1, 2627.7, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 12987.1, 2627.9, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 12862.3, 2500.2, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13243.9, 2499.5, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 12989.9, 2499.9, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13117.3, 2497.5, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 12863.1, 2372.3, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 12862.2, 2245.8, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 12861.8, 2116.6, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 12989.0, 2113.9, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13115.8, 2116.0, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13245.3, 2115.5, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13245.4, 2246.2, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13246.3, 2372.5, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14021.7, 2242.0, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14149.4, 2239.1, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14016.3, 2113.1, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14144.1, 2110.1, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14532.6, 2246.5, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14399.5, 2120.5, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14527.2, 2117.6, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14534.4, 2754.0, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14662.1, 2751.1, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14529.0, 2625.1, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14656.8, 2622.2, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 15165.7, 3018.8, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 15293.5, 3015.9, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 15160.4, 2889.9, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 15288.1, 2887.0, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14914.8, 2761.1, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 15042.6, 2758.2, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14909.5, 2632.2, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 15037.2, 2629.3, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14785.2, 2502.0, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14783.0, 2373.5, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14657.1, 2494.4, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14656.8, 2366.8, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13760.8, 3014.7, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13887.1, 3012.3, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14015.3, 3011.7, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14141.7, 3013.1, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14270.0, 3009.5, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16061.9, 4416.6, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14270.0, 2755.1, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14270.3, 2624.9, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14139.9, 2627.8, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14011.9, 2627.7, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13879.9, 2629.7, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13753.5, 2629.5, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13762.3, 2755.2, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13759.8, 2881.9, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14912.2, 2502.6, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 15040.0, 2499.7, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14912.9, 2373.6, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 15040.7, 2370.6, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14909.9, 2246.5, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 15037.6, 2243.5, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14908.8, 2117.6, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 15036.5, 2114.7, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14273.1, 2120.4, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13246.4, 3142.3, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13120.1, 3140.6, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 12990.2, 3138.9, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 12862.2, 3139.4, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13245.8, 3271.8, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13245.7, 3402.1, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13247.4, 3529.8, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13888.4, 2113.3, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16062.5, 4671.3, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13506.8, 315.8, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13634.5, 312.8, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13505.8, 185.4, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13633.5, 182.5, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14787.6, 463.1, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14915.4, 460.2, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14784.2, 336.1, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14915.0, 334.1, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16061.8, 4159.1, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16061.9, 2368.4, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16061.8, 2240.1, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16063.7, 2496.4, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 17595.7, 3139.8, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 17724.2, 3140.8, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 17855.2, 3138.8, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10430.7, -831.1, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10560.0, -837.9, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10430.8, -959.0, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10560.1, -965.8, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10433.4, -1086.7, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10562.7, -1093.6, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10432.2, -575.7, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10559.5, -579.0, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10431.7, -441.3, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10559.0, -444.5, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10432.0, -314.3, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10559.3, -317.5, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10432.3, -187.0, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10559.6, -190.2, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10430.5, -59.2, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10557.9, -62.5, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10429.4, 204.0, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10556.8, 200.8, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10431.2, 330.9, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10558.6, 327.6, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10945.0, -577.6, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10944.5, -443.1, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10944.8, -316.1, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10945.1, -188.8, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 11327.6, -571.0, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 11327.1, -436.6, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 11327.5, -309.6, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 11327.8, -182.3, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00E"), 15350.3, -5985.9, 180.000, FourCC("h00E"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00E"), 15355.4, -6821.1, 180.000, FourCC("h00E"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16318.2, 4672.5, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16319.2, 5056.5, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 17915.5, 2828.1, 192.980, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16318.3, 5184.4, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16318.5, 5312.7, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16318.9, 5439.1, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16318.5, 4289.9, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16317.6, 4417.8, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16317.8, 4546.1, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16318.4, 4032.5, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16317.5, 4160.4, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16447.2, 4672.2, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16447.5, 4289.6, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16446.6, 4417.5, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16446.8, 4545.8, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16447.4, 4032.2, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16446.5, 4160.0, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16577.5, 5440.3, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16577.8, 5057.7, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16576.9, 5185.6, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16577.1, 5313.9, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16830.4, 5439.1, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16830.7, 5056.5, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16829.8, 5184.4, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16830.0, 5312.7, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 17086.6, 5442.3, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 17086.9, 5059.7, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 17086.0, 5187.6, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 17086.2, 5315.9, 0.000, FourCC("h00Q"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14271.5, 2882.5, 90.000, FourCC("h00G"))
+    local p = Player(2)
+    local u
+    local unitID
+    local t
+    local life
+    gg_unit_h00B_0003 = BlzCreateUnitWithSkin(p, FourCC("h00B"), 9946.6, 4814.9, 0.000, FourCC("h00B"))
+    gg_unit_h00M_0257 = BlzCreateUnitWithSkin(p, FourCC("h00M"), 11137.1, -370.8, 177.340, FourCC("h00M"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16062.7, 4031.3, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16062.1, 4544.9, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16062.8, 4288.7, 0.000, FourCC("h00Q"))
+    gg_unit_h00B_0271 = BlzCreateUnitWithSkin(p, FourCC("h00B"), 11757.0, 5325.0, 180.000, FourCC("h00B"))
+    gg_unit_h00B_0276 = BlzCreateUnitWithSkin(p, FourCC("h00B"), 10309.8, 3140.1, 90.000, FourCC("h00B"))
+    gg_unit_u001_0395 = BlzCreateUnitWithSkin(p, FourCC("u001"), 10224.5, 1812.8, 335.254, FourCC("u001"))
+    gg_unit_u001_0396 = BlzCreateUnitWithSkin(p, FourCC("u001"), 11955.8, 1793.6, 165.617, FourCC("u001"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13373.7, 3267.1, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13376.0, 3394.9, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13374.4, 3522.5, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13373.3, 3138.4, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 12863.2, 3009.7, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 12990.5, 3010.0, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13119.4, 3010.4, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13247.3, 3010.5, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13373.6, 3011.4, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 12863.1, 2757.2, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 12991.4, 2882.3, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13119.4, 2757.9, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13247.3, 2757.9, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13374.1, 2883.0, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13631.8, 3265.9, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13634.1, 3393.7, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13632.5, 3521.3, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13631.4, 3137.1, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13631.8, 3010.1, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13503.5, 2757.6, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13633.4, 2883.5, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 12861.6, 2883.2, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13631.2, 2754.7, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13119.0, 2884.0, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13247.5, 2884.4, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13502.0, 3010.5, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13502.4, 3137.4, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13501.9, 3265.5, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13504.6, 3394.6, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13504.3, 3521.9, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13376.4, 2756.6, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 12990.2, 2756.2, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13761.6, 3396.1, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13760.0, 3523.7, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14014.9, 3398.8, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14017.3, 3525.9, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13887.8, 3396.2, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13889.8, 3523.1, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14142.1, 3397.1, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14271.6, 3526.7, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14144.1, 3524.0, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14269.2, 3399.7, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14401.4, 3397.1, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14530.5, 3526.0, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14403.4, 3524.0, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14528.1, 3398.0, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14655.7, 3397.3, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14656.5, 3523.6, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14782.7, 3394.5, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14783.8, 3524.0, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14911.6, 3524.6, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14912.3, 3396.3, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 15040.0, 3396.0, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 15037.9, 3523.7, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 12857.8, 2628.2, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13114.1, 2629.0, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13241.9, 2629.0, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13498.1, 2628.7, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13625.9, 2625.8, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13371.1, 2627.7, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 12987.1, 2627.9, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 12862.3, 2500.2, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13243.9, 2499.5, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 12989.9, 2499.9, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13117.3, 2497.5, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 12863.1, 2372.3, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 12862.2, 2245.8, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 12861.8, 2116.6, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 12989.0, 2113.9, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13115.8, 2116.0, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13245.3, 2115.5, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13245.4, 2246.2, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13246.3, 2372.5, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14021.7, 2242.0, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14149.4, 2239.1, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14016.3, 2113.1, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14144.1, 2110.1, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14532.6, 2246.5, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14399.5, 2120.5, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14527.2, 2117.6, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14534.4, 2754.0, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14662.1, 2751.1, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14529.0, 2625.1, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14656.8, 2622.2, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 15165.7, 3018.8, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 15293.5, 3015.9, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 15160.4, 2889.9, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 15288.1, 2887.0, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14914.8, 2761.1, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 15042.6, 2758.2, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14909.5, 2632.2, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 15037.2, 2629.3, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14785.2, 2502.0, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14783.0, 2373.5, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14657.1, 2494.4, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14656.8, 2366.8, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13760.8, 3014.7, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13887.1, 3012.3, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14015.3, 3011.7, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14141.7, 3013.1, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14270.0, 3009.5, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16061.9, 4416.6, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14270.0, 2755.1, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14270.3, 2624.9, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14139.9, 2627.8, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14011.9, 2627.7, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13879.9, 2629.7, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13753.5, 2629.5, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13762.3, 2755.2, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13759.8, 2881.9, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14912.2, 2502.6, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 15040.0, 2499.7, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14912.9, 2373.6, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 15040.7, 2370.6, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14909.9, 2246.5, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 15037.6, 2243.5, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14908.8, 2117.6, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 15036.5, 2114.7, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14273.1, 2120.4, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13246.4, 3142.3, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13120.1, 3140.6, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 12990.2, 3138.9, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 12862.2, 3139.4, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13245.8, 3271.8, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13245.7, 3402.1, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13247.4, 3529.8, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13888.4, 2113.3, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16062.5, 4671.3, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13506.8, 315.8, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13634.5, 312.8, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13505.8, 185.4, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13633.5, 182.5, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14787.6, 463.1, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14915.4, 460.2, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14784.2, 336.1, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14915.0, 334.1, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16061.8, 4159.1, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16061.9, 2368.4, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16061.8, 2240.1, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16063.7, 2496.4, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 17595.7, 3139.8, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 17724.2, 3140.8, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 17855.2, 3138.8, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10430.7, -831.1, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10560.0, -837.9, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10430.8, -959.0, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10560.1, -965.8, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10433.4, -1086.7, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10562.7, -1093.6, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10432.2, -575.7, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10559.5, -579.0, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10431.7, -441.3, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10559.0, -444.5, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10432.0, -314.3, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10559.3, -317.5, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10432.3, -187.0, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10559.6, -190.2, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10430.5, -59.2, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10557.9, -62.5, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10429.4, 204.0, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10556.8, 200.8, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10431.2, 330.9, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10558.6, 327.6, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10945.0, -577.6, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10944.5, -443.1, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10944.8, -316.1, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 10945.1, -188.8, 90.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 11327.6, -571.0, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 11327.1, -436.6, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 11327.5, -309.6, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 11327.8, -182.3, 0.000, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00E"), 15350.3, -5985.9, 180.000, FourCC("h00E"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00E"), 15355.4, -6821.1, 180.000, FourCC("h00E"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16318.2, 4672.5, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16319.2, 5056.5, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 17915.5, 2828.1, 192.980, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16318.3, 5184.4, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16318.5, 5312.7, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16318.9, 5439.1, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16318.5, 4289.9, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16317.6, 4417.8, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16317.8, 4546.1, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16318.4, 4032.5, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16317.5, 4160.4, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16447.2, 4672.2, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16447.5, 4289.6, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16446.6, 4417.5, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16446.8, 4545.8, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16447.4, 4032.2, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16446.5, 4160.0, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16577.5, 5440.3, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16577.8, 5057.7, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16576.9, 5185.6, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16577.1, 5313.9, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16830.4, 5439.1, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16830.7, 5056.5, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16829.8, 5184.4, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16830.0, 5312.7, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 17086.6, 5442.3, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 17086.9, 5059.7, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 17086.0, 5187.6, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 17086.2, 5315.9, 0.000, FourCC("h00Q"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14271.5, 2882.5, 90.000, FourCC("h00G"))
 end
 
 function CreateUnitsForPlayer10()
-local p = Player(10)
-local u
-local unitID
-local t
-local life
-
-gg_unit_h006_0002 = BlzCreateUnitWithSkin(p, FourCC("h006"), -4919.2, 7152.6, 291.597, FourCC("h006"))
-u = BlzCreateUnitWithSkin(p, FourCC("h005"), -8953.9, -3879.1, 240.498, FourCC("h005"))
-u = BlzCreateUnitWithSkin(p, FourCC("h005"), -8975.7, -4115.6, 237.037, FourCC("h005"))
-u = BlzCreateUnitWithSkin(p, FourCC("h005"), -8913.5, -4274.9, 310.461, FourCC("h005"))
-u = BlzCreateUnitWithSkin(p, FourCC("h005"), -8031.0, -3414.8, 65.074, FourCC("h005"))
-u = BlzCreateUnitWithSkin(p, FourCC("h005"), -8065.8, -3828.8, 43.002, FourCC("h005"))
-u = BlzCreateUnitWithSkin(p, FourCC("h005"), -8035.3, -4120.5, 240.894, FourCC("h005"))
-u = BlzCreateUnitWithSkin(p, FourCC("h005"), -9019.9, -3134.5, 311.505, FourCC("h005"))
-u = BlzCreateUnitWithSkin(p, FourCC("h005"), -8918.3, -2872.6, 232.401, FourCC("h005"))
-u = BlzCreateUnitWithSkin(p, FourCC("h005"), -8832.3, -3073.4, 311.549, FourCC("h005"))
-u = BlzCreateUnitWithSkin(p, FourCC("h005"), -9333.8, -1211.9, 242.926, FourCC("h005"))
-u = BlzCreateUnitWithSkin(p, FourCC("h005"), -10649.5, -844.4, 55.362, FourCC("h005"))
-u = BlzCreateUnitWithSkin(p, FourCC("h005"), -10455.2, -963.2, 33.235, FourCC("h005"))
-u = BlzCreateUnitWithSkin(p, FourCC("h005"), -10330.9, -1102.2, 229.885, FourCC("h005"))
-u = BlzCreateUnitWithSkin(p, FourCC("h005"), -10261.2, -326.6, 5.680, FourCC("h005"))
-u = BlzCreateUnitWithSkin(p, FourCC("h005"), -10117.6, -473.7, 291.652, FourCC("h005"))
-u = BlzCreateUnitWithSkin(p, FourCC("h005"), -9976.5, -621.8, 248.716, FourCC("h005"))
-u = BlzCreateUnitWithSkin(p, FourCC("h005"), -13416.5, -1531.8, 130.533, FourCC("h005"))
-u = BlzCreateUnitWithSkin(p, FourCC("h005"), -13380.5, -1147.7, 217.415, FourCC("h005"))
-u = BlzCreateUnitWithSkin(p, FourCC("h005"), -12971.2, -1291.5, 150.836, FourCC("h005"))
-u = BlzCreateUnitWithSkin(p, FourCC("h005"), -13022.2, -1680.6, 350.562, FourCC("h005"))
-u = BlzCreateUnitWithSkin(p, FourCC("h005"), -13180.0, -1417.9, 260.087, FourCC("h005"))
-u = BlzCreateUnitWithSkin(p, FourCC("h005"), -11812.2, -9329.4, 33.020, FourCC("h005"))
-u = BlzCreateUnitWithSkin(p, FourCC("h005"), -11593.3, -9501.6, 66.800, FourCC("h005"))
-u = BlzCreateUnitWithSkin(p, FourCC("h005"), -11277.3, -9421.3, 109.959, FourCC("h005"))
-u = BlzCreateUnitWithSkin(p, FourCC("h005"), -11015.5, -9258.0, 153.806, FourCC("h005"))
-u = BlzCreateUnitWithSkin(p, FourCC("n003"), -12609.4, -7320.8, 316.550, FourCC("n003"))
-u = BlzCreateUnitWithSkin(p, FourCC("n003"), -13003.6, -9340.0, 35.720, FourCC("n003"))
-u = BlzCreateUnitWithSkin(p, FourCC("n003"), -9116.4, -6427.4, 103.486, FourCC("n003"))
-u = BlzCreateUnitWithSkin(p, FourCC("n003"), -13362.9, 112.2, 315.797, FourCC("n003"))
-u = BlzCreateUnitWithSkin(p, FourCC("n003"), -11096.5, -4005.4, 116.844, FourCC("n003"))
-u = BlzCreateUnitWithSkin(p, FourCC("n003"), -8393.8, -8947.7, 35.720, FourCC("n003"))
-gg_unit_h006_0172 = BlzCreateUnitWithSkin(p, FourCC("h006"), -6759.5, 7717.5, 186.040, FourCC("h006"))
-gg_unit_h006_0173 = BlzCreateUnitWithSkin(p, FourCC("h006"), -6127.4, 6115.0, 31.803, FourCC("h006"))
-u = BlzCreateUnitWithSkin(p, FourCC("nwwf"), 1865.5, -2060.0, 220.762, FourCC("nwwf"))
-u = BlzCreateUnitWithSkin(p, FourCC("nwwf"), -1108.8, -5904.3, 97.265, FourCC("nwwf"))
-u = BlzCreateUnitWithSkin(p, FourCC("nwwf"), 568.5, -5414.6, 118.907, FourCC("nwwf"))
-u = BlzCreateUnitWithSkin(p, FourCC("nwwf"), -2851.3, -2003.9, 235.344, FourCC("nwwf"))
-u = BlzCreateUnitWithSkin(p, FourCC("nwwf"), -4700.5, -1959.2, 57.124, FourCC("nwwf"))
-u = BlzCreateUnitWithSkin(p, FourCC("nwwf"), -3834.0, -914.7, 186.899, FourCC("nwwf"))
-u = BlzCreateUnitWithSkin(p, FourCC("nwwf"), -5398.1, 1103.5, 71.228, FourCC("nwwf"))
-u = BlzCreateUnitWithSkin(p, FourCC("nwwf"), -1350.5, 6051.8, 169.624, FourCC("nwwf"))
+    local p = Player(10)
+    local u
+    local unitID
+    local t
+    local life
+    gg_unit_h006_0002 = BlzCreateUnitWithSkin(p, FourCC("h006"), -4919.2, 7152.6, 291.597, FourCC("h006"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h005"), -8953.9, -3879.1, 240.498, FourCC("h005"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h005"), -8975.7, -4115.6, 237.037, FourCC("h005"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h005"), -8913.5, -4274.9, 310.461, FourCC("h005"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h005"), -8031.0, -3414.8, 65.074, FourCC("h005"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h005"), -8065.8, -3828.8, 43.002, FourCC("h005"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h005"), -8035.3, -4120.5, 240.894, FourCC("h005"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h005"), -9019.9, -3134.5, 311.505, FourCC("h005"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h005"), -8918.3, -2872.6, 232.401, FourCC("h005"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h005"), -8832.3, -3073.4, 311.549, FourCC("h005"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h005"), -9333.8, -1211.9, 242.926, FourCC("h005"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h005"), -10649.5, -844.4, 55.362, FourCC("h005"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h005"), -10455.2, -963.2, 33.235, FourCC("h005"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h005"), -10330.9, -1102.2, 229.885, FourCC("h005"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h005"), -10261.2, -326.6, 5.680, FourCC("h005"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h005"), -10117.6, -473.7, 291.652, FourCC("h005"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h005"), -9976.5, -621.8, 248.716, FourCC("h005"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h005"), -13416.5, -1531.8, 130.533, FourCC("h005"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h005"), -13380.5, -1147.7, 217.415, FourCC("h005"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h005"), -12971.2, -1291.5, 150.836, FourCC("h005"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h005"), -13022.2, -1680.6, 350.562, FourCC("h005"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h005"), -13180.0, -1417.9, 260.087, FourCC("h005"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h005"), -11812.2, -9329.4, 33.020, FourCC("h005"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h005"), -11593.3, -9501.6, 66.800, FourCC("h005"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h005"), -11277.3, -9421.3, 109.959, FourCC("h005"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h005"), -11015.5, -9258.0, 153.806, FourCC("h005"))
+    u = BlzCreateUnitWithSkin(p, FourCC("n003"), -12609.4, -7320.8, 316.550, FourCC("n003"))
+    u = BlzCreateUnitWithSkin(p, FourCC("n003"), -13003.6, -9340.0, 35.720, FourCC("n003"))
+    u = BlzCreateUnitWithSkin(p, FourCC("n003"), -9116.4, -6427.4, 103.486, FourCC("n003"))
+    u = BlzCreateUnitWithSkin(p, FourCC("n003"), -13362.9, 112.2, 315.797, FourCC("n003"))
+    u = BlzCreateUnitWithSkin(p, FourCC("n003"), -11096.5, -4005.4, 116.844, FourCC("n003"))
+    u = BlzCreateUnitWithSkin(p, FourCC("n003"), -8393.8, -8947.7, 35.720, FourCC("n003"))
+    gg_unit_h006_0172 = BlzCreateUnitWithSkin(p, FourCC("h006"), -6759.5, 7717.5, 186.040, FourCC("h006"))
+    gg_unit_h006_0173 = BlzCreateUnitWithSkin(p, FourCC("h006"), -6127.4, 6115.0, 31.803, FourCC("h006"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nwwf"), 1865.5, -2060.0, 220.762, FourCC("nwwf"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nwwf"), -1108.8, -5904.3, 97.265, FourCC("nwwf"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nwwf"), 568.5, -5414.6, 118.907, FourCC("nwwf"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nwwf"), -2851.3, -2003.9, 235.344, FourCC("nwwf"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nwwf"), -4700.5, -1959.2, 57.124, FourCC("nwwf"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nwwf"), -3834.0, -914.7, 186.899, FourCC("nwwf"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nwwf"), -5398.1, 1103.5, 71.228, FourCC("nwwf"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nwwf"), -1350.5, 6051.8, 169.624, FourCC("nwwf"))
 end
 
 function CreateUnitsForPlayer22()
-local p = Player(22)
-local u
-local unitID
-local t
-local life
-
-u = BlzCreateUnitWithSkin(p, FourCC("e007"), 4809.7, -5997.2, 334.650, FourCC("e007"))
+    local p = Player(22)
+    local u
+    local unitID
+    local t
+    local life
+    u = BlzCreateUnitWithSkin(p, FourCC("e007"), 4809.7, -5997.2, 334.650, FourCC("e007"))
 end
 
 function CreateNeutralHostile()
-local p = Player(PLAYER_NEUTRAL_AGGRESSIVE)
-local u
-local unitID
-local t
-local life
-
-gg_unit_n000_0001 = BlzCreateUnitWithSkin(p, FourCC("n000"), -2863.2, -5340.3, 326.601, FourCC("n000"))
-gg_unit_u000_0005 = BlzCreateUnitWithSkin(p, FourCC("u000"), -5777.8, 8019.1, 276.770, FourCC("u000"))
-gg_unit_n001_0009 = BlzCreateUnitWithSkin(p, FourCC("n001"), -7570.0, 3830.9, 88.177, FourCC("n001"))
-u = BlzCreateUnitWithSkin(p, FourCC("e005"), -14253.5, -14208.2, 23.250, FourCC("e005"))
-u = BlzCreateUnitWithSkin(p, FourCC("n007"), 14559.0, -4646.7, 227.085, FourCC("n007"))
+    local p = Player(PLAYER_NEUTRAL_AGGRESSIVE)
+    local u
+    local unitID
+    local t
+    local life
+    gg_unit_n000_0001 = BlzCreateUnitWithSkin(p, FourCC("n000"), -2863.2, -5340.3, 326.601, FourCC("n000"))
+    gg_unit_u000_0005 = BlzCreateUnitWithSkin(p, FourCC("u000"), -5777.8, 8019.1, 276.770, FourCC("u000"))
+    gg_unit_n001_0009 = BlzCreateUnitWithSkin(p, FourCC("n001"), -7570.0, 3830.9, 88.177, FourCC("n001"))
+    u = BlzCreateUnitWithSkin(p, FourCC("e005"), -14253.5, -14208.2, 23.250, FourCC("e005"))
+    u = BlzCreateUnitWithSkin(p, FourCC("n007"), 14559.0, -4646.7, 227.085, FourCC("n007"))
 end
 
 function CreateNeutralPassive()
-local p = Player(PLAYER_NEUTRAL_PASSIVE)
-local u
-local unitID
-local t
-local life
-
-u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -1377.3, 7311.8, 119.744, FourCC("nsno"))
-u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -4992.9, 4916.3, 230.423, FourCC("nsno"))
-u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -5043.9, 6247.3, 163.306, FourCC("nsno"))
-u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -5760.5, 6601.1, 203.528, FourCC("nsno"))
-u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -7232.7, 3468.5, 318.646, FourCC("nsno"))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -818.7, -584.8, 290.597, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-gg_unit_opeo_0013 = BlzCreateUnitWithSkin(p, FourCC("opeo"), 473.2, -340.7, 313.224, FourCC("opeo"))
-SetUnitColor(gg_unit_opeo_0013, ConvertPlayerColor(0))
-gg_unit_opeo_0014 = BlzCreateUnitWithSkin(p, FourCC("opeo"), 414.9, -479.3, 14.290, FourCC("opeo"))
-SetUnitColor(gg_unit_opeo_0014, ConvertPlayerColor(0))
-gg_unit_opeo_0015 = BlzCreateUnitWithSkin(p, FourCC("opeo"), 534.7, -640.6, 73.650, FourCC("opeo"))
-SetUnitColor(gg_unit_opeo_0015, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -624.7, -255.0, 349.324, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -390.0, -556.4, 49.483, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -480.1, 90.0, 303.320, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 262.9, 168.1, 227.255, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 342.8, 108.6, 217.383, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 424.9, 7.4, 204.764, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -93.3, 439.8, 264.538, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -9.7, 428.2, 255.377, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-gg_unit_opeo_0024 = BlzCreateUnitWithSkin(p, FourCC("opeo"), -265.3, -699.5, 34.985, FourCC("opeo"))
-SetUnitColor(gg_unit_opeo_0024, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -208.2, -839.7, 52.017, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -8.9, -847.4, 69.163, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 491.9, -2341.9, 337.803, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 689.2, -2273.3, 257.772, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 987.4, -2183.5, 233.399, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 32.3, -2538.1, 28.538, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1543.3, 904.5, 343.258, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1213.6, 905.1, 102.463, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1106.8, 1270.4, 234.443, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1053.0, 1072.8, 172.683, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -558.6, -818.0, 49.483, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -471.8, -961.9, 49.483, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-gg_unit_n002_0045 = BlzCreateUnitWithSkin(p, FourCC("n002"), -12104.8, 3638.2, 271.700, FourCC("n002"))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -13088.2, 3360.7, 355.122, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("e002"), -5412.0, -9227.2, 358.817, FourCC("e002"))
-u = BlzCreateUnitWithSkin(p, FourCC("e002"), -7561.3, 4576.4, 275.157, FourCC("e002"))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -11617.0, -8041.4, 102.460, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("e002"), -11839.7, 128.6, 269.502, FourCC("e002"))
-u = BlzCreateUnitWithSkin(p, FourCC("e002"), -11835.8, 1670.0, 270.000, FourCC("e002"))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -8082.3, -5380.2, 194.385, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -12755.9, -4965.9, 345.936, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("e003"), 4188.3, 2697.4, 248.540, FourCC("e003"))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 1214.4, 2660.8, 11.906, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 4924.1, 6420.5, 102.463, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 801.1, -2497.8, 28.538, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 873.8, -2488.1, 6.286, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("n00B"), 723.1, -2489.4, 349.040, FourCC("n00B"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("n00A"), -1760.2, -94.9, 298.310, FourCC("n00A"))
-u = BlzCreateUnitWithSkin(p, FourCC("n00A"), 529.2, -1354.5, 309.719, FourCC("n00A"))
-u = BlzCreateUnitWithSkin(p, FourCC("n00A"), 652.5, -1326.4, 239.706, FourCC("n00A"))
-u = BlzCreateUnitWithSkin(p, FourCC("n00A"), 663.6, -1460.5, 138.430, FourCC("n00A"))
-u = BlzCreateUnitWithSkin(p, FourCC("n00B"), 406.5, -885.8, 349.040, FourCC("n00B"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("n00A"), -341.6, -361.2, 36.327, FourCC("n00A"))
-u = BlzCreateUnitWithSkin(p, FourCC("n00A"), -2486.8, 3015.6, 291.738, FourCC("n00A"))
-u = BlzCreateUnitWithSkin(p, FourCC("n00A"), -5510.7, 3325.3, 209.402, FourCC("n00A"))
-u = BlzCreateUnitWithSkin(p, FourCC("n00A"), -5469.0, 3219.2, 167.670, FourCC("n00A"))
-u = BlzCreateUnitWithSkin(p, FourCC("n00A"), 4465.4, 2399.8, 137.073, FourCC("n00A"))
-u = BlzCreateUnitWithSkin(p, FourCC("n00A"), 4540.3, 2867.3, 175.058, FourCC("n00A"))
-u = BlzCreateUnitWithSkin(p, FourCC("n00A"), 3830.3, 2974.2, 320.768, FourCC("n00A"))
-u = BlzCreateUnitWithSkin(p, FourCC("n00A"), 3897.6, 2377.1, 61.057, FourCC("n00A"))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 5084.7, 6588.1, 172.683, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 983.6, -1755.0, 233.399, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -11509.9, 9591.8, 23.954, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -11480.3, 9420.0, 46.008, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -11338.5, 9298.9, 69.005, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -11153.9, 9318.8, 91.867, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2002.5, -2307.7, 270.681, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 10936.0, 7343.2, 270.344, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 10723.4, 9013.8, 335.316, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 14610.3, 8642.0, 89.717, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1921.2, -2310.4, 277.035, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2056.0, -2376.5, 13.303, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1778.6, -2381.2, 181.860, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1967.4, -2446.3, 87.234, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1869.8, -2452.6, 100.278, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2004.3, -1854.9, 8.268, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1954.0, -1790.8, 280.954, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1876.9, -1784.8, 272.425, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1950.6, -1928.7, 100.278, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1876.4, -1929.2, 100.278, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("Oths"), -1749.7, -1852.9, 242.813, FourCC("Oths"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2251.8, -1879.0, 8.268, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2261.6, -1790.3, 8.268, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2271.8, -1647.6, 8.268, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2180.9, -1943.6, 91.332, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2109.9, -1858.4, 186.494, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2111.0, -1709.7, 171.928, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2196.5, -1606.3, 284.031, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2067.1, -1508.4, 249.784, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1975.1, -1518.1, 242.178, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2340.5, -1902.4, 8.268, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2094.7, -2235.7, 8.268, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2089.5, -2172.3, 8.268, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1933.2, -2172.9, 189.104, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2003.4, -2126.1, 265.872, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1893.2, -2175.3, 8.268, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1761.7, -2225.9, 170.997, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1756.4, -2172.9, 187.148, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1829.5, -2127.1, 288.949, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("n00A"), -2302.6, -1958.3, 208.427, FourCC("n00A"))
-u = BlzCreateUnitWithSkin(p, FourCC("n00A"), -2236.8, -2022.7, 3.934, FourCC("n00A"))
-u = BlzCreateUnitWithSkin(p, FourCC("n00A"), -1810.1, -1991.2, 239.706, FourCC("n00A"))
-u = BlzCreateUnitWithSkin(p, FourCC("n00B"), -1572.0, -1966.7, 50.162, FourCC("n00B"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("n00B"), -1623.2, -1785.0, 323.288, FourCC("n00B"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("n00B"), -1429.4, -2052.7, 124.917, FourCC("n00B"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 6787.5, -4804.8, 335.316, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 17749.1, 7116.1, 218.170, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("n00D"), 8574.0, -4760.7, 202.020, FourCC("n00D"))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 15940.0, 1236.8, 270.344, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 13630.4, 7140.9, 270.344, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 14803.5, 6246.3, 336.687, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 10819.6, 4918.1, 270.344, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 11305.1, 2474.1, 270.344, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 12326.3, 4808.5, 206.313, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 17783.9, 4369.4, 218.170, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 10576.3, 1803.1, 270.344, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 14659.1, 2997.4, 203.283, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 14256.3, -109.4, 270.344, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 14257.3, -342.0, 88.285, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 10259.6, -288.1, 270.344, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 10771.7, 14.8, 270.344, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 10788.8, -770.8, 270.344, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 11632.9, -988.2, 270.344, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 11970.7, -20.1, 270.344, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 14690.6, -3149.5, 270.344, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 15357.5, -4231.4, 270.344, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
+    local p = Player(PLAYER_NEUTRAL_PASSIVE)
+    local u
+    local unitID
+    local t
+    local life
+    u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -1377.3, 7311.8, 119.744, FourCC("nsno"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -4992.9, 4916.3, 230.423, FourCC("nsno"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -5043.9, 6247.3, 163.306, FourCC("nsno"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -5760.5, 6601.1, 203.528, FourCC("nsno"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nsno"), -7232.7, 3468.5, 318.646, FourCC("nsno"))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -818.7, -584.8, 290.597, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    gg_unit_opeo_0013 = BlzCreateUnitWithSkin(p, FourCC("opeo"), 473.2, -340.7, 313.224, FourCC("opeo"))
+    SetUnitColor(gg_unit_opeo_0013, ConvertPlayerColor(0))
+    gg_unit_opeo_0014 = BlzCreateUnitWithSkin(p, FourCC("opeo"), 414.9, -479.3, 14.290, FourCC("opeo"))
+    SetUnitColor(gg_unit_opeo_0014, ConvertPlayerColor(0))
+    gg_unit_opeo_0015 = BlzCreateUnitWithSkin(p, FourCC("opeo"), 534.7, -640.6, 73.650, FourCC("opeo"))
+    SetUnitColor(gg_unit_opeo_0015, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -624.7, -255.0, 349.324, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -390.0, -556.4, 49.483, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -480.1, 90.0, 303.320, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 262.9, 168.1, 227.255, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 342.8, 108.6, 217.383, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 424.9, 7.4, 204.764, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -93.3, 439.8, 264.538, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -9.7, 428.2, 255.377, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    gg_unit_opeo_0024 = BlzCreateUnitWithSkin(p, FourCC("opeo"), -265.3, -699.5, 34.985, FourCC("opeo"))
+    SetUnitColor(gg_unit_opeo_0024, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -208.2, -839.7, 52.017, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -8.9, -847.4, 69.163, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 491.9, -2341.9, 337.803, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 689.2, -2273.3, 257.772, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 987.4, -2183.5, 233.399, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 32.3, -2538.1, 28.538, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1543.3, 904.5, 343.258, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1213.6, 905.1, 102.463, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1106.8, 1270.4, 234.443, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1053.0, 1072.8, 172.683, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -558.6, -818.0, 49.483, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -471.8, -961.9, 49.483, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    gg_unit_n002_0045 = BlzCreateUnitWithSkin(p, FourCC("n002"), -12104.8, 3638.2, 271.700, FourCC("n002"))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -13088.2, 3360.7, 355.122, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("e002"), -5412.0, -9227.2, 358.817, FourCC("e002"))
+    u = BlzCreateUnitWithSkin(p, FourCC("e002"), -7561.3, 4576.4, 275.157, FourCC("e002"))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -11617.0, -8041.4, 102.460, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("e002"), -11839.7, 128.6, 269.502, FourCC("e002"))
+    u = BlzCreateUnitWithSkin(p, FourCC("e002"), -11835.8, 1670.0, 270.000, FourCC("e002"))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -8082.3, -5380.2, 194.385, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -12755.9, -4965.9, 345.936, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("e003"), 4188.3, 2697.4, 248.540, FourCC("e003"))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 1214.4, 2660.8, 11.906, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 4924.1, 6420.5, 102.463, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 801.1, -2497.8, 28.538, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 873.8, -2488.1, 6.286, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("n00B"), 723.1, -2489.4, 349.040, FourCC("n00B"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("n00A"), -1760.2, -94.9, 298.310, FourCC("n00A"))
+    u = BlzCreateUnitWithSkin(p, FourCC("n00A"), 529.2, -1354.5, 309.719, FourCC("n00A"))
+    u = BlzCreateUnitWithSkin(p, FourCC("n00A"), 652.5, -1326.4, 239.706, FourCC("n00A"))
+    u = BlzCreateUnitWithSkin(p, FourCC("n00A"), 663.6, -1460.5, 138.430, FourCC("n00A"))
+    u = BlzCreateUnitWithSkin(p, FourCC("n00B"), 406.5, -885.8, 349.040, FourCC("n00B"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("n00A"), -341.6, -361.2, 36.327, FourCC("n00A"))
+    u = BlzCreateUnitWithSkin(p, FourCC("n00A"), -2486.8, 3015.6, 291.738, FourCC("n00A"))
+    u = BlzCreateUnitWithSkin(p, FourCC("n00A"), -5510.7, 3325.3, 209.402, FourCC("n00A"))
+    u = BlzCreateUnitWithSkin(p, FourCC("n00A"), -5469.0, 3219.2, 167.670, FourCC("n00A"))
+    u = BlzCreateUnitWithSkin(p, FourCC("n00A"), 4465.4, 2399.8, 137.073, FourCC("n00A"))
+    u = BlzCreateUnitWithSkin(p, FourCC("n00A"), 4540.3, 2867.3, 175.058, FourCC("n00A"))
+    u = BlzCreateUnitWithSkin(p, FourCC("n00A"), 3830.3, 2974.2, 320.768, FourCC("n00A"))
+    u = BlzCreateUnitWithSkin(p, FourCC("n00A"), 3897.6, 2377.1, 61.057, FourCC("n00A"))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 5084.7, 6588.1, 172.683, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 983.6, -1755.0, 233.399, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -11509.9, 9591.8, 23.954, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -11480.3, 9420.0, 46.008, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -11338.5, 9298.9, 69.005, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -11153.9, 9318.8, 91.867, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2002.5, -2307.7, 270.681, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 10936.0, 7343.2, 270.344, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 10723.4, 9013.8, 335.316, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 14610.3, 8642.0, 89.717, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1921.2, -2310.4, 277.035, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2056.0, -2376.5, 13.303, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1778.6, -2381.2, 181.860, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1967.4, -2446.3, 87.234, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1869.8, -2452.6, 100.278, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2004.3, -1854.9, 8.268, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1954.0, -1790.8, 280.954, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1876.9, -1784.8, 272.425, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1950.6, -1928.7, 100.278, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1876.4, -1929.2, 100.278, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("Oths"), -1749.7, -1852.9, 242.813, FourCC("Oths"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2251.8, -1879.0, 8.268, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2261.6, -1790.3, 8.268, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2271.8, -1647.6, 8.268, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2180.9, -1943.6, 91.332, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2109.9, -1858.4, 186.494, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2111.0, -1709.7, 171.928, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2196.5, -1606.3, 284.031, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2067.1, -1508.4, 249.784, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1975.1, -1518.1, 242.178, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2340.5, -1902.4, 8.268, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2094.7, -2235.7, 8.268, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2089.5, -2172.3, 8.268, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1933.2, -2172.9, 189.104, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2003.4, -2126.1, 265.872, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1893.2, -2175.3, 8.268, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1761.7, -2225.9, 170.997, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1756.4, -2172.9, 187.148, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1829.5, -2127.1, 288.949, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("n00A"), -2302.6, -1958.3, 208.427, FourCC("n00A"))
+    u = BlzCreateUnitWithSkin(p, FourCC("n00A"), -2236.8, -2022.7, 3.934, FourCC("n00A"))
+    u = BlzCreateUnitWithSkin(p, FourCC("n00A"), -1810.1, -1991.2, 239.706, FourCC("n00A"))
+    u = BlzCreateUnitWithSkin(p, FourCC("n00B"), -1572.0, -1966.7, 50.162, FourCC("n00B"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("n00B"), -1623.2, -1785.0, 323.288, FourCC("n00B"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("n00B"), -1429.4, -2052.7, 124.917, FourCC("n00B"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 6787.5, -4804.8, 335.316, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 17749.1, 7116.1, 218.170, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("n00D"), 8574.0, -4760.7, 202.020, FourCC("n00D"))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 15940.0, 1236.8, 270.344, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 13630.4, 7140.9, 270.344, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 14803.5, 6246.3, 336.687, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 10819.6, 4918.1, 270.344, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 11305.1, 2474.1, 270.344, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 12326.3, 4808.5, 206.313, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 17783.9, 4369.4, 218.170, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 10576.3, 1803.1, 270.344, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 14659.1, 2997.4, 203.283, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 14256.3, -109.4, 270.344, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 14257.3, -342.0, 88.285, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 10259.6, -288.1, 270.344, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 10771.7, 14.8, 270.344, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 10788.8, -770.8, 270.344, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 11632.9, -988.2, 270.344, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 11970.7, -20.1, 270.344, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 14690.6, -3149.5, 270.344, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 15357.5, -4231.4, 270.344, FourCC("opeo"))
+    SetUnitColor(u, ConvertPlayerColor(0))
 end
 
 function CreatePlayerBuildings()
 end
 
 function CreatePlayerUnits()
-CreateUnitsForPlayer0()
-CreateUnitsForPlayer1()
-CreateUnitsForPlayer2()
-CreateUnitsForPlayer10()
-CreateUnitsForPlayer22()
+    CreateUnitsForPlayer0()
+    CreateUnitsForPlayer1()
+    CreateUnitsForPlayer2()
+    CreateUnitsForPlayer10()
+    CreateUnitsForPlayer22()
 end
 
 function CreateAllUnits()
-CreatePlayerBuildings()
-CreateNeutralHostile()
-CreateNeutralPassive()
-CreatePlayerUnits()
+    CreatePlayerBuildings()
+    CreateNeutralHostile()
+    CreateNeutralPassive()
+    CreatePlayerUnits()
 end
 
 function CreateRegions()
-local we
-
-gg_rct_Region_038 = Rect(-4224.0, -6208.0, -1568.0, -4480.0)
-gg_rct_Region_024 = Rect(-192.0, -352.0, -96.0, -256.0)
-gg_rct_TrapZone = Rect(-12896.0, -9408.0, -5664.0, 4608.0)
-gg_rct_EnterTrap = Rect(-5856.0, -9440.0, -5472.0, -8928.0)
-gg_rct_ExitTrap = Rect(-5472.0, -9440.0, -5376.0, -8992.0)
-gg_rct_ExitTrapZone = Rect(-7616.0, 4224.0, -7424.0, 4480.0)
-gg_rct_Region_004 = Rect(-7648.0, 4480.0, -7424.0, 4640.0)
-gg_rct_BossDrakon = Rect(-8672.0, 1088.0, -5376.0, 4000.0)
-gg_rct_InitStartDragon = Rect(-8160.0, 2336.0, -6656.0, 3840.0)
-gg_rct_Towolf = Rect(-11936.0, 128.0, -11744.0, 192.0)
-gg_rct_FromWolf = Rect(-12000.0, 64.0, -11680.0, 128.0)
-gg_rct_ExitWolf = Rect(-11968.0, 1632.0, -11712.0, 1760.0)
-gg_rct_EnterWolf = Rect(-11968.0, 1760.0, -11712.0, 1888.0)
-gg_rct_EnterWivern = Rect(-7168.0, 6016.0, -4512.0, 8352.0)
-gg_rct_Region_012 = Rect(-2848.0, -4512.0, -2656.0, -4448.0)
-gg_rct_Region_013 = Rect(-3424.0, -5824.0, -2240.0, -4704.0)
-gg_rct_Enter2Arena = Rect(1024.0, 7104.0, 1216.0, 7328.0)
-gg_rct_ExitArena = Rect(1280.0, 7008.0, 1376.0, 7232.0)
-gg_rct_AnimBossEnter = Rect(-13184.0, 7488.0, -13088.0, 7584.0)
-gg_rct_AnimBossStart = Rect(-13088.0, 7584.0, -12832.0, 7840.0)
-gg_rct_AIStartBoss = Rect(-12256.0, 8576.0, -10304.0, 10240.0)
-gg_rct_Region_019 = Rect(-12128.0, 2720.0, -11904.0, 2912.0)
-gg_rct_Region_020 = Rect(800.0, -2496.0, 896.0, -2400.0)
-gg_rct_Region_021 = Rect(672.0, -2400.0, 800.0, -2272.0)
-gg_rct_Region_022 = Rect(-256.0, -704.0, -160.0, -608.0)
-gg_rct_Region_023 = Rect(-448.0, -448.0, 256.0, 224.0)
-gg_rct_Boind00 = Rect(11200.0, 8256.0, 11296.0, 8608.0)
-gg_rct_Exit00 = Rect(11200.0, 8224.0, 11488.0, 8512.0)
-gg_rct_Enter00 = Rect(11072.0, 8928.0, 11264.0, 9056.0)
-gg_rct_StartBrainGame = Rect(736.0, -2176.0, 864.0, -2048.0)
-gg_rct_Boind01 = Rect(13600.0, 8320.0, 13952.0, 8544.0)
-gg_rct_Enter01 = Rect(12896.0, 8896.0, 13088.0, 9024.0)
-gg_rct_Exit01 = Rect(13664.0, 8192.0, 13952.0, 8480.0)
-gg_rct_Boind02 = Rect(11104.0, 6560.0, 11392.0, 6816.0)
-gg_rct_Enter02 = Rect(10048.0, 7232.0, 10176.0, 7360.0)
-gg_rct_Exit02 = Rect(10464.0, 5856.0, 10752.0, 6144.0)
-gg_rct_Boind03 = Rect(13952.0, 6592.0, 14240.0, 6816.0)
-gg_rct_Enter03 = Rect(12928.0, 7168.0, 13056.0, 7296.0)
-gg_rct_Exit03 = Rect(15104.0, 6144.0, 15392.0, 6432.0)
-gg_rct_Boind04 = Rect(11040.0, 3648.0, 11328.0, 4736.0)
-gg_rct_Enter04 = Rect(11072.0, 3872.0, 11200.0, 4000.0)
-gg_rct_Exit04 = Rect(11360.0, 3968.0, 11648.0, 4256.0)
-gg_rct_Bound05 = Rect(13920.0, 4672.0, 14208.0, 4896.0)
-gg_rct_Enter05 = Rect(12928.0, 5376.0, 13056.0, 5504.0)
-gg_rct_Exit05 = Rect(15072.0, 5216.0, 15360.0, 5504.0)
-gg_rct_Bound06 = Rect(10976.0, 1632.0, 11264.0, 1856.0)
-gg_rct_Enter06 = Rect(11072.0, 2080.0, 11200.0, 2208.0)
-gg_rct_Exit06 = Rect(10976.0, 2304.0, 11264.0, 2592.0)
-gg_rct_Bound07 = Rect(14016.0, 2720.0, 14304.0, 2944.0)
-gg_rct_Enter07 = Rect(12992.0, 3200.0, 13120.0, 3328.0)
-gg_rct_Exit07 = Rect(15104.0, 2272.0, 15392.0, 2560.0)
-gg_rct_SpikesZone = Rect(12768.0, 2048.0, 15360.0, 3584.0)
-gg_rct_Enter08 = Rect(12992.0, 64.0, 13120.0, 192.0)
-gg_rct_Exit08 = Rect(15104.0, -896.0, 15392.0, -608.0)
-gg_rct_Region08 = Rect(12800.0, -1152.0, 15360.0, 1408.0)
-gg_rct_Bound08 = Rect(13952.0, -544.0, 14240.0, 704.0)
-gg_rct_Bound08Start = Rect(13984.0, 288.0, 14272.0, 704.0)
-gg_rct_ResizePlace08 = Rect(14080.0, -416.0, 14432.0, -256.0)
-gg_rct_Region04 = Rect(9824.0, 2944.0, 12448.0, 5504.0)
-gg_rct_Bound09 = Rect(11008.0, -512.0, 11296.0, -288.0)
-gg_rct_Enter09 = Rect(11808.0, -448.0, 11936.0, -320.0)
-gg_rct_Exit09 = Rect(12032.0, -160.0, 12320.0, 128.0)
-gg_rct_Bound10 = Rect(13920.0, -2688.0, 14208.0, -2464.0)
-gg_rct_Enter10 = Rect(13568.0, -3264.0, 13696.0, -3136.0)
-gg_rct_Exit10 = Rect(14816.0, -3200.0, 15104.0, -2912.0)
-gg_rct_Bound11 = Rect(16768.0, 6560.0, 17056.0, 6848.0)
-gg_rct_Enter11 = Rect(15680.0, 7104.0, 15808.0, 7232.0)
-gg_rct_Exit11 = Rect(17920.0, 7168.0, 18208.0, 7456.0)
-gg_rct_Region11 = Rect(15488.0, 5760.0, 18304.0, 7552.0)
-gg_rct_R11B1_0 = Rect(15616.0, 6656.0, 16128.0, 7424.0)
-gg_rct_Start11_0 = Rect(15616.0, 6912.0, 15872.0, 7424.0)
-gg_rct_Start11_1 = Rect(16384.0, 6144.0, 16640.0, 6400.0)
-gg_rct_Start11_2 = Rect(17408.0, 6144.0, 17920.0, 6400.0)
-gg_rct_Start11_3 = Rect(17664.0, 6912.0, 18208.0, 7456.0)
-gg_rct_R11B1_1 = Rect(16384.0, 6400.0, 16640.0, 7424.0)
-gg_rct_R11B1_2 = Rect(16640.0, 6400.0, 17920.0, 6656.0)
-gg_rct_R11B2_0 = Rect(16128.0, 5920.0, 16384.0, 7424.0)
-gg_rct_R11B2_1 = Rect(16640.0, 6144.0, 17408.0, 6400.0)
-gg_rct_R11B3_0 = Rect(16640.0, 6656.0, 17664.0, 7168.0)
-gg_rct_R11B3_1 = Rect(16384.0, 5920.0, 18176.0, 6144.0)
-gg_rct_R11B1_4 = Rect(15872.0, 6400.0, 16128.0, 6656.0)
-gg_rct_R11B1_3 = Rect(15616.0, 5888.0, 15872.0, 6144.0)
-gg_rct_Start11_4 = Rect(15872.0, 6144.0, 16128.0, 6400.0)
-gg_rct_Start11_5 = Rect(15872.0, 6912.0, 16128.0, 7168.0)
-gg_rct_BoundBoss = Rect(13792.0, -8384.0, 16736.0, -4640.0)
-gg_rct_EnterBoss = Rect(12864.0, -4032.0, 12992.0, -3904.0)
-gg_rct_ExitBoss = Rect(17440.0, -4352.0, 17728.0, -4064.0)
-gg_rct_Bound12 = Rect(16736.0, 4704.0, 17024.0, 4992.0)
-gg_rct_Enter12 = Rect(15680.0, 4512.0, 15808.0, 4640.0)
-gg_rct_Exit12 = Rect(16896.0, 4224.0, 17152.0, 4480.0)
-gg_rct_Start12 = Rect(16896.0, 4736.0, 17152.0, 4992.0)
-gg_rct_Start13 = Rect(16768.0, 2560.0, 17024.0, 2816.0)
-gg_rct_Bound13 = Rect(16736.0, 2592.0, 17024.0, 2880.0)
-gg_rct_Enter13 = Rect(16832.0, 2272.0, 16960.0, 2400.0)
-gg_rct_Exit13 = Rect(17920.0, 2688.0, 18176.0, 2944.0)
-gg_rct_Region13 = Rect(15584.0, 2016.0, 18208.0, 3616.0)
-gg_rct_Error10 = Rect(13120.0, -3008.0, 15296.0, -2112.0)
-gg_rct_Error10Out = Rect(12736.0, -3392.0, 15424.0, -1728.0)
-gg_rct_Patrol12 = Rect(16416.0, 4992.0, 16512.0, 5120.0)
-gg_rct_BossBarelSpawn = Rect(15136.0, -6656.0, 15552.0, -6144.0)
-gg_rct_Region14 = Rect(15616.0, -1152.0, 18176.0, 1408.0)
-gg_rct_Enter14 = Rect(15680.0, 1216.0, 15808.0, 1344.0)
-gg_rct_Exit14 = Rect(17888.0, -832.0, 18176.0, -544.0)
-gg_rct_Bound14 = Rect(16736.0, -480.0, 17024.0, 768.0)
+    local we
+    gg_rct_Region_038 = Rect(-4224.0, -6208.0, -1568.0, -4480.0)
+    gg_rct_Region_024 = Rect(-192.0, -352.0, -96.0, -256.0)
+    gg_rct_TrapZone = Rect(-12896.0, -9408.0, -5664.0, 4608.0)
+    gg_rct_EnterTrap = Rect(-5856.0, -9440.0, -5472.0, -8928.0)
+    gg_rct_ExitTrap = Rect(-5472.0, -9440.0, -5376.0, -8992.0)
+    gg_rct_ExitTrapZone = Rect(-7616.0, 4224.0, -7424.0, 4480.0)
+    gg_rct_Region_004 = Rect(-7648.0, 4480.0, -7424.0, 4640.0)
+    gg_rct_BossDrakon = Rect(-8672.0, 1088.0, -5376.0, 4000.0)
+    gg_rct_InitStartDragon = Rect(-8160.0, 2336.0, -6656.0, 3840.0)
+    gg_rct_Towolf = Rect(-11936.0, 128.0, -11744.0, 192.0)
+    gg_rct_FromWolf = Rect(-12000.0, 64.0, -11680.0, 128.0)
+    gg_rct_ExitWolf = Rect(-11968.0, 1632.0, -11712.0, 1760.0)
+    gg_rct_EnterWolf = Rect(-11968.0, 1760.0, -11712.0, 1888.0)
+    gg_rct_EnterWivern = Rect(-7168.0, 6016.0, -4512.0, 8352.0)
+    gg_rct_Region_012 = Rect(-2848.0, -4512.0, -2656.0, -4448.0)
+    gg_rct_Region_013 = Rect(-3424.0, -5824.0, -2240.0, -4704.0)
+    gg_rct_Enter2Arena = Rect(1024.0, 7104.0, 1216.0, 7328.0)
+    gg_rct_ExitArena = Rect(1280.0, 7008.0, 1376.0, 7232.0)
+    gg_rct_AnimBossEnter = Rect(-13184.0, 7488.0, -13088.0, 7584.0)
+    gg_rct_AnimBossStart = Rect(-13088.0, 7584.0, -12832.0, 7840.0)
+    gg_rct_AIStartBoss = Rect(-12256.0, 8576.0, -10304.0, 10240.0)
+    gg_rct_Region_019 = Rect(-12128.0, 2720.0, -11904.0, 2912.0)
+    gg_rct_Region_020 = Rect(800.0, -2496.0, 896.0, -2400.0)
+    gg_rct_Region_021 = Rect(672.0, -2400.0, 800.0, -2272.0)
+    gg_rct_Region_022 = Rect(-256.0, -704.0, -160.0, -608.0)
+    gg_rct_Region_023 = Rect(-448.0, -448.0, 256.0, 224.0)
+    gg_rct_Boind00 = Rect(11200.0, 8256.0, 11296.0, 8608.0)
+    gg_rct_Exit00 = Rect(11200.0, 8224.0, 11488.0, 8512.0)
+    gg_rct_Enter00 = Rect(11072.0, 8928.0, 11264.0, 9056.0)
+    gg_rct_StartBrainGame = Rect(736.0, -2176.0, 864.0, -2048.0)
+    gg_rct_Boind01 = Rect(13600.0, 8320.0, 13952.0, 8544.0)
+    gg_rct_Enter01 = Rect(12896.0, 8896.0, 13088.0, 9024.0)
+    gg_rct_Exit01 = Rect(13664.0, 8192.0, 13952.0, 8480.0)
+    gg_rct_Boind02 = Rect(11104.0, 6560.0, 11392.0, 6816.0)
+    gg_rct_Enter02 = Rect(10048.0, 7232.0, 10176.0, 7360.0)
+    gg_rct_Exit02 = Rect(10464.0, 5856.0, 10752.0, 6144.0)
+    gg_rct_Boind03 = Rect(13952.0, 6592.0, 14240.0, 6816.0)
+    gg_rct_Enter03 = Rect(12928.0, 7168.0, 13056.0, 7296.0)
+    gg_rct_Exit03 = Rect(15104.0, 6144.0, 15392.0, 6432.0)
+    gg_rct_Boind04 = Rect(11040.0, 3648.0, 11328.0, 4736.0)
+    gg_rct_Enter04 = Rect(11072.0, 3872.0, 11200.0, 4000.0)
+    gg_rct_Exit04 = Rect(11360.0, 3968.0, 11648.0, 4256.0)
+    gg_rct_Bound05 = Rect(13920.0, 4672.0, 14208.0, 4896.0)
+    gg_rct_Enter05 = Rect(12928.0, 5376.0, 13056.0, 5504.0)
+    gg_rct_Exit05 = Rect(15072.0, 5216.0, 15360.0, 5504.0)
+    gg_rct_Bound06 = Rect(10976.0, 1632.0, 11264.0, 1856.0)
+    gg_rct_Enter06 = Rect(11072.0, 2080.0, 11200.0, 2208.0)
+    gg_rct_Exit06 = Rect(10976.0, 2304.0, 11264.0, 2592.0)
+    gg_rct_Bound07 = Rect(14016.0, 2720.0, 14304.0, 2944.0)
+    gg_rct_Enter07 = Rect(12992.0, 3200.0, 13120.0, 3328.0)
+    gg_rct_Exit07 = Rect(15104.0, 2272.0, 15392.0, 2560.0)
+    gg_rct_SpikesZone = Rect(12768.0, 2048.0, 15360.0, 3584.0)
+    gg_rct_Enter08 = Rect(12992.0, 64.0, 13120.0, 192.0)
+    gg_rct_Exit08 = Rect(15104.0, -896.0, 15392.0, -608.0)
+    gg_rct_Region08 = Rect(12800.0, -1152.0, 15360.0, 1408.0)
+    gg_rct_Bound08 = Rect(13952.0, -544.0, 14240.0, 704.0)
+    gg_rct_Bound08Start = Rect(13984.0, 288.0, 14272.0, 704.0)
+    gg_rct_ResizePlace08 = Rect(14080.0, -416.0, 14432.0, -256.0)
+    gg_rct_Region04 = Rect(9824.0, 2944.0, 12448.0, 5504.0)
+    gg_rct_Bound09 = Rect(11008.0, -512.0, 11296.0, -288.0)
+    gg_rct_Enter09 = Rect(11808.0, -448.0, 11936.0, -320.0)
+    gg_rct_Exit09 = Rect(12032.0, -160.0, 12320.0, 128.0)
+    gg_rct_Bound10 = Rect(13920.0, -2688.0, 14208.0, -2464.0)
+    gg_rct_Enter10 = Rect(13568.0, -3264.0, 13696.0, -3136.0)
+    gg_rct_Exit10 = Rect(14816.0, -3200.0, 15104.0, -2912.0)
+    gg_rct_Bound11 = Rect(16768.0, 6560.0, 17056.0, 6848.0)
+    gg_rct_Enter11 = Rect(15680.0, 7104.0, 15808.0, 7232.0)
+    gg_rct_Exit11 = Rect(17920.0, 7168.0, 18208.0, 7456.0)
+    gg_rct_Region11 = Rect(15488.0, 5760.0, 18304.0, 7552.0)
+    gg_rct_R11B1_0 = Rect(15616.0, 6656.0, 16128.0, 7424.0)
+    gg_rct_Start11_0 = Rect(15616.0, 6912.0, 15872.0, 7424.0)
+    gg_rct_Start11_1 = Rect(16384.0, 6144.0, 16640.0, 6400.0)
+    gg_rct_Start11_2 = Rect(17408.0, 6144.0, 17920.0, 6400.0)
+    gg_rct_Start11_3 = Rect(17664.0, 6912.0, 18208.0, 7456.0)
+    gg_rct_R11B1_1 = Rect(16384.0, 6400.0, 16640.0, 7424.0)
+    gg_rct_R11B1_2 = Rect(16640.0, 6400.0, 17920.0, 6656.0)
+    gg_rct_R11B2_0 = Rect(16128.0, 5920.0, 16384.0, 7424.0)
+    gg_rct_R11B2_1 = Rect(16640.0, 6144.0, 17408.0, 6400.0)
+    gg_rct_R11B3_0 = Rect(16640.0, 6656.0, 17664.0, 7168.0)
+    gg_rct_R11B3_1 = Rect(16384.0, 5920.0, 18176.0, 6144.0)
+    gg_rct_R11B1_4 = Rect(15872.0, 6400.0, 16128.0, 6656.0)
+    gg_rct_R11B1_3 = Rect(15616.0, 5888.0, 15872.0, 6144.0)
+    gg_rct_Start11_4 = Rect(15872.0, 6144.0, 16128.0, 6400.0)
+    gg_rct_Start11_5 = Rect(15872.0, 6912.0, 16128.0, 7168.0)
+    gg_rct_BoundBoss = Rect(13792.0, -8384.0, 16736.0, -4640.0)
+    gg_rct_EnterBoss = Rect(12864.0, -4032.0, 12992.0, -3904.0)
+    gg_rct_ExitBoss = Rect(17440.0, -4352.0, 17728.0, -4064.0)
+    gg_rct_Bound12 = Rect(16736.0, 4704.0, 17024.0, 4992.0)
+    gg_rct_Enter12 = Rect(15680.0, 4512.0, 15808.0, 4640.0)
+    gg_rct_Exit12 = Rect(16896.0, 4224.0, 17152.0, 4480.0)
+    gg_rct_Start12 = Rect(16896.0, 4736.0, 17152.0, 4992.0)
+    gg_rct_Start13 = Rect(16768.0, 2560.0, 17024.0, 2816.0)
+    gg_rct_Bound13 = Rect(16736.0, 2592.0, 17024.0, 2880.0)
+    gg_rct_Enter13 = Rect(16832.0, 2272.0, 16960.0, 2400.0)
+    gg_rct_Exit13 = Rect(17920.0, 2688.0, 18176.0, 2944.0)
+    gg_rct_Region13 = Rect(15584.0, 2016.0, 18208.0, 3616.0)
+    gg_rct_Error10 = Rect(13120.0, -3008.0, 15296.0, -2112.0)
+    gg_rct_Error10Out = Rect(12736.0, -3392.0, 15424.0, -1728.0)
+    gg_rct_Patrol12 = Rect(16416.0, 4992.0, 16512.0, 5120.0)
+    gg_rct_BossBarelSpawn = Rect(15136.0, -6656.0, 15552.0, -6144.0)
+    gg_rct_Region14 = Rect(15616.0, -1152.0, 18176.0, 1408.0)
+    gg_rct_Enter14 = Rect(15680.0, 1216.0, 15808.0, 1344.0)
+    gg_rct_Exit14 = Rect(17888.0, -832.0, 18176.0, -544.0)
+    gg_rct_Bound14 = Rect(16768.0, -512.0, 17024.0, 768.0)
+    gg_rct_R14B1 = Rect(16384.0, -1120.0, 17408.0, 1440.0)
+    gg_rct_R14B2 = Rect(15616.0, -384.0, 16416.0, 640.0)
+    gg_rct_R14B3 = Rect(17408.0, -384.0, 18208.0, 640.0)
+    gg_rct_UP14 = Rect(16640.0, -128.0, 17152.0, 384.0)
 end
 
 function CreateCameras()
-gg_cam_OnPeonsandTrall = CreateCameraSetup()
-CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_ROTATION, 93.0, 0.0)
-CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_ANGLE_OF_ATTACK, 313.3, 0.0)
-CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_TARGET_DISTANCE, 790.0, 0.0)
-CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_ROLL, 0.0, 0.0)
-CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_FARZ, 5000.0, 0.0)
-CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_NEARZ, 16.0, 0.0)
-CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-CameraSetupSetDestPosition(gg_cam_OnPeonsandTrall, -103.0, -645.6, 0.0)
-gg_cam_OnPineRound = CreateCameraSetup()
-CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_ROTATION, 98.2, 0.0)
-CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_ANGLE_OF_ATTACK, 317.9, 0.0)
-CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_TARGET_DISTANCE, 2727.3, 0.0)
-CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_ROLL, 0.0, 0.0)
-CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_FARZ, 6050.0, 0.0)
-CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_NEARZ, 16.0, 0.0)
-CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-CameraSetupSetDestPosition(gg_cam_OnPineRound, -105.5, 16.8, 0.0)
-gg_cam_OnPeons = CreateCameraSetup()
-CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_ROTATION, 214.9, 0.0)
-CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_ANGLE_OF_ATTACK, 331.8, 0.0)
-CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_TARGET_DISTANCE, 445.9, 0.0)
-CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_ROLL, 0.0, 0.0)
-CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_FARZ, 5000.0, 0.0)
-CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_NEARZ, 16.0, 0.0)
-CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-CameraSetupSetDestPosition(gg_cam_OnPeons, -63.7, -669.2, 0.0)
-gg_cam_MindPeon = CreateCameraSetup()
-CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_ROTATION, 222.5, 0.0)
-CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_ANGLE_OF_ATTACK, 7.9, 0.0)
-CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_TARGET_DISTANCE, 2.1, 0.0)
-CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_ROLL, 0.0, 0.0)
-CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_FARZ, 5000.0, 0.0)
-CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_NEARZ, 16.0, 0.0)
-CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-CameraSetupSetDestPosition(gg_cam_MindPeon, -5.4, -627.7, 0.0)
-gg_cam_TrallSteal = CreateCameraSetup()
-CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_ROTATION, 63.3, 0.0)
-CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_ANGLE_OF_ATTACK, 325.7, 0.0)
-CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_TARGET_DISTANCE, 368.5, 0.0)
-CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_ROLL, 0.0, 0.0)
-CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_FARZ, 5000.0, 0.0)
-CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_NEARZ, 16.0, 0.0)
-CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-CameraSetupSetDestPosition(gg_cam_TrallSteal, 70.4, -585.1, 0.0)
-gg_cam_Vine = CreateCameraSetup()
-CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_ROTATION, 59.5, 0.0)
-CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_ANGLE_OF_ATTACK, 311.0, 0.0)
-CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_TARGET_DISTANCE, 1051.5, 0.0)
-CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_ROLL, 0.0, 0.0)
-CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_FARZ, 5000.0, 0.0)
-CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_NEARZ, 16.0, 0.0)
-CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-CameraSetupSetDestPosition(gg_cam_Vine, 489.1, -482.8, 0.0)
-gg_cam_ResetCam = CreateCameraSetup()
-CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_ROTATION, 90.0, 0.0)
-CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_ANGLE_OF_ATTACK, 304.0, 0.0)
-CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_TARGET_DISTANCE, 1862.8, 0.0)
-CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_ROLL, 0.0, 0.0)
-CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_FARZ, 5000.0, 0.0)
-CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_NEARZ, 16.0, 0.0)
-CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-CameraSetupSetDestPosition(gg_cam_ResetCam, -276.9, -696.2, 0.0)
-gg_cam_LookYetty = CreateCameraSetup()
-CameraSetupSetField(gg_cam_LookYetty, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-CameraSetupSetField(gg_cam_LookYetty, CAMERA_FIELD_ROTATION, 124.8, 0.0)
-CameraSetupSetField(gg_cam_LookYetty, CAMERA_FIELD_ANGLE_OF_ATTACK, 328.0, 0.0)
-CameraSetupSetField(gg_cam_LookYetty, CAMERA_FIELD_TARGET_DISTANCE, 1051.5, 0.0)
-CameraSetupSetField(gg_cam_LookYetty, CAMERA_FIELD_ROLL, 0.0, 0.0)
-CameraSetupSetField(gg_cam_LookYetty, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-CameraSetupSetField(gg_cam_LookYetty, CAMERA_FIELD_FARZ, 5000.0, 0.0)
-CameraSetupSetField(gg_cam_LookYetty, CAMERA_FIELD_NEARZ, 16.0, 0.0)
-CameraSetupSetField(gg_cam_LookYetty, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-CameraSetupSetField(gg_cam_LookYetty, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-CameraSetupSetField(gg_cam_LookYetty, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-CameraSetupSetDestPosition(gg_cam_LookYetty, -2902.1, -5366.9, 0.0)
-gg_cam_PeonLookOnYetty = CreateCameraSetup()
-CameraSetupSetField(gg_cam_PeonLookOnYetty, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-CameraSetupSetField(gg_cam_PeonLookOnYetty, CAMERA_FIELD_ROTATION, 258.2, 0.0)
-CameraSetupSetField(gg_cam_PeonLookOnYetty, CAMERA_FIELD_ANGLE_OF_ATTACK, 319.2, 0.0)
-CameraSetupSetField(gg_cam_PeonLookOnYetty, CAMERA_FIELD_TARGET_DISTANCE, 1272.3, 0.0)
-CameraSetupSetField(gg_cam_PeonLookOnYetty, CAMERA_FIELD_ROLL, 0.0, 0.0)
-CameraSetupSetField(gg_cam_PeonLookOnYetty, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-CameraSetupSetField(gg_cam_PeonLookOnYetty, CAMERA_FIELD_FARZ, 5000.0, 0.0)
-CameraSetupSetField(gg_cam_PeonLookOnYetty, CAMERA_FIELD_NEARZ, 16.0, 0.0)
-CameraSetupSetField(gg_cam_PeonLookOnYetty, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-CameraSetupSetField(gg_cam_PeonLookOnYetty, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-CameraSetupSetField(gg_cam_PeonLookOnYetty, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-CameraSetupSetDestPosition(gg_cam_PeonLookOnYetty, -2922.1, -4613.7, 0.0)
-gg_cam_PeonReadyToYetty = CreateCameraSetup()
-CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_ROTATION, 87.4, 0.0)
-CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_ANGLE_OF_ATTACK, 338.0, 0.0)
-CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_TARGET_DISTANCE, 955.9, 0.0)
-CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_ROLL, 0.0, 0.0)
-CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_FARZ, 5000.0, 0.0)
-CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_NEARZ, 16.0, 0.0)
-CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-CameraSetupSetDestPosition(gg_cam_PeonReadyToYetty, -2745.0, -4498.0, 0.0)
-gg_cam_PeonLookOnPrise = CreateCameraSetup()
-CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_ROTATION, 80.1, 0.0)
-CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_ANGLE_OF_ATTACK, 313.8, 0.0)
-CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_TARGET_DISTANCE, 955.9, 0.0)
-CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_ROLL, 0.0, 0.0)
-CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_FARZ, 5000.0, 0.0)
-CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_NEARZ, 16.0, 0.0)
-CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-CameraSetupSetDestPosition(gg_cam_PeonLookOnPrise, -7408.1, 4600.5, 0.0)
-gg_cam_NydePeon = CreateCameraSetup()
-CameraSetupSetField(gg_cam_NydePeon, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-CameraSetupSetField(gg_cam_NydePeon, CAMERA_FIELD_ROTATION, 100.1, 0.0)
-CameraSetupSetField(gg_cam_NydePeon, CAMERA_FIELD_ANGLE_OF_ATTACK, 325.4, 0.0)
-CameraSetupSetField(gg_cam_NydePeon, CAMERA_FIELD_TARGET_DISTANCE, 228.8, 0.0)
-CameraSetupSetField(gg_cam_NydePeon, CAMERA_FIELD_ROLL, 0.0, 0.0)
-CameraSetupSetField(gg_cam_NydePeon, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-CameraSetupSetField(gg_cam_NydePeon, CAMERA_FIELD_FARZ, 5000.0, 0.0)
-CameraSetupSetField(gg_cam_NydePeon, CAMERA_FIELD_NEARZ, 16.0, 0.0)
-CameraSetupSetField(gg_cam_NydePeon, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-CameraSetupSetField(gg_cam_NydePeon, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-CameraSetupSetField(gg_cam_NydePeon, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-CameraSetupSetDestPosition(gg_cam_NydePeon, -13022.1, 8406.6, 0.0)
-gg_cam_LookAnime = CreateCameraSetup()
-CameraSetupSetField(gg_cam_LookAnime, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-CameraSetupSetField(gg_cam_LookAnime, CAMERA_FIELD_ROTATION, 27.4, 0.0)
-CameraSetupSetField(gg_cam_LookAnime, CAMERA_FIELD_ANGLE_OF_ATTACK, 327.6, 0.0)
-CameraSetupSetField(gg_cam_LookAnime, CAMERA_FIELD_TARGET_DISTANCE, 869.0, 0.0)
-CameraSetupSetField(gg_cam_LookAnime, CAMERA_FIELD_ROLL, 0.0, 0.0)
-CameraSetupSetField(gg_cam_LookAnime, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-CameraSetupSetField(gg_cam_LookAnime, CAMERA_FIELD_FARZ, 5000.0, 0.0)
-CameraSetupSetField(gg_cam_LookAnime, CAMERA_FIELD_NEARZ, 16.0, 0.0)
-CameraSetupSetField(gg_cam_LookAnime, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-CameraSetupSetField(gg_cam_LookAnime, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-CameraSetupSetField(gg_cam_LookAnime, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-CameraSetupSetDestPosition(gg_cam_LookAnime, -11145.9, 9598.4, 0.0)
-gg_cam_WolfEnd = CreateCameraSetup()
-CameraSetupSetField(gg_cam_WolfEnd, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-CameraSetupSetField(gg_cam_WolfEnd, CAMERA_FIELD_ROTATION, 95.2, 0.0)
-CameraSetupSetField(gg_cam_WolfEnd, CAMERA_FIELD_ANGLE_OF_ATTACK, 310.4, 0.0)
-CameraSetupSetField(gg_cam_WolfEnd, CAMERA_FIELD_TARGET_DISTANCE, 1272.3, 0.0)
-CameraSetupSetField(gg_cam_WolfEnd, CAMERA_FIELD_ROLL, 0.0, 0.0)
-CameraSetupSetField(gg_cam_WolfEnd, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-CameraSetupSetField(gg_cam_WolfEnd, CAMERA_FIELD_FARZ, 5000.0, 0.0)
-CameraSetupSetField(gg_cam_WolfEnd, CAMERA_FIELD_NEARZ, 16.0, 0.0)
-CameraSetupSetField(gg_cam_WolfEnd, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-CameraSetupSetField(gg_cam_WolfEnd, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-CameraSetupSetField(gg_cam_WolfEnd, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-CameraSetupSetDestPosition(gg_cam_WolfEnd, -5734.4, -8980.7, 0.0)
-gg_cam_SeeOnWolf = CreateCameraSetup()
-CameraSetupSetField(gg_cam_SeeOnWolf, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-CameraSetupSetField(gg_cam_SeeOnWolf, CAMERA_FIELD_ROTATION, 92.9, 0.0)
-CameraSetupSetField(gg_cam_SeeOnWolf, CAMERA_FIELD_ANGLE_OF_ATTACK, 323.2, 0.0)
-CameraSetupSetField(gg_cam_SeeOnWolf, CAMERA_FIELD_TARGET_DISTANCE, 2253.9, 0.0)
-CameraSetupSetField(gg_cam_SeeOnWolf, CAMERA_FIELD_ROLL, 0.0, 0.0)
-CameraSetupSetField(gg_cam_SeeOnWolf, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-CameraSetupSetField(gg_cam_SeeOnWolf, CAMERA_FIELD_FARZ, 5000.0, 0.0)
-CameraSetupSetField(gg_cam_SeeOnWolf, CAMERA_FIELD_NEARZ, 16.0, 0.0)
-CameraSetupSetField(gg_cam_SeeOnWolf, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-CameraSetupSetField(gg_cam_SeeOnWolf, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-CameraSetupSetField(gg_cam_SeeOnWolf, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-CameraSetupSetDestPosition(gg_cam_SeeOnWolf, -11820.9, 3269.4, 0.0)
-gg_cam_TalkMerch = CreateCameraSetup()
-CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_ROTATION, 73.1, 0.0)
-CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_ANGLE_OF_ATTACK, 316.4, 0.0)
-CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_TARGET_DISTANCE, 955.9, 0.0)
-CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_ROLL, 0.0, 0.0)
-CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_FARZ, 5000.0, 0.0)
-CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_NEARZ, 16.0, 0.0)
-CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-CameraSetupSetDestPosition(gg_cam_TalkMerch, 982.6, -2286.1, 0.0)
-gg_cam_InPeonHome = CreateCameraSetup()
-CameraSetupSetField(gg_cam_InPeonHome, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-CameraSetupSetField(gg_cam_InPeonHome, CAMERA_FIELD_ROTATION, 30.2, 0.0)
-CameraSetupSetField(gg_cam_InPeonHome, CAMERA_FIELD_ANGLE_OF_ATTACK, 320.4, 0.0)
-CameraSetupSetField(gg_cam_InPeonHome, CAMERA_FIELD_TARGET_DISTANCE, 460.9, 0.0)
-CameraSetupSetField(gg_cam_InPeonHome, CAMERA_FIELD_ROLL, 0.0, 0.0)
-CameraSetupSetField(gg_cam_InPeonHome, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-CameraSetupSetField(gg_cam_InPeonHome, CAMERA_FIELD_FARZ, 6050.0, 0.0)
-CameraSetupSetField(gg_cam_InPeonHome, CAMERA_FIELD_NEARZ, 16.0, 0.0)
-CameraSetupSetField(gg_cam_InPeonHome, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-CameraSetupSetField(gg_cam_InPeonHome, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-CameraSetupSetField(gg_cam_InPeonHome, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-CameraSetupSetDestPosition(gg_cam_InPeonHome, 858.1, -1843.9, 0.0)
-gg_cam_TavernaEnd = CreateCameraSetup()
-CameraSetupSetField(gg_cam_TavernaEnd, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-CameraSetupSetField(gg_cam_TavernaEnd, CAMERA_FIELD_ROTATION, 128.9, 0.0)
-CameraSetupSetField(gg_cam_TavernaEnd, CAMERA_FIELD_ANGLE_OF_ATTACK, 324.7, 0.0)
-CameraSetupSetField(gg_cam_TavernaEnd, CAMERA_FIELD_TARGET_DISTANCE, 955.9, 0.0)
-CameraSetupSetField(gg_cam_TavernaEnd, CAMERA_FIELD_ROLL, 0.0, 0.0)
-CameraSetupSetField(gg_cam_TavernaEnd, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-CameraSetupSetField(gg_cam_TavernaEnd, CAMERA_FIELD_FARZ, 5000.0, 0.0)
-CameraSetupSetField(gg_cam_TavernaEnd, CAMERA_FIELD_NEARZ, 16.0, 0.0)
-CameraSetupSetField(gg_cam_TavernaEnd, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-CameraSetupSetField(gg_cam_TavernaEnd, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-CameraSetupSetField(gg_cam_TavernaEnd, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-CameraSetupSetDestPosition(gg_cam_TavernaEnd, -1884.6, -1877.4, 0.0)
+    gg_cam_OnPeonsandTrall = CreateCameraSetup()
+    CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_ROTATION, 93.0, 0.0)
+    CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_ANGLE_OF_ATTACK, 313.3, 0.0)
+    CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_TARGET_DISTANCE, 790.0, 0.0)
+    CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_ROLL, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+    CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_FARZ, 5000.0, 0.0)
+    CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+    CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_OnPeonsandTrall, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+    CameraSetupSetDestPosition(gg_cam_OnPeonsandTrall, -103.0, -645.6, 0.0)
+    gg_cam_OnPineRound = CreateCameraSetup()
+    CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_ROTATION, 98.2, 0.0)
+    CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_ANGLE_OF_ATTACK, 317.9, 0.0)
+    CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_TARGET_DISTANCE, 2727.3, 0.0)
+    CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_ROLL, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+    CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_FARZ, 6050.0, 0.0)
+    CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+    CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_OnPineRound, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+    CameraSetupSetDestPosition(gg_cam_OnPineRound, -105.5, 16.8, 0.0)
+    gg_cam_OnPeons = CreateCameraSetup()
+    CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_ROTATION, 214.9, 0.0)
+    CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_ANGLE_OF_ATTACK, 331.8, 0.0)
+    CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_TARGET_DISTANCE, 445.9, 0.0)
+    CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_ROLL, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+    CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_FARZ, 5000.0, 0.0)
+    CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+    CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_OnPeons, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+    CameraSetupSetDestPosition(gg_cam_OnPeons, -63.7, -669.2, 0.0)
+    gg_cam_MindPeon = CreateCameraSetup()
+    CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_ROTATION, 222.5, 0.0)
+    CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_ANGLE_OF_ATTACK, 7.9, 0.0)
+    CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_TARGET_DISTANCE, 2.1, 0.0)
+    CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_ROLL, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+    CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_FARZ, 5000.0, 0.0)
+    CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+    CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_MindPeon, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+    CameraSetupSetDestPosition(gg_cam_MindPeon, -5.4, -627.7, 0.0)
+    gg_cam_TrallSteal = CreateCameraSetup()
+    CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_ROTATION, 63.3, 0.0)
+    CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_ANGLE_OF_ATTACK, 325.7, 0.0)
+    CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_TARGET_DISTANCE, 368.5, 0.0)
+    CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_ROLL, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+    CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_FARZ, 5000.0, 0.0)
+    CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+    CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_TrallSteal, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+    CameraSetupSetDestPosition(gg_cam_TrallSteal, 70.4, -585.1, 0.0)
+    gg_cam_Vine = CreateCameraSetup()
+    CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_ROTATION, 59.5, 0.0)
+    CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_ANGLE_OF_ATTACK, 311.0, 0.0)
+    CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_TARGET_DISTANCE, 1051.5, 0.0)
+    CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_ROLL, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+    CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_FARZ, 5000.0, 0.0)
+    CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+    CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_Vine, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+    CameraSetupSetDestPosition(gg_cam_Vine, 489.1, -482.8, 0.0)
+    gg_cam_ResetCam = CreateCameraSetup()
+    CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_ROTATION, 90.0, 0.0)
+    CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_ANGLE_OF_ATTACK, 304.0, 0.0)
+    CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_TARGET_DISTANCE, 1862.8, 0.0)
+    CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_ROLL, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+    CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_FARZ, 5000.0, 0.0)
+    CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+    CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_ResetCam, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+    CameraSetupSetDestPosition(gg_cam_ResetCam, -276.9, -696.2, 0.0)
+    gg_cam_LookYetty = CreateCameraSetup()
+    CameraSetupSetField(gg_cam_LookYetty, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_LookYetty, CAMERA_FIELD_ROTATION, 124.8, 0.0)
+    CameraSetupSetField(gg_cam_LookYetty, CAMERA_FIELD_ANGLE_OF_ATTACK, 328.0, 0.0)
+    CameraSetupSetField(gg_cam_LookYetty, CAMERA_FIELD_TARGET_DISTANCE, 1051.5, 0.0)
+    CameraSetupSetField(gg_cam_LookYetty, CAMERA_FIELD_ROLL, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_LookYetty, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+    CameraSetupSetField(gg_cam_LookYetty, CAMERA_FIELD_FARZ, 5000.0, 0.0)
+    CameraSetupSetField(gg_cam_LookYetty, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+    CameraSetupSetField(gg_cam_LookYetty, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_LookYetty, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_LookYetty, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+    CameraSetupSetDestPosition(gg_cam_LookYetty, -2902.1, -5366.9, 0.0)
+    gg_cam_PeonLookOnYetty = CreateCameraSetup()
+    CameraSetupSetField(gg_cam_PeonLookOnYetty, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_PeonLookOnYetty, CAMERA_FIELD_ROTATION, 258.2, 0.0)
+    CameraSetupSetField(gg_cam_PeonLookOnYetty, CAMERA_FIELD_ANGLE_OF_ATTACK, 319.2, 0.0)
+    CameraSetupSetField(gg_cam_PeonLookOnYetty, CAMERA_FIELD_TARGET_DISTANCE, 1272.3, 0.0)
+    CameraSetupSetField(gg_cam_PeonLookOnYetty, CAMERA_FIELD_ROLL, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_PeonLookOnYetty, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+    CameraSetupSetField(gg_cam_PeonLookOnYetty, CAMERA_FIELD_FARZ, 5000.0, 0.0)
+    CameraSetupSetField(gg_cam_PeonLookOnYetty, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+    CameraSetupSetField(gg_cam_PeonLookOnYetty, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_PeonLookOnYetty, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_PeonLookOnYetty, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+    CameraSetupSetDestPosition(gg_cam_PeonLookOnYetty, -2922.1, -4613.7, 0.0)
+    gg_cam_PeonReadyToYetty = CreateCameraSetup()
+    CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_ROTATION, 87.4, 0.0)
+    CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_ANGLE_OF_ATTACK, 338.0, 0.0)
+    CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_TARGET_DISTANCE, 955.9, 0.0)
+    CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_ROLL, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+    CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_FARZ, 5000.0, 0.0)
+    CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+    CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_PeonReadyToYetty, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+    CameraSetupSetDestPosition(gg_cam_PeonReadyToYetty, -2745.0, -4498.0, 0.0)
+    gg_cam_PeonLookOnPrise = CreateCameraSetup()
+    CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_ROTATION, 80.1, 0.0)
+    CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_ANGLE_OF_ATTACK, 313.8, 0.0)
+    CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_TARGET_DISTANCE, 955.9, 0.0)
+    CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_ROLL, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+    CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_FARZ, 5000.0, 0.0)
+    CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+    CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_PeonLookOnPrise, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+    CameraSetupSetDestPosition(gg_cam_PeonLookOnPrise, -7408.1, 4600.5, 0.0)
+    gg_cam_NydePeon = CreateCameraSetup()
+    CameraSetupSetField(gg_cam_NydePeon, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_NydePeon, CAMERA_FIELD_ROTATION, 100.1, 0.0)
+    CameraSetupSetField(gg_cam_NydePeon, CAMERA_FIELD_ANGLE_OF_ATTACK, 325.4, 0.0)
+    CameraSetupSetField(gg_cam_NydePeon, CAMERA_FIELD_TARGET_DISTANCE, 228.8, 0.0)
+    CameraSetupSetField(gg_cam_NydePeon, CAMERA_FIELD_ROLL, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_NydePeon, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+    CameraSetupSetField(gg_cam_NydePeon, CAMERA_FIELD_FARZ, 5000.0, 0.0)
+    CameraSetupSetField(gg_cam_NydePeon, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+    CameraSetupSetField(gg_cam_NydePeon, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_NydePeon, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_NydePeon, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+    CameraSetupSetDestPosition(gg_cam_NydePeon, -13022.1, 8406.6, 0.0)
+    gg_cam_LookAnime = CreateCameraSetup()
+    CameraSetupSetField(gg_cam_LookAnime, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_LookAnime, CAMERA_FIELD_ROTATION, 27.4, 0.0)
+    CameraSetupSetField(gg_cam_LookAnime, CAMERA_FIELD_ANGLE_OF_ATTACK, 327.6, 0.0)
+    CameraSetupSetField(gg_cam_LookAnime, CAMERA_FIELD_TARGET_DISTANCE, 869.0, 0.0)
+    CameraSetupSetField(gg_cam_LookAnime, CAMERA_FIELD_ROLL, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_LookAnime, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+    CameraSetupSetField(gg_cam_LookAnime, CAMERA_FIELD_FARZ, 5000.0, 0.0)
+    CameraSetupSetField(gg_cam_LookAnime, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+    CameraSetupSetField(gg_cam_LookAnime, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_LookAnime, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_LookAnime, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+    CameraSetupSetDestPosition(gg_cam_LookAnime, -11145.9, 9598.4, 0.0)
+    gg_cam_WolfEnd = CreateCameraSetup()
+    CameraSetupSetField(gg_cam_WolfEnd, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_WolfEnd, CAMERA_FIELD_ROTATION, 95.2, 0.0)
+    CameraSetupSetField(gg_cam_WolfEnd, CAMERA_FIELD_ANGLE_OF_ATTACK, 310.4, 0.0)
+    CameraSetupSetField(gg_cam_WolfEnd, CAMERA_FIELD_TARGET_DISTANCE, 1272.3, 0.0)
+    CameraSetupSetField(gg_cam_WolfEnd, CAMERA_FIELD_ROLL, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_WolfEnd, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+    CameraSetupSetField(gg_cam_WolfEnd, CAMERA_FIELD_FARZ, 5000.0, 0.0)
+    CameraSetupSetField(gg_cam_WolfEnd, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+    CameraSetupSetField(gg_cam_WolfEnd, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_WolfEnd, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_WolfEnd, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+    CameraSetupSetDestPosition(gg_cam_WolfEnd, -5734.4, -8980.7, 0.0)
+    gg_cam_SeeOnWolf = CreateCameraSetup()
+    CameraSetupSetField(gg_cam_SeeOnWolf, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_SeeOnWolf, CAMERA_FIELD_ROTATION, 92.9, 0.0)
+    CameraSetupSetField(gg_cam_SeeOnWolf, CAMERA_FIELD_ANGLE_OF_ATTACK, 323.2, 0.0)
+    CameraSetupSetField(gg_cam_SeeOnWolf, CAMERA_FIELD_TARGET_DISTANCE, 2253.9, 0.0)
+    CameraSetupSetField(gg_cam_SeeOnWolf, CAMERA_FIELD_ROLL, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_SeeOnWolf, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+    CameraSetupSetField(gg_cam_SeeOnWolf, CAMERA_FIELD_FARZ, 5000.0, 0.0)
+    CameraSetupSetField(gg_cam_SeeOnWolf, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+    CameraSetupSetField(gg_cam_SeeOnWolf, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_SeeOnWolf, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_SeeOnWolf, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+    CameraSetupSetDestPosition(gg_cam_SeeOnWolf, -11820.9, 3269.4, 0.0)
+    gg_cam_TalkMerch = CreateCameraSetup()
+    CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_ROTATION, 73.1, 0.0)
+    CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_ANGLE_OF_ATTACK, 316.4, 0.0)
+    CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_TARGET_DISTANCE, 955.9, 0.0)
+    CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_ROLL, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+    CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_FARZ, 5000.0, 0.0)
+    CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+    CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_TalkMerch, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+    CameraSetupSetDestPosition(gg_cam_TalkMerch, 982.6, -2286.1, 0.0)
+    gg_cam_InPeonHome = CreateCameraSetup()
+    CameraSetupSetField(gg_cam_InPeonHome, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_InPeonHome, CAMERA_FIELD_ROTATION, 30.2, 0.0)
+    CameraSetupSetField(gg_cam_InPeonHome, CAMERA_FIELD_ANGLE_OF_ATTACK, 320.4, 0.0)
+    CameraSetupSetField(gg_cam_InPeonHome, CAMERA_FIELD_TARGET_DISTANCE, 460.9, 0.0)
+    CameraSetupSetField(gg_cam_InPeonHome, CAMERA_FIELD_ROLL, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_InPeonHome, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+    CameraSetupSetField(gg_cam_InPeonHome, CAMERA_FIELD_FARZ, 6050.0, 0.0)
+    CameraSetupSetField(gg_cam_InPeonHome, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+    CameraSetupSetField(gg_cam_InPeonHome, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_InPeonHome, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_InPeonHome, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+    CameraSetupSetDestPosition(gg_cam_InPeonHome, 858.1, -1843.9, 0.0)
+    gg_cam_TavernaEnd = CreateCameraSetup()
+    CameraSetupSetField(gg_cam_TavernaEnd, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_TavernaEnd, CAMERA_FIELD_ROTATION, 128.9, 0.0)
+    CameraSetupSetField(gg_cam_TavernaEnd, CAMERA_FIELD_ANGLE_OF_ATTACK, 324.7, 0.0)
+    CameraSetupSetField(gg_cam_TavernaEnd, CAMERA_FIELD_TARGET_DISTANCE, 955.9, 0.0)
+    CameraSetupSetField(gg_cam_TavernaEnd, CAMERA_FIELD_ROLL, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_TavernaEnd, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+    CameraSetupSetField(gg_cam_TavernaEnd, CAMERA_FIELD_FARZ, 5000.0, 0.0)
+    CameraSetupSetField(gg_cam_TavernaEnd, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+    CameraSetupSetField(gg_cam_TavernaEnd, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_TavernaEnd, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_TavernaEnd, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+    CameraSetupSetDestPosition(gg_cam_TavernaEnd, -1884.6, -1877.4, 0.0)
 end
 
 --CUSTOM_CODE
@@ -6159,8 +6163,15 @@ end
 --- DateTime: 02.12.2023 20:26
 ---
 function InitRailWagon()
-    local unit = FindUnitOfType(FourCC("h00T"))
     --print("ищем вагонетку")
+    local _, k, rg = FindUnitOfType(FourCC("h00T"))
+
+    for i = 1, #rg do
+        StartRailWagon(rg[i])
+    end
+end
+
+function StartRailWagon(unit)
     SetUnitZ(unit,GetUnitZ(unit)+20)
     UnitAddAbility(unit, FourCC("Aloc"))
     local unitsT = FindNearUnitByID(unit, FourCC("h00U"))
@@ -6221,12 +6232,18 @@ function FindNearUnitByID(unit, id)
             table.insert(distanceT, dist)
 
             --print("Близжайший",GetUnitName(e),dist)
-            UnitAddAbility(e, FourCC("Aloc"))
-            ShowUnit(e, false)
-            SetUnitInvulnerable(e, true)
+
         end
         GroupRemoveUnit(perebor, e)
     end
+
+    TimerStart(CreateTimer(), 1, false, function()
+        for i=1,#unitsT do
+            UnitAddAbility(unitsT[i], FourCC("Aloc"))
+            ShowUnit(unitsT[i], false)
+            SetUnitInvulnerable(unitsT[i], true)
+        end
+    end)
     return unitsT
 end
 
@@ -15452,3659 +15469,3719 @@ end
 
 --CUSTOM_CODE
 function Trig_InitRoom14_Conditions()
-if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-return false
+    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+        return false
+    end
+    return true
 end
-return true
+
+function Trig_InitRoom14_Func007Func001C()
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+        return false
+    end
+    return true
+end
+
+function Trig_InitRoom14_Func007A()
+    if (Trig_InitRoom14_Func007Func001C()) then
+                MoveDestructableDown(GetEnumDestructable(), -500, 5)
+    else
+    end
+end
+
+function Trig_InitRoom14_Func008Func001C()
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+        return false
+    end
+    return true
+end
+
+function Trig_InitRoom14_Func008A()
+    if (Trig_InitRoom14_Func008Func001C()) then
+                MoveDestructableDown(GetEnumDestructable(), -500, 5)
+    else
+    end
+end
+
+function Trig_InitRoom14_Func009Func001C()
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+        return false
+    end
+    return true
+end
+
+function Trig_InitRoom14_Func009A()
+    if (Trig_InitRoom14_Func009Func001C()) then
+                MoveDestructableDown(GetEnumDestructable(), -500, 5)
+    else
+    end
 end
 
 function Trig_InitRoom14_Actions()
-SetDestructableOccluderHeight(gg_dest_B00D_20643, 128)
-    CreateFloorInRoom(GetDestructableX(gg_dest_B00D_20643), GetDestructableY(gg_dest_B00D_20643),10,10)
-DisableTrigger(GetTriggeringTrigger())
-SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound14)
-    HeroFixRespPos()
-    CreateEnteringFrame(nil, "Вся карта это рельсы")
+    SetDestructableOccluderHeight(gg_dest_B00D_20643, 128)
+        CreateFloorInRoom(GetDestructableX(gg_dest_B00D_20643), GetDestructableY(gg_dest_B00D_20643),10,10)
+    DisableTrigger(GetTriggeringTrigger())
+    SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound14)
+        HeroFixRespPos()
+        CreateEnteringFrame(nil, "Вся карта это рельсы")
+    EnumDestructablesInRectAll(gg_rct_R14B1, Trig_InitRoom14_Func007A)
+    EnumDestructablesInRectAll(gg_rct_R14B2, Trig_InitRoom14_Func008A)
+    EnumDestructablesInRectAll(gg_rct_R14B3, Trig_InitRoom14_Func009A)
+    TriggerSleepAction(5.00)
 end
 
 function InitTrig_InitRoom14()
-gg_trg_InitRoom14 = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_InitRoom14, gg_rct_Enter14)
-TriggerAddCondition(gg_trg_InitRoom14, Condition(Trig_InitRoom14_Conditions))
-TriggerAddAction(gg_trg_InitRoom14, Trig_InitRoom14_Actions)
+    gg_trg_InitRoom14 = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_InitRoom14, gg_rct_Enter14)
+    TriggerAddCondition(gg_trg_InitRoom14, Condition(Trig_InitRoom14_Conditions))
+    TriggerAddAction(gg_trg_InitRoom14, Trig_InitRoom14_Actions)
+end
+
+function Trig_Leave14Fix_Actions()
+    DisplayTextToForce(GetPlayersAll(), "TRIGSTR_889")
+    TriggerSleepAction(2.00)
+        UnitStartFallAnim(GetTriggerUnit(),1000)
+    SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter14))
+end
+
+function InitTrig_Leave14Fix()
+    gg_trg_Leave14Fix = CreateTrigger()
+    TriggerRegisterLeaveRectSimple(gg_trg_Leave14Fix, gg_rct_Region14)
+    TriggerAddAction(gg_trg_Leave14Fix, Trig_Leave14Fix_Actions)
 end
 
 function Trig_InitRoom13_Func002C()
-if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-return false
-end
-return true
+    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_InitRoom13_Conditions()
-if (not Trig_InitRoom13_Func002C()) then
-return false
-end
-return true
+    if (not Trig_InitRoom13_Func002C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_InitRoom13_Func004Func001C()
-if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
-return false
-end
-return true
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+        return false
+    end
+    return true
 end
 
 function Trig_InitRoom13_Func004A()
-if (Trig_InitRoom13_Func004Func001C()) then
-        MoveDestructableDown(GetEnumDestructable(), -500, 5)
-else
-end
+    if (Trig_InitRoom13_Func004Func001C()) then
+                MoveDestructableDown(GetEnumDestructable(), -500, 5)
+    else
+    end
 end
 
 function Trig_InitRoom13_Actions()
-DisableTrigger(GetTriggeringTrigger())
-    HeroFixRespPos()
-EnumDestructablesInRectAll(gg_rct_Start13, Trig_InitRoom13_Func004A)
+    DisableTrigger(GetTriggeringTrigger())
+        HeroFixRespPos()
+    EnumDestructablesInRectAll(gg_rct_Start13, Trig_InitRoom13_Func004A)
 end
 
 function InitTrig_InitRoom13()
-gg_trg_InitRoom13 = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_InitRoom13, gg_rct_Enter13)
-TriggerAddCondition(gg_trg_InitRoom13, Condition(Trig_InitRoom13_Conditions))
-TriggerAddAction(gg_trg_InitRoom13, Trig_InitRoom13_Actions)
+    gg_trg_InitRoom13 = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_InitRoom13, gg_rct_Enter13)
+    TriggerAddCondition(gg_trg_InitRoom13, Condition(Trig_InitRoom13_Conditions))
+    TriggerAddAction(gg_trg_InitRoom13, Trig_InitRoom13_Actions)
 end
 
 function Trig_Victory13_Func001Func002Func001C()
-if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
-return false
-end
-return true
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+        return false
+    end
+    return true
 end
 
 function Trig_Victory13_Func001Func002A()
-if (Trig_Victory13_Func001Func002Func001C()) then
-        MoveDestructableUp(GetEnumDestructable(), 500, 5)
-else
-end
+    if (Trig_Victory13_Func001Func002Func001C()) then
+                MoveDestructableUp(GetEnumDestructable(), 500, 5)
+    else
+    end
 end
 
 function Trig_Victory13_Func001Func003C()
-if (not (IsDestructableDeadBJ(gg_dest_B00D_20363) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00D_20366) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00D_20367) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00D_20368) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00D_20365) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00D_20364) == true)) then
-return false
-end
-return true
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_20363) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_20366) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_20367) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_20368) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_20365) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_20364) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_Victory13_Func001C()
-if (not Trig_Victory13_Func001Func003C()) then
-return false
-end
-return true
+    if (not Trig_Victory13_Func001Func003C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_Victory13_Actions()
-if (Trig_Victory13_Func001C()) then
-KillDestructable(gg_dest_B00B_20321)
-EnumDestructablesInRectAll(gg_rct_Start13, Trig_Victory13_Func001Func002A)
-else
-end
+    if (Trig_Victory13_Func001C()) then
+        KillDestructable(gg_dest_B00B_20321)
+        EnumDestructablesInRectAll(gg_rct_Start13, Trig_Victory13_Func001Func002A)
+    else
+    end
 end
 
 function InitTrig_Victory13()
-gg_trg_Victory13 = CreateTrigger()
-TriggerRegisterDeathEvent(gg_trg_Victory13, gg_dest_B00D_20363)
-TriggerRegisterDeathEvent(gg_trg_Victory13, gg_dest_B00D_20366)
-TriggerRegisterDeathEvent(gg_trg_Victory13, gg_dest_B00D_20367)
-TriggerRegisterDeathEvent(gg_trg_Victory13, gg_dest_B00D_20368)
-TriggerRegisterDeathEvent(gg_trg_Victory13, gg_dest_B00D_20365)
-TriggerRegisterDeathEvent(gg_trg_Victory13, gg_dest_B00D_20364)
-TriggerAddAction(gg_trg_Victory13, Trig_Victory13_Actions)
+    gg_trg_Victory13 = CreateTrigger()
+    TriggerRegisterDeathEvent(gg_trg_Victory13, gg_dest_B00D_20363)
+    TriggerRegisterDeathEvent(gg_trg_Victory13, gg_dest_B00D_20366)
+    TriggerRegisterDeathEvent(gg_trg_Victory13, gg_dest_B00D_20367)
+    TriggerRegisterDeathEvent(gg_trg_Victory13, gg_dest_B00D_20368)
+    TriggerRegisterDeathEvent(gg_trg_Victory13, gg_dest_B00D_20365)
+    TriggerRegisterDeathEvent(gg_trg_Victory13, gg_dest_B00D_20364)
+    TriggerAddAction(gg_trg_Victory13, Trig_Victory13_Actions)
 end
 
 function Trig_ExitFrom13_Func002C()
-if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-return false
-end
-if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00B_20321) == true)) then
-return false
-end
-return true
+    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+        return false
+    end
+    if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00B_20321) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_ExitFrom13_Conditions()
-if (not Trig_ExitFrom13_Func002C()) then
-return false
-end
-return true
+    if (not Trig_ExitFrom13_Func002C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_ExitFrom13_Actions()
-    SetUnitAnimationByIndex(udg_HERO, 25)
-TriggerSleepAction(0.30)
-SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_EnterBoss))
-    UnitStartFallAnim(udg_HERO,1000)
-SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_BoundBoss)
-    HeroFixRespPos()
-    CreateEnteringFrame(nil, "Вся карта это Босс")
+        SetUnitAnimationByIndex(udg_HERO, 25)
+    TriggerSleepAction(0.30)
+    SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_EnterBoss))
+        UnitStartFallAnim(udg_HERO,1000)
+    SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_BoundBoss)
+        HeroFixRespPos()
+        CreateEnteringFrame(nil, "Вся карта это Босс")
 end
 
 function InitTrig_ExitFrom13()
-gg_trg_ExitFrom13 = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_ExitFrom13, gg_rct_Exit13)
-TriggerAddCondition(gg_trg_ExitFrom13, Condition(Trig_ExitFrom13_Conditions))
-TriggerAddAction(gg_trg_ExitFrom13, Trig_ExitFrom13_Actions)
+    gg_trg_ExitFrom13 = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_ExitFrom13, gg_rct_Exit13)
+    TriggerAddCondition(gg_trg_ExitFrom13, Condition(Trig_ExitFrom13_Conditions))
+    TriggerAddAction(gg_trg_ExitFrom13, Trig_ExitFrom13_Actions)
 end
 
 function Trig_Leave13Fix_Conditions()
-if (not (GetUnitTypeId(GetTriggerUnit()) == FourCC("h00R"))) then
-return false
-end
-return true
+    if (not (GetUnitTypeId(GetTriggerUnit()) == FourCC("h00R"))) then
+        return false
+    end
+    return true
 end
 
 function Trig_Leave13Fix_Actions()
-DisplayTextToForce(GetPlayersAll(), "TRIGSTR_878")
-TriggerSleepAction(2.00)
-    UnitStartFallAnim(GetTriggerUnit(),1000)
-SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Region13))
+    DisplayTextToForce(GetPlayersAll(), "TRIGSTR_878")
+    TriggerSleepAction(2.00)
+        UnitStartFallAnim(GetTriggerUnit(),1000)
+    SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Region13))
 end
 
 function InitTrig_Leave13Fix()
-gg_trg_Leave13Fix = CreateTrigger()
-TriggerRegisterLeaveRectSimple(gg_trg_Leave13Fix, gg_rct_Region13)
-TriggerAddCondition(gg_trg_Leave13Fix, Condition(Trig_Leave13Fix_Conditions))
-TriggerAddAction(gg_trg_Leave13Fix, Trig_Leave13Fix_Actions)
+    gg_trg_Leave13Fix = CreateTrigger()
+    TriggerRegisterLeaveRectSimple(gg_trg_Leave13Fix, gg_rct_Region13)
+    TriggerAddCondition(gg_trg_Leave13Fix, Condition(Trig_Leave13Fix_Conditions))
+    TriggerAddAction(gg_trg_Leave13Fix, Trig_Leave13Fix_Actions)
 end
 
 function Trig_InitRoom12_Func002C()
-if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-return false
-end
-return true
+    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_InitRoom12_Conditions()
-if (not Trig_InitRoom12_Func002C()) then
-return false
-end
-return true
+    if (not Trig_InitRoom12_Func002C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_InitRoom12_Func004Func001C()
-if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
-return false
-end
-return true
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+        return false
+    end
+    return true
 end
 
 function Trig_InitRoom12_Func004A()
-if (Trig_InitRoom12_Func004Func001C()) then
-        MoveDestructableDown(GetEnumDestructable(), -500, 5)
-else
-end
+    if (Trig_InitRoom12_Func004Func001C()) then
+                MoveDestructableDown(GetEnumDestructable(), -500, 5)
+    else
+    end
 end
 
 function Trig_InitRoom12_Actions()
-DisableTrigger(GetTriggeringTrigger())
-    HeroFixRespPos()
-EnumDestructablesInRectAll(gg_rct_Start12, Trig_InitRoom12_Func004A)
+    DisableTrigger(GetTriggeringTrigger())
+        HeroFixRespPos()
+    EnumDestructablesInRectAll(gg_rct_Start12, Trig_InitRoom12_Func004A)
 end
 
 function InitTrig_InitRoom12()
-gg_trg_InitRoom12 = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_InitRoom12, gg_rct_Enter12)
-TriggerAddCondition(gg_trg_InitRoom12, Condition(Trig_InitRoom12_Conditions))
-TriggerAddAction(gg_trg_InitRoom12, Trig_InitRoom12_Actions)
+    gg_trg_InitRoom12 = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_InitRoom12, gg_rct_Enter12)
+    TriggerAddCondition(gg_trg_InitRoom12, Condition(Trig_InitRoom12_Conditions))
+    TriggerAddAction(gg_trg_InitRoom12, Trig_InitRoom12_Actions)
 end
 
 function Trig_PlatformUp12_Func001Func002Func001C()
-if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
-return false
-end
-return true
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+        return false
+    end
+    return true
 end
 
 function Trig_PlatformUp12_Func001Func002A()
-if (Trig_PlatformUp12_Func001Func002Func001C()) then
-        MoveDestructableUp(GetEnumDestructable(), 500, 5)
-else
-end
+    if (Trig_PlatformUp12_Func001Func002Func001C()) then
+                MoveDestructableUp(GetEnumDestructable(), 500, 5)
+    else
+    end
 end
 
 function Trig_PlatformUp12_Func001Func005Func001C()
-if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
-return false
-end
-return true
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+        return false
+    end
+    return true
 end
 
 function Trig_PlatformUp12_Func001Func005A()
-if (Trig_PlatformUp12_Func001Func005Func001C()) then
-        MoveDestructableDown(GetEnumDestructable(), -500, 5)
-EnableTrigger(GetTriggeringTrigger())
-DestructableRestoreLife(gg_dest_B00E_19641, 100.00, true)
-DestructableRestoreLife(gg_dest_B00E_19642, 100.00, true)
-else
-end
+    if (Trig_PlatformUp12_Func001Func005Func001C()) then
+                MoveDestructableDown(GetEnumDestructable(), -500, 5)
+        EnableTrigger(GetTriggeringTrigger())
+        DestructableRestoreLife(gg_dest_B00E_19641, 100.00, true)
+        DestructableRestoreLife(gg_dest_B00E_19642, 100.00, true)
+    else
+    end
 end
 
 function Trig_PlatformUp12_Func001Func007C()
-return true
+    return true
 end
 
 function Trig_PlatformUp12_Func001Func008C()
-if (not (IsDestructableDeadBJ(gg_dest_B00E_19641) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00E_19642) == true)) then
-return false
-end
-return true
+    if (not (IsDestructableDeadBJ(gg_dest_B00E_19641) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00E_19642) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_PlatformUp12_Func001C()
-if (not Trig_PlatformUp12_Func001Func008C()) then
-return false
-end
-return true
+    if (not Trig_PlatformUp12_Func001Func008C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_PlatformUp12_Actions()
-if (Trig_PlatformUp12_Func001C()) then
-EnumDestructablesInRectAll(gg_rct_Start12, Trig_PlatformUp12_Func001Func002A)
-DisableTrigger(GetTriggeringTrigger())
-TriggerSleepAction(5.00)
-EnumDestructablesInRectAll(gg_rct_Start12, Trig_PlatformUp12_Func001Func005A)
-else
-TriggerSleepAction(0.50)
-if (Trig_PlatformUp12_Func001Func007C()) then
-DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
-AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
-DestroyEffectBJ(GetLastCreatedEffectBJ())
-else
-end
-end
+    if (Trig_PlatformUp12_Func001C()) then
+        EnumDestructablesInRectAll(gg_rct_Start12, Trig_PlatformUp12_Func001Func002A)
+        DisableTrigger(GetTriggeringTrigger())
+        TriggerSleepAction(5.00)
+        EnumDestructablesInRectAll(gg_rct_Start12, Trig_PlatformUp12_Func001Func005A)
+    else
+        TriggerSleepAction(0.50)
+        if (Trig_PlatformUp12_Func001Func007C()) then
+            DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
+            AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
+            DestroyEffectBJ(GetLastCreatedEffectBJ())
+        else
+        end
+    end
 end
 
 function InitTrig_PlatformUp12()
-gg_trg_PlatformUp12 = CreateTrigger()
-TriggerRegisterDeathEvent(gg_trg_PlatformUp12, gg_dest_B00E_19641)
-TriggerRegisterDeathEvent(gg_trg_PlatformUp12, gg_dest_B00E_19642)
-TriggerAddAction(gg_trg_PlatformUp12, Trig_PlatformUp12_Actions)
+    gg_trg_PlatformUp12 = CreateTrigger()
+    TriggerRegisterDeathEvent(gg_trg_PlatformUp12, gg_dest_B00E_19641)
+    TriggerRegisterDeathEvent(gg_trg_PlatformUp12, gg_dest_B00E_19642)
+    TriggerAddAction(gg_trg_PlatformUp12, Trig_PlatformUp12_Actions)
 end
 
 function Trig_Single12_Actions()
-TriggerSleepAction(2.00)
-DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
-AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
-DestroyEffectBJ(GetLastCreatedEffectBJ())
+    TriggerSleepAction(2.00)
+    DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
+    AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
+    DestroyEffectBJ(GetLastCreatedEffectBJ())
 end
 
 function InitTrig_Single12()
-gg_trg_Single12 = CreateTrigger()
-TriggerRegisterDeathEvent(gg_trg_Single12, gg_dest_B00E_19723)
-TriggerAddAction(gg_trg_Single12, Trig_Single12_Actions)
+    gg_trg_Single12 = CreateTrigger()
+    TriggerRegisterDeathEvent(gg_trg_Single12, gg_dest_B00E_19723)
+    TriggerAddAction(gg_trg_Single12, Trig_Single12_Actions)
 end
 
 function Trig_Victory12_Func001Func002C()
-if (not (IsDestructableDeadBJ(gg_dest_B00D_19707) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00E_19723) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00E_19641) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00E_19642) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00D_19706) == true)) then
-return false
-end
-return true
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_19707) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00E_19723) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00E_19641) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00E_19642) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_19706) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_Victory12_Func001C()
-if (not Trig_Victory12_Func001Func002C()) then
-return false
-end
-return true
+    if (not Trig_Victory12_Func001Func002C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_Victory12_Actions()
-if (Trig_Victory12_Func001C()) then
-KillDestructable(gg_dest_B00B_19643)
-else
-end
+    if (Trig_Victory12_Func001C()) then
+        KillDestructable(gg_dest_B00B_19643)
+    else
+    end
 end
 
 function InitTrig_Victory12()
-gg_trg_Victory12 = CreateTrigger()
-TriggerRegisterDeathEvent(gg_trg_Victory12, gg_dest_B00D_19707)
-TriggerRegisterDeathEvent(gg_trg_Victory12, gg_dest_B00E_19723)
-TriggerRegisterDeathEvent(gg_trg_Victory12, gg_dest_B00E_19641)
-TriggerRegisterDeathEvent(gg_trg_Victory12, gg_dest_B00E_19642)
-TriggerRegisterDeathEvent(gg_trg_Victory12, gg_dest_B00D_19706)
-TriggerAddAction(gg_trg_Victory12, Trig_Victory12_Actions)
+    gg_trg_Victory12 = CreateTrigger()
+    TriggerRegisterDeathEvent(gg_trg_Victory12, gg_dest_B00D_19707)
+    TriggerRegisterDeathEvent(gg_trg_Victory12, gg_dest_B00E_19723)
+    TriggerRegisterDeathEvent(gg_trg_Victory12, gg_dest_B00E_19641)
+    TriggerRegisterDeathEvent(gg_trg_Victory12, gg_dest_B00E_19642)
+    TriggerRegisterDeathEvent(gg_trg_Victory12, gg_dest_B00D_19706)
+    TriggerAddAction(gg_trg_Victory12, Trig_Victory12_Actions)
 end
 
 function Trig_Restore12_Func003Func002C()
-if (not (IsDestructableDeadBJ(gg_dest_B00B_19643) == true)) then
-return false
-end
-return true
+    if (not (IsDestructableDeadBJ(gg_dest_B00B_19643) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_Restore12_Func003Func003C()
-if (not (IsDestructableDeadBJ(gg_dest_B00D_19707) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00D_19706) == true)) then
-return false
-end
-return true
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_19707) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_19706) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_Restore12_Func003C()
-if (not Trig_Restore12_Func003Func003C()) then
-return false
-end
-return true
+    if (not Trig_Restore12_Func003Func003C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_Restore12_Actions()
-if (Trig_Restore12_Func003C()) then
-else
-TriggerSleepAction(5.00)
-if (Trig_Restore12_Func003Func002C()) then
-else
-DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
-AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
-DestroyEffectBJ(GetLastCreatedEffectBJ())
-end
-end
+    if (Trig_Restore12_Func003C()) then
+    else
+        TriggerSleepAction(5.00)
+        if (Trig_Restore12_Func003Func002C()) then
+        else
+            DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
+            AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
+            DestroyEffectBJ(GetLastCreatedEffectBJ())
+        end
+    end
 end
 
 function InitTrig_Restore12()
-gg_trg_Restore12 = CreateTrigger()
-TriggerRegisterDeathEvent(gg_trg_Restore12, gg_dest_B00D_19707)
-TriggerRegisterDeathEvent(gg_trg_Restore12, gg_dest_B00D_19706)
-TriggerAddAction(gg_trg_Restore12, Trig_Restore12_Actions)
+    gg_trg_Restore12 = CreateTrigger()
+    TriggerRegisterDeathEvent(gg_trg_Restore12, gg_dest_B00D_19707)
+    TriggerRegisterDeathEvent(gg_trg_Restore12, gg_dest_B00D_19706)
+    TriggerAddAction(gg_trg_Restore12, Trig_Restore12_Actions)
 end
 
 function Trig_ExitFrom12_Func002C()
-if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00B_19643) == true)) then
-return false
-end
-if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
-return false
-end
-return true
+    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00B_19643) == true)) then
+        return false
+    end
+    if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
+        return false
+    end
+    return true
 end
 
 function Trig_ExitFrom12_Conditions()
-if (not Trig_ExitFrom12_Func002C()) then
-return false
-end
-return true
+    if (not Trig_ExitFrom12_Func002C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_ExitFrom12_Actions()
-    SetUnitAnimationByIndex(udg_HERO, 25)
-TriggerSleepAction(0.30)
-SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter13))
-    UnitStartFallAnim(udg_HERO,1000)
-SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound13)
-    HeroFixRespPos()
-    CreateEnteringFrame(nil, "Вся карта это холодильник")
+        SetUnitAnimationByIndex(udg_HERO, 25)
+    TriggerSleepAction(0.30)
+    SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter13))
+        UnitStartFallAnim(udg_HERO,1000)
+    SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound13)
+        HeroFixRespPos()
+        CreateEnteringFrame(nil, "Вся карта это холодильник")
 end
 
 function InitTrig_ExitFrom12()
-gg_trg_ExitFrom12 = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_ExitFrom12, gg_rct_Exit12)
-TriggerAddCondition(gg_trg_ExitFrom12, Condition(Trig_ExitFrom12_Conditions))
-TriggerAddAction(gg_trg_ExitFrom12, Trig_ExitFrom12_Actions)
+    gg_trg_ExitFrom12 = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_ExitFrom12, gg_rct_Exit12)
+    TriggerAddCondition(gg_trg_ExitFrom12, Condition(Trig_ExitFrom12_Conditions))
+    TriggerAddAction(gg_trg_ExitFrom12, Trig_ExitFrom12_Actions)
 end
 
 function Trig_Patrol12_Actions()
-UnitAddAbilityBJ(FourCC("A004"), gg_unit_opeo_0264)
-IssuePointOrderLocBJ(gg_unit_opeo_0264, "patrol", GetRectCenter(gg_rct_Patrol12))
+    UnitAddAbilityBJ(FourCC("A004"), gg_unit_opeo_0264)
+    IssuePointOrderLocBJ(gg_unit_opeo_0264, "patrol", GetRectCenter(gg_rct_Patrol12))
 end
 
 function InitTrig_Patrol12()
-gg_trg_Patrol12 = CreateTrigger()
-TriggerAddAction(gg_trg_Patrol12, Trig_Patrol12_Actions)
+    gg_trg_Patrol12 = CreateTrigger()
+    TriggerAddAction(gg_trg_Patrol12, Trig_Patrol12_Actions)
 end
 
 function Trig_Button1101_Func001Func001C()
-if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
-return false
-end
-return true
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+        return false
+    end
+    return true
 end
 
 function Trig_Button1101_Func001A()
-if (Trig_Button1101_Func001Func001C()) then
-        MoveDestructableUp(GetEnumDestructable(), 500, 5)
-else
-end
+    if (Trig_Button1101_Func001Func001C()) then
+                MoveDestructableUp(GetEnumDestructable(), 500, 5)
+    else
+    end
 end
 
 function Trig_Button1101_Func002Func001C()
-if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
-return false
-end
-return true
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+        return false
+    end
+    return true
 end
 
 function Trig_Button1101_Func002A()
-if (Trig_Button1101_Func002Func001C()) then
-        MoveDestructableUp(GetEnumDestructable(), 500, 5)
-else
-end
+    if (Trig_Button1101_Func002Func001C()) then
+                MoveDestructableUp(GetEnumDestructable(), 500, 5)
+    else
+    end
 end
 
 function Trig_Button1101_Func003Func001C()
-if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
-return false
-end
-return true
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+        return false
+    end
+    return true
 end
 
 function Trig_Button1101_Func003A()
-if (Trig_Button1101_Func003Func001C()) then
-        MoveDestructableUp(GetEnumDestructable(), 500, 5)
-else
-end
+    if (Trig_Button1101_Func003Func001C()) then
+                MoveDestructableUp(GetEnumDestructable(), 500, 5)
+    else
+    end
 end
 
 function Trig_Button1101_Func004Func001C()
-if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
-return false
-end
-return true
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+        return false
+    end
+    return true
 end
 
 function Trig_Button1101_Func004A()
-if (Trig_Button1101_Func004Func001C()) then
-        MoveDestructableUp(GetEnumDestructable(), 500, 5)
-else
-end
+    if (Trig_Button1101_Func004Func001C()) then
+                MoveDestructableUp(GetEnumDestructable(), 500, 5)
+    else
+    end
 end
 
 function Trig_Button1101_Func005Func001C()
-if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
-return false
-end
-return true
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+        return false
+    end
+    return true
 end
 
 function Trig_Button1101_Func005A()
-if (Trig_Button1101_Func005Func001C()) then
-        MoveDestructableUp(GetEnumDestructable(), 500, 5)
-else
-end
+    if (Trig_Button1101_Func005Func001C()) then
+                MoveDestructableUp(GetEnumDestructable(), 500, 5)
+    else
+    end
 end
 
 function Trig_Button1101_Func007Func001C()
-if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
-return false
-end
-return true
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+        return false
+    end
+    return true
 end
 
 function Trig_Button1101_Func007A()
-if (Trig_Button1101_Func007Func001C()) then
-        MoveDestructableDown(GetEnumDestructable(), -500, 5)
-else
-end
+    if (Trig_Button1101_Func007Func001C()) then
+                MoveDestructableDown(GetEnumDestructable(), -500, 5)
+    else
+    end
 end
 
 function Trig_Button1101_Func008Func001C()
-if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
-return false
-end
-return true
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+        return false
+    end
+    return true
 end
 
 function Trig_Button1101_Func008A()
-if (Trig_Button1101_Func008Func001C()) then
-        MoveDestructableDown(GetEnumDestructable(), -500, 5)
-else
-end
+    if (Trig_Button1101_Func008Func001C()) then
+                MoveDestructableDown(GetEnumDestructable(), -500, 5)
+    else
+    end
 end
 
 function Trig_Button1101_Func009Func001C()
-if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
-return false
-end
-return true
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+        return false
+    end
+    return true
 end
 
 function Trig_Button1101_Func009A()
-if (Trig_Button1101_Func009Func001C()) then
-        MoveDestructableDown(GetEnumDestructable(), -500, 5)
-else
-end
+    if (Trig_Button1101_Func009Func001C()) then
+                MoveDestructableDown(GetEnumDestructable(), -500, 5)
+    else
+    end
 end
 
 function Trig_Button1101_Func010Func001C()
-if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
-return false
-end
-return true
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+        return false
+    end
+    return true
 end
 
 function Trig_Button1101_Func010A()
-if (Trig_Button1101_Func010Func001C()) then
-        MoveDestructableDown(GetEnumDestructable(), -500, 5)
-else
-end
+    if (Trig_Button1101_Func010Func001C()) then
+                MoveDestructableDown(GetEnumDestructable(), -500, 5)
+    else
+    end
 end
 
 function Trig_Button1101_Func011Func001C()
-if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
-return false
-end
-return true
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+        return false
+    end
+    return true
 end
 
 function Trig_Button1101_Func011A()
-if (Trig_Button1101_Func011Func001C()) then
-        MoveDestructableDown(GetEnumDestructable(), -500, 5)
-else
-end
+    if (Trig_Button1101_Func011Func001C()) then
+                MoveDestructableDown(GetEnumDestructable(), -500, 5)
+    else
+    end
 end
 
 function Trig_Button1101_Actions()
-EnumDestructablesInRectAll(gg_rct_R11B1_0, Trig_Button1101_Func001A)
-EnumDestructablesInRectAll(gg_rct_R11B1_1, Trig_Button1101_Func002A)
-EnumDestructablesInRectAll(gg_rct_R11B1_2, Trig_Button1101_Func003A)
-EnumDestructablesInRectAll(gg_rct_R11B1_3, Trig_Button1101_Func004A)
-EnumDestructablesInRectAll(gg_rct_R11B1_4, Trig_Button1101_Func005A)
-TriggerSleepAction(5.00)
-EnumDestructablesInRectAll(gg_rct_R11B1_0, Trig_Button1101_Func007A)
-EnumDestructablesInRectAll(gg_rct_R11B1_1, Trig_Button1101_Func008A)
-EnumDestructablesInRectAll(gg_rct_R11B1_2, Trig_Button1101_Func009A)
-EnumDestructablesInRectAll(gg_rct_R11B1_3, Trig_Button1101_Func010A)
-EnumDestructablesInRectAll(gg_rct_R11B1_4, Trig_Button1101_Func011A)
+    EnumDestructablesInRectAll(gg_rct_R11B1_0, Trig_Button1101_Func001A)
+    EnumDestructablesInRectAll(gg_rct_R11B1_1, Trig_Button1101_Func002A)
+    EnumDestructablesInRectAll(gg_rct_R11B1_2, Trig_Button1101_Func003A)
+    EnumDestructablesInRectAll(gg_rct_R11B1_3, Trig_Button1101_Func004A)
+    EnumDestructablesInRectAll(gg_rct_R11B1_4, Trig_Button1101_Func005A)
+    TriggerSleepAction(5.00)
+    EnumDestructablesInRectAll(gg_rct_R11B1_0, Trig_Button1101_Func007A)
+    EnumDestructablesInRectAll(gg_rct_R11B1_1, Trig_Button1101_Func008A)
+    EnumDestructablesInRectAll(gg_rct_R11B1_2, Trig_Button1101_Func009A)
+    EnumDestructablesInRectAll(gg_rct_R11B1_3, Trig_Button1101_Func010A)
+    EnumDestructablesInRectAll(gg_rct_R11B1_4, Trig_Button1101_Func011A)
 end
 
 function InitTrig_Button1101()
-gg_trg_Button1101 = CreateTrigger()
-DisableTrigger(gg_trg_Button1101)
-TriggerRegisterDeathEvent(gg_trg_Button1101, gg_dest_DTfx_17980)
-TriggerAddAction(gg_trg_Button1101, Trig_Button1101_Actions)
+    gg_trg_Button1101 = CreateTrigger()
+    DisableTrigger(gg_trg_Button1101)
+    TriggerRegisterDeathEvent(gg_trg_Button1101, gg_dest_DTfx_17980)
+    TriggerAddAction(gg_trg_Button1101, Trig_Button1101_Actions)
 end
 
 function Trig_Button1102_Func001Func001C()
-if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
-return false
-end
-return true
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+        return false
+    end
+    return true
 end
 
 function Trig_Button1102_Func001A()
-if (Trig_Button1102_Func001Func001C()) then
-        MoveDestructableUp(GetEnumDestructable(), 500, 5)
-else
-end
+    if (Trig_Button1102_Func001Func001C()) then
+                MoveDestructableUp(GetEnumDestructable(), 500, 5)
+    else
+    end
 end
 
 function Trig_Button1102_Func002Func001C()
-if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
-return false
-end
-return true
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+        return false
+    end
+    return true
 end
 
 function Trig_Button1102_Func002A()
-if (Trig_Button1102_Func002Func001C()) then
-        MoveDestructableUp(GetEnumDestructable(), 500, 5)
-else
-end
+    if (Trig_Button1102_Func002Func001C()) then
+                MoveDestructableUp(GetEnumDestructable(), 500, 5)
+    else
+    end
 end
 
 function Trig_Button1102_Func004Func001C()
-if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
-return false
-end
-return true
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+        return false
+    end
+    return true
 end
 
 function Trig_Button1102_Func004A()
-if (Trig_Button1102_Func004Func001C()) then
-        MoveDestructableDown(GetEnumDestructable(), -500, 5)
-else
-end
+    if (Trig_Button1102_Func004Func001C()) then
+                MoveDestructableDown(GetEnumDestructable(), -500, 5)
+    else
+    end
 end
 
 function Trig_Button1102_Func005Func001C()
-if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
-return false
-end
-return true
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+        return false
+    end
+    return true
 end
 
 function Trig_Button1102_Func005A()
-if (Trig_Button1102_Func005Func001C()) then
-        MoveDestructableDown(GetEnumDestructable(), -500, 5)
-else
-end
+    if (Trig_Button1102_Func005Func001C()) then
+                MoveDestructableDown(GetEnumDestructable(), -500, 5)
+    else
+    end
 end
 
 function Trig_Button1102_Actions()
-EnumDestructablesInRectAll(gg_rct_R11B2_0, Trig_Button1102_Func001A)
-EnumDestructablesInRectAll(gg_rct_R11B2_1, Trig_Button1102_Func002A)
-TriggerSleepAction(5.00)
-EnumDestructablesInRectAll(gg_rct_R11B2_0, Trig_Button1102_Func004A)
-EnumDestructablesInRectAll(gg_rct_R11B2_1, Trig_Button1102_Func005A)
+    EnumDestructablesInRectAll(gg_rct_R11B2_0, Trig_Button1102_Func001A)
+    EnumDestructablesInRectAll(gg_rct_R11B2_1, Trig_Button1102_Func002A)
+    TriggerSleepAction(5.00)
+    EnumDestructablesInRectAll(gg_rct_R11B2_0, Trig_Button1102_Func004A)
+    EnumDestructablesInRectAll(gg_rct_R11B2_1, Trig_Button1102_Func005A)
 end
 
 function InitTrig_Button1102()
-gg_trg_Button1102 = CreateTrigger()
-TriggerRegisterDeathEvent(gg_trg_Button1102, gg_dest_DTfx_16046)
-TriggerAddAction(gg_trg_Button1102, Trig_Button1102_Actions)
+    gg_trg_Button1102 = CreateTrigger()
+    TriggerRegisterDeathEvent(gg_trg_Button1102, gg_dest_DTfx_16046)
+    TriggerAddAction(gg_trg_Button1102, Trig_Button1102_Actions)
 end
 
 function Trig_Button1103_Func001Func001C()
-if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
-return false
-end
-return true
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+        return false
+    end
+    return true
 end
 
 function Trig_Button1103_Func001A()
-if (Trig_Button1103_Func001Func001C()) then
-        MoveDestructableUp(GetEnumDestructable(), 500, 5)
-else
-end
+    if (Trig_Button1103_Func001Func001C()) then
+                MoveDestructableUp(GetEnumDestructable(), 500, 5)
+    else
+    end
 end
 
 function Trig_Button1103_Func002Func001C()
-if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
-return false
-end
-return true
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+        return false
+    end
+    return true
 end
 
 function Trig_Button1103_Func002A()
-if (Trig_Button1103_Func002Func001C()) then
-        MoveDestructableUp(GetEnumDestructable(), 500, 5)
-else
-end
+    if (Trig_Button1103_Func002Func001C()) then
+                MoveDestructableUp(GetEnumDestructable(), 500, 5)
+    else
+    end
 end
 
 function Trig_Button1103_Func004Func001C()
-if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
-return false
-end
-return true
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+        return false
+    end
+    return true
 end
 
 function Trig_Button1103_Func004A()
-if (Trig_Button1103_Func004Func001C()) then
-        MoveDestructableDown(GetEnumDestructable(), -500, 5)
-else
-end
+    if (Trig_Button1103_Func004Func001C()) then
+                MoveDestructableDown(GetEnumDestructable(), -500, 5)
+    else
+    end
 end
 
 function Trig_Button1103_Func005Func001C()
-if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
-return false
-end
-return true
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+        return false
+    end
+    return true
 end
 
 function Trig_Button1103_Func005A()
-if (Trig_Button1103_Func005Func001C()) then
-        MoveDestructableDown(GetEnumDestructable(), -500, 5)
-else
-end
+    if (Trig_Button1103_Func005Func001C()) then
+                MoveDestructableDown(GetEnumDestructable(), -500, 5)
+    else
+    end
 end
 
 function Trig_Button1103_Actions()
-EnumDestructablesInRectAll(gg_rct_R11B3_0, Trig_Button1103_Func001A)
-EnumDestructablesInRectAll(gg_rct_R11B3_1, Trig_Button1103_Func002A)
-TriggerSleepAction(5.00)
-EnumDestructablesInRectAll(gg_rct_R11B3_0, Trig_Button1103_Func004A)
-EnumDestructablesInRectAll(gg_rct_R11B3_1, Trig_Button1103_Func005A)
+    EnumDestructablesInRectAll(gg_rct_R11B3_0, Trig_Button1103_Func001A)
+    EnumDestructablesInRectAll(gg_rct_R11B3_1, Trig_Button1103_Func002A)
+    TriggerSleepAction(5.00)
+    EnumDestructablesInRectAll(gg_rct_R11B3_0, Trig_Button1103_Func004A)
+    EnumDestructablesInRectAll(gg_rct_R11B3_1, Trig_Button1103_Func005A)
 end
 
 function InitTrig_Button1103()
-gg_trg_Button1103 = CreateTrigger()
-TriggerRegisterDeathEvent(gg_trg_Button1103, gg_dest_DTfx_16051)
-TriggerAddAction(gg_trg_Button1103, Trig_Button1103_Actions)
+    gg_trg_Button1103 = CreateTrigger()
+    TriggerRegisterDeathEvent(gg_trg_Button1103, gg_dest_DTfx_16051)
+    TriggerAddAction(gg_trg_Button1103, Trig_Button1103_Actions)
 end
 
 function Trig_Button1101Restore_Actions()
-TriggerSleepAction(8.00)
-DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
-AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
-DestroyEffectBJ(GetLastCreatedEffectBJ())
+    TriggerSleepAction(8.00)
+    DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
+    AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
+    DestroyEffectBJ(GetLastCreatedEffectBJ())
 end
 
 function InitTrig_Button1101Restore()
-gg_trg_Button1101Restore = CreateTrigger()
-TriggerRegisterDeathEvent(gg_trg_Button1101Restore, gg_dest_DTfx_17980)
-TriggerAddAction(gg_trg_Button1101Restore, Trig_Button1101Restore_Actions)
+    gg_trg_Button1101Restore = CreateTrigger()
+    TriggerRegisterDeathEvent(gg_trg_Button1101Restore, gg_dest_DTfx_17980)
+    TriggerAddAction(gg_trg_Button1101Restore, Trig_Button1101Restore_Actions)
 end
 
 function Trig_Button1102Restore_Actions()
-TriggerSleepAction(8.00)
-DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
-AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
-DestroyEffectBJ(GetLastCreatedEffectBJ())
+    TriggerSleepAction(8.00)
+    DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
+    AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
+    DestroyEffectBJ(GetLastCreatedEffectBJ())
 end
 
 function InitTrig_Button1102Restore()
-gg_trg_Button1102Restore = CreateTrigger()
-TriggerRegisterDeathEvent(gg_trg_Button1102Restore, gg_dest_DTfx_16046)
-TriggerAddAction(gg_trg_Button1102Restore, Trig_Button1102Restore_Actions)
+    gg_trg_Button1102Restore = CreateTrigger()
+    TriggerRegisterDeathEvent(gg_trg_Button1102Restore, gg_dest_DTfx_16046)
+    TriggerAddAction(gg_trg_Button1102Restore, Trig_Button1102Restore_Actions)
 end
 
 function Trig_Button1103Restore_Actions()
-TriggerSleepAction(8.00)
-DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
-AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
-DestroyEffectBJ(GetLastCreatedEffectBJ())
+    TriggerSleepAction(8.00)
+    DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
+    AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
+    DestroyEffectBJ(GetLastCreatedEffectBJ())
 end
 
 function InitTrig_Button1103Restore()
-gg_trg_Button1103Restore = CreateTrigger()
-TriggerRegisterDeathEvent(gg_trg_Button1103Restore, gg_dest_DTfx_16051)
-TriggerAddAction(gg_trg_Button1103Restore, Trig_Button1103Restore_Actions)
+    gg_trg_Button1103Restore = CreateTrigger()
+    TriggerRegisterDeathEvent(gg_trg_Button1103Restore, gg_dest_DTfx_16051)
+    TriggerAddAction(gg_trg_Button1103Restore, Trig_Button1103Restore_Actions)
 end
 
 function Trig_Victory_Actions()
-KillDestructable(gg_dest_B00B_16092)
-DisableTrigger(GetTriggeringTrigger())
+    KillDestructable(gg_dest_B00B_16092)
+    DisableTrigger(GetTriggeringTrigger())
 end
 
 function InitTrig_Victory()
-gg_trg_Victory = CreateTrigger()
-TriggerRegisterDeathEvent(gg_trg_Victory, gg_dest_DTfx_16051)
-TriggerAddAction(gg_trg_Victory, Trig_Victory_Actions)
+    gg_trg_Victory = CreateTrigger()
+    TriggerRegisterDeathEvent(gg_trg_Victory, gg_dest_DTfx_16051)
+    TriggerAddAction(gg_trg_Victory, Trig_Victory_Actions)
 end
 
 function Trig_CreateFoorInRoom11_Func003Func001C()
-if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
-return false
-end
-return true
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+        return false
+    end
+    return true
 end
 
 function Trig_CreateFoorInRoom11_Func003A()
-if (Trig_CreateFoorInRoom11_Func003Func001C()) then
-RemoveDestructable(GetEnumDestructable())
-else
-end
+    if (Trig_CreateFoorInRoom11_Func003Func001C()) then
+        RemoveDestructable(GetEnumDestructable())
+    else
+    end
 end
 
 function Trig_CreateFoorInRoom11_Func004Func001C()
-if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
-return false
-end
-return true
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+        return false
+    end
+    return true
 end
 
 function Trig_CreateFoorInRoom11_Func004A()
-if (Trig_CreateFoorInRoom11_Func004Func001C()) then
-RemoveDestructable(GetEnumDestructable())
-else
-end
+    if (Trig_CreateFoorInRoom11_Func004Func001C()) then
+        RemoveDestructable(GetEnumDestructable())
+    else
+    end
 end
 
 function Trig_CreateFoorInRoom11_Func005Func001C()
-if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
-return false
-end
-return true
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+        return false
+    end
+    return true
 end
 
 function Trig_CreateFoorInRoom11_Func005A()
-if (Trig_CreateFoorInRoom11_Func005Func001C()) then
-RemoveDestructable(GetEnumDestructable())
-else
-end
+    if (Trig_CreateFoorInRoom11_Func005Func001C()) then
+        RemoveDestructable(GetEnumDestructable())
+    else
+    end
 end
 
 function Trig_CreateFoorInRoom11_Func006Func001C()
-if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
-return false
-end
-return true
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+        return false
+    end
+    return true
 end
 
 function Trig_CreateFoorInRoom11_Func006A()
-if (Trig_CreateFoorInRoom11_Func006Func001C()) then
-RemoveDestructable(GetEnumDestructable())
-else
-end
+    if (Trig_CreateFoorInRoom11_Func006Func001C()) then
+        RemoveDestructable(GetEnumDestructable())
+    else
+    end
 end
 
 function Trig_CreateFoorInRoom11_Func007Func001C()
-if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
-return false
-end
-return true
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+        return false
+    end
+    return true
 end
 
 function Trig_CreateFoorInRoom11_Func007A()
-if (Trig_CreateFoorInRoom11_Func007Func001C()) then
-RemoveDestructable(GetEnumDestructable())
-else
-end
+    if (Trig_CreateFoorInRoom11_Func007Func001C()) then
+        RemoveDestructable(GetEnumDestructable())
+    else
+    end
 end
 
 function Trig_CreateFoorInRoom11_Func008Func001C()
-if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
-return false
-end
-return true
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+        return false
+    end
+    return true
 end
 
 function Trig_CreateFoorInRoom11_Func008A()
-if (Trig_CreateFoorInRoom11_Func008Func001C()) then
-RemoveDestructable(GetEnumDestructable())
-else
-end
+    if (Trig_CreateFoorInRoom11_Func008Func001C()) then
+        RemoveDestructable(GetEnumDestructable())
+    else
+    end
 end
 
 function Trig_CreateFoorInRoom11_Actions()
-SetDestructableOccluderHeight(gg_dest_DTfx_17980, 128)
-    CreateFloorInRoom(GetDestructableX(gg_dest_DTfx_17980), GetDestructableY(gg_dest_DTfx_17980),10,6)
-EnumDestructablesInRectAll(gg_rct_Start11_0, Trig_CreateFoorInRoom11_Func003A)
-EnumDestructablesInRectAll(gg_rct_Start11_1, Trig_CreateFoorInRoom11_Func004A)
-EnumDestructablesInRectAll(gg_rct_Start11_2, Trig_CreateFoorInRoom11_Func005A)
-EnumDestructablesInRectAll(gg_rct_Start11_3, Trig_CreateFoorInRoom11_Func006A)
-EnumDestructablesInRectAll(gg_rct_Start11_4, Trig_CreateFoorInRoom11_Func007A)
-EnumDestructablesInRectAll(gg_rct_Start11_5, Trig_CreateFoorInRoom11_Func008A)
+    SetDestructableOccluderHeight(gg_dest_DTfx_17980, 128)
+        CreateFloorInRoom(GetDestructableX(gg_dest_DTfx_17980), GetDestructableY(gg_dest_DTfx_17980),10,6)
+    EnumDestructablesInRectAll(gg_rct_Start11_0, Trig_CreateFoorInRoom11_Func003A)
+    EnumDestructablesInRectAll(gg_rct_Start11_1, Trig_CreateFoorInRoom11_Func004A)
+    EnumDestructablesInRectAll(gg_rct_Start11_2, Trig_CreateFoorInRoom11_Func005A)
+    EnumDestructablesInRectAll(gg_rct_Start11_3, Trig_CreateFoorInRoom11_Func006A)
+    EnumDestructablesInRectAll(gg_rct_Start11_4, Trig_CreateFoorInRoom11_Func007A)
+    EnumDestructablesInRectAll(gg_rct_Start11_5, Trig_CreateFoorInRoom11_Func008A)
 end
 
 function InitTrig_CreateFoorInRoom11()
-gg_trg_CreateFoorInRoom11 = CreateTrigger()
-TriggerRegisterTimerEventSingle(gg_trg_CreateFoorInRoom11, 1.00)
-TriggerAddAction(gg_trg_CreateFoorInRoom11, Trig_CreateFoorInRoom11_Actions)
+    gg_trg_CreateFoorInRoom11 = CreateTrigger()
+    TriggerRegisterTimerEventSingle(gg_trg_CreateFoorInRoom11, 1.00)
+    TriggerAddAction(gg_trg_CreateFoorInRoom11, Trig_CreateFoorInRoom11_Actions)
 end
 
 function Trig_InitRoom11DownForRegion_Conditions()
-if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-return false
-end
-return true
+    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_InitRoom11DownForRegion_Func006Func001C()
-if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
-return false
-end
-return true
+    if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+        return false
+    end
+    return true
 end
 
 function Trig_InitRoom11DownForRegion_Func006A()
-if (Trig_InitRoom11DownForRegion_Func006Func001C()) then
-        MoveDestructableDown(GetEnumDestructable(), -500, 5)
-else
-end
+    if (Trig_InitRoom11DownForRegion_Func006Func001C()) then
+                MoveDestructableDown(GetEnumDestructable(), -500, 5)
+    else
+    end
 end
 
 function Trig_InitRoom11DownForRegion_Actions()
-DisableTrigger(GetTriggeringTrigger())
-SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound11)
-    HeroFixRespPos()
-    CreateEnteringFrame(nil, "Вся карта это пол")
-EnumDestructablesInRectAll(gg_rct_Region11, Trig_InitRoom11DownForRegion_Func006A)
-TriggerSleepAction(5.00)
-EnableTrigger(gg_trg_Button1101)
+    DisableTrigger(GetTriggeringTrigger())
+    SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound11)
+        HeroFixRespPos()
+        CreateEnteringFrame(nil, "Вся карта это пол")
+    EnumDestructablesInRectAll(gg_rct_Region11, Trig_InitRoom11DownForRegion_Func006A)
+    TriggerSleepAction(5.00)
+    EnableTrigger(gg_trg_Button1101)
 end
 
 function InitTrig_InitRoom11DownForRegion()
-gg_trg_InitRoom11DownForRegion = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_InitRoom11DownForRegion, gg_rct_Enter11)
-TriggerAddCondition(gg_trg_InitRoom11DownForRegion, Condition(Trig_InitRoom11DownForRegion_Conditions))
-TriggerAddAction(gg_trg_InitRoom11DownForRegion, Trig_InitRoom11DownForRegion_Actions)
+    gg_trg_InitRoom11DownForRegion = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_InitRoom11DownForRegion, gg_rct_Enter11)
+    TriggerAddCondition(gg_trg_InitRoom11DownForRegion, Condition(Trig_InitRoom11DownForRegion_Conditions))
+    TriggerAddAction(gg_trg_InitRoom11DownForRegion, Trig_InitRoom11DownForRegion_Actions)
 end
 
 function Trig_ExitFrom11_Func003C()
-if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-return false
-end
-if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
-return false
-end
-return true
+    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+        return false
+    end
+    if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
+        return false
+    end
+    return true
 end
 
 function Trig_ExitFrom11_Conditions()
-if (not Trig_ExitFrom11_Func003C()) then
-return false
-end
-return true
+    if (not Trig_ExitFrom11_Func003C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_ExitFrom11_Actions()
-DisableTrigger(gg_trg_Out11)
-    SetUnitAnimationByIndex(udg_HERO, 25)
-TriggerSleepAction(0.30)
-SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter12))
-    UnitStartFallAnim(udg_HERO,1000)
-SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound12)
-    HeroFixRespPos()
+    DisableTrigger(gg_trg_Out11)
+        SetUnitAnimationByIndex(udg_HERO, 25)
+    TriggerSleepAction(0.30)
+    SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter12))
+        UnitStartFallAnim(udg_HERO,1000)
+    SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound12)
+        HeroFixRespPos()
 end
 
 function InitTrig_ExitFrom11()
-gg_trg_ExitFrom11 = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_ExitFrom11, gg_rct_Exit11)
-TriggerAddCondition(gg_trg_ExitFrom11, Condition(Trig_ExitFrom11_Conditions))
-TriggerAddAction(gg_trg_ExitFrom11, Trig_ExitFrom11_Actions)
+    gg_trg_ExitFrom11 = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_ExitFrom11, gg_rct_Exit11)
+    TriggerAddCondition(gg_trg_ExitFrom11, Condition(Trig_ExitFrom11_Conditions))
+    TriggerAddAction(gg_trg_ExitFrom11, Trig_ExitFrom11_Actions)
 end
 
 function Trig_Out11_Actions()
-KillUnit(GetTriggerUnit())
+    KillUnit(GetTriggerUnit())
 end
 
 function InitTrig_Out11()
-gg_trg_Out11 = CreateTrigger()
-TriggerRegisterLeaveRectSimple(gg_trg_Out11, gg_rct_Region11)
-TriggerAddAction(gg_trg_Out11, Trig_Out11_Actions)
+    gg_trg_Out11 = CreateTrigger()
+    TriggerRegisterLeaveRectSimple(gg_trg_Out11, gg_rct_Region11)
+    TriggerAddAction(gg_trg_Out11, Trig_Out11_Actions)
 end
 
 function Trig_ExitFrom10_Func002C()
-if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00B_17599) == true)) then
-return false
-end
-if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
-return false
-end
-return true
+    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00B_17599) == true)) then
+        return false
+    end
+    if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
+        return false
+    end
+    return true
 end
 
 function Trig_ExitFrom10_Conditions()
-if (not Trig_ExitFrom10_Func002C()) then
-return false
-end
-return true
+    if (not Trig_ExitFrom10_Func002C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_ExitFrom10_Actions()
-    SetUnitAnimationByIndex(udg_HERO, 25)
-TriggerSleepAction(0.30)
-SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter11))
-    UnitStartFallAnim(udg_HERO,1000)
-SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound11)
-    HeroFixRespPos()
-    CreateEnteringFrame(nil, "Вся карта это пол")
+        SetUnitAnimationByIndex(udg_HERO, 25)
+    TriggerSleepAction(0.30)
+    SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter11))
+        UnitStartFallAnim(udg_HERO,1000)
+    SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound11)
+        HeroFixRespPos()
+        CreateEnteringFrame(nil, "Вся карта это пол")
 end
 
 function InitTrig_ExitFrom10()
-gg_trg_ExitFrom10 = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_ExitFrom10, gg_rct_Exit10)
-TriggerAddCondition(gg_trg_ExitFrom10, Condition(Trig_ExitFrom10_Conditions))
-TriggerAddAction(gg_trg_ExitFrom10, Trig_ExitFrom10_Actions)
+    gg_trg_ExitFrom10 = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_ExitFrom10, gg_rct_Exit10)
+    TriggerAddCondition(gg_trg_ExitFrom10, Condition(Trig_ExitFrom10_Conditions))
+    TriggerAddAction(gg_trg_ExitFrom10, Trig_ExitFrom10_Actions)
 end
 
 function Trig_Victory10_Func001Func002C()
-if (not (IsDestructableDeadBJ(gg_dest_B00B_17599) == true)) then
-return false
-end
-return true
+    if (not (IsDestructableDeadBJ(gg_dest_B00B_17599) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_Victory10_Func001Func004C()
-if (not (IsDestructableDeadBJ(gg_dest_B00D_17596) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00D_17597) == true)) then
-return false
-end
-return true
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_17596) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_17597) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_Victory10_Func001C()
-if (not Trig_Victory10_Func001Func004C()) then
-return false
-end
-return true
+    if (not Trig_Victory10_Func001Func004C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_Victory10_Actions()
-if (Trig_Victory10_Func001C()) then
-KillDestructable(gg_dest_B00B_17599)
-else
-TriggerSleepAction(0.50)
-if (Trig_Victory10_Func001Func002C()) then
-else
-DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
-AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
-DestroyEffectBJ(GetLastCreatedEffectBJ())
-end
-end
+    if (Trig_Victory10_Func001C()) then
+        KillDestructable(gg_dest_B00B_17599)
+    else
+        TriggerSleepAction(0.50)
+        if (Trig_Victory10_Func001Func002C()) then
+        else
+            DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
+            AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
+            DestroyEffectBJ(GetLastCreatedEffectBJ())
+        end
+    end
 end
 
 function InitTrig_Victory10()
-gg_trg_Victory10 = CreateTrigger()
-TriggerRegisterDeathEvent(gg_trg_Victory10, gg_dest_B00D_17596)
-TriggerRegisterDeathEvent(gg_trg_Victory10, gg_dest_B00D_17597)
-TriggerAddAction(gg_trg_Victory10, Trig_Victory10_Actions)
+    gg_trg_Victory10 = CreateTrigger()
+    TriggerRegisterDeathEvent(gg_trg_Victory10, gg_dest_B00D_17596)
+    TriggerRegisterDeathEvent(gg_trg_Victory10, gg_dest_B00D_17597)
+    TriggerAddAction(gg_trg_Victory10, Trig_Victory10_Actions)
 end
 
 function Trig_Error10In_Func001C()
-if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-return false
-end
-if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
-return false
-end
-return true
+    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+        return false
+    end
+    if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
+        return false
+    end
+    return true
 end
 
 function Trig_Error10In_Conditions()
-if (not Trig_Error10In_Func001C()) then
-return false
-end
-return true
+    if (not Trig_Error10In_Func001C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_Error10In_Actions()
-TriggerSleepAction(1.00)
-KillUnit(GetTriggerUnit())
+    TriggerSleepAction(1.00)
+    KillUnit(GetTriggerUnit())
 end
 
 function InitTrig_Error10In()
-gg_trg_Error10In = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_Error10In, gg_rct_Error10)
-TriggerAddCondition(gg_trg_Error10In, Condition(Trig_Error10In_Conditions))
-TriggerAddAction(gg_trg_Error10In, Trig_Error10In_Actions)
+    gg_trg_Error10In = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_Error10In, gg_rct_Error10)
+    TriggerAddCondition(gg_trg_Error10In, Condition(Trig_Error10In_Conditions))
+    TriggerAddAction(gg_trg_Error10In, Trig_Error10In_Actions)
 end
 
 function Trig_Error10Out_Func001C()
-if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-return false
-end
-if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
-return false
-end
-return true
+    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+        return false
+    end
+    if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
+        return false
+    end
+    return true
 end
 
 function Trig_Error10Out_Conditions()
-if (not Trig_Error10Out_Func001C()) then
-return false
-end
-return true
+    if (not Trig_Error10Out_Func001C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_Error10Out_Actions()
-TriggerSleepAction(1.00)
-KillUnit(GetTriggerUnit())
+    TriggerSleepAction(1.00)
+    KillUnit(GetTriggerUnit())
 end
 
 function InitTrig_Error10Out()
-gg_trg_Error10Out = CreateTrigger()
-TriggerRegisterLeaveRectSimple(gg_trg_Error10Out, gg_rct_Error10Out)
-TriggerAddCondition(gg_trg_Error10Out, Condition(Trig_Error10Out_Conditions))
-TriggerAddAction(gg_trg_Error10Out, Trig_Error10Out_Actions)
+    gg_trg_Error10Out = CreateTrigger()
+    TriggerRegisterLeaveRectSimple(gg_trg_Error10Out, gg_rct_Error10Out)
+    TriggerAddCondition(gg_trg_Error10Out, Condition(Trig_Error10Out_Conditions))
+    TriggerAddAction(gg_trg_Error10Out, Trig_Error10Out_Actions)
 end
 
 function Trig_ExitFrom09_Func003C()
-if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00B_17533) == true)) then
-return false
-end
-if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
-return false
-end
-return true
+    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00B_17533) == true)) then
+        return false
+    end
+    if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
+        return false
+    end
+    return true
 end
 
 function Trig_ExitFrom09_Conditions()
-if (not Trig_ExitFrom09_Func003C()) then
-return false
-end
-return true
+    if (not Trig_ExitFrom09_Func003C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_ExitFrom09_Actions()
-    SetUnitAnimationByIndex(udg_HERO, 25)
-TriggerSleepAction(0.30)
-SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter10))
-    UnitStartFallAnim(udg_HERO,1000)
-SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound10)
-    HeroFixRespPos()
-    CreateEnteringFrame(nil, "Цепная реакция")
+        SetUnitAnimationByIndex(udg_HERO, 25)
+    TriggerSleepAction(0.30)
+    SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter10))
+        UnitStartFallAnim(udg_HERO,1000)
+    SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound10)
+        HeroFixRespPos()
+        CreateEnteringFrame(nil, "Цепная реакция")
 end
 
 function InitTrig_ExitFrom09()
-gg_trg_ExitFrom09 = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_ExitFrom09, gg_rct_Exit09)
-TriggerAddCondition(gg_trg_ExitFrom09, Condition(Trig_ExitFrom09_Conditions))
-TriggerAddAction(gg_trg_ExitFrom09, Trig_ExitFrom09_Actions)
+    gg_trg_ExitFrom09 = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_ExitFrom09, gg_rct_Exit09)
+    TriggerAddCondition(gg_trg_ExitFrom09, Condition(Trig_ExitFrom09_Conditions))
+    TriggerAddAction(gg_trg_ExitFrom09, Trig_ExitFrom09_Actions)
 end
 
 function Trig_InitRoom09_Func003C()
-if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-return false
-end
-return true
+    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_InitRoom09_Conditions()
-if (not Trig_InitRoom09_Func003C()) then
-return false
-end
-return true
+    if (not Trig_InitRoom09_Func003C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_InitRoom09_Actions()
-DisableTrigger(GetTriggeringTrigger())
-SetUnitColor(gg_unit_h00M_0257, PLAYER_COLOR_RED)
-    HeroFixRespPos()
-    StartBlackHole(gg_unit_h00M_0257)
+    DisableTrigger(GetTriggeringTrigger())
+    SetUnitColor(gg_unit_h00M_0257, PLAYER_COLOR_RED)
+        HeroFixRespPos()
+        StartBlackHole(gg_unit_h00M_0257)
 end
 
 function InitTrig_InitRoom09()
-gg_trg_InitRoom09 = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_InitRoom09, gg_rct_Enter09)
-TriggerAddCondition(gg_trg_InitRoom09, Condition(Trig_InitRoom09_Conditions))
-TriggerAddAction(gg_trg_InitRoom09, Trig_InitRoom09_Actions)
+    gg_trg_InitRoom09 = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_InitRoom09, gg_rct_Enter09)
+    TriggerAddCondition(gg_trg_InitRoom09, Condition(Trig_InitRoom09_Conditions))
+    TriggerAddAction(gg_trg_InitRoom09, Trig_InitRoom09_Actions)
 end
 
 function Trig_Victory09_Func001Func002C()
-if (not (IsDestructableDeadBJ(gg_dest_B00B_17533) == true)) then
-return false
-end
-return true
+    if (not (IsDestructableDeadBJ(gg_dest_B00B_17533) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_Victory09_Func001Func004C()
-if (not (IsDestructableDeadBJ(gg_dest_B00D_17530) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00D_17529) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00D_17532) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00D_17531) == true)) then
-return false
-end
-return true
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_17530) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_17529) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_17532) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_17531) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_Victory09_Func001C()
-if (not Trig_Victory09_Func001Func004C()) then
-return false
-end
-return true
+    if (not Trig_Victory09_Func001Func004C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_Victory09_Actions()
-if (Trig_Victory09_Func001C()) then
-KillDestructable(gg_dest_B00B_17533)
-else
-TriggerSleepAction(0.50)
-if (Trig_Victory09_Func001Func002C()) then
-else
-DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
-AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
-DestroyEffectBJ(GetLastCreatedEffectBJ())
-end
-end
+    if (Trig_Victory09_Func001C()) then
+        KillDestructable(gg_dest_B00B_17533)
+    else
+        TriggerSleepAction(0.50)
+        if (Trig_Victory09_Func001Func002C()) then
+        else
+            DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
+            AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
+            DestroyEffectBJ(GetLastCreatedEffectBJ())
+        end
+    end
 end
 
 function InitTrig_Victory09()
-gg_trg_Victory09 = CreateTrigger()
-TriggerRegisterDeathEvent(gg_trg_Victory09, gg_dest_B00D_17530)
-TriggerRegisterDeathEvent(gg_trg_Victory09, gg_dest_B00D_17529)
-TriggerRegisterDeathEvent(gg_trg_Victory09, gg_dest_B00D_17532)
-TriggerRegisterDeathEvent(gg_trg_Victory09, gg_dest_B00D_17531)
-TriggerAddAction(gg_trg_Victory09, Trig_Victory09_Actions)
+    gg_trg_Victory09 = CreateTrigger()
+    TriggerRegisterDeathEvent(gg_trg_Victory09, gg_dest_B00D_17530)
+    TriggerRegisterDeathEvent(gg_trg_Victory09, gg_dest_B00D_17529)
+    TriggerRegisterDeathEvent(gg_trg_Victory09, gg_dest_B00D_17532)
+    TriggerRegisterDeathEvent(gg_trg_Victory09, gg_dest_B00D_17531)
+    TriggerAddAction(gg_trg_Victory09, Trig_Victory09_Actions)
 end
 
 function Trig_OffHole_Func002Func004C()
-if (not (IsDestructableDeadBJ(gg_dest_B00B_17533) == true)) then
-return false
-end
-return true
+    if (not (IsDestructableDeadBJ(gg_dest_B00B_17533) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_OffHole_Func002C()
-if (not (IsDestructableDeadBJ(gg_dest_B00B_17533) == true)) then
-return false
-end
-return true
+    if (not (IsDestructableDeadBJ(gg_dest_B00B_17533) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_OffHole_Actions()
-udg_HoleIsWork = false
-if (Trig_OffHole_Func002C()) then
-else
-        FlyTimer(25)
-TriggerSleepAction(25.00)
-if (Trig_OffHole_Func002Func004C()) then
-else
-DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
-udg_HoleIsWork = true
-end
-end
+    udg_HoleIsWork = false
+    if (Trig_OffHole_Func002C()) then
+    else
+                FlyTimer(25)
+        TriggerSleepAction(25.00)
+        if (Trig_OffHole_Func002Func004C()) then
+        else
+            DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
+            udg_HoleIsWork = true
+        end
+    end
 end
 
 function InitTrig_OffHole()
-gg_trg_OffHole = CreateTrigger()
-TriggerRegisterDeathEvent(gg_trg_OffHole, gg_dest_B00F_17534)
-TriggerAddAction(gg_trg_OffHole, Trig_OffHole_Actions)
+    gg_trg_OffHole = CreateTrigger()
+    TriggerRegisterDeathEvent(gg_trg_OffHole, gg_dest_B00F_17534)
+    TriggerAddAction(gg_trg_OffHole, Trig_OffHole_Actions)
 end
 
 function Trig_InitCustomTraps_Func001Func001C()
-if (not (GetUnitTypeId(GetEnumUnit()) == FourCC("h000"))) then
-return false
-end
-return true
+    if (not (GetUnitTypeId(GetEnumUnit()) == FourCC("h000"))) then
+        return false
+    end
+    return true
 end
 
 function Trig_InitCustomTraps_Func001A()
-if (Trig_InitCustomTraps_Func001Func001C()) then
-        InitUnitBulletTrap(GetEnumUnit(), true)
-GroupAddUnitSimple(GetEnumUnit(), udg_Remove08)
-else
-end
+    if (Trig_InitCustomTraps_Func001Func001C()) then
+                InitUnitBulletTrap(GetEnumUnit(), true)
+        GroupAddUnitSimple(GetEnumUnit(), udg_Remove08)
+    else
+    end
 end
 
 function Trig_InitCustomTraps_Actions()
-ForGroupBJ(GetUnitsInRectAll(gg_rct_Region08), Trig_InitCustomTraps_Func001A)
+    ForGroupBJ(GetUnitsInRectAll(gg_rct_Region08), Trig_InitCustomTraps_Func001A)
 end
 
 function InitTrig_InitCustomTraps()
-gg_trg_InitCustomTraps = CreateTrigger()
-TriggerAddAction(gg_trg_InitCustomTraps, Trig_InitCustomTraps_Actions)
+    gg_trg_InitCustomTraps = CreateTrigger()
+    TriggerAddAction(gg_trg_InitCustomTraps, Trig_InitCustomTraps_Actions)
 end
 
 function Trig_ExitFrom08_Func003C()
-if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00B_17182) == true)) then
-return false
-end
-if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
-return false
-end
-return true
+    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00B_17182) == true)) then
+        return false
+    end
+    if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
+        return false
+    end
+    return true
 end
 
 function Trig_ExitFrom08_Conditions()
-if (not Trig_ExitFrom08_Func003C()) then
-return false
-end
-return true
+    if (not Trig_ExitFrom08_Func003C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_ExitFrom08_Actions()
-    SetUnitAnimationByIndex(udg_HERO, 25)
-TriggerSleepAction(0.30)
-SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter09))
-    UnitStartFallAnim(udg_HERO,1000)
-SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound09)
-    CreateEnteringFrame(nil, "Черная дыра")
-    HeroFixRespPos()
+        SetUnitAnimationByIndex(udg_HERO, 25)
+    TriggerSleepAction(0.30)
+    SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter09))
+        UnitStartFallAnim(udg_HERO,1000)
+    SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound09)
+        CreateEnteringFrame(nil, "Черная дыра")
+        HeroFixRespPos()
 end
 
 function InitTrig_ExitFrom08()
-gg_trg_ExitFrom08 = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_ExitFrom08, gg_rct_Exit08)
-TriggerAddCondition(gg_trg_ExitFrom08, Condition(Trig_ExitFrom08_Conditions))
-TriggerAddAction(gg_trg_ExitFrom08, Trig_ExitFrom08_Actions)
+    gg_trg_ExitFrom08 = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_ExitFrom08, gg_rct_Exit08)
+    TriggerAddCondition(gg_trg_ExitFrom08, Condition(Trig_ExitFrom08_Conditions))
+    TriggerAddAction(gg_trg_ExitFrom08, Trig_ExitFrom08_Actions)
 end
 
 function Trig_Resize08_Conditions()
-if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-return false
-end
-return true
+    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_Resize08_Actions()
-SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound08)
+    SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound08)
 end
 
 function InitTrig_Resize08()
-gg_trg_Resize08 = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_Resize08, gg_rct_ResizePlace08)
-TriggerAddCondition(gg_trg_Resize08, Condition(Trig_Resize08_Conditions))
-TriggerAddAction(gg_trg_Resize08, Trig_Resize08_Actions)
+    gg_trg_Resize08 = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_Resize08, gg_rct_ResizePlace08)
+    TriggerAddCondition(gg_trg_Resize08, Condition(Trig_Resize08_Conditions))
+    TriggerAddAction(gg_trg_Resize08, Trig_Resize08_Actions)
 end
 
 function Trig_Victory08_Func001Func002C()
-if (not (IsDestructableDeadBJ(gg_dest_B00B_17182) == true)) then
-return false
-end
-return true
+    if (not (IsDestructableDeadBJ(gg_dest_B00B_17182) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_Victory08_Func001Func004A()
-KillUnit(GetEnumUnit())
-ShowUnitHide(GetEnumUnit())
+    KillUnit(GetEnumUnit())
+    ShowUnitHide(GetEnumUnit())
 end
 
 function Trig_Victory08_Func001Func005C()
-if (not (IsDestructableDeadBJ(gg_dest_B00D_17155) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00D_17275) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00D_17276) == true)) then
-return false
-end
-return true
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_17155) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_17275) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_17276) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_Victory08_Func001C()
-if (not Trig_Victory08_Func001Func005C()) then
-return false
-end
-return true
+    if (not Trig_Victory08_Func001Func005C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_Victory08_Actions()
-if (Trig_Victory08_Func001C()) then
-KillDestructable(gg_dest_B00B_17182)
-ForGroupBJ(udg_Remove08, Trig_Victory08_Func001Func004A)
-else
-TriggerSleepAction(2.00)
-if (Trig_Victory08_Func001Func002C()) then
-else
-DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
-AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
-DestroyEffectBJ(GetLastCreatedEffectBJ())
-end
-end
+    if (Trig_Victory08_Func001C()) then
+        KillDestructable(gg_dest_B00B_17182)
+        ForGroupBJ(udg_Remove08, Trig_Victory08_Func001Func004A)
+    else
+        TriggerSleepAction(2.00)
+        if (Trig_Victory08_Func001Func002C()) then
+        else
+            DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
+            AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
+            DestroyEffectBJ(GetLastCreatedEffectBJ())
+        end
+    end
 end
 
 function InitTrig_Victory08()
-gg_trg_Victory08 = CreateTrigger()
-TriggerRegisterDeathEvent(gg_trg_Victory08, gg_dest_B00D_17155)
-TriggerRegisterDeathEvent(gg_trg_Victory08, gg_dest_B00D_17275)
-TriggerRegisterDeathEvent(gg_trg_Victory08, gg_dest_B00D_17276)
-TriggerAddAction(gg_trg_Victory08, Trig_Victory08_Actions)
+    gg_trg_Victory08 = CreateTrigger()
+    TriggerRegisterDeathEvent(gg_trg_Victory08, gg_dest_B00D_17155)
+    TriggerRegisterDeathEvent(gg_trg_Victory08, gg_dest_B00D_17275)
+    TriggerRegisterDeathEvent(gg_trg_Victory08, gg_dest_B00D_17276)
+    TriggerAddAction(gg_trg_Victory08, Trig_Victory08_Actions)
 end
 
 function Trig_ExitFrom07_Func003C()
-if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00B_16680) == true)) then
-return false
-end
-if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
-return false
-end
-return true
+    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00B_16680) == true)) then
+        return false
+    end
+    if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
+        return false
+    end
+    return true
 end
 
 function Trig_ExitFrom07_Conditions()
-if (not Trig_ExitFrom07_Func003C()) then
-return false
-end
-return true
+    if (not Trig_ExitFrom07_Func003C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_ExitFrom07_Actions()
-    SetUnitAnimationByIndex(udg_HERO, 25)
-TriggerSleepAction(0.30)
-SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter08))
-    UnitStartFallAnim(udg_HERO,1000)
-SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound08Start)
-    HeroFixRespPos()
-    CreateEnteringFrame(nil, "Синие псы")
-TriggerExecute(gg_trg_InitCustomTraps)
+        SetUnitAnimationByIndex(udg_HERO, 25)
+    TriggerSleepAction(0.30)
+    SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter08))
+        UnitStartFallAnim(udg_HERO,1000)
+    SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound08Start)
+        HeroFixRespPos()
+        CreateEnteringFrame(nil, "Синие псы")
+    TriggerExecute(gg_trg_InitCustomTraps)
 end
 
 function InitTrig_ExitFrom07()
-gg_trg_ExitFrom07 = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_ExitFrom07, gg_rct_Exit07)
-TriggerAddCondition(gg_trg_ExitFrom07, Condition(Trig_ExitFrom07_Conditions))
-TriggerAddAction(gg_trg_ExitFrom07, Trig_ExitFrom07_Actions)
+    gg_trg_ExitFrom07 = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_ExitFrom07, gg_rct_Exit07)
+    TriggerAddCondition(gg_trg_ExitFrom07, Condition(Trig_ExitFrom07_Conditions))
+    TriggerAddAction(gg_trg_ExitFrom07, Trig_ExitFrom07_Actions)
 end
 
 function Trig_InitOrders_Func007A()
-GroupAddUnitSimple(GetEnumUnit(), udg_SpikeUnitsForRemove)
+    GroupAddUnitSimple(GetEnumUnit(), udg_SpikeUnitsForRemove)
 end
 
 function Trig_InitOrders_Actions()
-udg_Buttons[1] = gg_dest_B00D_16684
-udg_Buttons[2] = gg_dest_B00D_16686
-udg_Buttons[3] = gg_dest_B00D_16699
-udg_Buttons[4] = gg_dest_B00D_16702
-udg_Buttons[5] = gg_dest_B00D_16685
-udg_Buttons[6] = gg_dest_B00D_16701
-ForGroupBJ(GetUnitsInRectAll(gg_rct_SpikesZone), Trig_InitOrders_Func007A)
+    udg_Buttons[1] = gg_dest_B00D_16684
+    udg_Buttons[2] = gg_dest_B00D_16686
+    udg_Buttons[3] = gg_dest_B00D_16699
+    udg_Buttons[4] = gg_dest_B00D_16702
+    udg_Buttons[5] = gg_dest_B00D_16685
+    udg_Buttons[6] = gg_dest_B00D_16701
+    ForGroupBJ(GetUnitsInRectAll(gg_rct_SpikesZone), Trig_InitOrders_Func007A)
 end
 
 function InitTrig_InitOrders()
-gg_trg_InitOrders = CreateTrigger()
-TriggerAddAction(gg_trg_InitOrders, Trig_InitOrders_Actions)
+    gg_trg_InitOrders = CreateTrigger()
+    TriggerAddAction(gg_trg_InitOrders, Trig_InitOrders_Actions)
 end
 
 function Trig_DieCHK_Func001Func008Func002A()
-KillUnit(GetEnumUnit())
+    KillUnit(GetEnumUnit())
 end
 
 function Trig_DieCHK_Func001Func008C()
-if (not (udg_CurrentOrder > 6)) then
-return false
-end
-return true
+    if (not (udg_CurrentOrder > 6)) then
+        return false
+    end
+    return true
 end
 
 function Trig_DieCHK_Func001C()
-if (not (GetDyingDestructable() == udg_Buttons[udg_CurrentOrder])) then
-return false
-end
-return true
+    if (not (GetDyingDestructable() == udg_Buttons[udg_CurrentOrder])) then
+        return false
+    end
+    return true
 end
 
 function Trig_DieCHK_Actions()
-if (Trig_DieCHK_Func001C()) then
-udg_CurrentOrder = (udg_CurrentOrder + 1)
-PlaySoundBJ(gg_snd_BattlenetDeath1A)
-if (Trig_DieCHK_Func001Func008C()) then
-KillDestructable(gg_dest_B00B_16680)
-ForGroupBJ(udg_SpikeUnitsForRemove, Trig_DieCHK_Func001Func008Func002A)
-DisableTrigger(GetTriggeringTrigger())
-return 
-else
-end
-else
-TriggerSleepAction(0.10)
-udg_CurrentOrder = 1
-AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
-DestroyEffectBJ(GetLastCreatedEffectBJ())
-TriggerExecute(gg_trg_ErrorClear)
-end
+    if (Trig_DieCHK_Func001C()) then
+        udg_CurrentOrder = (udg_CurrentOrder + 1)
+        PlaySoundBJ(gg_snd_BattlenetDeath1A)
+        if (Trig_DieCHK_Func001Func008C()) then
+            KillDestructable(gg_dest_B00B_16680)
+            ForGroupBJ(udg_SpikeUnitsForRemove, Trig_DieCHK_Func001Func008Func002A)
+            DisableTrigger(GetTriggeringTrigger())
+            return 
+        else
+        end
+    else
+        TriggerSleepAction(0.10)
+        udg_CurrentOrder = 1
+        AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
+        DestroyEffectBJ(GetLastCreatedEffectBJ())
+        TriggerExecute(gg_trg_ErrorClear)
+    end
 end
 
 function InitTrig_DieCHK()
-gg_trg_DieCHK = CreateTrigger()
-TriggerRegisterDeathEvent(gg_trg_DieCHK, gg_dest_B00D_16702)
-TriggerRegisterDeathEvent(gg_trg_DieCHK, gg_dest_B00D_16684)
-TriggerRegisterDeathEvent(gg_trg_DieCHK, gg_dest_B00D_16685)
-TriggerRegisterDeathEvent(gg_trg_DieCHK, gg_dest_B00D_16701)
-TriggerRegisterDeathEvent(gg_trg_DieCHK, gg_dest_B00D_16686)
-TriggerRegisterDeathEvent(gg_trg_DieCHK, gg_dest_B00D_16699)
-TriggerAddAction(gg_trg_DieCHK, Trig_DieCHK_Actions)
+    gg_trg_DieCHK = CreateTrigger()
+    TriggerRegisterDeathEvent(gg_trg_DieCHK, gg_dest_B00D_16702)
+    TriggerRegisterDeathEvent(gg_trg_DieCHK, gg_dest_B00D_16684)
+    TriggerRegisterDeathEvent(gg_trg_DieCHK, gg_dest_B00D_16685)
+    TriggerRegisterDeathEvent(gg_trg_DieCHK, gg_dest_B00D_16701)
+    TriggerRegisterDeathEvent(gg_trg_DieCHK, gg_dest_B00D_16686)
+    TriggerRegisterDeathEvent(gg_trg_DieCHK, gg_dest_B00D_16699)
+    TriggerAddAction(gg_trg_DieCHK, Trig_DieCHK_Actions)
 end
 
 function Trig_ErrorClear_Actions()
-DestructableRestoreLife(udg_Buttons[1], 100.00, true)
-DestructableRestoreLife(udg_Buttons[2], 100.00, true)
-DestructableRestoreLife(udg_Buttons[3], 100.00, true)
-DestructableRestoreLife(udg_Buttons[4], 100.00, true)
-DestructableRestoreLife(udg_Buttons[5], 100.00, true)
-DestructableRestoreLife(udg_Buttons[6], 100.00, true)
-PlaySoundBJ(gg_snd_Warning)
+    DestructableRestoreLife(udg_Buttons[1], 100.00, true)
+    DestructableRestoreLife(udg_Buttons[2], 100.00, true)
+    DestructableRestoreLife(udg_Buttons[3], 100.00, true)
+    DestructableRestoreLife(udg_Buttons[4], 100.00, true)
+    DestructableRestoreLife(udg_Buttons[5], 100.00, true)
+    DestructableRestoreLife(udg_Buttons[6], 100.00, true)
+    PlaySoundBJ(gg_snd_Warning)
 end
 
 function InitTrig_ErrorClear()
-gg_trg_ErrorClear = CreateTrigger()
-TriggerAddAction(gg_trg_ErrorClear, Trig_ErrorClear_Actions)
+    gg_trg_ErrorClear = CreateTrigger()
+    TriggerAddAction(gg_trg_ErrorClear, Trig_ErrorClear_Actions)
 end
 
 function Trig_ExitFrom06_Func003C()
-if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00B_16430) == true)) then
-return false
-end
-if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
-return false
-end
-return true
+    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00B_16430) == true)) then
+        return false
+    end
+    if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
+        return false
+    end
+    return true
 end
 
 function Trig_ExitFrom06_Conditions()
-if (not Trig_ExitFrom06_Func003C()) then
-return false
-end
-return true
+    if (not Trig_ExitFrom06_Func003C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_ExitFrom06_Actions()
-    SetUnitAnimationByIndex(udg_HERO, 25)
-TriggerSleepAction(0.30)
-SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter07))
-    UnitStartFallAnim(udg_HERO,1000)
-SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound07)
-    HeroFixRespPos()
-    CreateEnteringFrame(nil, "Вся карта это Шипы")
+        SetUnitAnimationByIndex(udg_HERO, 25)
+    TriggerSleepAction(0.30)
+    SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter07))
+        UnitStartFallAnim(udg_HERO,1000)
+    SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound07)
+        HeroFixRespPos()
+        CreateEnteringFrame(nil, "Вся карта это Шипы")
 end
 
 function InitTrig_ExitFrom06()
-gg_trg_ExitFrom06 = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_ExitFrom06, gg_rct_Exit06)
-TriggerAddCondition(gg_trg_ExitFrom06, Condition(Trig_ExitFrom06_Conditions))
-TriggerAddAction(gg_trg_ExitFrom06, Trig_ExitFrom06_Actions)
+    gg_trg_ExitFrom06 = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_ExitFrom06, gg_rct_Exit06)
+    TriggerAddCondition(gg_trg_ExitFrom06, Condition(Trig_ExitFrom06_Conditions))
+    TriggerAddAction(gg_trg_ExitFrom06, Trig_ExitFrom06_Actions)
 end
 
 function Trig_Victory06_Func001Func002C()
-if (not (IsDestructableDeadBJ(gg_dest_B00B_16430) == true)) then
-return false
-end
-return true
+    if (not (IsDestructableDeadBJ(gg_dest_B00B_16430) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_Victory06_Func001Func006C()
-if (not (IsDestructableDeadBJ(gg_dest_B00D_16421) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00D_16416) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00D_16427) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00D_16426) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00D_16599) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00D_16598) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00D_16596) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00D_16597) == true)) then
-return false
-end
-return true
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_16421) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_16416) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_16427) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_16426) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_16599) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_16598) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_16596) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_16597) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_Victory06_Func001C()
-if (not Trig_Victory06_Func001Func006C()) then
-return false
-end
-return true
+    if (not Trig_Victory06_Func001Func006C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_Victory06_Actions()
-if (Trig_Victory06_Func001C()) then
-KillDestructable(gg_dest_B00B_16430)
-KillUnit(gg_unit_u001_0395)
-KillUnit(gg_unit_u001_0396)
-else
-TriggerSleepAction(2.00)
-if (Trig_Victory06_Func001Func002C()) then
-else
-DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
-AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
-DestroyEffectBJ(GetLastCreatedEffectBJ())
-end
-end
+    if (Trig_Victory06_Func001C()) then
+        KillDestructable(gg_dest_B00B_16430)
+        KillUnit(gg_unit_u001_0395)
+        KillUnit(gg_unit_u001_0396)
+    else
+        TriggerSleepAction(2.00)
+        if (Trig_Victory06_Func001Func002C()) then
+        else
+            DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
+            AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
+            DestroyEffectBJ(GetLastCreatedEffectBJ())
+        end
+    end
 end
 
 function InitTrig_Victory06()
-gg_trg_Victory06 = CreateTrigger()
-TriggerRegisterDeathEvent(gg_trg_Victory06, gg_dest_B00D_16427)
-TriggerRegisterDeathEvent(gg_trg_Victory06, gg_dest_B00D_16426)
-TriggerRegisterDeathEvent(gg_trg_Victory06, gg_dest_B00D_16416)
-TriggerRegisterDeathEvent(gg_trg_Victory06, gg_dest_B00D_16421)
-TriggerRegisterDeathEvent(gg_trg_Victory06, gg_dest_B00D_16599)
-TriggerRegisterDeathEvent(gg_trg_Victory06, gg_dest_B00D_16598)
-TriggerRegisterDeathEvent(gg_trg_Victory06, gg_dest_B00D_16596)
-TriggerRegisterDeathEvent(gg_trg_Victory06, gg_dest_B00D_16597)
-TriggerAddAction(gg_trg_Victory06, Trig_Victory06_Actions)
+    gg_trg_Victory06 = CreateTrigger()
+    TriggerRegisterDeathEvent(gg_trg_Victory06, gg_dest_B00D_16427)
+    TriggerRegisterDeathEvent(gg_trg_Victory06, gg_dest_B00D_16426)
+    TriggerRegisterDeathEvent(gg_trg_Victory06, gg_dest_B00D_16416)
+    TriggerRegisterDeathEvent(gg_trg_Victory06, gg_dest_B00D_16421)
+    TriggerRegisterDeathEvent(gg_trg_Victory06, gg_dest_B00D_16599)
+    TriggerRegisterDeathEvent(gg_trg_Victory06, gg_dest_B00D_16598)
+    TriggerRegisterDeathEvent(gg_trg_Victory06, gg_dest_B00D_16596)
+    TriggerRegisterDeathEvent(gg_trg_Victory06, gg_dest_B00D_16597)
+    TriggerAddAction(gg_trg_Victory06, Trig_Victory06_Actions)
 end
 
 function Trig_InvulPudges_Actions()
-SetUnitInvulnerable(gg_unit_u001_0396, true)
-SetUnitInvulnerable(gg_unit_u001_0395, true)
+    SetUnitInvulnerable(gg_unit_u001_0396, true)
+    SetUnitInvulnerable(gg_unit_u001_0395, true)
 end
 
 function InitTrig_InvulPudges()
-gg_trg_InvulPudges = CreateTrigger()
-TriggerAddAction(gg_trg_InvulPudges, Trig_InvulPudges_Actions)
+    gg_trg_InvulPudges = CreateTrigger()
+    TriggerAddAction(gg_trg_InvulPudges, Trig_InvulPudges_Actions)
 end
 
 function Trig_ExitFrom05_Func003C()
-if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00B_16153) == true)) then
-return false
-end
-if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
-return false
-end
-return true
+    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00B_16153) == true)) then
+        return false
+    end
+    if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
+        return false
+    end
+    return true
 end
 
 function Trig_ExitFrom05_Conditions()
-if (not Trig_ExitFrom05_Func003C()) then
-return false
-end
-return true
+    if (not Trig_ExitFrom05_Func003C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_ExitFrom05_Actions()
-    SetUnitAnimationByIndex(udg_HERO, 25)
-TriggerSleepAction(0.30)
-SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter06))
-    UnitStartFallAnim(udg_HERO,1000)
-SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound06)
-    HeroFixRespPos()
-    CreateEnteringFrame(nil, "Вся карта это Пуджи")
+        SetUnitAnimationByIndex(udg_HERO, 25)
+    TriggerSleepAction(0.30)
+    SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter06))
+        UnitStartFallAnim(udg_HERO,1000)
+    SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound06)
+        HeroFixRespPos()
+        CreateEnteringFrame(nil, "Вся карта это Пуджи")
 end
 
 function InitTrig_ExitFrom05()
-gg_trg_ExitFrom05 = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_ExitFrom05, gg_rct_Exit05)
-TriggerAddCondition(gg_trg_ExitFrom05, Condition(Trig_ExitFrom05_Conditions))
-TriggerAddAction(gg_trg_ExitFrom05, Trig_ExitFrom05_Actions)
+    gg_trg_ExitFrom05 = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_ExitFrom05, gg_rct_Exit05)
+    TriggerAddCondition(gg_trg_ExitFrom05, Condition(Trig_ExitFrom05_Conditions))
+    TriggerAddAction(gg_trg_ExitFrom05, Trig_ExitFrom05_Actions)
 end
 
 function Trig_Victory05_Func001Func002C()
-if (not (IsDestructableDeadBJ(gg_dest_B00B_16153) == true)) then
-return false
-end
-return true
+    if (not (IsDestructableDeadBJ(gg_dest_B00B_16153) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_Victory05_Func001Func004C()
-if (not (IsDestructableDeadBJ(gg_dest_B00D_16255) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00D_16257) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00D_16254) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00D_16256) == true)) then
-return false
-end
-return true
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_16255) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_16257) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_16254) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_16256) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_Victory05_Func001C()
-if (not Trig_Victory05_Func001Func004C()) then
-return false
-end
-return true
+    if (not Trig_Victory05_Func001Func004C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_Victory05_Actions()
-if (Trig_Victory05_Func001C()) then
-KillDestructable(gg_dest_B00B_16153)
-else
-TriggerSleepAction(5.00)
-if (Trig_Victory05_Func001Func002C()) then
-else
-DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
-AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
-DestroyEffectBJ(GetLastCreatedEffectBJ())
-end
-end
+    if (Trig_Victory05_Func001C()) then
+        KillDestructable(gg_dest_B00B_16153)
+    else
+        TriggerSleepAction(5.00)
+        if (Trig_Victory05_Func001Func002C()) then
+        else
+            DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
+            AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
+            DestroyEffectBJ(GetLastCreatedEffectBJ())
+        end
+    end
 end
 
 function InitTrig_Victory05()
-gg_trg_Victory05 = CreateTrigger()
-TriggerRegisterDeathEvent(gg_trg_Victory05, gg_dest_B00D_16256)
-TriggerRegisterDeathEvent(gg_trg_Victory05, gg_dest_B00D_16254)
-TriggerRegisterDeathEvent(gg_trg_Victory05, gg_dest_B00D_16257)
-TriggerRegisterDeathEvent(gg_trg_Victory05, gg_dest_B00D_16255)
-TriggerAddAction(gg_trg_Victory05, Trig_Victory05_Actions)
+    gg_trg_Victory05 = CreateTrigger()
+    TriggerRegisterDeathEvent(gg_trg_Victory05, gg_dest_B00D_16256)
+    TriggerRegisterDeathEvent(gg_trg_Victory05, gg_dest_B00D_16254)
+    TriggerRegisterDeathEvent(gg_trg_Victory05, gg_dest_B00D_16257)
+    TriggerRegisterDeathEvent(gg_trg_Victory05, gg_dest_B00D_16255)
+    TriggerAddAction(gg_trg_Victory05, Trig_Victory05_Actions)
 end
 
 function Trig_Init04_Func002Func001C()
-if (not (GetUnitTypeId(GetEnumUnit()) == FourCC("h00B"))) then
-return false
-end
-return true
+    if (not (GetUnitTypeId(GetEnumUnit()) == FourCC("h00B"))) then
+        return false
+    end
+    return true
 end
 
 function Trig_Init04_Func002A()
-if (Trig_Init04_Func002Func001C()) then
-        InitUnitLaserTrap(GetEnumUnit())
-else
-end
+    if (Trig_Init04_Func002Func001C()) then
+                InitUnitLaserTrap(GetEnumUnit())
+    else
+    end
 end
 
 function Trig_Init04_Actions()
-DisableTrigger(GetTriggeringTrigger())
-ForGroupBJ(GetUnitsInRectAll(gg_rct_Region04), Trig_Init04_Func002A)
+    DisableTrigger(GetTriggeringTrigger())
+    ForGroupBJ(GetUnitsInRectAll(gg_rct_Region04), Trig_Init04_Func002A)
 end
 
 function InitTrig_Init04()
-gg_trg_Init04 = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_Init04, gg_rct_Enter04)
-TriggerAddAction(gg_trg_Init04, Trig_Init04_Actions)
+    gg_trg_Init04 = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_Init04, gg_rct_Enter04)
+    TriggerAddAction(gg_trg_Init04, Trig_Init04_Actions)
 end
 
 function Trig_ExitFrom04_Func003C()
-if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00B_15713) == true)) then
-return false
-end
-if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
-return false
-end
-return true
+    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00B_15713) == true)) then
+        return false
+    end
+    if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
+        return false
+    end
+    return true
 end
 
 function Trig_ExitFrom04_Conditions()
-if (not Trig_ExitFrom04_Func003C()) then
-return false
-end
-return true
+    if (not Trig_ExitFrom04_Func003C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_ExitFrom04_Actions()
-    SetUnitAnimationByIndex(udg_HERO, 25)
-TriggerSleepAction(0.30)
-SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter05))
-    UnitStartFallAnim(udg_HERO,1000)
-SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound05)
-KillUnit(gg_unit_h00B_0276)
-KillUnit(gg_unit_h00B_0003)
-KillUnit(gg_unit_h00B_0271)
-    CreateEnteringFrame(nil, "Слепой лабиринт")
-    HeroFixRespPos()
+        SetUnitAnimationByIndex(udg_HERO, 25)
+    TriggerSleepAction(0.30)
+    SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter05))
+        UnitStartFallAnim(udg_HERO,1000)
+    SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound05)
+    KillUnit(gg_unit_h00B_0276)
+    KillUnit(gg_unit_h00B_0003)
+    KillUnit(gg_unit_h00B_0271)
+        CreateEnteringFrame(nil, "Слепой лабиринт")
+        HeroFixRespPos()
 end
 
 function InitTrig_ExitFrom04()
-gg_trg_ExitFrom04 = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_ExitFrom04, gg_rct_Exit04)
-TriggerAddCondition(gg_trg_ExitFrom04, Condition(Trig_ExitFrom04_Conditions))
-TriggerAddAction(gg_trg_ExitFrom04, Trig_ExitFrom04_Actions)
+    gg_trg_ExitFrom04 = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_ExitFrom04, gg_rct_Exit04)
+    TriggerAddCondition(gg_trg_ExitFrom04, Condition(Trig_ExitFrom04_Conditions))
+    TriggerAddAction(gg_trg_ExitFrom04, Trig_ExitFrom04_Actions)
 end
 
 function Trig_Victory04_Func001Func002C()
-if (not (IsDestructableDeadBJ(gg_dest_B00B_15713) == true)) then
-return false
-end
-return true
+    if (not (IsDestructableDeadBJ(gg_dest_B00B_15713) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_Victory04_Func001Func004C()
-if (not (IsDestructableDeadBJ(gg_dest_B00D_15712) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00D_15711) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00D_15709) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00D_15710) == true)) then
-return false
-end
-return true
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_15712) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_15711) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_15709) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_15710) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_Victory04_Func001C()
-if (not Trig_Victory04_Func001Func004C()) then
-return false
-end
-return true
+    if (not Trig_Victory04_Func001Func004C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_Victory04_Actions()
-if (Trig_Victory04_Func001C()) then
-KillDestructable(gg_dest_B00B_15713)
-else
-TriggerSleepAction(5.00)
-if (Trig_Victory04_Func001Func002C()) then
-else
-DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
-AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
-DestroyEffectBJ(GetLastCreatedEffectBJ())
-end
-end
+    if (Trig_Victory04_Func001C()) then
+        KillDestructable(gg_dest_B00B_15713)
+    else
+        TriggerSleepAction(5.00)
+        if (Trig_Victory04_Func001Func002C()) then
+        else
+            DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
+            AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
+            DestroyEffectBJ(GetLastCreatedEffectBJ())
+        end
+    end
 end
 
 function InitTrig_Victory04()
-gg_trg_Victory04 = CreateTrigger()
-TriggerRegisterDeathEvent(gg_trg_Victory04, gg_dest_B00D_15709)
-TriggerRegisterDeathEvent(gg_trg_Victory04, gg_dest_B00D_15710)
-TriggerRegisterDeathEvent(gg_trg_Victory04, gg_dest_B00D_15711)
-TriggerRegisterDeathEvent(gg_trg_Victory04, gg_dest_B00D_15712)
-TriggerAddAction(gg_trg_Victory04, Trig_Victory04_Actions)
+    gg_trg_Victory04 = CreateTrigger()
+    TriggerRegisterDeathEvent(gg_trg_Victory04, gg_dest_B00D_15709)
+    TriggerRegisterDeathEvent(gg_trg_Victory04, gg_dest_B00D_15710)
+    TriggerRegisterDeathEvent(gg_trg_Victory04, gg_dest_B00D_15711)
+    TriggerRegisterDeathEvent(gg_trg_Victory04, gg_dest_B00D_15712)
+    TriggerAddAction(gg_trg_Victory04, Trig_Victory04_Actions)
 end
 
 function Trig_ExitFrom03_Func003C()
-if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00B_15515) == true)) then
-return false
-end
-if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
-return false
-end
-return true
+    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00B_15515) == true)) then
+        return false
+    end
+    if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
+        return false
+    end
+    return true
 end
 
 function Trig_ExitFrom03_Conditions()
-if (not Trig_ExitFrom03_Func003C()) then
-return false
-end
-return true
+    if (not Trig_ExitFrom03_Func003C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_ExitFrom03_Actions()
-    SetUnitAnimationByIndex(udg_HERO, 25)
-TriggerSleepAction(0.30)
-SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter04))
-    UnitStartFallAnim(udg_HERO,1000)
-SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Boind04)
-    CreateEnteringFrame(nil, "Бочки на кнопки")
-    HeroFixRespPos()
+        SetUnitAnimationByIndex(udg_HERO, 25)
+    TriggerSleepAction(0.30)
+    SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter04))
+        UnitStartFallAnim(udg_HERO,1000)
+    SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Boind04)
+        CreateEnteringFrame(nil, "Бочки на кнопки")
+        HeroFixRespPos()
 end
 
 function InitTrig_ExitFrom03()
-gg_trg_ExitFrom03 = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_ExitFrom03, gg_rct_Exit03)
-TriggerAddCondition(gg_trg_ExitFrom03, Condition(Trig_ExitFrom03_Conditions))
-TriggerAddAction(gg_trg_ExitFrom03, Trig_ExitFrom03_Actions)
+    gg_trg_ExitFrom03 = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_ExitFrom03, gg_rct_Exit03)
+    TriggerAddCondition(gg_trg_ExitFrom03, Condition(Trig_ExitFrom03_Conditions))
+    TriggerAddAction(gg_trg_ExitFrom03, Trig_ExitFrom03_Actions)
 end
 
 function Trig_Victory03_Func001Func002C()
-if (not (IsDestructableDeadBJ(gg_dest_B00B_15515) == true)) then
-return false
-end
-return true
+    if (not (IsDestructableDeadBJ(gg_dest_B00B_15515) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_Victory03_Func001Func004C()
-if (not (IsDestructableDeadBJ(gg_dest_B00E_15516) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00E_15517) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00E_15514) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00E_15513) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00D_15532) == true)) then
-return false
-end
-return true
+    if (not (IsDestructableDeadBJ(gg_dest_B00E_15516) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00E_15517) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00E_15514) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00E_15513) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_15532) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_Victory03_Func001C()
-if (not Trig_Victory03_Func001Func004C()) then
-return false
-end
-return true
+    if (not Trig_Victory03_Func001Func004C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_Victory03_Actions()
-if (Trig_Victory03_Func001C()) then
-KillDestructable(gg_dest_B00B_15515)
-else
-TriggerSleepAction(5.00)
-if (Trig_Victory03_Func001Func002C()) then
-else
-AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
-DestroyEffectBJ(GetLastCreatedEffectBJ())
-DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
-end
-end
+    if (Trig_Victory03_Func001C()) then
+        KillDestructable(gg_dest_B00B_15515)
+    else
+        TriggerSleepAction(5.00)
+        if (Trig_Victory03_Func001Func002C()) then
+        else
+            AddSpecialEffectLocBJ(GetDestructableLoc(GetDyingDestructable()), "misaka light B.mdl")
+            DestroyEffectBJ(GetLastCreatedEffectBJ())
+            DestructableRestoreLife(GetDyingDestructable(), 100.00, true)
+        end
+    end
 end
 
 function InitTrig_Victory03()
-gg_trg_Victory03 = CreateTrigger()
-TriggerRegisterDeathEvent(gg_trg_Victory03, gg_dest_B00E_15513)
-TriggerRegisterDeathEvent(gg_trg_Victory03, gg_dest_B00E_15514)
-TriggerRegisterDeathEvent(gg_trg_Victory03, gg_dest_B00E_15517)
-TriggerRegisterDeathEvent(gg_trg_Victory03, gg_dest_B00E_15516)
-TriggerRegisterDeathEvent(gg_trg_Victory03, gg_dest_B00D_15532)
-TriggerAddAction(gg_trg_Victory03, Trig_Victory03_Actions)
+    gg_trg_Victory03 = CreateTrigger()
+    TriggerRegisterDeathEvent(gg_trg_Victory03, gg_dest_B00E_15513)
+    TriggerRegisterDeathEvent(gg_trg_Victory03, gg_dest_B00E_15514)
+    TriggerRegisterDeathEvent(gg_trg_Victory03, gg_dest_B00E_15517)
+    TriggerRegisterDeathEvent(gg_trg_Victory03, gg_dest_B00E_15516)
+    TriggerRegisterDeathEvent(gg_trg_Victory03, gg_dest_B00D_15532)
+    TriggerAddAction(gg_trg_Victory03, Trig_Victory03_Actions)
 end
 
 function Trig_ExitFrom02_Func003C()
-if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00B_15274) == true)) then
-return false
-end
-if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
-return false
-end
-return true
+    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00B_15274) == true)) then
+        return false
+    end
+    if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
+        return false
+    end
+    return true
 end
 
 function Trig_ExitFrom02_Conditions()
-if (not Trig_ExitFrom02_Func003C()) then
-return false
-end
-return true
+    if (not Trig_ExitFrom02_Func003C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_ExitFrom02_Actions()
-    SetUnitAnimationByIndex(udg_HERO, 25)
-TriggerSleepAction(0.30)
-SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter03))
-    UnitStartFallAnim(udg_HERO,1000)
-SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Boind03)
-KillUnit(gg_unit_h00E_0217)
-KillUnit(gg_unit_h00E_0216)
-    CreateEnteringFrame(nil, "Рикошеты")
-    HeroFixRespPos()
+        SetUnitAnimationByIndex(udg_HERO, 25)
+    TriggerSleepAction(0.30)
+    SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter03))
+        UnitStartFallAnim(udg_HERO,1000)
+    SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Boind03)
+    KillUnit(gg_unit_h00E_0217)
+    KillUnit(gg_unit_h00E_0216)
+        CreateEnteringFrame(nil, "Рикошеты")
+        HeroFixRespPos()
 end
 
 function InitTrig_ExitFrom02()
-gg_trg_ExitFrom02 = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_ExitFrom02, gg_rct_Exit02)
-TriggerAddCondition(gg_trg_ExitFrom02, Condition(Trig_ExitFrom02_Conditions))
-TriggerAddAction(gg_trg_ExitFrom02, Trig_ExitFrom02_Actions)
+    gg_trg_ExitFrom02 = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_ExitFrom02, gg_rct_Exit02)
+    TriggerAddCondition(gg_trg_ExitFrom02, Condition(Trig_ExitFrom02_Conditions))
+    TriggerAddAction(gg_trg_ExitFrom02, Trig_ExitFrom02_Actions)
 end
 
 function Trig_Victory02_Func002C()
-if (not (IsDestructableDeadBJ(gg_dest_DTfx_15314) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_DTfx_15068) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_DTfx_15071) == true)) then
-return false
-end
-return true
+    if (not (IsDestructableDeadBJ(gg_dest_DTfx_15314) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_DTfx_15068) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_DTfx_15071) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_Victory02_Conditions()
-if (not Trig_Victory02_Func002C()) then
-return false
-end
-return true
+    if (not Trig_Victory02_Func002C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_Victory02_Actions()
-KillDestructable(gg_dest_B00B_15274)
+    KillDestructable(gg_dest_B00B_15274)
 end
 
 function InitTrig_Victory02()
-gg_trg_Victory02 = CreateTrigger()
-TriggerRegisterDeathEvent(gg_trg_Victory02, gg_dest_DTfx_15314)
-TriggerRegisterDeathEvent(gg_trg_Victory02, gg_dest_DTfx_15068)
-TriggerRegisterDeathEvent(gg_trg_Victory02, gg_dest_DTfx_15071)
-TriggerAddCondition(gg_trg_Victory02, Condition(Trig_Victory02_Conditions))
-TriggerAddAction(gg_trg_Victory02, Trig_Victory02_Actions)
+    gg_trg_Victory02 = CreateTrigger()
+    TriggerRegisterDeathEvent(gg_trg_Victory02, gg_dest_DTfx_15314)
+    TriggerRegisterDeathEvent(gg_trg_Victory02, gg_dest_DTfx_15068)
+    TriggerRegisterDeathEvent(gg_trg_Victory02, gg_dest_DTfx_15071)
+    TriggerAddCondition(gg_trg_Victory02, Condition(Trig_Victory02_Conditions))
+    TriggerAddAction(gg_trg_Victory02, Trig_Victory02_Actions)
 end
 
 function Trig_ExitFrom01_Func001C()
-if (not (IsDestructableDeadBJ(gg_dest_B00B_14732) == true)) then
-return false
-end
-if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-return false
-end
-if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
-return false
-end
-return true
+    if (not (IsDestructableDeadBJ(gg_dest_B00B_14732) == true)) then
+        return false
+    end
+    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+        return false
+    end
+    if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
+        return false
+    end
+    return true
 end
 
 function Trig_ExitFrom01_Conditions()
-if (not Trig_ExitFrom01_Func001C()) then
-return false
-end
-return true
+    if (not Trig_ExitFrom01_Func001C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_ExitFrom01_Actions()
-    SetUnitAnimationByIndex(udg_HERO, 25)
-TriggerSleepAction(0.30)
-    UnitStartFallAnim(udg_HERO,1000)
-SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter02))
-SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Boind02)
-    CreateEnteringFrame(nil, "Два маятника")
-    HeroFixRespPos()
+        SetUnitAnimationByIndex(udg_HERO, 25)
+    TriggerSleepAction(0.30)
+        UnitStartFallAnim(udg_HERO,1000)
+    SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter02))
+    SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Boind02)
+        CreateEnteringFrame(nil, "Два маятника")
+        HeroFixRespPos()
 end
 
 function InitTrig_ExitFrom01()
-gg_trg_ExitFrom01 = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_ExitFrom01, gg_rct_Exit01)
-TriggerAddCondition(gg_trg_ExitFrom01, Condition(Trig_ExitFrom01_Conditions))
-TriggerAddAction(gg_trg_ExitFrom01, Trig_ExitFrom01_Actions)
+    gg_trg_ExitFrom01 = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_ExitFrom01, gg_rct_Exit01)
+    TriggerAddCondition(gg_trg_ExitFrom01, Condition(Trig_ExitFrom01_Conditions))
+    TriggerAddAction(gg_trg_ExitFrom01, Trig_ExitFrom01_Actions)
 end
 
 function Trig_Victory01_Func008C()
-if (not (IsDestructableDeadBJ(gg_dest_DTfx_14690) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_DTfx_14688) == true)) then
-return false
-end
-return true
+    if (not (IsDestructableDeadBJ(gg_dest_DTfx_14690) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_DTfx_14688) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_Victory01_Conditions()
-if (not Trig_Victory01_Func008C()) then
-return false
-end
-return true
+    if (not Trig_Victory01_Func008C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_Victory01_Actions()
-KillDestructable(gg_dest_B00B_14732)
-CreateNUnitsAtLoc(1, FourCC("h00I"), Player(0), GetRectCenter(gg_rct_Exit01), bj_UNIT_FACING)
-KillUnit(gg_unit_h00J_0593)
-KillUnit(gg_unit_h00J_0591)
-KillUnit(gg_unit_h00J_0592)
-KillUnit(gg_unit_h00J_0594)
-KillUnit(gg_unit_h00J_0595)
+    KillDestructable(gg_dest_B00B_14732)
+    CreateNUnitsAtLoc(1, FourCC("h00I"), Player(0), GetRectCenter(gg_rct_Exit01), bj_UNIT_FACING)
+    KillUnit(gg_unit_h00J_0593)
+    KillUnit(gg_unit_h00J_0591)
+    KillUnit(gg_unit_h00J_0592)
+    KillUnit(gg_unit_h00J_0594)
+    KillUnit(gg_unit_h00J_0595)
 end
 
 function InitTrig_Victory01()
-gg_trg_Victory01 = CreateTrigger()
-TriggerRegisterDeathEvent(gg_trg_Victory01, gg_dest_DTfx_14690)
-TriggerRegisterDeathEvent(gg_trg_Victory01, gg_dest_DTfx_14688)
-TriggerAddCondition(gg_trg_Victory01, Condition(Trig_Victory01_Conditions))
-TriggerAddAction(gg_trg_Victory01, Trig_Victory01_Actions)
+    gg_trg_Victory01 = CreateTrigger()
+    TriggerRegisterDeathEvent(gg_trg_Victory01, gg_dest_DTfx_14690)
+    TriggerRegisterDeathEvent(gg_trg_Victory01, gg_dest_DTfx_14688)
+    TriggerAddCondition(gg_trg_Victory01, Condition(Trig_Victory01_Conditions))
+    TriggerAddAction(gg_trg_Victory01, Trig_Victory01_Actions)
 end
 
 function Trig_ExitFrom00_Func002C()
-if (not (IsDestructableDeadBJ(gg_dest_B00B_14785) == true)) then
-return false
-end
-if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-return false
-end
-if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
-return false
-end
-return true
+    if (not (IsDestructableDeadBJ(gg_dest_B00B_14785) == true)) then
+        return false
+    end
+    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+        return false
+    end
+    if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
+        return false
+    end
+    return true
 end
 
 function Trig_ExitFrom00_Conditions()
-if (not Trig_ExitFrom00_Func002C()) then
-return false
-end
-return true
+    if (not Trig_ExitFrom00_Func002C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_ExitFrom00_Actions()
-    SetUnitAnimationByIndex(udg_HERO, 25)
-TriggerSleepAction(0.30)
-SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter01))
-SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Boind01)
-    UnitStartFallAnim(udg_HERO,1000)
-    CreateEnteringFrame(nil, "Маленькие пропасти")
-    HeroFixRespPos()
+        SetUnitAnimationByIndex(udg_HERO, 25)
+    TriggerSleepAction(0.30)
+    SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter01))
+    SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Boind01)
+        UnitStartFallAnim(udg_HERO,1000)
+        CreateEnteringFrame(nil, "Маленькие пропасти")
+        HeroFixRespPos()
 end
 
 function InitTrig_ExitFrom00()
-gg_trg_ExitFrom00 = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_ExitFrom00, gg_rct_Exit00)
-TriggerAddCondition(gg_trg_ExitFrom00, Condition(Trig_ExitFrom00_Conditions))
-TriggerAddAction(gg_trg_ExitFrom00, Trig_ExitFrom00_Actions)
+    gg_trg_ExitFrom00 = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_ExitFrom00, gg_rct_Exit00)
+    TriggerAddCondition(gg_trg_ExitFrom00, Condition(Trig_ExitFrom00_Conditions))
+    TriggerAddAction(gg_trg_ExitFrom00, Trig_ExitFrom00_Actions)
 end
 
 function Trig_Victory00_Func009C()
-if (not (IsDestructableDeadBJ(gg_dest_DTfx_14833) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_DTfx_5091) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_DTfx_14834) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_DTfx_14832) == true)) then
-return false
-end
-return true
+    if (not (IsDestructableDeadBJ(gg_dest_DTfx_14833) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_DTfx_5091) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_DTfx_14834) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_DTfx_14832) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_Victory00_Conditions()
-if (not Trig_Victory00_Func009C()) then
-return false
-end
-return true
+    if (not Trig_Victory00_Func009C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_Victory00_Actions()
-ClearMapMusicBJ()
-PlayMusicBJ(gg_snd_The_Astral_Academy_Gardens)
-KillDestructable(gg_dest_B00B_14785)
-CreateNUnitsAtLoc(1, FourCC("h00I"), Player(0), GetRectCenter(gg_rct_Exit00), bj_UNIT_FACING)
-KillUnit(gg_unit_h00H_0569)
-KillUnit(gg_unit_h00H_0588)
-KillUnit(gg_unit_h00H_0589)
-KillUnit(gg_unit_h00H_0590)
+    ClearMapMusicBJ()
+    PlayMusicBJ(gg_snd_The_Astral_Academy_Gardens)
+    KillDestructable(gg_dest_B00B_14785)
+    CreateNUnitsAtLoc(1, FourCC("h00I"), Player(0), GetRectCenter(gg_rct_Exit00), bj_UNIT_FACING)
+    KillUnit(gg_unit_h00H_0569)
+    KillUnit(gg_unit_h00H_0588)
+    KillUnit(gg_unit_h00H_0589)
+    KillUnit(gg_unit_h00H_0590)
 end
 
 function InitTrig_Victory00()
-gg_trg_Victory00 = CreateTrigger()
-TriggerRegisterDeathEvent(gg_trg_Victory00, gg_dest_DTfx_14833)
-TriggerRegisterDeathEvent(gg_trg_Victory00, gg_dest_DTfx_5091)
-TriggerRegisterDeathEvent(gg_trg_Victory00, gg_dest_DTfx_14832)
-TriggerRegisterDeathEvent(gg_trg_Victory00, gg_dest_DTfx_14834)
-TriggerAddCondition(gg_trg_Victory00, Condition(Trig_Victory00_Conditions))
-TriggerAddAction(gg_trg_Victory00, Trig_Victory00_Actions)
+    gg_trg_Victory00 = CreateTrigger()
+    TriggerRegisterDeathEvent(gg_trg_Victory00, gg_dest_DTfx_14833)
+    TriggerRegisterDeathEvent(gg_trg_Victory00, gg_dest_DTfx_5091)
+    TriggerRegisterDeathEvent(gg_trg_Victory00, gg_dest_DTfx_14832)
+    TriggerRegisterDeathEvent(gg_trg_Victory00, gg_dest_DTfx_14834)
+    TriggerAddCondition(gg_trg_Victory00, Condition(Trig_Victory00_Conditions))
+    TriggerAddAction(gg_trg_Victory00, Trig_Victory00_Actions)
 end
 
 function Trig_StartBrainGame_Conditions()
-if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-return false
-end
-return true
+    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartBrainGame_Actions()
-DisableTrigger(GetTriggeringTrigger())
-udg_IsBrainGame = true
-KillUnit(gg_unit_h00I_0601)
-ClearMapMusicBJ()
-PlayMusicBJ(gg_snd_The_Astral_Academy_Gardens)
-SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter00))
-    HeroFixRespPos()
-    UnitStartFallAnim(udg_HERO,1000)
-SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Boind00)
-    CreateEnteringFrame(nil, "Подвальчик")
+    DisableTrigger(GetTriggeringTrigger())
+    udg_IsBrainGame = true
+    KillUnit(gg_unit_h00I_0601)
+    ClearMapMusicBJ()
+    PlayMusicBJ(gg_snd_The_Astral_Academy_Gardens)
+    SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter00))
+        HeroFixRespPos()
+        UnitStartFallAnim(udg_HERO,1000)
+    SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Boind00)
+        CreateEnteringFrame(nil, "Подвальчик")
 end
 
 function InitTrig_StartBrainGame()
-gg_trg_StartBrainGame = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_StartBrainGame, gg_rct_StartBrainGame)
-TriggerAddCondition(gg_trg_StartBrainGame, Condition(Trig_StartBrainGame_Conditions))
-TriggerAddAction(gg_trg_StartBrainGame, Trig_StartBrainGame_Actions)
+    gg_trg_StartBrainGame = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_StartBrainGame, gg_rct_StartBrainGame)
+    TriggerAddCondition(gg_trg_StartBrainGame, Condition(Trig_StartBrainGame_Conditions))
+    TriggerAddAction(gg_trg_StartBrainGame, Trig_StartBrainGame_Actions)
 end
 
 function Trig_SpawnBarrel_Func007C()
-if (not (IsDestructableDeadBJ(gg_dest_B00D_18148) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00D_18193) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00D_18157) == true)) then
-return false
-end
-if (not (IsDestructableDeadBJ(gg_dest_B00D_18184) == true)) then
-return false
-end
-return true
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_18148) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_18193) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_18157) == true)) then
+        return false
+    end
+    if (not (IsDestructableDeadBJ(gg_dest_B00D_18184) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_SpawnBarrel_Conditions()
-if (not Trig_SpawnBarrel_Func007C()) then
-return false
-end
-return true
+    if (not Trig_SpawnBarrel_Func007C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_SpawnBarrel_Actions()
-CreateNUnitsAtLoc(1, FourCC("h00C"), Player(1), GetRectCenter(gg_rct_BossBarelSpawn), bj_UNIT_FACING)
-TriggerSleepAction(5.00)
-DestructableRestoreLife(gg_dest_B00D_18148, 100.00, true)
-DestructableRestoreLife(gg_dest_B00D_18193, 100.00, true)
-DestructableRestoreLife(gg_dest_B00D_18184, 100.00, true)
-DestructableRestoreLife(gg_dest_B00D_18157, 100.00, true)
+    CreateNUnitsAtLoc(1, FourCC("h00C"), Player(1), GetRectCenter(gg_rct_BossBarelSpawn), bj_UNIT_FACING)
+    TriggerSleepAction(5.00)
+    DestructableRestoreLife(gg_dest_B00D_18148, 100.00, true)
+    DestructableRestoreLife(gg_dest_B00D_18193, 100.00, true)
+    DestructableRestoreLife(gg_dest_B00D_18184, 100.00, true)
+    DestructableRestoreLife(gg_dest_B00D_18157, 100.00, true)
 end
 
 function InitTrig_SpawnBarrel()
-gg_trg_SpawnBarrel = CreateTrigger()
-TriggerRegisterDeathEvent(gg_trg_SpawnBarrel, gg_dest_B00D_18148)
-TriggerRegisterDeathEvent(gg_trg_SpawnBarrel, gg_dest_B00D_18193)
-TriggerRegisterDeathEvent(gg_trg_SpawnBarrel, gg_dest_B00D_18157)
-TriggerRegisterDeathEvent(gg_trg_SpawnBarrel, gg_dest_B00D_18184)
-TriggerAddCondition(gg_trg_SpawnBarrel, Condition(Trig_SpawnBarrel_Conditions))
-TriggerAddAction(gg_trg_SpawnBarrel, Trig_SpawnBarrel_Actions)
+    gg_trg_SpawnBarrel = CreateTrigger()
+    TriggerRegisterDeathEvent(gg_trg_SpawnBarrel, gg_dest_B00D_18148)
+    TriggerRegisterDeathEvent(gg_trg_SpawnBarrel, gg_dest_B00D_18193)
+    TriggerRegisterDeathEvent(gg_trg_SpawnBarrel, gg_dest_B00D_18157)
+    TriggerRegisterDeathEvent(gg_trg_SpawnBarrel, gg_dest_B00D_18184)
+    TriggerAddCondition(gg_trg_SpawnBarrel, Condition(Trig_SpawnBarrel_Conditions))
+    TriggerAddAction(gg_trg_SpawnBarrel, Trig_SpawnBarrel_Actions)
 end
 
 function Trig_InitBossRoom_Conditions()
-if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-return false
-end
-return true
+    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_InitBossRoom_Actions()
-SetDestructableOccluderHeight(gg_dest_DTfx_18124, 128)
-    CreateFloorInRoom(GetDestructableX(gg_dest_DTfx_18124), GetDestructableY(gg_dest_DTfx_18124),20,20)
-DisableTrigger(GetTriggeringTrigger())
-SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_BoundBoss)
-    HeroFixRespPos()
-    CreateEnteringFrame(nil, "Вся карта это Босс")
+    SetDestructableOccluderHeight(gg_dest_DTfx_18124, 128)
+        CreateFloorInRoom(GetDestructableX(gg_dest_DTfx_18124), GetDestructableY(gg_dest_DTfx_18124),20,20)
+    DisableTrigger(GetTriggeringTrigger())
+    SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_BoundBoss)
+        HeroFixRespPos()
+        CreateEnteringFrame(nil, "Вся карта это Босс")
 end
 
 function InitTrig_InitBossRoom()
-gg_trg_InitBossRoom = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_InitBossRoom, gg_rct_EnterBoss)
-TriggerAddCondition(gg_trg_InitBossRoom, Condition(Trig_InitBossRoom_Conditions))
-TriggerAddAction(gg_trg_InitBossRoom, Trig_InitBossRoom_Actions)
+    gg_trg_InitBossRoom = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_InitBossRoom, gg_rct_EnterBoss)
+    TriggerAddCondition(gg_trg_InitBossRoom, Condition(Trig_InitBossRoom_Conditions))
+    TriggerAddAction(gg_trg_InitBossRoom, Trig_InitBossRoom_Actions)
 end
 
 function Trig_EndSinematicStart_Actions()
-DisableTrigger(GetTriggeringTrigger())
-    CustomCinematicMode(true)
-CinematicModeBJ(true, GetPlayersAll())
-IssuePointOrderLocBJ(udg_HERO, "move", GetRectCenter(gg_rct_Region_022))
-CinematicFadeBJ(bj_CINEFADETYPE_FADEOUT, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
-CinematicFadeBJ(bj_CINEFADETYPE_FADEIN, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
-IssuePointOrderLocBJ(udg_HERO, "move", GetRectCenter(gg_rct_Region_022))
-SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_Oths_0011, 0)
-CameraSetupApplyForPlayer(true, gg_cam_OnPeonsandTrall, Player(0), 0.00)
-SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_Oths_0011, 0)
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_801", gg_snd_OP3, "TRIGSTR_802", bj_TIMETYPE_ADD, 0.00, true)
-CameraSetupApplyForPlayer(true, gg_cam_TrallSteal, Player(0), 0.00)
-SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_Oths_0011, 0)
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_803", gg_snd_OT3, "TRIGSTR_804", bj_TIMETYPE_ADD, 0.00, true)
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_805", gg_snd_OT4, "TRIGSTR_806", bj_TIMETYPE_ADD, 0.00, true)
-CinematicFadeBJ(bj_CINEFADETYPE_FADEOUT, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
-TriggerSleepAction(1.00)
-CreateDestructableLoc(FourCC("B00A"), GetDestructableLoc(gg_dest_B004_2162), GetRandomDirectionDeg(), 3.00, 0)
-RemoveDestructable(gg_dest_B004_2162)
-bj_forLoopAIndex = 1
-bj_forLoopAIndexEnd = 100
-while (true) do
-if (bj_forLoopAIndex > bj_forLoopAIndexEnd) then break end
-CreateDestructableLoc(FourCC("B003"), GetRandomLocInRect(gg_rct_Region_023), GetRandomDirectionDeg(), GetRandomReal(0.80, 1.20), GetRandomInt(0, 2))
-bj_forLoopAIndex = bj_forLoopAIndex + 1
-end
-CinematicFadeBJ(bj_CINEFADETYPE_FADEIN, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
-CameraSetupApplyForPlayer(true, gg_cam_OnPineRound, Player(0), 0.00)
-RotateCameraAroundLocBJ(360.00, GetDestructableLoc(GetLastCreatedDestructable()), Player(0), 20.00)
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_809", gg_snd_OT1, "TRIGSTR_810", bj_TIMETYPE_ADD, 0.00, true)
-CameraSetupApplyForPlayer(true, gg_cam_OnPineRound, Player(0), 0.00)
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_811", gg_snd_OT2, "TRIGSTR_812", bj_TIMETYPE_ADD, 0.00, true)
-CinematicFadeBJ(bj_CINEFADETYPE_FADEOUT, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_813", gg_snd_OP1, "TRIGSTR_814", bj_TIMETYPE_ADD, 0.00, true)
-TriggerSleepAction(1.00)
-CameraSetupApplyForPlayer(true, gg_cam_TavernaEnd, Player(0), 0.00)
-CinematicFadeBJ(bj_CINEFADETYPE_FADEIN, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_815", gg_snd_OP2, "TRIGSTR_816", bj_TIMETYPE_ADD, 0.00, true)
-TriggerSleepAction(10.00)
-CustomVictoryBJ(Player(0), true, true)
+    DisableTrigger(GetTriggeringTrigger())
+        CustomCinematicMode(true)
+    CinematicModeBJ(true, GetPlayersAll())
+    IssuePointOrderLocBJ(udg_HERO, "move", GetRectCenter(gg_rct_Region_022))
+    CinematicFadeBJ(bj_CINEFADETYPE_FADEOUT, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
+    CinematicFadeBJ(bj_CINEFADETYPE_FADEIN, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
+    IssuePointOrderLocBJ(udg_HERO, "move", GetRectCenter(gg_rct_Region_022))
+    SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_Oths_0011, 0)
+    CameraSetupApplyForPlayer(true, gg_cam_OnPeonsandTrall, Player(0), 0.00)
+    SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_Oths_0011, 0)
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_801", gg_snd_OP3, "TRIGSTR_802", bj_TIMETYPE_ADD, 0.00, true)
+    CameraSetupApplyForPlayer(true, gg_cam_TrallSteal, Player(0), 0.00)
+    SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_Oths_0011, 0)
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_803", gg_snd_OT3, "TRIGSTR_804", bj_TIMETYPE_ADD, 0.00, true)
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_805", gg_snd_OT4, "TRIGSTR_806", bj_TIMETYPE_ADD, 0.00, true)
+    CinematicFadeBJ(bj_CINEFADETYPE_FADEOUT, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
+    TriggerSleepAction(1.00)
+    CreateDestructableLoc(FourCC("B00A"), GetDestructableLoc(gg_dest_B004_2162), GetRandomDirectionDeg(), 3.00, 0)
+    RemoveDestructable(gg_dest_B004_2162)
+    bj_forLoopAIndex = 1
+    bj_forLoopAIndexEnd = 100
+    while (true) do
+        if (bj_forLoopAIndex > bj_forLoopAIndexEnd) then break end
+        CreateDestructableLoc(FourCC("B003"), GetRandomLocInRect(gg_rct_Region_023), GetRandomDirectionDeg(), GetRandomReal(0.80, 1.20), GetRandomInt(0, 2))
+        bj_forLoopAIndex = bj_forLoopAIndex + 1
+    end
+    CinematicFadeBJ(bj_CINEFADETYPE_FADEIN, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
+    CameraSetupApplyForPlayer(true, gg_cam_OnPineRound, Player(0), 0.00)
+    RotateCameraAroundLocBJ(360.00, GetDestructableLoc(GetLastCreatedDestructable()), Player(0), 20.00)
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_809", gg_snd_OT1, "TRIGSTR_810", bj_TIMETYPE_ADD, 0.00, true)
+    CameraSetupApplyForPlayer(true, gg_cam_OnPineRound, Player(0), 0.00)
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_811", gg_snd_OT2, "TRIGSTR_812", bj_TIMETYPE_ADD, 0.00, true)
+    CinematicFadeBJ(bj_CINEFADETYPE_FADEOUT, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_813", gg_snd_OP1, "TRIGSTR_814", bj_TIMETYPE_ADD, 0.00, true)
+    TriggerSleepAction(1.00)
+    CameraSetupApplyForPlayer(true, gg_cam_TavernaEnd, Player(0), 0.00)
+    CinematicFadeBJ(bj_CINEFADETYPE_FADEIN, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_815", gg_snd_OP2, "TRIGSTR_816", bj_TIMETYPE_ADD, 0.00, true)
+    TriggerSleepAction(10.00)
+    CustomVictoryBJ(Player(0), true, true)
 end
 
 function InitTrig_EndSinematicStart()
-gg_trg_EndSinematicStart = CreateTrigger()
-TriggerAddAction(gg_trg_EndSinematicStart, Trig_EndSinematicStart_Actions)
+    gg_trg_EndSinematicStart = CreateTrigger()
+    TriggerAddAction(gg_trg_EndSinematicStart, Trig_EndSinematicStart_Actions)
 end
 
 function Trig_EnterAnimeArena_Conditions()
-if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-return false
-end
-return true
+    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_EnterAnimeArena_Actions()
-SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_AnimBossStart))
-    CreateEnteringFrame(nil, "Звёздная арена")
+    SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_AnimBossStart))
+        CreateEnteringFrame(nil, "Звёздная арена")
 end
 
 function InitTrig_EnterAnimeArena()
-gg_trg_EnterAnimeArena = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_EnterAnimeArena, gg_rct_Enter2Arena)
-TriggerAddCondition(gg_trg_EnterAnimeArena, Condition(Trig_EnterAnimeArena_Conditions))
-TriggerAddAction(gg_trg_EnterAnimeArena, Trig_EnterAnimeArena_Actions)
+    gg_trg_EnterAnimeArena = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_EnterAnimeArena, gg_rct_Enter2Arena)
+    TriggerAddCondition(gg_trg_EnterAnimeArena, Condition(Trig_EnterAnimeArena_Conditions))
+    TriggerAddAction(gg_trg_EnterAnimeArena, Trig_EnterAnimeArena_Actions)
 end
 
 function Trig_ExitAnimeArena_Conditions()
-if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-return false
-end
-return true
+    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_ExitAnimeArena_Actions()
-SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_ExitArena))
-    CreateEnteringFrame(nil, "Деревня пеонов")
+    SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_ExitArena))
+        CreateEnteringFrame(nil, "Деревня пеонов")
 end
 
 function InitTrig_ExitAnimeArena()
-gg_trg_ExitAnimeArena = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_ExitAnimeArena, gg_rct_AnimBossEnter)
-TriggerAddCondition(gg_trg_ExitAnimeArena, Condition(Trig_ExitAnimeArena_Conditions))
-TriggerAddAction(gg_trg_ExitAnimeArena, Trig_ExitAnimeArena_Actions)
+    gg_trg_ExitAnimeArena = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_ExitAnimeArena, gg_rct_AnimBossEnter)
+    TriggerAddCondition(gg_trg_ExitAnimeArena, Condition(Trig_ExitAnimeArena_Conditions))
+    TriggerAddAction(gg_trg_ExitAnimeArena, Trig_ExitAnimeArena_Actions)
 end
 
 function Trig_InitAnimeArena_Actions()
-UnitAddAbilityBJ(FourCC("A604"), gg_unit_o002_0203)
+    UnitAddAbilityBJ(FourCC("A604"), gg_unit_o002_0203)
 end
 
 function InitTrig_InitAnimeArena()
-gg_trg_InitAnimeArena = CreateTrigger()
-TriggerAddAction(gg_trg_InitAnimeArena, Trig_InitAnimeArena_Actions)
+    gg_trg_InitAnimeArena = CreateTrigger()
+    TriggerAddAction(gg_trg_InitAnimeArena, Trig_InitAnimeArena_Actions)
 end
 
 function Trig_NudeCinematic_Actions()
-CinematicModeBJ(true, GetPlayersAll())
-SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_o002_0203, 0)
-CameraSetupApplyForPlayer(true, gg_cam_NydePeon, Player(0), 1.00)
-ResetUnitAnimation(udg_HERO)
-SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_o002_0203, 0)
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_739", gg_snd_animepeon1, "TRIGSTR_740", bj_TIMETYPE_ADD, 0.00, true)
-SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_o002_0203, 0)
-SetUnitLookAt(gg_unit_o002_0203, "bone_head", udg_HERO, 0, 0, 90)
-SetUnitLookAt(udg_HERO, "bone_head", gg_unit_o002_0203, 0, 0, 90)
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_o002_0203, "TRIGSTR_744", gg_snd_animeZurck1, "TRIGSTR_745", bj_TIMETYPE_ADD, 0.00, true)
-CameraSetupApplyForPlayer(true, gg_cam_LookAnime, Player(0), 0.00)
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_746", gg_snd_animepeon2, "TRIGSTR_747", bj_TIMETYPE_ADD, 0.00, true)
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_748", gg_snd_animepeon3, "TRIGSTR_749", bj_TIMETYPE_ADD, 0.00, true)
-CameraSetupApplyForPlayer(true, gg_cam_NydePeon, Player(0), 0.50)
-SetUnitFacingToFaceUnitTimed(gg_unit_o002_0203, gg_unit_h009_0197, 0)
-SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_h009_0197, 0)
-ResetUnitLookAt(gg_unit_o002_0203)
-ResetUnitLookAt(udg_HERO)
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_o002_0203, "TRIGSTR_750", gg_snd_animeZurck2, "TRIGSTR_751", bj_TIMETYPE_ADD, 0.00, true)
-ConditionalTriggerExecute(gg_trg_SkipNude)
+    CinematicModeBJ(true, GetPlayersAll())
+    SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_o002_0203, 0)
+    CameraSetupApplyForPlayer(true, gg_cam_NydePeon, Player(0), 1.00)
+    ResetUnitAnimation(udg_HERO)
+    SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_o002_0203, 0)
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_739", gg_snd_animepeon1, "TRIGSTR_740", bj_TIMETYPE_ADD, 0.00, true)
+    SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_o002_0203, 0)
+    SetUnitLookAt(gg_unit_o002_0203, "bone_head", udg_HERO, 0, 0, 90)
+    SetUnitLookAt(udg_HERO, "bone_head", gg_unit_o002_0203, 0, 0, 90)
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_o002_0203, "TRIGSTR_744", gg_snd_animeZurck1, "TRIGSTR_745", bj_TIMETYPE_ADD, 0.00, true)
+    CameraSetupApplyForPlayer(true, gg_cam_LookAnime, Player(0), 0.00)
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_746", gg_snd_animepeon2, "TRIGSTR_747", bj_TIMETYPE_ADD, 0.00, true)
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_748", gg_snd_animepeon3, "TRIGSTR_749", bj_TIMETYPE_ADD, 0.00, true)
+    CameraSetupApplyForPlayer(true, gg_cam_NydePeon, Player(0), 0.50)
+    SetUnitFacingToFaceUnitTimed(gg_unit_o002_0203, gg_unit_h009_0197, 0)
+    SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_h009_0197, 0)
+    ResetUnitLookAt(gg_unit_o002_0203)
+    ResetUnitLookAt(udg_HERO)
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_o002_0203, "TRIGSTR_750", gg_snd_animeZurck2, "TRIGSTR_751", bj_TIMETYPE_ADD, 0.00, true)
+    ConditionalTriggerExecute(gg_trg_SkipNude)
 end
 
 function InitTrig_NudeCinematic()
-gg_trg_NudeCinematic = CreateTrigger()
-TriggerAddAction(gg_trg_NudeCinematic, Trig_NudeCinematic_Actions)
+    gg_trg_NudeCinematic = CreateTrigger()
+    TriggerAddAction(gg_trg_NudeCinematic, Trig_NudeCinematic_Actions)
 end
 
 function Trig_SkipNude_Actions()
-CameraSetupApplyForPlayer(true, gg_cam_ResetCam, Player(0), 1.00)
-CinematicModeBJ(false, GetPlayersAll())
-    CustomCinematicMode(false)
-ResetUnitLookAt(gg_unit_o002_0203)
-ResetUnitLookAt(udg_HERO)
-    StartPeonAllyAI()
+    CameraSetupApplyForPlayer(true, gg_cam_ResetCam, Player(0), 1.00)
+    CinematicModeBJ(false, GetPlayersAll())
+        CustomCinematicMode(false)
+    ResetUnitLookAt(gg_unit_o002_0203)
+    ResetUnitLookAt(udg_HERO)
+        StartPeonAllyAI()
 end
 
 function InitTrig_SkipNude()
-gg_trg_SkipNude = CreateTrigger()
-DisableTrigger(gg_trg_SkipNude)
-TriggerAddAction(gg_trg_SkipNude, Trig_SkipNude_Actions)
+    gg_trg_SkipNude = CreateTrigger()
+    DisableTrigger(gg_trg_SkipNude)
+    TriggerAddAction(gg_trg_SkipNude, Trig_SkipNude_Actions)
 end
 
 function Trig_DeathNudeFriend_Actions()
-QuestSetFailedBJ(udg_QNudeFriend, true)
+    QuestSetFailedBJ(udg_QNudeFriend, true)
 end
 
 function InitTrig_DeathNudeFriend()
-gg_trg_DeathNudeFriend = CreateTrigger()
-TriggerRegisterUnitEvent(gg_trg_DeathNudeFriend, gg_unit_o002_0203, EVENT_UNIT_DEATH)
-TriggerAddAction(gg_trg_DeathNudeFriend, Trig_DeathNudeFriend_Actions)
+    gg_trg_DeathNudeFriend = CreateTrigger()
+    TriggerRegisterUnitEvent(gg_trg_DeathNudeFriend, gg_unit_o002_0203, EVENT_UNIT_DEATH)
+    TriggerAddAction(gg_trg_DeathNudeFriend, Trig_DeathNudeFriend_Actions)
 end
 
 function Trig_InitYetty_Actions()
-SetUnitAnimation(gg_unit_n000_0001, "death")
+    SetUnitAnimation(gg_unit_n000_0001, "death")
 end
 
 function InitTrig_InitYetty()
-gg_trg_InitYetty = CreateTrigger()
-TriggerRegisterTimerEventSingle(gg_trg_InitYetty, 0.50)
-TriggerAddAction(gg_trg_InitYetty, Trig_InitYetty_Actions)
+    gg_trg_InitYetty = CreateTrigger()
+    TriggerRegisterTimerEventSingle(gg_trg_InitYetty, 0.50)
+    TriggerAddAction(gg_trg_InitYetty, Trig_InitYetty_Actions)
 end
 
 function Trig_StartYettyCinematic_Conditions()
-if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
-return false
-end
-return true
+    if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartYettyCinematic_Func004C()
-if (not (udg_PressESCYETTY == true)) then
-return false
-end
-return true
+    if (not (udg_PressESCYETTY == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartYettyCinematic_Func013C()
-if (not (udg_PressESCYETTY == true)) then
-return false
-end
-return true
+    if (not (udg_PressESCYETTY == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartYettyCinematic_Func016C()
-if (not (udg_PressESCYETTY == true)) then
-return false
-end
-return true
+    if (not (udg_PressESCYETTY == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartYettyCinematic_Func019C()
-if (not (udg_PressESCYETTY == true)) then
-return false
-end
-return true
+    if (not (udg_PressESCYETTY == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartYettyCinematic_Func020C()
-if (not (udg_PressESCYETTY == true)) then
-return false
-end
-return true
+    if (not (udg_PressESCYETTY == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartYettyCinematic_Func022C()
-if (not (udg_PressESCYETTY == true)) then
-return false
-end
-return true
+    if (not (udg_PressESCYETTY == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartYettyCinematic_Func023C()
-if (not (udg_PressESCYETTY == true)) then
-return false
-end
-return true
+    if (not (udg_PressESCYETTY == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartYettyCinematic_Actions()
-DisableTrigger(GetTriggeringTrigger())
-CinematicModeBJ(true, GetPlayersAll())
-CinematicFadeBJ(bj_CINEFADETYPE_FADEOUT, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
-if (Trig_StartYettyCinematic_Func004C()) then
-return 
-else
-end
-TriggerSleepAction(1.00)
-CameraSetupApplyForPlayer(true, gg_cam_PeonLookOnYetty, Player(0), 0.00)
-SetUnitFacingToFaceUnitTimed(GetTriggerUnit(), gg_unit_n000_0001, 0)
-SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Region_012))
-SetUnitFacingToFaceUnitTimed(GetTriggerUnit(), gg_unit_n000_0001, 0)
-ResetUnitAnimation(GetTriggerUnit())
-CinematicFadeBJ(bj_CINEFADETYPE_FADEIN, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
-EnableTrigger(gg_trg_SkipYetty)
-if (Trig_StartYettyCinematic_Func013C()) then
-return 
-else
-end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), GetTriggerUnit(), "TRIGSTR_688", gg_snd_peon1, "TRIGSTR_689", bj_TIMETYPE_ADD, 0.00, true)
-SetUnitFacingToFaceUnitTimed(GetTriggerUnit(), gg_unit_n000_0001, 0)
-if (Trig_StartYettyCinematic_Func016C()) then
-else
-CameraSetupApplyForPlayer(true, gg_cam_LookYetty, Player(0), 0.00)
-end
-TriggerSleepAction(0.50)
-SetUnitFacingToFaceUnitTimed(GetTriggerUnit(), gg_unit_n000_0001, 0)
-if (Trig_StartYettyCinematic_Func019C()) then
-else
-RotateCameraAroundLocBJ(360.00, GetUnitLoc(gg_unit_n000_0001), Player(0), 8.00)
-end
-if (Trig_StartYettyCinematic_Func020C()) then
-return 
-else
-end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), GetTriggerUnit(), "TRIGSTR_690", gg_snd_peon2, "TRIGSTR_691", bj_TIMETYPE_ADD, 0.00, true)
-if (Trig_StartYettyCinematic_Func022C()) then
-else
-CameraSetupApplyForPlayer(true, gg_cam_PeonReadyToYetty, Player(0), 0.00)
-end
-if (Trig_StartYettyCinematic_Func023C()) then
-return 
-else
-end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), GetTriggerUnit(), "TRIGSTR_692", gg_snd_peon3, "TRIGSTR_693", bj_TIMETYPE_ADD, 0.00, true)
-ConditionalTriggerExecute(gg_trg_SkipYetty)
+    DisableTrigger(GetTriggeringTrigger())
+    CinematicModeBJ(true, GetPlayersAll())
+    CinematicFadeBJ(bj_CINEFADETYPE_FADEOUT, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
+    if (Trig_StartYettyCinematic_Func004C()) then
+        return 
+    else
+    end
+    TriggerSleepAction(1.00)
+    CameraSetupApplyForPlayer(true, gg_cam_PeonLookOnYetty, Player(0), 0.00)
+    SetUnitFacingToFaceUnitTimed(GetTriggerUnit(), gg_unit_n000_0001, 0)
+    SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Region_012))
+    SetUnitFacingToFaceUnitTimed(GetTriggerUnit(), gg_unit_n000_0001, 0)
+    ResetUnitAnimation(GetTriggerUnit())
+    CinematicFadeBJ(bj_CINEFADETYPE_FADEIN, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
+    EnableTrigger(gg_trg_SkipYetty)
+    if (Trig_StartYettyCinematic_Func013C()) then
+        return 
+    else
+    end
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), GetTriggerUnit(), "TRIGSTR_688", gg_snd_peon1, "TRIGSTR_689", bj_TIMETYPE_ADD, 0.00, true)
+    SetUnitFacingToFaceUnitTimed(GetTriggerUnit(), gg_unit_n000_0001, 0)
+    if (Trig_StartYettyCinematic_Func016C()) then
+    else
+        CameraSetupApplyForPlayer(true, gg_cam_LookYetty, Player(0), 0.00)
+    end
+    TriggerSleepAction(0.50)
+    SetUnitFacingToFaceUnitTimed(GetTriggerUnit(), gg_unit_n000_0001, 0)
+    if (Trig_StartYettyCinematic_Func019C()) then
+    else
+        RotateCameraAroundLocBJ(360.00, GetUnitLoc(gg_unit_n000_0001), Player(0), 8.00)
+    end
+    if (Trig_StartYettyCinematic_Func020C()) then
+        return 
+    else
+    end
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), GetTriggerUnit(), "TRIGSTR_690", gg_snd_peon2, "TRIGSTR_691", bj_TIMETYPE_ADD, 0.00, true)
+    if (Trig_StartYettyCinematic_Func022C()) then
+    else
+        CameraSetupApplyForPlayer(true, gg_cam_PeonReadyToYetty, Player(0), 0.00)
+    end
+    if (Trig_StartYettyCinematic_Func023C()) then
+        return 
+    else
+    end
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), GetTriggerUnit(), "TRIGSTR_692", gg_snd_peon3, "TRIGSTR_693", bj_TIMETYPE_ADD, 0.00, true)
+    ConditionalTriggerExecute(gg_trg_SkipYetty)
 end
 
 function InitTrig_StartYettyCinematic()
-gg_trg_StartYettyCinematic = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_StartYettyCinematic, gg_rct_Region_038)
-TriggerAddCondition(gg_trg_StartYettyCinematic, Condition(Trig_StartYettyCinematic_Conditions))
-TriggerAddAction(gg_trg_StartYettyCinematic, Trig_StartYettyCinematic_Actions)
+    gg_trg_StartYettyCinematic = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_StartYettyCinematic, gg_rct_Region_038)
+    TriggerAddCondition(gg_trg_StartYettyCinematic, Condition(Trig_StartYettyCinematic_Conditions))
+    TriggerAddAction(gg_trg_StartYettyCinematic, Trig_StartYettyCinematic_Actions)
 end
 
 function Trig_SkipYetty_Conditions()
-if (not (udg_PressESCYETTY == false)) then
-return false
-end
-return true
+    if (not (udg_PressESCYETTY == false)) then
+        return false
+    end
+    return true
 end
 
 function Trig_SkipYetty_Func004A()
-KillDestructable(GetEnumDestructable())
+    KillDestructable(GetEnumDestructable())
 end
 
 function Trig_SkipYetty_Actions()
-CameraSetupApplyForPlayer(true, gg_cam_ResetCam, Player(0), 1.00)
-udg_PressESCYETTY = true
-EnumDestructablesInRectAll(gg_rct_Region_013, Trig_SkipYetty_Func004A)
-DisableTrigger(GetTriggeringTrigger())
-CinematicModeBJ(false, GetPlayersAll())
-    CustomCinematicMode(false)
-SetUnitTimeScalePercent(gg_unit_n000_0001, 100.00)
-    StartYettyAI(GetRectCenterX(gg_rct_Region_038), GetRectCenterY(gg_rct_Region_038))
+    CameraSetupApplyForPlayer(true, gg_cam_ResetCam, Player(0), 1.00)
+    udg_PressESCYETTY = true
+    EnumDestructablesInRectAll(gg_rct_Region_013, Trig_SkipYetty_Func004A)
+    DisableTrigger(GetTriggeringTrigger())
+    CinematicModeBJ(false, GetPlayersAll())
+        CustomCinematicMode(false)
+    SetUnitTimeScalePercent(gg_unit_n000_0001, 100.00)
+        StartYettyAI(GetRectCenterX(gg_rct_Region_038), GetRectCenterY(gg_rct_Region_038))
 end
 
 function InitTrig_SkipYetty()
-gg_trg_SkipYetty = CreateTrigger()
-DisableTrigger(gg_trg_SkipYetty)
-TriggerRegisterPlayerEventEndCinematic(gg_trg_SkipYetty, Player(0))
-TriggerAddCondition(gg_trg_SkipYetty, Condition(Trig_SkipYetty_Conditions))
-TriggerAddAction(gg_trg_SkipYetty, Trig_SkipYetty_Actions)
+    gg_trg_SkipYetty = CreateTrigger()
+    DisableTrigger(gg_trg_SkipYetty)
+    TriggerRegisterPlayerEventEndCinematic(gg_trg_SkipYetty, Player(0))
+    TriggerAddCondition(gg_trg_SkipYetty, Condition(Trig_SkipYetty_Conditions))
+    TriggerAddAction(gg_trg_SkipYetty, Trig_SkipYetty_Actions)
 end
 
 function Trig_InitEggs_Actions()
-AddUnitAnimationPropertiesBJ(true, "alternate", gg_unit_h006_0173)
-AddUnitAnimationPropertiesBJ(true, "alternate", gg_unit_h006_0172)
-AddUnitAnimationPropertiesBJ(true, "alternate", gg_unit_h006_0002)
+    AddUnitAnimationPropertiesBJ(true, "alternate", gg_unit_h006_0173)
+    AddUnitAnimationPropertiesBJ(true, "alternate", gg_unit_h006_0172)
+    AddUnitAnimationPropertiesBJ(true, "alternate", gg_unit_h006_0002)
 end
 
 function InitTrig_InitEggs()
-gg_trg_InitEggs = CreateTrigger()
-TriggerRegisterTimerEventSingle(gg_trg_InitEggs, 1.00)
-TriggerAddAction(gg_trg_InitEggs, Trig_InitEggs_Actions)
+    gg_trg_InitEggs = CreateTrigger()
+    TriggerRegisterTimerEventSingle(gg_trg_InitEggs, 1.00)
+    TriggerAddAction(gg_trg_InitEggs, Trig_InitEggs_Actions)
 end
 
 function Trig_Task_Actions()
-CreateQuestBJ(bj_QUESTTYPE_REQ_DISCOVERED, "TRIGSTR_719", "TRIGSTR_720", "ReplaceableTextures\\CommandButtons\\BTNThrall.blp")
-CreateQuestBJ(bj_QUESTTYPE_REQ_DISCOVERED, "TRIGSTR_721", "TRIGSTR_722", "ReplaceableTextures\\CommandButtons\\BTNWendigo.blp")
-udg_QYetty = GetLastCreatedQuestBJ()
-CreateQuestBJ(bj_QUESTTYPE_REQ_DISCOVERED, "TRIGSTR_725", "TRIGSTR_726", "ReplaceableTextures\\CommandButtons\\BTNpurpleDragonSpawn.blp")
-udg_QDragon = GetLastCreatedQuestBJ()
-CreateQuestBJ(bj_QUESTTYPE_REQ_DISCOVERED, "TRIGSTR_727", "TRIGSTR_728", "ReplaceableTextures\\CommandButtons\\BTNStrongDrink.blp")
-udg_QWine = GetLastCreatedQuestBJ()
-CreateQuestBJ(bj_QUESTTYPE_REQ_DISCOVERED, "TRIGSTR_729", "TRIGSTR_730", "ReplaceableTextures\\CommandButtons\\BTNTimberWolf.blp")
-udg_QWolf = GetLastCreatedQuestBJ()
-CreateQuestBJ(bj_QUESTTYPE_REQ_DISCOVERED, "TRIGSTR_731", "TRIGSTR_732", "ReplaceableTextures\\CommandButtons\\BTNStarWand.blp")
-udg_QStarAnime = GetLastCreatedQuestBJ()
-CreateQuestBJ(bj_QUESTTYPE_OPT_DISCOVERED, "TRIGSTR_733", "TRIGSTR_734", "ReplaceableTextures\\CommandButtons\\BTNPeon.blp")
-CreateQuestBJ(bj_QUESTTYPE_OPT_DISCOVERED, "TRIGSTR_735", "TRIGSTR_736", "ReplaceableTextures\\CommandButtons\\BTNForestTrollShadowPriest.blp")
-udg_QSnowMan = GetLastCreatedQuestBJ()
-CreateQuestBJ(bj_QUESTTYPE_OPT_DISCOVERED, "TRIGSTR_737", "TRIGSTR_738", "CandyCane.blp")
-udg_QCHKPoint = GetLastCreatedQuestBJ()
-CreateQuestBJ(bj_QUESTTYPE_OPT_DISCOVERED, "TRIGSTR_752", "TRIGSTR_753", "ReplaceableTextures\\CommandButtons\\BTNGrunt.blp")
-udg_QNudeFriend = GetLastCreatedQuestBJ()
+    CreateQuestBJ(bj_QUESTTYPE_REQ_DISCOVERED, "TRIGSTR_719", "TRIGSTR_720", "ReplaceableTextures\\CommandButtons\\BTNThrall.blp")
+    CreateQuestBJ(bj_QUESTTYPE_REQ_DISCOVERED, "TRIGSTR_721", "TRIGSTR_722", "ReplaceableTextures\\CommandButtons\\BTNWendigo.blp")
+    udg_QYetty = GetLastCreatedQuestBJ()
+    CreateQuestBJ(bj_QUESTTYPE_REQ_DISCOVERED, "TRIGSTR_725", "TRIGSTR_726", "ReplaceableTextures\\CommandButtons\\BTNpurpleDragonSpawn.blp")
+    udg_QDragon = GetLastCreatedQuestBJ()
+    CreateQuestBJ(bj_QUESTTYPE_REQ_DISCOVERED, "TRIGSTR_727", "TRIGSTR_728", "ReplaceableTextures\\CommandButtons\\BTNStrongDrink.blp")
+    udg_QWine = GetLastCreatedQuestBJ()
+    CreateQuestBJ(bj_QUESTTYPE_REQ_DISCOVERED, "TRIGSTR_729", "TRIGSTR_730", "ReplaceableTextures\\CommandButtons\\BTNTimberWolf.blp")
+    udg_QWolf = GetLastCreatedQuestBJ()
+    CreateQuestBJ(bj_QUESTTYPE_REQ_DISCOVERED, "TRIGSTR_731", "TRIGSTR_732", "ReplaceableTextures\\CommandButtons\\BTNStarWand.blp")
+    udg_QStarAnime = GetLastCreatedQuestBJ()
+    CreateQuestBJ(bj_QUESTTYPE_OPT_DISCOVERED, "TRIGSTR_733", "TRIGSTR_734", "ReplaceableTextures\\CommandButtons\\BTNPeon.blp")
+    CreateQuestBJ(bj_QUESTTYPE_OPT_DISCOVERED, "TRIGSTR_735", "TRIGSTR_736", "ReplaceableTextures\\CommandButtons\\BTNForestTrollShadowPriest.blp")
+    udg_QSnowMan = GetLastCreatedQuestBJ()
+    CreateQuestBJ(bj_QUESTTYPE_OPT_DISCOVERED, "TRIGSTR_737", "TRIGSTR_738", "CandyCane.blp")
+    udg_QCHKPoint = GetLastCreatedQuestBJ()
+    CreateQuestBJ(bj_QUESTTYPE_OPT_DISCOVERED, "TRIGSTR_752", "TRIGSTR_753", "ReplaceableTextures\\CommandButtons\\BTNGrunt.blp")
+    udg_QNudeFriend = GetLastCreatedQuestBJ()
 end
 
 function InitTrig_Task()
-gg_trg_Task = CreateTrigger()
-TriggerRegisterTimerEventSingle(gg_trg_Task, 1.00)
-TriggerAddAction(gg_trg_Task, Trig_Task_Actions)
+    gg_trg_Task = CreateTrigger()
+    TriggerRegisterTimerEventSingle(gg_trg_Task, 1.00)
+    TriggerAddAction(gg_trg_Task, Trig_Task_Actions)
 end
 
 function Trig_WisDead_Actions()
-udg_WisDead = true
-UnitAddAbilityBJ(FourCC("A604"), gg_unit_h007_0171)
+    udg_WisDead = true
+    UnitAddAbilityBJ(FourCC("A604"), gg_unit_h007_0171)
 end
 
 function InitTrig_WisDead()
-gg_trg_WisDead = CreateTrigger()
-TriggerRegisterUnitEvent(gg_trg_WisDead, gg_unit_u000_0005, EVENT_UNIT_DEATH)
-TriggerAddAction(gg_trg_WisDead, Trig_WisDead_Actions)
+    gg_trg_WisDead = CreateTrigger()
+    TriggerRegisterUnitEvent(gg_trg_WisDead, gg_unit_u000_0005, EVENT_UNIT_DEATH)
+    TriggerAddAction(gg_trg_WisDead, Trig_WisDead_Actions)
 end
 
 function Trig_InitMerchantQuest_Actions()
-UnitAddAbilityBJ(FourCC("A604"), gg_unit_h007_0171)
+    UnitAddAbilityBJ(FourCC("A604"), gg_unit_h007_0171)
 end
 
 function InitTrig_InitMerchantQuest()
-gg_trg_InitMerchantQuest = CreateTrigger()
-TriggerAddAction(gg_trg_InitMerchantQuest, Trig_InitMerchantQuest_Actions)
+    gg_trg_InitMerchantQuest = CreateTrigger()
+    TriggerAddAction(gg_trg_InitMerchantQuest, Trig_InitMerchantQuest_Actions)
 end
 
 function Trig_MerchQuestCinematic_Func011C()
-if (not (udg_SkipMerchCinematic == true)) then
-return false
-end
-return true
+    if (not (udg_SkipMerchCinematic == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_MerchQuestCinematic_Func016C()
-if (not (udg_SkipMerchCinematic == true)) then
-return false
-end
-return true
+    if (not (udg_SkipMerchCinematic == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_MerchQuestCinematic_Func018C()
-if (not (udg_SkipMerchCinematic == true)) then
-return false
-end
-return true
+    if (not (udg_SkipMerchCinematic == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_MerchQuestCinematic_Func020C()
-if (not (udg_SkipMerchCinematic == true)) then
-return false
-end
-return true
+    if (not (udg_SkipMerchCinematic == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_MerchQuestCinematic_Func024C()
-if (not (udg_SkipMerchCinematic == true)) then
-return false
-end
-return true
+    if (not (udg_SkipMerchCinematic == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_MerchQuestCinematic_Func026C()
-if (not (udg_SkipMerchCinematic == true)) then
-return false
-end
-return true
+    if (not (udg_SkipMerchCinematic == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_MerchQuestCinematic_Func028C()
-if (not (udg_SkipMerchCinematic == true)) then
-return false
-end
-return true
+    if (not (udg_SkipMerchCinematic == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_MerchQuestCinematic_Func031C()
-if (not (udg_SkipMerchCinematic == true)) then
-return false
-end
-return true
+    if (not (udg_SkipMerchCinematic == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_MerchQuestCinematic_Actions()
-DisableTrigger(GetTriggeringTrigger())
-EnableTrigger(gg_trg_SkipMerchCinematic)
-    CustomCinematicMode(true)
-CinematicModeBJ(true, GetPlayersAll())
-SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_h007_0171, 0)
-CameraSetupApplyForPlayer(true, gg_cam_TalkMerch, Player(0), 0.00)
-SetCameraTargetControllerNoZForPlayer(Player(0), udg_HERO, 0, 0, false)
-RotateCameraAroundLocBJ(30.00, GetUnitLoc(udg_HERO), Player(0), 20.00)
-ResetUnitAnimation(udg_HERO)
-IssuePointOrderLocBJ(udg_HERO, "move", GetRectCenter(gg_rct_Region_020))
-if (Trig_MerchQuestCinematic_Func011C()) then
-return 
-else
-end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_h007_0171, "TRIGSTR_781", gg_snd_cook1, "TRIGSTR_782", bj_TIMETYPE_ADD, 0.00, true)
-SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_h007_0171, 0)
-SetCameraTargetControllerNoZForPlayer(Player(0), udg_HERO, 0, 0, false)
-SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_h007_0171, 0)
-if (Trig_MerchQuestCinematic_Func016C()) then
-return 
-else
-end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_783", gg_snd_CookQuestPeon1, "TRIGSTR_784", bj_TIMETYPE_ADD, 0.00, true)
-if (Trig_MerchQuestCinematic_Func018C()) then
-return 
-else
-end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_h007_0171, "TRIGSTR_785", gg_snd_cook2, "TRIGSTR_786", bj_TIMETYPE_ADD, 0.00, true)
-if (Trig_MerchQuestCinematic_Func020C()) then
-return 
-else
-end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_787", gg_snd_CookQuestPeon4, "TRIGSTR_788", bj_TIMETYPE_ADD, 0.00, true)
-IssuePointOrderLocBJ(udg_HERO, "move", GetRectCenter(gg_rct_Region_021))
-RotateCameraAroundLocBJ(-15.00, GetUnitLoc(udg_HERO), Player(0), 10.00)
-if (Trig_MerchQuestCinematic_Func024C()) then
-return 
-else
-end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_h007_0171, "TRIGSTR_789", gg_snd_cook3, "TRIGSTR_790", bj_TIMETYPE_ADD, 0.00, true)
-if (Trig_MerchQuestCinematic_Func026C()) then
-return 
-else
-end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_791", gg_snd_CookQuestPeon2, "TRIGSTR_792", bj_TIMETYPE_ADD, 0.00, true)
-if (Trig_MerchQuestCinematic_Func028C()) then
-return 
-else
-end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_h007_0171, "TRIGSTR_795", gg_snd_cook4, "TRIGSTR_796", bj_TIMETYPE_ADD, 0.00, true)
-SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_h007_0171, 0)
-if (Trig_MerchQuestCinematic_Func031C()) then
-return 
-else
-end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_797", gg_snd_CookQuestPeon3, "TRIGSTR_798", bj_TIMETYPE_ADD, 0.00, true)
-ConditionalTriggerExecute(gg_trg_MerchEndCinematic1)
+    DisableTrigger(GetTriggeringTrigger())
+    EnableTrigger(gg_trg_SkipMerchCinematic)
+        CustomCinematicMode(true)
+    CinematicModeBJ(true, GetPlayersAll())
+    SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_h007_0171, 0)
+    CameraSetupApplyForPlayer(true, gg_cam_TalkMerch, Player(0), 0.00)
+    SetCameraTargetControllerNoZForPlayer(Player(0), udg_HERO, 0, 0, false)
+    RotateCameraAroundLocBJ(30.00, GetUnitLoc(udg_HERO), Player(0), 20.00)
+    ResetUnitAnimation(udg_HERO)
+    IssuePointOrderLocBJ(udg_HERO, "move", GetRectCenter(gg_rct_Region_020))
+    if (Trig_MerchQuestCinematic_Func011C()) then
+        return 
+    else
+    end
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_h007_0171, "TRIGSTR_781", gg_snd_cook1, "TRIGSTR_782", bj_TIMETYPE_ADD, 0.00, true)
+    SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_h007_0171, 0)
+    SetCameraTargetControllerNoZForPlayer(Player(0), udg_HERO, 0, 0, false)
+    SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_h007_0171, 0)
+    if (Trig_MerchQuestCinematic_Func016C()) then
+        return 
+    else
+    end
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_783", gg_snd_CookQuestPeon1, "TRIGSTR_784", bj_TIMETYPE_ADD, 0.00, true)
+    if (Trig_MerchQuestCinematic_Func018C()) then
+        return 
+    else
+    end
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_h007_0171, "TRIGSTR_785", gg_snd_cook2, "TRIGSTR_786", bj_TIMETYPE_ADD, 0.00, true)
+    if (Trig_MerchQuestCinematic_Func020C()) then
+        return 
+    else
+    end
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_787", gg_snd_CookQuestPeon4, "TRIGSTR_788", bj_TIMETYPE_ADD, 0.00, true)
+    IssuePointOrderLocBJ(udg_HERO, "move", GetRectCenter(gg_rct_Region_021))
+    RotateCameraAroundLocBJ(-15.00, GetUnitLoc(udg_HERO), Player(0), 10.00)
+    if (Trig_MerchQuestCinematic_Func024C()) then
+        return 
+    else
+    end
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_h007_0171, "TRIGSTR_789", gg_snd_cook3, "TRIGSTR_790", bj_TIMETYPE_ADD, 0.00, true)
+    if (Trig_MerchQuestCinematic_Func026C()) then
+        return 
+    else
+    end
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_791", gg_snd_CookQuestPeon2, "TRIGSTR_792", bj_TIMETYPE_ADD, 0.00, true)
+    if (Trig_MerchQuestCinematic_Func028C()) then
+        return 
+    else
+    end
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_h007_0171, "TRIGSTR_795", gg_snd_cook4, "TRIGSTR_796", bj_TIMETYPE_ADD, 0.00, true)
+    SetUnitFacingToFaceUnitTimed(udg_HERO, gg_unit_h007_0171, 0)
+    if (Trig_MerchQuestCinematic_Func031C()) then
+        return 
+    else
+    end
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_797", gg_snd_CookQuestPeon3, "TRIGSTR_798", bj_TIMETYPE_ADD, 0.00, true)
+    ConditionalTriggerExecute(gg_trg_MerchEndCinematic1)
 end
 
 function InitTrig_MerchQuestCinematic()
-gg_trg_MerchQuestCinematic = CreateTrigger()
-TriggerAddAction(gg_trg_MerchQuestCinematic, Trig_MerchQuestCinematic_Actions)
+    gg_trg_MerchQuestCinematic = CreateTrigger()
+    TriggerAddAction(gg_trg_MerchQuestCinematic, Trig_MerchQuestCinematic_Actions)
 end
 
 function Trig_MerchEndCinematic1_Actions()
-CameraSetupApplyForPlayer(true, gg_cam_ResetCam, Player(0), 1.00)
-CinematicModeBJ(false, GetPlayersAll())
-    CustomCinematicMode(false)
-CreateQuestBJ(bj_QUESTTYPE_OPT_DISCOVERED, "TRIGSTR_799", "TRIGSTR_800", "ReplaceableTextures\\CommandButtons\\BTNAzureDragon.blp")
-udg_QWiverna = GetLastCreatedQuestBJ()
+    CameraSetupApplyForPlayer(true, gg_cam_ResetCam, Player(0), 1.00)
+    CinematicModeBJ(false, GetPlayersAll())
+        CustomCinematicMode(false)
+    CreateQuestBJ(bj_QUESTTYPE_OPT_DISCOVERED, "TRIGSTR_799", "TRIGSTR_800", "ReplaceableTextures\\CommandButtons\\BTNAzureDragon.blp")
+    udg_QWiverna = GetLastCreatedQuestBJ()
 end
 
 function InitTrig_MerchEndCinematic1()
-gg_trg_MerchEndCinematic1 = CreateTrigger()
-TriggerAddAction(gg_trg_MerchEndCinematic1, Trig_MerchEndCinematic1_Actions)
+    gg_trg_MerchEndCinematic1 = CreateTrigger()
+    TriggerAddAction(gg_trg_MerchEndCinematic1, Trig_MerchEndCinematic1_Actions)
 end
 
 function Trig_SkipMerchCinematic_Actions()
-udg_SkipMerchCinematic = true
-CameraSetupApplyForPlayer(true, gg_cam_ResetCam, Player(0), 1.00)
-DisableTrigger(GetTriggeringTrigger())
-CinematicModeBJ(false, GetPlayersAll())
-    CustomCinematicMode(false)
-ConditionalTriggerExecute(gg_trg_MerchEndCinematic1)
+    udg_SkipMerchCinematic = true
+    CameraSetupApplyForPlayer(true, gg_cam_ResetCam, Player(0), 1.00)
+    DisableTrigger(GetTriggeringTrigger())
+    CinematicModeBJ(false, GetPlayersAll())
+        CustomCinematicMode(false)
+    ConditionalTriggerExecute(gg_trg_MerchEndCinematic1)
 end
 
 function InitTrig_SkipMerchCinematic()
-gg_trg_SkipMerchCinematic = CreateTrigger()
-DisableTrigger(gg_trg_SkipMerchCinematic)
-TriggerRegisterPlayerEventEndCinematic(gg_trg_SkipMerchCinematic, Player(0))
-TriggerAddAction(gg_trg_SkipMerchCinematic, Trig_SkipMerchCinematic_Actions)
+    gg_trg_SkipMerchCinematic = CreateTrigger()
+    DisableTrigger(gg_trg_SkipMerchCinematic)
+    TriggerRegisterPlayerEventEndCinematic(gg_trg_SkipMerchCinematic, Player(0))
+    TriggerAddAction(gg_trg_SkipMerchCinematic, Trig_SkipMerchCinematic_Actions)
 end
 
 function Trig_EndBoss_Actions()
-KillDestructable(gg_dest_B007_5312)
-QuestSetCompletedBJ(udg_QDragon, true)
+    KillDestructable(gg_dest_B007_5312)
+    QuestSetCompletedBJ(udg_QDragon, true)
 end
 
 function InitTrig_EndBoss()
-gg_trg_EndBoss = CreateTrigger()
-TriggerRegisterUnitEvent(gg_trg_EndBoss, gg_unit_n001_0009, EVENT_UNIT_DEATH)
-TriggerAddAction(gg_trg_EndBoss, Trig_EndBoss_Actions)
+    gg_trg_EndBoss = CreateTrigger()
+    TriggerRegisterUnitEvent(gg_trg_EndBoss, gg_unit_n001_0009, EVENT_UNIT_DEATH)
+    TriggerAddAction(gg_trg_EndBoss, Trig_EndBoss_Actions)
 end
 
 function Trig_StartDragonCinematic_Conditions()
-if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
-return false
-end
-return true
+    if (not (GetOwningPlayer(GetTriggerUnit()) == Player(0))) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartDragonCinematic_Func011C()
-if (not (udg_SkipDragon == true)) then
-return false
-end
-return true
+    if (not (udg_SkipDragon == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartDragonCinematic_Func015C()
-if (not (udg_SkipDragon == true)) then
-return false
-end
-return true
+    if (not (udg_SkipDragon == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartDragonCinematic_Func021C()
-if (not (udg_SkipDragon == true)) then
-return false
-end
-return true
+    if (not (udg_SkipDragon == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartDragonCinematic_Func024C()
-if (not (udg_SkipDragon == true)) then
-return false
-end
-return true
+    if (not (udg_SkipDragon == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartDragonCinematic_Actions()
-DisableTrigger(GetTriggeringTrigger())
-EnableTrigger(gg_trg_SkipDragon)
-PlaySoundBJ(udg_SHlop)
-CinematicModeBJ(true, GetPlayersAll())
-CinematicFadeBJ(bj_CINEFADETYPE_FADEOUT, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
-SetUnitTimeScalePercent(gg_unit_n001_0009, 600.00)
-CameraSetupApplyForPlayer(true, gg_cam_PeonLookOnPrise, Player(0), 0.00)
-ResetUnitAnimation(GetTriggerUnit())
-CinematicFadeBJ(bj_CINEFADETYPE_FADEIN, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), GetTriggerUnit(), "TRIGSTR_704", gg_snd_oanenashilietopodarki, "TRIGSTR_705", bj_TIMETYPE_ADD, 0.00, true)
-if (Trig_StartDragonCinematic_Func011C()) then
-return 
-else
-end
-PanCameraToTimedLocForPlayer(Player(0), GetUnitLoc(gg_unit_n001_0009), 2.00)
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), GetTriggerUnit(), "TRIGSTR_706", gg_snd_fyyachtoetozazvyki, "TRIGSTR_707", bj_TIMETYPE_ADD, 0.00, true)
-SetUnitTimeScalePercent(gg_unit_n001_0009, 0.00)
-if (Trig_StartDragonCinematic_Func015C()) then
-return 
-else
-end
-KillSoundWhenDoneBJ(udg_SHlop)
-DisableTrigger(gg_trg_Cum)
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_n001_0009, "TRIGSTR_710", gg_snd_15, "TRIGSTR_711", bj_TIMETYPE_ADD, 0.00, true)
-SetUnitTimeScalePercent(gg_unit_n001_0009, 100.00)
-QueueUnitAnimationBJ(gg_unit_n001_0009, "Walk")
-if (Trig_StartDragonCinematic_Func021C()) then
-return 
-else
-end
-SetUnitFacingToFaceUnitTimed(gg_unit_n001_0009, GetTriggerUnit(), 0)
-ResetUnitAnimation(gg_unit_n001_0009)
-if (Trig_StartDragonCinematic_Func024C()) then
-return 
-else
-end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_n001_0009, "TRIGSTR_708", gg_snd_16, "TRIGSTR_709", bj_TIMETYPE_ADD, 0.00, true)
-ConditionalTriggerExecute(gg_trg_SkipDragon)
+    DisableTrigger(GetTriggeringTrigger())
+    EnableTrigger(gg_trg_SkipDragon)
+    PlaySoundBJ(udg_SHlop)
+    CinematicModeBJ(true, GetPlayersAll())
+    CinematicFadeBJ(bj_CINEFADETYPE_FADEOUT, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
+    SetUnitTimeScalePercent(gg_unit_n001_0009, 600.00)
+    CameraSetupApplyForPlayer(true, gg_cam_PeonLookOnPrise, Player(0), 0.00)
+    ResetUnitAnimation(GetTriggerUnit())
+    CinematicFadeBJ(bj_CINEFADETYPE_FADEIN, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), GetTriggerUnit(), "TRIGSTR_704", gg_snd_oanenashilietopodarki, "TRIGSTR_705", bj_TIMETYPE_ADD, 0.00, true)
+    if (Trig_StartDragonCinematic_Func011C()) then
+        return 
+    else
+    end
+    PanCameraToTimedLocForPlayer(Player(0), GetUnitLoc(gg_unit_n001_0009), 2.00)
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), GetTriggerUnit(), "TRIGSTR_706", gg_snd_fyyachtoetozazvyki, "TRIGSTR_707", bj_TIMETYPE_ADD, 0.00, true)
+    SetUnitTimeScalePercent(gg_unit_n001_0009, 0.00)
+    if (Trig_StartDragonCinematic_Func015C()) then
+        return 
+    else
+    end
+    KillSoundWhenDoneBJ(udg_SHlop)
+    DisableTrigger(gg_trg_Cum)
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_n001_0009, "TRIGSTR_710", gg_snd_15, "TRIGSTR_711", bj_TIMETYPE_ADD, 0.00, true)
+    SetUnitTimeScalePercent(gg_unit_n001_0009, 100.00)
+    QueueUnitAnimationBJ(gg_unit_n001_0009, "Walk")
+    if (Trig_StartDragonCinematic_Func021C()) then
+        return 
+    else
+    end
+    SetUnitFacingToFaceUnitTimed(gg_unit_n001_0009, GetTriggerUnit(), 0)
+    ResetUnitAnimation(gg_unit_n001_0009)
+    if (Trig_StartDragonCinematic_Func024C()) then
+        return 
+    else
+    end
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_n001_0009, "TRIGSTR_708", gg_snd_16, "TRIGSTR_709", bj_TIMETYPE_ADD, 0.00, true)
+    ConditionalTriggerExecute(gg_trg_SkipDragon)
 end
 
 function InitTrig_StartDragonCinematic()
-gg_trg_StartDragonCinematic = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_StartDragonCinematic, gg_rct_InitStartDragon)
-TriggerAddCondition(gg_trg_StartDragonCinematic, Condition(Trig_StartDragonCinematic_Conditions))
-TriggerAddAction(gg_trg_StartDragonCinematic, Trig_StartDragonCinematic_Actions)
+    gg_trg_StartDragonCinematic = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_StartDragonCinematic, gg_rct_InitStartDragon)
+    TriggerAddCondition(gg_trg_StartDragonCinematic, Condition(Trig_StartDragonCinematic_Conditions))
+    TriggerAddAction(gg_trg_StartDragonCinematic, Trig_StartDragonCinematic_Actions)
 end
 
 function Trig_SkipDragon_Actions()
-udg_SkipDragon = true
-KillSoundWhenDoneBJ(udg_SHlop)
-CameraSetupApplyForPlayer(true, gg_cam_ResetCam, Player(0), 1.00)
-SetUnitTimeScalePercent(gg_unit_n001_0009, 100.00)
-DisableTrigger(gg_trg_Cum)
-DisableTrigger(GetTriggeringTrigger())
-CinematicModeBJ(false, GetPlayersAll())
-    CustomCinematicMode(false)
-    StartDragonAI(GetUnitXY(gg_unit_n001_0009))
+    udg_SkipDragon = true
+    KillSoundWhenDoneBJ(udg_SHlop)
+    CameraSetupApplyForPlayer(true, gg_cam_ResetCam, Player(0), 1.00)
+    SetUnitTimeScalePercent(gg_unit_n001_0009, 100.00)
+    DisableTrigger(gg_trg_Cum)
+    DisableTrigger(GetTriggeringTrigger())
+    CinematicModeBJ(false, GetPlayersAll())
+        CustomCinematicMode(false)
+        StartDragonAI(GetUnitXY(gg_unit_n001_0009))
 end
 
 function InitTrig_SkipDragon()
-gg_trg_SkipDragon = CreateTrigger()
-DisableTrigger(gg_trg_SkipDragon)
-TriggerRegisterPlayerEventEndCinematic(gg_trg_SkipDragon, Player(0))
-TriggerAddAction(gg_trg_SkipDragon, Trig_SkipDragon_Actions)
+    gg_trg_SkipDragon = CreateTrigger()
+    DisableTrigger(gg_trg_SkipDragon)
+    TriggerRegisterPlayerEventEndCinematic(gg_trg_SkipDragon, Player(0))
+    TriggerAddAction(gg_trg_SkipDragon, Trig_SkipDragon_Actions)
 end
 
 function Trig_Cum_Actions()
-QueueUnitAnimationBJ(gg_unit_n001_0009, "Attack")
+    QueueUnitAnimationBJ(gg_unit_n001_0009, "Attack")
 end
 
 function InitTrig_Cum()
-gg_trg_Cum = CreateTrigger()
-TriggerRegisterTimerEventPeriodic(gg_trg_Cum, 0.05)
-TriggerAddAction(gg_trg_Cum, Trig_Cum_Actions)
+    gg_trg_Cum = CreateTrigger()
+    TriggerRegisterTimerEventPeriodic(gg_trg_Cum, 0.05)
+    TriggerAddAction(gg_trg_Cum, Trig_Cum_Actions)
 end
 
 function Trig_FromWolfCave_Func001C()
-if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-return false
-end
-if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
-return false
-end
-return true
+    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+        return false
+    end
+    if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
+        return false
+    end
+    return true
 end
 
 function Trig_FromWolfCave_Conditions()
-if (not Trig_FromWolfCave_Func001C()) then
-return false
-end
-return true
+    if (not Trig_FromWolfCave_Func001C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_FromWolfCave_Actions()
-SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_EnterWolf))
+    SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_EnterWolf))
 end
 
 function InitTrig_FromWolfCave()
-gg_trg_FromWolfCave = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_FromWolfCave, gg_rct_Towolf)
-TriggerAddCondition(gg_trg_FromWolfCave, Condition(Trig_FromWolfCave_Conditions))
-TriggerAddAction(gg_trg_FromWolfCave, Trig_FromWolfCave_Actions)
+    gg_trg_FromWolfCave = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_FromWolfCave, gg_rct_Towolf)
+    TriggerAddCondition(gg_trg_FromWolfCave, Condition(Trig_FromWolfCave_Conditions))
+    TriggerAddAction(gg_trg_FromWolfCave, Trig_FromWolfCave_Actions)
 end
 
 function Trig_ExitWolf_Func001Func001C()
-if (not (udg_WolfIsDie == true)) then
-return false
-end
-return true
+    if (not (udg_WolfIsDie == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_ExitWolf_Func001Func002C()
-if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-return false
-end
-if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
-return false
-end
-return true
+    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+        return false
+    end
+    if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
+        return false
+    end
+    return true
 end
 
 function Trig_ExitWolf_Func001C()
-if (Trig_ExitWolf_Func001Func001C()) then
-return true
-end
-if (Trig_ExitWolf_Func001Func002C()) then
-return true
-end
-return false
+    if (Trig_ExitWolf_Func001Func001C()) then
+        return true
+    end
+    if (Trig_ExitWolf_Func001Func002C()) then
+        return true
+    end
+    return false
 end
 
 function Trig_ExitWolf_Conditions()
-if (not Trig_ExitWolf_Func001C()) then
-return false
-end
-return true
+    if (not Trig_ExitWolf_Func001C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_ExitWolf_Actions()
-SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_FromWolf))
+    SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_FromWolf))
 end
 
 function InitTrig_ExitWolf()
-gg_trg_ExitWolf = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_ExitWolf, gg_rct_ExitWolf)
-TriggerAddCondition(gg_trg_ExitWolf, Condition(Trig_ExitWolf_Conditions))
-TriggerAddAction(gg_trg_ExitWolf, Trig_ExitWolf_Actions)
+    gg_trg_ExitWolf = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_ExitWolf, gg_rct_ExitWolf)
+    TriggerAddCondition(gg_trg_ExitWolf, Condition(Trig_ExitWolf_Conditions))
+    TriggerAddAction(gg_trg_ExitWolf, Trig_ExitWolf_Actions)
 end
 
 function Trig_ExitOnWolf_Func001C()
-if (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true) then
-return true
-end
-if (IsUnitAlly(GetTriggerUnit(), Player(0)) == true) then
-return true
-end
-return false
+    if (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true) then
+        return true
+    end
+    if (IsUnitAlly(GetTriggerUnit(), Player(0)) == true) then
+        return true
+    end
+    return false
 end
 
 function Trig_ExitOnWolf_Conditions()
-if (not Trig_ExitOnWolf_Func001C()) then
-return false
-end
-return true
+    if (not Trig_ExitOnWolf_Func001C()) then
+        return false
+    end
+    return true
 end
 
 function Trig_ExitOnWolf_Actions()
-CinematicModeBJ(true, GetPlayersAll())
-ResetUnitAnimation(GetTriggerUnit())
-ResetUnitAnimation(udg_HERO)
-    CustomCinematicMode(true)
-DisableTrigger(GetTriggeringTrigger())
-CinematicFadeBJ(bj_CINEFADETYPE_FADEOUT, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
-TriggerSleepAction(1.00)
-CameraSetupApplyForPlayer(true, gg_cam_WolfEnd, Player(0), 0.00)
-PanCameraToTimedLocForPlayer(Player(0), GetUnitLoc(GetTriggerUnit()), 1.00)
-CinematicFadeBJ(bj_CINEFADETYPE_FADEIN, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), GetTriggerUnit(), "TRIGSTR_757", gg_snd_WolfCinematic3, "TRIGSTR_758", bj_TIMETYPE_ADD, 0.00, true)
-ResetUnitAnimation(GetTriggerUnit())
-ResetUnitAnimation(udg_HERO)
-    DestroyEffect(HERO[0].peonAttach)
-ShowUnitShow(udg_HERO)
-SetUnitPositionLoc(udg_HERO, GetRectCenter(gg_rct_EnterTrap))
-SetUnitFacingToFaceUnitTimed(GetTriggerUnit(), udg_HERO, 0)
-SetUnitFacingToFaceUnitTimed(udg_HERO, GetTriggerUnit(), 0)
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_759", gg_snd_PenFromWolf5, "TRIGSTR_760", bj_TIMETYPE_ADD, 0.00, true)
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), GetTriggerUnit(), "TRIGSTR_761", nil, "TRIGSTR_762", bj_TIMETYPE_ADD, 0.00, true)
-IssuePointOrderLocBJ(GetTriggerUnit(), "attack", GetRectCenter(gg_rct_FromWolf))
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_763", gg_snd_PenFromWolf6, "TRIGSTR_764", bj_TIMETYPE_ADD, 0.00, true)
-    HERO[0].UnitHero=udg_HERO
-    InitAnimations(udg_HERO, HERO[0])
-CinematicModeBJ(false, GetPlayersAll())
-    CustomCinematicMode(false)
-SetUnitInvulnerable(GetTriggerUnit(), true)
-UnitRemoveAbilityBJ(FourCC("Abun"), GetTriggerUnit())
-QuestSetCompletedBJ(udg_QWolf, true)
-    ITSATRAP=false
+    CinematicModeBJ(true, GetPlayersAll())
+    ResetUnitAnimation(GetTriggerUnit())
+    ResetUnitAnimation(udg_HERO)
+        CustomCinematicMode(true)
+    DisableTrigger(GetTriggeringTrigger())
+    CinematicFadeBJ(bj_CINEFADETYPE_FADEOUT, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
+    TriggerSleepAction(1.00)
+    CameraSetupApplyForPlayer(true, gg_cam_WolfEnd, Player(0), 0.00)
+    PanCameraToTimedLocForPlayer(Player(0), GetUnitLoc(GetTriggerUnit()), 1.00)
+    CinematicFadeBJ(bj_CINEFADETYPE_FADEIN, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), GetTriggerUnit(), "TRIGSTR_757", gg_snd_WolfCinematic3, "TRIGSTR_758", bj_TIMETYPE_ADD, 0.00, true)
+    ResetUnitAnimation(GetTriggerUnit())
+    ResetUnitAnimation(udg_HERO)
+        DestroyEffect(HERO[0].peonAttach)
+    ShowUnitShow(udg_HERO)
+    SetUnitPositionLoc(udg_HERO, GetRectCenter(gg_rct_EnterTrap))
+    SetUnitFacingToFaceUnitTimed(GetTriggerUnit(), udg_HERO, 0)
+    SetUnitFacingToFaceUnitTimed(udg_HERO, GetTriggerUnit(), 0)
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_759", gg_snd_PenFromWolf5, "TRIGSTR_760", bj_TIMETYPE_ADD, 0.00, true)
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), GetTriggerUnit(), "TRIGSTR_761", nil, "TRIGSTR_762", bj_TIMETYPE_ADD, 0.00, true)
+    IssuePointOrderLocBJ(GetTriggerUnit(), "attack", GetRectCenter(gg_rct_FromWolf))
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_763", gg_snd_PenFromWolf6, "TRIGSTR_764", bj_TIMETYPE_ADD, 0.00, true)
+        HERO[0].UnitHero=udg_HERO
+        InitAnimations(udg_HERO, HERO[0])
+    CinematicModeBJ(false, GetPlayersAll())
+        CustomCinematicMode(false)
+    SetUnitInvulnerable(GetTriggerUnit(), true)
+    UnitRemoveAbilityBJ(FourCC("Abun"), GetTriggerUnit())
+    QuestSetCompletedBJ(udg_QWolf, true)
+        ITSATRAP=false
 end
 
 function InitTrig_ExitOnWolf()
-gg_trg_ExitOnWolf = CreateTrigger()
-DisableTrigger(gg_trg_ExitOnWolf)
-TriggerRegisterEnterRectSimple(gg_trg_ExitOnWolf, gg_rct_EnterTrap)
-TriggerAddCondition(gg_trg_ExitOnWolf, Condition(Trig_ExitOnWolf_Conditions))
-TriggerAddAction(gg_trg_ExitOnWolf, Trig_ExitOnWolf_Actions)
+    gg_trg_ExitOnWolf = CreateTrigger()
+    DisableTrigger(gg_trg_ExitOnWolf)
+    TriggerRegisterEnterRectSimple(gg_trg_ExitOnWolf, gg_rct_EnterTrap)
+    TriggerAddCondition(gg_trg_ExitOnWolf, Condition(Trig_ExitOnWolf_Conditions))
+    TriggerAddAction(gg_trg_ExitOnWolf, Trig_ExitOnWolf_Actions)
 end
 
 function Trig_DeathWolf_Actions()
-EnableTrigger(gg_trg_ExitOnWolf)
-udg_WolfIsDie = true
+    EnableTrigger(gg_trg_ExitOnWolf)
+    udg_WolfIsDie = true
 end
 
 function InitTrig_DeathWolf()
-gg_trg_DeathWolf = CreateTrigger()
-TriggerRegisterUnitEvent(gg_trg_DeathWolf, gg_unit_n002_0045, EVENT_UNIT_DEATH)
-TriggerAddAction(gg_trg_DeathWolf, Trig_DeathWolf_Actions)
+    gg_trg_DeathWolf = CreateTrigger()
+    TriggerRegisterUnitEvent(gg_trg_DeathWolf, gg_unit_n002_0045, EVENT_UNIT_DEATH)
+    TriggerAddAction(gg_trg_DeathWolf, Trig_DeathWolf_Actions)
 end
 
 function Trig_WolfCinematic_Conditions()
-if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-return false
-end
-return true
+    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_WolfCinematic_Actions()
-DisableTrigger(GetTriggeringTrigger())
-    CustomCinematicMode(true)
-CinematicModeBJ(true, GetPlayersAll())
-CinematicFadeBJ(bj_CINEFADETYPE_FADEOUT, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
-CinematicFadeBJ(bj_CINEFADETYPE_FADEIN, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
-CameraSetupApplyForPlayer(true, gg_cam_SeeOnWolf, Player(0), 0.00)
-IssuePointOrderLocBJ(GetTriggerUnit(), "move", GetRectCenter(gg_rct_Region_019))
-SetCameraTargetControllerNoZForPlayer(Player(0), GetTriggerUnit(), 0, 0, false)
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_765", gg_snd_PenFromWolf1, "TRIGSTR_766", bj_TIMETYPE_ADD, 0.00, true)
-PanCameraToTimedLocForPlayer(Player(0), GetUnitLoc(gg_unit_n002_0045), 1.00)
-IssuePointOrderLocBJ(GetTriggerUnit(), "move", GetRectCenter(gg_rct_Region_019))
-TriggerSleepAction(1.00)
-IssuePointOrderLocBJ(GetTriggerUnit(), "move", GetRectCenter(gg_rct_Region_019))
-RotateCameraAroundLocBJ(360.00, GetUnitLoc(gg_unit_n002_0045), Player(0), 6.00)
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_767", gg_snd_PenFromWolf2, "TRIGSTR_768", bj_TIMETYPE_ADD, 0.00, true)
-SetCameraTargetControllerNoZForPlayer(Player(0), gg_unit_n002_0045, 0, 0, false)
-SetUnitFacingToFaceUnitTimed(gg_unit_n002_0045, GetTriggerUnit(), 0)
-RotateCameraAroundLocBJ(-180.00, GetUnitLoc(gg_unit_n002_0045), Player(0), 12.00)
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_n002_0045, "TRIGSTR_769", gg_snd_WolfCinematic1, "TRIGSTR_770", bj_TIMETYPE_ADD, 0.00, true)
-SetUnitAnimation(gg_unit_n002_0045, "Attack")
-QueueUnitAnimationBJ(gg_unit_n002_0045, "stand")
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_771", gg_snd_PenFromWolf3, "TRIGSTR_772", bj_TIMETYPE_ADD, 0.00, true)
-SetUnitAnimation(gg_unit_n002_0045, "Attack")
-QueueUnitAnimationBJ(gg_unit_n002_0045, "stand")
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_n002_0045, "TRIGSTR_773", gg_snd_WolfCinematic2, "TRIGSTR_774", bj_TIMETYPE_ADD, 0.00, true)
-IssuePointOrderLocBJ(GetTriggerUnit(), "move", GetUnitLoc(gg_unit_n002_0045))
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_775", gg_snd_PenFromWolf4, "TRIGSTR_776", bj_TIMETYPE_ADD, 0.00, true)
-TriggerExecute(gg_trg_SkipWolf)
+    DisableTrigger(GetTriggeringTrigger())
+        CustomCinematicMode(true)
+    CinematicModeBJ(true, GetPlayersAll())
+    CinematicFadeBJ(bj_CINEFADETYPE_FADEOUT, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
+    CinematicFadeBJ(bj_CINEFADETYPE_FADEIN, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
+    CameraSetupApplyForPlayer(true, gg_cam_SeeOnWolf, Player(0), 0.00)
+    IssuePointOrderLocBJ(GetTriggerUnit(), "move", GetRectCenter(gg_rct_Region_019))
+    SetCameraTargetControllerNoZForPlayer(Player(0), GetTriggerUnit(), 0, 0, false)
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_765", gg_snd_PenFromWolf1, "TRIGSTR_766", bj_TIMETYPE_ADD, 0.00, true)
+    PanCameraToTimedLocForPlayer(Player(0), GetUnitLoc(gg_unit_n002_0045), 1.00)
+    IssuePointOrderLocBJ(GetTriggerUnit(), "move", GetRectCenter(gg_rct_Region_019))
+    TriggerSleepAction(1.00)
+    IssuePointOrderLocBJ(GetTriggerUnit(), "move", GetRectCenter(gg_rct_Region_019))
+    RotateCameraAroundLocBJ(360.00, GetUnitLoc(gg_unit_n002_0045), Player(0), 6.00)
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_767", gg_snd_PenFromWolf2, "TRIGSTR_768", bj_TIMETYPE_ADD, 0.00, true)
+    SetCameraTargetControllerNoZForPlayer(Player(0), gg_unit_n002_0045, 0, 0, false)
+    SetUnitFacingToFaceUnitTimed(gg_unit_n002_0045, GetTriggerUnit(), 0)
+    RotateCameraAroundLocBJ(-180.00, GetUnitLoc(gg_unit_n002_0045), Player(0), 12.00)
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_n002_0045, "TRIGSTR_769", gg_snd_WolfCinematic1, "TRIGSTR_770", bj_TIMETYPE_ADD, 0.00, true)
+    SetUnitAnimation(gg_unit_n002_0045, "Attack")
+    QueueUnitAnimationBJ(gg_unit_n002_0045, "stand")
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_771", gg_snd_PenFromWolf3, "TRIGSTR_772", bj_TIMETYPE_ADD, 0.00, true)
+    SetUnitAnimation(gg_unit_n002_0045, "Attack")
+    QueueUnitAnimationBJ(gg_unit_n002_0045, "stand")
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_n002_0045, "TRIGSTR_773", gg_snd_WolfCinematic2, "TRIGSTR_774", bj_TIMETYPE_ADD, 0.00, true)
+    IssuePointOrderLocBJ(GetTriggerUnit(), "move", GetUnitLoc(gg_unit_n002_0045))
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_775", gg_snd_PenFromWolf4, "TRIGSTR_776", bj_TIMETYPE_ADD, 0.00, true)
+    TriggerExecute(gg_trg_SkipWolf)
 end
 
 function InitTrig_WolfCinematic()
-gg_trg_WolfCinematic = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_WolfCinematic, gg_rct_EnterWolf)
-TriggerAddCondition(gg_trg_WolfCinematic, Condition(Trig_WolfCinematic_Conditions))
-TriggerAddAction(gg_trg_WolfCinematic, Trig_WolfCinematic_Actions)
+    gg_trg_WolfCinematic = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_WolfCinematic, gg_rct_EnterWolf)
+    TriggerAddCondition(gg_trg_WolfCinematic, Condition(Trig_WolfCinematic_Conditions))
+    TriggerAddAction(gg_trg_WolfCinematic, Trig_WolfCinematic_Actions)
 end
 
 function Trig_SkipWolf_Actions()
-CameraSetupApplyForPlayer(true, gg_cam_ResetCam, Player(0), 1.00)
-CinematicModeBJ(false, GetPlayersAll())
-    CustomCinematicMode(false)
+    CameraSetupApplyForPlayer(true, gg_cam_ResetCam, Player(0), 1.00)
+    CinematicModeBJ(false, GetPlayersAll())
+        CustomCinematicMode(false)
 end
 
 function InitTrig_SkipWolf()
-gg_trg_SkipWolf = CreateTrigger()
-TriggerAddAction(gg_trg_SkipWolf, Trig_SkipWolf_Actions)
+    gg_trg_SkipWolf = CreateTrigger()
+    TriggerAddAction(gg_trg_SkipWolf, Trig_SkipWolf_Actions)
 end
 
 function Trig_BoundEnter_Conditions()
-if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-return false
-end
-return true
+    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_BoundEnter_Actions()
-SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_EnterTrap))
-SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_TrapZone)
-    ClearMapMusicBJ()
-    PlayMusicBJ("Salve Springs")
-    CreateEnteringFrame(nil, "Волчье логово")
+    SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_EnterTrap))
+    SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_TrapZone)
+        ClearMapMusicBJ()
+        PlayMusicBJ("Salve Springs")
+        CreateEnteringFrame(nil, "Волчье логово")
 end
 
 function InitTrig_BoundEnter()
-gg_trg_BoundEnter = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_BoundEnter, gg_rct_Region_004)
-TriggerAddCondition(gg_trg_BoundEnter, Condition(Trig_BoundEnter_Conditions))
-TriggerAddAction(gg_trg_BoundEnter, Trig_BoundEnter_Actions)
+    gg_trg_BoundEnter = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_BoundEnter, gg_rct_Region_004)
+    TriggerAddCondition(gg_trg_BoundEnter, Condition(Trig_BoundEnter_Conditions))
+    TriggerAddAction(gg_trg_BoundEnter, Trig_BoundEnter_Actions)
 end
 
 function Trig_BoundEnterOnce_Conditions()
-if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-return false
-end
-return true
+    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_BoundEnterOnce_Actions()
-    InitAllTraps()
-DisableTrigger(GetTriggeringTrigger())
+        InitAllTraps()
+    DisableTrigger(GetTriggeringTrigger())
 end
 
 function InitTrig_BoundEnterOnce()
-gg_trg_BoundEnterOnce = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_BoundEnterOnce, gg_rct_Region_004)
-TriggerAddCondition(gg_trg_BoundEnterOnce, Condition(Trig_BoundEnterOnce_Conditions))
-TriggerAddAction(gg_trg_BoundEnterOnce, Trig_BoundEnterOnce_Actions)
+    gg_trg_BoundEnterOnce = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_BoundEnterOnce, gg_rct_Region_004)
+    TriggerAddCondition(gg_trg_BoundEnterOnce, Condition(Trig_BoundEnterOnce_Conditions))
+    TriggerAddAction(gg_trg_BoundEnterOnce, Trig_BoundEnterOnce_Actions)
 end
 
 function Trig_Exit_Conditions()
-if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-return false
-end
-return true
+    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_Exit_Actions()
-SetCameraBoundsToRectForPlayerBJ(Player(0), GetPlayableMapRect())
-SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_ExitTrapZone))
-    ClearMapMusicBJ()
-    PlayMusicBJ("Endless Snowbanks")
-    CreateEnteringFrame(nil, "Деревня пеонов")
+    SetCameraBoundsToRectForPlayerBJ(Player(0), GetPlayableMapRect())
+    SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_ExitTrapZone))
+        ClearMapMusicBJ()
+        PlayMusicBJ("Endless Snowbanks")
+        CreateEnteringFrame(nil, "Деревня пеонов")
 end
 
 function InitTrig_Exit()
-gg_trg_Exit = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_Exit, gg_rct_ExitTrap)
-TriggerAddCondition(gg_trg_Exit, Condition(Trig_Exit_Conditions))
-TriggerAddAction(gg_trg_Exit, Trig_Exit_Actions)
+    gg_trg_Exit = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_Exit, gg_rct_ExitTrap)
+    TriggerAddCondition(gg_trg_Exit, Condition(Trig_Exit_Conditions))
+    TriggerAddAction(gg_trg_Exit, Trig_Exit_Actions)
 end
 
 function Trig_InitGUI_Actions()
-UseTimeOfDayBJ(false)
+    UseTimeOfDayBJ(false)
 end
 
 function InitTrig_InitGUI()
-gg_trg_InitGUI = CreateTrigger()
-TriggerRegisterTimerEventSingle(gg_trg_InitGUI, 0.10)
-TriggerAddAction(gg_trg_InitGUI, Trig_InitGUI_Actions)
+    gg_trg_InitGUI = CreateTrigger()
+    TriggerRegisterTimerEventSingle(gg_trg_InitGUI, 0.10)
+    TriggerAddAction(gg_trg_InitGUI, Trig_InitGUI_Actions)
 end
 
 function Trig_StartIntro_Func002C()
-if (not (udg_PressESC == true)) then
-return false
-end
-return true
+    if (not (udg_PressESC == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartIntro_Func004C()
-if (not (udg_PressESC == true)) then
-return false
-end
-return true
+    if (not (udg_PressESC == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartIntro_Func006C()
-if (not (udg_PressESC == true)) then
-return false
-end
-return true
+    if (not (udg_PressESC == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartIntro_Func008C()
-if (not (udg_PressESC == true)) then
-return false
-end
-return true
+    if (not (udg_PressESC == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartIntro_Func010C()
-if (not (udg_PressESC == true)) then
-return false
-end
-return true
+    if (not (udg_PressESC == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartIntro_Func012C()
-if (not (udg_PressESC == true)) then
-return false
-end
-return true
+    if (not (udg_PressESC == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartIntro_Func014C()
-if (not (udg_PressESC == true)) then
-return false
-end
-return true
+    if (not (udg_PressESC == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartIntro_Func016C()
-if (not (udg_PressESC == true)) then
-return false
-end
-return true
+    if (not (udg_PressESC == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartIntro_Func018C()
-if (not (udg_PressESC == true)) then
-return false
-end
-return true
+    if (not (udg_PressESC == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartIntro_Func020C()
-if (not (udg_PressESC == true)) then
-return false
-end
-return true
+    if (not (udg_PressESC == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartIntro_Func022C()
-if (not (udg_PressESC == true)) then
-return false
-end
-return true
+    if (not (udg_PressESC == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartIntro_Func025C()
-if (not (udg_PressESC == true)) then
-return false
-end
-return true
+    if (not (udg_PressESC == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartIntro_Func027C()
-if (not (udg_PressESC == true)) then
-return false
-end
-return true
+    if (not (udg_PressESC == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartIntro_Func029C()
-if (not (udg_PressESC == true)) then
-return false
-end
-return true
+    if (not (udg_PressESC == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartIntro_Func031C()
-if (not (udg_PressESC == true)) then
-return false
-end
-return true
+    if (not (udg_PressESC == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartIntro_Func033C()
-if (not (udg_PressESC == true)) then
-return false
-end
-return true
+    if (not (udg_PressESC == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartIntro_Func035C()
-if (not (udg_PressESC == true)) then
-return false
-end
-return true
+    if (not (udg_PressESC == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartIntro_Func037C()
-if (not (udg_PressESC == true)) then
-return false
-end
-return true
+    if (not (udg_PressESC == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartIntro_Func039C()
-if (not (udg_PressESC == true)) then
-return false
-end
-return true
+    if (not (udg_PressESC == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartIntro_Func041C()
-if (not (udg_PressESC == true)) then
-return false
-end
-return true
+    if (not (udg_PressESC == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartIntro_Func043C()
-if (not (udg_PressESC == true)) then
-return false
-end
-return true
+    if (not (udg_PressESC == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartIntro_Func046C()
-if (not (udg_PressESC == true)) then
-return false
-end
-return true
+    if (not (udg_PressESC == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartIntro_Func048C()
-if (not (udg_PressESC == true)) then
-return false
-end
-return true
+    if (not (udg_PressESC == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartIntro_Func050C()
-if (not (udg_PressESC == true)) then
-return false
-end
-return true
+    if (not (udg_PressESC == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartIntro_Func052C()
-if (not (udg_PressESC == true)) then
-return false
-end
-return true
+    if (not (udg_PressESC == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_StartIntro_Actions()
-EnableTrigger(gg_trg_SkipIntro)
-if (Trig_StartIntro_Func002C()) then
-return 
-else
-end
-CinematicModeBJ(true, GetPlayersAll())
-if (Trig_StartIntro_Func004C()) then
-return 
-else
-end
-CameraSetupApplyForPlayer(true, gg_cam_OnPeonsandTrall, Player(0), 0)
-if (Trig_StartIntro_Func006C()) then
-return 
-else
-end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_627", gg_snd_Intro1, "TRIGSTR_628", bj_TIMETYPE_ADD, 0.00, true)
-if (Trig_StartIntro_Func008C()) then
-return 
-else
-end
-CameraSetupApplyForPlayer(true, gg_cam_OnPineRound, Player(0), 0.00)
-if (Trig_StartIntro_Func010C()) then
-return 
-else
-end
-RotateCameraAroundLocBJ(360.00, GetRectCenter(gg_rct_Region_024), Player(0), 5.00)
-if (Trig_StartIntro_Func012C()) then
-return 
-else
-end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_629", gg_snd_Intro2, "TRIGSTR_630", bj_TIMETYPE_ADD, 0.00, true)
-if (Trig_StartIntro_Func014C()) then
-return 
-else
-end
-CameraSetupApplyForPlayer(true, gg_cam_OnPeons, Player(0), 0.00)
-if (Trig_StartIntro_Func016C()) then
-return 
-else
-end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_631", gg_snd_Intro3, "TRIGSTR_632", bj_TIMETYPE_ADD, 0.00, true)
-if (Trig_StartIntro_Func018C()) then
-return 
-else
-end
-CameraSetupApplyForPlayer(true, gg_cam_MindPeon, Player(0), 0.00)
-if (Trig_StartIntro_Func020C()) then
-return 
-else
-end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_opeo_0024, "TRIGSTR_633", nil, "TRIGSTR_634", bj_TIMETYPE_ADD, 3.00, true)
-if (Trig_StartIntro_Func022C()) then
-return 
-else
-end
-CameraSetupApplyForPlayer(true, gg_cam_TrallSteal, Player(0), 0.00)
-    CreateCardFrame()
-if (Trig_StartIntro_Func025C()) then
-return 
-else
-end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_635", gg_snd_Intro4, "TRIGSTR_636", bj_TIMETYPE_ADD, 0.00, true)
-if (Trig_StartIntro_Func027C()) then
-return 
-else
-end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_637", gg_snd_Intro5, "TRIGSTR_638", bj_TIMETYPE_ADD, 0.00, true)
-if (Trig_StartIntro_Func029C()) then
-return 
-else
-end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_639", gg_snd_Intro6, "TRIGSTR_640", bj_TIMETYPE_ADD, 0.00, true)
-if (Trig_StartIntro_Func031C()) then
-return 
-else
-end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_641", gg_snd_Intro7, "TRIGSTR_642", bj_TIMETYPE_ADD, 0.00, true)
-if (Trig_StartIntro_Func033C()) then
-return 
-else
-end
-SetUnitAnimation(gg_unit_opeo_0013, "Death")
-if (Trig_StartIntro_Func035C()) then
-return 
-else
-end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_643", gg_snd_Intro8, "TRIGSTR_644", bj_TIMETYPE_ADD, 0.00, true)
-if (Trig_StartIntro_Func037C()) then
-return 
-else
-end
-SetUnitAnimation(gg_unit_opeo_0014, "Death")
-if (Trig_StartIntro_Func039C()) then
-return 
-else
-end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_645", gg_snd_Intro9, "TRIGSTR_646", bj_TIMETYPE_ADD, 0.00, true)
-if (Trig_StartIntro_Func041C()) then
-return 
-else
-end
-CameraSetupApplyForPlayer(true, gg_cam_Vine, Player(0), 0.00)
-if (Trig_StartIntro_Func043C()) then
-return 
-else
-end
-SetUnitAnimation(gg_unit_opeo_0015, "Death")
-    BlzFrameSetVisible(CardBox,false)
-if (Trig_StartIntro_Func046C()) then
-return 
-else
-end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_647", gg_snd_Intro10, "TRIGSTR_648", bj_TIMETYPE_ADD, 0.00, true)
-if (Trig_StartIntro_Func048C()) then
-return 
-else
-end
-CameraSetupApplyForPlayer(true, gg_cam_TrallSteal, Player(0), 0.00)
-if (Trig_StartIntro_Func050C()) then
-return 
-else
-end
-TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_649", gg_snd_Intro11, "TRIGSTR_650", bj_TIMETYPE_ADD, 0.00, true)
-if (Trig_StartIntro_Func052C()) then
-return 
-else
-end
-TriggerExecute(gg_trg_SkipIntro)
+    EnableTrigger(gg_trg_SkipIntro)
+    if (Trig_StartIntro_Func002C()) then
+        return 
+    else
+    end
+    CinematicModeBJ(true, GetPlayersAll())
+    if (Trig_StartIntro_Func004C()) then
+        return 
+    else
+    end
+    CameraSetupApplyForPlayer(true, gg_cam_OnPeonsandTrall, Player(0), 0)
+    if (Trig_StartIntro_Func006C()) then
+        return 
+    else
+    end
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_627", gg_snd_Intro1, "TRIGSTR_628", bj_TIMETYPE_ADD, 0.00, true)
+    if (Trig_StartIntro_Func008C()) then
+        return 
+    else
+    end
+    CameraSetupApplyForPlayer(true, gg_cam_OnPineRound, Player(0), 0.00)
+    if (Trig_StartIntro_Func010C()) then
+        return 
+    else
+    end
+    RotateCameraAroundLocBJ(360.00, GetRectCenter(gg_rct_Region_024), Player(0), 5.00)
+    if (Trig_StartIntro_Func012C()) then
+        return 
+    else
+    end
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_629", gg_snd_Intro2, "TRIGSTR_630", bj_TIMETYPE_ADD, 0.00, true)
+    if (Trig_StartIntro_Func014C()) then
+        return 
+    else
+    end
+    CameraSetupApplyForPlayer(true, gg_cam_OnPeons, Player(0), 0.00)
+    if (Trig_StartIntro_Func016C()) then
+        return 
+    else
+    end
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_631", gg_snd_Intro3, "TRIGSTR_632", bj_TIMETYPE_ADD, 0.00, true)
+    if (Trig_StartIntro_Func018C()) then
+        return 
+    else
+    end
+    CameraSetupApplyForPlayer(true, gg_cam_MindPeon, Player(0), 0.00)
+    if (Trig_StartIntro_Func020C()) then
+        return 
+    else
+    end
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_opeo_0024, "TRIGSTR_633", nil, "TRIGSTR_634", bj_TIMETYPE_ADD, 3.00, true)
+    if (Trig_StartIntro_Func022C()) then
+        return 
+    else
+    end
+    CameraSetupApplyForPlayer(true, gg_cam_TrallSteal, Player(0), 0.00)
+        CreateCardFrame()
+    if (Trig_StartIntro_Func025C()) then
+        return 
+    else
+    end
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_635", gg_snd_Intro4, "TRIGSTR_636", bj_TIMETYPE_ADD, 0.00, true)
+    if (Trig_StartIntro_Func027C()) then
+        return 
+    else
+    end
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_637", gg_snd_Intro5, "TRIGSTR_638", bj_TIMETYPE_ADD, 0.00, true)
+    if (Trig_StartIntro_Func029C()) then
+        return 
+    else
+    end
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_639", gg_snd_Intro6, "TRIGSTR_640", bj_TIMETYPE_ADD, 0.00, true)
+    if (Trig_StartIntro_Func031C()) then
+        return 
+    else
+    end
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_641", gg_snd_Intro7, "TRIGSTR_642", bj_TIMETYPE_ADD, 0.00, true)
+    if (Trig_StartIntro_Func033C()) then
+        return 
+    else
+    end
+    SetUnitAnimation(gg_unit_opeo_0013, "Death")
+    if (Trig_StartIntro_Func035C()) then
+        return 
+    else
+    end
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_643", gg_snd_Intro8, "TRIGSTR_644", bj_TIMETYPE_ADD, 0.00, true)
+    if (Trig_StartIntro_Func037C()) then
+        return 
+    else
+    end
+    SetUnitAnimation(gg_unit_opeo_0014, "Death")
+    if (Trig_StartIntro_Func039C()) then
+        return 
+    else
+    end
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_645", gg_snd_Intro9, "TRIGSTR_646", bj_TIMETYPE_ADD, 0.00, true)
+    if (Trig_StartIntro_Func041C()) then
+        return 
+    else
+    end
+    CameraSetupApplyForPlayer(true, gg_cam_Vine, Player(0), 0.00)
+    if (Trig_StartIntro_Func043C()) then
+        return 
+    else
+    end
+    SetUnitAnimation(gg_unit_opeo_0015, "Death")
+        BlzFrameSetVisible(CardBox,false)
+    if (Trig_StartIntro_Func046C()) then
+        return 
+    else
+    end
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_647", gg_snd_Intro10, "TRIGSTR_648", bj_TIMETYPE_ADD, 0.00, true)
+    if (Trig_StartIntro_Func048C()) then
+        return 
+    else
+    end
+    CameraSetupApplyForPlayer(true, gg_cam_TrallSteal, Player(0), 0.00)
+    if (Trig_StartIntro_Func050C()) then
+        return 
+    else
+    end
+    TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_Oths_0011, "TRIGSTR_649", gg_snd_Intro11, "TRIGSTR_650", bj_TIMETYPE_ADD, 0.00, true)
+    if (Trig_StartIntro_Func052C()) then
+        return 
+    else
+    end
+    TriggerExecute(gg_trg_SkipIntro)
 end
 
 function InitTrig_StartIntro()
-gg_trg_StartIntro = CreateTrigger()
-TriggerRegisterTimerEventSingle(gg_trg_StartIntro, 0.01)
-TriggerAddAction(gg_trg_StartIntro, Trig_StartIntro_Actions)
+    gg_trg_StartIntro = CreateTrigger()
+    TriggerRegisterTimerEventSingle(gg_trg_StartIntro, 0.01)
+    TriggerAddAction(gg_trg_StartIntro, Trig_StartIntro_Actions)
 end
 
 function Trig_SkipIntro_Actions()
-    BlzFrameSetVisible(CardBox,false)
-udg_PressESC = true
-DisableTrigger(GetTriggeringTrigger())
-DisableTrigger(gg_trg_StartIntro)
-CameraSetupApplyForPlayer(true, gg_cam_ResetCam, Player(0), 1.00)
-CinematicModeBJ(false, GetPlayersAll())
-    CreateWASDActions()
-EnablePreSelect(false, false)
-    InitMenu()
-    FREE_CAMERA=false
-    PlayMonoSpeech("Speech\\Peon\\OpyatOnRaskomandovalsa","Опять он раскомандовался")
+        BlzFrameSetVisible(CardBox,false)
+    udg_PressESC = true
+    DisableTrigger(GetTriggeringTrigger())
+    DisableTrigger(gg_trg_StartIntro)
+    CameraSetupApplyForPlayer(true, gg_cam_ResetCam, Player(0), 1.00)
+    CinematicModeBJ(false, GetPlayersAll())
+        CreateWASDActions()
+    EnablePreSelect(false, false)
+        InitMenu()
+        FREE_CAMERA=false
+        PlayMonoSpeech("Speech\\Peon\\OpyatOnRaskomandovalsa","Опять он раскомандовался")
 end
 
 function InitTrig_SkipIntro()
-gg_trg_SkipIntro = CreateTrigger()
-DisableTrigger(gg_trg_SkipIntro)
-TriggerRegisterPlayerEventEndCinematic(gg_trg_SkipIntro, Player(0))
-TriggerAddAction(gg_trg_SkipIntro, Trig_SkipIntro_Actions)
+    gg_trg_SkipIntro = CreateTrigger()
+    DisableTrigger(gg_trg_SkipIntro)
+    TriggerRegisterPlayerEventEndCinematic(gg_trg_SkipIntro, Player(0))
+    TriggerAddAction(gg_trg_SkipIntro, Trig_SkipIntro_Actions)
 end
 
 function Trig_ESCTEST_Actions()
 end
 
 function InitTrig_ESCTEST()
-gg_trg_ESCTEST = CreateTrigger()
-TriggerRegisterPlayerEventEndCinematic(gg_trg_ESCTEST, Player(0))
-TriggerAddAction(gg_trg_ESCTEST, Trig_ESCTEST_Actions)
+    gg_trg_ESCTEST = CreateTrigger()
+    TriggerRegisterPlayerEventEndCinematic(gg_trg_ESCTEST, Player(0))
+    TriggerAddAction(gg_trg_ESCTEST, Trig_ESCTEST_Actions)
 end
 
 function InitCustomTriggers()
-InitTrig_InitRoom14()
-InitTrig_InitRoom13()
-InitTrig_Victory13()
-InitTrig_ExitFrom13()
-InitTrig_Leave13Fix()
-InitTrig_InitRoom12()
-InitTrig_PlatformUp12()
-InitTrig_Single12()
-InitTrig_Victory12()
-InitTrig_Restore12()
-InitTrig_ExitFrom12()
-InitTrig_Patrol12()
-InitTrig_Button1101()
-InitTrig_Button1102()
-InitTrig_Button1103()
-InitTrig_Button1101Restore()
-InitTrig_Button1102Restore()
-InitTrig_Button1103Restore()
-InitTrig_Victory()
-InitTrig_CreateFoorInRoom11()
-InitTrig_InitRoom11DownForRegion()
-InitTrig_ExitFrom11()
-InitTrig_Out11()
-InitTrig_ExitFrom10()
-InitTrig_Victory10()
-InitTrig_Error10In()
-InitTrig_Error10Out()
-InitTrig_ExitFrom09()
-InitTrig_InitRoom09()
-InitTrig_Victory09()
-InitTrig_OffHole()
-InitTrig_InitCustomTraps()
-InitTrig_ExitFrom08()
-InitTrig_Resize08()
-InitTrig_Victory08()
-InitTrig_ExitFrom07()
-InitTrig_InitOrders()
-InitTrig_DieCHK()
-InitTrig_ErrorClear()
-InitTrig_ExitFrom06()
-InitTrig_Victory06()
-InitTrig_InvulPudges()
-InitTrig_ExitFrom05()
-InitTrig_Victory05()
-InitTrig_Init04()
-InitTrig_ExitFrom04()
-InitTrig_Victory04()
-InitTrig_ExitFrom03()
-InitTrig_Victory03()
-InitTrig_ExitFrom02()
-InitTrig_Victory02()
-InitTrig_ExitFrom01()
-InitTrig_Victory01()
-InitTrig_ExitFrom00()
-InitTrig_Victory00()
-InitTrig_StartBrainGame()
-InitTrig_SpawnBarrel()
-InitTrig_InitBossRoom()
-InitTrig_EndSinematicStart()
-InitTrig_EnterAnimeArena()
-InitTrig_ExitAnimeArena()
-InitTrig_InitAnimeArena()
-InitTrig_NudeCinematic()
-InitTrig_SkipNude()
-InitTrig_DeathNudeFriend()
-InitTrig_InitYetty()
-InitTrig_StartYettyCinematic()
-InitTrig_SkipYetty()
-InitTrig_InitEggs()
-InitTrig_Task()
-InitTrig_WisDead()
-InitTrig_InitMerchantQuest()
-InitTrig_MerchQuestCinematic()
-InitTrig_MerchEndCinematic1()
-InitTrig_SkipMerchCinematic()
-InitTrig_EndBoss()
-InitTrig_StartDragonCinematic()
-InitTrig_SkipDragon()
-InitTrig_Cum()
-InitTrig_FromWolfCave()
-InitTrig_ExitWolf()
-InitTrig_ExitOnWolf()
-InitTrig_DeathWolf()
-InitTrig_WolfCinematic()
-InitTrig_SkipWolf()
-InitTrig_BoundEnter()
-InitTrig_BoundEnterOnce()
-InitTrig_Exit()
-InitTrig_InitGUI()
-InitTrig_StartIntro()
-InitTrig_SkipIntro()
-InitTrig_ESCTEST()
+    InitTrig_InitRoom14()
+    InitTrig_Leave14Fix()
+    InitTrig_InitRoom13()
+    InitTrig_Victory13()
+    InitTrig_ExitFrom13()
+    InitTrig_Leave13Fix()
+    InitTrig_InitRoom12()
+    InitTrig_PlatformUp12()
+    InitTrig_Single12()
+    InitTrig_Victory12()
+    InitTrig_Restore12()
+    InitTrig_ExitFrom12()
+    InitTrig_Patrol12()
+    InitTrig_Button1101()
+    InitTrig_Button1102()
+    InitTrig_Button1103()
+    InitTrig_Button1101Restore()
+    InitTrig_Button1102Restore()
+    InitTrig_Button1103Restore()
+    InitTrig_Victory()
+    InitTrig_CreateFoorInRoom11()
+    InitTrig_InitRoom11DownForRegion()
+    InitTrig_ExitFrom11()
+    InitTrig_Out11()
+    InitTrig_ExitFrom10()
+    InitTrig_Victory10()
+    InitTrig_Error10In()
+    InitTrig_Error10Out()
+    InitTrig_ExitFrom09()
+    InitTrig_InitRoom09()
+    InitTrig_Victory09()
+    InitTrig_OffHole()
+    InitTrig_InitCustomTraps()
+    InitTrig_ExitFrom08()
+    InitTrig_Resize08()
+    InitTrig_Victory08()
+    InitTrig_ExitFrom07()
+    InitTrig_InitOrders()
+    InitTrig_DieCHK()
+    InitTrig_ErrorClear()
+    InitTrig_ExitFrom06()
+    InitTrig_Victory06()
+    InitTrig_InvulPudges()
+    InitTrig_ExitFrom05()
+    InitTrig_Victory05()
+    InitTrig_Init04()
+    InitTrig_ExitFrom04()
+    InitTrig_Victory04()
+    InitTrig_ExitFrom03()
+    InitTrig_Victory03()
+    InitTrig_ExitFrom02()
+    InitTrig_Victory02()
+    InitTrig_ExitFrom01()
+    InitTrig_Victory01()
+    InitTrig_ExitFrom00()
+    InitTrig_Victory00()
+    InitTrig_StartBrainGame()
+    InitTrig_SpawnBarrel()
+    InitTrig_InitBossRoom()
+    InitTrig_EndSinematicStart()
+    InitTrig_EnterAnimeArena()
+    InitTrig_ExitAnimeArena()
+    InitTrig_InitAnimeArena()
+    InitTrig_NudeCinematic()
+    InitTrig_SkipNude()
+    InitTrig_DeathNudeFriend()
+    InitTrig_InitYetty()
+    InitTrig_StartYettyCinematic()
+    InitTrig_SkipYetty()
+    InitTrig_InitEggs()
+    InitTrig_Task()
+    InitTrig_WisDead()
+    InitTrig_InitMerchantQuest()
+    InitTrig_MerchQuestCinematic()
+    InitTrig_MerchEndCinematic1()
+    InitTrig_SkipMerchCinematic()
+    InitTrig_EndBoss()
+    InitTrig_StartDragonCinematic()
+    InitTrig_SkipDragon()
+    InitTrig_Cum()
+    InitTrig_FromWolfCave()
+    InitTrig_ExitWolf()
+    InitTrig_ExitOnWolf()
+    InitTrig_DeathWolf()
+    InitTrig_WolfCinematic()
+    InitTrig_SkipWolf()
+    InitTrig_BoundEnter()
+    InitTrig_BoundEnterOnce()
+    InitTrig_Exit()
+    InitTrig_InitGUI()
+    InitTrig_StartIntro()
+    InitTrig_SkipIntro()
+    InitTrig_ESCTEST()
 end
 
 function RunInitializationTriggers()
-ConditionalTriggerExecute(gg_trg_Patrol12)
-ConditionalTriggerExecute(gg_trg_InitOrders)
-ConditionalTriggerExecute(gg_trg_InvulPudges)
-ConditionalTriggerExecute(gg_trg_InitAnimeArena)
-ConditionalTriggerExecute(gg_trg_InitMerchantQuest)
+    ConditionalTriggerExecute(gg_trg_Patrol12)
+    ConditionalTriggerExecute(gg_trg_InitOrders)
+    ConditionalTriggerExecute(gg_trg_InvulPudges)
+    ConditionalTriggerExecute(gg_trg_InitAnimeArena)
+    ConditionalTriggerExecute(gg_trg_InitMerchantQuest)
 end
 
 function InitCustomPlayerSlots()
-SetPlayerStartLocation(Player(0), 0)
-SetPlayerColor(Player(0), ConvertPlayerColor(0))
-SetPlayerRacePreference(Player(0), RACE_PREF_HUMAN)
-SetPlayerRaceSelectable(Player(0), true)
-SetPlayerController(Player(0), MAP_CONTROL_USER)
+    SetPlayerStartLocation(Player(0), 0)
+    SetPlayerColor(Player(0), ConvertPlayerColor(0))
+    SetPlayerRacePreference(Player(0), RACE_PREF_HUMAN)
+    SetPlayerRaceSelectable(Player(0), true)
+    SetPlayerController(Player(0), MAP_CONTROL_USER)
 end
 
 function InitCustomTeams()
-SetPlayerTeam(Player(0), 0)
+    SetPlayerTeam(Player(0), 0)
 end
 
 function main()
-SetCameraBounds(-14336.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), -14336.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 18432.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 10240.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -14336.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 10240.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 18432.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), -14336.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
-SetDayNightModels("Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl", "Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl")
-SetTerrainFogEx(0, 0.0, 5000.0, 0.500, 0.086, 0.043, 0.275)
-NewSoundEnvironment("Default")
-SetAmbientDaySound("LordaeronWinterDay")
-SetAmbientNightSound("LordaeronWinterNight")
-SetMapMusic("Music", true, 0)
-InitSounds()
-CreateRegions()
-CreateCameras()
-CreateAllDestructables()
-CreateAllUnits()
-InitBlizzard()
-InitGlobals()
-InitCustomTriggers()
-RunInitializationTriggers()
+    SetCameraBounds(-14336.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), -14336.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 18432.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 10240.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -14336.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 10240.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 18432.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), -14336.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
+    SetDayNightModels("Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl", "Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl")
+    SetTerrainFogEx(0, 0.0, 5000.0, 0.500, 0.086, 0.043, 0.275)
+    NewSoundEnvironment("Default")
+    SetAmbientDaySound("LordaeronWinterDay")
+    SetAmbientNightSound("LordaeronWinterNight")
+    SetMapMusic("Music", true, 0)
+    InitSounds()
+    CreateRegions()
+    CreateCameras()
+    CreateAllDestructables()
+    CreateAllUnits()
+    InitBlizzard()
+    InitGlobals()
+    InitCustomTriggers()
+    RunInitializationTriggers()
 end
 
 function config()
-SetMapName("TRIGSTR_001")
-SetMapDescription("TRIGSTR_003")
-SetPlayers(1)
-SetTeams(1)
-SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, 15872.0, 960.0)
-InitCustomPlayerSlots()
-SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
-InitGenericPlayerSlots()
+    SetMapName("TRIGSTR_001")
+    SetMapDescription("TRIGSTR_003")
+    SetPlayers(1)
+    SetTeams(1)
+    SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
+    DefineStartLocation(0, 15872.0, 960.0)
+    InitCustomPlayerSlots()
+    SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
+    InitGenericPlayerSlots()
 end
 
