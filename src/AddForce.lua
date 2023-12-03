@@ -12,7 +12,6 @@ function UnitAddForceSimpleClean(hero, angle, speed, distance, flag)
     end
     if onForces[GetHandleId(hero)] then
         onForces[GetHandleId(hero)] = false
-
         TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
             currentdistance = currentdistance + speed
             local x, y = GetUnitXY(hero)
@@ -20,20 +19,34 @@ function UnitAddForceSimpleClean(hero, angle, speed, distance, flag)
             local newVector = vector
             newVector = VectorSum(newVector, vector:yawPitchOffset(speed, angle * (math.pi / 180), 0.0))
             SetUnitPositionSmooth(hero, newVector.x, newVector.y)
+            if flag then
+                for i = 1, #flag do
+                    if flag[i] == "MoveWMe" then
+                        local near = FindNearEnemyXY(hero, 80, newVector.x, newVector.y)
 
-            for i = 1, #flag do
-                if flag[i] == "MoveWMe" then
-                    local data = HERO[0]
-                    if IsUnitInRange(hero, data.UnitHero, 50) and not data.SpaceForce and not data.sit then
-                        SetUnitX(data.UnitHero, newVector.x)
-                        SetUnitY(data.UnitHero, newVector.y)
-                        SetUnitZ(data.UnitHero, GetUnitZ(hero) + 15)
-                    else
-
+                        if IsUnitInRange(hero, near, 50) then
+                            local data = HERO[0]
+                            if IsUnitType(near, UNIT_TYPE_HERO) then
+                                if not data.SpaceForce and not data.sit then
+                                    SetUnitX(near, newVector.x)
+                                    SetUnitY(near, newVector.y)
+                                    SetUnitZ(near, GetUnitZ(hero) + 15)
+                                end
+                            else
+                                if data.CatchUnit == near then
+                                    --print("захваченные не катаются", GetUnitName(data.CatchUnit))
+                                else
+                                    SetUnitX(near, newVector.x)
+                                    SetUnitY(near, newVector.y)
+                                    SetUnitZ(near, GetUnitZ(hero) + 15)
+                                end
+                            end
+                        else
+                            SetUnitZ(near, GetTerrainZ(newVector.x, newVector.y))
+                        end
                     end
                 end
             end
-
             if currentdistance >= distance then
                 DestroyTimer(GetExpiredTimer())
                 onForces[GetHandleId(hero)] = true
@@ -270,7 +283,7 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
                     local data = HERO[GetPlayerId(GetOwningPlayer(hero))]
                     data.OnDeep = false
                     IssueImmediateOrder(hero, "stop")
-                    SetUnitZ(data.UnitHero,0)
+                    SetUnitZ(data.UnitHero, 0)
                     if data.IsMoving then
                         --print("закончил рывок")
 

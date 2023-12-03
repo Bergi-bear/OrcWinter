@@ -82,7 +82,7 @@ function FindNearEnemyXY(unit,range,x,y)
             break
         end
 
-        if UnitAlive(e) and IsUnitEnemy(e, GetOwningPlayer(unit)) and not BlzIsUnitInvulnerable(e) then
+        if UnitAlive(e) and  not BlzIsUnitInvulnerable(e) and e~=unit then -- IsUnitEnemy(e, GetOwningPlayer(unit)) and -- убрал врага в условиях проверки
             local dist=DistanceBetweenXY(x,y,GetUnitXY(e))
             if dist<=min then
                 min=dist

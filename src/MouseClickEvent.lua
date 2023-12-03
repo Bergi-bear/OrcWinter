@@ -36,11 +36,12 @@ function InitMouseClickEvent()
                     data.UnitMissile = true
 
                     --print("бросок захваченного", differenceZ)
-                    if differenceZ<=1 and not IsUnitFall[GetHandleId(data.CatchUnit)] then
+                    if differenceZ<=2 and not IsUnitFall[GetHandleId(data.CatchUnit)] then
                         if IsUnitFall[GetHandleId(data.CatchUnit)] then
                             print("Юнит ещё падает")
                         end
                         --UnitCreateArtMissile()
+                        --print("проверка нормы",differenceZ)
                         local dist = DistanceBetweenXY(x, y, GetUnitXY(data.UnitHero))
                         if dist >= 600 then
                             dist = 600
@@ -56,6 +57,8 @@ function InitMouseClickEvent()
                         BlzSetUnitFacingEx(data.UnitHero, angle)
                         MakeUnitArtMissile(data.UnitHero, data.CatchUnit, angle, speed, dist, 300)
                         data.CatchUnit = nil
+                    else
+                        print("что-то сломалось",differenceZ,IsUnitFall[GetHandleId(data.CatchUnit)])
                     end
 
                 end
@@ -107,6 +110,7 @@ function InitMouseClickEvent()
                     local distMagnet = DistanceBetweenXY(GetUnitX(data.CatchUnit), GetUnitY(data.CatchUnit), GetUnitXY(data.UnitHero))
                     SetUnitFacing(data.CatchUnit, angleMagnet)
                     UnitAddForceSimple(data.CatchUnit, angleMagnet, 5, distMagnet)
+                    SetUnitZ(data.CatchUnit,0)
                 else
                     data.CatchUnit = false
                 end
@@ -122,6 +126,7 @@ function InitMouseClickEvent()
                             local distMagnet = DistanceBetweenXY(GetUnitX(data.CatchUnit), GetUnitY(data.CatchUnit), GetUnitXY(data.UnitHero))
                             SetUnitFacing(data.CatchUnit, angleMagnet)
                             UnitAddForceSimple(data.CatchUnit, angleMagnet, 5, distMagnet)
+                            SetUnitZ(data.CatchUnit,0)
                         else
                             data.CatchUnit = false
                         end

@@ -18,7 +18,7 @@ function MakeUnitArtMissile(hero, unit, angle, speed, distance, MaxHeight, HasMa
 
     if IsUnitType(hero, UNIT_TYPE_HERO) then
         local data = GetUnitData(hero)
-        damage = data.BaseDamage * 0.5
+        damage = data.BaseDamage * 1
     end
 
     TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
