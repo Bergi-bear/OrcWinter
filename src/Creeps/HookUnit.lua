@@ -12,22 +12,22 @@ function InitHookUnits(id)
     end
 end
 
-function UnitCreateHook(unit, angle,totalScale)
+function UnitCreateHook(unit, angle, totalScale)
     if not totalScale then
-        totalScale=1
+        totalScale = 1
     end
     local x, y = GetUnitXY(unit)
     local chainEff = "Chain"
     local hookEff = "abilities\\weapons\\wyvernspear\\wyvernspearmissile"
     local chains = {}
-    local maxDist = 1000*totalScale
+    local maxDist = 1000 * totalScale
     local hook = AddSpecialEffect(hookEff, x, y)
     local currentDist = 0
-    local speed = 40*totalScale
+    local speed = 40 * totalScale
     local revers = false
     local k = 0
     local forward = true
-    local scale = 3*totalScale
+    local scale = 3 * totalScale
     local k2 = 0
     local hero = nil
     local r = GetRandomInt(1, 4)
@@ -50,7 +50,7 @@ function UnitCreateHook(unit, angle,totalScale)
 
             BlzSetSpecialEffectPosition(hook, nx, ny, z)
             BlzSetSpecialEffectYaw(hook, math.rad(angle))
-            BlzSetSpecialEffectMatrixScale(hook, 2*totalScale, 2*totalScale, 2*totalScale)
+            BlzSetSpecialEffectMatrixScale(hook, 2 * totalScale, 2 * totalScale, 2 * totalScale)
             _, hero = UnitDamageArea(unit, 1, nx, ny, 80)
             if hero then
                 if forward then
@@ -106,12 +106,12 @@ function UnitCreateHook(unit, angle,totalScale)
     end)
 end
 
-function StartHookAI(unit, timed,scale)
+function StartHookAI(unit, timed, scale)
     local hero = HERO[0].UnitHero
     local sec = 2
     local TimerFinder = CreateTimer()
     if not scale then
-        scale=1
+        scale = 1
     end
 
     if not timed then
@@ -128,13 +128,11 @@ function StartHookAI(unit, timed,scale)
         end)
     end
 
-
-
     TimerStart(TimerFinder, 1, true, function()
         sec = sec - 1
         if sec <= 0 then
             sec = 7
-            if IsUnitInRange(unit, hero, 1000*scale) and UnitAlive(unit) then
+            if IsUnitInRange(unit, hero, 1000 * scale) and UnitAlive(unit) then
                 --print("герой в радиусе активируем прицеливание")
                 local mark = AddSpecialEffect("BossArrowHook", GetUnitXY(unit))
                 local markTimer = CreateTimer()
@@ -146,10 +144,10 @@ function StartHookAI(unit, timed,scale)
                     BlzSetSpecialEffectY(mark, GetUnitY(unit))
                     BlzSetSpecialEffectZ(mark, GetUnitZ(unit) + 50)
                     BlzSetSpecialEffectYaw(mark, math.rad(angle))
-                    BlzSetSpecialEffectScale(mark,scale)
+                    BlzSetSpecialEffectScale(mark, scale)
                     SetUnitFacing(unit, angle)
                 end)
-                TimerStart(CreateTimer(), 3, false, function()
+                TimerStart(CreateTimer(), 3+1-scale, false, function()
                     DestroyEffect(mark)
                     DestroyTimer(markTimer)
                     BlzSetSpecialEffectPosition(mark, 5000, 5000, 5000)
@@ -161,9 +159,20 @@ function StartHookAI(unit, timed,scale)
                         --print("Активируем сам хук")
                         QueueUnitAnimation(unit, "Stand")
                         if UnitAlive(unit) then
-                            UnitCreateHook(unit, angle,scale)
-                            if unit==GBoss then
-                                PlayBossSpeech("Speech\\Pudge\\InFight\\F12", "Свежее мясо")
+                            UnitCreateHook(unit, angle, scale)
+                            if unit == GBoss then
+                                local r = GetRandomInt(12, 16)
+                                if r == 12 then
+                                    PlayBossSpeech("Speech\\Pudge\\InFight\\F" .. r, "Свежее мясо")
+                                elseif r == 13 then
+                                    PlayBossSpeech("Speech\\Pudge\\InFight\\F" .. r, "Фрешмит")
+                                elseif r == 14 then
+                                    PlayBossSpeech("Speech\\Pudge\\InFight\\F" .. r, "Ах ты....")
+                                elseif r == 15 then
+                                    PlayBossSpeech("Speech\\Pudge\\InFight\\F" .. r, "Ловись рыбка да по зеленее")
+                                elseif r == 16 then
+                                    PlayBossSpeech("Speech\\Pudge\\InFight\\F" .. r, "Я специально")
+                                end
                             end
                         end
                     end)

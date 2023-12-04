@@ -103,7 +103,7 @@ function ByItemByName(item, data)
         normal_sound("Abilities\\Spells\\Items\\ResourceItems\\ReceiveGold")
         UnitGetItemByName(item, data)
     else
-        print("недостаточно", item.cost - data.gold, "золота")
+        --print("недостаточно", item.cost - data.gold, "золота")
         normal_sound("Sound\\Interface\\Warning\\Orc\\GruntNoGold1.flac")
     end
 end

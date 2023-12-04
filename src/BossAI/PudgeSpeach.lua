@@ -4,7 +4,7 @@
 --- DateTime: 23.11.2023 22:40
 ---
 function PlayPudgeSpeechNumber(n)
-    local BD={
+    local BD = {
         "Что это ещё там за скрипы...",
         "Показалось?",
         "Наверное кто-то идёт?",
@@ -17,15 +17,27 @@ function PlayPudgeSpeechNumber(n)
         "Да сколько можно!?",
         "Павел, а на тебе сейчас есть штаны?",
         "Я уже готов принимать гостей, когда прейдёте, то пополню счетчик ваших смертей",
-        "Вот и открыли вы последний проход, угадайте, кто вас внизу сидит ждёт?"
+        "Вот и открыли вы последний проход, угадайте, кто вас внизу сидит ждёт?",
+        "Про последний проход я соврал, ещё не скоро здесь будет финал",
+        "Варенье вы пришли украсть? Но угодите прям ко мне в пасть"
     }
     if not GBoss then
-        GBoss=FindUnitOfType(FourCC("n007"))
+        GBoss = FindUnitOfType(FourCC("n007"))
         --print('мясник инициализирован')
     end
     CameraSetEQNoiseForPlayer(Player(0), 6)
     TimerStart(CreateTimer(), 2, false, function()
         CameraClearNoiseForPlayer(Player(0))
     end)
-    PlayBossSpeech("Speech\\Pudge\\Q"..n,BD[n] )
+    PlayBossSpeech("Speech\\Pudge\\Q" .. n, BD[n])
+
+    local portrait = BlzCreateFrameByType("BACKDROP", "Face",  BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
+    BlzFrameSetParent(portrait, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    BlzFrameSetTexture(portrait, GetPortraitFromBD(nil), 0, true)
+    BlzFrameSetSize(portrait, 0.06, 0.06)
+    BlzFrameSetAbsPoint(portrait, FRAMEPOINT_LEFT, -0.05, 0.05)
+    TimerStart(CreateTimer(), GBossSoundDuration, false, function()
+        BlzDestroyFrame(portrait)
+    end)
+    --table.insert(BugsFH,portrait)
 end

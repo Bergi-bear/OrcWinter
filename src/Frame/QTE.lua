@@ -68,20 +68,21 @@ function CreateEActions()
                 elseif data.CurrentQuest == "MagnetIsClosed" then
                     local r = GetRandomInt(1, 5)
                     if r == 1 then
-                        PlayMonoSpeech("", "Работает до 23:00")
+                        PlayMonoSpeech("Speech\\Peon\\Magnit\\m"..r, "Работает до 23:00")
                     elseif r == 2 then
-                        PlayMonoSpeech("", "Я кажись не успел")
+                        PlayMonoSpeech("Speech\\Peon\\Magnit\\m"..r, "Я кажись не успел")
                     elseif r == 3 then
-                        PlayMonoSpeech("", "Заперто")
+                        PlayMonoSpeech("Speech\\Peon\\Magnit\\m"..r, "Заперто")
                     elseif r == 4 then
-                        PlayMonoSpeech("", "Не получается открыть")
+                        PlayMonoSpeech("Speech\\Peon\\Magnit\\m"..r, "Не получается открыть")
                     elseif r == 5 then
-                        PlayMonoSpeech("", "Нужно поискать, другое место для покупки")
+                        PlayMonoSpeech("Speech\\Peon\\Magnit\\m"..r, "Нужно поискать, другое место для покупки")
                     end
                 elseif data.CurrentQuest == "Shop" then
                     --UnitRemoveAbility(data.QuestUnit,FourCC("A604"))
                     --print("показываем магазин")
                     CreateShop()
+                    BlzFrameSetVisible(ShopTipFH, true)
                     DisableTrigger(gg_trg_EventUpE)
                     TimerStart(CreateTimer(), 1, false, function()
                         EnableTrigger(gg_trg_EventUpE)

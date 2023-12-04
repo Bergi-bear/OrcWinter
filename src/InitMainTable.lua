@@ -63,7 +63,7 @@ function InitHEROTable()
             DamageThrow            = 150, -- урон от кирки
             InvulPreDeathCurrentCD = 1, --кулдаун бессмертия от трала
             LifeFHTable            = {},
-            gold                   = 50000,
+            gold                   = 100, --стартовое количество золота
             ShowGold               = true, -- показ накопления золота
             ShowHeal               = true,
             ShowGoldAmount         = 0,

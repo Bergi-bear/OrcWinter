@@ -42,11 +42,11 @@ function CreateItemsForSell()
     local x, y = 0.25, 0.4 - NextPoint
     local currentSHOP = ClearShop(SHOP_BD)
     local max = #currentSHOP
-    local w=7
-    local h=4
-    local limit=h*w
-    if max>limit then
-        max=limit-- число предметов в БД магазина ограничено h на w
+    local w = 7
+    local h = 4
+    local limit = h * w
+    if max > limit then
+        max = limit-- число предметов в БД магазина ограничено h на w
     end
     local k = 1
     --print(max)
@@ -66,18 +66,18 @@ function CreateItemsForSell()
             end
         end
     end
-    HERO[0].SteamSale=false
+    HERO[0].SteamSale = false
 end
 
-GItemName=""
+GItemName = ""
 function CreateItemForShop(posX, PosY, parent, item)
-    local data=HERO[0]
+    local data = HERO[0]
     local NextPoint = 0.039
 
     if data.SteamSale then
         --print("скидка пременена")
 
-        item.cost=item.cost*data.SteamSale//100
+        item.cost = item.cost * data.SteamSale // 100
         --data.SteamSale=false
     end
     local name = item.name
@@ -87,10 +87,11 @@ function CreateItemForShop(posX, PosY, parent, item)
     if not texture then
         texture = "ReplaceableTextures\\CommandButtons\\BTNSelectHeroOn"
     end
-    local SelfFrame = BlzCreateFrameByType('GLUEBUTTON', 'FaceButton', parent, 'ScoreScreenTabButtonTemplate', 0)
+    --local SelfFrame = BlzCreateFrameByType('GLUEBUTTON', 'FaceButton', parent, 'ScoreScreenTabButtonTemplate', 0)
+    --local SelfFrame = BlzCreateFrame("IconButtonTemplate", parent, 0, 0)
+    local SelfFrame = BlzCreateFrameByType("GLUETEXTBUTTON", "MyScriptDialogButton",parent, "ScriptDialogButton", 0)
+    --BlzFrameSetParent(SelfFrame, BlzGetFrameByName("ConsoleUIBackdrop", 0))
     local buttonIconFrame = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', SelfFrame, '', 0)
-    --BlzFrameSetVisible(SelfFrame, false)
-    -- BlzFrameSetVisible(SelfFrame, GetLocalPlayer() == player)
 
     item.FHcost, item.FHgold = ItemAddCostFromShop(buttonIconFrame, item.cost)
     BlzFrameSetAllPoints(buttonIconFrame, SelfFrame)
@@ -115,12 +116,12 @@ function CreateItemForShop(posX, PosY, parent, item)
     TriggerAddAction(TrigMOUSE_ENTER, function()
         --print("показать подсказку ",flag)
         --TODO из за сломанного события и дёргающего курса нет возможности сделать событие наведения
-        local tmptext=BlzFrameGetText(SHOP_TOOLTIP)
+        local tmptext = BlzFrameGetText(SHOP_TOOLTIP)
         --print("get ",tmptext)
-        if tmptext==ColorText2(name) .. "\n" .. DSColorDescription(item) then
+        if tmptext == ColorText2(name) .. "\n" .. DSColorDescription(item) then
             --print("повтор текста")
         else
-           -- print("звук наведения на магазин")
+            -- print("звук наведения на магазин")
         end
         BlzFrameSetText(SHOP_TOOLTIP, ColorText2(name) .. "\n" .. DSColorDescription(item))
 
@@ -171,8 +172,8 @@ function CurrentGoldInShop(parent)
     TimerStart(CreateTimer(), 0.1, true, function()
         BlzFrameSetText(text, R2I(data.gold))
     end)
-    table.insert(BugsFH,GoldFrame)
-    table.insert(BugsFH,text)
+    table.insert(BugsFH, GoldFrame)
+    table.insert(BugsFH, text)
 end
 
 function ItemAddCostFromShop(FHItem, cost)
@@ -190,8 +191,8 @@ function ItemAddCostFromShop(FHItem, cost)
     BlzFrameSetPoint(text, FRAMEPOINT_BOTTOMLEFT, GoldFrame, FRAMEPOINT_BOTTOMLEFT, 0.01, 0.0)
     BlzFrameSetEnable(text, false)
 
-    table.insert(BugsFH,GoldFrame)
-    table.insert(BugsFH,text)
+    table.insert(BugsFH, GoldFrame)
+    table.insert(BugsFH, text)
     return text, GoldFrame
 end
 
@@ -232,7 +233,7 @@ function CreateCloseButton(BoxBorder, rama)
     end)
 end
 NextPoint = 0.039
-ShopTipFH=nil
+ShopTipFH = nil
 function CreateGoldInterFace(data)
     local goldIco = "Textures\\GOLDCoin.blp"
     local NextPoint = 0.039
@@ -253,10 +254,18 @@ function CreateGoldInterFace(data)
         BlzFrameSetEnable(BlzGetTriggerFrame(), true)
         --BlzFrameSetVisible(SHOP, true)
         if not udg_IsBrainGame then
+            BlzFrameSetVisible(ShopTipFH, false)
             CreateShop()
         else
             print("Недоступно в этом игровом режиме ")
         end
+    end)
+
+    local TrigMOUSE_LEAVE = CreateTrigger()
+    BlzTriggerRegisterFrameEvent(TrigMOUSE_LEAVE, SelfFrame, FRAMEEVENT_MOUSE_LEAVE)
+    TriggerAddAction(TrigMOUSE_LEAVE, function()
+        --print("события ухода с фрейма золота НЕ багуется")
+
     end)
 
     local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", SelfFrame, "", 0)
@@ -269,15 +278,15 @@ function CreateGoldInterFace(data)
     TimerStart(CreateTimer(), 0.1, true, function()
         BlzFrameSetText(text, R2I(data.gold))
     end)
-    ShopTipFH=CreateJumpArrow(SelfFrame)
-    BlzFrameSetVisible(ShopTipFH,false)
+    ShopTipFH = CreateJumpArrow(SelfFrame)
+    BlzFrameSetVisible(ShopTipFH, false)
 end
 
 function CreateRTips()
     local goldIco = "Rkey"
     local NextPoint = 0.039
     --local SelfFrame = BlzCreateFrameByType('GLUEBUTTON', 'FaceButton', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 'ScoreScreenTabButtonTemplate', 0)
-    local buttonIconFrame = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', SelfFrame, '', 0)
+    local buttonIconFrame = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), '', 0)
     --BlzFrameSetAllPoints(buttonIconFrame, SelfFrame)
     BlzFrameSetTexture(buttonIconFrame, goldIco, 0, true)
     BlzFrameSetSize(buttonIconFrame, NextPoint / 2, NextPoint / 2)
@@ -292,3 +301,26 @@ function CreateRTips()
     BlzFrameSetPoint(text, FRAMEPOINT_LEFT, buttonIconFrame, FRAMEPOINT_LEFT, 0.011, 0.0)
 
 end
+
+--[[
+do
+    local real = MarkGameStarted
+    function MarkGameStarted()
+        real()
+
+        local SelfFrame = BlzCreateFrameByType("GLUETEXTBUTTON", "MyScriptDialogButton", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "ScriptDialogButton", 0)
+        local buttonIconFrame = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', SelfFrame, '', 0)
+
+        BlzFrameSetAllPoints(buttonIconFrame, SelfFrame)
+        BlzFrameSetTexture(buttonIconFrame, "TexturePortraits\\Wolf", 0, true)
+        BlzFrameSetSize(SelfFrame, NextPoint, NextPoint)
+        BlzFrameSetAbsPoint(SelfFrame, FRAMEPOINT_CENTER, 0.4, 0.3)
+
+        local TrigMOUSE_LEAVE = CreateTrigger()
+        BlzTriggerRegisterFrameEvent(TrigMOUSE_LEAVE, SelfFrame, FRAMEEVENT_MOUSE_LEAVE)
+        TriggerAddAction(TrigMOUSE_LEAVE, function()
+            --print("Событие выхода")
+        end)
+    end
+end
+]]
