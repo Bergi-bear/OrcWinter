@@ -58,7 +58,7 @@ function InitMouseClickEvent()
                         MakeUnitArtMissile(data.UnitHero, data.CatchUnit, angle, speed, dist, 300)
                         data.CatchUnit = nil
                     else
-                        print("что-то сломалось",differenceZ,IsUnitFall[GetHandleId(data.CatchUnit)])
+                        --print("что-то сломалось",differenceZ,IsUnitFall[GetHandleId(data.CatchUnit)])
                     end
 
                 end
@@ -152,14 +152,16 @@ function InitMouseClickEvent()
                     end
 
                     local mark = AddSpecialEffect("Spell Marker TC", x, y)
-                    BlzSetSpecialEffectScale(mark, 2)
-                    DestroyEffect(mark)
+                    BlzSetSpecialEffectScale(mark, 1)
+                    TimerStart(CreateTimer(), delay, false, function()
+                        --DestroyEffect(mark)
+                    end)
                     BlzSetSpecialEffectColorByPlayer(mark, Player(1)) -- синий
                     local speed = dist / 80
                     --QueueUnitAnimation(data.UnitHero,"Attack")
                     SetUnitAnimationByIndex(data.UnitHero, 25)
                     BlzSetUnitFacingEx(data.UnitHero, angle)
-                    UnitCreateArtMissile(data.UnitHero, angle, speed, dist, 300, nil, "ChainFrost")
+                    UnitCreateArtMissile(data.UnitHero, angle, speed, dist, 300, nil, "ChainFrost",mark)
 
                     TimerStart(CreateTimer(), delay, false, function()
 

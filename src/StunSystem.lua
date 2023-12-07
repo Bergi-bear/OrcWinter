@@ -23,7 +23,7 @@ function StunUnit(hero,dur,flag)
 		--print("старт нового таймера")
 		data.Eff=AddSpecialEffectTarget(stuneff,hero,"overhead")
 		BlzPauseUnitEx(hero,true)
-		SetUnitTimeScale(hero,0)
+		--SetUnitTimeScale(hero,0)
 		if flag=="stagger" and  data.Status~="frise" then
 			SetUnitVertexColor(hero,255,0,0,255)
 			data.Status="stagger"

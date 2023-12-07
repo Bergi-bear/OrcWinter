@@ -3,7 +3,7 @@
 --- Created by User.
 --- DateTime: 25.10.2023 20:17
 ---
-function MakeUnitArtMissile(hero, unit, angle, speed, distance, MaxHeight, HasMarker)
+function MakeUnitArtMissile(hero, unit, angle, speed, distance, MaxHeight, flag)
     --UnitAddAbility(unit, FourCC("Aloc"))
     IsUnitFall[GetHandleId(unit)] = true
     local range = 200
@@ -26,31 +26,47 @@ function MakeUnitArtMissile(hero, unit, angle, speed, distance, MaxHeight, HasMa
         local f = ParabolaZ(MaxHeight, distance, i * speed) + ZStart
         i = i + 1
         x, y = MoveXY(x, y, speed, angle)
-        SetUnitX(unit, x)
-        SetUnitY(unit, y)
+        if flag then
+            --SetUnitPositionSmooth(unit,x,y)
+        else
+            SetUnitX(unit, x)
+            SetUnitY(unit, y)
+            --print("движение без флага")
+        end
+
         SetUnitZ(unit, f)
         --BlzSetSpecialEffectScale(eff,5)
         if i > 3 and f <= GetTerrainZ(x, y) then
+            --
+            --print("приземлился")
             DestroyTimer(GetExpiredTimer())
             IsUnitFall[GetHandleId(unit)] = false
             --local _,d= PointContentDestructable(x,y,60,true,1)
 
-            DamageDestructableInRangeXY(hero, damage, range, x, y)
-            KillDestructableByTypeInPoint(ButtonsIDTable, range, x, y)
-            --KillUnit(unit)
-            --UnitRemoveAbility(unit,FourCC("Aloc"))
-            --ShowUnit(unit,false)
-            --ShowUnit(unit,true)
-            DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", x, y))
-            UnitDamageArea(hero, damage, x, y, range)
+            if flag then
+                for k = 1, #flag do
+                    if flag[k] == "RemoveStun" then
+                        TimerStart(CreateTimer(), 0.01, false, function()
+                            UnitRemoveStun(unit)
+                            SetUnitAnimationByIndex(unit,24)
+                            QueueUnitAnimation(unit,"stand")
+                        end)
+                    end
+                end
+            else --без флага
+                DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", x, y))
+                UnitDamageArea(hero, damage, x, y, range)
+                DamageDestructableInRangeXY(hero, damage, range, x, y)
+                KillDestructableByTypeInPoint(ButtonsIDTable, range, x, y)
+            end
 
 
         end
     end)
 end
 
-function UnitCreateArtMissile(hero, angle, speed, distance, MaxHeight, HasMarker, effModel)
-    local range = 200
+function UnitCreateArtMissile(hero, angle, speed, distance, MaxHeight, HasMarker, effModel, markEffect)
+    local range = 100
     local currentdistance = 0
     local i = 0
     local ZStart = GetUnitZ(hero) + 40
@@ -78,14 +94,14 @@ function UnitCreateArtMissile(hero, angle, speed, distance, MaxHeight, HasMarker
         if i > 3 and f <= GetTerrainZ(x, y) then
             DestroyTimer(GetExpiredTimer())
             local ox, oy = GetUnitXY(hero)
-            SetUnitUserData(hero,0)
+            SetUnitUserData(hero, 0)
             SetUnitX(hero, x)
             SetUnitY(hero, y)
             UnitDamageArea(hero, damage, x, y, range)
             SetUnitX(hero, ox)
             SetUnitY(hero, oy)
             TimerStart(CreateTimer(), TIMER_PERIOD64, false, function()
-                SetUnitUserData(hero,1)
+                SetUnitUserData(hero, 1)
             end)
             --local _,d= PointContentDestructable(x,y,60,true,1)
             DamageDestructableInRangeXY(hero, damage, range, x, y)
@@ -94,7 +110,13 @@ function UnitCreateArtMissile(hero, angle, speed, distance, MaxHeight, HasMarker
                 --DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", newX, newY))
             else
                 DestroyEffect(eff)
+                DestroyEffect(markEffect)
                 DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", x, y))
+                --local near=FindNearEnemyXY()
+                if IsUnitInRangeXY(hero, x, y, 100) then
+                    local ab = AngleBetweenXY(x, y, GetUnitXY(hero))/ bj_DEGTORAD
+                    UnitFallGround(hero, ab, 200)
+                end
             end
         end
     end)

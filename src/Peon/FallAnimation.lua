@@ -59,6 +59,24 @@ function UnitStartFallAnim(hero, maxZ)
     end)
 end
 
+function UnitFallGround(hero, angle, dist)
+    StunUnit(hero, 2)
+
+
+    local diff=angle-GetUnitFacing(hero)
+    --print(diff)
+    if GetRandomInt(0,1)==0 then
+        --print("падаем на лицо?")
+        SetUnitAnimationByIndex(hero, 20) --падаем вперёд
+    else
+        SetUnitAnimationByIndex(hero, 23) --падаем назад
+    end
+    local speed = dist / 20 --ниже число выше скорость
+    --print("угол удара", angle, "угол поворота юнита", GetUnitFacing(hero),"разница",)
+    UnitAddForceSimple(hero, angle, speed, dist,"ignore")
+    MakeUnitArtMissile(hero, hero, angle, speed, dist, 150, { "RemoveStun" })
+end
+
 function JumpToCenterRect(rect)
     --JumpToCenterRect(gg_rct_Exit00)
     --gg_rct_Region_038

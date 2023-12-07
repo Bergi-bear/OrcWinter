@@ -133,7 +133,7 @@ function OnPostDamage()
 
         end
     end
-    if GetUnitTypeId(target)==FourCC("h00R") then
+    if GetUnitTypeId(target)==FourCC("h00R") then -- получается урон
         if udg_Ball then
            -- print("Существует")
         else

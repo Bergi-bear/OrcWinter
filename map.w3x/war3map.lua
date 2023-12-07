@@ -417,6 +417,7 @@ gg_dest_B00D_20785 = nil
 gg_dest_B00D_20786 = nil
 gg_dest_B00D_20787 = nil
 gg_dest_B00D_20788 = nil
+gg_unit_h00R_0259 = nil
 function InitGlobals()
 local i = 0
 
@@ -1249,6 +1250,7 @@ life = GetUnitState(u, UNIT_STATE_LIFE)
 SetUnitState(u, UNIT_STATE_LIFE, 0.10 * life)
 gg_unit_h00E_0216 = BlzCreateUnitWithSkin(p, FourCC("h00E"), 11003.5, 6845.6, 180.000, FourCC("h00E"))
 gg_unit_h00E_0217 = BlzCreateUnitWithSkin(p, FourCC("h00E"), 11383.8, 6704.5, 0.000, FourCC("h00E"))
+gg_unit_h00R_0259 = BlzCreateUnitWithSkin(p, FourCC("h00R"), 15831.2, 812.1, 338.210, FourCC("h00R"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11191.5, 4303.2, 45.687, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11192.8, 4434.4, 34.162, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11089.5, 4305.8, 242.987, FourCC("h00C"))
@@ -1336,7 +1338,6 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11359.3, 8039.5, 351.690, FourCC("h
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 17790.2, 6274.9, 242.987, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15712.4, 945.1, 242.987, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15716.4, 824.6, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00R"), 17760.9, 767.0, 338.210, FourCC("h00R"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15718.5, 701.4, 242.987, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15722.2, 5403.1, 242.987, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15814.1, 5404.6, 242.987, FourCC("h00C"))
@@ -2710,7 +2711,7 @@ end
 --- Created by User.
 --- DateTime: 25.10.2023 20:17
 ---
-function MakeUnitArtMissile(hero, unit, angle, speed, distance, MaxHeight, HasMarker)
+function MakeUnitArtMissile(hero, unit, angle, speed, distance, MaxHeight, flag)
     --UnitAddAbility(unit, FourCC("Aloc"))
     IsUnitFall[GetHandleId(unit)] = true
     local range = 200
@@ -2733,31 +2734,47 @@ function MakeUnitArtMissile(hero, unit, angle, speed, distance, MaxHeight, HasMa
         local f = ParabolaZ(MaxHeight, distance, i * speed) + ZStart
         i = i + 1
         x, y = MoveXY(x, y, speed, angle)
-        SetUnitX(unit, x)
-        SetUnitY(unit, y)
+        if flag then
+            --SetUnitPositionSmooth(unit,x,y)
+        else
+            SetUnitX(unit, x)
+            SetUnitY(unit, y)
+            --print("движение без флага")
+        end
+
         SetUnitZ(unit, f)
         --BlzSetSpecialEffectScale(eff,5)
         if i > 3 and f <= GetTerrainZ(x, y) then
+            --
+            --print("приземлился")
             DestroyTimer(GetExpiredTimer())
             IsUnitFall[GetHandleId(unit)] = false
             --local _,d= PointContentDestructable(x,y,60,true,1)
 
-            DamageDestructableInRangeXY(hero, damage, range, x, y)
-            KillDestructableByTypeInPoint(ButtonsIDTable, range, x, y)
-            --KillUnit(unit)
-            --UnitRemoveAbility(unit,FourCC("Aloc"))
-            --ShowUnit(unit,false)
-            --ShowUnit(unit,true)
-            DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", x, y))
-            UnitDamageArea(hero, damage, x, y, range)
+            if flag then
+                for k = 1, #flag do
+                    if flag[k] == "RemoveStun" then
+                        TimerStart(CreateTimer(), 0.01, false, function()
+                            UnitRemoveStun(unit)
+                            SetUnitAnimationByIndex(unit,24)
+                            QueueUnitAnimation(unit,"stand")
+                        end)
+                    end
+                end
+            else --без флага
+                DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", x, y))
+                UnitDamageArea(hero, damage, x, y, range)
+                DamageDestructableInRangeXY(hero, damage, range, x, y)
+                KillDestructableByTypeInPoint(ButtonsIDTable, range, x, y)
+            end
 
 
         end
     end)
 end
 
-function UnitCreateArtMissile(hero, angle, speed, distance, MaxHeight, HasMarker, effModel)
-    local range = 200
+function UnitCreateArtMissile(hero, angle, speed, distance, MaxHeight, HasMarker, effModel, markEffect)
+    local range = 100
     local currentdistance = 0
     local i = 0
     local ZStart = GetUnitZ(hero) + 40
@@ -2785,14 +2802,14 @@ function UnitCreateArtMissile(hero, angle, speed, distance, MaxHeight, HasMarker
         if i > 3 and f <= GetTerrainZ(x, y) then
             DestroyTimer(GetExpiredTimer())
             local ox, oy = GetUnitXY(hero)
-            SetUnitUserData(hero,0)
+            SetUnitUserData(hero, 0)
             SetUnitX(hero, x)
             SetUnitY(hero, y)
             UnitDamageArea(hero, damage, x, y, range)
             SetUnitX(hero, ox)
             SetUnitY(hero, oy)
             TimerStart(CreateTimer(), TIMER_PERIOD64, false, function()
-                SetUnitUserData(hero,1)
+                SetUnitUserData(hero, 1)
             end)
             --local _,d= PointContentDestructable(x,y,60,true,1)
             DamageDestructableInRangeXY(hero, damage, range, x, y)
@@ -2801,7 +2818,13 @@ function UnitCreateArtMissile(hero, angle, speed, distance, MaxHeight, HasMarker
                 --DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", newX, newY))
             else
                 DestroyEffect(eff)
+                DestroyEffect(markEffect)
                 DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", x, y))
+                --local near=FindNearEnemyXY()
+                if IsUnitInRangeXY(hero, x, y, 100) then
+                    local ab = AngleBetweenXY(x, y, GetUnitXY(hero))/ bj_DEGTORAD
+                    UnitFallGround(hero, ab, 200)
+                end
             end
         end
     end)
@@ -3410,7 +3433,7 @@ function OnPostDamage()
 
         end
     end
-    if GetUnitTypeId(target)==FourCC("h00R") then
+    if GetUnitTypeId(target)==FourCC("h00R") then -- получается урон
         if udg_Ball then
            -- print("Существует")
         else
@@ -4467,7 +4490,7 @@ function InitMouseClickEvent()
                         MakeUnitArtMissile(data.UnitHero, data.CatchUnit, angle, speed, dist, 300)
                         data.CatchUnit = nil
                     else
-                        print("что-то сломалось",differenceZ,IsUnitFall[GetHandleId(data.CatchUnit)])
+                        --print("что-то сломалось",differenceZ,IsUnitFall[GetHandleId(data.CatchUnit)])
                     end
 
                 end
@@ -4561,14 +4584,16 @@ function InitMouseClickEvent()
                     end
 
                     local mark = AddSpecialEffect("Spell Marker TC", x, y)
-                    BlzSetSpecialEffectScale(mark, 2)
-                    DestroyEffect(mark)
+                    BlzSetSpecialEffectScale(mark, 1)
+                    TimerStart(CreateTimer(), delay, false, function()
+                        --DestroyEffect(mark)
+                    end)
                     BlzSetSpecialEffectColorByPlayer(mark, Player(1)) -- синий
                     local speed = dist / 80
                     --QueueUnitAnimation(data.UnitHero,"Attack")
                     SetUnitAnimationByIndex(data.UnitHero, 25)
                     BlzSetUnitFacingEx(data.UnitHero, angle)
-                    UnitCreateArtMissile(data.UnitHero, angle, speed, dist, 300, nil, "ChainFrost")
+                    UnitCreateArtMissile(data.UnitHero, angle, speed, dist, 300, nil, "ChainFrost",mark)
 
                     TimerStart(CreateTimer(), delay, false, function()
 
@@ -5062,7 +5087,7 @@ function StunUnit(hero,dur,flag)
 		--print("старт нового таймера")
 		data.Eff=AddSpecialEffectTarget(stuneff,hero,"overhead")
 		BlzPauseUnitEx(hero,true)
-		SetUnitTimeScale(hero,0)
+		--SetUnitTimeScale(hero,0)
 		if flag=="stagger" and  data.Status~="frise" then
 			SetUnitVertexColor(hero,255,0,0,255)
 			data.Status="stagger"
@@ -13164,6 +13189,24 @@ function UnitStartFallAnim(hero, maxZ)
     end)
 end
 
+function UnitFallGround(hero, angle, dist)
+    StunUnit(hero, 2)
+
+
+    local diff=angle-GetUnitFacing(hero)
+    --print(diff)
+    if GetRandomInt(0,1)==0 then
+        --print("падаем на лицо?")
+        SetUnitAnimationByIndex(hero, 20) --падаем вперёд
+    else
+        SetUnitAnimationByIndex(hero, 23) --падаем назад
+    end
+    local speed = dist / 20 --ниже число выше скорость
+    --print("угол удара", angle, "угол поворота юнита", GetUnitFacing(hero),"разница",)
+    UnitAddForceSimple(hero, angle, speed, dist,"ignore")
+    MakeUnitArtMissile(hero, hero, angle, speed, dist, 150, { "RemoveStun" })
+end
+
 function JumpToCenterRect(rect)
     --JumpToCenterRect(gg_rct_Exit00)
     --gg_rct_Region_038
@@ -15580,34 +15623,6 @@ end
 return true
 end
 
-function Trig_InitRoom14_Func007Func001C()
-if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
-return false
-end
-return true
-end
-
-function Trig_InitRoom14_Func007A()
-if (Trig_InitRoom14_Func007Func001C()) then
-        MoveDestructableDown(GetEnumDestructable(), -500, 5)
-else
-end
-end
-
-function Trig_InitRoom14_Func008Func001C()
-if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
-return false
-end
-return true
-end
-
-function Trig_InitRoom14_Func008A()
-if (Trig_InitRoom14_Func008Func001C()) then
-        MoveDestructableDown(GetEnumDestructable(), -500, 5)
-else
-end
-end
-
 function Trig_InitRoom14_Func009Func001C()
 if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
 return false
@@ -15622,47 +15637,77 @@ else
 end
 end
 
-function Trig_InitRoom14_Func012Func001C()
+function Trig_InitRoom14_Func010Func001C()
 if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
 return false
 end
 return true
 end
 
-function Trig_InitRoom14_Func012A()
-if (Trig_InitRoom14_Func012Func001C()) then
+function Trig_InitRoom14_Func010A()
+if (Trig_InitRoom14_Func010Func001C()) then
+        MoveDestructableDown(GetEnumDestructable(), -500, 5)
+else
+end
+end
+
+function Trig_InitRoom14_Func011Func001C()
+if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+return false
+end
+return true
+end
+
+function Trig_InitRoom14_Func011A()
+if (Trig_InitRoom14_Func011Func001C()) then
+        MoveDestructableDown(GetEnumDestructable(), -500, 5)
+else
+end
+end
+
+function Trig_InitRoom14_Func014Func001C()
+if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
+return false
+end
+return true
+end
+
+function Trig_InitRoom14_Func014A()
+if (Trig_InitRoom14_Func014Func001C()) then
 RemoveDestructable(GetEnumDestructable())
 else
 end
 end
 
-function Trig_InitRoom14_Func013Func001C()
+function Trig_InitRoom14_Func015Func001C()
 if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B005"))) then
 return false
 end
 return true
 end
 
-function Trig_InitRoom14_Func013A()
-if (Trig_InitRoom14_Func013Func001C()) then
+function Trig_InitRoom14_Func015A()
+if (Trig_InitRoom14_Func015Func001C()) then
 RemoveDestructable(GetEnumDestructable())
 else
 end
 end
 
 function Trig_InitRoom14_Actions()
+    udg_Ball=gg_unit_h00R_0259
+SetUnitUserData(gg_unit_h00R_0259, 0)
 SetDestructableOccluderHeight(gg_dest_B00D_20643, 128)
     CreateFloorInRoom(GetDestructableX(gg_dest_B00D_20643), GetDestructableY(gg_dest_B00D_20643),10,10)
 DisableTrigger(GetTriggeringTrigger())
 SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound14)
     HeroFixRespPos()
     CreateEnteringFrame(nil, "Вся карта это рельсы")
-EnumDestructablesInRectAll(gg_rct_R14B1, Trig_InitRoom14_Func007A)
-EnumDestructablesInRectAll(gg_rct_R14B2, Trig_InitRoom14_Func008A)
-EnumDestructablesInRectAll(gg_rct_R14B3, Trig_InitRoom14_Func009A)
+EnumDestructablesInRectAll(gg_rct_R14B1, Trig_InitRoom14_Func009A)
+EnumDestructablesInRectAll(gg_rct_R14B2, Trig_InitRoom14_Func010A)
+EnumDestructablesInRectAll(gg_rct_R14B3, Trig_InitRoom14_Func011A)
 TriggerSleepAction(5.00)
-EnumDestructablesInRectAll(gg_rct_UP14, Trig_InitRoom14_Func012A)
-EnumDestructablesInRectAll(gg_rct_UP14, Trig_InitRoom14_Func013A)
+EnumDestructablesInRectAll(gg_rct_UP14, Trig_InitRoom14_Func014A)
+EnumDestructablesInRectAll(gg_rct_UP14, Trig_InitRoom14_Func015A)
 end
 
 function InitTrig_InitRoom14()
@@ -15700,7 +15745,6 @@ return true
 end
 
 function Trig_Leave14Fix_Actions()
-DisplayTextToForce(GetPlayersAll(), "TRIGSTR_889")
 TriggerSleepAction(2.00)
     UnitStartFallAnim(GetTriggerUnit(),1000)
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter14))
@@ -16709,15 +16753,15 @@ end
 return true
 end
 
-function Trig_InitRoom11DownForRegion_Func006Func001C()
+function Trig_InitRoom11DownForRegion_Func007Func001C()
 if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
 return false
 end
 return true
 end
 
-function Trig_InitRoom11DownForRegion_Func006A()
-if (Trig_InitRoom11DownForRegion_Func006Func001C()) then
+function Trig_InitRoom11DownForRegion_Func007A()
+if (Trig_InitRoom11DownForRegion_Func007Func001C()) then
         MoveDestructableDown(GetEnumDestructable(), -500, 5)
 else
 end
@@ -16725,10 +16769,11 @@ end
 
 function Trig_InitRoom11DownForRegion_Actions()
 DisableTrigger(GetTriggeringTrigger())
+EnableTrigger(gg_trg_Out11)
 SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound11)
     HeroFixRespPos()
     CreateEnteringFrame(nil, "Вся карта это пол")
-EnumDestructablesInRectAll(gg_rct_Region11, Trig_InitRoom11DownForRegion_Func006A)
+EnumDestructablesInRectAll(gg_rct_Region11, Trig_InitRoom11DownForRegion_Func007A)
 TriggerSleepAction(5.00)
 EnableTrigger(gg_trg_Button1101)
 end
@@ -16774,13 +16819,39 @@ TriggerAddCondition(gg_trg_ExitFrom11, Condition(Trig_ExitFrom11_Conditions))
 TriggerAddAction(gg_trg_ExitFrom11, Trig_ExitFrom11_Actions)
 end
 
+function Trig_Out11_Func001Func001C()
+if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+return false
+end
+if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
+return false
+end
+return true
+end
+
+function Trig_Out11_Func001C()
+if (Trig_Out11_Func001Func001C()) then
+return true
+end
+return false
+end
+
+function Trig_Out11_Conditions()
+if (not Trig_Out11_Func001C()) then
+return false
+end
+return true
+end
+
 function Trig_Out11_Actions()
 KillUnit(GetTriggerUnit())
 end
 
 function InitTrig_Out11()
 gg_trg_Out11 = CreateTrigger()
+DisableTrigger(gg_trg_Out11)
 TriggerRegisterLeaveRectSimple(gg_trg_Out11, gg_rct_Region11)
+TriggerAddCondition(gg_trg_Out11, Condition(Trig_Out11_Conditions))
 TriggerAddAction(gg_trg_Out11, Trig_Out11_Actions)
 end
 
@@ -19459,7 +19530,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, -384.0, -768.0)
+DefineStartLocation(0, 10880.0, 8576.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()
