@@ -21,9 +21,9 @@ function CreateFloorInRoom(x, y, h, w)
             local r = GetRandomInt(1, 4)
             local nx, ny = x + ((i - 1) * step), y - ((k - 1) * step)
             CreateDestructableZ(id, nx, ny, z, 90 * r, 2, 1)
-            local eff=AddSpecialEffect("MechaImpale",nx,ny)
-            BlzSetSpecialEffectZ(eff,z-500)
-            BlzSetSpecialEffectScale(eff,2)
+            local eff = AddSpecialEffect("MechaImpale", nx, ny)
+            BlzSetSpecialEffectZ(eff, z - 500)
+            BlzSetSpecialEffectScale(eff, 2)
             BlzPlaySpecialEffect(eff, ANIM_TYPE_ATTACK)
         end
     end
@@ -113,4 +113,25 @@ function DownFloorInTimedXY(timed, nx, ny)
         d = FindFloorInPoint(nx, ny)
         MoveDestructableUp(d, 500, 5)
     end)
+end
+
+function CreateSquareDestrutablesID(x, y, id)
+    local t = {}
+    local step = 64
+    local nx, ny = x - step, y - step
+    local d = CreateDestructableZ(id, nx, ny, GetTerrainZ(x, y), 0, 1, 1)
+    table.insert(t, d)
+    nx, ny = x + step, y + step
+    d = CreateDestructableZ(id, nx, ny, GetTerrainZ(x, y), 0, 1, 1)
+    table.insert(t, d)
+    nx, ny = x - step, y + step
+    d = CreateDestructableZ(id, nx, ny, GetTerrainZ(x, y), 0, 1, 1)
+    table.insert(t, d)
+    nx, ny = x + step, y - step
+    d = CreateDestructableZ(id, nx, ny, GetTerrainZ(x, y), 0, 1, 1)
+    table.insert(t, d)
+    for i = 1, #t do
+        local dx, dy = GetDestructableX(t[i]), GetDestructableY(t[i])
+        UnitDamageArea(udg_HERO, 60, dx, dy, 60, "All")
+    end
 end

@@ -12,8 +12,11 @@ function UnitAddForceSimpleClean(hero, angle, speed, distance, flag)
     end
     if onForces[GetHandleId(hero)] then
         onForces[GetHandleId(hero)] = false
+        local iteration=0
+        local eff=nil
         TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
             currentdistance = currentdistance + speed
+            iteration=iteration+1
             local x, y = GetUnitXY(hero)
             local vector = Vector:new(x, y, GetUnitZ(hero))
             local newVector = vector
@@ -44,11 +47,19 @@ function UnitAddForceSimpleClean(hero, angle, speed, distance, flag)
                         else
                             SetUnitZ(near, GetTerrainZ(newVector.x, newVector.y))
                         end
+                    elseif flag[i] == "Dust" then
+                        if iteration==1 then
+                            eff=AddSpecialEffect("Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl", newVector.x, newVector.y)
+                        end
+                        BlzSetSpecialEffectX(eff,newVector.x)
+                        BlzSetSpecialEffectY(eff,newVector.y)
                     end
                 end
             end
             if currentdistance >= distance then
+                --print("закончил движение")
                 DestroyTimer(GetExpiredTimer())
+                DestroyEffect(eff)
                 onForces[GetHandleId(hero)] = true
             end
         end)
@@ -293,7 +304,9 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
                                 --SetUnitAnimationByIndex(data.UnitHero, IndexAnimationWalk)
                             else
                                 --print("резкая анимация движения в случае хотьбы после переката")
-                                SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationWalk)
+                                if not IsUnitStunned(hero) then
+                                    SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationWalk)
+                                end
                             end
                         end
                     end

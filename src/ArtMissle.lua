@@ -42,17 +42,25 @@ function MakeUnitArtMissile(hero, unit, angle, speed, distance, MaxHeight, flag)
             DestroyTimer(GetExpiredTimer())
             IsUnitFall[GetHandleId(unit)] = false
             --local _,d= PointContentDestructable(x,y,60,true,1)
-
+            local stunDuration=0.01
             if flag then
                 for k = 1, #flag do
                     if flag[k] == "RemoveStun" then
-                        TimerStart(CreateTimer(), 0.01, false, function()
+                        TimerStart(CreateTimer(), stunDuration, false, function()
+                            UnitRemoveStun(unit)
+                            SetUnitAnimationByIndex(unit,24)
+                            QueueUnitAnimation(unit,"stand")
+                        end)
+                    elseif flag[k]=="Stun" then
+                        stunDuration=1.5
+                        TimerStart(CreateTimer(), stunDuration, false, function()
                             UnitRemoveStun(unit)
                             SetUnitAnimationByIndex(unit,24)
                             QueueUnitAnimation(unit,"stand")
                         end)
                     end
                 end
+
             else --без флага
                 DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", x, y))
                 UnitDamageArea(hero, damage, x, y, range)

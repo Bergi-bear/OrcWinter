@@ -145,6 +145,8 @@ function InitWASD(hero)
         distance = DistanceBetweenXY(hx, hy, GetPlayerMouseX[data.pid], GetPlayerMouseY[data.pid])
         cutDistance = math.lerp(cutDistance, distance, TIMER_PERIOD64 * 8)
 
+
+
         ----------------------------------------
 
         if not data.MouseMove then
@@ -156,6 +158,15 @@ function InitWASD(hero)
             data.DistMouse = DistanceBetweenXY(hx, hy, GetPlayerMouseX[data.pid], GetPlayerMouseY[data.pid])
             data.AngleMouse = AngleBetweenXY(hx, hy, GetPlayerMouseX[data.pid], GetPlayerMouseY[data.pid]) / bj_DEGTORAD
             --print("пошевелил " .. data.DistMouse)
+        end
+
+        if data.CatchUnit then
+            --print(curAngle)
+            if IsUnitInRangeXY(data.CatchUnit,hx, hy,120) then
+                local nx,ny=MoveXY(hx, hy,80,curAngle)
+                BlzSetUnitFacingEx(data.CatchUnit,curAngle)
+                SetUnitPositionSmooth(data.CatchUnit,nx,ny)
+            end
         end
         ------------ ВЕКТОРА
         local vector = Vector:new(GetUnitX(hero), GetUnitY(hero), GetUnitZ(hero))
@@ -439,9 +450,9 @@ function InitWASD(hero)
                     else
                         SetUnitTimeScale(hero,1)
                     end
-                    if animWalk == 0 and not stator then
+                    if animWalk == 0 and not stator  then
                         -- and not data.ReleaseRMB
-                        --print("сброс анимации")
+                        --print("сброс анимации движения",StunSystem[GetHandleId(data.UnitHero)].Time == 0)
                         SetUnitAnimationByIndex(hero, data.IndexAnimationWalk)
                         --local r={SoundStep1,SoundStep2,SoundStep3,SoundStep4}
                         data.animStand = 3
@@ -869,7 +880,6 @@ function CreateWASDActions()
                             SetUnitTimeScale(data.UnitHero, 1)
                         end
                         SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationSpace)-- Всегда бег
-                        --SetUnitAnimationByIndex(data.UnitHero, 27) -- 27 для кувырка -- IndexAnimationWalk -- для бега
                     end
                 end
             end

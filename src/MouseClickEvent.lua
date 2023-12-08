@@ -50,7 +50,9 @@ function InitMouseClickEvent()
 
                         local mark = AddSpecialEffect("Spell Marker TC", x, y)
                         BlzSetSpecialEffectScale(mark, 2)
-                        DestroyEffect(mark)
+                        TimerStart(CreateTimer(), 1, false, function()
+                            DestroyEffect(mark)
+                        end)
                         BlzSetSpecialEffectColorByPlayer(mark, Player(1)) -- синий
                         local speed = dist / 80
                         SetUnitAnimationByIndex(data.UnitHero, 25)
@@ -117,7 +119,7 @@ function InitMouseClickEvent()
                 if not data.CatchUnit then
                     --print("ищем юнита под курсором")
                     if dist <= 400 then
-                        tmpCatch = FindNearEnemyXY(data.UnitHero, 400, x, y)
+                        tmpCatch = FindNearEnemyXY(data.UnitHero, 120, x, y)
                         --print(dist)
                         if GetUnitTypeId(tmpCatch) == FourCC("h00C") or GetUnitTypeId(tmpCatch) == FourCC("h00R") then
                             data.CatchUnit = tmpCatch
@@ -125,7 +127,7 @@ function InitMouseClickEvent()
                             local angleMagnet = AngleBetweenUnits(data.CatchUnit, data.UnitHero)
                             local distMagnet = DistanceBetweenXY(GetUnitX(data.CatchUnit), GetUnitY(data.CatchUnit), GetUnitXY(data.UnitHero))
                             SetUnitFacing(data.CatchUnit, angleMagnet)
-                            UnitAddForceSimple(data.CatchUnit, angleMagnet, 5, distMagnet)
+                            UnitAddForceSimpleClean(data.CatchUnit, angleMagnet, 5*2, distMagnet,{"Dust"})
                             SetUnitZ(data.CatchUnit,0)
                         else
                             data.CatchUnit = false
