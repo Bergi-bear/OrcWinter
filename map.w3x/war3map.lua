@@ -301,6 +301,7 @@ gg_trg_ExitOnWolf = nil
 gg_trg_DeathWolf = nil
 gg_trg_WolfCinematic = nil
 gg_trg_SkipWolf = nil
+gg_trg_SkipWolfESC = nil
 gg_trg_BoundEnter = nil
 gg_trg_BoundEnterOnce = nil
 gg_trg_Exit = nil
@@ -435,7 +436,6 @@ gg_dest_B00D_20786 = nil
 gg_dest_B00D_20787 = nil
 gg_dest_B00D_20788 = nil
 gg_dest_B00B_21136 = nil
-gg_trg_SkipWolfESC = nil
 function InitGlobals()
 local i = 0
 
@@ -1839,7 +1839,7 @@ u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2119.9, -1861.5, 186.494, FourCC("
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2113.9, -1712.5, 175.971, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2189.5, -1629.3, -85.700, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2189.5, -1629.3, 274.300, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2067.1, -1508.4, 249.784, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
@@ -11284,7 +11284,7 @@ function InitDeathEventCreep()
             end)
         end
         if GetUnitTypeId(u) == FourCC("h005") then
-            UnitBlastArea(u, "FrostWyrmMissileNoOmni", 12)
+            --UnitBlastArea(u, "FrostWyrmMissileNoOmni", 12)
         end
         if GetUnitTypeId(u) == FourCC("h00C") then --бочка умирает
             local nx,ny=GetUnitXY(u)

@@ -55,7 +55,7 @@ function InitDeathEventCreep()
             end)
         end
         if GetUnitTypeId(u) == FourCC("h005") then
-            UnitBlastArea(u, "FrostWyrmMissileNoOmni", 12)
+            --UnitBlastArea(u, "FrostWyrmMissileNoOmni", 12)
         end
         if GetUnitTypeId(u) == FourCC("h00C") then --бочка умирает
             local nx,ny=GetUnitXY(u)
