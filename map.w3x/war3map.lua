@@ -23,6 +23,8 @@ udg_IsBrainGame = false
 udg_WolfIsDie = false
 udg_QPodval = nil
 udg_Remove15 = nil
+udg_Remove09 = nil
+udg_SkipWolfFact = false
 gg_rct_Region_038 = nil
 gg_rct_Region_024 = nil
 gg_rct_TrapZone = nil
@@ -135,6 +137,7 @@ gg_rct_Bound15 = nil
 gg_rct_Enter15 = nil
 gg_rct_Exit15 = nil
 gg_rct_Error15Out = nil
+gg_rct_Region09 = nil
 gg_cam_OnPeonsandTrall = nil
 gg_cam_OnPineRound = nil
 gg_cam_OnPeons = nil
@@ -432,6 +435,7 @@ gg_dest_B00D_20786 = nil
 gg_dest_B00D_20787 = nil
 gg_dest_B00D_20788 = nil
 gg_dest_B00B_21136 = nil
+gg_trg_SkipWolfESC = nil
 function InitGlobals()
 local i = 0
 
@@ -447,6 +451,8 @@ udg_HoleIsWork = true
 udg_IsBrainGame = false
 udg_WolfIsDie = false
 udg_Remove15 = CreateGroup()
+udg_Remove09 = CreateGroup()
+udg_SkipWolfFact = false
 end
 
 function InitSounds()
@@ -1054,6 +1060,7 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14398.5, 6077.9, 0.000, FourCC("h00
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14270.7, 6077.9, 0.000, FourCC("h00F"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00T"), 16071.1, -759.3, 90.000, FourCC("h00T"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00T"), 17780.4, 345.1, 90.000, FourCC("h00T"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 16904.7, 2956.2, 342.399, FourCC("h00K"))
 end
 
 function CreateUnitsForPlayer1()
@@ -1266,7 +1273,7 @@ life = GetUnitState(u, UNIT_STATE_LIFE)
 SetUnitState(u, UNIT_STATE_LIFE, 0.10 * life)
 gg_unit_h00E_0216 = BlzCreateUnitWithSkin(p, FourCC("h00E"), 11003.5, 6845.6, 180.000, FourCC("h00E"))
 gg_unit_h00E_0217 = BlzCreateUnitWithSkin(p, FourCC("h00E"), 11383.8, 6704.5, 0.000, FourCC("h00E"))
-gg_unit_h00R_0259 = BlzCreateUnitWithSkin(p, FourCC("h00R"), 15831.2, 812.1, 338.210, FourCC("h00R"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00R"), 15831.2, 812.1, 338.210, FourCC("h00R"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00V"), 16514.6, -2176.0, 0.000, FourCC("h00V"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11191.5, 4303.2, 45.687, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11192.8, 4434.4, 34.162, FourCC("h00C"))
@@ -1281,7 +1288,7 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 10740.6, 1412.7, 242.987, FourCC("h
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11522.5, 2183.7, 242.987, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11520.9, 1800.1, 242.987, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11519.3, 1411.6, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00R"), 16877.2, 2902.7, 338.210, FourCC("h00R"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00R"), 16899.6, 2945.6, 338.210, FourCC("h00R"))
 u = BlzCreateUnitWithSkin(p, FourCC("h000"), 13505.5, 1331.6, 270.000, FourCC("h000"))
 life = GetUnitState(u, UNIT_STATE_LIFE)
 SetUnitState(u, UNIT_STATE_LIFE, 0.02 * life)
@@ -1814,7 +1821,7 @@ u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1954.0, -1790.8, 280.954, FourCC("
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1876.9, -1784.8, 272.425, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1950.6, -1928.7, 100.278, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1961.0, -1929.7, 100.278, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1876.4, -1929.2, 100.278, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
@@ -1828,11 +1835,11 @@ u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2271.8, -1647.6, 8.268, FourCC("op
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2180.9, -1943.6, 91.332, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2109.9, -1858.4, 186.494, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2119.9, -1861.5, 186.494, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2111.0, -1709.7, 171.928, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2113.9, -1712.5, 175.971, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2196.5, -1606.3, 284.031, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2189.5, -1629.3, -85.700, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -2067.1, -1508.4, 249.784, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
@@ -1856,7 +1863,7 @@ u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1756.4, -2172.9, 187.148, FourCC("
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), -1829.5, -2127.1, 288.949, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("n00A"), -2302.6, -1958.3, 208.427, FourCC("n00A"))
+u = BlzCreateUnitWithSkin(p, FourCC("n00A"), -2315.2, -1941.1, 208.427, FourCC("n00A"))
 u = BlzCreateUnitWithSkin(p, FourCC("n00A"), -2236.8, -2022.7, 3.934, FourCC("n00A"))
 u = BlzCreateUnitWithSkin(p, FourCC("n00A"), -1810.1, -1991.2, 239.706, FourCC("n00A"))
 u = BlzCreateUnitWithSkin(p, FourCC("n00B"), -1572.0, -1966.7, 50.162, FourCC("n00B"))
@@ -1961,7 +1968,7 @@ gg_rct_Region_020 = Rect(800.0, -2496.0, 896.0, -2400.0)
 gg_rct_Region_021 = Rect(672.0, -2400.0, 800.0, -2272.0)
 gg_rct_Region_022 = Rect(-256.0, -704.0, -160.0, -608.0)
 gg_rct_Region_023 = Rect(-448.0, -448.0, 256.0, 224.0)
-gg_rct_Boind00 = Rect(11200.0, 8256.0, 11296.0, 8608.0)
+gg_rct_Boind00 = Rect(11200.0, 8320.0, 11296.0, 8608.0)
 gg_rct_Exit00 = Rect(11200.0, 8224.0, 11488.0, 8512.0)
 gg_rct_Enter00 = Rect(11072.0, 8928.0, 11264.0, 9056.0)
 gg_rct_StartBrainGame = Rect(736.0, -2176.0, 864.0, -2048.0)
@@ -2047,6 +2054,7 @@ gg_rct_Bound15 = Rect(16736.0, -2624.0, 17024.0, -2400.0)
 gg_rct_Enter15 = Rect(15680.0, -1984.0, 15808.0, -1856.0)
 gg_rct_Exit15 = Rect(17408.0, -3328.0, 17664.0, -3072.0)
 gg_rct_Error15Out = Rect(15552.0, -3392.0, 18240.0, -1664.0)
+gg_rct_Region09 = Rect(9856.0, -1152.0, 12448.0, 384.0)
 end
 
 function CreateCameras()
@@ -5922,12 +5930,17 @@ function CreateStompWall(unit)
     SetUnitInvulnerable(unit, true)
     local x, y = GetUnitXY(unit)
     local t={}
-    local eff = AddSpecialEffect("ConcreteCliffSide", x, y)
-    BlzSetSpecialEffectMatrixScale(eff, 2, 2, 1)
+    local eff = AddSpecialEffect("ConcreteCliffFloorCenter", x, y)
+    BlzSetSpecialEffectMatrixScale(eff, 2, 2, 4)
 
-    local eff2 = AddSpecialEffect("ConcreteCliffSide", x, y)
-    BlzSetSpecialEffectYaw(eff2, math.rad(180))
-    BlzSetSpecialEffectMatrixScale(eff2, 2, 2, 1)
+    --local eff2 = AddSpecialEffect("ConcreteCliffSide", x, y)
+    --BlzSetSpecialEffectYaw(eff2, math.rad(180))
+    --BlzSetSpecialEffectMatrixScale(eff2, 2, 2, 1)
+
+    local eff2 = AddSpecialEffect("MechaImpale", x, y)
+    BlzSetSpecialEffectPitch(eff2, math.rad(0))
+    BlzSetSpecialEffectMatrixScale(eff2, 2,2,1)
+    BlzPlaySpecialEffect(eff2, ANIM_TYPE_ATTACK)
 
 
     local eff3 = AddSpecialEffect("MechaImpale", x, y)
@@ -6740,10 +6753,10 @@ function PlayPudgeSpeechNumber(n)
         "Про последний проход я соврал, ещё не скоро здесь будет финал",
         "Варенье вы пришли украсть? Но угодите прям ко мне в пасть"
     }
-    if not GBoss then
+    --if not GBoss then
         GBoss = FindUnitOfType(FourCC("n007"))
         --print('мясник инициализирован')
-    end
+    --end
     CameraSetEQNoiseForPlayer(Player(0), 6)
     TimerStart(CreateTimer(), 2, false, function()
         CameraClearNoiseForPlayer(Player(0))
@@ -8813,7 +8826,7 @@ function StartDragonAI(xs, ys)
                         --print("фраза с задержкой?", dragonFrazeCount)
                         PlayMonoSpeech("Speech\\Peon\\Dragon\\tiykral", "Ты украл наши подарки!, и делал что-то непристойное рядом с ними")
                         TimerStart(CreateTimer(), 5, false, function()
-                            PlayBossSpeech("Speech\\Dragon\\" .. dragonFrazeCount+1, tFraze[dragonFrazeCount+1])
+                            PlayBossSpeech("Speech\\Dragon\\" .. dragonFrazeCount + 1, tFraze[dragonFrazeCount + 1])
                         end)
                     else
                         --print("нормальная фраза",dragonFrazeCount)
@@ -8888,7 +8901,11 @@ function StartDragonAI(xs, ys)
                 PhaseOn = false
                 --print("фаза", phase)
                 --print("Падающие сосульки")
-                IceCrest(boss)
+                if GetRandomInt(1, 2) == 1 then
+                    IceCrest(boss)
+                else
+                    MissileSpamInRandomPoint(boss,hero)
+                end
             end
 
         else
@@ -8913,6 +8930,28 @@ function StartDragonAI(xs, ys)
         end--конец
     end)
 end
+
+function MissileSpamInRandomPoint(boss,hero)
+    local period=0.1
+    local sec=0
+    TimerStart(CreateTimer(), period, true, function()
+        sec=sec+period
+
+        local ra=GetRandomInt(1,360)
+        local dist=GetRandomInt(250,1500)
+        local speed = dist / 80
+        local x, y = MoveXY(GetUnitX(boss), GetUnitY(boss), dist, ra)
+        local mark = AddSpecialEffect("Spell Marker TC", x, y)
+        SetUnitAnimation(boss, "attack")
+        SetUnitFacing(boss,ra)
+        UnitCreateArtMissile(boss, ra, speed, dist, 300, nil, "FrostWyrmMissileNoOmni",mark)
+        if sec>=6 then
+            DestroyTimer(GetExpiredTimer())
+            IssuePointOrder(boss, "move", GetUnitXY(hero))
+        end
+    end)
+end
+
 
 function DragonDashAttackPrepare(boss, hero)
     if UnitAlive(boss) then
@@ -9016,7 +9055,10 @@ function IceImpale(boss, angle, notMove)
             local _, enemy = UnitDamageArea(boss, 10, x, y, range)
             CreateSpikeFromDeep(x, y, notMove)
             if k > max or enemy then
-                CreateDestructableZ(FourCC("B006"), x, y, 900, GetRandomInt(0, 360), 2.5, 1)
+                local nd = CreateDestructableZ(FourCC("B006"), x, y, 900, GetRandomInt(0, 360), 2.5, 1)
+                TimerStart(CreateTimer(), 10, false, function()
+                    KillDestructable(nd)
+                end)
                 DestroyTimer(GetExpiredTimer())
                 if not notMove then
                     -- IssuePointOrder(boss, "move", GetUnitXY(hero))
@@ -9070,6 +9112,9 @@ function CreateSpikeFromDeep(x, y, notMove)
     end
     if not IsTerrainPathable(x, y, PATHING_TYPE_WALKABILITY) then
         local nd = CreateDestructableZ(id, x, y, 900, GetRandomInt(0, 360), size, 1)
+        TimerStart(CreateTimer(), 20, false, function()
+            KillDestructable(nd)
+        end)
     end
 end
 
@@ -10086,7 +10131,7 @@ function WolfWinterMove(boss, xs, ys)
         end)
     else
         --print("стадия двойной закрутки")
-        SandStorm(boss, gbxWolf, gbyWolf)
+        SandStorm(boss, xs, ys)
     end
 end
 
@@ -15848,8 +15893,7 @@ end
 end
 
 function Trig_InitRoom14_Actions()
-    udg_Ball=gg_unit_h00R_0259
-SetUnitUserData(gg_unit_h00R_0259, 0)
+    udg_Ball=nil
 SetDestructableOccluderHeight(gg_dest_B00D_20643, 128)
     CreateFloorInRoom(GetDestructableX(gg_dest_B00D_20643), GetDestructableY(gg_dest_B00D_20643),10,10)
 DisableTrigger(GetTriggeringTrigger())
@@ -15934,11 +15978,11 @@ end
 function Trig_ExitFrom14_Actions()
     SetUnitAnimationByIndex(udg_HERO, 25)
 TriggerSleepAction(0.30)
-SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_EnterBoss))
+SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter15))
     UnitStartFallAnim(udg_HERO,1000)
-SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_BoundBoss)
+SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound15)
     HeroFixRespPos()
-    CreateEnteringFrame(nil, "Вся карта это Босс")
+    CreateEnteringFrame(nil, "Картины оживают")
 end
 
 function InitTrig_ExitFrom14()
@@ -17200,11 +17244,26 @@ end
 return true
 end
 
+function Trig_InitRoom09_Func006Func001C()
+if (not (GetUnitTypeId(GetEnumUnit()) == FourCC("h00G"))) then
+return false
+end
+return true
+end
+
+function Trig_InitRoom09_Func006A()
+if (Trig_InitRoom09_Func006Func001C()) then
+GroupAddUnitSimple(GetEnumUnit(), udg_Remove09)
+else
+end
+end
+
 function Trig_InitRoom09_Actions()
 DisableTrigger(GetTriggeringTrigger())
 SetUnitColor(gg_unit_h00M_0257, PLAYER_COLOR_RED)
     HeroFixRespPos()
     StartBlackHole(gg_unit_h00M_0257)
+ForGroupBJ(GetUnitsInRectAll(gg_rct_Region09), Trig_InitRoom09_Func006A)
 end
 
 function InitTrig_InitRoom09()
@@ -17221,7 +17280,12 @@ end
 return true
 end
 
-function Trig_Victory09_Func001Func004C()
+function Trig_Victory09_Func001Func004A()
+KillUnit(GetEnumUnit())
+ShowUnitHide(GetEnumUnit())
+end
+
+function Trig_Victory09_Func001Func005C()
 if (not (IsDestructableDeadBJ(gg_dest_B00D_17530) == true)) then
 return false
 end
@@ -17238,7 +17302,7 @@ return true
 end
 
 function Trig_Victory09_Func001C()
-if (not Trig_Victory09_Func001Func004C()) then
+if (not Trig_Victory09_Func001Func005C()) then
 return false
 end
 return true
@@ -17247,6 +17311,7 @@ end
 function Trig_Victory09_Actions()
 if (Trig_Victory09_Func001C()) then
 KillDestructable(gg_dest_B00B_17533)
+ForGroupBJ(udg_Remove09, Trig_Victory09_Func001Func004A)
 else
 TriggerSleepAction(0.50)
 if (Trig_Victory09_Func001Func002C()) then
@@ -19077,33 +19142,111 @@ end
 return true
 end
 
+function Trig_WolfCinematic_Func010C()
+if (not (udg_SkipWolfFact == true)) then
+return false
+end
+return true
+end
+
+function Trig_WolfCinematic_Func012C()
+if (not (udg_SkipWolfFact == true)) then
+return false
+end
+return true
+end
+
+function Trig_WolfCinematic_Func019C()
+if (not (udg_SkipWolfFact == true)) then
+return false
+end
+return true
+end
+
+function Trig_WolfCinematic_Func024C()
+if (not (udg_SkipWolfFact == true)) then
+return false
+end
+return true
+end
+
+function Trig_WolfCinematic_Func028C()
+if (not (udg_SkipWolfFact == true)) then
+return false
+end
+return true
+end
+
+function Trig_WolfCinematic_Func032C()
+if (not (udg_SkipWolfFact == true)) then
+return false
+end
+return true
+end
+
+function Trig_WolfCinematic_Func035C()
+if (not (udg_SkipWolfFact == true)) then
+return false
+end
+return true
+end
+
 function Trig_WolfCinematic_Actions()
 DisableTrigger(GetTriggeringTrigger())
+EnableTrigger(gg_trg_SkipWolfESC)
     CustomCinematicMode(true)
 CinematicModeBJ(true, GetPlayersAll())
 CinematicFadeBJ(bj_CINEFADETYPE_FADEOUT, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
 CinematicFadeBJ(bj_CINEFADETYPE_FADEIN, 2, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0)
 CameraSetupApplyForPlayer(true, gg_cam_SeeOnWolf, Player(0), 0.00)
 IssuePointOrderLocBJ(GetTriggerUnit(), "move", GetRectCenter(gg_rct_Region_019))
+if (Trig_WolfCinematic_Func010C()) then
+return 
+else
+end
 SetCameraTargetControllerNoZForPlayer(Player(0), GetTriggerUnit(), 0, 0, false)
+if (Trig_WolfCinematic_Func012C()) then
+return 
+else
+end
 TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_765", gg_snd_PenFromWolf1, "TRIGSTR_766", bj_TIMETYPE_ADD, 0.00, true)
 PanCameraToTimedLocForPlayer(Player(0), GetUnitLoc(gg_unit_n002_0045), 1.00)
 IssuePointOrderLocBJ(GetTriggerUnit(), "move", GetRectCenter(gg_rct_Region_019))
 TriggerSleepAction(1.00)
 IssuePointOrderLocBJ(GetTriggerUnit(), "move", GetRectCenter(gg_rct_Region_019))
 RotateCameraAroundLocBJ(360.00, GetUnitLoc(gg_unit_n002_0045), Player(0), 6.00)
+if (Trig_WolfCinematic_Func019C()) then
+return 
+else
+end
 TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_767", gg_snd_PenFromWolf2, "TRIGSTR_768", bj_TIMETYPE_ADD, 0.00, true)
 SetCameraTargetControllerNoZForPlayer(Player(0), gg_unit_n002_0045, 0, 0, false)
 SetUnitFacingToFaceUnitTimed(gg_unit_n002_0045, GetTriggerUnit(), 0)
 RotateCameraAroundLocBJ(-180.00, GetUnitLoc(gg_unit_n002_0045), Player(0), 12.00)
+if (Trig_WolfCinematic_Func024C()) then
+return 
+else
+end
 TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_n002_0045, "TRIGSTR_769", gg_snd_WolfCinematic1, "TRIGSTR_770", bj_TIMETYPE_ADD, 0.00, true)
 SetUnitAnimation(gg_unit_n002_0045, "Attack")
 QueueUnitAnimationBJ(gg_unit_n002_0045, "stand")
+if (Trig_WolfCinematic_Func028C()) then
+return 
+else
+end
 TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_771", gg_snd_PenFromWolf3, "TRIGSTR_772", bj_TIMETYPE_ADD, 0.00, true)
 SetUnitAnimation(gg_unit_n002_0045, "Attack")
 QueueUnitAnimationBJ(gg_unit_n002_0045, "stand")
+if (Trig_WolfCinematic_Func032C()) then
+return 
+else
+end
 TransmissionFromUnitWithNameBJ(GetPlayersAll(), gg_unit_n002_0045, "TRIGSTR_773", gg_snd_WolfCinematic2, "TRIGSTR_774", bj_TIMETYPE_ADD, 0.00, true)
 IssuePointOrderLocBJ(GetTriggerUnit(), "move", GetUnitLoc(gg_unit_n002_0045))
+if (Trig_WolfCinematic_Func035C()) then
+return 
+else
+end
 TransmissionFromUnitWithNameBJ(GetPlayersAll(), udg_HERO, "TRIGSTR_775", gg_snd_PenFromWolf4, "TRIGSTR_776", bj_TIMETYPE_ADD, 0.00, true)
 TriggerExecute(gg_trg_SkipWolf)
 end
@@ -19124,6 +19267,19 @@ end
 function InitTrig_SkipWolf()
 gg_trg_SkipWolf = CreateTrigger()
 TriggerAddAction(gg_trg_SkipWolf, Trig_SkipWolf_Actions)
+end
+
+function Trig_SkipWolfESC_Actions()
+udg_SkipWolfFact = true
+CameraSetupApplyForPlayer(true, gg_cam_ResetCam, Player(0), 1.00)
+ConditionalTriggerExecute(gg_trg_SkipWolf)
+end
+
+function InitTrig_SkipWolfESC()
+gg_trg_SkipWolfESC = CreateTrigger()
+DisableTrigger(gg_trg_SkipWolfESC)
+TriggerRegisterPlayerEventEndCinematic(gg_trg_SkipWolfESC, Player(0))
+TriggerAddAction(gg_trg_SkipWolfESC, Trig_SkipWolfESC_Actions)
 end
 
 function Trig_BoundEnter_Conditions()
@@ -19635,6 +19791,7 @@ InitTrig_ExitOnWolf()
 InitTrig_DeathWolf()
 InitTrig_WolfCinematic()
 InitTrig_SkipWolf()
+InitTrig_SkipWolfESC()
 InitTrig_BoundEnter()
 InitTrig_BoundEnterOnce()
 InitTrig_Exit()
@@ -19689,7 +19846,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, -512.0, -704.0)
+DefineStartLocation(0, -384.0, -768.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()

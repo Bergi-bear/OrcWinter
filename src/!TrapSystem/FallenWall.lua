@@ -99,12 +99,17 @@ function CreateStompWall(unit)
     SetUnitInvulnerable(unit, true)
     local x, y = GetUnitXY(unit)
     local t={}
-    local eff = AddSpecialEffect("ConcreteCliffSide", x, y)
-    BlzSetSpecialEffectMatrixScale(eff, 2, 2, 1)
+    local eff = AddSpecialEffect("ConcreteCliffFloorCenter", x, y)
+    BlzSetSpecialEffectMatrixScale(eff, 2, 2, 4)
 
-    local eff2 = AddSpecialEffect("ConcreteCliffSide", x, y)
-    BlzSetSpecialEffectYaw(eff2, math.rad(180))
-    BlzSetSpecialEffectMatrixScale(eff2, 2, 2, 1)
+    --local eff2 = AddSpecialEffect("ConcreteCliffSide", x, y)
+    --BlzSetSpecialEffectYaw(eff2, math.rad(180))
+    --BlzSetSpecialEffectMatrixScale(eff2, 2, 2, 1)
+
+    local eff2 = AddSpecialEffect("MechaImpale", x, y)
+    BlzSetSpecialEffectPitch(eff2, math.rad(0))
+    BlzSetSpecialEffectMatrixScale(eff2, 2,2,1)
+    BlzPlaySpecialEffect(eff2, ANIM_TYPE_ATTACK)
 
 
     local eff3 = AddSpecialEffect("MechaImpale", x, y)

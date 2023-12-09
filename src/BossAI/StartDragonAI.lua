@@ -170,7 +170,7 @@ function StartDragonAI(xs, ys)
                         --print("фраза с задержкой?", dragonFrazeCount)
                         PlayMonoSpeech("Speech\\Peon\\Dragon\\tiykral", "Ты украл наши подарки!, и делал что-то непристойное рядом с ними")
                         TimerStart(CreateTimer(), 5, false, function()
-                            PlayBossSpeech("Speech\\Dragon\\" .. dragonFrazeCount+1, tFraze[dragonFrazeCount+1])
+                            PlayBossSpeech("Speech\\Dragon\\" .. dragonFrazeCount + 1, tFraze[dragonFrazeCount + 1])
                         end)
                     else
                         --print("нормальная фраза",dragonFrazeCount)
@@ -245,7 +245,11 @@ function StartDragonAI(xs, ys)
                 PhaseOn = false
                 --print("фаза", phase)
                 --print("Падающие сосульки")
-                IceCrest(boss)
+                if GetRandomInt(1, 2) == 1 then
+                    IceCrest(boss)
+                else
+                    MissileSpamInRandomPoint(boss,hero)
+                end
             end
 
         else
@@ -270,6 +274,28 @@ function StartDragonAI(xs, ys)
         end--конец
     end)
 end
+
+function MissileSpamInRandomPoint(boss,hero)
+    local period=0.1
+    local sec=0
+    TimerStart(CreateTimer(), period, true, function()
+        sec=sec+period
+
+        local ra=GetRandomInt(1,360)
+        local dist=GetRandomInt(250,1500)
+        local speed = dist / 80
+        local x, y = MoveXY(GetUnitX(boss), GetUnitY(boss), dist, ra)
+        local mark = AddSpecialEffect("Spell Marker TC", x, y)
+        SetUnitAnimation(boss, "attack")
+        SetUnitFacing(boss,ra)
+        UnitCreateArtMissile(boss, ra, speed, dist, 300, nil, "FrostWyrmMissileNoOmni",mark)
+        if sec>=6 then
+            DestroyTimer(GetExpiredTimer())
+            IssuePointOrder(boss, "move", GetUnitXY(hero))
+        end
+    end)
+end
+
 
 function DragonDashAttackPrepare(boss, hero)
     if UnitAlive(boss) then
@@ -373,7 +399,10 @@ function IceImpale(boss, angle, notMove)
             local _, enemy = UnitDamageArea(boss, 10, x, y, range)
             CreateSpikeFromDeep(x, y, notMove)
             if k > max or enemy then
-                CreateDestructableZ(FourCC("B006"), x, y, 900, GetRandomInt(0, 360), 2.5, 1)
+                local nd = CreateDestructableZ(FourCC("B006"), x, y, 900, GetRandomInt(0, 360), 2.5, 1)
+                TimerStart(CreateTimer(), 10, false, function()
+                    KillDestructable(nd)
+                end)
                 DestroyTimer(GetExpiredTimer())
                 if not notMove then
                     -- IssuePointOrder(boss, "move", GetUnitXY(hero))
@@ -427,6 +456,9 @@ function CreateSpikeFromDeep(x, y, notMove)
     end
     if not IsTerrainPathable(x, y, PATHING_TYPE_WALKABILITY) then
         local nd = CreateDestructableZ(id, x, y, 900, GetRandomInt(0, 360), size, 1)
+        TimerStart(CreateTimer(), 20, false, function()
+            KillDestructable(nd)
+        end)
     end
 end
 

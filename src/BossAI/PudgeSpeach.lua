@@ -21,10 +21,10 @@ function PlayPudgeSpeechNumber(n)
         "Про последний проход я соврал, ещё не скоро здесь будет финал",
         "Варенье вы пришли украсть? Но угодите прям ко мне в пасть"
     }
-    if not GBoss then
+    --if not GBoss then
         GBoss = FindUnitOfType(FourCC("n007"))
         --print('мясник инициализирован')
-    end
+    --end
     CameraSetEQNoiseForPlayer(Player(0), 6)
     TimerStart(CreateTimer(), 2, false, function()
         CameraClearNoiseForPlayer(Player(0))

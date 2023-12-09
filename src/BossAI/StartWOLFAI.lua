@@ -413,7 +413,7 @@ function WolfWinterMove(boss, xs, ys)
         end)
     else
         --print("стадия двойной закрутки")
-        SandStorm(boss, gbxWolf, gbyWolf)
+        SandStorm(boss, xs, ys)
     end
 end
 
