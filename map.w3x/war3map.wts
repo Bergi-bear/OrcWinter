@@ -2650,9 +2650,3 @@ STRING 895
 Летающий портрет Назара
 }
 
-STRING 896
-// Units: h00W (Летающий портрет Назара), EditorSuffix (Name - Editor Suffix)
-{
- (можно толкать)
-}
-

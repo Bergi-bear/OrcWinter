@@ -129,7 +129,8 @@ function InitRegistryEvent(hero)
         if GetUnitTypeId(entering) == FourCC("e003") then
             -- Снеговик для дефенса
             if not SnowManDefenceGame then
-                StartSnowManDefence()
+                --StartSnowManDefence()
+                print("данная мини игра недоступна в этой версии карты")
             end
         end
         if GetUnitTypeId(entering) == FourCC("n002") then

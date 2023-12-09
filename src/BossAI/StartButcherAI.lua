@@ -468,15 +468,17 @@ function ButcherAddArmorTimed(boss, lvl, timed)
     --1 уровень 50 брони
 
 
-    DestroyEffect(AddSpecialEffectTarget("Effect\\File00000341", boss, "chest"))
-    local x,y=GetUnitXY(boss)
-    local _, _, _, units = UnitDamageArea(unit, 1, x, y, 500)
+    DestroyEffect(AddSpecialEffectTarget("Effect\\File00000341", boss, "chest")) --эффект отталкивания
+    local x, y = GetUnitXY(boss)
+    local _, _, _, units = UnitDamageArea(boss, 1, x, y, 500)
 
     for i = 1, #units do
-        local angle=AngleBetweenUnits(unit,units[i])
-        local dist=500-DistanceBetweenXY(x,y,GetUnitXY(units[i]))
-        BlzPauseUnitEx(units[i], true) -- починка бага
-        UnitAddJumpForce(units[i],angle,40,dist,250)
+        local angle = AngleBetweenUnits(boss, units[i])
+        local dist = 500 - DistanceBetweenXY(x, y, GetUnitXY(units[i]))
+        --BlzPauseUnitEx(units[i], true) -- починка бага
+        --UnitAddJumpForce(units[i],angle,40,dist,250)
+        local ab = AngleBetweenXY(x, y, GetUnitXY(units[i])) / bj_DEGTORAD
+        UnitFallGround(units[i], ab, 200, { "Stun" })
     end
 
     UnitAddAbility(boss, FourCC("A002"))
@@ -679,8 +681,14 @@ function ButcherThrowGround(boss, hero)
             nx, ny = MoveXY(x, y, 500, GetUnitFacing(boss) - 15)
             DestroyEffect(AddSpecialEffect("Earthshock", nx, ny))
             DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", nx, ny))
-            local is, du = UnitDamageArea(boss, 50, nx, ny, 220)
+            local _, du = UnitDamageArea(boss, 50, nx, ny, 220)
             DamageDestructableInRangeXY(boss, 50, 220, x, y)
+
+            if IsUnitInRangeXY(hero, nx, ny, 250) then
+                local ab = AngleBetweenXY(nx, ny, GetUnitXY(hero)) / bj_DEGTORAD
+                UnitFallGround(hero, ab, 250, { "Stun" })
+            end
+
             if du then
                 PlayBossSpeech("Speech\\Pudge\\InFight\\F9", "Попал")
             else

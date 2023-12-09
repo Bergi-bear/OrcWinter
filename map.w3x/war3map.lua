@@ -22,6 +22,7 @@ udg_HoleIsWork = false
 udg_IsBrainGame = false
 udg_WolfIsDie = false
 udg_QPodval = nil
+udg_Remove15 = nil
 gg_rct_Region_038 = nil
 gg_rct_Region_024 = nil
 gg_rct_TrapZone = nil
@@ -130,6 +131,10 @@ gg_rct_R14B1 = nil
 gg_rct_R14B2 = nil
 gg_rct_R14B3 = nil
 gg_rct_UP14 = nil
+gg_rct_Bound15 = nil
+gg_rct_Enter15 = nil
+gg_rct_Exit15 = nil
+gg_rct_Error15Out = nil
 gg_cam_OnPeonsandTrall = nil
 gg_cam_OnPineRound = nil
 gg_cam_OnPeons = nil
@@ -200,6 +205,11 @@ gg_snd_OP2 = nil
 gg_snd_OP3 = nil
 gg_snd_OT3 = nil
 gg_snd_OT4 = nil
+gg_trg_Error15Out = nil
+gg_trg_Error15OutNAZAR = nil
+gg_trg_Victory15 = nil
+gg_trg_ExitFrom15 = nil
+gg_trg_InitRoom15 = nil
 gg_trg_InitRoom14 = nil
 gg_trg_Leave14Fix = nil
 gg_trg_ExitFrom14 = nil
@@ -330,6 +340,9 @@ gg_unit_h00J_0593 = nil
 gg_unit_h00J_0595 = nil
 gg_unit_opeo_0264 = nil
 gg_unit_h00R_0259 = nil
+gg_unit_h00W_0785 = nil
+gg_unit_h00W_0775 = nil
+gg_unit_h00W_0784 = nil
 gg_dest_B004_2162 = nil
 gg_dest_B007_5312 = nil
 gg_dest_DTfx_5091 = nil
@@ -418,19 +431,7 @@ gg_dest_B00D_20785 = nil
 gg_dest_B00D_20786 = nil
 gg_dest_B00D_20787 = nil
 gg_dest_B00D_20788 = nil
-gg_rct_Bound15 = nil
-gg_rct_Enter15 = nil
-gg_rct_Exit15 = nil
-gg_rct_Error15Out = nil
-gg_trg_Error15Out = nil
-gg_trg_Error15OutNAZAR = nil
-gg_trg_Victory15 = nil
-gg_unit_h00W_0775 = nil
-gg_unit_h00W_0784 = nil
-gg_unit_h00W_0785 = nil
-gg_unit_h00V_0769 = nil
 gg_dest_B00B_21136 = nil
-gg_trg_ExitFrom15 = nil
 function InitGlobals()
 local i = 0
 
@@ -445,6 +446,7 @@ udg_Remove08 = CreateGroup()
 udg_HoleIsWork = true
 udg_IsBrainGame = false
 udg_WolfIsDie = false
+udg_Remove15 = CreateGroup()
 end
 
 function InitSounds()
@@ -720,7 +722,7 @@ gg_dest_B00B_17599 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 14969.5, -30
 gg_dest_B00B_17182 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15231.9, -760.3, 844.8, 270.000, 1.450, 0, FourCC("B00B"))
 gg_dest_B00B_14732 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 13812.6, 8326.6, 838.4, 90.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_16680 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15221.9, 2433.2, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
-gg_dest_B00B_21136 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 17535.6, -3199.7, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
+gg_dest_B00B_21136 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 17542.3, -3202.7, 864.0, 180.000, 1.500, 0, FourCC("B00B"))
 gg_dest_B00B_16430 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11136.0, 2426.0, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_17533 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 12163.4, 2.3, 832.0, 270.000, 1.850, 0, FourCC("B00B"))
 gg_dest_B00B_15274 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 10618.1, 6012.7, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
@@ -5885,8 +5887,8 @@ function StartStopWall(unit)
                     CreateSquareDestrutablesID(x, y, FourCC("Ytlc"))
                     DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", x, y))
 
-                    local hero=FindNearEnemyXY(unit,300,x,y)
-                    if IsUnitInRangeXY(hero, x, y, 250) then
+                    local hero=FindNearEnemyXY(unit,250,x,y)
+                    if IsUnitInRangeXY(hero, x, y, 200) then
                         local ab = AngleBetweenXY(x, y, GetUnitXY(hero))/ bj_DEGTORAD
                         UnitFallGround(hero, ab, 200,{"Stun"})
                     end
@@ -5899,6 +5901,17 @@ function StartStopWall(unit)
 
         if not UnitAlive(unit) then
             DestroyTimer(GetExpiredTimer())
+            for i=1,#t do
+                DestroyEffect(t[i])
+                BlzSetSpecialEffectZ(t[i], z)
+                BlzSetSpecialEffectPosition(t[i],OutPoint,OutPoint,0)
+            end
+            local range = 128
+            SetRect(GlobalRect, x - range, y - range, x + range, y + range)
+            EnumDestructablesInRect(GlobalRect, nil, function()
+                local d = GetEnumDestructable()
+                RemoveDestructable(d)
+            end)
         end
     end)
 end
@@ -8361,15 +8374,17 @@ function ButcherAddArmorTimed(boss, lvl, timed)
     --1 уровень 50 брони
 
 
-    DestroyEffect(AddSpecialEffectTarget("Effect\\File00000341", boss, "chest"))
-    local x,y=GetUnitXY(boss)
-    local _, _, _, units = UnitDamageArea(unit, 1, x, y, 500)
+    DestroyEffect(AddSpecialEffectTarget("Effect\\File00000341", boss, "chest")) --эффект отталкивания
+    local x, y = GetUnitXY(boss)
+    local _, _, _, units = UnitDamageArea(boss, 1, x, y, 500)
 
     for i = 1, #units do
-        local angle=AngleBetweenUnits(unit,units[i])
-        local dist=500-DistanceBetweenXY(x,y,GetUnitXY(units[i]))
-        BlzPauseUnitEx(units[i], true) -- починка бага
-        UnitAddJumpForce(units[i],angle,40,dist,250)
+        local angle = AngleBetweenUnits(boss, units[i])
+        local dist = 500 - DistanceBetweenXY(x, y, GetUnitXY(units[i]))
+        --BlzPauseUnitEx(units[i], true) -- починка бага
+        --UnitAddJumpForce(units[i],angle,40,dist,250)
+        local ab = AngleBetweenXY(x, y, GetUnitXY(units[i])) / bj_DEGTORAD
+        UnitFallGround(units[i], ab, 200, { "Stun" })
     end
 
     UnitAddAbility(boss, FourCC("A002"))
@@ -8572,8 +8587,14 @@ function ButcherThrowGround(boss, hero)
             nx, ny = MoveXY(x, y, 500, GetUnitFacing(boss) - 15)
             DestroyEffect(AddSpecialEffect("Earthshock", nx, ny))
             DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", nx, ny))
-            local is, du = UnitDamageArea(boss, 50, nx, ny, 220)
+            local _, du = UnitDamageArea(boss, 50, nx, ny, 220)
             DamageDestructableInRangeXY(boss, 50, 220, x, y)
+
+            if IsUnitInRangeXY(hero, nx, ny, 250) then
+                local ab = AngleBetweenXY(nx, ny, GetUnitXY(hero)) / bj_DEGTORAD
+                UnitFallGround(hero, ab, 250, { "Stun" })
+            end
+
             if du then
                 PlayBossSpeech("Speech\\Pudge\\InFight\\F9", "Попал")
             else
@@ -11178,7 +11199,7 @@ do
             InitHookUnits(FourCC("u001")) -- пуджи с хуком
             InitPendulum(FourCC("h00E")) -- маятники
             InitBarrels(FourCC("h00C")) -- бочки возрождаются после смерти
-            InitAllFallenWall()
+            --InitAllFallenWall()
             ReplaceId2InvisiblePlatform(FourCC("h00F")) --невидимые кнопки
         end)
     end
@@ -13505,7 +13526,8 @@ function InitRegistryEvent(hero)
         if GetUnitTypeId(entering) == FourCC("e003") then
             -- Снеговик для дефенса
             if not SnowManDefenceGame then
-                StartSnowManDefence()
+                --StartSnowManDefence()
+                print("данная мини игра недоступна в этой версии карты")
             end
         end
         if GetUnitTypeId(entering) == FourCC("n002") then
@@ -15636,7 +15658,11 @@ TriggerAddCondition(gg_trg_Error15OutNAZAR, Condition(Trig_Error15OutNAZAR_Condi
 TriggerAddAction(gg_trg_Error15OutNAZAR, Trig_Error15OutNAZAR_Actions)
 end
 
-function Trig_Victory15_Func001Func003C()
+function Trig_Victory15_Func001Func003A()
+KillUnit(GetEnumUnit())
+end
+
+function Trig_Victory15_Func001Func004C()
 if (not (IsUnitDeadBJ(gg_unit_h00W_0775) == true)) then
 return false
 end
@@ -15650,7 +15676,7 @@ return true
 end
 
 function Trig_Victory15_Func001C()
-if (not Trig_Victory15_Func001Func003C()) then
+if (not Trig_Victory15_Func001Func004C()) then
 return false
 end
 return true
@@ -15660,6 +15686,7 @@ function Trig_Victory15_Actions()
 if (Trig_Victory15_Func001C()) then
 DisableTrigger(gg_trg_Error15Out)
 KillDestructable(gg_dest_B00B_21136)
+ForGroupBJ(udg_Remove15, Trig_Victory15_Func001Func003A)
 else
 end
 end
@@ -15707,6 +15734,40 @@ gg_trg_ExitFrom15 = CreateTrigger()
 TriggerRegisterEnterRectSimple(gg_trg_ExitFrom15, gg_rct_Exit15)
 TriggerAddCondition(gg_trg_ExitFrom15, Condition(Trig_ExitFrom15_Conditions))
 TriggerAddAction(gg_trg_ExitFrom15, Trig_ExitFrom15_Actions)
+end
+
+function Trig_InitRoom15_Conditions()
+if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+return false
+end
+return true
+end
+
+function Trig_InitRoom15_Func002Func001C()
+if (not (GetUnitTypeId(GetEnumUnit()) == FourCC("h00V"))) then
+return false
+end
+return true
+end
+
+function Trig_InitRoom15_Func002A()
+if (Trig_InitRoom15_Func002Func001C()) then
+GroupAddUnitSimple(GetEnumUnit(), udg_Remove15)
+else
+end
+end
+
+function Trig_InitRoom15_Actions()
+DisableTrigger(GetTriggeringTrigger())
+ForGroupBJ(GetUnitsInRectAll(gg_rct_Error15Out), Trig_InitRoom15_Func002A)
+    InitAllFallenWall()
+end
+
+function InitTrig_InitRoom15()
+gg_trg_InitRoom15 = CreateTrigger()
+TriggerRegisterEnterRectSimple(gg_trg_InitRoom15, gg_rct_Enter15)
+TriggerAddCondition(gg_trg_InitRoom15, Condition(Trig_InitRoom15_Conditions))
+TriggerAddAction(gg_trg_InitRoom15, Trig_InitRoom15_Actions)
 end
 
 function Trig_InitRoom14_Conditions()
@@ -19485,6 +19546,7 @@ InitTrig_Error15Out()
 InitTrig_Error15OutNAZAR()
 InitTrig_Victory15()
 InitTrig_ExitFrom15()
+InitTrig_InitRoom15()
 InitTrig_InitRoom14()
 InitTrig_Leave14Fix()
 InitTrig_ExitFrom14()
@@ -19627,7 +19689,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, 15808.0, -2176.0)
+DefineStartLocation(0, -512.0, -704.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()

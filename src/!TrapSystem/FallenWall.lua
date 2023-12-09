@@ -78,6 +78,17 @@ function StartStopWall(unit)
 
         if not UnitAlive(unit) then
             DestroyTimer(GetExpiredTimer())
+            for i=1,#t do
+                DestroyEffect(t[i])
+                BlzSetSpecialEffectZ(t[i], z)
+                BlzSetSpecialEffectPosition(t[i],OutPoint,OutPoint,0)
+            end
+            local range = 128
+            SetRect(GlobalRect, x - range, y - range, x + range, y + range)
+            EnumDestructablesInRect(GlobalRect, nil, function()
+                local d = GetEnumDestructable()
+                RemoveDestructable(d)
+            end)
         end
     end)
 end

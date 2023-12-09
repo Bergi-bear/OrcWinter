@@ -15,7 +15,7 @@ do
             InitHookUnits(FourCC("u001")) -- пуджи с хуком
             InitPendulum(FourCC("h00E")) -- маятники
             InitBarrels(FourCC("h00C")) -- бочки возрождаются после смерти
-            InitAllFallenWall()
+            --InitAllFallenWall()
             ReplaceId2InvisiblePlatform(FourCC("h00F")) --невидимые кнопки
         end)
     end
