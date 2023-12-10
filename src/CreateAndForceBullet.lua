@@ -30,6 +30,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
     end
     if effectmodel == "Firebrand Shot Silver" then
         local data = GetUnitData(hero)
+        data.EggCount=data.EggCount-1
         if data.EggCount > 0 then
             damage = damage + data.BonusDamage
         else
@@ -241,23 +242,6 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
             --print("попал в", DamagingUnit,CollisionEnemy, reverse, delay, maxDistance, PerepadZ, dist)
             if CollisisonDestr then
 
-                if effectmodel == "Abilities\\Weapons\\GryphonRiderMissile\\GryphonRiderMissile.mdl" then
-                    -- print("в стену молот")
-                    if IsUnitType(hero, UNIT_TYPE_HERO) then
-                        local data = GetUnitData(hero)
-                        if data.BlastDamage then
-                            local eff = AddSpecialEffect("Abilities\\Weapons\\GyroCopter\\GyroCopterMissile.mdl", nx, ny)
-                            BlzSetSpecialEffectScale(eff, 0.1)
-                            TimerStart(CreateTimer(), 1 / 32, false, function()
-                                BlzSetSpecialEffectScale(eff, 3)
-                                DestroyEffect(eff)
-                                DestroyTimer(GetExpiredTimer())
-                            end)
-                            UnitDamageArea(hero, data.BlastDamage, nx, ny, 300)
-                            --print("взрыв")
-                        end
-                    end
-                end
             end
             PointContentDestructable(x, y, CollisionRange, true, 0, heroCurrent)
             local flag = nil
@@ -269,6 +253,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
             SetUnitX(hero, x)
             SetUnitY(hero, y)
             UnitDamageArea(heroCurrent, damage, x, y, CollisionRange, flag) -- УРОН ПРИ ПОПАДАНИИ находится здесь
+            --print(damage)
             SetUnitX(hero, ox)
             SetUnitY(hero, oy)
             TimerStart(CreateTimer(), TIMER_PERIOD64, false, function()

@@ -40,7 +40,8 @@ function OnPostDamage()
 
         if IsPointInSector(x, y, xe, ye, GetUnitFacing(target) - 180, 90, 200) then
             BlzSetEventDamage(damage * data.BackDamage)
-            --FlyTextTagShieldXY(x, y, L("Удар в спину", "Back stab"), GetOwningPlayer(caster))
+            --print("в спину")
+            FlyTextTagShieldXY(x, y, L("Удар в спину", "Back stab"), GetOwningPlayer(caster))
 
             local eff = AddSpecialEffect("Hive\\Coup de Grace\\noSlash\\Coup de Grace", xe, ye)
             BlzSetSpecialEffectYaw(eff, math.rad(GetUnitFacing(target)))
@@ -161,6 +162,7 @@ function OnPostDamage()
     if GetUnitTypeId(target) ~= HeroID and GetOwningPlayer(caster)==Player(0) and GetUnitTypeId(target)~=FourCC("h00R")then
         --Функция должна быть в самом низу
         AddDamage2Show(target, GetEventDamage())
+        --print("показ",GetEventDamage())
         local data = GetUnitData(caster)
         --data.StatDamageDealing = data.StatDamageDealing + GetEventDamage()
         data.StatDamage = data.StatDamage + GetEventDamage()

@@ -7,11 +7,8 @@ function UnitGetItemByName(item, data)
     if item.name == "Гирлянда" then
         QuestSetCompletedBJ(udg_QWolf, true)
     elseif item.name == "Носочки" then
-        if not data.BlockDamageSocks then
-            data.BlockDamageSocks = 10
-        else
-            data.BlockDamageSocks = data.BlockDamageSocks + 10
-        end
+        HeroCandyHeal(data, 10)
+        AddPeonMAXHP(data, 1)
     elseif item.name == "Имитация красной икры" then
         HeroCandyHeal(data, 99)
     elseif item.name == "Набор для оливье" then

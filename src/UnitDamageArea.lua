@@ -151,6 +151,7 @@ function UnitDamageArea(u, damage, x, y, range, flag, paramTable)
                     end
                 end
                 if not missDamage then
+                    --print(damage, "в функции урона")
                     if UnitDamageTarget(u, e, damage, true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WHOKNOWS) then
                         if GetUnitTypeId(e) ~= FourCC("nglm") and GetUnitTypeId(e) ~= FourCC("hdhw") then
                             --нет раекцтии на мину и точку входа

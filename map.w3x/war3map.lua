@@ -334,6 +334,7 @@ gg_unit_u001_0395 = nil
 gg_unit_u001_0396 = nil
 gg_unit_h00I_0601 = nil
 gg_unit_h00M_0257 = nil
+gg_unit_h00W_0784 = nil
 gg_unit_h00H_0590 = nil
 gg_unit_h00H_0569 = nil
 gg_unit_h00H_0588 = nil
@@ -343,10 +344,9 @@ gg_unit_h00J_0592 = nil
 gg_unit_h00J_0593 = nil
 gg_unit_h00J_0595 = nil
 gg_unit_opeo_0264 = nil
-gg_unit_h00R_0259 = nil
-gg_unit_h00W_0785 = nil
 gg_unit_h00W_0775 = nil
-gg_unit_h00W_0784 = nil
+gg_unit_h00W_0785 = nil
+gg_unit_h00R_0259 = nil
 gg_dest_B004_2162 = nil
 gg_dest_B007_5312 = nil
 gg_dest_DTfx_5091 = nil
@@ -719,29 +719,29 @@ local life
 
 gg_dest_B004_2162 = BlzCreateDestructableWithSkin(FourCC("B004"), -128.0, -192.0, 325.000, 3.000, 0, FourCC("B004"))
 gg_dest_B007_5312 = BlzCreateDestructableWithSkin(FourCC("B007"), -7552.0, 4224.0, 211.000, 3.000, 0, FourCC("B007"))
-gg_dest_B00B_20775 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 16894.3, 129.0, 832.0, 180.000, 1.650, 0, FourCC("B00B"))
-gg_dest_B00B_20321 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 18040.2, 2828.5, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
+gg_dest_B00B_20775 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 16894.3, 129.0, 819.2, 180.000, 1.650, 0, FourCC("B00B"))
+gg_dest_B00B_20321 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 17518.2, 2869.3, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_19643 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 17013.9, 4349.7, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_16092 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 18043.0, 7294.2, 838.4, 270.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_14785 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11344.6, 8373.0, 832.0, 270.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_17599 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 14969.5, -3076.2, 832.0, 180.000, 1.850, 0, FourCC("B00B"))
-gg_dest_B00B_17182 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15231.9, -760.3, 844.8, 270.000, 1.450, 0, FourCC("B00B"))
+gg_dest_B00B_17182 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15223.5, -767.4, 844.8, 270.000, 1.450, 0, FourCC("B00B"))
 gg_dest_B00B_14732 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 13812.6, 8326.6, 838.4, 90.000, 1.650, 0, FourCC("B00B"))
-gg_dest_B00B_16680 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15221.9, 2433.2, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
+gg_dest_B00B_16680 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15222.6, 2438.8, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_21136 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 17542.3, -3202.7, 864.0, 180.000, 1.500, 0, FourCC("B00B"))
 gg_dest_B00B_16430 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11136.0, 2426.0, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_17533 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 12163.4, 2.3, 832.0, 270.000, 1.850, 0, FourCC("B00B"))
 gg_dest_B00B_15274 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 10618.1, 6012.7, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_15515 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15227.5, 6283.1, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
-gg_dest_B00B_16153 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15215.2, 5364.9, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
+gg_dest_B00B_16153 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15226.2, 5370.2, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_15713 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11516.0, 4100.8, 844.8, 90.000, 1.450, 0, FourCC("B00B"))
 gg_dest_B00D_17155 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, 1280.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_20788 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 17088.0, 128.0, 889.6, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_20788 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 17088.0, 128.0, 876.8, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_15532 = BlzCreateDestructableWithSkin(FourCC("B00D"), 14016.0, 6080.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_15710 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12224.0, 5184.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_15711 = BlzCreateDestructableWithSkin(FourCC("B00D"), 10752.0, 3328.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_15712 = BlzCreateDestructableWithSkin(FourCC("B00D"), 12096.0, 3264.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_20787 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 16704.0, 128.0, 889.6, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_20787 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 16704.0, 128.0, 876.8, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_15709 = BlzCreateDestructableWithSkin(FourCC("B00D"), 9984.0, 5376.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_20643 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15744.0, 1280.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16257 = BlzCreateDestructableWithSkin(FourCC("B00D"), 14080.0, 4608.0, 270.000, 1.000, 0, FourCC("B00D"))
@@ -1575,6 +1575,7 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 11327.6, -571.0, 0.000, FourCC("h00
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 11327.1, -436.6, 0.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 11327.5, -309.6, 0.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 11327.8, -182.3, 0.000, FourCC("h00G"))
+u = BlzCreateUnitWithSkin(p, FourCC("nrat"), 15000.4, 2932.3, 253.100, FourCC("nrat"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00E"), 15350.3, -5985.9, 180.000, FourCC("h00E"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00E"), 15355.4, -6821.1, 180.000, FourCC("h00E"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16318.2, 4672.5, 0.000, FourCC("h00Q"))
@@ -1608,6 +1609,11 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 17086.9, 5059.7, 0.000, FourCC("h00
 u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 17086.0, 5187.6, 0.000, FourCC("h00Q"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 17086.2, 5315.9, 0.000, FourCC("h00Q"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14271.5, 2882.5, 90.000, FourCC("h00G"))
+u = BlzCreateUnitWithSkin(p, FourCC("nrat"), 15141.3, 3474.0, 310.254, FourCC("nrat"))
+u = BlzCreateUnitWithSkin(p, FourCC("nrat"), 12885.3, 3333.4, 340.207, FourCC("nrat"))
+u = BlzCreateUnitWithSkin(p, FourCC("nrat"), 14148.4, 2809.2, 169.740, FourCC("nrat"))
+u = BlzCreateUnitWithSkin(p, FourCC("nrat"), 15276.3, 2646.8, 156.308, FourCC("nrat"))
+u = BlzCreateUnitWithSkin(p, FourCC("nrat"), 13788.4, 2261.7, 215.661, FourCC("nrat"))
 end
 
 function CreateUnitsForPlayer10()
@@ -1913,12 +1919,6 @@ u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 14690.6, -3149.5, 270.344, FourCC("
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 15357.5, -4231.4, 270.344, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("nrat"), 15000.4, 2932.3, 253.100, FourCC("nrat"))
-u = BlzCreateUnitWithSkin(p, FourCC("nrat"), 15141.3, 3474.0, 310.254, FourCC("nrat"))
-u = BlzCreateUnitWithSkin(p, FourCC("nrat"), 12885.3, 3333.4, 340.207, FourCC("nrat"))
-u = BlzCreateUnitWithSkin(p, FourCC("nrat"), 14148.4, 2809.2, 169.740, FourCC("nrat"))
-u = BlzCreateUnitWithSkin(p, FourCC("nrat"), 15276.3, 2646.8, 156.308, FourCC("nrat"))
-u = BlzCreateUnitWithSkin(p, FourCC("nrat"), 13788.4, 2261.7, 215.661, FourCC("nrat"))
 end
 
 function CreatePlayerBuildings()
@@ -1969,12 +1969,12 @@ gg_rct_Region_021 = Rect(672.0, -2400.0, 800.0, -2272.0)
 gg_rct_Region_022 = Rect(-256.0, -704.0, -160.0, -608.0)
 gg_rct_Region_023 = Rect(-448.0, -448.0, 256.0, 224.0)
 gg_rct_Boind00 = Rect(11200.0, 8320.0, 11296.0, 8608.0)
-gg_rct_Exit00 = Rect(11200.0, 8224.0, 11488.0, 8512.0)
+gg_rct_Exit00 = Rect(11232.0, 8256.0, 11456.0, 8480.0)
 gg_rct_Enter00 = Rect(11072.0, 8928.0, 11264.0, 9056.0)
 gg_rct_StartBrainGame = Rect(736.0, -2176.0, 864.0, -2048.0)
-gg_rct_Boind01 = Rect(13600.0, 8320.0, 13952.0, 8544.0)
+gg_rct_Boind01 = Rect(13600.0, 8384.0, 13952.0, 8544.0)
 gg_rct_Enter01 = Rect(12896.0, 8896.0, 13088.0, 9024.0)
-gg_rct_Exit01 = Rect(13664.0, 8192.0, 13952.0, 8480.0)
+gg_rct_Exit01 = Rect(13696.0, 8192.0, 13952.0, 8448.0)
 gg_rct_Boind02 = Rect(11104.0, 6560.0, 11392.0, 6816.0)
 gg_rct_Enter02 = Rect(10048.0, 7232.0, 10176.0, 7360.0)
 gg_rct_Exit02 = Rect(10464.0, 5856.0, 10752.0, 6144.0)
@@ -1986,7 +1986,7 @@ gg_rct_Enter04 = Rect(11072.0, 3872.0, 11200.0, 4000.0)
 gg_rct_Exit04 = Rect(11360.0, 3968.0, 11648.0, 4256.0)
 gg_rct_Bound05 = Rect(13920.0, 4672.0, 14208.0, 4896.0)
 gg_rct_Enter05 = Rect(12928.0, 5376.0, 13056.0, 5504.0)
-gg_rct_Exit05 = Rect(15072.0, 5216.0, 15360.0, 5504.0)
+gg_rct_Exit05 = Rect(15104.0, 5248.0, 15360.0, 5504.0)
 gg_rct_Bound06 = Rect(10976.0, 1632.0, 11264.0, 1856.0)
 gg_rct_Enter06 = Rect(11072.0, 2080.0, 11200.0, 2208.0)
 gg_rct_Exit06 = Rect(10976.0, 2304.0, 11264.0, 2592.0)
@@ -2946,6 +2946,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
     end
     if effectmodel == "Firebrand Shot Silver" then
         local data = GetUnitData(hero)
+        data.EggCount=data.EggCount-1
         if data.EggCount > 0 then
             damage = damage + data.BonusDamage
         else
@@ -3157,23 +3158,6 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
             --print("попал в", DamagingUnit,CollisionEnemy, reverse, delay, maxDistance, PerepadZ, dist)
             if CollisisonDestr then
 
-                if effectmodel == "Abilities\\Weapons\\GryphonRiderMissile\\GryphonRiderMissile.mdl" then
-                    -- print("в стену молот")
-                    if IsUnitType(hero, UNIT_TYPE_HERO) then
-                        local data = GetUnitData(hero)
-                        if data.BlastDamage then
-                            local eff = AddSpecialEffect("Abilities\\Weapons\\GyroCopter\\GyroCopterMissile.mdl", nx, ny)
-                            BlzSetSpecialEffectScale(eff, 0.1)
-                            TimerStart(CreateTimer(), 1 / 32, false, function()
-                                BlzSetSpecialEffectScale(eff, 3)
-                                DestroyEffect(eff)
-                                DestroyTimer(GetExpiredTimer())
-                            end)
-                            UnitDamageArea(hero, data.BlastDamage, nx, ny, 300)
-                            --print("взрыв")
-                        end
-                    end
-                end
             end
             PointContentDestructable(x, y, CollisionRange, true, 0, heroCurrent)
             local flag = nil
@@ -3185,6 +3169,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
             SetUnitX(hero, x)
             SetUnitY(hero, y)
             UnitDamageArea(heroCurrent, damage, x, y, CollisionRange, flag) -- УРОН ПРИ ПОПАДАНИИ находится здесь
+            --print(damage)
             SetUnitX(hero, ox)
             SetUnitY(hero, oy)
             TimerStart(CreateTimer(), TIMER_PERIOD64, false, function()
@@ -3409,7 +3394,8 @@ function OnPostDamage()
 
         if IsPointInSector(x, y, xe, ye, GetUnitFacing(target) - 180, 90, 200) then
             BlzSetEventDamage(damage * data.BackDamage)
-            --FlyTextTagShieldXY(x, y, L("Удар в спину", "Back stab"), GetOwningPlayer(caster))
+            --print("в спину")
+            FlyTextTagShieldXY(x, y, L("Удар в спину", "Back stab"), GetOwningPlayer(caster))
 
             local eff = AddSpecialEffect("Hive\\Coup de Grace\\noSlash\\Coup de Grace", xe, ye)
             BlzSetSpecialEffectYaw(eff, math.rad(GetUnitFacing(target)))
@@ -3530,6 +3516,7 @@ function OnPostDamage()
     if GetUnitTypeId(target) ~= HeroID and GetOwningPlayer(caster)==Player(0) and GetUnitTypeId(target)~=FourCC("h00R")then
         --Функция должна быть в самом низу
         AddDamage2Show(target, GetEventDamage())
+        --print("показ",GetEventDamage())
         local data = GetUnitData(caster)
         --data.StatDamageDealing = data.StatDamageDealing + GetEventDamage()
         data.StatDamage = data.StatDamage + GetEventDamage()
@@ -5593,6 +5580,7 @@ function UnitDamageArea(u, damage, x, y, range, flag, paramTable)
                     end
                 end
                 if not missDamage then
+                    --print(damage, "в функции урона")
                     if UnitDamageTarget(u, e, damage, true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WHOKNOWS) then
                         if GetUnitTypeId(e) ~= FourCC("nglm") and GetUnitTypeId(e) ~= FourCC("hdhw") then
                             --нет раекцтии на мину и точку входа
@@ -14944,11 +14932,8 @@ function UnitGetItemByName(item, data)
     if item.name == "Гирлянда" then
         QuestSetCompletedBJ(udg_QWolf, true)
     elseif item.name == "Носочки" then
-        if not data.BlockDamageSocks then
-            data.BlockDamageSocks = 10
-        else
-            data.BlockDamageSocks = data.BlockDamageSocks + 10
-        end
+        HeroCandyHeal(data, 10)
+        AddPeonMAXHP(data, 1)
     elseif item.name == "Имитация красной икры" then
         HeroCandyHeal(data, 99)
     elseif item.name == "Набор для оливье" then
@@ -15443,10 +15428,10 @@ function InitItemBDForShop()
         },
         [2] = {
             name         = "Носочки",
-            descriptions = "Тёплые шерстяные носки,где каждая петелька, связана с любовью, DS% шанс уклонится от атаки",
+            descriptions = "Тёплые шерстяные носки,где каждая петелька, связана с любовью, +DS к максимальному здоровью ",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNSlippersOfAgility",
             cost         = 900,
-            DS           = {10,20,30},
+            DS           = {1},
             lvl          = 1
         },
         [3] = {
@@ -15521,10 +15506,11 @@ function InitItemBDForShop()
         },
         [12] = {
             name         = "Медовые звёздочки",
-            descriptions = "Насыщенный медовый вкус и хрустящая текстура. Готовый завтрак содержит дополнительный кальций и железо, необходимые организму, клетчатку, которая регулирует пищеварение и помогает очищению организма",
+            descriptions = "Насыщенный медовый вкус и хрустящая текстура. Готовый завтрак содержит дополнительный кальций и железо и +DS к максимальному здоровью",
             texture      = "ReplaceableTextures\\CommandButtons\\BTNStarWand.blp",
             cost         = 500,
             lvl          = 1,
+            DS           = {1}
         },
         [13] = {
             name         = "Штопор",
