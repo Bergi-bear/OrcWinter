@@ -100,7 +100,7 @@ function CreateStompWall(unit)
     local x, y = GetUnitXY(unit)
     local t={}
     local eff = AddSpecialEffect("ConcreteCliffFloorCenter", x, y)
-    BlzSetSpecialEffectMatrixScale(eff, 2, 2, 4)
+    BlzSetSpecialEffectMatrixScale(eff, 2, 2, 1)
 
     --local eff2 = AddSpecialEffect("ConcreteCliffSide", x, y)
     --BlzSetSpecialEffectYaw(eff2, math.rad(180))

@@ -29,7 +29,7 @@ function CreateAndMoveSpeechImage(state, duration, position, texture, text, dela
         --BlzFrameSetText(TexBoxText, text)
 
         --print(sound, "звук из глобалки")
-        if name~="Демонесса" then
+        if name ~= "Демонесса" then
             normal_sound(sound, GetUnitXY(GetRandomPeon()))
         else
             PlaySound(sound)
@@ -172,28 +172,21 @@ function CreateAndMoveSpeechImage(state, duration, position, texture, text, dela
 end
 
 function CreteDialogBox()
-    --print("создан бокс ",toolTipTex)
     local tooltip = BlzCreateFrameByType("FRAME", "TestDialog", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "StandardFrameTemplate", 0)
     BlzFrameSetParent(tooltip, BlzGetFrameByName("ConsoleUIBackdrop", 0))
-    --local backdrop = BlzCreateFrame("QuestButtonDisabledBackdropTemplate", tooltip, 0, 0)
-    local backdrop=BlzCreateFrameByType("BACKDROP", "Face", tooltip, "", 0)
+    local backdrop = BlzCreateFrameByType("BACKDROP", "Face", tooltip, "", 0)
     BlzFrameSetTexture(backdrop, "SpeechBox", 0, true)
-    --BlzFrameSetSize(backdrop, 0.76, 0.02)
-    --BlzFrameSetAbsPoint(backdrop, FRAMEPOINT_LEFT, 0.018, 0.03)
-
-
     local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", tooltip, "", 0)
     BlzFrameSetAbsPoint(tooltip, FRAMEPOINT_LEFT, -0.08, 0.51)
-    BlzFrameSetSize(tooltip, 0.25, 0.125)
-    BlzFrameSetSize(backdrop, 0.25, 0.125)
-    BlzFrameSetSize(text, 0.28, 0.06)
+    local w, h = 0.25, 0.125
+    BlzFrameSetSize(tooltip, w, h)
+    BlzFrameSetSize(backdrop, w, h)
+    BlzFrameSetSize(text, w * 0.85, h * 0.5)
     BlzFrameSetPoint(backdrop, FRAMEPOINT_CENTER, tooltip, FRAMEPOINT_CENTER, 0.0, 0.0)
-    --BlzFrameSetAlpha(backdrop, 0)
-    BlzFrameSetText(text, "Проверочный текст для фрейма теперь текста больше, а где авто перенос?,Проверочный текст для фрейма теперь текста больше, а где авто перенос?,Проверочный текст для фрейма теперь текста больше, а где авто перенос?,Проверочный текст для фрейма теперь текста больше, а где авто перенос?")
-    BlzFrameSetPoint(text, FRAMEPOINT_LEFT, tooltip, FRAMEPOINT_LEFT, 0.02, -0.003)
+    BlzFrameSetText(text, "Проверочный текст для фрейма теперь текста больше, а где авто перенос?,Проверочный")
+    BlzFrameSetPoint(text, FRAMEPOINT_CENTER, tooltip, FRAMEPOINT_CENTER, 0, -0.022)
     BlzFrameSetScale(text, 0.8)
     BlzFrameSetVisible(tooltip, false)
-
     TexBox = tooltip
     TexBoxText = text
 end

@@ -10,12 +10,13 @@ function PlayBossSpeech(sound, text)
         CreteDialogBoxBoss()
     end
     if not text then
-        text="У меня нет слов"
+        text = "У меня нет слов"
     end
     local s = nil
     if not BlzFrameIsVisible(TexBoxBoss) and UnitAlive(GBoss) then
         s = normal_sound(sound)
-        if GetUnitTypeId(GBoss)==FourCC("n007") then -- мясник говорит ниже
+        if GetUnitTypeId(GBoss) == FourCC("n007") then
+            -- мясник говорит ниже
             SetSoundPitch(s, 0.8)
         end
         local sd = GetSoundDuration(s)
@@ -27,6 +28,7 @@ function PlayBossSpeech(sound, text)
         SetMusicVolumeBJ(GV)
         BlzFrameSetVisible(TexBoxBoss, true)
         BlzFrameSetText(TexBoxTextBoss, text)
+        --BlzFrameSetScale(TexBoxTextBoss, GetTextScaleForBoss(text))
         --TransmissionFromUnitWithNameBJ(GetPlayersAll(), HERO[0].UnitHero, "", nil, "", bj_TIMETYPE_SET, GetSoundDuration(s) / 700, false)
         --print(GetSoundDuration(s))
         GBossSoundDuration = sd / 700
@@ -53,25 +55,42 @@ function PlayBossSpeech(sound, text)
 end
 
 function CreteDialogBoxBoss()
-    --print("создан бокс ",toolTipTex)
+    local testText = "А с другой стороны и хорошо, что вы пришли, мне надоело дёргать своего одноглазого змея под ваши звуки"
+    --local scale = GetTextScaleForBoss(testText)
     local tooltip = BlzCreateFrameByType("FRAME", "TestDialog", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "StandardFrameTemplate", 0)
     BlzFrameSetParent(tooltip, BlzGetFrameByName("ConsoleUIBackdrop", 0))
-    --local backdrop = BlzCreateFrame("QuestButtonDisabledBackdropTemplate", tooltip, 0, 0)
     local backdrop = BlzCreateFrameByType("BACKDROP", "Face", tooltip, "", 0)
     BlzFrameSetTexture(backdrop, "SpeechBoxBoss", 0, true)
-
     local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", tooltip, "", 0)
-    BlzFrameSetAbsPoint(tooltip, FRAMEPOINT_LEFT, 0, 0.09)
-    BlzFrameSetSize(tooltip, 0.25, 0.125)
-    BlzFrameSetSize(backdrop, 0.25, 0.125)
-    BlzFrameSetSize(text, 0.28, 0.06)
+    BlzFrameSetAbsPoint(tooltip, FRAMEPOINT_LEFT, 0.0, 0.09)
+    local sw, sh = 0.3, 0.15
+    BlzFrameSetSize(tooltip, sw, sh)
+    BlzFrameSetSize(backdrop, sw, sh)
+    BlzFrameSetSize(text, sw * 0.85, sh * 0.5)
     BlzFrameSetPoint(backdrop, FRAMEPOINT_CENTER, tooltip, FRAMEPOINT_CENTER, 0.0, 0.0)
-    --BlzFrameSetAlpha(backdrop, 0)
-    BlzFrameSetText(text, "Проверочный текст для фрейма теперь текста больше, а где авто перенос?,Проверочный текст для фрейма теперь текста больше, а где авто перенос?,Проверочный текст для фрейма теперь текста больше, а где авто перенос?,Проверочный текст для фрейма теперь текста больше, а где авто перенос?")
-    BlzFrameSetPoint(text, FRAMEPOINT_LEFT, tooltip, FRAMEPOINT_LEFT, 0.02, -0.003)
+    BlzFrameSetText(text, testText)
+    BlzFrameSetPoint(text, FRAMEPOINT_CENTER, tooltip, FRAMEPOINT_CENTER, 0, -0.027)
+
     BlzFrameSetScale(text, 0.8)
+
     BlzFrameSetVisible(tooltip, false)
 
     TexBoxBoss = tooltip
     TexBoxTextBoss = text
+end
+
+--BlzFrameSetScale(TexBoxTextBoss, GetTextScaleForBoss(text))
+
+function GetTextScaleForBoss(testText)
+    local k = #testText
+    local scale = 1.7 - k * 0.005
+    --print("максимум символов=", k, scale)
+    if scale <= 0.8 then
+        scale = 0.8
+    end
+    if scale >= 2 then
+        scale = 2
+    end
+    --print(scale)
+    return scale
 end

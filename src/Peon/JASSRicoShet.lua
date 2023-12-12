@@ -56,6 +56,9 @@ function InitTrig_BallInit ()
         udg_BallPoint = GetUnitLoc(udg_Ball)
         if GetEventDamage() > 5 then
             udg_BallSpeed = udg_BallSpeed + 20
+            if udg_BallSpeed>=60 then
+                udg_BallSpeed=60
+            end
             udg_BallFacing = AngleBetweenPoints(GetUnitLoc(GetEventDamageSource()), udg_BallPoint)
             EnableTrigger(gg_trg_BallMove)
 
@@ -75,6 +78,6 @@ function InitRicoshet()
     TempItem = CreateItem(FourCC('spsh'), 0.00, 0.00)
     TempGroup = CreateGroup()
     SetItemVisible(TempItem, false)
-    print("конец инициализации рикошета")
+    --print("конец инициализации рикошета")
     --InitBounceOnGUI()
 end

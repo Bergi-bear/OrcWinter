@@ -354,9 +354,13 @@ function YettyCouchHero(boss, hero, duration)
             end
             if duration <= 0 or not QTEReadyToPress or not UnitAlive(hero) then
                 DestroyTimer(GetExpiredTimer())
-                UnitAddForceSimple(hero, GetUnitFacing(boss), 40, 400)
+
+                --UnitAddForceSimple(hero, GetUnitFacing(boss), 40, 400)
                 --print("отпустил")
-                UnitRemoveStun(hero)
+                --local ab = AngleBetweenXY(x, y, GetUnitXY(hero))/ bj_DEGTORAD
+                UnitFallGround(hero, GetUnitFacing(boss), 400)
+
+                --UnitRemoveStun(hero)
                 DestroyEffect(eff)
                 ResetUnitAnimation(boss)
                 BlzDestroyFrame(qteFH)

@@ -161,9 +161,11 @@ function CreateInsertActions()
                 if not data.sit then
                     SetUnitAnimationByIndex(data.UnitHero, 20) -- 26 сидение
                     data.sit = true
+                    SetUnitInvulnerable(data.UnitHero,true)
                 else
                     ResetUnitAnimation(data.UnitHero)
                     data.sit = false
+                    SetUnitInvulnerable(data.UnitHero,false)
                 end
             end
 

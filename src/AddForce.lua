@@ -38,10 +38,12 @@ function UnitAddForceSimpleClean(hero, angle, speed, distance, flag)
                             else
                                 if data.CatchUnit == near then
                                     --print("захваченные не катаются", GetUnitName(data.CatchUnit))
-                                else
-                                    SetUnitX(near, newVector.x)
-                                    SetUnitY(near, newVector.y)
-                                    SetUnitZ(near, GetUnitZ(hero) + 15)
+                                else -- не герой
+                                    if GetUnitTypeId(near)~=FourCC("n007") then --мясник не катается
+                                        SetUnitX(near, newVector.x)
+                                        SetUnitY(near, newVector.y)
+                                        SetUnitZ(near, GetUnitZ(hero) + 15)
+                                    end
                                 end
                             end
                         else
@@ -87,6 +89,7 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
         if IsUnitType(hero, UNIT_TYPE_HERO) then
             local data = HERO[GetPlayerId(GetOwningPlayer(hero))]
             data.sit = false
+            SetUnitInvulnerable(data.UnitHero,false)
             --print("сброс сидения и пошел")
         end
 

@@ -29,7 +29,7 @@ function StartButcherAI(xs, ys)
     local boss = FindUnitOfType(FourCC('n007'))
     local BossFight = true
     local into = CreateBOSSHPBar(boss, "Мясник из подвала")
-
+    currentInto=into
     local hpMark = { 100, 90, 80, 70, 60, 50, 40, 30, 20, 10 }
     local phaseCHK = {
         true,
@@ -464,34 +464,9 @@ function StartButcherAI(xs, ys)
     end)
 end
 
-function ButcherAddArmorTimed(boss, lvl, timed)
-    --1 уровень 50 брони
 
-
-    DestroyEffect(AddSpecialEffectTarget("Effect\\File00000341", boss, "chest")) --эффект отталкивания
-    local x, y = GetUnitXY(boss)
-    local _, _, _, units = UnitDamageArea(boss, 1, x, y, 500)
-
-    for i = 1, #units do
-        local angle = AngleBetweenUnits(boss, units[i])
-        local dist = 500 - DistanceBetweenXY(x, y, GetUnitXY(units[i]))
-        --BlzPauseUnitEx(units[i], true) -- починка бага
-        --UnitAddJumpForce(units[i],angle,40,dist,250)
-        local ab = AngleBetweenXY(x, y, GetUnitXY(units[i])) / bj_DEGTORAD
-        UnitFallGround(units[i], ab, 200, { "Stun" })
-    end
-
-    UnitAddAbility(boss, FourCC("A002"))
-    SetUnitAbilityLevel(boss, FourCC("A002"), lvl)
-    TimerStart(CreateTimer(), timed, false, function()
-        UnitRemoveAbility(boss, FourCC("A002"))
-        UnitRemoveAbility(boss, FourCC("B000"))
-    end)
-end
-
-function ButcherRoundSpike(boss, k)
-    SetUnitAnimation(boss, "Spell Slam")
-    local x, y = GetUnitXY(boss)
+function ButcherRoundSpikePoint(boss, k,x,y)
+    --x, y = GetUnitXY(boss)
     local dist = 50
     if not k then
         k = 15
@@ -506,7 +481,11 @@ function ButcherRoundSpike(boss, k)
             local eff = AddSpecialEffect("MechaImpaleNoDust", nx, ny)
             BlzSetSpecialEffectYaw(eff, math.rad(GetRandomInt(0, 360))) --angle
             TimerStart(CreateTimer(), 0.3, false, function()
-                UnitDamageArea(boss, 50, nx, ny, 80)
+                local _, _, _, units=UnitDamageArea(boss, 50, nx, ny, 80)
+                for i = 1, #units do
+                    local ab = AngleBetweenXY(nx, ny, GetUnitXY(units[i])) / bj_DEGTORAD
+                    UnitFallGround(units[i], ab, 250, { "Stun" })
+                end
             end)
             TimerStart(CreateTimer(), 0.7, false, function()
                 DestroyEffect(eff)
@@ -520,7 +499,72 @@ function ButcherRoundSpike(boss, k)
             DestroyTimer(GetExpiredTimer())
         end
     end)
+end
 
+
+function ButcherAddArmorTimed(boss, lvl, timed)
+    --1 уровень 50 брони
+
+    local FHArmor,FHArmorText=CreateArmorFrame(currentInto,boss)
+
+    DestroyEffect(AddSpecialEffectTarget("Effect\\File00000341", boss, "chest")) --эффект отталкивания
+    local x, y = GetUnitXY(boss)
+    local _, _, _, units = UnitDamageArea(boss, 1, x, y, 500)
+
+    for i = 1, #units do
+        local ab = AngleBetweenXY(x, y, GetUnitXY(units[i])) / bj_DEGTORAD
+        UnitFallGround(units[i], ab, 200, { "Stun" })
+    end
+
+    UnitAddAbility(boss, FourCC("A002"))
+    SetUnitAbilityLevel(boss, FourCC("A002"), lvl)
+    local upPeriodTimer=CreateTimer()
+    TimerStart(upPeriodTimer, 1, true, function()
+        BlzFrameSetText(FHArmorText, R2I(timed))
+        timed=timed-1
+    end)
+
+    TimerStart(CreateTimer(), timed, false, function()
+        UnitRemoveAbility(boss, FourCC("A002"))
+        UnitRemoveAbility(boss, FourCC("B000"))
+        BlzDestroyFrame(FHArmor)
+        DestroyTimer(upPeriodTimer)
+    end)
+end
+
+function ButcherRoundSpike(boss, k)
+    SetUnitAnimation(boss, "Spell Slam")
+    local x, y = GetUnitXY(boss)
+    local dist = 50
+    if not k then
+        k = 15
+        --normal_sound("howl", x, y)
+    end
+    local n = 0
+    local speed=0.1
+    TimerStart(CreateTimer(), speed, true, function()
+        local angle = 360 / (15 + n)
+        for i = 1, 15 + n do
+            local nx, ny = MoveXY(x, y, dist, angle * i)
+            --print("i",angle*i)
+            local eff = AddSpecialEffect("MechaImpaleNoDust", nx, ny)
+            BlzSetSpecialEffectYaw(eff, math.rad(GetRandomInt(0, 360))) --angle
+            TimerStart(CreateTimer(), 0.3, false, function()
+                UnitDamageArea(boss, 50, nx, ny, 80)
+
+            end)
+            TimerStart(CreateTimer(), 0.7, false, function()
+                DestroyEffect(eff)
+            end)
+        end
+        dist = dist + 70
+        n = n + 3
+        k = k - 1
+        --print(k,"k")
+        if k <= 0 then
+            DestroyTimer(GetExpiredTimer())
+        end
+    end)
 end
 
 function FallenRoof(boss, timed)
@@ -679,7 +723,7 @@ function ButcherThrowGround(boss, hero)
         DestroyEffect(mark)
         TimerStart(CreateTimer(), 0.45, false, function()
             nx, ny = MoveXY(x, y, 500, GetUnitFacing(boss) - 15)
-            DestroyEffect(AddSpecialEffect("Earthshock", nx, ny))
+            --DestroyEffect(AddSpecialEffect("Earthshock", nx, ny))
             DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", nx, ny))
             local _, du = UnitDamageArea(boss, 50, nx, ny, 220)
             DamageDestructableInRangeXY(boss, 50, 220, x, y)
@@ -693,6 +737,7 @@ function ButcherThrowGround(boss, hero)
                 PlayBossSpeech("Speech\\Pudge\\InFight\\F9", "Попал")
             else
                 PlayBossSpeech("Speech\\Pudge\\InFight\\F10", "Мимо")
+                ButcherRoundSpikePoint(boss,5,nx, ny)
             end
             DownFloorInTimedXY(120, nx, ny)
         end)
@@ -734,4 +779,23 @@ end
 
 function BossHooked(boss, timed, scale)
     StartHookAI(boss, timed, scale)
+end
+
+function CreateArmorFrame(into,boss)
+    local texture = "ReplaceableTextures\\CommandButtons\\BTNHumanArmorUpOne.blp"
+    local NextPoint = 0.039
+    local buttonIconFrame = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', into, '', 0)
+
+    BlzFrameSetTexture(buttonIconFrame, texture, 0, true)
+    BlzFrameSetSize(buttonIconFrame, NextPoint, NextPoint )
+    BlzFrameSetPoint(buttonIconFrame, FRAMEPOINT_LEFT, into, FRAMEPOINT_LEFT, -NextPoint, 0)
+    BlzFrameSetParent(buttonIconFrame, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+
+    local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", buttonIconFrame, "", 0)
+    BlzFrameSetParent(text, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    BlzFrameSetText(text, "999")
+    BlzFrameSetScale(text, 2)
+    BlzFrameSetPoint(text, FRAMEPOINT_CENTER, buttonIconFrame, FRAMEPOINT_CENTER, 0, 0)
+
+    return buttonIconFrame,text
 end

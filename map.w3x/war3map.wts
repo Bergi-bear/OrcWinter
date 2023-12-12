@@ -2603,12 +2603,6 @@ STRING 886
 Вагонетка
 }
 
-STRING 887
-// Units: h00T (Вагонетка), EditorSuffix (Name - Editor Suffix)
-{
- (можно толкать)
-}
-
 STRING 888
 // Units: h00U (Направление движения вагонетки), Name (Name)
 {
@@ -2654,5 +2648,23 @@ STRING 896
 // Destructibles: B00J (Мешки), Name (Name)
 {
 Мешки
+}
+
+STRING 897
+// Units: h00X (PRESS C), Name (Name)
+{
+PRESS C
+}
+
+STRING 898
+// Units: h00X (PRESS C), EditorSuffix (Name - Editor Suffix)
+{
+ (подсказка)
+}
+
+STRING 899
+// Doodads: D05K (Коневеер), Name (Name)
+{
+Коневеер
 }
 

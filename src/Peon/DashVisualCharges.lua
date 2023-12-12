@@ -4,7 +4,7 @@
 --- DateTime: 15.11.2023 22:57
 ---
 function InitDashVisualCharges(data)
-    print(data.DashCharges, "максимум зарядов")
+    --print(data.DashCharges, "максимум зарядов")
     data.TableDashEffect = {}
     for i = 1, data.DashCharges do
         local eff = AddSpecialEffectTarget("1starAttach"..i, data.UnitHero,"origin")

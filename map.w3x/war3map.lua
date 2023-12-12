@@ -247,7 +247,7 @@ gg_trg_ExitFrom09 = nil
 gg_trg_InitRoom09 = nil
 gg_trg_Victory09 = nil
 gg_trg_OffHole = nil
-gg_trg_InitCustomTraps = nil
+gg_trg_InitRoom8 = nil
 gg_trg_ExitFrom08 = nil
 gg_trg_Resize08 = nil
 gg_trg_Victory08 = nil
@@ -345,7 +345,6 @@ gg_unit_h00J_0593 = nil
 gg_unit_h00J_0595 = nil
 gg_unit_opeo_0264 = nil
 gg_unit_h00W_0775 = nil
-gg_unit_h00W_0785 = nil
 gg_unit_h00R_0259 = nil
 gg_dest_B004_2162 = nil
 gg_dest_B007_5312 = nil
@@ -720,7 +719,7 @@ local life
 gg_dest_B004_2162 = BlzCreateDestructableWithSkin(FourCC("B004"), -128.0, -192.0, 325.000, 3.000, 0, FourCC("B004"))
 gg_dest_B007_5312 = BlzCreateDestructableWithSkin(FourCC("B007"), -7552.0, 4224.0, 211.000, 3.000, 0, FourCC("B007"))
 gg_dest_B00B_20775 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 16894.3, 129.0, 819.2, 180.000, 1.650, 0, FourCC("B00B"))
-gg_dest_B00B_20321 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 17518.2, 2869.3, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
+gg_dest_B00B_20321 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 18043.0, 2806.7, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_19643 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 17013.9, 4349.7, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_16092 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 18043.0, 7294.2, 838.4, 270.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_14785 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11344.6, 8373.0, 832.0, 270.000, 1.650, 0, FourCC("B00B"))
@@ -728,7 +727,7 @@ gg_dest_B00B_17599 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 14969.5, -30
 gg_dest_B00B_17182 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15223.5, -767.4, 844.8, 270.000, 1.450, 0, FourCC("B00B"))
 gg_dest_B00B_14732 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 13812.6, 8326.6, 838.4, 90.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_16680 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15222.6, 2438.8, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
-gg_dest_B00B_21136 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 17542.3, -3202.7, 864.0, 180.000, 1.500, 0, FourCC("B00B"))
+gg_dest_B00B_21136 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 17538.6, -3204.7, 864.0, 180.000, 1.500, 0, FourCC("B00B"))
 gg_dest_B00B_16430 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11136.0, 2426.0, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_17533 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 12163.4, 2.3, 832.0, 270.000, 1.850, 0, FourCC("B00B"))
 gg_dest_B00B_15274 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 10618.1, 6012.7, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
@@ -767,7 +766,7 @@ gg_dest_B00D_16684 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 13056.0, 230
 gg_dest_B00D_20366 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15808.0, 3392.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_20365 = BlzCreateDestructableWithSkin(FourCC("B00D"), 17984.0, 3392.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16699 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
-gg_dest_B00D_16701 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 14016.0, 2816.0, 896.0, 270.000, 1.000, 0, FourCC("B00D"))
+gg_dest_B00D_16701 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 14016.0, 3008.0, 896.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16702 = BlzCreateDestructableWithSkin(FourCC("B00D"), 13056.0, 3456.0, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_18193 = BlzCreateDestructableZWithSkin(FourCC("B00D"), 16256.0, -5504.0, 1529.6, 270.000, 1.000, 0, FourCC("B00D"))
 gg_dest_B00D_16599 = BlzCreateDestructableWithSkin(FourCC("B00D"), 11136.0, 2176.0, 270.000, 1.000, 0, FourCC("B00D"))
@@ -970,6 +969,8 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13888.5, 4674.0, 0.000, FourCC("h00
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13889.0, 4542.5, 0.000, FourCC("h00F"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00J"), 10318.3, 7276.3, 133.576, FourCC("h00J"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 12330.3, 5971.7, 100.913, FourCC("h00L"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00X"), 15872.3, -2155.2, 193.651, FourCC("h00X"))
+u = BlzCreateUnitWithSkin(p, FourCC("h002"), 16763.1, -8305.9, 5.812, FourCC("h002"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15172.7, 957.5, 0.000, FourCC("h00F"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15172.9, 1089.5, 0.000, FourCC("h00F"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14527.4, -68.9, 0.000, FourCC("h00F"))
@@ -1007,6 +1008,7 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00N"), 11085.4, 4305.4, 58.460, FourCC("h0
 u = BlzCreateUnitWithSkin(p, FourCC("h00P"), 11206.2, 4294.0, 290.279, FourCC("h00P"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14658.0, -68.6, 0.000, FourCC("h00F"))
 gg_unit_h00I_0601 = BlzCreateUnitWithSkin(p, FourCC("h00I"), 799.4, -2193.8, 0.000, FourCC("h00I"))
+u = BlzCreateUnitWithSkin(p, FourCC("h002"), 13910.1, -8204.7, 5.812, FourCC("h002"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00T"), 16005.6, 513.3, 90.000, FourCC("h00T"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16012.7, 667.7, 88.807, FourCC("h00U"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16014.1, 767.9, 88.807, FourCC("h00U"))
@@ -1035,6 +1037,8 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 11068.8, -1018.3, 0.000, FourCC("h0
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 11196.0, -1018.0, 0.000, FourCC("h00F"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 11074.0, 258.1, 0.000, FourCC("h00F"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 11201.2, 258.3, 0.000, FourCC("h00F"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 18810.0, -2289.0, 353.240, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("h00H"), 14037.1, 6128.8, 158.230, FourCC("h00H"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 11142.3, 2173.2, 100.913, FourCC("h00L"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 11146.8, 1210.6, 100.913, FourCC("h00L"))
@@ -1043,13 +1047,13 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14917.3, -67.9, 0.000, FourCC("h00F
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15045.0, -65.4, 0.000, FourCC("h00F"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15171.1, -64.2, 0.000, FourCC("h00F"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 15169.4, 65.1, 0.000, FourCC("h00F"))
-u = BlzCreateUnitWithSkin(p, FourCC("h002"), 13952.3, -7796.8, 5.812, FourCC("h002"))
+u = BlzCreateUnitWithSkin(p, FourCC("h002"), 14018.6, -4497.6, 5.812, FourCC("h002"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16020.3, -571.3, 88.807, FourCC("h00U"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 15999.5, -475.1, 88.807, FourCC("h00U"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00T"), 17568.7, -836.6, 90.000, FourCC("h00T"))
-u = BlzCreateUnitWithSkin(p, FourCC("h002"), 13968.7, -5016.5, 5.812, FourCC("h002"))
-u = BlzCreateUnitWithSkin(p, FourCC("h002"), 16768.6, -5028.5, 5.812, FourCC("h002"))
-u = BlzCreateUnitWithSkin(p, FourCC("h002"), 16774.7, -7815.1, 5.812, FourCC("h002"))
+u = BlzCreateUnitWithSkin(p, FourCC("h002"), 16780.6, -4536.6, 5.812, FourCC("h002"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 13808.7, -5195.0, 97.232, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 13821.0, -5070.8, 317.668, FourCC("h00U"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00S"), 13062.2, 3399.4, 183.104, FourCC("h00S"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14528.3, 6589.8, 0.000, FourCC("h00F"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14528.5, 6463.1, 0.000, FourCC("h00F"))
@@ -1061,6 +1065,35 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 14270.7, 6077.9, 0.000, FourCC("h00
 u = BlzCreateUnitWithSkin(p, FourCC("h00T"), 16071.1, -759.3, 90.000, FourCC("h00T"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00T"), 17780.4, 345.1, 90.000, FourCC("h00T"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 16904.7, 2956.2, 342.399, FourCC("h00K"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 13865.9, -5003.5, 267.448, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 13927.5, -4935.0, 32.949, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 14025.4, -4905.5, 84.487, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 14142.5, -4889.5, 24.401, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16553.1, -4903.6, 41.892, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16631.8, -4902.4, 146.848, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16705.9, -4927.9, 323.854, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16768.0, -4966.3, 173.084, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16841.0, -5033.0, 7.097, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16882.8, -5097.2, 109.361, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16907.1, -5183.0, 43.342, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16903.5, -7510.1, 328.743, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16889.0, -7609.9, 97.803, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16863.9, -7673.6, 242.355, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16819.7, -7741.4, 204.934, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16768.5, -7783.6, 236.697, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16718.6, -7802.4, 110.009, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16646.7, -7821.9, 163.558, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 16588.6, -7823.7, 349.046, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 14140.6, -7824.6, 324.227, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 14063.4, -7815.9, 268.679, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 13971.4, -7788.1, 155.516, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 13896.6, -7742.4, 22.149, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 13845.2, -7667.2, 160.900, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 13808.3, -7590.9, 196.782, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 13799.8, -7496.9, 58.471, FourCC("h00U"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00T"), 13796.5, -5405.4, 90.000, FourCC("h00T"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00T"), 13794.2, -6179.2, 90.000, FourCC("h00T"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00T"), 13815.2, -6545.9, 90.000, FourCC("h00T"))
 end
 
 function CreateUnitsForPlayer1()
@@ -1281,7 +1314,6 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11089.5, 4305.8, 242.987, FourCC("h
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 11091.9, 4435.2, 351.690, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12967.5, 4144.6, 34.162, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15188.1, 4143.0, 34.162, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12892.6, 5400.3, 34.162, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 10744.7, 2186.1, 242.987, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 10751.4, 1800.7, 242.987, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 10740.6, 1412.7, 242.987, FourCC("h00C"))
@@ -1364,8 +1396,6 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15712.4, 945.1, 242.987, FourCC("h0
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15716.4, 824.6, 242.987, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00V"), 16768.2, -2177.2, 0.000, FourCC("h00V"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15718.5, 701.4, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15722.2, 5403.1, 242.987, FourCC("h00C"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15814.1, 5404.6, 242.987, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 10912.0, 6233.6, 34.162, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 16352.2, 1075.0, 242.987, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00V"), 16256.1, -2820.1, 0.000, FourCC("h00V"))
@@ -1385,7 +1415,6 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00V"), 17541.8, -2945.6, 0.000, FourCC("h0
 u = BlzCreateUnitWithSkin(p, FourCC("h00V"), 17025.4, -2560.7, 0.000, FourCC("h00V"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00V"), 17281.8, -2560.5, 0.000, FourCC("h00V"))
 gg_unit_h00W_0784 = BlzCreateUnitWithSkin(p, FourCC("h00W"), 17573.3, -2250.8, 270.000, FourCC("h00W"))
-gg_unit_h00W_0785 = BlzCreateUnitWithSkin(p, FourCC("h00W"), 16827.9, -3140.7, 270.000, FourCC("h00W"))
 end
 
 function CreateUnitsForPlayer2()
@@ -1402,6 +1431,8 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16062.1, 4544.9, 0.000, FourCC("h00
 u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16062.8, 4288.7, 0.000, FourCC("h00Q"))
 gg_unit_h00B_0271 = BlzCreateUnitWithSkin(p, FourCC("h00B"), 11757.0, 5325.0, 180.000, FourCC("h00B"))
 gg_unit_h00B_0276 = BlzCreateUnitWithSkin(p, FourCC("h00B"), 10309.8, 3140.1, 90.000, FourCC("h00B"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 15822.1, -3237.3, 58.026, FourCC("opeo"))
+SetUnitColor(u, ConvertPlayerColor(0))
 gg_unit_u001_0395 = BlzCreateUnitWithSkin(p, FourCC("u001"), 10224.5, 1812.8, 335.254, FourCC("u001"))
 gg_unit_u001_0396 = BlzCreateUnitWithSkin(p, FourCC("u001"), 11955.8, 1793.6, 165.617, FourCC("u001"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13373.7, 3267.1, 90.000, FourCC("h00G"))
@@ -1501,9 +1532,6 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14783.0, 2373.5, 0.000, FourCC("h00
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14657.1, 2494.4, 0.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14656.8, 2366.8, 0.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13760.8, 3014.7, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13887.1, 3012.3, 90.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14015.3, 3011.7, 0.000, FourCC("h00G"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14141.7, 3013.1, 90.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14270.0, 3009.5, 0.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16061.9, 4416.6, 0.000, FourCC("h00Q"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14270.0, 2755.1, 90.000, FourCC("h00G"))
@@ -1688,7 +1716,7 @@ gg_unit_n000_0001 = BlzCreateUnitWithSkin(p, FourCC("n000"), -2863.2, -5340.3, 3
 gg_unit_u000_0005 = BlzCreateUnitWithSkin(p, FourCC("u000"), -5777.8, 8019.1, 276.770, FourCC("u000"))
 gg_unit_n001_0009 = BlzCreateUnitWithSkin(p, FourCC("n001"), -7570.0, 3830.9, 88.177, FourCC("n001"))
 u = BlzCreateUnitWithSkin(p, FourCC("e005"), -14253.5, -14208.2, 23.250, FourCC("e005"))
-u = BlzCreateUnitWithSkin(p, FourCC("n007"), 14559.0, -4646.7, 227.085, FourCC("n007"))
+u = BlzCreateUnitWithSkin(p, FourCC("n007"), 15224.0, -5670.6, 227.085, FourCC("n007"))
 end
 
 function CreateNeutralPassive()
@@ -1915,8 +1943,6 @@ u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 11632.9, -988.2, 270.344, FourCC("o
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 11970.7, -20.1, 270.344, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 14690.6, -3149.5, 270.344, FourCC("opeo"))
-SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 15357.5, -4231.4, 270.344, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 end
@@ -1998,7 +2024,7 @@ gg_rct_Enter08 = Rect(12992.0, 64.0, 13120.0, 192.0)
 gg_rct_Exit08 = Rect(15104.0, -896.0, 15392.0, -608.0)
 gg_rct_Region08 = Rect(12800.0, -1152.0, 15360.0, 1408.0)
 gg_rct_Bound08 = Rect(13952.0, -544.0, 14240.0, 704.0)
-gg_rct_Bound08Start = Rect(13984.0, 288.0, 14272.0, 704.0)
+gg_rct_Bound08Start = Rect(13984.0, 320.0, 14272.0, 704.0)
 gg_rct_ResizePlace08 = Rect(14080.0, -416.0, 14432.0, -256.0)
 gg_rct_Region04 = Rect(9824.0, 2944.0, 12448.0, 5504.0)
 gg_rct_Bound09 = Rect(11008.0, -512.0, 11296.0, -288.0)
@@ -2041,7 +2067,7 @@ gg_rct_Region13 = Rect(15584.0, 2016.0, 18208.0, 3616.0)
 gg_rct_Error10 = Rect(13120.0, -3008.0, 15296.0, -2112.0)
 gg_rct_Error10Out = Rect(12736.0, -3392.0, 15424.0, -1728.0)
 gg_rct_Patrol12 = Rect(16416.0, 4992.0, 16512.0, 5120.0)
-gg_rct_BossBarelSpawn = Rect(15136.0, -6656.0, 15552.0, -6144.0)
+gg_rct_BossBarelSpawn = Rect(15136.0, -5152.0, 15552.0, -4640.0)
 gg_rct_Region14 = Rect(15616.0, -1152.0, 18176.0, 1408.0)
 gg_rct_Enter14 = Rect(15680.0, 1216.0, 15808.0, 1344.0)
 gg_rct_Exit14 = Rect(16768.0, 0.0, 17024.0, 256.0)
@@ -2335,10 +2361,12 @@ function UnitAddForceSimpleClean(hero, angle, speed, distance, flag)
                             else
                                 if data.CatchUnit == near then
                                     --print("захваченные не катаются", GetUnitName(data.CatchUnit))
-                                else
-                                    SetUnitX(near, newVector.x)
-                                    SetUnitY(near, newVector.y)
-                                    SetUnitZ(near, GetUnitZ(hero) + 15)
+                                else -- не герой
+                                    if GetUnitTypeId(near)~=FourCC("n007") then --мясник не катается
+                                        SetUnitX(near, newVector.x)
+                                        SetUnitY(near, newVector.y)
+                                        SetUnitZ(near, GetUnitZ(hero) + 15)
+                                    end
                                 end
                             end
                         else
@@ -2384,6 +2412,7 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
         if IsUnitType(hero, UNIT_TYPE_HERO) then
             local data = HERO[GetPlayerId(GetOwningPlayer(hero))]
             data.sit = false
+            SetUnitInvulnerable(data.UnitHero,false)
             --print("сброс сидения и пошел")
         end
 
@@ -5919,7 +5948,7 @@ function CreateStompWall(unit)
     local x, y = GetUnitXY(unit)
     local t={}
     local eff = AddSpecialEffect("ConcreteCliffFloorCenter", x, y)
-    BlzSetSpecialEffectMatrixScale(eff, 2, 2, 4)
+    BlzSetSpecialEffectMatrixScale(eff, 2, 2, 1)
 
     --local eff2 = AddSpecialEffect("ConcreteCliffSide", x, y)
     --BlzSetSpecialEffectYaw(eff2, math.rad(180))
@@ -7936,7 +7965,7 @@ function StartButcherAI(xs, ys)
     local boss = FindUnitOfType(FourCC('n007'))
     local BossFight = true
     local into = CreateBOSSHPBar(boss, "Мясник из подвала")
-
+    currentInto=into
     local hpMark = { 100, 90, 80, 70, 60, 50, 40, 30, 20, 10 }
     local phaseCHK = {
         true,
@@ -8371,34 +8400,9 @@ function StartButcherAI(xs, ys)
     end)
 end
 
-function ButcherAddArmorTimed(boss, lvl, timed)
-    --1 уровень 50 брони
 
-
-    DestroyEffect(AddSpecialEffectTarget("Effect\\File00000341", boss, "chest")) --эффект отталкивания
-    local x, y = GetUnitXY(boss)
-    local _, _, _, units = UnitDamageArea(boss, 1, x, y, 500)
-
-    for i = 1, #units do
-        local angle = AngleBetweenUnits(boss, units[i])
-        local dist = 500 - DistanceBetweenXY(x, y, GetUnitXY(units[i]))
-        --BlzPauseUnitEx(units[i], true) -- починка бага
-        --UnitAddJumpForce(units[i],angle,40,dist,250)
-        local ab = AngleBetweenXY(x, y, GetUnitXY(units[i])) / bj_DEGTORAD
-        UnitFallGround(units[i], ab, 200, { "Stun" })
-    end
-
-    UnitAddAbility(boss, FourCC("A002"))
-    SetUnitAbilityLevel(boss, FourCC("A002"), lvl)
-    TimerStart(CreateTimer(), timed, false, function()
-        UnitRemoveAbility(boss, FourCC("A002"))
-        UnitRemoveAbility(boss, FourCC("B000"))
-    end)
-end
-
-function ButcherRoundSpike(boss, k)
-    SetUnitAnimation(boss, "Spell Slam")
-    local x, y = GetUnitXY(boss)
+function ButcherRoundSpikePoint(boss, k,x,y)
+    --x, y = GetUnitXY(boss)
     local dist = 50
     if not k then
         k = 15
@@ -8413,7 +8417,11 @@ function ButcherRoundSpike(boss, k)
             local eff = AddSpecialEffect("MechaImpaleNoDust", nx, ny)
             BlzSetSpecialEffectYaw(eff, math.rad(GetRandomInt(0, 360))) --angle
             TimerStart(CreateTimer(), 0.3, false, function()
-                UnitDamageArea(boss, 50, nx, ny, 80)
+                local _, _, _, units=UnitDamageArea(boss, 50, nx, ny, 80)
+                for i = 1, #units do
+                    local ab = AngleBetweenXY(nx, ny, GetUnitXY(units[i])) / bj_DEGTORAD
+                    UnitFallGround(units[i], ab, 250, { "Stun" })
+                end
             end)
             TimerStart(CreateTimer(), 0.7, false, function()
                 DestroyEffect(eff)
@@ -8427,7 +8435,72 @@ function ButcherRoundSpike(boss, k)
             DestroyTimer(GetExpiredTimer())
         end
     end)
+end
 
+
+function ButcherAddArmorTimed(boss, lvl, timed)
+    --1 уровень 50 брони
+
+    local FHArmor,FHArmorText=CreateArmorFrame(currentInto,boss)
+
+    DestroyEffect(AddSpecialEffectTarget("Effect\\File00000341", boss, "chest")) --эффект отталкивания
+    local x, y = GetUnitXY(boss)
+    local _, _, _, units = UnitDamageArea(boss, 1, x, y, 500)
+
+    for i = 1, #units do
+        local ab = AngleBetweenXY(x, y, GetUnitXY(units[i])) / bj_DEGTORAD
+        UnitFallGround(units[i], ab, 200, { "Stun" })
+    end
+
+    UnitAddAbility(boss, FourCC("A002"))
+    SetUnitAbilityLevel(boss, FourCC("A002"), lvl)
+    local upPeriodTimer=CreateTimer()
+    TimerStart(upPeriodTimer, 1, true, function()
+        BlzFrameSetText(FHArmorText, R2I(timed))
+        timed=timed-1
+    end)
+
+    TimerStart(CreateTimer(), timed, false, function()
+        UnitRemoveAbility(boss, FourCC("A002"))
+        UnitRemoveAbility(boss, FourCC("B000"))
+        BlzDestroyFrame(FHArmor)
+        DestroyTimer(upPeriodTimer)
+    end)
+end
+
+function ButcherRoundSpike(boss, k)
+    SetUnitAnimation(boss, "Spell Slam")
+    local x, y = GetUnitXY(boss)
+    local dist = 50
+    if not k then
+        k = 15
+        --normal_sound("howl", x, y)
+    end
+    local n = 0
+    local speed=0.1
+    TimerStart(CreateTimer(), speed, true, function()
+        local angle = 360 / (15 + n)
+        for i = 1, 15 + n do
+            local nx, ny = MoveXY(x, y, dist, angle * i)
+            --print("i",angle*i)
+            local eff = AddSpecialEffect("MechaImpaleNoDust", nx, ny)
+            BlzSetSpecialEffectYaw(eff, math.rad(GetRandomInt(0, 360))) --angle
+            TimerStart(CreateTimer(), 0.3, false, function()
+                UnitDamageArea(boss, 50, nx, ny, 80)
+
+            end)
+            TimerStart(CreateTimer(), 0.7, false, function()
+                DestroyEffect(eff)
+            end)
+        end
+        dist = dist + 70
+        n = n + 3
+        k = k - 1
+        --print(k,"k")
+        if k <= 0 then
+            DestroyTimer(GetExpiredTimer())
+        end
+    end)
 end
 
 function FallenRoof(boss, timed)
@@ -8586,7 +8659,7 @@ function ButcherThrowGround(boss, hero)
         DestroyEffect(mark)
         TimerStart(CreateTimer(), 0.45, false, function()
             nx, ny = MoveXY(x, y, 500, GetUnitFacing(boss) - 15)
-            DestroyEffect(AddSpecialEffect("Earthshock", nx, ny))
+            --DestroyEffect(AddSpecialEffect("Earthshock", nx, ny))
             DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", nx, ny))
             local _, du = UnitDamageArea(boss, 50, nx, ny, 220)
             DamageDestructableInRangeXY(boss, 50, 220, x, y)
@@ -8600,6 +8673,7 @@ function ButcherThrowGround(boss, hero)
                 PlayBossSpeech("Speech\\Pudge\\InFight\\F9", "Попал")
             else
                 PlayBossSpeech("Speech\\Pudge\\InFight\\F10", "Мимо")
+                ButcherRoundSpikePoint(boss,5,nx, ny)
             end
             DownFloorInTimedXY(120, nx, ny)
         end)
@@ -8641,6 +8715,25 @@ end
 
 function BossHooked(boss, timed, scale)
     StartHookAI(boss, timed, scale)
+end
+
+function CreateArmorFrame(into,boss)
+    local texture = "ReplaceableTextures\\CommandButtons\\BTNHumanArmorUpOne.blp"
+    local NextPoint = 0.039
+    local buttonIconFrame = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', into, '', 0)
+
+    BlzFrameSetTexture(buttonIconFrame, texture, 0, true)
+    BlzFrameSetSize(buttonIconFrame, NextPoint, NextPoint )
+    BlzFrameSetPoint(buttonIconFrame, FRAMEPOINT_LEFT, into, FRAMEPOINT_LEFT, -NextPoint, 0)
+    BlzFrameSetParent(buttonIconFrame, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+
+    local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", buttonIconFrame, "", 0)
+    BlzFrameSetParent(text, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    BlzFrameSetText(text, "999")
+    BlzFrameSetScale(text, 2)
+    BlzFrameSetPoint(text, FRAMEPOINT_CENTER, buttonIconFrame, FRAMEPOINT_CENTER, 0, 0)
+
+    return buttonIconFrame,text
 end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
@@ -10730,9 +10823,13 @@ function YettyCouchHero(boss, hero, duration)
             end
             if duration <= 0 or not QTEReadyToPress or not UnitAlive(hero) then
                 DestroyTimer(GetExpiredTimer())
-                UnitAddForceSimple(hero, GetUnitFacing(boss), 40, 400)
+
+                --UnitAddForceSimple(hero, GetUnitFacing(boss), 40, 400)
                 --print("отпустил")
-                UnitRemoveStun(hero)
+                --local ab = AngleBetweenXY(x, y, GetUnitXY(hero))/ bj_DEGTORAD
+                UnitFallGround(hero, GetUnitFacing(boss), 400)
+
+                --UnitRemoveStun(hero)
                 DestroyEffect(eff)
                 ResetUnitAnimation(boss)
                 BlzDestroyFrame(qteFH)
@@ -11462,12 +11559,13 @@ function PlayBossSpeech(sound, text)
         CreteDialogBoxBoss()
     end
     if not text then
-        text="У меня нет слов"
+        text = "У меня нет слов"
     end
     local s = nil
     if not BlzFrameIsVisible(TexBoxBoss) and UnitAlive(GBoss) then
         s = normal_sound(sound)
-        if GetUnitTypeId(GBoss)==FourCC("n007") then -- мясник говорит ниже
+        if GetUnitTypeId(GBoss) == FourCC("n007") then
+            -- мясник говорит ниже
             SetSoundPitch(s, 0.8)
         end
         local sd = GetSoundDuration(s)
@@ -11479,6 +11577,7 @@ function PlayBossSpeech(sound, text)
         SetMusicVolumeBJ(GV)
         BlzFrameSetVisible(TexBoxBoss, true)
         BlzFrameSetText(TexBoxTextBoss, text)
+        --BlzFrameSetScale(TexBoxTextBoss, GetTextScaleForBoss(text))
         --TransmissionFromUnitWithNameBJ(GetPlayersAll(), HERO[0].UnitHero, "", nil, "", bj_TIMETYPE_SET, GetSoundDuration(s) / 700, false)
         --print(GetSoundDuration(s))
         GBossSoundDuration = sd / 700
@@ -11505,27 +11604,44 @@ function PlayBossSpeech(sound, text)
 end
 
 function CreteDialogBoxBoss()
-    --print("создан бокс ",toolTipTex)
+    local testText = "А с другой стороны и хорошо, что вы пришли, мне надоело дёргать своего одноглазого змея под ваши звуки"
+    --local scale = GetTextScaleForBoss(testText)
     local tooltip = BlzCreateFrameByType("FRAME", "TestDialog", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "StandardFrameTemplate", 0)
     BlzFrameSetParent(tooltip, BlzGetFrameByName("ConsoleUIBackdrop", 0))
-    --local backdrop = BlzCreateFrame("QuestButtonDisabledBackdropTemplate", tooltip, 0, 0)
     local backdrop = BlzCreateFrameByType("BACKDROP", "Face", tooltip, "", 0)
     BlzFrameSetTexture(backdrop, "SpeechBoxBoss", 0, true)
-
     local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", tooltip, "", 0)
-    BlzFrameSetAbsPoint(tooltip, FRAMEPOINT_LEFT, 0, 0.09)
-    BlzFrameSetSize(tooltip, 0.25, 0.125)
-    BlzFrameSetSize(backdrop, 0.25, 0.125)
-    BlzFrameSetSize(text, 0.28, 0.06)
+    BlzFrameSetAbsPoint(tooltip, FRAMEPOINT_LEFT, 0.0, 0.09)
+    local sw, sh = 0.3, 0.15
+    BlzFrameSetSize(tooltip, sw, sh)
+    BlzFrameSetSize(backdrop, sw, sh)
+    BlzFrameSetSize(text, sw * 0.85, sh * 0.5)
     BlzFrameSetPoint(backdrop, FRAMEPOINT_CENTER, tooltip, FRAMEPOINT_CENTER, 0.0, 0.0)
-    --BlzFrameSetAlpha(backdrop, 0)
-    BlzFrameSetText(text, "Проверочный текст для фрейма теперь текста больше, а где авто перенос?,Проверочный текст для фрейма теперь текста больше, а где авто перенос?,Проверочный текст для фрейма теперь текста больше, а где авто перенос?,Проверочный текст для фрейма теперь текста больше, а где авто перенос?")
-    BlzFrameSetPoint(text, FRAMEPOINT_LEFT, tooltip, FRAMEPOINT_LEFT, 0.02, -0.003)
+    BlzFrameSetText(text, testText)
+    BlzFrameSetPoint(text, FRAMEPOINT_CENTER, tooltip, FRAMEPOINT_CENTER, 0, -0.027)
+
     BlzFrameSetScale(text, 0.8)
+
     BlzFrameSetVisible(tooltip, false)
 
     TexBoxBoss = tooltip
     TexBoxTextBoss = text
+end
+
+--BlzFrameSetScale(TexBoxTextBoss, GetTextScaleForBoss(text))
+
+function GetTextScaleForBoss(testText)
+    local k = #testText
+    local scale = 1.7 - k * 0.005
+    --print("максимум символов=", k, scale)
+    if scale <= 0.8 then
+        scale = 0.8
+    end
+    if scale >= 2 then
+        scale = 2
+    end
+    --print(scale)
+    return scale
 end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
@@ -11558,7 +11674,7 @@ function CreateAndMoveSpeechImage(state, duration, position, texture, text, dela
         --BlzFrameSetText(TexBoxText, text)
 
         --print(sound, "звук из глобалки")
-        if name~="Демонесса" then
+        if name ~= "Демонесса" then
             normal_sound(sound, GetUnitXY(GetRandomPeon()))
         else
             PlaySound(sound)
@@ -11701,28 +11817,21 @@ function CreateAndMoveSpeechImage(state, duration, position, texture, text, dela
 end
 
 function CreteDialogBox()
-    --print("создан бокс ",toolTipTex)
     local tooltip = BlzCreateFrameByType("FRAME", "TestDialog", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "StandardFrameTemplate", 0)
     BlzFrameSetParent(tooltip, BlzGetFrameByName("ConsoleUIBackdrop", 0))
-    --local backdrop = BlzCreateFrame("QuestButtonDisabledBackdropTemplate", tooltip, 0, 0)
-    local backdrop=BlzCreateFrameByType("BACKDROP", "Face", tooltip, "", 0)
+    local backdrop = BlzCreateFrameByType("BACKDROP", "Face", tooltip, "", 0)
     BlzFrameSetTexture(backdrop, "SpeechBox", 0, true)
-    --BlzFrameSetSize(backdrop, 0.76, 0.02)
-    --BlzFrameSetAbsPoint(backdrop, FRAMEPOINT_LEFT, 0.018, 0.03)
-
-
     local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", tooltip, "", 0)
     BlzFrameSetAbsPoint(tooltip, FRAMEPOINT_LEFT, -0.08, 0.51)
-    BlzFrameSetSize(tooltip, 0.25, 0.125)
-    BlzFrameSetSize(backdrop, 0.25, 0.125)
-    BlzFrameSetSize(text, 0.28, 0.06)
+    local w, h = 0.25, 0.125
+    BlzFrameSetSize(tooltip, w, h)
+    BlzFrameSetSize(backdrop, w, h)
+    BlzFrameSetSize(text, w * 0.85, h * 0.5)
     BlzFrameSetPoint(backdrop, FRAMEPOINT_CENTER, tooltip, FRAMEPOINT_CENTER, 0.0, 0.0)
-    --BlzFrameSetAlpha(backdrop, 0)
-    BlzFrameSetText(text, "Проверочный текст для фрейма теперь текста больше, а где авто перенос?,Проверочный текст для фрейма теперь текста больше, а где авто перенос?,Проверочный текст для фрейма теперь текста больше, а где авто перенос?,Проверочный текст для фрейма теперь текста больше, а где авто перенос?")
-    BlzFrameSetPoint(text, FRAMEPOINT_LEFT, tooltip, FRAMEPOINT_LEFT, 0.02, -0.003)
+    BlzFrameSetText(text, "Проверочный текст для фрейма теперь текста больше, а где авто перенос?,Проверочный")
+    BlzFrameSetPoint(text, FRAMEPOINT_CENTER, tooltip, FRAMEPOINT_CENTER, 0, -0.022)
     BlzFrameSetScale(text, 0.8)
     BlzFrameSetVisible(tooltip, false)
-
     TexBox = tooltip
     TexBoxText = text
 end
@@ -12805,9 +12914,11 @@ function CreateInsertActions()
                 if not data.sit then
                     SetUnitAnimationByIndex(data.UnitHero, 20) -- 26 сидение
                     data.sit = true
+                    SetUnitInvulnerable(data.UnitHero,true)
                 else
                     ResetUnitAnimation(data.UnitHero)
                     data.sit = false
+                    SetUnitInvulnerable(data.UnitHero,false)
                 end
             end
 
@@ -13271,7 +13382,7 @@ end
 --- DateTime: 15.11.2023 22:57
 ---
 function InitDashVisualCharges(data)
-    print(data.DashCharges, "максимум зарядов")
+    --print(data.DashCharges, "максимум зарядов")
     data.TableDashEffect = {}
     for i = 1, data.DashCharges do
         local eff = AddSpecialEffectTarget("1starAttach"..i, data.UnitHero,"origin")
@@ -13734,6 +13845,9 @@ function InitTrig_BallInit ()
         udg_BallPoint = GetUnitLoc(udg_Ball)
         if GetEventDamage() > 5 then
             udg_BallSpeed = udg_BallSpeed + 20
+            if udg_BallSpeed>=60 then
+                udg_BallSpeed=60
+            end
             udg_BallFacing = AngleBetweenPoints(GetUnitLoc(GetEventDamageSource()), udg_BallPoint)
             EnableTrigger(gg_trg_BallMove)
 
@@ -13753,7 +13867,7 @@ function InitRicoshet()
     TempItem = CreateItem(FourCC('spsh'), 0.00, 0.00)
     TempGroup = CreateGroup()
     SetItemVisible(TempItem, false)
-    print("конец инициализации рикошета")
+    --print("конец инициализации рикошета")
     --InitBounceOnGUI()
 end
 ---
@@ -15700,9 +15814,6 @@ end
 if (not (IsUnitDeadBJ(gg_unit_h00W_0784) == true)) then
 return false
 end
-if (not (IsUnitDeadBJ(gg_unit_h00W_0785) == true)) then
-return false
-end
 return true
 end
 
@@ -15726,7 +15837,6 @@ function InitTrig_Victory15()
 gg_trg_Victory15 = CreateTrigger()
 TriggerRegisterUnitEvent(gg_trg_Victory15, gg_unit_h00W_0775, EVENT_UNIT_DEATH)
 TriggerRegisterUnitEvent(gg_trg_Victory15, gg_unit_h00W_0784, EVENT_UNIT_DEATH)
-TriggerRegisterUnitEvent(gg_trg_Victory15, gg_unit_h00W_0785, EVENT_UNIT_DEATH)
 TriggerAddAction(gg_trg_Victory15, Trig_Victory15_Actions)
 end
 
@@ -17352,28 +17462,38 @@ TriggerRegisterDeathEvent(gg_trg_OffHole, gg_dest_B00F_17534)
 TriggerAddAction(gg_trg_OffHole, Trig_OffHole_Actions)
 end
 
-function Trig_InitCustomTraps_Func001Func001C()
+function Trig_InitRoom8_Conditions()
+if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+return false
+end
+return true
+end
+
+function Trig_InitRoom8_Func004Func001C()
 if (not (GetUnitTypeId(GetEnumUnit()) == FourCC("h000"))) then
 return false
 end
 return true
 end
 
-function Trig_InitCustomTraps_Func001A()
-if (Trig_InitCustomTraps_Func001Func001C()) then
+function Trig_InitRoom8_Func004A()
+if (Trig_InitRoom8_Func004Func001C()) then
         InitUnitBulletTrap(GetEnumUnit(), true)
 GroupAddUnitSimple(GetEnumUnit(), udg_Remove08)
 else
 end
 end
 
-function Trig_InitCustomTraps_Actions()
-ForGroupBJ(GetUnitsInRectAll(gg_rct_Region08), Trig_InitCustomTraps_Func001A)
+function Trig_InitRoom8_Actions()
+DisableTrigger(GetTriggeringTrigger())
+ForGroupBJ(GetUnitsInRectAll(gg_rct_Region08), Trig_InitRoom8_Func004A)
 end
 
-function InitTrig_InitCustomTraps()
-gg_trg_InitCustomTraps = CreateTrigger()
-TriggerAddAction(gg_trg_InitCustomTraps, Trig_InitCustomTraps_Actions)
+function InitTrig_InitRoom8()
+gg_trg_InitRoom8 = CreateTrigger()
+TriggerRegisterEnterRectSimple(gg_trg_InitRoom8, gg_rct_Enter08)
+TriggerAddCondition(gg_trg_InitRoom8, Condition(Trig_InitRoom8_Conditions))
+TriggerAddAction(gg_trg_InitRoom8, Trig_InitRoom8_Actions)
 end
 
 function Trig_ExitFrom08_Func003C()
@@ -17514,7 +17634,6 @@ SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter08))
 SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Bound08Start)
     HeroFixRespPos()
     CreateEnteringFrame(nil, "Синие псы")
-TriggerExecute(gg_trg_InitCustomTraps)
 end
 
 function InitTrig_ExitFrom07()
@@ -19723,7 +19842,7 @@ InitTrig_ExitFrom09()
 InitTrig_InitRoom09()
 InitTrig_Victory09()
 InitTrig_OffHole()
-InitTrig_InitCustomTraps()
+InitTrig_InitRoom8()
 InitTrig_ExitFrom08()
 InitTrig_Resize08()
 InitTrig_Victory08()
@@ -19808,7 +19927,7 @@ SetPlayerTeam(Player(0), 0)
 end
 
 function main()
-SetCameraBounds(-14336.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), -14336.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 18432.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 10240.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -14336.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 10240.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 18432.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), -14336.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
+SetCameraBounds(-14336.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), -14336.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 22528.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 10240.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -14336.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 10240.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 22528.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), -14336.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
 SetDayNightModels("Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl", "Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl")
 SetTerrainFogEx(0, 0.0, 5000.0, 0.500, 0.086, 0.043, 0.275)
 NewSoundEnvironment("Default")
@@ -19832,7 +19951,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, -384.0, -768.0)
+DefineStartLocation(0, 10880.0, 8512.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()

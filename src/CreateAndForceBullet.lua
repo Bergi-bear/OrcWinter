@@ -235,11 +235,13 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
         local PerepadZ = zGround - z
         --print(CollisisonDestr)
         --if not reverse and delay <= 0 and (dist > maxDistance or CollisionEnemy or IsUnitType(DamagingUnit, UNIT_TYPE_STRUCTURE) or PerepadZ > 20) then --оригинальная строчка
-        if not reverse and delay <= 0 and (dist > maxDistance or CollisionEnemy or PerepadZ > 20) then
+        if not reverse and not BlzIsUnitInvulnerable(DamagingUnit) and delay <= 0 and (dist > maxDistance or CollisionEnemy or PerepadZ > 20)  then
             --or CollisisonDestr
             --
             --or IsTerrainPathable(nx, ny, PATHING_TYPE_WALKABILITY)
-            --print("попал в", DamagingUnit,CollisionEnemy, reverse, delay, maxDistance, PerepadZ, dist)
+            if DamagingUnit then
+                print("попал в", GetUnitName(DamagingUnit),CollisionEnemy, reverse, delay, maxDistance, PerepadZ, dist)
+            end
             if CollisisonDestr then
 
             end
