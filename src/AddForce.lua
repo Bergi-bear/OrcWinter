@@ -4,7 +4,7 @@
 --- DateTime: 28.04.2021 23:55
 ---
 ----- ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
-function UnitAddForceSimpleClean(hero, angle, speed, distance, flag)
+function UnitAddForceSimpleClean(hero, angle, speed, distance, flag,tableEff)
     local currentdistance = 0
     if onForces[GetHandleId(hero)] == nil then
         onForces[GetHandleId(hero)] = true
@@ -58,11 +58,25 @@ function UnitAddForceSimpleClean(hero, angle, speed, distance, flag)
                     end
                 end
             end
+            if tableEff then
+                local data = HERO[0]
+                --if data.CatchUnit then
+                    local x1,y1=GetUnitXY(data.UnitHero)
+                    local z1=GetUnitZ(data.UnitHero)+20
+                    local x2,y2=GetUnitXY(hero)
+                    local z2=GetUnitZ(hero)+20
+                    MoveEffectLighting3D(x1, y1, z1, x2, y2, z2, 10, tableEff)
+                    --DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt", x1,y1))
+                --end
+            end
             if currentdistance >= distance then
                 --print("закончил движение")
                 DestroyTimer(GetExpiredTimer())
                 DestroyEffect(eff)
                 onForces[GetHandleId(hero)] = true
+                if tableEff then
+                    DestroyEffectLighting3D(tableEff)
+                end
             end
         end)
     end

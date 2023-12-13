@@ -104,6 +104,11 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
 
                     if bounceFact then
                         bounceCount = bounceCount + 1
+                        --print("звук")
+                        local s=normal_sound("Abilities\\Spells\\Items\\SpellShieldAmulet\\SpellShieldImpact1",x,y)
+                        --normal_sound("Abilities\\Spells\\Items\\ResourceItems\\ReceiveGold")
+                        local sp=GetRandomReal(0.2,1.2)
+                        SetSoundPitch(s,sp+bounceCount*0.1)
                         nx, ny = MoveXY(x, y, speed, angleCurrent)
                         --print(bounceCount)
                     else
@@ -240,7 +245,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
             --
             --or IsTerrainPathable(nx, ny, PATHING_TYPE_WALKABILITY)
             if DamagingUnit then
-                print("попал в", GetUnitName(DamagingUnit),CollisionEnemy, reverse, delay, maxDistance, PerepadZ, dist)
+                --print("попал в", GetUnitName(DamagingUnit),CollisionEnemy, reverse, delay, maxDistance, PerepadZ, dist)
             end
             if CollisisonDestr then
 

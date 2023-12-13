@@ -102,7 +102,7 @@ local path="Speech\\Peon\\Rescue\\"
         }
     ,
         [15] = {
-            text = "Услышь моё ты возраженье, вьбу я на опереженье",
+            text = "Услышь моё ты возраженье, вьебу я на опереженье",
             sound = path.."yslishmoyotivozrashenie"
         }
 

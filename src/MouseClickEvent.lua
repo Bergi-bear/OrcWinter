@@ -127,7 +127,18 @@ function InitMouseClickEvent()
                             local angleMagnet = AngleBetweenUnits(data.CatchUnit, data.UnitHero)
                             local distMagnet = DistanceBetweenXY(GetUnitX(data.CatchUnit), GetUnitY(data.CatchUnit), GetUnitXY(data.UnitHero))
                             SetUnitFacing(data.CatchUnit, angleMagnet)
-                            UnitAddForceSimpleClean(data.CatchUnit, angleMagnet, 5*2, distMagnet,{"Dust"})
+                            local x1,y1=GetUnitXY(data.UnitHero)
+                            local z1=GetUnitZ(data.UnitHero)+20
+                            local x2,y2=GetUnitXY(data.CatchUnit)
+                            local z2=GetUnitZ(data.CatchUnit)+20
+                            local step=10
+                            local s=normal_sound("ChainShortSound",x1,y1)
+                            SetSoundVolume(s,80)
+                            SetSoundPitch(s, GetRandomReal(0.6, 1.4))
+                            SetUnitAnimationByIndex(data.UnitHero,2)
+                            BlzSetUnitFacingEx(data.UnitHero,angleMagnet-180)
+                            local chain=CreateEffectLighting3D(x1, y1, z1, x2, y2, z2, step, "ChainElement")
+                            UnitAddForceSimpleClean(data.CatchUnit, angleMagnet, 5*2, distMagnet,{"Dust"},chain)
                             SetUnitZ(data.CatchUnit,0)
                         else
                             data.CatchUnit = false

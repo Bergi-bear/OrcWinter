@@ -807,7 +807,8 @@ function CreateWASDActions()
                             Blink2Point(data.UnitHero, nx, ny)
                         else
                             -- print("прыжок вниз?, сообщите об этом баге!")
-                            UnitAddForceSimple(data.UnitHero, data.DirectionMove, 10, dist, "ignore") --САМ рывок при нажатии пробела
+                            UnitAddForceSimple(data.UnitHero, data.DirectionMove, 10, dist, "ignore") --САМ рывок при нажатии пробела РЕДКИЙ!
+
                             data.StatDash = data.StatDash + 1
                         end
                     else
@@ -819,8 +820,22 @@ function CreateWASDActions()
                             data.chargeEff = AddSpecialEffectTarget("IceCharge", data.UnitHero, "origin")
 
                         end
-                        UnitAddForceSimple(data.UnitHero, data.DirectionMove, dashSpeed, dist, "ignore") --САМ рывок при нажатии пробела
+                        UnitAddForceSimple(data.UnitHero, data.DirectionMove, dashSpeed, dist, "ignore") --САМ рывок при нажатии пробела ЧАСТЫЙ!
                         data.StatDash = data.StatDash + 1
+
+                        --print("где опять эффект?")
+                        local tmpEff=AddSpecialEffect("WindAnime\\WindWeak2",GetUnitXY(data.UnitHero))
+                        BlzSetSpecialEffectYaw(tmpEff, math.rad(data.DirectionMove))
+                        BlzSetSpecialEffectPitch(tmpEff, math.rad(-90))
+                        BlzSetSpecialEffectZ(tmpEff,GetUnitZ(data.UnitHero)+50)
+                        DestroyEffect(tmpEff)
+                        local r=GetRandomInt(1,3)
+                        local s=normal_sound("Abilities\\Weapons\\BristleBackMissile\\BristleBackMissileLaunch"..r,GetUnitXY(data.UnitHero))
+                        SetSoundPitch(s,GetRandomReal(0.8,1.2))
+
+
+
+
                         local r = GetRandomInt(1, 120)
                         if r == 1 then
                             PlayMonoSpeech("Speech\\Peon\\Dash\\D"..r, "Я не так молод, чтобы так кувыркаться")

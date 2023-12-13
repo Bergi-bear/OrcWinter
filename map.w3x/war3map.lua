@@ -721,7 +721,7 @@ gg_dest_B007_5312 = BlzCreateDestructableWithSkin(FourCC("B007"), -7552.0, 4224.
 gg_dest_B00B_20775 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 16894.3, 129.0, 819.2, 180.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_20321 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 18043.0, 2806.7, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_19643 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 17013.9, 4349.7, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
-gg_dest_B00B_16092 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 18043.0, 7294.2, 838.4, 270.000, 1.650, 0, FourCC("B00B"))
+gg_dest_B00B_16092 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 18048.6, 7289.5, 838.4, 270.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_14785 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11344.6, 8373.0, 832.0, 270.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_17599 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 14969.5, -3076.2, 832.0, 180.000, 1.850, 0, FourCC("B00B"))
 gg_dest_B00B_17182 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15223.5, -767.4, 844.8, 270.000, 1.450, 0, FourCC("B00B"))
@@ -731,7 +731,7 @@ gg_dest_B00B_21136 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 17538.6, -32
 gg_dest_B00B_16430 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11136.0, 2426.0, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_17533 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 12163.4, 2.3, 832.0, 270.000, 1.850, 0, FourCC("B00B"))
 gg_dest_B00B_15274 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 10618.1, 6012.7, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
-gg_dest_B00B_15515 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15227.5, 6283.1, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
+gg_dest_B00B_15515 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15229.1, 6272.7, 838.4, 180.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_16153 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 15226.2, 5370.2, 838.4, 0.000, 1.650, 0, FourCC("B00B"))
 gg_dest_B00B_15713 = BlzCreateDestructableZWithSkin(FourCC("B00B"), 11516.0, 4100.8, 844.8, 90.000, 1.450, 0, FourCC("B00B"))
 gg_dest_B00D_17155 = BlzCreateDestructableWithSkin(FourCC("B00D"), 15232.0, 1280.0, 270.000, 1.000, 0, FourCC("B00D"))
@@ -1094,6 +1094,7 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00U"), 13799.8, -7496.9, 58.471, FourCC("h
 u = BlzCreateUnitWithSkin(p, FourCC("h00T"), 13796.5, -5405.4, 90.000, FourCC("h00T"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00T"), 13794.2, -6179.2, 90.000, FourCC("h00T"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00T"), 13815.2, -6545.9, 90.000, FourCC("h00T"))
+u = BlzCreateUnitWithSkin(p, FourCC("hpea"), 10274.7, -1847.8, 3.534, FourCC("hpea"))
 end
 
 function CreateUnitsForPlayer1()
@@ -1396,6 +1397,8 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15712.4, 945.1, 242.987, FourCC("h0
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15716.4, 824.6, 242.987, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00V"), 16768.2, -2177.2, 0.000, FourCC("h00V"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15718.5, 701.4, 242.987, FourCC("h00C"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 12901.5, 5408.1, 34.162, FourCC("h00C"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15740.2, 5407.4, 242.987, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 10912.0, 6233.6, 34.162, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 16352.2, 1075.0, 242.987, FourCC("h00C"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00V"), 16256.1, -2820.1, 0.000, FourCC("h00V"))
@@ -1415,6 +1418,7 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00V"), 17541.8, -2945.6, 0.000, FourCC("h0
 u = BlzCreateUnitWithSkin(p, FourCC("h00V"), 17025.4, -2560.7, 0.000, FourCC("h00V"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00V"), 17281.8, -2560.5, 0.000, FourCC("h00V"))
 gg_unit_h00W_0784 = BlzCreateUnitWithSkin(p, FourCC("h00W"), 17573.3, -2250.8, 270.000, FourCC("h00W"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00C"), 15904.0, 5405.4, 242.987, FourCC("h00C"))
 end
 
 function CreateUnitsForPlayer2()
@@ -2327,7 +2331,7 @@ end
 --- DateTime: 28.04.2021 23:55
 ---
 ----- ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
-function UnitAddForceSimpleClean(hero, angle, speed, distance, flag)
+function UnitAddForceSimpleClean(hero, angle, speed, distance, flag,tableEff)
     local currentdistance = 0
     if onForces[GetHandleId(hero)] == nil then
         onForces[GetHandleId(hero)] = true
@@ -2381,11 +2385,27 @@ function UnitAddForceSimpleClean(hero, angle, speed, distance, flag)
                     end
                 end
             end
+            if tableEff then
+                local data = HERO[0]
+                if data.CatchUnit then
+                    local x1,y1=GetUnitXY(data.UnitHero)
+                    local z1=GetUnitZ(data.UnitHero)+20
+                    local x2,y2=GetUnitXY(data.CatchUnit)
+                    local z2=GetUnitZ(data.CatchUnit)+20
+                    MoveEffectLighting3D(x1, y1, z1, x2, y2, z2, 10, tableEff)
+                end
+            end
             if currentdistance >= distance then
                 --print("закончил движение")
                 DestroyTimer(GetExpiredTimer())
                 DestroyEffect(eff)
                 onForces[GetHandleId(hero)] = true
+                if tableEff then
+                    for i=1,#tableEff do
+                        DestroyEffect(tableEff[i])
+                    end
+
+                end
             end
         end)
     end
@@ -3180,11 +3200,13 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
         local PerepadZ = zGround - z
         --print(CollisisonDestr)
         --if not reverse and delay <= 0 and (dist > maxDistance or CollisionEnemy or IsUnitType(DamagingUnit, UNIT_TYPE_STRUCTURE) or PerepadZ > 20) then --оригинальная строчка
-        if not reverse and delay <= 0 and (dist > maxDistance or CollisionEnemy or PerepadZ > 20) then
+        if not reverse and not BlzIsUnitInvulnerable(DamagingUnit) and delay <= 0 and (dist > maxDistance or CollisionEnemy or PerepadZ > 20)  then
             --or CollisisonDestr
             --
             --or IsTerrainPathable(nx, ny, PATHING_TYPE_WALKABILITY)
-            --print("попал в", DamagingUnit,CollisionEnemy, reverse, delay, maxDistance, PerepadZ, dist)
+            if DamagingUnit then
+                --print("попал в", GetUnitName(DamagingUnit),CollisionEnemy, reverse, delay, maxDistance, PerepadZ, dist)
+            end
             if CollisisonDestr then
 
             end
@@ -4227,6 +4249,75 @@ function L(ru, en)
 end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 13.12.2023 19:19
+---
+function CreateEffectLighting3D(x1, y1, z1, x2, y2, z2, step, effModel,length)
+    local vector = Vector:new(x2 - x1, y2 - y1, z2 - z1)
+    local normalized = vector:normalize(true)
+    local chainCount = math.floor(vector:length() / step)
+    local pitch = vector:pitch()
+    local yaw = vector:yaw()
+    local eff = {}
+    if not length then
+        length=chainCount
+    end
+
+    if length <1 then
+        --print("ОШИБКА, СЛИШКОМ МАЛО ЭЛЕМЕНТОВ МЕЖДУ ТОЧКАМИ, ЗАДАЙТЕ ЧИСЛО ВРУЧНУЮ length")
+        length=100
+    end
+
+    for i = 1, length do
+        if i<=chainCount then
+            eff[i] = AddSpecialEffect(effModel, 0, 0)
+            local v = normalized * (step * i)
+            BlzSetSpecialEffectPosition(eff[i], x1 + v.x, y1 + v.y, z1 + v.z)
+            BlzSetSpecialEffectPitch(eff[i], -pitch)
+            BlzSetSpecialEffectYaw(eff[i], yaw)
+        else
+            eff[i] = AddSpecialEffect(effModel, OutPoint, OutPoint)
+        end
+    end
+    return eff
+end
+
+function MoveEffectLighting3D(x1, y1, z1, x2, y2, z2, step, eff,length,isUnit)
+    local vector = Vector:new(x2 - x1, y2 - y1, z2 - z1)
+    local normalized = vector:normalize(true)
+    local chainCount = math.floor(vector:length() / step)
+    local pitch = vector:pitch()
+    local yaw = vector:yaw()
+    if not length then
+        length=#eff
+    end
+    if isUnit then
+        pitch=pitch-math.rad(90)
+    end
+
+    for i = 1, length do
+        local v = normalized * (step * i)
+        if i<=chainCount then
+            local z = z1 + v.z
+            BlzSetSpecialEffectPosition(eff[i], x1 + v.x, y1 + v.y, z)
+            BlzSetSpecialEffectPitch(eff[i], -pitch)
+            BlzSetSpecialEffectYaw(eff[i], yaw)
+        else
+            BlzSetSpecialEffectPosition(eff[i], OutPoint, OutPoint, 0)
+        end
+
+    end
+    return pitch
+end
+
+function DestroyEffectLighting3D(eff)
+    for i = 1, #eff do
+        BlzSetSpecialEffectPosition(eff[i], OutPoint, OutPoint, 0)
+        DestroyEffect(eff[i])
+    end
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
 --- Created by Bergi.
 --- DateTime: 10.01.2020 23:44
 ---
@@ -4644,7 +4735,15 @@ function InitMouseClickEvent()
                             local angleMagnet = AngleBetweenUnits(data.CatchUnit, data.UnitHero)
                             local distMagnet = DistanceBetweenXY(GetUnitX(data.CatchUnit), GetUnitY(data.CatchUnit), GetUnitXY(data.UnitHero))
                             SetUnitFacing(data.CatchUnit, angleMagnet)
-                            UnitAddForceSimpleClean(data.CatchUnit, angleMagnet, 5*2, distMagnet,{"Dust"})
+                            local x1,y1=GetUnitXY(data.UnitHero)
+                            local z1=GetUnitZ(data.UnitHero)+20
+                            local x2,y2=GetUnitXY(data.CatchUnit)
+                            local z2=GetUnitZ(data.CatchUnit)+20
+                            local step=10
+
+
+                            local chain=CreateEffectLighting3D(x1, y1, z1, x2, y2, z2, step, "ChainElement")
+                            UnitAddForceSimpleClean(data.CatchUnit, angleMagnet, 5*2, distMagnet,{"Dust"},chain)
                             SetUnitZ(data.CatchUnit,0)
                         else
                             data.CatchUnit = false
@@ -11957,7 +12056,7 @@ local path="Speech\\Peon\\Rescue\\"
         }
     ,
         [15] = {
-            text = "Услышь моё ты возраженье, вьбу я на опереженье",
+            text = "Услышь моё ты возраженье, вьебу я на опереженье",
             sound = path.."yslishmoyotivozrashenie"
         }
 
@@ -17193,7 +17292,7 @@ end
 return true
 end
 
-function Trig_Victory10_Func001Func004C()
+function Trig_Victory10_Func001Func006C()
 if (not (IsDestructableDeadBJ(gg_dest_B00D_17596) == true)) then
 return false
 end
@@ -17204,7 +17303,7 @@ return true
 end
 
 function Trig_Victory10_Func001C()
-if (not Trig_Victory10_Func001Func004C()) then
+if (not Trig_Victory10_Func001Func006C()) then
 return false
 end
 return true
@@ -17213,6 +17312,8 @@ end
 function Trig_Victory10_Actions()
 if (Trig_Victory10_Func001C()) then
 KillDestructable(gg_dest_B00B_17599)
+DisableTrigger(gg_trg_Error10In)
+DisableTrigger(gg_trg_Error10Out)
 else
 TriggerSleepAction(0.50)
 if (Trig_Victory10_Func001Func002C()) then
