@@ -852,7 +852,7 @@ gg_unit_o002_0203 = BlzCreateUnitWithSkin(p, FourCC("o002"), -13047.3, 8357.1, 3
 u = BlzCreateUnitWithSkin(p, FourCC("h00A"), 5159.2, 6586.8, 281.200, FourCC("h00A"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), -1503.4, 1375.2, 5.812, FourCC("h002"))
 u = BlzCreateUnitWithSkin(p, FourCC("h002"), -10937.8, 8908.1, 5.812, FourCC("h002"))
-gg_unit_opeo_0264 = BlzCreateUnitWithSkin(p, FourCC("opeo"), 16192.7, 5056.5, 353.240, FourCC("opeo"))
+gg_unit_opeo_0264 = BlzCreateUnitWithSkin(p, FourCC("opeo"), 16145.7, 5044.2, 353.240, FourCC("opeo"))
 SetUnitColor(gg_unit_opeo_0264, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13505.9, 4803.2, 0.000, FourCC("h00F"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00F"), 13378.1, 4926.1, 0.000, FourCC("h00F"))
@@ -2080,7 +2080,7 @@ gg_rct_R14B1 = Rect(16384.0, -1120.0, 17408.0, 1440.0)
 gg_rct_R14B2 = Rect(15616.0, -384.0, 16416.0, 640.0)
 gg_rct_R14B3 = Rect(17408.0, -384.0, 18208.0, 640.0)
 gg_rct_UP14 = Rect(16640.0, -128.0, 17152.0, 384.0)
-gg_rct_Bound15 = Rect(16736.0, -2624.0, 17024.0, -2400.0)
+gg_rct_Bound15 = Rect(16736.0, -2720.0, 17024.0, -2400.0)
 gg_rct_Enter15 = Rect(15680.0, -1984.0, 15808.0, -1856.0)
 gg_rct_Exit15 = Rect(17408.0, -3328.0, 17664.0, -3072.0)
 gg_rct_Error15Out = Rect(15552.0, -3392.0, 18240.0, -1664.0)
@@ -2387,13 +2387,14 @@ function UnitAddForceSimpleClean(hero, angle, speed, distance, flag,tableEff)
             end
             if tableEff then
                 local data = HERO[0]
-                if data.CatchUnit then
+                --if data.CatchUnit then
                     local x1,y1=GetUnitXY(data.UnitHero)
                     local z1=GetUnitZ(data.UnitHero)+20
-                    local x2,y2=GetUnitXY(data.CatchUnit)
-                    local z2=GetUnitZ(data.CatchUnit)+20
+                    local x2,y2=GetUnitXY(hero)
+                    local z2=GetUnitZ(hero)+20
                     MoveEffectLighting3D(x1, y1, z1, x2, y2, z2, 10, tableEff)
-                end
+                    --DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt", x1,y1))
+                --end
             end
             if currentdistance >= distance then
                 --print("закончил движение")
@@ -2401,10 +2402,7 @@ function UnitAddForceSimpleClean(hero, angle, speed, distance, flag,tableEff)
                 DestroyEffect(eff)
                 onForces[GetHandleId(hero)] = true
                 if tableEff then
-                    for i=1,#tableEff do
-                        DestroyEffect(tableEff[i])
-                    end
-
+                    DestroyEffectLighting3D(tableEff)
                 end
             end
         end)
@@ -3069,6 +3067,11 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
 
                     if bounceFact then
                         bounceCount = bounceCount + 1
+                        --print("звук")
+                        local s=normal_sound("Abilities\\Spells\\Items\\SpellShieldAmulet\\SpellShieldImpact1",x,y)
+                        --normal_sound("Abilities\\Spells\\Items\\ResourceItems\\ReceiveGold")
+                        local sp=GetRandomReal(0.2,1.2)
+                        SetSoundPitch(s,sp+bounceCount*0.1)
                         nx, ny = MoveXY(x, y, speed, angleCurrent)
                         --print(bounceCount)
                     else
@@ -4740,8 +4743,11 @@ function InitMouseClickEvent()
                             local x2,y2=GetUnitXY(data.CatchUnit)
                             local z2=GetUnitZ(data.CatchUnit)+20
                             local step=10
-
-
+                            local s=normal_sound("ChainShortSound",x1,y1)
+                            SetSoundVolume(s,80)
+                            SetSoundPitch(s, GetRandomReal(0.6, 1.4))
+                            SetUnitAnimationByIndex(data.UnitHero,2)
+                            BlzSetUnitFacingEx(data.UnitHero,angleMagnet-180)
                             local chain=CreateEffectLighting3D(x1, y1, z1, x2, y2, z2, step, "ChainElement")
                             UnitAddForceSimpleClean(data.CatchUnit, angleMagnet, 5*2, distMagnet,{"Dust"},chain)
                             SetUnitZ(data.CatchUnit,0)
@@ -4779,6 +4785,9 @@ function InitMouseClickEvent()
                     --QueueUnitAnimation(data.UnitHero,"Attack")
                     SetUnitAnimationByIndex(data.UnitHero, 25)
                     BlzSetUnitFacingEx(data.UnitHero, angle)
+                    local r=GetRandomInt(1,3)
+                    local s=normal_sound("Abilities\\Weapons\\ColdArrow\\ColdArrow"..r,GetUnitXY(data.UnitHero))
+                    SetSoundPitch(s,GetRandomReal(0.8,1.2))
                     UnitCreateArtMissile(data.UnitHero, angle, speed, dist, 300, nil, "ChainFrost",mark)
 
                     TimerStart(CreateTimer(), delay, false, function()
@@ -6120,9 +6129,9 @@ function ReplaceIdToStaticTrap(id)
 end
 function CreateSpikeTrapStatic(unit)
     local enterTrig = CreateTrigger()
-    local range = 80
+    local range = 100 --радиус активации
     local x, y = GetUnitXY(unit)
-    local z = GetUnitZ(unit)
+
     local eff = AddSpecialEffect("MechaImpale", x, y)
 
     ShowUnit(unit, false)
@@ -8064,7 +8073,7 @@ function StartButcherAI(xs, ys)
     local boss = FindUnitOfType(FourCC('n007'))
     local BossFight = true
     local into = CreateBOSSHPBar(boss, "Мясник из подвала")
-    currentInto=into
+    currentInto = into
     local hpMark = { 100, 90, 80, 70, 60, 50, 40, 30, 20, 10 }
     local phaseCHK = {
         true,
@@ -8283,7 +8292,7 @@ function StartButcherAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[10] then
                 phase = 10
                 if not phaseCHK[phase] then
-                    ButcherAddArmorTimed(boss, phase, 30 + phase * 2)
+                    ButcherAddArmorTimed(boss, phase, 500)
                     BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     phaseCHK[phase] = true
                 end
@@ -8330,7 +8339,11 @@ function StartButcherAI(xs, ys)
                 elseif rph == 3 then
                     StrongWalk(boss, hero)
                 elseif rph == 4 then
-                    BossSpikeWave(boss, hero)
+                    if GetRandomInt(1, 2) == 1 then
+                        BossSpikeWave(boss, hero)
+                    else
+                        CreateLaserUpToDown(boss, hero)
+                    end
                 end
 
 
@@ -8346,7 +8359,11 @@ function StartButcherAI(xs, ys)
                 elseif rph == 3 then
                     StrongWalk(boss, hero)
                 elseif rph == 4 then
-                    BossSpikeWave(boss, hero)
+                    if GetRandomInt(1, 2) == 1 then
+                        BossSpikeWave(boss, hero)
+                    else
+                        CreateLaserUpToDown(boss, hero)
+                    end
                 elseif rph == 5 then
                     BossAxeThrow(boss, hero)
                 end
@@ -8365,7 +8382,11 @@ function StartButcherAI(xs, ys)
                 elseif rph == 3 then
                     StrongWalk(boss, hero)
                 elseif rph == 4 then
-                    BossSpikeWave(boss, hero)
+                    if GetRandomInt(1, 2) == 1 then
+                        BossSpikeWave(boss, hero)
+                    else
+                        CreateLaserUpToDown(boss, hero)
+                    end
                 elseif rph == 5 then
                     BossAxeThrow(boss, hero)
                 elseif rph == 6 then
@@ -8383,7 +8404,11 @@ function StartButcherAI(xs, ys)
                 elseif rph == 3 then
                     StrongWalk(boss, hero)
                 elseif rph == 4 then
-                    BossSpikeWave(boss, hero)
+                    if GetRandomInt(1, 2) == 1 then
+                        BossSpikeWave(boss, hero)
+                    else
+                        CreateLaserUpToDown(boss, hero)
+                    end
                 elseif rph == 5 then
                     BossAxeThrow(boss, hero)
                 elseif rph == 6 then
@@ -8402,7 +8427,11 @@ function StartButcherAI(xs, ys)
                 elseif rph == 3 then
                     StrongWalk(boss, hero)
                 elseif rph == 4 then
-                    BossSpikeWave(boss, hero)
+                    if GetRandomInt(1, 2) == 1 then
+                        BossSpikeWave(boss, hero)
+                    else
+                        CreateLaserUpToDown(boss, hero)
+                    end
                 elseif rph == 5 then
                     BossAxeThrow(boss, hero)
                 elseif rph == 6 then
@@ -8423,7 +8452,11 @@ function StartButcherAI(xs, ys)
                 elseif rph == 3 then
                     StrongWalk(boss, hero)
                 elseif rph == 4 then
-                    BossSpikeWave(boss, hero)
+                    if GetRandomInt(1, 2) == 1 then
+                        BossSpikeWave(boss, hero)
+                    else
+                        CreateLaserUpToDown(boss, hero)
+                    end
                 elseif rph == 5 then
                     BossAxeThrow(boss, hero)
                 elseif rph == 6 then
@@ -8458,7 +8491,7 @@ function StartButcherAI(xs, ys)
                 elseif rph == 9 then
                     ButcherRoundSpike(boss, 15)
                 elseif rph == 10 then
-                    BossHooked(boss, 5, 2)
+                    CreateLaserUpToDown(boss, hero)
                 end
             end
 
@@ -8499,8 +8532,54 @@ function StartButcherAI(xs, ys)
     end)
 end
 
+function CreateLaserUpToDown(boss, hero)
+    SetUnitAnimationByIndex(boss, 12)
+    local z1, x1, y1 = GetUnitZ(boss) + 330, GetUnitXY(boss)
+    local z2, x2, y2 = GetUnitZ(hero), GetUnitXY(hero)
+    local mark = AddSpecialEffect("Spell Marker TC", GetUnitXY(hero))
+    local angle = AngleBetweenUnits(boss, hero)
+    local curAngle = angle
+    local dist = DistanceBetweenXY(x2, y2, x1, y1)
+    local currentDist = dist
+    TimerStart(CreateTimer(), 0.5, false, function()
+        SetUnitTimeScale(boss, 0)
 
-function ButcherRoundSpikePoint(boss, k,x,y)
+        local effElement = "ZigguratFrostMissile.mdl"
+
+        local eff = CreateEffectLighting3D(x1, y1, z1, x2, y2, z2, 40, effElement, 60)
+        local timed = 3
+        local period = TIMER_PERIOD64
+
+        TimerStart(CreateTimer(), period, true, function()
+            angle = AngleBetweenUnits(boss, hero)
+            curAngle = lerpTheta(curAngle, angle, TIMER_PERIOD64 * 1)
+            --print(curAngle)
+            dist = DistanceBetweenXY(x2, y2, x1, y1)
+            currentDist = math.lerp(currentDist, dist, TIMER_PERIOD64 * 1)
+            z2, x2, y2 = GetUnitZ(hero), GetUnitXY(hero)
+
+            local ex, ey = MoveXY(x1, y1, currentDist, curAngle)
+            BlzSetSpecialEffectX(mark, ex)
+            BlzSetSpecialEffectY(mark, ey)
+
+            SetUnitFacing(boss, angle)
+            local nx, ny = MoveXY(x1, y1, 50, curAngle)
+            MoveEffectLighting3D(nx, ny, z1, ex, ey, z2, 40, eff)
+            UnitDamageArea(boss, 5, ex, ey, 100, "all")
+            timed = timed - period
+            if timed <= 0 then
+                DestroyEffectLighting3D(eff)
+                DestroyEffect(mark)
+                DestroyTimer(GetExpiredTimer())
+                SetUnitTimeScale(boss, 1)
+                QueueUnitAnimation(boss, "stand")
+            end
+        end)
+    end)
+
+end
+
+function ButcherRoundSpikePoint(boss, k, x, y)
     --x, y = GetUnitXY(boss)
     local dist = 50
     if not k then
@@ -8516,10 +8595,10 @@ function ButcherRoundSpikePoint(boss, k,x,y)
             local eff = AddSpecialEffect("MechaImpaleNoDust", nx, ny)
             BlzSetSpecialEffectYaw(eff, math.rad(GetRandomInt(0, 360))) --angle
             TimerStart(CreateTimer(), 0.3, false, function()
-                local _, _, _, units=UnitDamageArea(boss, 50, nx, ny, 80)
-                for i = 1, #units do
-                    local ab = AngleBetweenXY(nx, ny, GetUnitXY(units[i])) / bj_DEGTORAD
-                    UnitFallGround(units[i], ab, 250, { "Stun" })
+                local _, _, _, units = UnitDamageArea(boss, 50, nx, ny, 80)
+                for m = 1, #units do
+                    local ab = AngleBetweenXY(nx, ny, GetUnitXY(units[m])) / bj_DEGTORAD
+                    UnitFallGround(units[m], ab, 250, { "Stun" })
                 end
             end)
             TimerStart(CreateTimer(), 0.7, false, function()
@@ -8536,11 +8615,10 @@ function ButcherRoundSpikePoint(boss, k,x,y)
     end)
 end
 
-
 function ButcherAddArmorTimed(boss, lvl, timed)
     --1 уровень 50 брони
 
-    local FHArmor,FHArmorText=CreateArmorFrame(currentInto,boss)
+    local FHArmor, FHArmorText = CreateArmorFrame(currentInto, boss)
 
     DestroyEffect(AddSpecialEffectTarget("Effect\\File00000341", boss, "chest")) --эффект отталкивания
     local x, y = GetUnitXY(boss)
@@ -8553,13 +8631,19 @@ function ButcherAddArmorTimed(boss, lvl, timed)
 
     UnitAddAbility(boss, FourCC("A002"))
     SetUnitAbilityLevel(boss, FourCC("A002"), lvl)
-    local upPeriodTimer=CreateTimer()
+    local upPeriodTimer = CreateTimer()
+    local durationTimer = CreateTimer()
     TimerStart(upPeriodTimer, 1, true, function()
         BlzFrameSetText(FHArmorText, R2I(timed))
-        timed=timed-1
+        timed = timed - 1
+        if GetUnitAbilityLevel(boss, FourCC("A002")) == 0 then
+            BlzDestroyFrame(FHArmor)
+            DestroyTimer(upPeriodTimer)
+            DestroyTimer(durationTimer)
+        end
     end)
 
-    TimerStart(CreateTimer(), timed, false, function()
+    TimerStart(durationTimer, timed, false, function()
         UnitRemoveAbility(boss, FourCC("A002"))
         UnitRemoveAbility(boss, FourCC("B000"))
         BlzDestroyFrame(FHArmor)
@@ -8576,7 +8660,7 @@ function ButcherRoundSpike(boss, k)
         --normal_sound("howl", x, y)
     end
     local n = 0
-    local speed=0.1
+    local speed = GetRandomReal(0.1,0.3)
     TimerStart(CreateTimer(), speed, true, function()
         local angle = 360 / (15 + n)
         for i = 1, 15 + n do
@@ -8772,7 +8856,7 @@ function ButcherThrowGround(boss, hero)
                 PlayBossSpeech("Speech\\Pudge\\InFight\\F9", "Попал")
             else
                 PlayBossSpeech("Speech\\Pudge\\InFight\\F10", "Мимо")
-                ButcherRoundSpikePoint(boss,5,nx, ny)
+                ButcherRoundSpikePoint(boss, 5, nx, ny)
             end
             DownFloorInTimedXY(120, nx, ny)
         end)
@@ -8816,13 +8900,13 @@ function BossHooked(boss, timed, scale)
     StartHookAI(boss, timed, scale)
 end
 
-function CreateArmorFrame(into,boss)
+function CreateArmorFrame(into, boss)
     local texture = "ReplaceableTextures\\CommandButtons\\BTNHumanArmorUpOne.blp"
     local NextPoint = 0.039
     local buttonIconFrame = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', into, '', 0)
 
     BlzFrameSetTexture(buttonIconFrame, texture, 0, true)
-    BlzFrameSetSize(buttonIconFrame, NextPoint, NextPoint )
+    BlzFrameSetSize(buttonIconFrame, NextPoint, NextPoint)
     BlzFrameSetPoint(buttonIconFrame, FRAMEPOINT_LEFT, into, FRAMEPOINT_LEFT, -NextPoint, 0)
     BlzFrameSetParent(buttonIconFrame, BlzGetFrameByName("ConsoleUIBackdrop", 0))
 
@@ -8832,7 +8916,7 @@ function CreateArmorFrame(into,boss)
     BlzFrameSetScale(text, 2)
     BlzFrameSetPoint(text, FRAMEPOINT_CENTER, buttonIconFrame, FRAMEPOINT_CENTER, 0, 0)
 
-    return buttonIconFrame,text
+    return buttonIconFrame, text
 end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
@@ -11187,6 +11271,9 @@ function StartHookAI(unit, timed, scale)
                     BlzSetSpecialEffectPosition(mark, 5000, 5000, 5000)
                     IssueImmediateOrder(unit, "stop")
                     SetUnitAnimation(unit, "Attack")
+                    if unit==GBoss then
+                        SetUnitAnimationByIndex(unit, 11)
+                    end
                     BlzSetUnitFacingEx(unit, angle)
 
                     TimerStart(CreateTimer(), 0.2, false, function()
@@ -13943,9 +14030,9 @@ function InitTrig_BallInit ()
         --udg_Ball = gg_unit_e007_0258 --глобалка
         udg_BallPoint = GetUnitLoc(udg_Ball)
         if GetEventDamage() > 5 then
-            udg_BallSpeed = udg_BallSpeed + 20
-            if udg_BallSpeed>=60 then
-                udg_BallSpeed=60
+
+            if udg_BallSpeed<=40 then
+                udg_BallSpeed = udg_BallSpeed + 20
             end
             udg_BallFacing = AngleBetweenPoints(GetUnitLoc(GetEventDamageSource()), udg_BallPoint)
             EnableTrigger(gg_trg_BallMove)
@@ -14809,7 +14896,8 @@ function CreateWASDActions()
                             Blink2Point(data.UnitHero, nx, ny)
                         else
                             -- print("прыжок вниз?, сообщите об этом баге!")
-                            UnitAddForceSimple(data.UnitHero, data.DirectionMove, 10, dist, "ignore") --САМ рывок при нажатии пробела
+                            UnitAddForceSimple(data.UnitHero, data.DirectionMove, 10, dist, "ignore") --САМ рывок при нажатии пробела РЕДКИЙ!
+
                             data.StatDash = data.StatDash + 1
                         end
                     else
@@ -14821,8 +14909,22 @@ function CreateWASDActions()
                             data.chargeEff = AddSpecialEffectTarget("IceCharge", data.UnitHero, "origin")
 
                         end
-                        UnitAddForceSimple(data.UnitHero, data.DirectionMove, dashSpeed, dist, "ignore") --САМ рывок при нажатии пробела
+                        UnitAddForceSimple(data.UnitHero, data.DirectionMove, dashSpeed, dist, "ignore") --САМ рывок при нажатии пробела ЧАСТЫЙ!
                         data.StatDash = data.StatDash + 1
+
+                        --print("где опять эффект?")
+                        local tmpEff=AddSpecialEffect("WindAnime\\WindWeak2",GetUnitXY(data.UnitHero))
+                        BlzSetSpecialEffectYaw(tmpEff, math.rad(data.DirectionMove))
+                        BlzSetSpecialEffectPitch(tmpEff, math.rad(-90))
+                        BlzSetSpecialEffectZ(tmpEff,GetUnitZ(data.UnitHero)+50)
+                        DestroyEffect(tmpEff)
+                        local r=GetRandomInt(1,3)
+                        local s=normal_sound("Abilities\\Weapons\\BristleBackMissile\\BristleBackMissileLaunch"..r,GetUnitXY(data.UnitHero))
+                        SetSoundPitch(s,GetRandomReal(0.8,1.2))
+
+
+
+
                         local r = GetRandomInt(1, 120)
                         if r == 1 then
                             PlayMonoSpeech("Speech\\Peon\\Dash\\D"..r, "Я не так молод, чтобы так кувыркаться")
@@ -15939,7 +16041,7 @@ TriggerRegisterUnitEvent(gg_trg_Victory15, gg_unit_h00W_0784, EVENT_UNIT_DEATH)
 TriggerAddAction(gg_trg_Victory15, Trig_Victory15_Actions)
 end
 
-function Trig_ExitFrom15_Func002C()
+function Trig_ExitFrom15_Func003C()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
 end
@@ -15953,13 +16055,14 @@ return true
 end
 
 function Trig_ExitFrom15_Conditions()
-if (not Trig_ExitFrom15_Func002C()) then
+if (not Trig_ExitFrom15_Func003C()) then
 return false
 end
 return true
 end
 
 function Trig_ExitFrom15_Actions()
+DisableTrigger(GetTriggeringTrigger())
     SetUnitAnimationByIndex(udg_HERO, 25)
 TriggerSleepAction(0.30)
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_EnterBoss))
@@ -16150,7 +16253,7 @@ TriggerAddCondition(gg_trg_Leave14Fix, Condition(Trig_Leave14Fix_Conditions))
 TriggerAddAction(gg_trg_Leave14Fix, Trig_Leave14Fix_Actions)
 end
 
-function Trig_ExitFrom14_Func002C()
+function Trig_ExitFrom14_Func003C()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
 end
@@ -16164,13 +16267,14 @@ return true
 end
 
 function Trig_ExitFrom14_Conditions()
-if (not Trig_ExitFrom14_Func002C()) then
+if (not Trig_ExitFrom14_Func003C()) then
 return false
 end
 return true
 end
 
 function Trig_ExitFrom14_Actions()
+DisableTrigger(GetTriggeringTrigger())
     SetUnitAnimationByIndex(udg_HERO, 25)
 TriggerSleepAction(0.30)
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter15))
@@ -16367,7 +16471,7 @@ TriggerRegisterDeathEvent(gg_trg_Victory13, gg_dest_B00D_20364)
 TriggerAddAction(gg_trg_Victory13, Trig_Victory13_Actions)
 end
 
-function Trig_ExitFrom13_Func002C()
+function Trig_ExitFrom13_Func003C()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
 end
@@ -16381,13 +16485,14 @@ return true
 end
 
 function Trig_ExitFrom13_Conditions()
-if (not Trig_ExitFrom13_Func002C()) then
+if (not Trig_ExitFrom13_Func003C()) then
 return false
 end
 return true
 end
 
 function Trig_ExitFrom13_Actions()
+DisableTrigger(GetTriggeringTrigger())
     SetUnitAnimationByIndex(udg_HERO, 25)
 TriggerSleepAction(0.30)
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter14))
@@ -16640,7 +16745,7 @@ TriggerRegisterDeathEvent(gg_trg_Restore12, gg_dest_B00D_19706)
 TriggerAddAction(gg_trg_Restore12, Trig_Restore12_Actions)
 end
 
-function Trig_ExitFrom12_Func002C()
+function Trig_ExitFrom12_Func003C()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
 end
@@ -16654,13 +16759,14 @@ return true
 end
 
 function Trig_ExitFrom12_Conditions()
-if (not Trig_ExitFrom12_Func002C()) then
+if (not Trig_ExitFrom12_Func003C()) then
 return false
 end
 return true
 end
 
 function Trig_ExitFrom12_Actions()
+DisableTrigger(GetTriggeringTrigger())
     SetUnitAnimationByIndex(udg_HERO, 25)
 TriggerSleepAction(0.30)
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter13))
@@ -17178,7 +17284,7 @@ TriggerAddCondition(gg_trg_InitRoom11DownForRegion, Condition(Trig_InitRoom11Dow
 TriggerAddAction(gg_trg_InitRoom11DownForRegion, Trig_InitRoom11DownForRegion_Actions)
 end
 
-function Trig_ExitFrom11_Func003C()
+function Trig_ExitFrom11_Func004C()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
 end
@@ -17189,13 +17295,14 @@ return true
 end
 
 function Trig_ExitFrom11_Conditions()
-if (not Trig_ExitFrom11_Func003C()) then
+if (not Trig_ExitFrom11_Func004C()) then
 return false
 end
 return true
 end
 
 function Trig_ExitFrom11_Actions()
+DisableTrigger(GetTriggeringTrigger())
 DisableTrigger(gg_trg_Out11)
     SetUnitAnimationByIndex(udg_HERO, 25)
 TriggerSleepAction(0.30)
@@ -17248,7 +17355,7 @@ TriggerAddCondition(gg_trg_Out11, Condition(Trig_Out11_Conditions))
 TriggerAddAction(gg_trg_Out11, Trig_Out11_Actions)
 end
 
-function Trig_ExitFrom10_Func002C()
+function Trig_ExitFrom10_Func003C()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
 end
@@ -17262,13 +17369,14 @@ return true
 end
 
 function Trig_ExitFrom10_Conditions()
-if (not Trig_ExitFrom10_Func002C()) then
+if (not Trig_ExitFrom10_Func003C()) then
 return false
 end
 return true
 end
 
 function Trig_ExitFrom10_Actions()
+DisableTrigger(GetTriggeringTrigger())
     SetUnitAnimationByIndex(udg_HERO, 25)
 TriggerSleepAction(0.30)
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter11))
@@ -17390,7 +17498,7 @@ TriggerAddCondition(gg_trg_Error10Out, Condition(Trig_Error10Out_Conditions))
 TriggerAddAction(gg_trg_Error10Out, Trig_Error10Out_Actions)
 end
 
-function Trig_ExitFrom09_Func003C()
+function Trig_ExitFrom09_Func004C()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
 end
@@ -17404,13 +17512,14 @@ return true
 end
 
 function Trig_ExitFrom09_Conditions()
-if (not Trig_ExitFrom09_Func003C()) then
+if (not Trig_ExitFrom09_Func004C()) then
 return false
 end
 return true
 end
 
 function Trig_ExitFrom09_Actions()
+DisableTrigger(GetTriggeringTrigger())
     SetUnitAnimationByIndex(udg_HERO, 25)
 TriggerSleepAction(0.30)
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter10))
@@ -17597,7 +17706,7 @@ TriggerAddCondition(gg_trg_InitRoom8, Condition(Trig_InitRoom8_Conditions))
 TriggerAddAction(gg_trg_InitRoom8, Trig_InitRoom8_Actions)
 end
 
-function Trig_ExitFrom08_Func003C()
+function Trig_ExitFrom08_Func004C()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
 end
@@ -17611,13 +17720,14 @@ return true
 end
 
 function Trig_ExitFrom08_Conditions()
-if (not Trig_ExitFrom08_Func003C()) then
+if (not Trig_ExitFrom08_Func004C()) then
 return false
 end
 return true
 end
 
 function Trig_ExitFrom08_Actions()
+DisableTrigger(GetTriggeringTrigger())
     SetUnitAnimationByIndex(udg_HERO, 25)
 TriggerSleepAction(0.30)
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter09))
@@ -17707,7 +17817,7 @@ TriggerRegisterDeathEvent(gg_trg_Victory08, gg_dest_B00D_17276)
 TriggerAddAction(gg_trg_Victory08, Trig_Victory08_Actions)
 end
 
-function Trig_ExitFrom07_Func003C()
+function Trig_ExitFrom07_Func004C()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
 end
@@ -17721,13 +17831,14 @@ return true
 end
 
 function Trig_ExitFrom07_Conditions()
-if (not Trig_ExitFrom07_Func003C()) then
+if (not Trig_ExitFrom07_Func004C()) then
 return false
 end
 return true
 end
 
 function Trig_ExitFrom07_Actions()
+DisableTrigger(GetTriggeringTrigger())
     SetUnitAnimationByIndex(udg_HERO, 25)
 TriggerSleepAction(0.30)
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter08))
@@ -17827,7 +17938,7 @@ gg_trg_ErrorClear = CreateTrigger()
 TriggerAddAction(gg_trg_ErrorClear, Trig_ErrorClear_Actions)
 end
 
-function Trig_ExitFrom06_Func003C()
+function Trig_ExitFrom06_Func004C()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
 end
@@ -17841,13 +17952,14 @@ return true
 end
 
 function Trig_ExitFrom06_Conditions()
-if (not Trig_ExitFrom06_Func003C()) then
+if (not Trig_ExitFrom06_Func004C()) then
 return false
 end
 return true
 end
 
 function Trig_ExitFrom06_Actions()
+DisableTrigger(GetTriggeringTrigger())
     SetUnitAnimationByIndex(udg_HERO, 25)
 TriggerSleepAction(0.30)
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter07))
@@ -17945,7 +18057,7 @@ gg_trg_InvulPudges = CreateTrigger()
 TriggerAddAction(gg_trg_InvulPudges, Trig_InvulPudges_Actions)
 end
 
-function Trig_ExitFrom05_Func003C()
+function Trig_ExitFrom05_Func004C()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
 end
@@ -17959,13 +18071,14 @@ return true
 end
 
 function Trig_ExitFrom05_Conditions()
-if (not Trig_ExitFrom05_Func003C()) then
+if (not Trig_ExitFrom05_Func004C()) then
 return false
 end
 return true
 end
 
 function Trig_ExitFrom05_Actions()
+DisableTrigger(GetTriggeringTrigger())
     SetUnitAnimationByIndex(udg_HERO, 25)
 TriggerSleepAction(0.30)
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter06))
@@ -18060,7 +18173,7 @@ TriggerRegisterEnterRectSimple(gg_trg_Init04, gg_rct_Enter04)
 TriggerAddAction(gg_trg_Init04, Trig_Init04_Actions)
 end
 
-function Trig_ExitFrom04_Func003C()
+function Trig_ExitFrom04_Func004C()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
 end
@@ -18074,13 +18187,14 @@ return true
 end
 
 function Trig_ExitFrom04_Conditions()
-if (not Trig_ExitFrom04_Func003C()) then
+if (not Trig_ExitFrom04_Func004C()) then
 return false
 end
 return true
 end
 
 function Trig_ExitFrom04_Actions()
+DisableTrigger(GetTriggeringTrigger())
     SetUnitAnimationByIndex(udg_HERO, 25)
 TriggerSleepAction(0.30)
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter05))
@@ -18153,7 +18267,7 @@ TriggerRegisterDeathEvent(gg_trg_Victory04, gg_dest_B00D_15712)
 TriggerAddAction(gg_trg_Victory04, Trig_Victory04_Actions)
 end
 
-function Trig_ExitFrom03_Func003C()
+function Trig_ExitFrom03_Func004C()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
 end
@@ -18167,13 +18281,14 @@ return true
 end
 
 function Trig_ExitFrom03_Conditions()
-if (not Trig_ExitFrom03_Func003C()) then
+if (not Trig_ExitFrom03_Func004C()) then
 return false
 end
 return true
 end
 
 function Trig_ExitFrom03_Actions()
+DisableTrigger(GetTriggeringTrigger())
     SetUnitAnimationByIndex(udg_HERO, 25)
 TriggerSleepAction(0.30)
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter04))
@@ -18247,7 +18362,7 @@ TriggerRegisterDeathEvent(gg_trg_Victory03, gg_dest_B00D_15532)
 TriggerAddAction(gg_trg_Victory03, Trig_Victory03_Actions)
 end
 
-function Trig_ExitFrom02_Func003C()
+function Trig_ExitFrom02_Func004C()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
 end
@@ -18261,13 +18376,14 @@ return true
 end
 
 function Trig_ExitFrom02_Conditions()
-if (not Trig_ExitFrom02_Func003C()) then
+if (not Trig_ExitFrom02_Func004C()) then
 return false
 end
 return true
 end
 
 function Trig_ExitFrom02_Actions()
+DisableTrigger(GetTriggeringTrigger())
     SetUnitAnimationByIndex(udg_HERO, 25)
 TriggerSleepAction(0.30)
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter03))
@@ -18319,7 +18435,7 @@ TriggerAddCondition(gg_trg_Victory02, Condition(Trig_Victory02_Conditions))
 TriggerAddAction(gg_trg_Victory02, Trig_Victory02_Actions)
 end
 
-function Trig_ExitFrom01_Func001C()
+function Trig_ExitFrom01_Func002C()
 if (not (IsDestructableDeadBJ(gg_dest_B00B_14732) == true)) then
 return false
 end
@@ -18333,13 +18449,14 @@ return true
 end
 
 function Trig_ExitFrom01_Conditions()
-if (not Trig_ExitFrom01_Func001C()) then
+if (not Trig_ExitFrom01_Func002C()) then
 return false
 end
 return true
 end
 
 function Trig_ExitFrom01_Actions()
+DisableTrigger(GetTriggeringTrigger())
     SetUnitAnimationByIndex(udg_HERO, 25)
 TriggerSleepAction(0.30)
     UnitStartFallAnim(udg_HERO,1000)
@@ -18391,7 +18508,7 @@ TriggerAddCondition(gg_trg_Victory01, Condition(Trig_Victory01_Conditions))
 TriggerAddAction(gg_trg_Victory01, Trig_Victory01_Actions)
 end
 
-function Trig_ExitFrom00_Func002C()
+function Trig_ExitFrom00_Func003C()
 if (not (IsDestructableDeadBJ(gg_dest_B00B_14785) == true)) then
 return false
 end
@@ -18405,13 +18522,14 @@ return true
 end
 
 function Trig_ExitFrom00_Conditions()
-if (not Trig_ExitFrom00_Func002C()) then
+if (not Trig_ExitFrom00_Func003C()) then
 return false
 end
 return true
 end
 
 function Trig_ExitFrom00_Actions()
+DisableTrigger(GetTriggeringTrigger())
     SetUnitAnimationByIndex(udg_HERO, 25)
 TriggerSleepAction(0.30)
 SetUnitPositionLoc(GetTriggerUnit(), GetRectCenter(gg_rct_Enter01))
@@ -18472,8 +18590,18 @@ TriggerAddCondition(gg_trg_Victory00, Condition(Trig_Victory00_Conditions))
 TriggerAddAction(gg_trg_Victory00, Trig_Victory00_Actions)
 end
 
-function Trig_StartBrainGame_Conditions()
+function Trig_StartBrainGame_Func006C()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+return false
+end
+if (not (GetUnitUserData(GetTriggerUnit()) == 1)) then
+return false
+end
+return true
+end
+
+function Trig_StartBrainGame_Conditions()
+if (not Trig_StartBrainGame_Func006C()) then
 return false
 end
 return true
@@ -20052,7 +20180,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, 10880.0, 8512.0)
+DefineStartLocation(0, -384.0, -768.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()

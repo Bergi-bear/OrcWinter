@@ -22,9 +22,9 @@ function ReplaceIdToStaticTrap(id)
 end
 function CreateSpikeTrapStatic(unit)
     local enterTrig = CreateTrigger()
-    local range = 80
+    local range = 100 --радиус активации
     local x, y = GetUnitXY(unit)
-    local z = GetUnitZ(unit)
+
     local eff = AddSpecialEffect("MechaImpale", x, y)
 
     ShowUnit(unit, false)

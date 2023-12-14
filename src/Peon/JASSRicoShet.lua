@@ -55,9 +55,9 @@ function InitTrig_BallInit ()
         --udg_Ball = gg_unit_e007_0258 --глобалка
         udg_BallPoint = GetUnitLoc(udg_Ball)
         if GetEventDamage() > 5 then
-            udg_BallSpeed = udg_BallSpeed + 20
-            if udg_BallSpeed>=60 then
-                udg_BallSpeed=60
+
+            if udg_BallSpeed<=40 then
+                udg_BallSpeed = udg_BallSpeed + 20
             end
             udg_BallFacing = AngleBetweenPoints(GetUnitLoc(GetEventDamageSource()), udg_BallPoint)
             EnableTrigger(gg_trg_BallMove)

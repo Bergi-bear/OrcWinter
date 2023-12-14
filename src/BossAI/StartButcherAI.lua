@@ -29,7 +29,7 @@ function StartButcherAI(xs, ys)
     local boss = FindUnitOfType(FourCC('n007'))
     local BossFight = true
     local into = CreateBOSSHPBar(boss, "Мясник из подвала")
-    currentInto=into
+    currentInto = into
     local hpMark = { 100, 90, 80, 70, 60, 50, 40, 30, 20, 10 }
     local phaseCHK = {
         true,
@@ -248,7 +248,7 @@ function StartButcherAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[10] then
                 phase = 10
                 if not phaseCHK[phase] then
-                    ButcherAddArmorTimed(boss, phase, 30 + phase * 2)
+                    ButcherAddArmorTimed(boss, phase, 500)
                     BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     phaseCHK[phase] = true
                 end
@@ -295,7 +295,11 @@ function StartButcherAI(xs, ys)
                 elseif rph == 3 then
                     StrongWalk(boss, hero)
                 elseif rph == 4 then
-                    BossSpikeWave(boss, hero)
+                    if GetRandomInt(1, 2) == 1 then
+                        BossSpikeWave(boss, hero)
+                    else
+                        CreateLaserUpToDown(boss, hero)
+                    end
                 end
 
 
@@ -311,7 +315,11 @@ function StartButcherAI(xs, ys)
                 elseif rph == 3 then
                     StrongWalk(boss, hero)
                 elseif rph == 4 then
-                    BossSpikeWave(boss, hero)
+                    if GetRandomInt(1, 2) == 1 then
+                        BossSpikeWave(boss, hero)
+                    else
+                        CreateLaserUpToDown(boss, hero)
+                    end
                 elseif rph == 5 then
                     BossAxeThrow(boss, hero)
                 end
@@ -330,7 +338,11 @@ function StartButcherAI(xs, ys)
                 elseif rph == 3 then
                     StrongWalk(boss, hero)
                 elseif rph == 4 then
-                    BossSpikeWave(boss, hero)
+                    if GetRandomInt(1, 2) == 1 then
+                        BossSpikeWave(boss, hero)
+                    else
+                        CreateLaserUpToDown(boss, hero)
+                    end
                 elseif rph == 5 then
                     BossAxeThrow(boss, hero)
                 elseif rph == 6 then
@@ -348,7 +360,11 @@ function StartButcherAI(xs, ys)
                 elseif rph == 3 then
                     StrongWalk(boss, hero)
                 elseif rph == 4 then
-                    BossSpikeWave(boss, hero)
+                    if GetRandomInt(1, 2) == 1 then
+                        BossSpikeWave(boss, hero)
+                    else
+                        CreateLaserUpToDown(boss, hero)
+                    end
                 elseif rph == 5 then
                     BossAxeThrow(boss, hero)
                 elseif rph == 6 then
@@ -367,7 +383,11 @@ function StartButcherAI(xs, ys)
                 elseif rph == 3 then
                     StrongWalk(boss, hero)
                 elseif rph == 4 then
-                    BossSpikeWave(boss, hero)
+                    if GetRandomInt(1, 2) == 1 then
+                        BossSpikeWave(boss, hero)
+                    else
+                        CreateLaserUpToDown(boss, hero)
+                    end
                 elseif rph == 5 then
                     BossAxeThrow(boss, hero)
                 elseif rph == 6 then
@@ -388,7 +408,11 @@ function StartButcherAI(xs, ys)
                 elseif rph == 3 then
                     StrongWalk(boss, hero)
                 elseif rph == 4 then
-                    BossSpikeWave(boss, hero)
+                    if GetRandomInt(1, 2) == 1 then
+                        BossSpikeWave(boss, hero)
+                    else
+                        CreateLaserUpToDown(boss, hero)
+                    end
                 elseif rph == 5 then
                     BossAxeThrow(boss, hero)
                 elseif rph == 6 then
@@ -423,7 +447,7 @@ function StartButcherAI(xs, ys)
                 elseif rph == 9 then
                     ButcherRoundSpike(boss, 15)
                 elseif rph == 10 then
-                    BossHooked(boss, 5, 2)
+                    CreateLaserUpToDown(boss, hero)
                 end
             end
 
@@ -464,8 +488,54 @@ function StartButcherAI(xs, ys)
     end)
 end
 
+function CreateLaserUpToDown(boss, hero)
+    SetUnitAnimationByIndex(boss, 12)
+    local z1, x1, y1 = GetUnitZ(boss) + 330, GetUnitXY(boss)
+    local z2, x2, y2 = GetUnitZ(hero), GetUnitXY(hero)
+    local mark = AddSpecialEffect("Spell Marker TC", GetUnitXY(hero))
+    local angle = AngleBetweenUnits(boss, hero)
+    local curAngle = angle
+    local dist = DistanceBetweenXY(x2, y2, x1, y1)
+    local currentDist = dist
+    TimerStart(CreateTimer(), 0.5, false, function()
+        SetUnitTimeScale(boss, 0)
 
-function ButcherRoundSpikePoint(boss, k,x,y)
+        local effElement = "ZigguratFrostMissile.mdl"
+
+        local eff = CreateEffectLighting3D(x1, y1, z1, x2, y2, z2, 40, effElement, 60)
+        local timed = 3
+        local period = TIMER_PERIOD64
+
+        TimerStart(CreateTimer(), period, true, function()
+            angle = AngleBetweenUnits(boss, hero)
+            curAngle = lerpTheta(curAngle, angle, TIMER_PERIOD64 * 1)
+            --print(curAngle)
+            dist = DistanceBetweenXY(x2, y2, x1, y1)
+            currentDist = math.lerp(currentDist, dist, TIMER_PERIOD64 * 1)
+            z2, x2, y2 = GetUnitZ(hero), GetUnitXY(hero)
+
+            local ex, ey = MoveXY(x1, y1, currentDist, curAngle)
+            BlzSetSpecialEffectX(mark, ex)
+            BlzSetSpecialEffectY(mark, ey)
+
+            SetUnitFacing(boss, angle)
+            local nx, ny = MoveXY(x1, y1, 50, curAngle)
+            MoveEffectLighting3D(nx, ny, z1, ex, ey, z2, 40, eff)
+            UnitDamageArea(boss, 5, ex, ey, 100, "all")
+            timed = timed - period
+            if timed <= 0 then
+                DestroyEffectLighting3D(eff)
+                DestroyEffect(mark)
+                DestroyTimer(GetExpiredTimer())
+                SetUnitTimeScale(boss, 1)
+                QueueUnitAnimation(boss, "stand")
+            end
+        end)
+    end)
+
+end
+
+function ButcherRoundSpikePoint(boss, k, x, y)
     --x, y = GetUnitXY(boss)
     local dist = 50
     if not k then
@@ -481,10 +551,10 @@ function ButcherRoundSpikePoint(boss, k,x,y)
             local eff = AddSpecialEffect("MechaImpaleNoDust", nx, ny)
             BlzSetSpecialEffectYaw(eff, math.rad(GetRandomInt(0, 360))) --angle
             TimerStart(CreateTimer(), 0.3, false, function()
-                local _, _, _, units=UnitDamageArea(boss, 50, nx, ny, 80)
-                for i = 1, #units do
-                    local ab = AngleBetweenXY(nx, ny, GetUnitXY(units[i])) / bj_DEGTORAD
-                    UnitFallGround(units[i], ab, 250, { "Stun" })
+                local _, _, _, units = UnitDamageArea(boss, 50, nx, ny, 80)
+                for m = 1, #units do
+                    local ab = AngleBetweenXY(nx, ny, GetUnitXY(units[m])) / bj_DEGTORAD
+                    UnitFallGround(units[m], ab, 250, { "Stun" })
                 end
             end)
             TimerStart(CreateTimer(), 0.7, false, function()
@@ -501,11 +571,10 @@ function ButcherRoundSpikePoint(boss, k,x,y)
     end)
 end
 
-
 function ButcherAddArmorTimed(boss, lvl, timed)
     --1 уровень 50 брони
 
-    local FHArmor,FHArmorText=CreateArmorFrame(currentInto,boss)
+    local FHArmor, FHArmorText = CreateArmorFrame(currentInto, boss)
 
     DestroyEffect(AddSpecialEffectTarget("Effect\\File00000341", boss, "chest")) --эффект отталкивания
     local x, y = GetUnitXY(boss)
@@ -518,13 +587,19 @@ function ButcherAddArmorTimed(boss, lvl, timed)
 
     UnitAddAbility(boss, FourCC("A002"))
     SetUnitAbilityLevel(boss, FourCC("A002"), lvl)
-    local upPeriodTimer=CreateTimer()
+    local upPeriodTimer = CreateTimer()
+    local durationTimer = CreateTimer()
     TimerStart(upPeriodTimer, 1, true, function()
         BlzFrameSetText(FHArmorText, R2I(timed))
-        timed=timed-1
+        timed = timed - 1
+        if GetUnitAbilityLevel(boss, FourCC("A002")) == 0 then
+            BlzDestroyFrame(FHArmor)
+            DestroyTimer(upPeriodTimer)
+            DestroyTimer(durationTimer)
+        end
     end)
 
-    TimerStart(CreateTimer(), timed, false, function()
+    TimerStart(durationTimer, timed, false, function()
         UnitRemoveAbility(boss, FourCC("A002"))
         UnitRemoveAbility(boss, FourCC("B000"))
         BlzDestroyFrame(FHArmor)
@@ -541,7 +616,7 @@ function ButcherRoundSpike(boss, k)
         --normal_sound("howl", x, y)
     end
     local n = 0
-    local speed=0.1
+    local speed = GetRandomReal(0.1,0.3)
     TimerStart(CreateTimer(), speed, true, function()
         local angle = 360 / (15 + n)
         for i = 1, 15 + n do
@@ -737,7 +812,7 @@ function ButcherThrowGround(boss, hero)
                 PlayBossSpeech("Speech\\Pudge\\InFight\\F9", "Попал")
             else
                 PlayBossSpeech("Speech\\Pudge\\InFight\\F10", "Мимо")
-                ButcherRoundSpikePoint(boss,5,nx, ny)
+                ButcherRoundSpikePoint(boss, 5, nx, ny)
             end
             DownFloorInTimedXY(120, nx, ny)
         end)
@@ -781,13 +856,13 @@ function BossHooked(boss, timed, scale)
     StartHookAI(boss, timed, scale)
 end
 
-function CreateArmorFrame(into,boss)
+function CreateArmorFrame(into, boss)
     local texture = "ReplaceableTextures\\CommandButtons\\BTNHumanArmorUpOne.blp"
     local NextPoint = 0.039
     local buttonIconFrame = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', into, '', 0)
 
     BlzFrameSetTexture(buttonIconFrame, texture, 0, true)
-    BlzFrameSetSize(buttonIconFrame, NextPoint, NextPoint )
+    BlzFrameSetSize(buttonIconFrame, NextPoint, NextPoint)
     BlzFrameSetPoint(buttonIconFrame, FRAMEPOINT_LEFT, into, FRAMEPOINT_LEFT, -NextPoint, 0)
     BlzFrameSetParent(buttonIconFrame, BlzGetFrameByName("ConsoleUIBackdrop", 0))
 
@@ -797,5 +872,5 @@ function CreateArmorFrame(into,boss)
     BlzFrameSetScale(text, 2)
     BlzFrameSetPoint(text, FRAMEPOINT_CENTER, buttonIconFrame, FRAMEPOINT_CENTER, 0, 0)
 
-    return buttonIconFrame,text
+    return buttonIconFrame, text
 end

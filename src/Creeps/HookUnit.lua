@@ -153,6 +153,9 @@ function StartHookAI(unit, timed, scale)
                     BlzSetSpecialEffectPosition(mark, 5000, 5000, 5000)
                     IssueImmediateOrder(unit, "stop")
                     SetUnitAnimation(unit, "Attack")
+                    if unit==GBoss then
+                        SetUnitAnimationByIndex(unit, 11)
+                    end
                     BlzSetUnitFacingEx(unit, angle)
 
                     TimerStart(CreateTimer(), 0.2, false, function()
