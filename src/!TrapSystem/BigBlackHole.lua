@@ -72,8 +72,13 @@ function StartBlackHole(unit, timed)
                         if realSpeed <= minSpeed then
                             realSpeed = minSpeed
                         end
-
-                        UnitAddForceSimpleClean(e, angle, realSpeed, 50) -- типа не лагает?
+                        if not timed then
+                            UnitAddForceSimpleClean(e, angle, realSpeed, 50) -- типа не лагает?
+                        else
+                            if RectContainsUnit(gg_rct_AllBossZone,e) then
+                                UnitAddForceSimpleClean(e, angle, realSpeed, 50)
+                            end
+                        end
                     end
                 end
                 GroupRemoveUnit(perebor, e)

@@ -489,49 +489,55 @@ function StartButcherAI(xs, ys)
 end
 
 function CreateLaserUpToDown(boss, hero)
-    SetUnitAnimationByIndex(boss, 12)
-    local z1, x1, y1 = GetUnitZ(boss) + 330, GetUnitXY(boss)
-    local z2, x2, y2 = GetUnitZ(hero), GetUnitXY(hero)
-    local mark = AddSpecialEffect("Spell Marker TC", GetUnitXY(hero))
-    local angle = AngleBetweenUnits(boss, hero)
-    local curAngle = angle
-    local dist = DistanceBetweenXY(x2, y2, x1, y1)
-    local currentDist = dist
-    TimerStart(CreateTimer(), 0.5, false, function()
-        SetUnitTimeScale(boss, 0)
+    if IsUnitInRange(boss,hero,1200) then
+        PlayBossSpeech("", "Испепелятор!!!")
+        SetUnitAnimationByIndex(boss, 12)
+        local z1, x1, y1 = GetUnitZ(boss) + 330, GetUnitXY(boss)
+        local z2, x2, y2 = GetUnitZ(hero), GetUnitXY(hero)
+        local mark = AddSpecialEffect("Spell Marker TC", GetUnitXY(boss))
+        local angle = AngleBetweenUnits(boss, hero)
+        local curAngle = angle
+        local dist = 0--DistanceBetweenXY(x2, y2, x1, y1)
+        local currentDist = dist
+        TimerStart(CreateTimer(), 0.5, false, function()
+            SetUnitTimeScale(boss, 0)
 
-        local effElement = "ZigguratFrostMissile.mdl"
+            local effElement = "ZigguratFrostMissile.mdl"
 
-        local eff = CreateEffectLighting3D(x1, y1, z1, x2, y2, z2, 40, effElement, 60)
-        local timed = 3
-        local period = TIMER_PERIOD64
+            local eff = CreateEffectLighting3D(x1, y1, z1, x2, y2, z2, 40, effElement, 60)
+            local timed = 3
+            local period = TIMER_PERIOD64
 
-        TimerStart(CreateTimer(), period, true, function()
-            angle = AngleBetweenUnits(boss, hero)
-            curAngle = lerpTheta(curAngle, angle, TIMER_PERIOD64 * 1)
-            --print(curAngle)
-            dist = DistanceBetweenXY(x2, y2, x1, y1)
-            currentDist = math.lerp(currentDist, dist, TIMER_PERIOD64 * 1)
-            z2, x2, y2 = GetUnitZ(hero), GetUnitXY(hero)
+            TimerStart(CreateTimer(), period, true, function()
+                angle = AngleBetweenUnits(boss, hero)
+                curAngle = lerpTheta(curAngle, angle, TIMER_PERIOD64 * 1)
+                --print(curAngle)
+                dist = DistanceBetweenXY(x2, y2, x1, y1)
+                currentDist = math.lerp(currentDist, dist, TIMER_PERIOD64 * 1)
+                z2, x2, y2 = GetUnitZ(hero), GetUnitXY(hero)
 
-            local ex, ey = MoveXY(x1, y1, currentDist, curAngle)
-            BlzSetSpecialEffectX(mark, ex)
-            BlzSetSpecialEffectY(mark, ey)
+                local ex, ey = MoveXY(x1, y1, currentDist, curAngle)
+                BlzSetSpecialEffectX(mark, ex)
+                BlzSetSpecialEffectY(mark, ey)
 
-            SetUnitFacing(boss, angle)
-            local nx, ny = MoveXY(x1, y1, 50, curAngle)
-            MoveEffectLighting3D(nx, ny, z1, ex, ey, z2, 40, eff)
-            UnitDamageArea(boss, 5, ex, ey, 100, "all")
-            timed = timed - period
-            if timed <= 0 then
-                DestroyEffectLighting3D(eff)
-                DestroyEffect(mark)
-                DestroyTimer(GetExpiredTimer())
-                SetUnitTimeScale(boss, 1)
-                QueueUnitAnimation(boss, "stand")
-            end
+                SetUnitFacing(boss, angle)
+                local nx, ny = MoveXY(x1, y1, 50, curAngle)
+                MoveEffectLighting3D(nx, ny, z1, ex, ey, z2, 40, eff)
+                UnitDamageArea(boss, 5, ex, ey, 100, "all")
+                timed = timed - period
+                if timed <= 0 then
+                    DestroyEffectLighting3D(eff)
+                    DestroyEffect(mark)
+                    DestroyTimer(GetExpiredTimer())
+                    SetUnitTimeScale(boss, 1)
+                    QueueUnitAnimation(boss, "stand")
+                end
+            end)
         end)
-    end)
+    else
+        IssuePointOrder(boss, "move", GetUnitXY(hero))
+        PlayBossSpeech("", "Где ты прячешься?")
+    end
 
 end
 

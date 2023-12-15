@@ -435,6 +435,7 @@ gg_dest_B00D_20786 = nil
 gg_dest_B00D_20787 = nil
 gg_dest_B00D_20788 = nil
 gg_dest_B00B_21136 = nil
+gg_rct_AllBossZone = nil
 function InitGlobals()
 local i = 0
 
@@ -1536,6 +1537,7 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14783.0, 2373.5, 0.000, FourCC("h00
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14657.1, 2494.4, 0.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14656.8, 2366.8, 0.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 13760.8, 3014.7, 0.000, FourCC("h00G"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00E"), 16779.0, -6742.1, 0.000, FourCC("h00E"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14270.0, 3009.5, 0.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16061.9, 4416.6, 0.000, FourCC("h00Q"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 14270.0, 2755.1, 90.000, FourCC("h00G"))
@@ -1608,8 +1610,7 @@ u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 11327.1, -436.6, 0.000, FourCC("h00
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 11327.5, -309.6, 0.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00G"), 11327.8, -182.3, 0.000, FourCC("h00G"))
 u = BlzCreateUnitWithSkin(p, FourCC("nrat"), 15000.4, 2932.3, 253.100, FourCC("nrat"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00E"), 15350.3, -5985.9, 180.000, FourCC("h00E"))
-u = BlzCreateUnitWithSkin(p, FourCC("h00E"), 15355.4, -6821.1, 180.000, FourCC("h00E"))
+u = BlzCreateUnitWithSkin(p, FourCC("h00E"), 13875.8, -5895.8, 180.000, FourCC("h00E"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16318.2, 4672.5, 0.000, FourCC("h00Q"))
 u = BlzCreateUnitWithSkin(p, FourCC("h00Q"), 16319.2, 5056.5, 0.000, FourCC("h00Q"))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 17915.5, 2828.1, 192.980, FourCC("opeo"))
@@ -1720,7 +1721,7 @@ gg_unit_n000_0001 = BlzCreateUnitWithSkin(p, FourCC("n000"), -2863.2, -5340.3, 3
 gg_unit_u000_0005 = BlzCreateUnitWithSkin(p, FourCC("u000"), -5777.8, 8019.1, 276.770, FourCC("u000"))
 gg_unit_n001_0009 = BlzCreateUnitWithSkin(p, FourCC("n001"), -7570.0, 3830.9, 88.177, FourCC("n001"))
 u = BlzCreateUnitWithSkin(p, FourCC("e005"), -14253.5, -14208.2, 23.250, FourCC("e005"))
-u = BlzCreateUnitWithSkin(p, FourCC("n007"), 15224.0, -5670.6, 227.085, FourCC("n007"))
+u = BlzCreateUnitWithSkin(p, FourCC("n007"), 14747.6, -4657.8, 227.085, FourCC("n007"))
 end
 
 function CreateNeutralPassive()
@@ -1947,7 +1948,7 @@ u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 11632.9, -988.2, 270.344, FourCC("o
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 11970.7, -20.1, 270.344, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 15357.5, -4231.4, 270.344, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 15812.8, -4084.2, 270.344, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 end
 
@@ -2085,6 +2086,7 @@ gg_rct_Enter15 = Rect(15680.0, -1984.0, 15808.0, -1856.0)
 gg_rct_Exit15 = Rect(17408.0, -3328.0, 17664.0, -3072.0)
 gg_rct_Error15Out = Rect(15552.0, -3392.0, 18240.0, -1664.0)
 gg_rct_Region09 = Rect(9856.0, -1152.0, 12448.0, 384.0)
+gg_rct_AllBossZone = Rect(12800.0, -8896.0, 17856.0, -3840.0)
 end
 
 function CreateCameras()
@@ -5918,8 +5920,13 @@ function StartBlackHole(unit, timed)
                         if realSpeed <= minSpeed then
                             realSpeed = minSpeed
                         end
-
-                        UnitAddForceSimpleClean(e, angle, realSpeed, 50) -- типа не лагает?
+                        if not timed then
+                            UnitAddForceSimpleClean(e, angle, realSpeed, 50) -- типа не лагает?
+                        else
+                            if RectContainsUnit(gg_rct_AllBossZone,e) then
+                                UnitAddForceSimpleClean(e, angle, realSpeed, 50)
+                            end
+                        end
                     end
                 end
                 GroupRemoveUnit(perebor, e)
@@ -8533,49 +8540,55 @@ function StartButcherAI(xs, ys)
 end
 
 function CreateLaserUpToDown(boss, hero)
-    SetUnitAnimationByIndex(boss, 12)
-    local z1, x1, y1 = GetUnitZ(boss) + 330, GetUnitXY(boss)
-    local z2, x2, y2 = GetUnitZ(hero), GetUnitXY(hero)
-    local mark = AddSpecialEffect("Spell Marker TC", GetUnitXY(hero))
-    local angle = AngleBetweenUnits(boss, hero)
-    local curAngle = angle
-    local dist = DistanceBetweenXY(x2, y2, x1, y1)
-    local currentDist = dist
-    TimerStart(CreateTimer(), 0.5, false, function()
-        SetUnitTimeScale(boss, 0)
+    if IsUnitInRange(boss,hero,1200) then
+        PlayBossSpeech("", "Испепелятор!!!")
+        SetUnitAnimationByIndex(boss, 12)
+        local z1, x1, y1 = GetUnitZ(boss) + 330, GetUnitXY(boss)
+        local z2, x2, y2 = GetUnitZ(hero), GetUnitXY(hero)
+        local mark = AddSpecialEffect("Spell Marker TC", GetUnitXY(boss))
+        local angle = AngleBetweenUnits(boss, hero)
+        local curAngle = angle
+        local dist = 0--DistanceBetweenXY(x2, y2, x1, y1)
+        local currentDist = dist
+        TimerStart(CreateTimer(), 0.5, false, function()
+            SetUnitTimeScale(boss, 0)
 
-        local effElement = "ZigguratFrostMissile.mdl"
+            local effElement = "ZigguratFrostMissile.mdl"
 
-        local eff = CreateEffectLighting3D(x1, y1, z1, x2, y2, z2, 40, effElement, 60)
-        local timed = 3
-        local period = TIMER_PERIOD64
+            local eff = CreateEffectLighting3D(x1, y1, z1, x2, y2, z2, 40, effElement, 60)
+            local timed = 3
+            local period = TIMER_PERIOD64
 
-        TimerStart(CreateTimer(), period, true, function()
-            angle = AngleBetweenUnits(boss, hero)
-            curAngle = lerpTheta(curAngle, angle, TIMER_PERIOD64 * 1)
-            --print(curAngle)
-            dist = DistanceBetweenXY(x2, y2, x1, y1)
-            currentDist = math.lerp(currentDist, dist, TIMER_PERIOD64 * 1)
-            z2, x2, y2 = GetUnitZ(hero), GetUnitXY(hero)
+            TimerStart(CreateTimer(), period, true, function()
+                angle = AngleBetweenUnits(boss, hero)
+                curAngle = lerpTheta(curAngle, angle, TIMER_PERIOD64 * 1)
+                --print(curAngle)
+                dist = DistanceBetweenXY(x2, y2, x1, y1)
+                currentDist = math.lerp(currentDist, dist, TIMER_PERIOD64 * 1)
+                z2, x2, y2 = GetUnitZ(hero), GetUnitXY(hero)
 
-            local ex, ey = MoveXY(x1, y1, currentDist, curAngle)
-            BlzSetSpecialEffectX(mark, ex)
-            BlzSetSpecialEffectY(mark, ey)
+                local ex, ey = MoveXY(x1, y1, currentDist, curAngle)
+                BlzSetSpecialEffectX(mark, ex)
+                BlzSetSpecialEffectY(mark, ey)
 
-            SetUnitFacing(boss, angle)
-            local nx, ny = MoveXY(x1, y1, 50, curAngle)
-            MoveEffectLighting3D(nx, ny, z1, ex, ey, z2, 40, eff)
-            UnitDamageArea(boss, 5, ex, ey, 100, "all")
-            timed = timed - period
-            if timed <= 0 then
-                DestroyEffectLighting3D(eff)
-                DestroyEffect(mark)
-                DestroyTimer(GetExpiredTimer())
-                SetUnitTimeScale(boss, 1)
-                QueueUnitAnimation(boss, "stand")
-            end
+                SetUnitFacing(boss, angle)
+                local nx, ny = MoveXY(x1, y1, 50, curAngle)
+                MoveEffectLighting3D(nx, ny, z1, ex, ey, z2, 40, eff)
+                UnitDamageArea(boss, 5, ex, ey, 100, "all")
+                timed = timed - period
+                if timed <= 0 then
+                    DestroyEffectLighting3D(eff)
+                    DestroyEffect(mark)
+                    DestroyTimer(GetExpiredTimer())
+                    SetUnitTimeScale(boss, 1)
+                    QueueUnitAnimation(boss, "stand")
+                end
+            end)
         end)
-    end)
+    else
+        IssuePointOrder(boss, "move", GetUnitXY(hero))
+        PlayBossSpeech("", "Где ты прячешься?")
+    end
 
 end
 
@@ -18674,6 +18687,9 @@ function Trig_InitBossRoom_Conditions()
 if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
 return false
 end
+if (not (RectContainsUnit(gg_rct_AllBossZone, GetTriggerUnit()) == true)) then
+return false
+end
 return true
 end
 
@@ -20180,7 +20196,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, -384.0, -768.0)
+DefineStartLocation(0, -448.0, -704.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()

@@ -2668,3 +2668,27 @@ STRING 899
 Коневеер
 }
 
+STRING 900
+// Destructibles: B00K (Настенная плита желтая), Name (Name)
+{
+Настенная плита желтая
+}
+
+STRING 901
+// Destructibles: B00K (Настенная плита желтая), EditorSuffix (Editor Suffix)
+{
+ (возрождается)
+}
+
+STRING 902
+// Destructibles: B00L (Плита Синяя), EditorSuffix (Editor Suffix)
+{
+ (Возрождается!)
+}
+
+STRING 903
+// Destructibles: B00L (Плита Синяя), Name (Name)
+{
+Плита Синяя
+}
+
