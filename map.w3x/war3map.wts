@@ -2550,11 +2550,6 @@ STRING 877
 Круглая дыра
 }
 
-STRING 878
-{
-Вылетел за пределы карты
-}
-
 STRING 879
 // Units: h00S (rsfghd), Name (Name)
 {
@@ -2662,12 +2657,6 @@ STRING 898
  (подсказка)
 }
 
-STRING 899
-// Doodads: D05K (Коневеер), Name (Name)
-{
-Коневеер
-}
-
 STRING 900
 // Destructibles: B00K (Настенная плита желтая), Name (Name)
 {
@@ -2690,5 +2679,38 @@ STRING 903
 // Destructibles: B00L (Плита Синяя), Name (Name)
 {
 Плита Синяя
+}
+
+STRING 904
+{
+Выйти из подвала
+}
+
+STRING 905
+{
+Завершить игру
+}
+
+STRING 906
+{
+Сделайте выбор
+}
+
+STRING 907
+// Units: h00Y (Конвеер), Name (Name)
+{
+Конвеер
+}
+
+STRING 908
+// Units: h00Y (Конвеер), EditorSuffix (Name - Editor Suffix)
+{
+ (Замена на эффект)
+}
+
+STRING 909
+// Doodads: D05K (Конвеер), Name (Name)
+{
+Конвеер
 }
 

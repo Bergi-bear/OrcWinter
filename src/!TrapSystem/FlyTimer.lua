@@ -3,14 +3,25 @@
 --- Created by User.
 --- DateTime: 11.11.2023 21:09
 ---
-function FlyTimer(max)
-    local s=normal_sound("TikTok")
+--FlyTimer(60,GetTriggerDestructable())
+
+function FlyTimer(max,d)
+    local s
+    local x,y=GetDestructableX(d),GetDestructableY(d)
+    if not d then
+        s=normal_sound("TikTok")
+    end
     TimerStart(CreateTimer(), 1, true, function()
-        FlyTextTagManaBurn(udg_HERO,R2I(max),Player(0))
+        if not d then
+            x,y=GetUnitXY(udg_HERO)
+        end
+        FlyTextTagShieldXY(x,y,R2I(max),Player(0),"blue")
         max=max-1
         if max<1 then
             DestroyTimer(GetExpiredTimer())
-            KillSoundWhenDone(s)
+            if not d then
+                KillSoundWhenDone(s)
+            end
         end
     end)
 end

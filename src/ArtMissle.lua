@@ -42,26 +42,27 @@ function MakeUnitArtMissile(hero, unit, angle, speed, distance, MaxHeight, flag)
             DestroyTimer(GetExpiredTimer())
             IsUnitFall[GetHandleId(unit)] = false
             --local _,d= PointContentDestructable(x,y,60,true,1)
-            local stunDuration=0.01
+            local stunDuration = 0.01
             if flag then
                 for k = 1, #flag do
                     if flag[k] == "RemoveStun" then
                         TimerStart(CreateTimer(), stunDuration, false, function()
                             UnitRemoveStun(unit)
-                            SetUnitAnimationByIndex(unit,24)
-                            QueueUnitAnimation(unit,"stand")
+                            SetUnitAnimationByIndex(unit, 24)
+                            QueueUnitAnimation(unit, "stand")
                         end)
-                    elseif flag[k]=="Stun" then
-                        stunDuration=1.5
+                    elseif flag[k] == "Stun" then
+                        stunDuration = 1.5
                         TimerStart(CreateTimer(), stunDuration, false, function()
                             UnitRemoveStun(unit)
-                            SetUnitAnimationByIndex(unit,24)
-                            QueueUnitAnimation(unit,"stand")
+                            SetUnitAnimationByIndex(unit, 24)
+                            QueueUnitAnimation(unit, "stand")
                         end)
                     end
                 end
 
-            else --без флага
+            else
+                --без флага
                 DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", x, y))
                 UnitDamageArea(hero, damage, x, y, range)
                 DamageDestructableInRangeXY(hero, damage, range, x, y)
@@ -122,14 +123,14 @@ function UnitCreateArtMissile(hero, angle, speed, distance, MaxHeight, HasMarker
                 DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", x, y))
                 --local near=FindNearEnemyXY()
                 if IsUnitInRangeXY(hero, x, y, 100) then
-                    local ab = AngleBetweenXY(x, y, GetUnitXY(hero))/ bj_DEGTORAD
+                    local ab = AngleBetweenXY(x, y, GetUnitXY(hero)) / bj_DEGTORAD
                     UnitFallGround(hero, ab, 200)
                 end
             end
         end
     end)
 end
-ButtonsIDTable = { FourCC('DTfx'), FourCC('B00E'), FourCC('B00D'), FourCC('B00F') }
+ButtonsIDTable = { FourCC('DTfx'), FourCC('B00E'), FourCC('B00D'), FourCC('B00F'), FourCC('B00K'), FourCC('B00L') }
 function KillDestructableByTypeInPoint(idTable, range, x, y)
     SetRect(GlobalRect, x - range, y - range, x + range, y + range)
     EnumDestructablesInRect(GlobalRect, nil, function()
@@ -139,7 +140,7 @@ function KillDestructableByTypeInPoint(idTable, range, x, y)
                 if GetDestructableTypeId(d) == idTable[i] then
                     --print(GetDestructableName(d),idTable[i])
                     KillDestructable(d)
-                    normal_sound("Sound\\Interface\\BattlenetDeath1A", x, y)
+                    --normal_sound("Sound\\Interface\\BattlenetDeath1A", x, y) --звук нажатия кнопки
                 end
             end
         end

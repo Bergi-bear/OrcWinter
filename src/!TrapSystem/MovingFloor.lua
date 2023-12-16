@@ -59,6 +59,9 @@ function MoveDestructableUp(d, maxZ, speed)
     local currentZ = GetTerrainZ(x, y) - maxZ
     maxZ = 896
     PlayerSeeNoiseInRangeTimed(0.5, x, y)
+    --local eff = CreateEffectLighting3D(x, y, maxZ+1000, x, y, currentZ, 30, "ChainElement")
+    --print("поднимаемся вверх", maxZ, currentZ)
+
     TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
         currentZ = currentZ + speed
         if currentZ >= maxZ then
@@ -66,9 +69,17 @@ function MoveDestructableUp(d, maxZ, speed)
             DestroyTimer(GetExpiredTimer())
             RemoveTableDestructable(x, y)
             PlayerSeeNoiseInRangeTimed(0.5, x, y)
+
+            --print("разрушение")
+            --DestroyEffectLighting3D(eff)
         else
             RemoveDestructable(d)
             d = CreateDestructableZ(id, x, y, currentZ, 0, 2, 1)
+            --[[MoveEffectLighting3D(x, y, maxZ+1000, x, y, currentZ, 30, eff)
+            for i=1,#eff do
+                BlzSetSpecialEffectScale(eff[i],3)
+            end
+            ]]
         end
     end)
 end

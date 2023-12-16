@@ -86,7 +86,8 @@ function StartButcherAI(xs, ys)
             BlzFrameSetVisible(into, false)
             BlzFrameSetVisible(STAT, true)
             TimerStart(CreateTimer(), 15, false, function()
-                CustomVictoryBJ(Player(0), true, true)
+                --CustomVictoryBJ(Player(0), true, true)
+                Trig_InitVictoryDialog_Actions()
             end)
 
         else
@@ -232,7 +233,7 @@ function StartButcherAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[8] then
                 phase = 8
                 if not phaseCHK[phase] then
-                    ButcherAddArmorTimed(boss, phase, 30 + phase * 2)
+                    ButcherAddArmorTimed(boss, phase, 250)
                     BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     phaseCHK[phase] = true
                 end
@@ -240,7 +241,7 @@ function StartButcherAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[9] then
                 phase = 9
                 if not phaseCHK[phase] then
-                    ButcherAddArmorTimed(boss, phase, 30 + phase * 2)
+                    ButcherAddArmorTimed(boss, phase, 500)
                     BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     phaseCHK[phase] = true
                 end
@@ -248,7 +249,7 @@ function StartButcherAI(xs, ys)
             if GetUnitLifePercent(boss) <= hpMark[10] then
                 phase = 10
                 if not phaseCHK[phase] then
-                    ButcherAddArmorTimed(boss, phase, 500)
+                    ButcherAddArmorTimed(boss, phase, 999)
                     BlzFrameSetVisible(HPMarkFH[phase - 1], false)
                     phaseCHK[phase] = true
                 end
@@ -258,7 +259,7 @@ function StartButcherAI(xs, ys)
             if phase == 1 and PhaseOn then
                 PhaseOn = false
                 --print("Атака 1, первая проверочная")
-                BossHooked(boss, 5)
+                BossHooked(boss, 5,1)
 
             end
 
@@ -370,7 +371,7 @@ function StartButcherAI(xs, ys)
                 elseif rph == 6 then
                     BulletHellButcher(boss, GetRandomInt(1, 2))
                 elseif rph == 7 then
-                    BossBlackHoleTimed(boss, 4)
+                    BossBlackHoleTimed(boss, 5)
                 end
             end
             if phase == 8 and PhaseOn then
@@ -418,7 +419,7 @@ function StartButcherAI(xs, ys)
                 elseif rph == 6 then
                     BulletHellButcher(boss, GetRandomInt(1, 2))
                 elseif rph == 7 then
-                    BossBlackHoleTimed(boss, 6)
+                    BossBlackHoleTimed(boss, 5)
                 elseif rph == 8 then
                     FallenRoof(boss, 6)
                 elseif rph == 9 then
@@ -441,7 +442,7 @@ function StartButcherAI(xs, ys)
                 elseif rph == 6 then
                     BulletHellButcher(boss, GetRandomInt(1, 2))
                 elseif rph == 7 then
-                    BossBlackHoleTimed(boss, 7)
+                    BossBlackHoleTimed(boss, 5)
                 elseif rph == 8 then
                     FallenRoof(boss, 7)
                 elseif rph == 9 then
@@ -489,7 +490,8 @@ function StartButcherAI(xs, ys)
 end
 
 function CreateLaserUpToDown(boss, hero)
-    if IsUnitInRange(boss,hero,1200) then
+    IssueImmediateOrder(boss, "stop")
+    if IsUnitInRange(boss, hero, 1200) then
         PlayBossSpeech("", "Испепелятор!!!")
         SetUnitAnimationByIndex(boss, 12)
         local z1, x1, y1 = GetUnitZ(boss) + 330, GetUnitXY(boss)
@@ -500,6 +502,7 @@ function CreateLaserUpToDown(boss, hero)
         local dist = 0--DistanceBetweenXY(x2, y2, x1, y1)
         local currentDist = dist
         TimerStart(CreateTimer(), 0.5, false, function()
+            normal_sound("LaserSound3", x2, y2)
             SetUnitTimeScale(boss, 0)
 
             local effElement = "ZigguratFrostMissile.mdl"
@@ -524,6 +527,7 @@ function CreateLaserUpToDown(boss, hero)
                 local nx, ny = MoveXY(x1, y1, 50, curAngle)
                 MoveEffectLighting3D(nx, ny, z1, ex, ey, z2, 40, eff)
                 UnitDamageArea(boss, 5, ex, ey, 100, "all")
+                DestroyEffect(AddSpecialEffect("AncestralGuardianMissileNoOmni", ex, ey))
                 timed = timed - period
                 if timed <= 0 then
                     DestroyEffectLighting3D(eff)
@@ -593,6 +597,14 @@ function ButcherAddArmorTimed(boss, lvl, timed)
 
     UnitAddAbility(boss, FourCC("A002"))
     SetUnitAbilityLevel(boss, FourCC("A002"), lvl)
+
+    local r = GetRandomInt(1, 10)
+    if r == 1 then
+        PlayBossSpeech("" .. r, "Больно!")
+    elseif r == 2 then
+        PlayBossSpeech("" .. r, "Активирую щит!")
+    end
+
     local upPeriodTimer = CreateTimer()
     local durationTimer = CreateTimer()
     TimerStart(upPeriodTimer, 1, true, function()
@@ -602,6 +614,7 @@ function ButcherAddArmorTimed(boss, lvl, timed)
             BlzDestroyFrame(FHArmor)
             DestroyTimer(upPeriodTimer)
             DestroyTimer(durationTimer)
+            PlayBossSpeech("", "Щит сломан!")
         end
     end)
 
@@ -622,7 +635,7 @@ function ButcherRoundSpike(boss, k)
         --normal_sound("howl", x, y)
     end
     local n = 0
-    local speed = GetRandomReal(0.1,0.3)
+    local speed = GetRandomReal(0.1, 0.3)
     TimerStart(CreateTimer(), speed, true, function()
         local angle = 360 / (15 + n)
         for i = 1, 15 + n do
@@ -682,6 +695,7 @@ function BossBlackHoleTimed(boss, timed)
         timed = timed - 1
         if timed < 1 then
             DestroyTimer(GetExpiredTimer())
+            udg_HoleIsWork = false
         end
     end)
 end
@@ -859,7 +873,15 @@ function StrongWalk(boss, hero)
 end
 
 function BossHooked(boss, timed, scale)
-    StartHookAI(boss, timed, scale)
+    local hero = udg_HERO
+    if scale then
+        if IsUnitInRange(boss, hero, 1000 * scale) and UnitAlive(boss) then
+            StartHookAI(boss, timed, scale)
+        else
+            IssuePointOrder(boss, "move", GetUnitXY(hero))
+            PlayBossSpeech("", "Где ты прячешься?")
+        end
+    end
 end
 
 function CreateArmorFrame(into, boss)
