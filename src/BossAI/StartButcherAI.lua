@@ -492,7 +492,7 @@ end
 function CreateLaserUpToDown(boss, hero)
     IssueImmediateOrder(boss, "stop")
     if IsUnitInRange(boss, hero, 1200) then
-        PlayBossSpeech("", "Испепелятор!!!")
+        PlayBossSpeech("Speech\\Pudge\\InFight\\F18", "Испепелятор!!!")
         SetUnitAnimationByIndex(boss, 12)
         local z1, x1, y1 = GetUnitZ(boss) + 330, GetUnitXY(boss)
         local z2, x2, y2 = GetUnitZ(hero), GetUnitXY(hero)
@@ -508,7 +508,7 @@ function CreateLaserUpToDown(boss, hero)
             local effElement = "ZigguratFrostMissile.mdl"
 
             local eff = CreateEffectLighting3D(x1, y1, z1, x2, y2, z2, 40, effElement, 60)
-            local timed = 3
+            local timed = 5
             local period = TIMER_PERIOD64
 
             TimerStart(CreateTimer(), period, true, function()
@@ -540,7 +540,7 @@ function CreateLaserUpToDown(boss, hero)
         end)
     else
         IssuePointOrder(boss, "move", GetUnitXY(hero))
-        PlayBossSpeech("", "Где ты прячешься?")
+        PlayBossSpeech("Speech\\Pudge\\InFight\\F19", "Где ты прячешься?")
     end
 
 end
@@ -600,9 +600,9 @@ function ButcherAddArmorTimed(boss, lvl, timed)
 
     local r = GetRandomInt(1, 10)
     if r == 1 then
-        PlayBossSpeech("" .. r, "Больно!")
+        PlayBossSpeech("Speech\\Pudge\\InFight\\F20", "Больно!")
     elseif r == 2 then
-        PlayBossSpeech("" .. r, "Активирую щит!")
+        PlayBossSpeech("Speech\\Pudge\\InFight\\F21", "Активирую щит!")
     end
 
     local upPeriodTimer = CreateTimer()
@@ -614,7 +614,7 @@ function ButcherAddArmorTimed(boss, lvl, timed)
             BlzDestroyFrame(FHArmor)
             DestroyTimer(upPeriodTimer)
             DestroyTimer(durationTimer)
-            PlayBossSpeech("", "Щит сломан!")
+            PlayBossSpeech("Speech\\Pudge\\InFight\\F17", "О нет, ты сломал мой щит!")
         end
     end)
 
@@ -739,32 +739,37 @@ end
 function BossAxeThrow(boss, hero)
     local k = 3
     TimerStart(CreateTimer(), 1.1, true, function()
-        if k == 3 then
-            PlayBossSpeech("Speech\\Pudge\\InFight\\F5", "Раз")
-        end
-        if k == 2 then
-            PlayBossSpeech("Speech\\Pudge\\InFight\\F6", "Два")
-        end
-        if k == 1 then
-            PlayBossSpeech("Speech\\Pudge\\InFight\\F7", "Три")
-        end
-        k = k - 1
-        if k < 1 then
+        if UnitAlive(boss) then
+            if k == 3 then
+                PlayBossSpeech("Speech\\Pudge\\InFight\\F5", "Раз")
+            end
+            if k == 2 then
+                PlayBossSpeech("Speech\\Pudge\\InFight\\F6", "Два")
+            end
+            if k == 1 then
+                PlayBossSpeech("Speech\\Pudge\\InFight\\F7", "Три")
+            end
+            k = k - 1
+            if k < 1 then
+                DestroyTimer(GetExpiredTimer())
+            end
+
+            IssueImmediateOrder(boss, "stop")
+            SetUnitAnimationByIndex(boss, 13)
+            QueueUnitAnimation(boss, "Stand")
+            local angle = AngleBetweenUnits(boss, hero)
+            SetUnitFacing(boss, angle)
+            TimerStart(CreateTimer(), 0.4, false, function()
+                angle = AngleBetweenUnits(boss, hero)
+                local x, y = GetUnitXY(boss)
+                BlzSetUnitFacingEx(boss, angle)
+                local eff = CreateAndForceBullet(boss, angle, 40, "Butcher\\Axe Missile", x, y, 50, 1800, 15)
+                BlzSetSpecialEffectZ(eff, GetTerrainZ(x, y) + 120)
+                BlzSetSpecialEffectScale(eff, 3)
+            end)
+        else
             DestroyTimer(GetExpiredTimer())
         end
-        IssueImmediateOrder(boss, "stop")
-        SetUnitAnimationByIndex(boss, 13)
-        QueueUnitAnimation(boss, "Stand")
-        local angle = AngleBetweenUnits(boss, hero)
-        SetUnitFacing(boss, angle)
-        TimerStart(CreateTimer(), 0.4, false, function()
-            angle = AngleBetweenUnits(boss, hero)
-            local x, y = GetUnitXY(boss)
-            BlzSetUnitFacingEx(boss, angle)
-            local eff = CreateAndForceBullet(boss, angle, 40, "Butcher\\Axe Missile", x, y, 50, 1800, 15)
-            BlzSetSpecialEffectZ(eff, GetTerrainZ(x, y) + 120)
-            BlzSetSpecialEffectScale(eff, 3)
-        end)
     end)
 end
 
@@ -867,6 +872,7 @@ function StrongWalk(boss, hero)
             local x, y = GetUnitXY(boss)
             DestroyEffect(AddSpecialEffect("Earthshock", x, y))
             UnitDamageArea(boss, 50, x, y, 300)
+            PlayerSeeNoiseInRangeTimed(1,x,y)
             DamageDestructableInRangeXY(boss, 50, 300, x, y)
         end)
     end
@@ -879,7 +885,7 @@ function BossHooked(boss, timed, scale)
             StartHookAI(boss, timed, scale)
         else
             IssuePointOrder(boss, "move", GetUnitXY(hero))
-            PlayBossSpeech("", "Где ты прячешься?")
+            PlayBossSpeech("Speech\\Pudge\\InFight\\F22", "Ты можешь бежать, но тебе не спрятаться")
         end
     end
 end
@@ -896,7 +902,7 @@ function CreateArmorFrame(into, boss)
 
     local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", buttonIconFrame, "", 0)
     BlzFrameSetParent(text, BlzGetFrameByName("ConsoleUIBackdrop", 0))
-    BlzFrameSetText(text, "999")
+    BlzFrameSetText(text, "Щит")
     BlzFrameSetScale(text, 2)
     BlzFrameSetPoint(text, FRAMEPOINT_CENTER, buttonIconFrame, FRAMEPOINT_CENTER, 0, 0)
 

@@ -87,7 +87,7 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
         local bounceFact = false
         local b, d = PointContentDestructable(nx, ny, CollisionRange, false, 0, hero)
         if b then
-            KillDestructableByTypeInPoint({ FourCC("B00E"),FourCC("B00K") }, 80, x, y)
+            KillDestructableByTypeInPoint({ FourCC("B00E"),FourCC("B00K") }, 120, x, y) -- попадание по настенным кнопкам
         end
         if GetDestructableTypeId(d) == FourCC("B005") or GetDestructableTypeId(d) == FourCC("B00C") then
             --нет рикошета от этих блокираторов

@@ -1075,7 +1075,7 @@ function PlayUnitAnimationFromChat()
         local s = S2I(GetEventPlayerChatString())
         local data = HERO[GetPlayerId(GetTriggerPlayer())]
         if GetEventPlayerChatString() == "w" then
-            PlayMonoSpeech("Speech\\Peon\\OpyatOnRaskomandovalsa", "Опять раскомандовался")
+            PlayMonoSpeech("Speech\\Peon\\OpyatOnRaskomandovalsa", "Опять он раскомандовался")
             --CreateForUnitWayToPoint(mainHero,CQX,CQY)
             return
         end

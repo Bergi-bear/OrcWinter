@@ -1991,7 +1991,7 @@ u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 12326.3, 4808.5, 206.313, FourCC("o
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 17783.9, 4369.4, 218.170, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
-u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 10576.3, 1803.1, 270.344, FourCC("opeo"))
+u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 10151.6, 2251.8, 135.845, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
 u = BlzCreateUnitWithSkin(p, FourCC("opeo"), 14659.1, 2997.4, 203.283, FourCC("opeo"))
 SetUnitColor(u, ConvertPlayerColor(0))
@@ -16157,8 +16157,8 @@ return true
 end
 
 function Trig_SpawnBarrelWhite_Actions()
+    PlayMonoSpeech("Speech\\Peon\\NewBarrel", "Новая бочка, её взрыв может сломать Мяснику щит")
     FlyTimer(60,GetTriggerDestructable())
-    PlayMonoSpeech("", "Новая, бочка, её взрыв может сломать Мяснику щит")
 CreateNUnitsAtLoc(1, FourCC("h00C"), Player(1), GetRectCenter(gg_rct_BossBarelSpawnWhite), bj_UNIT_FACING)
     UnitStartFallAnim(bj_lastCreatedUnit,1000)
 TriggerSleepAction(60.00)
@@ -16216,7 +16216,7 @@ end
 end
 
 function Trig_SpawnBarrelYellow_Actions()
-    PlayMonoSpeech("", "Новая, бочка, её взрыв может сломать Мяснику щит")
+    PlayMonoSpeech("Speech\\Peon\\NewBarrel", "Новая бочка, её взрыв может сломать Мяснику щит")
     FlyTimer(60,GetTriggerDestructable())
 CreateNUnitsAtLoc(1, FourCC("h00C"), Player(1), GetRectCenter(gg_rct_BossBarelSpawnYellow), bj_UNIT_FACING)
     UnitStartFallAnim(bj_lastCreatedUnit,1000)
@@ -16272,7 +16272,7 @@ end
 end
 
 function Trig_SpawnBarrelRed_Actions()
-    PlayMonoSpeech("", "Новая, бочка, её взрыв может сломать Мяснику щит")
+    PlayMonoSpeech("Speech\\Peon\\NewBarrel", "Новая бочка, её взрыв может сломать Мяснику щит")
 CreateNUnitsAtLoc(1, FourCC("h00C"), Player(1), GetRectCenter(gg_rct_BossBarelSpawnRed), bj_UNIT_FACING)
     FlyTimer(60,GetTriggerDestructable())
     UnitStartFallAnim(bj_lastCreatedUnit,1000)
@@ -16328,7 +16328,7 @@ end
 end
 
 function Trig_SpawnBarrelBlue_Actions()
-    PlayMonoSpeech("", "Новая, бочка, её взрыв может сломать Мяснику щит")
+    PlayMonoSpeech("Speech\\Peon\\NewBarrel", "Новая бочка, её взрыв может сломать Мяснику щит")
 CreateNUnitsAtLoc(1, FourCC("h00C"), Player(1), GetRectCenter(gg_rct_BossBarelSpawnBlue), bj_UNIT_FACING)
     FlyTimer(60,GetTriggerDestructable())
     UnitStartFallAnim(bj_lastCreatedUnit,1000)
@@ -16868,21 +16868,21 @@ TriggerAddCondition(gg_trg_InitRoom13, Condition(Trig_InitRoom13_Conditions))
 TriggerAddAction(gg_trg_InitRoom13, Trig_InitRoom13_Actions)
 end
 
-function Trig_Victory13_Func001Func003Func001C()
+function Trig_Victory13_Func001Func004Func001C()
 if (not (GetDestructableTypeId(GetEnumDestructable()) == FourCC("B00G"))) then
 return false
 end
 return true
 end
 
-function Trig_Victory13_Func001Func003A()
-if (Trig_Victory13_Func001Func003Func001C()) then
+function Trig_Victory13_Func001Func004A()
+if (Trig_Victory13_Func001Func004Func001C()) then
         MoveDestructableUp(GetEnumDestructable(), 500, 5)
 else
 end
 end
 
-function Trig_Victory13_Func001Func004C()
+function Trig_Victory13_Func001Func005C()
 if (not (IsDestructableDeadBJ(gg_dest_B00D_20363) == true)) then
 return false
 end
@@ -16905,7 +16905,7 @@ return true
 end
 
 function Trig_Victory13_Func001C()
-if (not Trig_Victory13_Func001Func004C()) then
+if (not Trig_Victory13_Func001Func005C()) then
 return false
 end
 return true
@@ -16915,7 +16915,8 @@ function Trig_Victory13_Actions()
 if (Trig_Victory13_Func001C()) then
 KillDestructable(gg_dest_B00B_20321)
 KillUnit(gg_unit_h00R_0483)
-EnumDestructablesInRectAll(gg_rct_Start13, Trig_Victory13_Func001Func003A)
+ShowUnitHide(gg_unit_h00R_0483)
+EnumDestructablesInRectAll(gg_rct_Start13, Trig_Victory13_Func001Func004A)
 else
 end
 end
@@ -20627,7 +20628,7 @@ SetMapDescription("TRIGSTR_003")
 SetPlayers(1)
 SetTeams(1)
 SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, -192.0, -704.0)
+DefineStartLocation(0, -384.0, -768.0)
 InitCustomPlayerSlots()
 SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
 InitGenericPlayerSlots()

@@ -22,22 +22,23 @@ function PlayPudgeSpeechNumber(n)
         "Варенье вы пришли украсть? Но угодите прям ко мне в пасть"
     }
     --if not GBoss then
-        GBoss = FindUnitOfType(FourCC("n007"))
-        --print('мясник инициализирован')
+    GBoss = FindUnitOfType(FourCC("n007"))
+    --print('мясник инициализирован')
     --end
     CameraSetEQNoiseForPlayer(Player(0), 6)
-    TimerStart(CreateTimer(), 2, false, function()
-        CameraClearNoiseForPlayer(Player(0))
-    end)
+
     PlayBossSpeech("Speech\\Pudge\\Q" .. n, BD[n])
 
-    local portrait = BlzCreateFrameByType("BACKDROP", "Face",  BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
+    local portrait = BlzCreateFrameByType("BACKDROP", "Face", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
     BlzFrameSetParent(portrait, BlzGetFrameByName("ConsoleUIBackdrop", 0))
     BlzFrameSetTexture(portrait, GetPortraitFromBD(nil), 0, true)
     BlzFrameSetSize(portrait, 0.06, 0.06)
     BlzFrameSetAbsPoint(portrait, FRAMEPOINT_LEFT, -0.05, 0.05)
+    StunUnit(udg_HERO, 2)
+    SetUnitAnimationByIndex(udg_HERO,20) --падение
     TimerStart(CreateTimer(), GBossSoundDuration, false, function()
         BlzDestroyFrame(portrait)
+        CameraClearNoiseForPlayer(Player(0))
     end)
     --table.insert(BugsFH,portrait)
 end
