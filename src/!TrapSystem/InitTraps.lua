@@ -93,7 +93,7 @@ end
 function InitTrapByID(id)
     local _, k, rg = FindUnitOfType(id)
 
-    --print(k, " стреляющих ловушек активировано")
+    print(k, " стреляющих ловушек активировано")
     for i = 1, #rg do
         local u = rg[i]
         InitUnitBulletTrap(u)
