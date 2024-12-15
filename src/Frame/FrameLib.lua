@@ -49,6 +49,11 @@ function HideEverything()
     end
     BlzHideOriginFrames(true)--скрыть всё
     BlzFrameSetScale(BlzFrameGetChild(BlzGetFrameByName("ConsoleUI", 0), 5), 0.001) --рамка мёртвой зоны отключение
+
+    BlzFrameSetVisible(BlzGetFrameByName("ConsoleTopBar", 0), false)
+    BlzFrameClearAllPoints(BlzGetFrameByName("ConsoleBottomBar" , 0))
+    BlzFrameSetAbsPoint(BlzGetFrameByName("ConsoleBottomBar" , 0), FRAMEPOINT_CENTER, 0, -9)
+    BlzFrameSetVisible(BlzGetFrameByName("ConsoleBottomBarOverlay", 0), false)
 end
 
 function MenuFrame()

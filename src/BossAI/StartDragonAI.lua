@@ -316,6 +316,7 @@ function DragonDashAttackPrepare(boss, hero)
             --local r=GetRandomInt(0,8)
             --print(r)
             SetUnitAnimationByIndex(boss, 2)
+            QueueUnitAnimation(boss,"walk")
             SetUnitTimeScale(boss, 3)
             BlzSetUnitFacingEx(boss, angle)
         end)
@@ -367,6 +368,7 @@ function IceCrest(boss)
     TimerStart(CreateTimer(), 2, false, function()
         BlzPauseUnitEx(boss, false)
         SetUnitTimeScale(boss, 1)
+        QueueUnitAnimation(boss,"stand")
     end)
 end
 
@@ -383,7 +385,7 @@ function IceImpale(boss, angle, notMove)
     local range = 80
     local rangeAuto = 100 --радиус поворота шипа на героя
     if notMove then
-        step = 180
+        step = 220
         max = 6
         range = 250
     end
@@ -405,7 +407,7 @@ function IceImpale(boss, angle, notMove)
                 end)
                 DestroyTimer(GetExpiredTimer())
                 if not notMove then
-                    -- IssuePointOrder(boss, "move", GetUnitXY(hero))
+                    IssuePointOrder(boss, "move", GetUnitXY(hero))
                 end
             end
         end)
@@ -440,6 +442,7 @@ function DragonTripleShot(boss, hero)
                 CreateAndForceBullet(boss, GetUnitFacing(boss) + 30, 15, effModel)
                 CreateAndForceBullet(boss, GetUnitFacing(boss) + 15, 15, effModel)
                 BlzPauseUnitEx(boss, false)
+                QueueUnitAnimation(boss,"stand")
                 --IceImpale(boss, AngleBetweenUnits(boss,hero), true)
             end)
         end
@@ -456,8 +459,10 @@ function CreateSpikeFromDeep(x, y, notMove)
     end
     if not IsTerrainPathable(x, y, PATHING_TYPE_WALKABILITY) then
         local nd = CreateDestructableZ(id, x, y, 900, GetRandomInt(0, 360), size, 1)
-        TimerStart(CreateTimer(), 20, false, function()
+        TimerStart(CreateTimer(), 5, false, function()
             KillDestructable(nd)
+            RemoveDestructable(nd)
+            DestroyTimer(GetExpiredTimer())
         end)
     end
 end

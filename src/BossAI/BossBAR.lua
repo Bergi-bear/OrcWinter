@@ -57,14 +57,8 @@ function CreateBOSSHPBar(boss,name)
 
             BlzFrameSetSize(into, 0, 0)
             BlzFrameSetVisible(into, false)
-            --BlzFrameSetText(textCurrent, hp)
-            --BlzFrameSetText(textMax, R2I(BlzGetUnitMaxHP(hero)))
         else
-            --BlzFrameSetVisible(into, GetLocalPlayer() == GetOwningPlayer(hero))
-            --BlzFrameSetText(textCurrent, R2I(GetUnitState(hero, UNIT_STATE_LIFE)))
-            --BlzFrameSetText(textMax, R2I(BlzGetUnitMaxHP(hero)))
             BlzFrameSetSize(into, 0.76 * hp / 100, 0.02)
-            --BlzFrameSetAlpha(chargesBox, 128)
         end
     end)
     return into
